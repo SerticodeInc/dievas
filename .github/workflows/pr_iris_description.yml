@@ -1,0 +1,73 @@
+name: 🕊️ Iris PR Summary
+
+on:
+    pull_request:
+        types: [opened]
+
+jobs:
+    iris-summary:
+        runs-on: ubuntu-latest
+        permissions:
+            pull-requests: write
+
+        steps:
+            - name: Append 🕊️ Iris Summary
+              uses: actions/github-script@v9
+              with:
+                  script: |
+                      const pr = context.payload.pull_request;
+                      const currentBody = pr.body || "";
+
+                      if (currentBody.includes("🕊️ Iris Summary")) {
+                        console.log("🕊️ Iris Summary already exists. Skipping.");
+                        return;
+                      }
+
+                      const { data: files } = await github.rest.pulls.listFiles({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        pull_number: pr.number,
+                      });
+
+                      const fileCount = files.length;
+                      const changedFiles = files.map(f => f.filename).join(', ');
+
+                      // Infer type from branch name
+                      const branch = pr.head.ref;
+                      let type = "Feature";
+                      if (/bug|fix|hotfix/.test(branch)) type = "Bug Fix";
+                      else if (/refactor/.test(branch)) type = "Refactor";
+                      else if (/chore|deps|dependabot/.test(branch)) type = "Chore";
+                      else if (/docs/.test(branch)) type = "Docs";
+                      else if (/style|design/.test(branch)) type = "Style";
+
+                      // Infer impacted package(s) from file paths
+                      const packages = new Set(
+                        files
+                          .map(f => f.filename.match(/^packages\/(\w+)\//))
+                          .filter(Boolean)
+                          .map(m => m[1])
+                      );
+                      const packageLabel = packages.size > 0
+                        ? Array.from(packages).map(p => `\`${p}\``).join(', ')
+                        : "root";
+
+                      const truncatedFiles = changedFiles.length > 500
+                        ? changedFiles.slice(0, 500) + '...'
+                        : changedFiles;
+
+                      const irisTemplate = "\n\n---\n## 🕊️ Iris Summary\n" +
+                        "- **Type:** " + type + "\n" +
+                        "- **Package(s):** " + packageLabel + "\n" +
+                        "- **Impact:** Altered " + fileCount + " file(s).\n" +
+                        "- **Notes:** Automated summary for branch `" + branch + "`.\n" +
+                        "  - *Files touched:* " + truncatedFiles + "\n";
+
+                      const newBody = currentBody.trim() + irisTemplate;
+
+                      await github.rest.pulls.update({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        pull_number: pr.number,
+                        body: newBody.trim()
+                      });

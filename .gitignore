@@ -1,3 +1,7 @@
 # https://dart.dev/guides/libraries/private-files
 # Created by `dart pub`
 .dart_tool/
+
+# Claude / AI session docs — local only, not tracked in git
+.claude/
+.codex/

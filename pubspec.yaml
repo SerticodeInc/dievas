@@ -19,7 +19,6 @@ melos:
         - packages/*
 
     scripts:
-        # ─── Analysis & Quality
         analyze:
             exec: dart analyze .
             description: Run dart analyzer across all packages
@@ -33,14 +32,12 @@ melos:
             exec: dart format . --line-length 120 --set-exit-if-changed
             description: Check formatting without modifying files
 
-        # ─── Testing
         test:
             exec: dart test
             packageFilters:
                 dirExists: test
             description: Run tests across all packages
 
-        # ─── Code gen
         codegen:
             exec: dart run build_runner build --delete-conflicting-outputs
             packageFilters:

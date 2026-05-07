@@ -1,0 +1,42 @@
+version: 2
+
+updates:
+    - package-ecosystem: github-actions
+      directory: /
+      schedule:
+          interval: weekly
+          day: monday
+      commit-message:
+          prefix: "chore(deps)"
+
+    - package-ecosystem: pub
+      directory: /
+      schedule:
+          interval: weekly
+          day: monday
+      commit-message:
+          prefix: "chore(deps)"
+
+    - package-ecosystem: pub
+      directory: /packages/dievas
+      schedule:
+          interval: weekly
+          day: monday
+      commit-message:
+          prefix: "chore(deps)"
+
+    - package-ecosystem: pub
+      directory: /packages/dievas_gallery
+      schedule:
+          interval: weekly
+          day: monday
+      commit-message:
+          prefix: "chore(deps)"
+
+    - package-ecosystem: pub
+      directory: /packages/dievas_tokens
+      schedule:
+          interval: weekly
+          day: monday
+      commit-message:
+          prefix: "chore(deps)"

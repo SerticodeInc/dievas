@@ -1,0 +1,26 @@
+name: Enforce PR Limit
+
+on:
+    pull_request:
+        types:
+            - opened
+            - edited
+            - reopened
+            - synchronize
+
+jobs:
+    enforce-pr-limit:
+        if: github.actor != 'dependabot[bot]' && github.actor != 'github-actions[bot]'
+        runs-on: ubuntu-latest
+        permissions:
+            pull-requests: write
+            contents: read
+        steps:
+            - uses: Homebrew/actions/limit-pull-requests@65e77dd780fb5f9ea82af068d3b24eccd13aebee
+              with:
+                  comment-limit: 3
+                  comment: >
+                      You are allowed to have at most 3 pull requests open at a time!
+                      Consider getting your existing PRs merged before opening new ones. Thanks!
+                  close-limit: 3
+                  close: true

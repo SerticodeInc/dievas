@@ -1,7 +1,7 @@
 name: dievas
 publish_to: none
 description: "Dievas design system — Flutter theme and component layer."
-version: 0.1.0
+version: 0.0.1
 homepage:
 resolution: workspace
 

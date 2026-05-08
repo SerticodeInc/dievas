@@ -45,6 +45,14 @@ abstract final class DievasLetterSpacingPrimitives {
 }
 
 abstract final class DievasFontFamilyPrimitives {
-  static const String sans = 'Inter';
+  /// Maison Neue — body, label, title, and UI copy.
+  /// Font files registered in packages/dievas/pubspec.yaml under flutter: fonts:.
+  static const String sans = 'MaisonNeue';
+
+  /// Maison Neue Extended — display and heading styles.
+  /// Wider letterforms designed for large-scale use.
+  static const String sansExtended = 'MaisonNeueExtended';
+
+  /// JetBrains Mono — code snippets and monospaced output.
   static const String mono = 'JetBrainsMono';
 }

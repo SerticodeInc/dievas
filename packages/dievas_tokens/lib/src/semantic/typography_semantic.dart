@@ -27,7 +27,7 @@ typedef DievasTextStyleToken = ({
 /// [DievasFontSizePrimitives], [DievasFontWeightPrimitives],
 /// [DievasLineHeightPrimitives], and [DievasLetterSpacingPrimitives].
 abstract final class DievasTypographySemantic {
-  // ─── Display
+  // Display
 
   /// Display large. Hero headings, marketing splash copy.
   static const DievasTextStyleToken displayLg = (
@@ -56,7 +56,7 @@ abstract final class DievasTypographySemantic {
     fontFamily: DievasFontFamilyPrimitives.sansExtended,
   );
 
-  // ─── Heading
+  // Heading
 
   /// Heading XL. Page-level section titles.
   static const DievasTextStyleToken headingXl = (
@@ -103,7 +103,7 @@ abstract final class DievasTypographySemantic {
     fontFamily: DievasFontFamilyPrimitives.sansExtended,
   );
 
-  // ─── Title
+  // Title
 
   /// Title large. Section headings inside cards, drawer titles, sheet headers.
   /// Same size as [bodyLg] but semiBold — title vs body is a weight distinction.
@@ -133,7 +133,7 @@ abstract final class DievasTypographySemantic {
     fontFamily: DievasFontFamilyPrimitives.sans,
   );
 
-  // ─── Body
+  // Body
 
   /// Body large. Long-form reading content.
   static const DievasTextStyleToken bodyLg = (
@@ -171,7 +171,7 @@ abstract final class DievasTypographySemantic {
     fontFamily: DievasFontFamilyPrimitives.sans,
   );
 
-  // ─── Label
+  // Label
 
   /// Label large. Button text (large), prominent tags.
   static const DievasTextStyleToken labelLg = (
@@ -209,7 +209,7 @@ abstract final class DievasTypographySemantic {
     fontFamily: DievasFontFamilyPrimitives.sans,
   );
 
-  // ─── Code
+  // Code
 
   /// Code medium. Inline code blocks, code editors, shell output.
   static const DievasTextStyleToken codeMd = (

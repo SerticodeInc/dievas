@@ -51,7 +51,7 @@ abstract final class DievasColourPrimitives {
 }
 ```
 
-**Semantic tokens** — pure Dart aliases that map primitives to roles. No Flutter types here either — `Color()` wrapping happens in the `dievas` Flutter package.
+**Semantic tokens** — pure Dart aliases that map primitives to roles. No Flutter types live in `dievas_tokens`; `Color`, `TextStyle`, and `BoxShadow` wrapping happens in the `dievas` Flutter package.
 
 ```dart
 // dievas_tokens — pure Dart, no Flutter import

@@ -50,7 +50,7 @@ abstract final class DievasFontFamilyPrimitives {
   static const String sans = 'MaisonNeue';
 
   /// Maison Neue Extended — display and heading styles.
-  /// Wider letterforms designed for large-scale use.
+  /// Wider letter forms designed for large-scale use.
   static const String sansExtended = 'MaisonNeueExtended';
 
   /// JetBrains Mono — code snippets and monospaced output.

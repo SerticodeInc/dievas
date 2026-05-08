@@ -14,7 +14,7 @@ import '../primitives/colour_primitives.dart';
 /// References [DievasColourPrimitives] exclusively — no raw hex values
 /// are permitted in this file.
 abstract final class DievasColourSemanticLight {
-  // ─── Core / Brand
+  //Brand
 
   /// Primary brand colour. Interactive elements, CTAs, selected states.
   /// Moon ref: piccolo
@@ -26,7 +26,7 @@ abstract final class DievasColourSemanticLight {
   /// Text or icons placed on top of [brand] surfaces.
   static const int onBrand = DievasColourPrimitives.white;
 
-  // ─── Text
+  //Text
 
   /// Highest-contrast body text. Headlines, labels, primary copy.
   /// Moon ref: bulma
@@ -48,7 +48,7 @@ abstract final class DievasColourSemanticLight {
   /// Text placed directly on a [brand]-coloured background.
   static const int textOnBrand = DievasColourPrimitives.white;
 
-  // ─── Icon
+  //Icon
 
   /// Default icon fill on light backgrounds.
   static const int iconPrimary = DievasColourPrimitives.slate900;
@@ -62,7 +62,7 @@ abstract final class DievasColourSemanticLight {
   /// Icons placed on a [brand]-coloured surface.
   static const int iconOnBrand = DievasColourPrimitives.white;
 
-  // ─── Background
+  //Background
 
   /// Page / scaffold background. The base layer.
   /// Moon ref: goku
@@ -79,7 +79,7 @@ abstract final class DievasColourSemanticLight {
   /// Scrim / overlay behind modals and bottom sheets.
   static const int bgOverlay = DievasColourPrimitives.slate900;
 
-  // ─── Border
+  //Border
 
   /// Default dividers and container strokes.
   /// Moon ref: beerus
@@ -98,7 +98,7 @@ abstract final class DievasColourSemanticLight {
   /// Brand-coloured border. Selected states, brand highlights.
   static const int borderBrand = DievasColourPrimitives.indigo500;
 
-  // ─── Action
+  //Action
 
   /// Primary CTA background (filled button, active toggle).
   /// Moon ref: piccolo
@@ -131,7 +131,7 @@ abstract final class DievasColourSemanticLight {
   /// Moon ref: roshi
   static const int actionSuccess = DievasColourPrimitives.green500;
 
-  // ─── Feedback — Success
+  //Success
 
   /// Success alert / toast background.
   static const int feedbackSuccessBackground = DievasColourPrimitives.green50;
@@ -145,7 +145,7 @@ abstract final class DievasColourSemanticLight {
   /// Success body text.
   static const int feedbackSuccessText = DievasColourPrimitives.green900;
 
-  // ─── Feedback — Warning
+  //Warning
 
   /// Warning alert background.
   /// Moon ref: krillin
@@ -160,7 +160,7 @@ abstract final class DievasColourSemanticLight {
   /// Warning body text.
   static const int feedbackWarningText = DievasColourPrimitives.amber900;
 
-  // ─── Feedback — Error
+  //Error
 
   /// Error alert background.
   /// Moon ref: chichi
@@ -175,7 +175,7 @@ abstract final class DievasColourSemanticLight {
   /// Error body text.
   static const int feedbackErrorText = DievasColourPrimitives.red900;
 
-  // ─── Feedback — Info
+  //Info
 
   /// Informational alert background.
   /// Moon ref: whis
@@ -190,7 +190,7 @@ abstract final class DievasColourSemanticLight {
   /// Info body text.
   static const int feedbackInfoText = DievasColourPrimitives.sky900;
 
-  // ─── Input
+  //Input
 
   /// Input field background surface.
   static const int inputBg = DievasColourPrimitives.white;
@@ -210,7 +210,7 @@ abstract final class DievasColourSemanticLight {
   /// Input placeholder / hint text colour.
   static const int inputPlaceholder = DievasColourPrimitives.slate400;
 
-  // ─── Switch
+  //Switch
 
   /// Track colour when the switch is ON.
   static const int switchTrackOn = DievasColourPrimitives.indigo500;
@@ -224,7 +224,7 @@ abstract final class DievasColourSemanticLight {
   /// Switch track border (outlined switch variant).
   static const int switchBorder = DievasColourPrimitives.slate300;
 
-  // ─── Static
+  //Static
 
   /// Pure white. Theme-invariant. Never flips in dark mode.
   static const int staticWhite = DievasColourPrimitives.white;

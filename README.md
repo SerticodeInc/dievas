@@ -34,15 +34,15 @@ dievas/
 dievas_gallery  →  dievas  →  dievas_tokens (pure Dart, zero Flutter dependency)
 ```
 
-`dievas_tokens` must never import Flutter. It is safe to use in Dart only targets — CLI tools, Jaspr, server-side code. A Flutter import in that package is a bug.
+`dievas_tokens` must never import Flutter. It is safe to use in Dart-only targets — CLI tools, Jaspr, server-side code. A Flutter import in that package is a bug.
 
 ---
 
 ## Token Architecture
 
-### Two tier model
+### Two-tier model
 
-**Primitives** — raw values with no semantic meaning. Raw `int` constants, no `Color` wrapper.
+**Primitives** — raw values with no semantic meaning. Raw `int` or `double` constants, no Flutter types.
 
 ```dart
 abstract final class DievasColourPrimitives {
@@ -51,16 +51,33 @@ abstract final class DievasColourPrimitives {
 }
 ```
 
-**Semantic tokens** — alias primitives to roles. These use Flutter types (`Color`, `TextStyle`, `double`) and are the only thing that components and theme data ever reference.
+**Semantic tokens** — pure Dart aliases that map primitives to roles. No Flutter types here either — `Color()` wrapping happens in the `dievas` Flutter package.
 
 ```dart
+// dievas_tokens — pure Dart, no Flutter import
 abstract final class DievasColourSemanticLight {
-  static const Color piccolo = Color(DievasColourPrimitives.indigo500); // brand primary
-  static const Color bulma   = Color(DievasColourPrimitives.slate900);  // primary text
+  static const int textPrimary   = DievasColourPrimitives.slate900;
+  static const int actionPrimary = DievasColourPrimitives.indigo500;
 }
+
+// dievas package — Color wrapping happens here
+static const Color textPrimary = Color(DievasColourSemanticLight.textPrimary);
 ```
 
-Colour role names follow the Moon Design System convention: `piccolo`, `bulma`, `beerus`, `gohan`, `krillin`, `chichi`, `roshi`, `whis`, and so on. Primitive scales follow the Tailwind convention: `50` → `950`.
+Colour roles use **grouped semantic naming** — `textPrimary`, `bgBase`, `actionPrimary`, `borderDefault` — not Moon character names. Primitive scales follow the Tailwind convention: `50` → `950`.
+
+### Token families
+
+| Family | Primitives file | Semantic file |
+| --- | --- | --- |
+| Colour | `colour_primitives.dart` | `colour_semantic_light/dark.dart` |
+| Typography | `typography_primitives.dart` | `typography_semantic.dart` |
+| Spacing | `spacing_primitives.dart` | `spacing_semantic.dart` |
+| Radius | `radius_primitives.dart` | `radius_semantic.dart` |
+| Elevation | `elevation_primitives.dart` | `elevation_semantic.dart` |
+| Opacity | `opacity_primitives.dart` | `opacity_semantic.dart` |
+
+Typography uses **Maison Neue** (body, label, title) and **Maison Neue Extended** (display, heading), with JetBrains Mono for code.
 
 ---
 
@@ -82,10 +99,10 @@ DievasThemeData               ← abstract interface (the contract)
 
 ```dart
 // Inside any widget's build method
-final color  = context.colors.action.piccolo;
-final style  = context.typography.labelMd;
-final gap    = context.spacing.s4;
-final cols   = context.grid.columns;
+final color = context.colors.action.actionPrimary;
+final style = context.typography.labelMd;
+final gap   = context.spacing.md;
+final cols  = context.grid.columns;
 ```
 
 ### Plugging in a brand theme
@@ -93,13 +110,13 @@ final cols   = context.grid.columns;
 Consumer apps never touch `DievasLightThemeData` directly — they extend `DievasGlobalThemeData` with their own brand tokens:
 
 ```dart
-// In the Sample app — not in this repo
-class SampleLightThemeData extends DievasGlobalThemeData {
-  SampleLightThemeData({super.components})
+// In the Cadence app — not in this repo
+class CadenceLightThemeData extends DievasGlobalThemeData {
+  CadenceLightThemeData({super.components})
     : super(
-        colors: const DievasColourThemeData(
+        colors: DievasColourThemeData(
           brightness: Brightness.light,
-          action: ActionColors(piccolo: Color(0xFF...)),
+          action: ActionColors(actionPrimary: Color(0xFF7C3AED)),
         ),
         border: const DievasBorderThemeData(...),
       );
@@ -110,8 +127,8 @@ Then at the app root:
 
 ```dart
 DievasScope(
-  lightTheme: SampleLightThemeData(),
-  darkTheme: SampleDarkThemeData(),
+  lightTheme: CadenceLightThemeData(),
+  darkTheme: CadenceDarkThemeData(),
   child: MaterialApp.router(...),
 )
 ```
@@ -197,16 +214,24 @@ Dart 3 idioms throughout — pattern matching with `switch` expressions, sealed 
 
 ## Reference Systems
 
-| Reference                                                        | Role in Dievas                                                     |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------ |
-| [Moon Design System](https://flutter.moon.io)                    | Visual language, component set, colour naming                      |
+| Reference | Role in Dievas |
+| --- | --- |
+| [Moon Design System](https://flutter.moon.io) | Component catalogue, visual language |
 | [Genesis Design System](https://github.com/bushadigital/warlock) | Architectural pattern, theme inheritance, InheritedModel structure |
 
 ---
 
 ## Status
 
-`v0.0.1-dev` — Active development. Token layer and theme architecture scaffolded. Component library in progress. Target: complete system by **May 21, 2026**.
+`v0.0.1-dev` — **M1 complete** (semantic token layer). Theme architecture in progress. Target: complete system by **May 21, 2026**.
+
+| Milestone | Status | Window |
+| --- | --- | --- |
+| M1 — Semantic token layer | ✅ Done | May 7–9 |
+| M2 — Theme architecture | 🔄 Next | May 10–12 |
+| M3 — Core components | ⬜ Pending | May 12–15 |
+| M4 — Composite components | ⬜ Pending | May 16–18 |
+| M5 — Gallery + polish | ⬜ Pending | May 19–21 |
 
 ---
 

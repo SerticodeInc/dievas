@@ -6,9 +6,12 @@ abstract final class DievasOpacityPrimitives {
   static const double o5 = 0.05;
   static const double o8 = 0.08;
   static const double o10 = 0.10;
+  static const double o13 = 0.13;
+  static const double o15 = 0.15;
   static const double o16 = 0.16;
   static const double o20 = 0.20;
   static const double o24 = 0.24;
+  static const double o25 = 0.25;
   static const double o32 = 0.32;
   static const double o40 = 0.40;
   static const double o48 = 0.48;

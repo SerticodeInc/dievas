@@ -184,7 +184,6 @@ class DievasScopeState extends State<DievasScope>
   @override
   Widget build(BuildContext context) {
     final scope = _DievasScopeStateMarker(
-      key: ValueKey(_brightness),
       state: this,
       child: ValueListenableBuilder<ThemeMode>(
         valueListenable: _themeModeNotifier,
@@ -196,16 +195,16 @@ class DievasScopeState extends State<DievasScope>
           return DievasTheme(
             data: theme,
             child: Stack(
-              fit: StackFit.expand,
+              fit: .expand,
               children: [
                 content,
                 _DievasOverlaySlot(
-                  alignment: Alignment.topCenter,
+                  alignment: .topCenter,
                   animation: _bannerAnimationController,
                   notifier: _bannerNotifier,
                 ),
                 _DievasOverlaySlot(
-                  alignment: Alignment.bottomCenter,
+                  alignment: .bottomCenter,
                   animation: _snackbarAnimationController,
                   notifier: _snackbarNotifier,
                 ),
@@ -220,7 +219,7 @@ class DievasScopeState extends State<DievasScope>
     if (!widget.global) return scope;
 
     return Directionality(
-      textDirection: TextDirection.ltr,
+      textDirection: .ltr,
       child: Overlay(initialEntries: [OverlayEntry(builder: (_) => scope)]),
     );
   }
@@ -233,7 +232,7 @@ class DievasScopeState extends State<DievasScope>
 }
 
 class _DievasScopeStateMarker extends InheritedTheme {
-  const _DievasScopeStateMarker({super.key, required super.child, required this.state});
+  const _DievasScopeStateMarker({required super.child, required this.state});
 
   final DievasScopeController state;
 

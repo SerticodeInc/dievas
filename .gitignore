@@ -5,3 +5,4 @@
 # Claude / AI session docs — local only, not tracked in git
 .claude/
 .codex/
+.ite/

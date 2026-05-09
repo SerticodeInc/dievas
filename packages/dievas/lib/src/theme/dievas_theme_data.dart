@@ -19,7 +19,7 @@ import 'typography/dievas_typography_theme_data.dart';
 /// not by implementing this interface directly.
 ///
 /// ```dart
-/// // In a consuming app:
+/// In a consuming app:
 /// class CadenceLightThemeData extends DievasGlobalThemeData { ... }
 /// ```
 abstract interface class DievasThemeData {

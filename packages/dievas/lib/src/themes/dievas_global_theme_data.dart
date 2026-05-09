@@ -2,7 +2,7 @@ part of '../themes.dart';
 
 /// Sealed abstract base for all Dievas theme implementations.
 ///
-/// Subclassing [DievasGlobalThemeData] is the contract for both the built-in
+/// Sub classing [DievasGlobalThemeData] is the contract for both the built-in
 /// default themes and consumer app brand themes. Subclasses provide:
 /// - [colors] — the full colour token set for their brand / mode
 /// - [border] — optional border radius overrides (defaults work for most brands)
@@ -11,7 +11,7 @@ part of '../themes.dart';
 /// derived automatically inside the constructor.
 ///
 /// ```dart
-/// // In a consuming app:
+/// In a consuming app:
 /// class CadenceLightThemeData extends DievasGlobalThemeData {
 ///   CadenceLightThemeData({super.components})
 ///     : super(
@@ -85,24 +85,66 @@ sealed class DievasGlobalThemeData implements DievasThemeData {
     // Shadow colour: always derived from the overlay base — not the brand colour.
     final shadow = colors.staticColours.staticBlack;
 
+    // Helper to construct BoxShadow from tokens.
+    BoxShadow layer({required double blur, required double offsetY, required double opacity}) =>
+        BoxShadow(color: shadow.withAlpha((opacity * 255).round()), blurRadius: blur, offset: Offset(0, offsetY));
+
     return DievasElevationThemeData(
       none: const [],
-      xs: [BoxShadow(color: shadow.withAlpha(13), blurRadius: 1, offset: const Offset(0, 1))],
+      xs: [
+        layer(
+          blur: DievasElevationShadowLayer.xs.blur,
+          offsetY: DievasElevationShadowLayer.xs.offsetY,
+          opacity: DievasOpacitySemantic.shadow1,
+        ),
+      ],
       sm: [
-        BoxShadow(color: shadow.withAlpha(10), blurRadius: 2, offset: const Offset(0, 1)),
-        BoxShadow(color: shadow.withAlpha(15), blurRadius: 4, offset: const Offset(0, 2)),
+        layer(
+          blur: DievasElevationShadowLayer.smUpper.blur,
+          offsetY: DievasElevationShadowLayer.smUpper.offsetY,
+          opacity: DievasOpacitySemantic.shadow2Upper,
+        ),
+        layer(
+          blur: DievasElevationShadowLayer.smLower.blur,
+          offsetY: DievasElevationShadowLayer.smLower.offsetY,
+          opacity: DievasOpacitySemantic.shadow2Lower,
+        ),
       ],
       md: [
-        BoxShadow(color: shadow.withAlpha(10), blurRadius: 4, offset: const Offset(0, 2)),
-        BoxShadow(color: shadow.withAlpha(20), blurRadius: 8, offset: const Offset(0, 4)),
+        layer(
+          blur: DievasElevationShadowLayer.mdUpper.blur,
+          offsetY: DievasElevationShadowLayer.mdUpper.offsetY,
+          opacity: DievasOpacitySemantic.shadow2Upper,
+        ),
+        layer(
+          blur: DievasElevationShadowLayer.mdLower.blur,
+          offsetY: DievasElevationShadowLayer.mdLower.offsetY,
+          opacity: DievasOpacitySemantic.shadow2,
+        ),
       ],
       lg: [
-        BoxShadow(color: shadow.withAlpha(8), blurRadius: 8, offset: const Offset(0, 4)),
-        BoxShadow(color: shadow.withAlpha(20), blurRadius: 16, offset: const Offset(0, 8)),
+        layer(
+          blur: DievasElevationShadowLayer.lgUpper.blur,
+          offsetY: DievasElevationShadowLayer.lgUpper.offsetY,
+          opacity: DievasOpacitySemantic.shadow1Light,
+        ),
+        layer(
+          blur: DievasElevationShadowLayer.lgLower.blur,
+          offsetY: DievasElevationShadowLayer.lgLower.offsetY,
+          opacity: DievasOpacitySemantic.shadow2,
+        ),
       ],
       xl: [
-        BoxShadow(color: shadow.withAlpha(8), blurRadius: 16, offset: const Offset(0, 8)),
-        BoxShadow(color: shadow.withAlpha(25), blurRadius: 32, offset: const Offset(0, 16)),
+        layer(
+          blur: DievasElevationShadowLayer.xlUpper.blur,
+          offsetY: DievasElevationShadowLayer.xlUpper.offsetY,
+          opacity: DievasOpacitySemantic.shadow1Light,
+        ),
+        layer(
+          blur: DievasElevationShadowLayer.xlLower.blur,
+          offsetY: DievasElevationShadowLayer.xlLower.offsetY,
+          opacity: DievasOpacitySemantic.shadow2Heavy,
+        ),
       ],
     );
   }
@@ -114,7 +156,7 @@ sealed class DievasGlobalThemeData implements DievasThemeData {
 
     return ThemeData(
       brightness: brightness,
-      colorScheme: ColorScheme.fromSeed(seedColor: seedColor, brightness: brightness),
+      colorScheme: .fromSeed(seedColor: seedColor, brightness: brightness),
       scaffoldBackgroundColor: scaffoldBg,
       useMaterial3: true,
     );

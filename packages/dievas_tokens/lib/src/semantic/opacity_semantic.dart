@@ -30,4 +30,22 @@ abstract final class DievasOpacitySemantic {
 
   /// 100% — fully opaque. Animation end states and solid surfaces.
   static const double opaque = DievasOpacityPrimitives.o100;
+
+  /// 13% — shadow layer 1 (elevations xs).
+  static const double shadow1 = DievasOpacityPrimitives.o13;
+
+  /// 10% — shadow layer 2 upper (elevations sm, md).
+  static const double shadow2Upper = DievasOpacityPrimitives.o10;
+
+  /// 15% — shadow layer 2 lower (elevations sm).
+  static const double shadow2Lower = DievasOpacityPrimitives.o15;
+
+  /// 20% — shadow layer 2 (elevations md, lg).
+  static const double shadow2 = DievasOpacityPrimitives.o20;
+
+  /// 8% — shadow layer 1 (elevations lg, xl).
+  static const double shadow1Light = DievasOpacityPrimitives.o8;
+
+  /// 25% — shadow layer 2 (elevations xl).
+  static const double shadow2Heavy = DievasOpacityPrimitives.o25;
 }

@@ -9,7 +9,7 @@ final class DievasDarkThemeData extends DievasGlobalThemeData {
   DievasDarkThemeData({super.components}) : super(colors: _darkColors);
 
   static final DievasColourThemeData _darkColors = DievasColourThemeData(
-    brightness: Brightness.dark,
+    brightness: .dark,
     core: const CoreColours(
       brand: Color(DievasColourSemanticDark.brand),
       brandSubtle: Color(DievasColourSemanticDark.brandSubtle),

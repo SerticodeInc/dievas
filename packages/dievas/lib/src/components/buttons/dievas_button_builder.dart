@@ -106,9 +106,11 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
 
               // Estimate text height for padding calculation.
               final textScaler = MediaQuery.textScalerOf(context);
-              final fontSize = widget.textStyle.fontSize ?? 14.0;
+              final placeholderFontSize = 14.0;
+              final placeholderTextHeight = 1.4;
+              final fontSize = widget.textStyle.fontSize ?? placeholderFontSize;
               final scaledSize = textScaler.scale(fontSize);
-              final estimatedTextHeight = scaledSize * (widget.textStyle.height ?? 1.4);
+              final estimatedTextHeight = scaledSize * (widget.textStyle.height ?? placeholderTextHeight);
 
               final content = Row(
                 mainAxisSize: .min,

@@ -25,8 +25,16 @@ mixin DievasButtonStateAnimatedLoaderMixin on StatefulWidget {
 /// Provides the loader [AnimationController] and the pre-built [animatedLoader]
 /// widget to the [State] that mixes it in.
 ///
-/// Requires [SingleTickerProviderStateMixin] to be mixed in first so [vsync]
-/// is available.
+/// IMPORTANT: The mixing class MUST also mix in [SingleTickerProviderStateMixin]
+/// to provide the [vsync] source. This is required because Dart mixins cannot
+/// enforce multiple `on` clauses. Usage:
+///
+/// ```dart
+/// class _MyButtonState extends State<MyButton>
+///   with SingleTickerProviderStateMixin, DievasButtonStateAnimatedLoaderProviderMixin {
+///   // ...
+/// }
+/// ```
 mixin DievasButtonStateAnimatedLoaderProviderMixin<T extends DievasButtonStateAnimatedLoaderMixin> on State<T>
     implements SingleTickerProviderStateMixin<T> {
   @visibleForTesting

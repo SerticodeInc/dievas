@@ -184,7 +184,6 @@ class DievasScopeState extends State<DievasScope>
   @override
   Widget build(BuildContext context) {
     final scope = _DievasScopeStateMarker(
-      key: ValueKey(_brightness),
       state: this,
       child: ValueListenableBuilder<ThemeMode>(
         valueListenable: _themeModeNotifier,
@@ -233,7 +232,7 @@ class DievasScopeState extends State<DievasScope>
 }
 
 class _DievasScopeStateMarker extends InheritedTheme {
-  const _DievasScopeStateMarker({super.key, required super.child, required this.state});
+  const _DievasScopeStateMarker({required super.child, required this.state});
 
   final DievasScopeController state;
 

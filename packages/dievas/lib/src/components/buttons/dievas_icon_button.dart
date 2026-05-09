@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:dievas_tokens/dievas_tokens.dart';
 import '../../theme/dievas_theme.dart';
+import 'dievas_button_press_mixin.dart';
 import 'types/dievas_button_shape.dart';
 import 'types/dievas_button_size.dart';
 
@@ -13,9 +14,6 @@ enum DievasIconButtonStyle {
   /// Tinted background matching the action primary fill.
   tinted,
 }
-
-/// Duration for press-opacity animation.
-const Duration _kPressedOpacityDuration = Duration(milliseconds: 100);
 
 /// A square or circular button that displays a single icon with no label.
 ///
@@ -51,15 +49,7 @@ class DievasIconButton extends StatefulWidget {
   State<DievasIconButton> createState() => _DievasIconButtonState();
 }
 
-class _DievasIconButtonState extends State<DievasIconButton> {
-  late final _statesController = WidgetStatesController();
-
-  @override
-  void dispose() {
-    _statesController.dispose();
-    super.dispose();
-  }
-
+class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPressMixin {
   @override
   Widget build(BuildContext context) {
     final components = DievasTheme.componentsOf(context);
@@ -88,14 +78,14 @@ class _DievasIconButtonState extends State<DievasIconButton> {
       child: Material(
         type: .transparency,
         child: InkWell(
-          statesController: _statesController,
+          statesController: statesController,
           onTap: widget.onPressed,
           borderRadius: borderRadius,
           splashFactory: NoSplash.splashFactory,
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,
           child: ValueListenableBuilder<Set<WidgetState>>(
-            valueListenable: _statesController,
+            valueListenable: statesController,
             builder: (_, states, _) {
               final isPressed = states.contains(WidgetState.pressed);
               final isDisabled = states.contains(WidgetState.disabled) || widget.onPressed == null;
@@ -108,7 +98,7 @@ class _DievasIconButtonState extends State<DievasIconButton> {
               final iconColor = activeStyle.icon.withValues(alpha: opacityFactor);
 
               return AnimatedContainer(
-                duration: _kPressedOpacityDuration,
+                duration: DievasButtonPressMixin.kAnimationDuration,
                 width: containerSize,
                 height: containerSize,
                 decoration: BoxDecoration(color: bgColor, borderRadius: borderRadius),

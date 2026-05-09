@@ -32,8 +32,10 @@ class DievasDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: M3 implementation — colour from context.colors.border.borderDefault,
-    //       thickness from context.border.borderWidthSm
+    // Implementation lands in M3.
+    assert(false, 'DievasDivider is not yet implemented — it renders nothing. Implementation lands in M3.');
     return const SizedBox.shrink();
   }
+  //       thickness from context.border.borderWidthSm
+  //return const SizedBox.shrink();
 }

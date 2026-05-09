@@ -62,7 +62,8 @@ class DievasAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: M3 implementation — derive sizing from DievasTheme.componentsOf(context).avatar
+    // Implementation lands in M3.
+    assert(false, 'DievasAvatar is not yet implemented — it renders nothing. Implementation lands in M3.');
     return const SizedBox.shrink();
   }
 }

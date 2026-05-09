@@ -50,7 +50,8 @@ class DievasBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: M3 implementation — derive tokens from DievasTheme.componentsOf(context).badge
+    // Implementation lands in M3.
+    assert(false, 'DievasBadge is not yet implemented — it renders nothing. Implementation lands in M3.');
     return const SizedBox.shrink();
   }
 }

@@ -6,14 +6,9 @@ import '../../theme/component/button/dievas_button_theme_state_style.dart';
 import '../../theme/component/button/dievas_button_theme_style.dart';
 import 'dievas_button_state_animated_loader_mixin.dart';
 import 'dievas_button_state_switcher.dart';
+import 'dievas_button_press_mixin.dart';
 import 'types/dievas_button_icon_style_behavior.dart';
 import 'types/dievas_button_state.dart';
-
-/// Duration for iOS-style press-opacity fade.
-const Duration _kPressedOpacityDuration = Duration(milliseconds: 100);
-
-/// Opacity applied when the button is pressed on Apple platforms.
-const double _kApplePressedOpacity = 0.7;
 
 /// The internal layout-and-gesture layer shared by [DievasFilledButton] and
 /// [DievasOutlinedButton].
@@ -61,33 +56,24 @@ class DievasButtonBuilder extends StatefulWidget with DievasButtonStateAnimatedL
 }
 
 class _DievasButtonBuilderState extends State<DievasButtonBuilder>
-    with SingleTickerProviderStateMixin, DievasButtonStateAnimatedLoaderProviderMixin {
-  late final _statesController = WidgetStatesController();
-
-  @override
-  void dispose() {
-    _statesController.dispose();
-    super.dispose();
-  }
-
+    with SingleTickerProviderStateMixin, DievasButtonStateAnimatedLoaderProviderMixin, DievasButtonPressMixin {
   @override
   Widget build(BuildContext context) {
-    final platform = Theme.of(context).platform;
-    final isApple = platform == TargetPlatform.iOS || platform == TargetPlatform.macOS;
+    final apple = isApplePlatform;
 
     return Semantics(
       button: true,
       child: Material(
         type: .transparency,
         child: InkWell(
-          statesController: _statesController,
+          statesController: statesController,
           onTap: (widget.state == .loading || widget.state == .disabled) ? null : widget.onPressed,
           borderRadius: widget.borderRadius,
-          splashFactory: isApple ? NoSplash.splashFactory : InkRipple.splashFactory,
+          splashFactory: apple ? NoSplash.splashFactory : InkRipple.splashFactory,
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,
           child: ValueListenableBuilder<Set<WidgetState>>(
-            valueListenable: _statesController,
+            valueListenable: statesController,
             builder: (context, states, _) {
               final isPressed = states.contains(WidgetState.pressed);
               final isDisabled =
@@ -95,7 +81,7 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
 
               final opacityFactor = isDisabled
                   ? widget.disabledOpacity
-                  : (isApple && isPressed ? _kApplePressedOpacity : 1.0);
+                  : (apple && isPressed ? DievasButtonPressMixin.kApplePressedOpacity : 1.0);
 
               final activeStyle = isPressed ? widget.style.focused : widget.style.idle;
 
@@ -132,7 +118,7 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
                   ?maybeColourIcon(widget.leadingIcon),
                   if (widget.label.isNotEmpty)
                     AnimatedDefaultTextStyle(
-                      duration: _kPressedOpacityDuration,
+                      duration: DievasButtonPressMixin.kAnimationDuration,
                       style: widget.textStyle.copyWith(color: foreground),
                       textAlign: .center,
                       child: Text(widget.label),
@@ -157,9 +143,9 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
 
               final inner = DievasButtonStateSwitcher(state: widget.state, loader: loader, content: child);
 
-              if (isApple) {
+              if (apple) {
                 return AnimatedContainer(
-                  duration: _kPressedOpacityDuration,
+                  duration: DievasButtonPressMixin.kAnimationDuration,
                   height: height,
                   padding: padding,
                   decoration: decoration,

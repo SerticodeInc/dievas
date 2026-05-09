@@ -32,9 +32,11 @@ class DievasLinearProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: M3 implementation — derive track/fill colours from
-    //       DievasTheme.componentsOf(context).linearProgress,
-    //       height from DievasTheme.sizingOf(context)
+    // Implementation lands in M3.
+    assert(false, 'DievasLinearProgress is not yet implemented — it renders nothing. Implementation lands in M3.');
     return const SizedBox.shrink();
   }
+  //       DievasTheme.componentsOf(context).linearProgress,
+  //       height from DievasTheme.sizingOf(context)
+  //return const SizedBox.shrink();
 }

@@ -45,7 +45,8 @@ class DievasTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: M3 implementation — derive tokens from DievasTheme.componentsOf(context).tag
+    // Implementation lands in M3.
+    assert(false, 'DievasTag is not yet implemented — it renders nothing. Implementation lands in M3.');
     return const SizedBox.shrink();
   }
 }

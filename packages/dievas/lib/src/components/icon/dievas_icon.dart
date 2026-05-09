@@ -40,8 +40,10 @@ class DievasIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: M3 implementation — map DievasIconSize to dp via
-    //       DievasTheme.sizingOf(context)
+    // Implementation lands in M3.
+    assert(false, 'DievasIcon is not yet implemented — it renders nothing. Implementation lands in M3.');
     return const SizedBox.shrink();
   }
+  //       DievasTheme.sizingOf(context)
+  //return const SizedBox.shrink();
 }

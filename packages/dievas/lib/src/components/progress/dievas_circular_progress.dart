@@ -43,8 +43,10 @@ class DievasCircularProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: M3 implementation — derive stroke colour + dp from
-    //       DievasTheme.componentsOf(context).circularProgress
+    // Implementation lands in M3.
+    assert(false, 'DievasCircularProgress is not yet implemented — it renders nothing. Implementation lands in M3.');
     return const SizedBox.shrink();
   }
+  //       DievasTheme.componentsOf(context).circularProgress
+  //return const SizedBox.shrink();
 }

@@ -60,9 +60,9 @@ COPY --from=dart-builder /build/landing/build/ ./
 # Overlay the generated CSS (Tailwind output) into the web assets dir
 COPY --from=css-builder /build/landing/web/output.css ./web/output.css
 
-# Railway injects PORT — Jaspr reads JASPR_PORT or defaults to 8080.
-# Set JASPR_PORT to match PORT so Railway's health check passes.
-ENV JASPR_PORT=8080
+# Railway injects a dynamic PORT env var at runtime.
+# Map it to JASPR_PORT so Jaspr binds to the port Railway expects.
+# Falls back to 8080 for local docker run without a PORT override.
 EXPOSE 8080
 
-CMD ["./server"]
+CMD ["sh", "-c", "JASPR_PORT=${PORT:-8080} ./server"]

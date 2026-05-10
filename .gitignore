@@ -8,3 +8,6 @@
 .ite/
 
 node_modules/
+
+# jaspr_builder generated file — recreated by build_runner, not tracked
+jaspr_options.dart

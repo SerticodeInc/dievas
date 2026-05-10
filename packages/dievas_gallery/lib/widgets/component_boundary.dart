@@ -17,7 +17,7 @@ class ComponentBoundaryScope extends InheritedWidget {
 
 /// Draws a 1dp dashed border around its child when the addon toggle is active.
 ///
-/// Wrap individual components in use-cases to visualise their exact footprint:
+/// Wrap individual components in use-cases to visualize their exact footprint:
 /// ```dart
 /// ComponentBoundary(child: DievasFilledButton(...))
 /// ```
@@ -31,9 +31,7 @@ class ComponentBoundary extends StatelessWidget {
     if (!ComponentBoundaryScope.of(context)) return child;
 
     return DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border.all(color: const Color(0x80FF0080), width: 1),
-      ),
+      decoration: BoxDecoration(border: Border.all(color: const Color(0x80FF0080), width: 1)),
       child: child,
     );
   }

@@ -11,3 +11,24 @@ node_modules/
 
 # jaspr_builder generated file — recreated by build_runner, not tracked
 jaspr_options.dart
+
+**/.dart_tool/
+**/build/
+**/.packages
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/pubspec.lock
+
+**/.env
+*.env
+
+.melos_tool/
+
+**/web/build/
+
+.DS_Store
+Thumbs.db
+
+.idea/
+.vscode/
+*.iml

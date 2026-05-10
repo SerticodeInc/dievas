@@ -15,7 +15,7 @@ class ComponentBoundaryScope extends InheritedWidget {
   bool updateShouldNotify(ComponentBoundaryScope old) => show != old.show;
 }
 
-/// Draws a 1dp dashed border around its child when the addon toggle is active.
+/// Draws a 2dp dashed border around its child when the addon toggle is active.
 ///
 /// Wrap individual components in use-cases to visualize their exact footprint:
 /// ```dart
@@ -31,7 +31,7 @@ class ComponentBoundary extends StatelessWidget {
     if (!ComponentBoundaryScope.of(context)) return child;
 
     return DecoratedBox(
-      decoration: BoxDecoration(border: Border.all(color: const Color(0x80FF0080), width: 1)),
+      decoration: BoxDecoration(border: Border.all(color: const Color.fromARGB(255, 237, 11, 11), width: 2)),
       child: child,
     );
   }

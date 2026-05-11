@@ -1,6 +1,9 @@
 name: Deploy — Landing
 
 # Deploys dievas_landing (Jaspr + Tailwind SSR server) to Railway.
+# Manual trigger only — auto-deploy on push is intentionally disabled to
+# prevent Railway's GitHub integration and this workflow from racing and
+# spawning duplicate service instances.
 #
 # Build context: REPO ROOT (not landing/)
 #   The Dockerfile at landing/Dockerfile expects to find:
@@ -14,6 +17,7 @@ name: Deploy — Landing
 #   Dockerfile:     landing/Dockerfile
 #   Build Context:  . (repo root)
 #   Custom Domain:  dievas.serticode.com
+#   Auto-Deploy:    DISABLED (deploy is triggered manually via workflow_dispatch)
 #
 # Secrets required:
 #   RAILWAY_TOKEN           — Railway project token (Settings → Tokens)
@@ -26,13 +30,6 @@ on:
                 description: "Reason for manual deploy (optional)"
                 required: false
                 default: "Manual trigger"
-
-    push:
-        branches:
-            - master
-        paths:
-            - "landing/**"
-            - "packages/dievas_tokens/**"
 
 concurrency:
     group: deploy-landing

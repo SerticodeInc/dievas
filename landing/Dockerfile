@@ -46,7 +46,7 @@ RUN dart pub get
 RUN dart run build_runner build --delete-conflicting-outputs
 
 # Build the Jaspr server in release mode
-RUN jaspr build --release
+RUN jaspr build
 
 # ── Stage 3: Lean runtime image ───────────────────────────────────────────────
 FROM debian:bookworm-slim AS runtime

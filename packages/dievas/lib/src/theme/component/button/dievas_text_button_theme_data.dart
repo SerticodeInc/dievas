@@ -9,10 +9,7 @@ import 'dievas_button_theme_data.dart';
 /// `DievasTheme.componentsOf(context).textButton`.
 @immutable
 final class DievasTextButtonGroupThemeData extends Equatable with Diagnosticable {
-  const DievasTextButtonGroupThemeData({
-    required this.primary,
-    required this.destructive,
-  });
+  const DievasTextButtonGroupThemeData({required this.primary, required this.destructive});
 
   /// Primary text action — brand foreground colour.
   final DievasTextButtonThemeData primary;

@@ -14,7 +14,7 @@ final checkboxComponent = WidgetbookComponent(
 );
 
 Widget _playground(BuildContext context) {
-  final value = context.knobs.list<DievasCheckboxValue>(
+  final value = context.knobs.object.dropdown<DievasCheckboxValue>(
     label: 'Value',
     options: DievasCheckboxValue.values,
     labelBuilder: (v) => v.name,
@@ -70,10 +70,7 @@ Widget _stateRow(String name, DievasCheckboxValue value, {bool disabled = false}
       child: Text(name, style: const TextStyle(fontSize: 11, color: Color(0xFF64748B))),
     ),
     ComponentBoundary(
-      child: DievasCheckbox(
-        value: value,
-        onChanged: disabled ? null : (_) {},
-      ),
+      child: DievasCheckbox(value: value, onChanged: disabled ? null : (_) {}),
     ),
   ],
 );
@@ -102,11 +99,7 @@ Widget _withLabels(BuildContext context) => Center(
         ),
         const SizedBox(height: 16),
         ComponentBoundary(
-          child: DievasCheckbox(
-            value: DievasCheckboxValue.unchecked,
-            label: 'Disabled',
-            onChanged: null,
-          ),
+          child: DievasCheckbox(value: DievasCheckboxValue.unchecked, label: 'Disabled', onChanged: null),
         ),
       ],
     ),

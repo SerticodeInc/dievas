@@ -16,14 +16,14 @@ final avatarComponent = WidgetbookComponent(
 Widget _playground(BuildContext context) {
   final initials = context.knobs.string(label: 'Initials', initialValue: 'AB');
 
-  final size = context.knobs.list<DievasAvatarSize>(
+  final size = context.knobs.object.dropdown<DievasAvatarSize>(
     label: 'Size',
     options: DievasAvatarSize.values,
     labelBuilder: (v) => v.name,
     initialOption: .md,
   );
 
-  final shape = context.knobs.list<DievasAvatarShape>(
+  final shape = context.knobs.object.dropdown<DievasAvatarShape>(
     label: 'Shape',
     options: DievasAvatarShape.values,
     labelBuilder: (v) => v.name,

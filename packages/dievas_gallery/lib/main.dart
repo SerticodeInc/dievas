@@ -3,6 +3,7 @@ import 'package:widgetbook/widgetbook.dart';
 
 import 'addons/component_boundary_addon.dart';
 import 'addons/dievas_theme_addon.dart';
+import 'home/dievas_home_page.dart';
 
 // Buttons
 import 'components/buttons/dievas_filled_button.dart';
@@ -33,18 +34,14 @@ class DievasGallery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Widgetbook.material(
+    home: const DievasHomePage(),
     directories: [
       WidgetbookCategory(
         name: 'Components',
         children: [
           WidgetbookFolder(
             name: 'Buttons',
-            children: [
-              filledButtonComponent,
-              outlinedButtonComponent,
-              textButtonComponent,
-              iconButtonComponent,
-            ],
+            children: [filledButtonComponent, outlinedButtonComponent, textButtonComponent, iconButtonComponent],
           ),
           WidgetbookFolder(
             name: 'Display',
@@ -60,13 +57,7 @@ class DievasGallery extends StatelessWidget {
           ),
           WidgetbookFolder(
             name: 'Form',
-            children: [
-              checkboxComponent,
-              radioComponent,
-              switchComponent,
-              textInputComponent,
-              textAreaComponent,
-            ],
+            children: [checkboxComponent, radioComponent, switchComponent, textInputComponent, textAreaComponent],
           ),
         ],
       ),

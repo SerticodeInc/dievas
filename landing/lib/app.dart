@@ -28,17 +28,37 @@ class App extends StatelessComponent {
       head: [
         link(rel: 'preconnect', href: 'https://fonts.googleapis.com'),
         link(rel: 'preconnect', href: 'https://fonts.gstatic.com', attributes: const {'crossorigin': ''}),
-        link(
-          rel: 'stylesheet',
-          href:
-              'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap',
-        ),
+        link(rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap'),
         link(rel: 'stylesheet', href: '/output.css'),
       ],
       body: const _AppBody(),
     );
   }
 }
+
+const _navScrollScript = '''<script>
+(function(){
+  var nav=document.getElementById('site-nav');
+  if(!nav)return;
+  var lastY=window.scrollY,ticking=false,deadZone=16,topZone=80;
+  window.addEventListener('scroll',function(){
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(function(){
+      var y=window.scrollY;
+      if(y<topZone){
+        nav.style.transform='translateY(0)';
+      }else if(y-lastY>deadZone){
+        nav.style.transform='translateY(-130%)';
+      }else if(lastY-y>deadZone){
+        nav.style.transform='translateY(0)';
+      }
+      lastY=y;
+      ticking=false;
+    });
+  },{passive:true});
+})();
+</script>''';
 
 /// Body content — rendered inside [Document]'s [body].
 class _AppBody extends StatelessComponent {
@@ -50,8 +70,11 @@ class _AppBody extends StatelessComponent {
       const Nav(),
       const Hero(),
       const ArchitectureSection(),
-      const ComponentsSection(),
-      const FooterComponent(),
+      div(
+        attributes: const {'style': 'background: linear-gradient(to bottom, #ffffff 0%, #EEF2FF 100%);'},
+        [const ComponentsSection(), const FooterComponent()],
+      ),
+      RawText(_navScrollScript),
     ]);
   }
 }

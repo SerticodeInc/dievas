@@ -29,6 +29,25 @@ void main() {
   buf.writeln(' * Regenerate: dart run tool/generate_theme.dart');
   buf.writeln(' * ───────────────────────────────────────────────────────────── */');
   buf.writeln();
+
+  // ── Self-hosted fonts ────────────────────────────────────────────────────
+  buf.writeln('@font-face {');
+  buf.writeln('  font-family: "Maison Neue Extended";');
+  buf.writeln('  src: url("/assets/fonts/maison-neue-extended-medium.woff2") format("woff2");');
+  buf.writeln('  font-weight: 500;');
+  buf.writeln('  font-style: normal;');
+  buf.writeln('  font-display: swap;');
+  buf.writeln('}');
+  buf.writeln();
+  buf.writeln('@font-face {');
+  buf.writeln('  font-family: "Maison Neue";');
+  buf.writeln('  src: url("/assets/fonts/maison-neue-medium.woff2") format("woff2");');
+  buf.writeln('  font-weight: 500;');
+  buf.writeln('  font-style: normal;');
+  buf.writeln('  font-display: swap;');
+  buf.writeln('}');
+  buf.writeln();
+
   buf.writeln('@import "tailwindcss";');
   buf.writeln();
   // Tell Tailwind v4 to scan Dart files for class names in addition to
@@ -82,6 +101,12 @@ void main() {
   buf.writeln('  --color-static-black: ${toRgba(DievasColourSemanticDark.staticBlack)};');
   buf.writeln();
 
+  // ── Typography ─────────────────────────────────────────────────────────
+  buf.writeln('  /* ── Typography ─────────────────────────────────────────────── */');
+  buf.writeln('  --font-display: "Maison Neue Extended", system-ui, sans-serif;');
+  buf.writeln('  --font-body:    "Maison Neue", system-ui, sans-serif;');
+  buf.writeln();
+
   // ── Spacing ────────────────────────────────────────────────────────────
   buf.writeln('  /* ── Spacing — DievasSpacingSemantic ─────────────────────── */');
   buf.writeln('  --spacing-xs:   ${toPx(DievasSpacingSemantic.xs)};');
@@ -107,6 +132,55 @@ void main() {
   buf.writeln('  --radius-full: ${toPx(DievasRadiusSemantic.full)};');
   buf.writeln();
 
+  buf.writeln('}');
+  buf.writeln();
+
+  // ── Animations ─────────────────────────────────────────────────────────
+  buf.writeln('@keyframes fade-up {');
+  buf.writeln('  from { opacity: 0; transform: translateY(16px); }');
+  buf.writeln('  to   { opacity: 1; transform: translateY(0); }');
+  buf.writeln('}');
+  buf.writeln();
+  buf.writeln('@keyframes float {');
+  buf.writeln('  0%, 100% { transform: translateY(0px); }');
+  buf.writeln('  50%       { transform: translateY(-12px); }');
+  buf.writeln('}');
+  buf.writeln();
+  buf.writeln('@keyframes float-slow {');
+  buf.writeln('  0%, 100% { transform: translateY(0px); }');
+  buf.writeln('  50%       { transform: translateY(-8px); }');
+  buf.writeln('}');
+  buf.writeln();
+
+  // ── Eyebrow shimmer ────────────────────────────────────────────────────
+  buf.writeln('@keyframes eyebrow-shimmer {');
+  buf.writeln('  0%   { background-position:  200% center; }');
+  buf.writeln('  100% { background-position: -200% center; }');
+  buf.writeln('}');
+  buf.writeln();
+  buf.writeln('.section-eyebrow {');
+  buf.writeln('  background: linear-gradient(');
+  buf.writeln('    90deg,');
+  buf.writeln('    rgba(100,116,139,1) 0%,');
+  buf.writeln('    rgba(100,116,139,1) 25%,');
+  buf.writeln('    rgba(129,140,248,1) 50%,');
+  buf.writeln('    rgba(100,116,139,1) 75%,');
+  buf.writeln('    rgba(100,116,139,1) 100%');
+  buf.writeln('  );');
+  buf.writeln('  background-size: 200% auto;');
+  buf.writeln('  -webkit-background-clip: text;');
+  buf.writeln('  -webkit-text-fill-color: transparent;');
+  buf.writeln('  background-clip: text;');
+  buf.writeln('  color: transparent;');
+  buf.writeln('  animation: eyebrow-shimmer 5s linear infinite;');
+  buf.writeln('}');
+  buf.writeln();
+
+  // ── Named max-width overrides (Tailwind v4 does not ship these by default)
+  buf.writeln('@layer utilities {');
+  buf.writeln('  .max-w-5xl { max-width: 64rem; }');
+  buf.writeln('  .max-w-lg  { max-width: 32rem; }');
+  buf.writeln('  .max-w-sm  { max-width: 24rem; }');
   buf.writeln('}');
 
   final outputFile = File('web/styles.css');

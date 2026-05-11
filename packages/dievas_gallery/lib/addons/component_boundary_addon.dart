@@ -11,15 +11,12 @@ class ComponentBoundaryAddon extends WidgetbookAddon<bool> {
   ComponentBoundaryAddon() : super(name: 'Component Boundary');
 
   @override
-  List<Field> get fields => [
-    BooleanField(name: 'show_boundary', initialValue: false),
-  ];
+  List<Field> get fields => [BooleanField(name: 'show_boundary', initialValue: false)];
 
   @override
-  bool valueFromQueryGroup(Map<String, String> group) =>
-      valueOf('show_boundary', group) ?? false;
+  bool valueFromQueryGroup(Map<String, String> group) => valueOf('show_boundary', group) ?? false;
 
   @override
-  Widget buildUseCase(BuildContext context, Widget child, bool show) =>
-      ComponentBoundaryScope(show: show, child: child);
+  Widget buildUseCase(BuildContext context, Widget child, bool setting) =>
+      ComponentBoundaryScope(show: setting, child: child);
 }

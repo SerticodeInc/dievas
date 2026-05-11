@@ -53,11 +53,6 @@ class DievasIcon extends StatelessWidget {
       DievasIconSize.lg => sizing.iconLg,
     };
 
-    return Icon(
-      icon,
-      size: dimension,
-      color: color ?? colors.icon.iconPrimary,
-      semanticLabel: semanticLabel,
-    );
+    return Icon(icon, size: dimension, color: color ?? colors.icon.iconPrimary, semanticLabel: semanticLabel);
   }
 }

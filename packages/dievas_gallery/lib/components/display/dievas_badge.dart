@@ -16,14 +16,14 @@ final badgeComponent = WidgetbookComponent(
 Widget _playground(BuildContext context) {
   final label = context.knobs.string(label: 'Label', initialValue: 'New');
 
-  final style = context.knobs.list<DievasBadgeStyle>(
+  final style = context.knobs.object.dropdown<DievasBadgeStyle>(
     label: 'Style',
     options: DievasBadgeStyle.values,
     labelBuilder: (v) => v.name,
     initialOption: .tinted,
   );
 
-  final tone = context.knobs.list<DievasBadgeTone>(
+  final tone = context.knobs.object.dropdown<DievasBadgeTone>(
     label: 'Tone',
     options: DievasBadgeTone.values,
     labelBuilder: (v) => v.name,

@@ -5,76 +5,130 @@
  * Regenerate: dart run tool/generate_theme.dart
  * ───────────────────────────────────────────────────────────── */
 
+@font-face {
+  font-family: "Maison Neue Extended";
+  src: url("/assets/fonts/maison-neue-extended-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Maison Neue";
+  src: url("/assets/fonts/maison-neue-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import "tailwindcss";
 
 @source "../lib/**/*.dart";
 
 @theme {
-	--color-brand: rgba(129, 140, 248, 1);
-	--color-brand-subtle: rgba(30, 27, 75, 1);
-	--color-on-brand: rgba(255, 255, 255, 1);
+  /* ── Colours — DievasColourSemanticDark ──────────────────── */
 
-	--color-text-hi: rgba(248, 250, 252, 1);
-	--color-text-mid: rgba(148, 163, 184, 1);
-	--color-text-lo: rgba(100, 116, 139, 1);
-	--color-text-off: rgba(71, 85, 105, 1);
+  /* Brand */
+  --color-brand:        rgba(129, 140, 248, 1);
+  --color-brand-subtle: rgba(30, 27, 75, 1);
+  --color-on-brand:     rgba(255, 255, 255, 1);
 
-	--color-bg-base: rgba(2, 6, 23, 1);
-	--color-bg-subtle: rgba(15, 23, 42, 1);
-	--color-bg-elevated: rgba(30, 41, 59, 1);
-	--color-bg-overlay: rgba(0, 0, 0, 1);
+  /* Text */
+  --color-text-hi:  rgba(248, 250, 252, 1);
+  --color-text-mid: rgba(148, 163, 184, 1);
+  --color-text-lo:  rgba(100, 116, 139, 1);
+  --color-text-off: rgba(71, 85, 105, 1);
 
-	--color-border: rgba(51, 65, 85, 1);
-	--color-border-hi: rgba(148, 163, 184, 1);
-	--color-border-brand: rgba(129, 140, 248, 1);
-	--color-border-focus: rgba(129, 140, 248, 1);
+  /* Background */
+  --color-bg-base:     rgba(2, 6, 23, 1);
+  --color-bg-subtle:   rgba(15, 23, 42, 1);
+  --color-bg-elevated: rgba(30, 41, 59, 1);
+  --color-bg-overlay:  rgba(0, 0, 0, 1);
 
-	--color-action: rgba(99, 102, 241, 1);
-	--color-action-hover: rgba(129, 140, 248, 1);
-	--color-action-active: rgba(165, 180, 252, 1);
-	--color-action-disabled: rgba(51, 65, 85, 1);
-	--color-action-sec: rgba(30, 27, 75, 1);
-	--color-action-sec-hover: rgba(49, 46, 129, 1);
+  /* Border */
+  --color-border:       rgba(51, 65, 85, 1);
+  --color-border-hi:    rgba(148, 163, 184, 1);
+  --color-border-brand: rgba(129, 140, 248, 1);
+  --color-border-focus: rgba(129, 140, 248, 1);
 
-	--color-static-white: rgba(255, 255, 255, 1);
-	--color-static-black: rgba(0, 0, 0, 1);
+  /* Action */
+  --color-action:          rgba(99, 102, 241, 1);
+  --color-action-hover:    rgba(129, 140, 248, 1);
+  --color-action-active:   rgba(165, 180, 252, 1);
+  --color-action-disabled: rgba(51, 65, 85, 1);
+  --color-action-sec:      rgba(30, 27, 75, 1);
+  --color-action-sec-hover:rgba(49, 46, 129, 1);
 
-	--spacing-xs: 4px;
-	--spacing-sm: 8px;
-	--spacing-md: 16px;
-	--spacing-lg: 24px;
-	--spacing-xl: 32px;
-	--spacing-2xl: 48px;
-	--spacing-3xl: 64px;
-	--spacing-4xl: 80px;
-	--spacing-5xl: 96px;
+  /* Static */
+  --color-static-white: rgba(255, 255, 255, 1);
+  --color-static-black: rgba(0, 0, 0, 1);
 
-	--radius-xs: 2px;
-	--radius-sm: 4px;
-	--radius-md: 8px;
-	--radius-lg: 12px;
-	--radius-xl: 16px;
-	--radius-2xl: 20px;
-	--radius-3xl: 24px;
-	--radius-full: 9999px;
+  /* ── Typography ─────────────────────────────────────────────── */
+  --font-display: "Maison Neue Extended", system-ui, sans-serif;
+  --font-body:    "Maison Neue", system-ui, sans-serif;
+
+  /* ── Spacing — DievasSpacingSemantic ─────────────────────── */
+  --spacing-xs:   4.0px;
+  --spacing-sm:   8.0px;
+  --spacing-md:   16.0px;
+  --spacing-lg:   24.0px;
+  --spacing-xl:   32.0px;
+  --spacing-2xl:  48.0px;
+  --spacing-3xl:  64.0px;
+  --spacing-4xl:  80.0px;
+  --spacing-5xl:  96.0px;
+
+  /* ── Radius — DievasRadiusSemantic ───────────────────────── */
+  --radius-xs:   2.0px;
+  --radius-sm:   4.0px;
+  --radius-md:   8.0px;
+  --radius-lg:   12.0px;
+  --radius-xl:   16.0px;
+  --radius-2xl:  20.0px;
+  --radius-3xl:  24.0px;
+  --radius-full: 9999.0px;
+
 }
 
 @keyframes fade-up {
-	from {
-		opacity: 0;
-		transform: translateY(16px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes eyebrow-shimmer {
+  0%   { background-position:  200% center; }
+  100% { background-position: -200% center; }
+}
+
+.section-eyebrow {
+  background: linear-gradient(
+    90deg,
+    rgba(100,116,139,1) 0%,
+    rgba(100,116,139,1) 25%,
+    rgba(129,140,248,1) 50%,
+    rgba(100,116,139,1) 75%,
+    rgba(100,116,139,1) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  animation: eyebrow-shimmer 5s linear infinite;
 }
 
 @layer utilities {
-	.max-w-5xl {
-		max-width: 64rem;
-	}
-	.max-w-lg {
-		max-width: 32rem;
-	}
+  .max-w-5xl { max-width: 64rem; }
+  .max-w-lg  { max-width: 32rem; }
+  .max-w-sm  { max-width: 24rem; }
 }

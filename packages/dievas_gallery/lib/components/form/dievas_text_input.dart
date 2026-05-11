@@ -14,7 +14,7 @@ final textInputComponent = WidgetbookComponent(
 );
 
 Widget _playground(BuildContext context) {
-  final size = context.knobs.list<DievasTextInputSize>(
+  final size = context.knobs.object.dropdown<DievasTextInputSize>(
     label: 'Size',
     options: DievasTextInputSize.values,
     labelBuilder: (v) => v.name,
@@ -64,10 +64,7 @@ Widget _allSizes(BuildContext context) => Center(
               const SizedBox(width: 16),
               Expanded(
                 child: ComponentBoundary(
-                  child: DievasTextInput(
-                    size: size,
-                    hint: 'Placeholder',
-                  ),
+                  child: DievasTextInput(size: size, hint: 'Placeholder'),
                 ),
               ),
             ],
@@ -89,20 +86,12 @@ Widget _allStates(BuildContext context) => Center(
         const SizedBox(height: 20),
         _stateBlock(
           'With Label + Helper',
-          child: DievasTextInput(
-            label: 'Full name',
-            hint: 'John Appleseed',
-            helperText: 'As it appears on your ID.',
-          ),
+          child: DievasTextInput(label: 'Full name', hint: 'John Appleseed', helperText: 'As it appears on your ID.'),
         ),
         const SizedBox(height: 20),
         _stateBlock(
           'Error',
-          child: DievasTextInput(
-            label: 'Email',
-            hint: 'you@example.com',
-            errorText: 'This email is already in use.',
-          ),
+          child: DievasTextInput(label: 'Email', hint: 'you@example.com', errorText: 'This email is already in use.'),
         ),
         const SizedBox(height: 20),
         _stateBlock(
@@ -116,11 +105,7 @@ Widget _allStates(BuildContext context) => Center(
         const SizedBox(height: 20),
         _stateBlock(
           'Disabled',
-          child: DievasTextInput(
-            label: 'Username',
-            hint: 'adonis_serticode',
-            enabled: false,
-          ),
+          child: DievasTextInput(label: 'Username', hint: 'adonis_serticode', enabled: false),
         ),
       ],
     ),

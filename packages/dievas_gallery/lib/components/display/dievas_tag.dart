@@ -15,7 +15,7 @@ final tagComponent = WidgetbookComponent(
 Widget _playground(BuildContext context) {
   final label = context.knobs.string(label: 'Label', initialValue: 'Flutter');
 
-  final style = context.knobs.list<DievasTagStyle>(
+  final style = context.knobs.object.dropdown<DievasTagStyle>(
     label: 'Style',
     options: DievasTagStyle.values,
     labelBuilder: (v) => v.name,
@@ -48,7 +48,9 @@ Widget _allStyles(BuildContext context) => Center(
       alignment: WrapAlignment.center,
       children: [
         for (final style in DievasTagStyle.values) ...[
-          ComponentBoundary(child: DievasTag(label: style.name, style: style)),
+          ComponentBoundary(
+            child: DievasTag(label: style.name, style: style),
+          ),
           ComponentBoundary(
             child: DievasTag(
               label: style.name,

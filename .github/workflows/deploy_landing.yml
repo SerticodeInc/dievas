@@ -1,0 +1,125 @@
+name: Deploy — Landing
+
+# Deploys dievas_landing (Jaspr + Tailwind SSR server) to Railway.
+#
+# Build context: REPO ROOT (not landing/)
+#   The Dockerfile at landing/Dockerfile expects to find:
+#     - pubspec.yaml / pubspec.lock  at root
+#     - packages/dievas_tokens/      at root
+#     - landing/                     at root
+#   so `railway up` MUST run from the repo root.
+#
+# Railway service must be configured in the dashboard with:
+#   Builder:        Dockerfile
+#   Dockerfile:     landing/Dockerfile
+#   Build Context:  . (repo root)
+#   Custom Domain:  dievas.serticode.com
+#
+# Secrets required:
+#   RAILWAY_TOKEN           — Railway project token (Settings → Tokens)
+#   DISCORD_HERMODR_WEBHOOK — (optional) Discord channel for deploy notifications
+
+on:
+    workflow_dispatch:
+        inputs:
+            reason:
+                description: "Reason for manual deploy (optional)"
+                required: false
+                default: "Manual trigger"
+
+    push:
+        branches:
+            - master
+        paths:
+            - "landing/**"
+            - "packages/dievas_tokens/**"
+
+concurrency:
+    group: deploy-landing
+    cancel-in-progress: true
+
+jobs:
+    deploy:
+        name: Deploy to Railway
+        runs-on: ubuntu-latest
+        timeout-minutes: 20
+        permissions:
+            contents: read
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Install Railway CLI
+              run: npm install -g @railway/cli
+
+            - name: Deploy landing
+              # Run from repo root so the build context matches landing/Dockerfile's COPY paths.
+              # The Railway service resolves landing/Dockerfile via its dashboard config.
+              run: railway up --service dievas-landing --detach
+              env:
+                  RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+            - name: Notify Discord — success
+              if: success() && vars.DISCORD_NOTIFICATIONS_ENABLED != 'false'
+              run: |
+                  TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+                  RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                  COMMIT_URL="${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}"
+                  SHORT_SHA="${{ github.sha }}"
+                  SHORT_SHA="${SHORT_SHA:0:7}"
+
+                  jq -n \
+                      --arg run_url "$RUN_URL" \
+                      --arg commit_url "$COMMIT_URL" \
+                      --arg sha "$SHORT_SHA" \
+                      --arg msg "${{ github.event.head_commit.message || inputs.reason }}" \
+                      --arg author "${{ github.event.head_commit.author.name || github.actor }}" \
+                      --arg timestamp "$TIMESTAMP" \
+                      '{
+                        username: "Hermóðr 🌑",
+                        embeds: [{
+                          title: "✅ dievas-landing deployed",
+                          color: 3066993,
+                          fields: [
+                            { name: "📦 Commit", value: "[`\($sha)`](\($commit_url)) — \($msg)", inline: false },
+                            { name: "👤 Author", value: $author, inline: true },
+                            { name: "🔗 Run", value: "[View](\($run_url))", inline: true }
+                          ],
+                          footer: { text: "Dievas CI/CD • Railway • dievas.serticode.com" },
+                          timestamp: $timestamp
+                        }]
+                      }' > payload.json
+
+                  curl -s -o /dev/null -w "%{http_code}" \
+                      -X POST "${{ secrets.DISCORD_HERMODR_WEBHOOK }}" \
+                      -H "Content-Type: application/json" \
+                      -d @payload.json
+              continue-on-error: true
+
+            - name: Notify Discord — failure
+              if: failure() && vars.DISCORD_NOTIFICATIONS_ENABLED != 'false'
+              run: |
+                  TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+                  RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+                  jq -n \
+                      --arg run_url "$RUN_URL" \
+                      --arg timestamp "$TIMESTAMP" \
+                      '{
+                        username: "Hermóðr 🌑",
+                        embeds: [{
+                          title: "❌ dievas-landing deploy failed",
+                          color: 15158332,
+                          fields: [
+                            { name: "🔗 Run", value: "[View](\($run_url))" }
+                          ],
+                          footer: { text: "Dievas CI/CD • Railway" },
+                          timestamp: $timestamp
+                        }]
+                      }' > payload.json
+
+                  curl -s -o /dev/null -w "%{http_code}" \
+                      -X POST "${{ secrets.DISCORD_HERMODR_WEBHOOK }}" \
+                      -H "Content-Type: application/json" \
+                      -d @payload.json
+              continue-on-error: true

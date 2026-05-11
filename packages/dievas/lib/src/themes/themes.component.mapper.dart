@@ -282,30 +282,27 @@ DievasTagThemeData _createTagTheme(
 );
 
 // LinearProgress
-DievasLinearProgressThemeData _createLinearProgressTheme(
-  DievasColourThemeData colors,
-  DievasBorderThemeData border,
-) => DievasLinearProgressThemeData(
-  height: 4.0,
-  borderRadius: border.full,
-  trackColor: colors.background.bgSubtle,
-  colorPrimary: colors.action.actionPrimary,
-  colorSuccess: colors.feedback.feedbackSuccess.icon,
-  colorError: colors.feedback.feedbackError.icon,
-);
+DievasLinearProgressThemeData _createLinearProgressTheme(DievasColourThemeData colors, DievasBorderThemeData border) =>
+    DievasLinearProgressThemeData(
+      height: 4.0,
+      borderRadius: border.full,
+      trackColor: colors.background.bgSubtle,
+      colorPrimary: colors.action.actionPrimary,
+      colorSuccess: colors.feedback.feedbackSuccess.icon,
+      colorError: colors.feedback.feedbackError.icon,
+    );
 
 // CircularProgress
-DievasCircularProgressThemeData _createCircularProgressTheme(
-  DievasColourThemeData colors,
-) => DievasCircularProgressThemeData(
-  sizeSm: 16.0,
-  sizeMd: 24.0,
-  sizeLg: 32.0,
-  strokeWidth: 2.5,
-  colorPrimary: colors.action.actionPrimary,
-  colorOnBrand: colors.core.onBrand,
-  trackColor: colors.background.bgSubtle,
-);
+DievasCircularProgressThemeData _createCircularProgressTheme(DievasColourThemeData colors) =>
+    DievasCircularProgressThemeData(
+      sizeSm: 16.0,
+      sizeMd: 24.0,
+      sizeLg: 32.0,
+      strokeWidth: 2.5,
+      colorPrimary: colors.action.actionPrimary,
+      colorOnBrand: colors.core.onBrand,
+      trackColor: colors.background.bgSubtle,
+    );
 
 // Checkbox
 DievasCheckboxThemeData _createCheckboxTheme(

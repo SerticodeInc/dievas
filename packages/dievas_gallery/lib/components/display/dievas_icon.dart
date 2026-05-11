@@ -13,7 +13,7 @@ final iconComponent = WidgetbookComponent(
 );
 
 Widget _playground(BuildContext context) {
-  final size = context.knobs.list<DievasIconSize>(
+  final size = context.knobs.object.dropdown<DievasIconSize>(
     label: 'Size',
     options: DievasIconSize.values,
     labelBuilder: (v) => v.name,
@@ -21,9 +21,7 @@ Widget _playground(BuildContext context) {
   );
 
   return Center(
-    child: ComponentBoundary(
-      child: DievasIcon(Icons.star_rounded, size: size),
-    ),
+    child: ComponentBoundary(child: DievasIcon(Icons.star_rounded, size: size)),
   );
 }
 

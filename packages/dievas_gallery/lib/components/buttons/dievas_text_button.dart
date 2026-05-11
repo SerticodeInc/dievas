@@ -17,20 +17,20 @@ final textButtonComponent = WidgetbookComponent(
 Widget _playground(BuildContext context) {
   final label = context.knobs.string(label: 'Label', initialValue: 'View details');
 
-  final style = context.knobs.list<DievasTextButtonStyle>(
+  final style = context.knobs.object.dropdown<DievasTextButtonStyle>(
     label: 'Style',
     options: DievasTextButtonStyle.values,
     labelBuilder: (v) => v.name,
   );
 
-  final size = context.knobs.list<DievasButtonSize>(
+  final size = context.knobs.object.dropdown<DievasButtonSize>(
     label: 'Size',
     options: DievasButtonSize.values,
     labelBuilder: (v) => v.name,
     initialOption: DievasButtonSize.md,
   );
 
-  final state = context.knobs.list<DievasButtonState>(
+  final state = context.knobs.object.dropdown<DievasButtonState>(
     label: 'State',
     options: DievasButtonState.values,
     labelBuilder: (v) => v.name,
@@ -65,11 +65,7 @@ Widget _allStyles(BuildContext context) => Center(
       children: [
         for (final style in DievasTextButtonStyle.values)
           ComponentBoundary(
-            child: DievasTextButton(
-              label: style.name,
-              style: style,
-              onPressed: () {},
-            ),
+            child: DievasTextButton(label: style.name, style: style, onPressed: () {}),
           ),
       ],
     ),
@@ -86,11 +82,7 @@ Widget _allSizes(BuildContext context) => Center(
       children: [
         for (final size in DievasButtonSize.values)
           ComponentBoundary(
-            child: DievasTextButton(
-              label: size.name,
-              size: size,
-              onPressed: () {},
-            ),
+            child: DievasTextButton(label: size.name, size: size, onPressed: () {}),
           ),
       ],
     ),

@@ -37,11 +37,8 @@ sealed class DievasButtonThemeStyle extends Equatable {
 @immutable
 @internal
 final class DievasFilledButtonThemeStyle extends DievasButtonThemeStyle {
-  const DievasFilledButtonThemeStyle({
-    required super.foreground,
-    required super.icon,
-    required Color super.background,
-  }) : super._(borderSide: null);
+  const DievasFilledButtonThemeStyle({required super.foreground, required super.icon, required Color super.background})
+    : super._(borderSide: null);
 }
 
 /// Style tokens for [DievasOutlinedButton].
@@ -59,19 +56,14 @@ final class DievasOutlinedButtonThemeStyle extends DievasButtonThemeStyle {
 @immutable
 @internal
 final class DievasTextButtonThemeStyle extends DievasButtonThemeStyle {
-  const DievasTextButtonThemeStyle({
-    required super.foreground,
-    required super.icon,
-  }) : super._(background: null, borderSide: null);
+  const DievasTextButtonThemeStyle({required super.foreground, required super.icon})
+    : super._(background: null, borderSide: null);
 }
 
 /// Style tokens for [DievasIconButton].
 @immutable
 @internal
 final class DievasIconButtonThemeStyle extends DievasButtonThemeStyle {
-  const DievasIconButtonThemeStyle({
-    required super.icon,
-    required super.foreground,
-    super.background,
-  }) : super._(borderSide: null);
+  const DievasIconButtonThemeStyle({required super.icon, required super.foreground, super.background})
+    : super._(borderSide: null);
 }

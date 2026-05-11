@@ -48,6 +48,9 @@ RUN dart run build_runner build --delete-conflicting-outputs
 # Build the Jaspr server in release mode
 RUN jaspr build
 
+# Diagnostic — confirms binary name and web assets are present after build
+RUN echo "=== build/jaspr contents ===" && ls -lh build/jaspr/ && echo "==========================="
+
 # ── Stage 3: Lean runtime image ───────────────────────────────────────────────
 FROM debian:bookworm-slim AS runtime
 
@@ -58,17 +61,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 
 # Copy compiled server binary + web assets.
-# jaspr build outputs to build/jaspr/ (relative to the landing package),
-# so the binary lives at /build/landing/build/jaspr/server in the builder stage.
-# Copying that subdirectory directly puts /app/server where CMD expects it.
+# jaspr build outputs to build/jaspr/ relative to the landing package WORKDIR,
+# so absolute path in the builder is /build/landing/build/jaspr/.
+# jaspr names the binary 'app' (not 'server') — confirmed from serti0x Dockerfile.web.
 COPY --from=dart-builder /build/landing/build/jaspr/ ./
 
-# Overlay the generated CSS (Tailwind output) into the web assets dir
+# Overlay the Tailwind-generated CSS into the web assets dir
 COPY --from=css-builder /build/landing/web/output.css ./web/output.css
 
-# Railway injects a dynamic PORT env var at runtime.
-# Map it to JASPR_PORT so Jaspr binds to the port Railway expects.
-# Falls back to 8080 for local docker run without a PORT override.
+# Ensure the binary is executable
+RUN chmod +x /app/app
+
+# Railway injects PORT at runtime; jaspr reads JASPR_PORT.
 EXPOSE 8080
 
-CMD ["sh", "-c", "JASPR_PORT=${PORT:-8080} ./server"]
+CMD ["sh", "-c", "JASPR_PORT=${PORT:-8080} ./app"]

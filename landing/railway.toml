@@ -10,7 +10,7 @@ dockerfilePath   = "landing/Dockerfile"
 buildContext     = "."
 
 [deploy]
-startCommand     = "./server"
+startCommand     = "JASPR_PORT=${PORT:-8080} ./app"
 healthcheckPath  = "/"
 healthcheckTimeout = 30
 restartPolicyType  = "ON_FAILURE"

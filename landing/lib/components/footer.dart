@@ -13,7 +13,7 @@ class FooterComponent extends StatelessComponent {
             'py-8 '
             'flex items-center justify-between flex-wrap gap-4',
         [
-          span(classes: 'font-mono text-xs text-slate-400', [
+          span(classes: 'font-mono text-sm text-slate-400', [
             Component.text('Dievas — built by '),
             a(
               href: 'https://portfolio.serticode.com',
@@ -27,11 +27,11 @@ class FooterComponent extends StatelessComponent {
               href: 'https://master.dievas-gallery.pages.dev',
               attributes: const {'target': '_blank', 'rel': 'noopener'},
               classes:
-                  'font-mono text-xs text-slate-400 no-underline '
+                  'font-mono text-sm text-slate-400 no-underline '
                   'transition-colors duration-200 hover:text-slate-700',
               [Component.text('Gallery')],
             ),
-            span(classes: 'font-mono text-xs text-slate-400', [
+            span(classes: 'font-mono text-sm text-slate-400', [
               Component.text('Inspired by '),
               a(
                 href: 'https://flutter.moon.io',

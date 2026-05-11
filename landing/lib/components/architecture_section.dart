@@ -61,7 +61,7 @@ class ArchitectureSection extends StatelessComponent {
         'hover:bg-slate-100',
     [
       p(classes: 'font-mono text-[11px] text-brand tracking-wide mb-4', [Component.text(num)]),
-      p(classes: 'text-sm font-semibold text-slate-900 mb-2 leading-snug', [Component.text(title)]),
+      p(classes: 'text-sm font-display font-medium text-slate-900 mb-2 leading-snug', [Component.text(title)]),
       p(classes: 'font-body font-light text-xs leading-relaxed text-slate-500', [Component.text(body)]),
     ],
   );

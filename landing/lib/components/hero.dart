@@ -14,19 +14,25 @@ class Hero extends StatelessComponent {
   const Hero({super.key});
 
   @override
-  Component build(BuildContext context) => section(classes: 'relative min-h-screen overflow-hidden flex items-center', [
+  Component build(BuildContext context) => section(classes: 'relative min-h-screen overflow-hidden flex items-start lg:items-center', [
     // Ambient glow behind everything
     div(classes: 'pointer-events-none absolute inset-0 flex items-center justify-center', [
       div(classes: 'w-[700px] h-[500px] rounded-full bg-brand/8 blur-[120px]', []),
     ]),
 
     // ── LEFT COLUMN — editorial copy ──────────────────────────────────────
+    // padding-right: 56% pushes the content box to stay within the left 44%
+    // of the viewport on lg+, avoiding overlap with the absolutely-positioned
+    // right panel that starts at left: 45%. On mobile, pr-4 is used instead.
     div(
       classes:
-          'relative z-10 flex flex-col '
-          'pt-24 pb-24 '
+          'relative z-10 flex flex-col w-full '
+          'items-center lg:items-start '
+          'text-center lg:text-left '
+          'px-6 lg:px-0 lg:ml-[max(40px,9vw)] '
+          'pt-28 pb-8 lg:pt-24 lg:pb-24 '
+          'pr-6 lg:pr-[56%] '
           'opacity-0 animate-[fade-up_0.5s_ease_0.05s_forwards]',
-      attributes: const {'style': 'margin-left: max(40px, 9vw); max-width: 500px;'},
       [
         // Eyebrow
         p(
@@ -117,6 +123,44 @@ class Hero extends StatelessComponent {
             _stat('2', 'default themes'),
             _stat('16', 'components'),
             _stat('∞', 'brand configs'),
+          ],
+        ),
+
+        // Mobile preview — gallery app window peek, desktop hides this
+        div(
+          classes:
+              'lg:hidden relative w-full mt-10 h-[260px] rounded-2xl overflow-hidden '
+              'opacity-0 animate-[fade-up_0.7s_ease_0.72s_forwards]',
+          attributes: const {
+            'style':
+                'background: linear-gradient(160deg, rgba(28,44,82,1) 0%, rgba(18,28,60,1) 45%, rgba(8,13,32,1) 100%); '
+                'border: 1px solid rgba(129,140,248,0.22); '
+                'box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), '
+                '0 24px 64px rgba(0,0,0,0.6);',
+          },
+          [
+            // Radial glow inside the frame
+            div(
+              classes: 'pointer-events-none absolute top-0 left-0 right-0',
+              attributes: const {
+                'style':
+                    'height: 140px; '
+                    'background: radial-gradient(ellipse 70% 50% at 55% 0%, rgba(129,140,248,0.14) 0%, transparent 75%);',
+              },
+              [],
+            ),
+            // App window — clipped to h-[260px], shows browser chrome + top content
+            div(classes: 'absolute inset-0 p-3', [_appWindow()]),
+            // Gradient vignette fades the bottom edge of the preview
+            div(
+              classes: 'pointer-events-none absolute bottom-0 left-0 right-0',
+              attributes: const {
+                'style':
+                    'height: 96px; '
+                    'background: linear-gradient(to bottom, transparent, rgba(8,13,32,0.97));',
+              },
+              [],
+            ),
           ],
         ),
       ],

@@ -1,0 +1,99 @@
+name: CI
+
+on:
+    push:
+        branches: [master]
+    pull_request:
+        branches: [master]
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+    cancel-in-progress: true
+
+jobs:
+    analyze-format-test:
+        name: Analyze, Format & Test
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Set up Flutter
+              uses: subosito/flutter-action@v2
+              with:
+                  channel: stable
+                  cache: true
+
+            - name: Cache pub packages
+              uses: actions/cache@v4
+              with:
+                  path: ~/.pub-cache
+                  key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+                  restore-keys: ${{ runner.os }}-pub-
+
+            - name: Activate melos
+              run: dart pub global activate melos
+
+            - name: Bootstrap workspace
+              run: melos bootstrap
+
+            - name: Check formatting
+              run: melos run format:check
+
+            - name: Run analyzer
+              run: melos exec --concurrency=1 -- "dart analyze ."
+
+            - name: Run tests
+              run: melos run test
+
+            # Analyze landing (outside melos workspace)
+            - name: Analyze landing
+              run: dart analyze .
+              working-directory: landing
+
+    ci-passed:
+        name: CI Passed
+        needs: [analyze-format-test]
+        if: always() && !cancelled()
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check result
+              if: contains(needs.analyze-format-test.result, 'failure')
+              run: exit 1
+
+            - name: Notify Discord — CI failed
+              if: failure()
+              run: |
+                  TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+                  RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                  COMMIT_URL="${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}"
+                  SHORT_SHA="${{ github.sha }}"
+                  SHORT_SHA="${SHORT_SHA:0:7}"
+
+                  jq -n \
+                      --arg sha "$SHORT_SHA" \
+                      --arg commit_url "$COMMIT_URL" \
+                      --arg msg "${{ github.event.head_commit.message || github.event.pull_request.title }}" \
+                      --arg run_url "$RUN_URL" \
+                      --arg timestamp "$TIMESTAMP" \
+                      '{
+                        username: "Hermóðr 🌑",
+                        embeds: [{
+                          title: "❌ CI failed — dievas",
+                          color: 15158332,
+                          fields: [
+                            { name: "📦 Commit", value: "[`\($sha)`](\($commit_url)) — \($msg)", inline: false },
+                            { name: "🔗 Run", value: "[View](\($run_url))" }
+                          ],
+                          footer: { text: "Dievas CI/CD • analyze + format + test" },
+                          timestamp: $timestamp
+                        }]
+                      }' > payload.json
+
+                  curl -s -o /dev/null -w "%{http_code}" \
+                      -X POST "${{ secrets.DISCORD_HERMODR_WEBHOOK }}" \
+                      -H "Content-Type: application/json" \
+                      -d @payload.json
+              continue-on-error: true

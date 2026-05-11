@@ -21,9 +21,7 @@ Widget _playground(BuildContext context) {
   );
 
   return Center(
-    child: ComponentBoundary(
-      child: DievasIcon(Icons.star_rounded, size: size),
-    ),
+    child: ComponentBoundary(child: DievasIcon(Icons.star_rounded, size: size)),
   );
 }
 

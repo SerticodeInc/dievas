@@ -58,11 +58,7 @@ Widget _allStyles(BuildContext context) => Center(
       children: [
         for (final style in DievasIconButtonStyle.values)
           ComponentBoundary(
-            child: DievasIconButton(
-              icon: const Icon(Icons.star_rounded),
-              style: style,
-              onPressed: () {},
-            ),
+            child: DievasIconButton(icon: const Icon(Icons.star_rounded), style: style, onPressed: () {}),
           ),
       ],
     ),
@@ -79,11 +75,7 @@ Widget _allSizes(BuildContext context) => Center(
       children: [
         for (final size in DievasButtonSize.values)
           ComponentBoundary(
-            child: DievasIconButton(
-              icon: const Icon(Icons.star_rounded),
-              size: size,
-              onPressed: () {},
-            ),
+            child: DievasIconButton(icon: const Icon(Icons.star_rounded), size: size, onPressed: () {}),
           ),
       ],
     ),

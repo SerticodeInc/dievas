@@ -18,19 +18,9 @@ Widget _playground(BuildContext context) {
   final helperText = context.knobs.string(label: 'Helper', initialValue: 'Max 300 characters.');
   final errorText = context.knobs.string(label: 'Error', initialValue: '');
 
-  final minLines = context.knobs.double.slider(
-    label: 'Min Lines',
-    initialValue: 3,
-    min: 1,
-    max: 8,
-  ).round();
+  final minLines = context.knobs.double.slider(label: 'Min Lines', initialValue: 3, min: 1, max: 8).round();
 
-  final maxLines = context.knobs.double.slider(
-    label: 'Max Lines',
-    initialValue: 6,
-    min: 2,
-    max: 12,
-  ).round();
+  final maxLines = context.knobs.double.slider(label: 'Max Lines', initialValue: 6, min: 2, max: 12).round();
 
   final disabled = context.knobs.boolean(label: 'Disabled');
 
@@ -81,11 +71,7 @@ Widget _allStates(BuildContext context) => Center(
         const SizedBox(height: 20),
         _stateBlock(
           'Disabled',
-          child: const DievasTextArea(
-            label: 'Notes',
-            hint: 'No notes available.',
-            enabled: false,
-          ),
+          child: const DievasTextArea(label: 'Notes', hint: 'No notes available.', enabled: false),
         ),
       ],
     ),

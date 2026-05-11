@@ -9,11 +9,7 @@ import 'dievas_button_theme_data.dart';
 /// `DievasTheme.componentsOf(context).filledButton`.
 @immutable
 final class DievasFilledButtonGroupThemeData extends Equatable with Diagnosticable {
-  const DievasFilledButtonGroupThemeData({
-    required this.primary,
-    required this.secondary,
-    required this.destructive,
-  });
+  const DievasFilledButtonGroupThemeData({required this.primary, required this.secondary, required this.destructive});
 
   /// Primary call-to-action — brand colour background.
   final DievasFilledButtonThemeData primary;

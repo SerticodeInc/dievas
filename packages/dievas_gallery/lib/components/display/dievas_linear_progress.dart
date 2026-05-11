@@ -14,12 +14,7 @@ final linearProgressComponent = WidgetbookComponent(
 );
 
 Widget _playground(BuildContext context) {
-  final value = context.knobs.double.slider(
-    label: 'Value (0 = indeterminate)',
-    initialValue: 0.6,
-    min: 0,
-    max: 1,
-  );
+  final value = context.knobs.double.slider(label: 'Value (0 = indeterminate)', initialValue: 0.6, min: 0, max: 1);
 
   final style = context.knobs.list<DievasLinearProgressStyle>(
     label: 'Style',
@@ -33,10 +28,7 @@ Widget _playground(BuildContext context) {
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: ComponentBoundary(
-        child: DievasLinearProgress(
-          value: isIndeterminate ? null : value,
-          style: style,
-        ),
+        child: DievasLinearProgress(value: isIndeterminate ? null : value, style: style),
       ),
     ),
   );
@@ -52,7 +44,9 @@ Widget _allStyles(BuildContext context) => Center(
           Row(
             children: [
               SizedBox(width: 64, child: Text(style.name, style: const TextStyle(fontSize: 11))),
-              Expanded(child: ComponentBoundary(child: DievasLinearProgress(value: 0.65, style: style))),
+              Expanded(
+                child: ComponentBoundary(child: DievasLinearProgress(value: 0.65, style: style)),
+              ),
             ],
           ),
           const SizedBox(height: 16),

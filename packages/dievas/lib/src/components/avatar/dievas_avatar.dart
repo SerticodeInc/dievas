@@ -97,12 +97,7 @@ class DievasAvatar extends StatelessWidget {
     Widget content;
 
     if (imageProvider != null) {
-      content = Image(
-        image: imageProvider!,
-        fit: BoxFit.cover,
-        width: dimension,
-        height: dimension,
-      );
+      content = Image(image: imageProvider!, fit: BoxFit.cover, width: dimension, height: dimension);
     } else if (initials != null && initials!.isNotEmpty) {
       final label = initials!.length > 2 ? initials!.substring(0, 2).toUpperCase() : initials!.toUpperCase();
       content = Center(
@@ -129,10 +124,7 @@ class DievasAvatar extends StatelessWidget {
     final container = Container(
       width: dimension,
       height: dimension,
-      decoration: BoxDecoration(
-        color: theme.backgroundColor,
-        borderRadius: borderRadius,
-      ),
+      decoration: BoxDecoration(color: theme.backgroundColor, borderRadius: borderRadius),
       clipBehavior: Clip.antiAlias,
       child: content,
     );

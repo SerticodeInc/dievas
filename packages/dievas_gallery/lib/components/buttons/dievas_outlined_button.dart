@@ -72,11 +72,7 @@ Widget _allStyles(BuildContext context) => Center(
       children: [
         for (final style in DievasOutlinedButtonStyle.values)
           ComponentBoundary(
-            child: DievasOutlinedButton(
-              label: style.name,
-              style: style,
-              onPressed: () {},
-            ),
+            child: DievasOutlinedButton(label: style.name, style: style, onPressed: () {}),
           ),
       ],
     ),
@@ -93,11 +89,7 @@ Widget _allSizes(BuildContext context) => Center(
       children: [
         for (final size in DievasButtonSize.values)
           ComponentBoundary(
-            child: DievasOutlinedButton(
-              label: size.name,
-              size: size,
-              onPressed: () {},
-            ),
+            child: DievasOutlinedButton(label: size.name, size: size, onPressed: () {}),
           ),
       ],
     ),

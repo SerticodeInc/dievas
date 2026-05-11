@@ -48,7 +48,9 @@ Widget _allStyles(BuildContext context) => Center(
       alignment: WrapAlignment.center,
       children: [
         for (final style in DievasTagStyle.values) ...[
-          ComponentBoundary(child: DievasTag(label: style.name, style: style)),
+          ComponentBoundary(
+            child: DievasTag(label: style.name, style: style),
+          ),
           ComponentBoundary(
             child: DievasTag(
               label: style.name,

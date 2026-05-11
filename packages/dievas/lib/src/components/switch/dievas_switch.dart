@@ -15,12 +15,7 @@ import '../../theme/dievas_theme.dart';
 /// DievasSwitch(value: isOn, label: 'Dark mode', onChanged: (_) {})
 /// ```
 class DievasSwitch extends StatefulWidget {
-  const DievasSwitch({
-    super.key,
-    required this.value,
-    required this.onChanged,
-    this.label,
-  });
+  const DievasSwitch({super.key, required this.value, required this.onChanged, this.label});
 
   /// Whether the switch is in the ON position.
   final bool value;

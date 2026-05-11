@@ -9,10 +9,7 @@ import 'dievas_button_theme_data.dart';
 /// `DievasTheme.componentsOf(context).outlinedButton`.
 @immutable
 final class DievasOutlinedButtonGroupThemeData extends Equatable with Diagnosticable {
-  const DievasOutlinedButtonGroupThemeData({
-    required this.primary,
-    required this.destructive,
-  });
+  const DievasOutlinedButtonGroupThemeData({required this.primary, required this.destructive});
 
   /// Primary outlined variant — brand-coloured border and foreground.
   final DievasOutlinedButtonThemeData primary;

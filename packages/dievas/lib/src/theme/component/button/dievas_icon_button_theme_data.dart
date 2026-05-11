@@ -9,10 +9,7 @@ import 'dievas_button_theme_data.dart';
 /// `DievasTheme.componentsOf(context).iconButton`.
 @immutable
 final class DievasIconButtonGroupThemeData extends Equatable with Diagnosticable {
-  const DievasIconButtonGroupThemeData({
-    required this.ghost,
-    required this.tinted,
-  });
+  const DievasIconButtonGroupThemeData({required this.ghost, required this.tinted});
 
   /// No background — icon only. Default style.
   final DievasIconButtonThemeData ghost;

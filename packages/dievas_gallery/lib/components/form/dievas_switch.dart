@@ -62,10 +62,7 @@ Widget _stateRow(String name, {required bool value, bool disabled = false}) => R
       child: Text(name, style: const TextStyle(fontSize: 11, color: Color(0xFF64748B))),
     ),
     ComponentBoundary(
-      child: DievasSwitch(
-        value: value,
-        onChanged: disabled ? null : (_) {},
-      ),
+      child: DievasSwitch(value: value, onChanged: disabled ? null : (_) {}),
     ),
   ],
 );
@@ -85,9 +82,7 @@ Widget _withLabels(BuildContext context) => Center(
           child: DievasSwitch(value: true, label: 'Dark mode', onChanged: (_) {}),
         ),
         const SizedBox(height: 16),
-        ComponentBoundary(
-          child: DievasSwitch(value: false, label: 'Disabled setting', onChanged: null),
-        ),
+        ComponentBoundary(child: DievasSwitch(value: false, label: 'Disabled setting', onChanged: null)),
       ],
     ),
   ),

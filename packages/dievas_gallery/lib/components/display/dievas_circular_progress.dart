@@ -14,12 +14,7 @@ final circularProgressComponent = WidgetbookComponent(
 );
 
 Widget _playground(BuildContext context) {
-  final value = context.knobs.double.slider(
-    label: 'Value (0 = indeterminate)',
-    initialValue: 0.6,
-    min: 0,
-    max: 1,
-  );
+  final value = context.knobs.double.slider(label: 'Value (0 = indeterminate)', initialValue: 0.6, min: 0, max: 1);
 
   final size = context.knobs.list<DievasCircularProgressSize>(
     label: 'Size',
@@ -38,11 +33,7 @@ Widget _playground(BuildContext context) {
 
   return Center(
     child: ComponentBoundary(
-      child: DievasCircularProgress(
-        value: isIndeterminate ? null : value,
-        size: size,
-        style: style,
-      ),
+      child: DievasCircularProgress(value: isIndeterminate ? null : value, size: size, style: style),
     ),
   );
 }

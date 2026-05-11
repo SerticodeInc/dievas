@@ -112,11 +112,7 @@ Widget _stateRow(String name, {required bool isSelected, bool disabled = false})
       child: Text(name, style: const TextStyle(fontSize: 11, color: Color(0xFF64748B))),
     ),
     ComponentBoundary(
-      child: DievasRadio<bool>(
-        value: true,
-        groupValue: isSelected ? true : false,
-        onChanged: disabled ? null : (_) {},
-      ),
+      child: DievasRadio<bool>(value: true, groupValue: isSelected ? true : false, onChanged: disabled ? null : (_) {}),
     ),
   ],
 );

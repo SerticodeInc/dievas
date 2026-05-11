@@ -41,12 +41,7 @@ class DievasGallery extends StatelessWidget {
         children: [
           WidgetbookFolder(
             name: 'Buttons',
-            children: [
-              filledButtonComponent,
-              outlinedButtonComponent,
-              textButtonComponent,
-              iconButtonComponent,
-            ],
+            children: [filledButtonComponent, outlinedButtonComponent, textButtonComponent, iconButtonComponent],
           ),
           WidgetbookFolder(
             name: 'Display',
@@ -62,13 +57,7 @@ class DievasGallery extends StatelessWidget {
           ),
           WidgetbookFolder(
             name: 'Form',
-            children: [
-              checkboxComponent,
-              radioComponent,
-              switchComponent,
-              textInputComponent,
-              textAreaComponent,
-            ],
+            children: [checkboxComponent, radioComponent, switchComponent, textInputComponent, textAreaComponent],
           ),
         ],
       ),

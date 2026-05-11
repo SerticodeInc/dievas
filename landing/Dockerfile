@@ -36,7 +36,7 @@ COPY packages/dievas_tokens/ ./packages/dievas_tokens/
 COPY landing/ ./landing/
 
 # Activate jaspr CLI globally (required for `jaspr build`)
-RUN dart pub global activate jaspr
+RUN dart pub global activate jaspr_cli
 
 # Resolve deps from within the landing package
 WORKDIR /build/landing
@@ -46,7 +46,7 @@ RUN dart pub get
 RUN dart run build_runner build --delete-conflicting-outputs
 
 # Build the Jaspr server in release mode
-RUN dart pub global run jaspr build --release
+RUN jaspr build --release
 
 # ── Stage 3: Lean runtime image ───────────────────────────────────────────────
 FROM debian:bookworm-slim AS runtime

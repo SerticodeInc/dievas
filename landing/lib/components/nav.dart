@@ -1,6 +1,8 @@
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr/dom.dart';
 
+import '../constants.dart';
+
 /// Fixed top navigation — glass pill matching Serti0x.
 ///
 /// Centered pill, `min(860px, calc(100% - 20vw))` wide.
@@ -76,6 +78,6 @@ class Nav extends StatelessComponent {
   static const _links = [
     /// *** We might need to have docs here to show people how to use it
     ///('Docs', '#', false),
-    ('Gallery', 'https://master.dievas-gallery.pages.dev', true),
+    ('Gallery', DievasUrls.gallery, true),
   ];
 }

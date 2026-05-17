@@ -99,7 +99,7 @@ jobs:
                   body-includes: "Dievas Gallery preview"
 
             - name: Post preview URL comment
-              uses: peter-evans/create-or-update-comment@v4
+              uses: peter-evans/create-or-update-comment@v5
               if: github.ref_name != 'master' && github.event.pull_request.number != ''
               with:
                   comment-id: ${{ steps.fc.outputs.comment-id }}

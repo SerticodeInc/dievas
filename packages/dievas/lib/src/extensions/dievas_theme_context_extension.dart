@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-
+import 'package:dievas/l10n/dievas_localizations.dart';
 import '../theme.dart';
 
 /// Flat [BuildContext] extension for accessing Dievas theme sub-systems.
@@ -37,4 +37,9 @@ extension DievasThemeContextExtension on BuildContext {
 
   /// The component-level theme data sub-system.
   DievasComponentThemeData get components => DievasTheme.componentsOf(this);
+
+  /// Dievas localizations for component-internal copy.
+  ///
+  /// Requires [DievasLocalizations.localizationsDelegates] to be registered.
+  DievasLocalizations get l10n => DievasLocalizations.of(this);
 }

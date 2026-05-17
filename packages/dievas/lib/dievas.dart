@@ -9,13 +9,21 @@
 /// - All ThemeData sub-systems (colours, typography, spacing, etc.)
 /// - [DievasGrid] / [DievasGridBreakpoint] — responsive grid
 /// - Context extensions (`context.colors`, `context.typography`, ...)
+/// - [DievasLocalizations] — l10n delegate and context extension
 /// - Button components: [DievasFilledButton], [DievasOutlinedButton],
 ///   [DievasTextButton], [DievasIconButton]
 /// - Form components: [DievasTextInput], [DievasTextArea], [DievasCheckbox],
 ///   [DievasSwitch], [DievasRadio]
 /// - Display components: [DievasAvatar], [DievasBadge], [DievasTag],
 ///   [DievasDivider], [DievasIcon], [DievasLinearProgress], [DievasCircularProgress]
+/// - Feedback components: [DievasAlert], [DievasBanner], [DievasSnackbar]
+/// - Overlay components: [DievasBottomSheet], [showDievasBottomSheet],
+///   [DievasModal], [showDievasModal], [DievasTooltip]
+/// - Utility components: [DievasLoader], [DievasEmptyState]
 library;
+
+//  Localizations
+export 'l10n/dievas_localizations.dart';
 
 //  Scope
 export 'src/scope/dievas_scope.dart';
@@ -50,3 +58,17 @@ export 'src/components/icon/dievas_icon.dart';
 export 'src/components/progress/dievas_circular_progress.dart';
 export 'src/components/progress/dievas_linear_progress.dart';
 export 'src/components/tag/dievas_tag.dart';
+
+//  Components — Feedback
+export 'src/components/alert/dievas_alert.dart';
+export 'src/components/banner/dievas_banner.dart';
+export 'src/components/snackbar/dievas_snackbar.dart';
+
+//  Components — Overlays
+export 'src/components/bottom_sheet/dievas_bottom_sheet.dart';
+export 'src/components/modal/dievas_modal.dart';
+export 'src/components/tooltip/dievas_tooltip.dart';
+
+//  Components — Utility
+export 'src/components/loader/dievas_loader.dart';
+export 'src/components/empty_state/dievas_empty_state.dart';

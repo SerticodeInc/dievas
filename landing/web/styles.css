@@ -146,7 +146,7 @@
 #app-tab-buttons:checked ~ .app-inner .panel-buttons,
 #app-tab-tokens:checked  ~ .app-inner .panel-tokens,
 #app-tab-type:checked    ~ .app-inner .panel-type,
-#app-tab-status:checked  ~ .app-inner .panel-status {
+#app-tab-scope:checked   ~ .app-inner .panel-scope {
   display: flex;
 }
 
@@ -158,7 +158,7 @@
 #app-tab-buttons:checked ~ .app-inner .tab-lbl-buttons,
 #app-tab-tokens:checked  ~ .app-inner .tab-lbl-tokens,
 #app-tab-type:checked    ~ .app-inner .tab-lbl-type,
-#app-tab-status:checked  ~ .app-inner .tab-lbl-status {
+#app-tab-scope:checked   ~ .app-inner .tab-lbl-scope {
   color: var(--color-brand);
   border-bottom-color: var(--color-brand);
 }
@@ -309,4 +309,185 @@
   .mp-dot-2,
   .mp-dot-3,
   .mp-dot-4   { animation: none; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * Anchor-inspired animations
+ * ───────────────────────────────────────────────────────────── */
+
+/* 3D word reveal — Anchor hero headline style */
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: perspective(1200px) rotateX(-30deg) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1200px) rotateX(0deg) translateY(0);
+  }
+}
+
+/* Falling chip/card entry — Anchor product-tool style */
+@keyframes chip-fall {
+  0% {
+    opacity: 0;
+    transform: perspective(900px) rotateX(-22deg) translateY(-56px) scale(0.96);
+  }
+  65% {
+    transform: perspective(900px) rotateX(1.5deg) translateY(3px) scale(1.003);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(900px) rotateX(0deg) translateY(0) scale(1);
+  }
+}
+
+/* Infinite horizontal marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Scroll-triggered reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reveal cascade — staggered children */
+.reveal-group > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-group.is-visible > * { opacity: 1; transform: translateY(0); }
+.reveal-group.is-visible > *:nth-child(2) { transition-delay: 0.1s; }
+.reveal-group.is-visible > *:nth-child(3) { transition-delay: 0.2s; }
+.reveal-group.is-visible > *:nth-child(4) { transition-delay: 0.3s; }
+.reveal-group.is-visible > *:nth-child(5) { transition-delay: 0.4s; }
+
+/* Initial state: invisible but laid out. Animations are triggered
+   only after the body receives .js-loaded (set via requestAnimationFrame
+   in app.dart so the browser has painted at least one frame first). */
+.word-in {
+  display: inline-block;
+  opacity: 0;
+}
+
+.chip-falling {
+  opacity: 0;
+}
+
+/* Animations fire once body.js-loaded is set */
+.js-loaded .word-in {
+  animation: word-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.js-loaded .chip-falling {
+  animation: chip-fall 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.js-loaded .marquee-track {
+  animation: marquee 38s linear infinite;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .word-in, .chip-falling { opacity: 1; }
+  .js-loaded .word-in       { animation: none; opacity: 1; }
+  .js-loaded .chip-falling  { animation: none; opacity: 1; }
+  .js-loaded .marquee-track { animation: none; }
+  .reveal, .reveal-group > * { opacity: 1; transform: none; transition: none; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * Redesign additions — new sections
+ * ───────────────────────────────────────────────────────────── */
+
+/* Manifesto + architecture code panels: overflow handling */
+.code-panel-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Component category mini-preview: switch thumb detail */
+.mini-switch-thumb {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Component preview: cursor blink on text field mock */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: cursor-blink 1.2s ease-in-out infinite;
+}
+
+/* Architecture code layer blocks: equal height on desktop */
+@media (min-width: 1024px) {
+  .arch-pipeline {
+    align-items: stretch;
+  }
+  .arch-layer {
+    display: flex;
+    flex-direction: column;
+  }
+  .arch-layer-code {
+    flex: 1;
+  }
+}
+
+/* Shimmer on CTA button hover */
+@keyframes btn-shimmer {
+  from { background-position: 200% center; }
+  to   { background-position: -200% center; }
+}
+
+/* Reduced motion: disable new animations */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink { animation: none; opacity: 1; }
+  .animate-pulse { animation: none; }
+}
+
+/* Principle cards — per-card accent borders */
+.pc-indigo { border-color: rgba(99, 102, 241, 0.4); }
+.pc-indigo:hover { border-color: rgba(99, 102, 241, 0.8); }
+
+.pc-sky { border-color: rgba(56, 189, 248, 0.4); }
+.pc-sky:hover { border-color: rgba(56, 189, 248, 0.8); }
+
+.pc-green { border-color: rgba(74, 222, 128, 0.4); }
+.pc-green:hover { border-color: rgba(74, 222, 128, 0.8); }
+
+.pc-amber { border-color: rgba(251, 191, 36, 0.4); }
+.pc-amber:hover { border-color: rgba(251, 191, 36, 0.8); }
+
+/* Shipped pill arrow — full visibility on hover */
+a.group:hover .arrow-span {
+  opacity: 1 !important;
+}
+.arrow-span {
+  opacity: 0;
+  transition: opacity 150ms ease;
 }

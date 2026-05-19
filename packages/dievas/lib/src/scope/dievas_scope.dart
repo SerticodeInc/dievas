@@ -268,7 +268,7 @@ class _DievasOverlaySlot extends StatelessWidget {
               child: SlideTransition(
                 position: Tween<Offset>(
                   begin: const Offset(0, 0.1),
-                  end: Offset.zero,
+                  end: .zero,
                 ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOutCubic)),
                 child: builder(context, animation),
               ),

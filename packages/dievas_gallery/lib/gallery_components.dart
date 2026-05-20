@@ -15,9 +15,12 @@ export 'components/buttons/dievas_text_button.dart';
 // Display
 export 'components/display/dievas_avatar.dart';
 export 'components/display/dievas_badge.dart';
+export 'components/display/dievas_circular_loader.dart';
 export 'components/display/dievas_circular_progress.dart';
 export 'components/display/dievas_divider.dart';
+export 'components/display/dievas_empty_state.dart';
 export 'components/display/dievas_icon.dart';
+export 'components/display/dievas_linear_loader.dart';
 export 'components/display/dievas_linear_progress.dart';
 export 'components/display/dievas_tag.dart';
 
@@ -32,7 +35,6 @@ export 'components/form/dievas_text_input.dart';
 export 'components/overlays/dievas_alert.dart';
 export 'components/overlays/dievas_banner.dart';
 export 'components/overlays/dievas_bottom_sheet.dart';
-export 'components/overlays/dievas_empty_state.dart';
 export 'components/overlays/dievas_loader.dart';
 export 'components/overlays/dievas_modal.dart';
 export 'components/overlays/dievas_snackbar.dart';

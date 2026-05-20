@@ -14,18 +14,23 @@ class DievasHomePage extends StatelessWidget {
     lightTheme: DievasDarkThemeData(),
     darkTheme: DievasDarkThemeData(),
     global: false,
-    child: Builder(builder: _build),
+    child: _WidgetBookContent(),
   );
+}
 
-  Widget _build(BuildContext context) => Scaffold(
-    backgroundColor: context.colors.background.bgBase,
+class _WidgetBookContent extends StatelessWidget {
+  const _WidgetBookContent();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    backgroundColor: context.colors.background.bgSubtle,
     body: SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.x2l, vertical: context.spacing.x3l),
+      padding: .symmetric(horizontal: context.spacing.xl, vertical: context.spacing.x3l),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 640),
+          constraints: const BoxConstraints(maxWidth: 720),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: [
               _Eyebrow(),
               SizedBox(height: context.spacing.lg),
@@ -63,6 +68,7 @@ class DievasHomePage extends StatelessWidget {
               SizedBox(height: context.spacing.x2lPlus),
               _HintBadge(),
               SizedBox(height: context.spacing.x3l),
+              _FooterText(),
             ],
           ),
         ),
@@ -73,36 +79,38 @@ class DievasHomePage extends StatelessWidget {
 
 class _Eyebrow extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Row(
-    children: [
-      Container(
-        width: 6,
-        height: 6,
-        decoration: BoxDecoration(color: context.colors.core.brand, shape: BoxShape.circle),
-      ),
-      SizedBox(width: context.spacing.sm),
-      Text(
-        'FLUTTER DESIGN SYSTEM',
-        style: context.typography.codeSm.copyWith(letterSpacing: 2.5, color: context.colors.core.brand),
-      ),
-    ],
-  );
+  Widget build(BuildContext context) {
+    final spacing = context.spacing;
+    final colours = context.colors.core;
+
+    return Row(
+      children: [
+        Container(
+          width: spacing.smPlus,
+          height: spacing.smPlus,
+          decoration: BoxDecoration(color: colours.brand, shape: .circle),
+        ),
+        SizedBox(width: spacing.smPlus),
+        Text(
+          'FLUTTER DESIGN SYSTEM',
+          style: context.typography.codeMd.copyWith(letterSpacing: 2.8, color: colours.brand),
+        ),
+      ],
+    );
+  }
 }
 
 class _Headline extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Text(
-    'Dievas',
-    style: context.typography.displayLg.copyWith(fontWeight: FontWeight.w900, height: 0.92, letterSpacing: -3),
-  );
+  Widget build(BuildContext context) => Text('Dievas', style: context.typography.displayLg);
 }
 
 class _Subtitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     "Ports Moon Design System's component catalogue.\n"
-    'Token-driven. InheritedModel-first. Multi-brand.',
-    style: context.typography.bodyMd.copyWith(height: 1.75, color: context.colors.text.textSecondary),
+    'Token driven. InheritedModel first. Multi brand.',
+    style: context.typography.bodyMd.copyWith(height: 2.0, color: context.colors.text.textSecondary),
   );
 }
 
@@ -115,7 +123,7 @@ class _StatsRow extends StatelessWidget {
         _Divider(),
         _StatCell(value: '2', label: 'default themes'),
         _Divider(),
-        _StatCell(value: '24', label: 'components'),
+        _StatCell(value: '25', label: 'components'),
         _Divider(),
         _StatCell(value: '∞', label: 'brand configs'),
       ],
@@ -132,13 +140,13 @@ class _StatCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Expanded(
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
-        Text(value, style: context.typography.headingXl.copyWith(height: 1, letterSpacing: -1)),
+        Text(value, style: context.typography.headingXl),
         SizedBox(height: context.spacing.sm),
         Text(
           label.toUpperCase(),
-          style: context.typography.codeSm.copyWith(letterSpacing: 1.8, color: context.colors.text.textTertiary),
+          style: context.typography.codeMd.copyWith(letterSpacing: 1.8, color: context.colors.text.textTertiary),
         ),
       ],
     ),
@@ -148,8 +156,8 @@ class _StatCell extends StatelessWidget {
 class _Divider extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
-    width: 1,
-    margin: EdgeInsets.symmetric(horizontal: context.spacing.lg),
+    width: context.spacing.sm - 6,
+    margin: .symmetric(horizontal: context.spacing.lg),
     color: context.colors.border.borderDefault,
   );
 }
@@ -160,10 +168,8 @@ class _SectionLabel extends StatelessWidget {
   final String text;
 
   @override
-  Widget build(BuildContext context) => Text(
-    text.toUpperCase(),
-    style: context.typography.codeSm.copyWith(letterSpacing: 2, color: context.colors.text.textTertiary),
-  );
+  Widget build(BuildContext context) =>
+      Text(text.toUpperCase(), style: context.typography.codeMd.copyWith(color: context.colors.text.textTertiary));
 }
 
 class _ComponentCategory extends StatelessWidget {
@@ -174,75 +180,98 @@ class _ComponentCategory extends StatelessWidget {
   final List<String> components;
 
   @override
-  Widget build(BuildContext context) => Container(
-    decoration: BoxDecoration(
-      color: context.colors.background.bgSubtle,
-      border: Border.all(color: context.colors.border.borderDefault),
-      borderRadius: context.border.lg,
-    ),
-    padding: EdgeInsets.symmetric(horizontal: context.spacing.mdPlus, vertical: context.spacing.md),
-    child: Row(
-      children: [
-        Container(
-          width: 6,
-          height: 6,
-          decoration: BoxDecoration(color: context.colors.action.actionSuccess, shape: BoxShape.circle),
-        ),
-        SizedBox(width: context.spacing.smPlus),
-        SizedBox(
-          width: 80, // label column — gallery-only fixed width
-          child: Text(name, style: context.typography.codeSm.copyWith(color: context.colors.text.textPrimary)),
-        ),
-        Expanded(
-          child: Wrap(
-            spacing: context.spacing.xs,
-            runSpacing: context.spacing.xs,
-            children: [
-              for (final c in components)
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: context.spacing.sm, vertical: context.spacing.xs),
-                  decoration: BoxDecoration(
-                    color: context.colors.background.bgElevated,
-                    borderRadius: context.border.sm,
-                    border: Border.all(color: context.colors.border.borderDefault.withAlpha(100)),
-                  ),
-                  child: Text(c, style: context.typography.codeSm.copyWith(color: context.colors.text.textSecondary)),
-                ),
-            ],
+  Widget build(BuildContext context) {
+    final colours = context.colors;
+    final spacing = context.spacing;
+    final typography = context.typography;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: colours.background.bgSubtle,
+        border: .all(color: context.colors.border.borderDefault),
+        borderRadius: context.border.lg,
+      ),
+      padding: .all(spacing.md),
+      child: Row(
+        children: [
+          Container(
+            width: spacing.sm,
+            height: spacing.sm,
+            decoration: BoxDecoration(color: colours.action.actionSuccess, shape: .circle),
           ),
-        ),
-        SizedBox(width: context.spacing.md),
-        Text('$count', style: context.typography.codeSm.copyWith(color: context.colors.text.textTertiary)),
-      ],
-    ),
-  );
+          SizedBox(width: spacing.smPlus),
+          SizedBox(
+            width: 80,
+            child: Text(
+              name,
+              style: typography.titleLg.copyWith(color: colours.text.textPrimary, fontWeight: .w500),
+            ),
+          ),
+          SizedBox(width: spacing.smPlus),
+          Expanded(
+            child: Wrap(
+              spacing: context.spacing.sm,
+              runSpacing: context.spacing.sm,
+              children: [
+                for (final component in components)
+                  Container(
+                    padding: .all(spacing.sm),
+                    decoration: BoxDecoration(
+                      color: colours.background.bgElevated,
+                      borderRadius: context.border.md,
+                      border: .all(color: context.colors.border.borderDefault),
+                    ),
+                    child: Text(component, style: typography.bodyXs.copyWith(color: context.colors.text.textSecondary)),
+                  ),
+              ],
+            ),
+          ),
+          SizedBox(width: spacing.md),
+          Text('$count', style: typography.codeMd.copyWith(color: colours.text.textTertiary)),
+        ],
+      ),
+    );
+  }
 }
 
 class _HintBadge extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Container(
-    padding: EdgeInsets.symmetric(horizontal: context.spacing.md, vertical: context.spacing.smPlus),
-    decoration: BoxDecoration(
-      color: context.colors.background.bgSubtle,
-      border: Border.all(color: context.colors.core.brand.withAlpha(80)),
-      borderRadius: context.border.lg,
-    ),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 6,
-          height: 6,
-          decoration: BoxDecoration(color: context.colors.core.brand, shape: BoxShape.circle),
-        ),
-        SizedBox(width: context.spacing.smPlus),
-        Flexible(
-          child: Text(
-            'Select a component from the sidebar to explore use cases',
-            style: context.typography.codeSm.copyWith(color: context.colors.text.textSecondary),
+  Widget build(BuildContext context) {
+    final spacing = context.spacing;
+    final colours = context.colors;
+
+    return Container(
+      padding: .all(spacing.md),
+      decoration: BoxDecoration(
+        color: colours.background.bgSubtle,
+        border: .all(color: colours.core.brandSubtle),
+        borderRadius: context.border.lg,
+      ),
+      child: Row(
+        mainAxisSize: .min,
+        children: [
+          Container(
+            width: spacing.sm,
+            height: spacing.sm,
+            decoration: BoxDecoration(color: colours.core.brand, shape: .circle),
           ),
-        ),
-      ],
-    ),
+          SizedBox(width: spacing.smPlus),
+          Flexible(
+            child: Text(
+              'Select a component from the sidebar to explore use cases',
+              style: context.typography.codeMd.copyWith(color: colours.text.textSecondary),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _FooterText extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Text(
+    "Built with Dievas. \n💙 Serticode Inc.",
+    style: context.typography.bodyLg.copyWith(color: context.colors.text.textDisabled),
   );
 }

@@ -113,7 +113,8 @@ class Hero extends StatelessComponent {
             classes: 'flex items-center gap-4 flex-wrap justify-center word-in',
             attributes: const {'style': 'animation-delay: 0.82s'},
             [
-              a(
+              /// *** Keep the below for a forth night till we decide if we want to send this to pub.dev.
+              /* a(
                 href: DievasUrls.pubDev,
                 attributes: const {'target': '_blank', 'rel': 'noopener'},
                 classes:
@@ -128,17 +129,27 @@ class Hero extends StatelessComponent {
                   Component.text('View on pub.dev'),
                   span(classes: 'text-xs', [Component.text('→')]),
                 ],
-              ),
+              ), */
               a(
                 href: DievasUrls.gallery,
                 attributes: const {'target': '_blank', 'rel': 'noopener'},
                 classes:
                     'inline-flex items-center gap-2 '
                     'px-6 py-3 rounded-md '
+                    'bg-action text-on-brand '
+                    'font-mono text-sm font-medium tracking-wide '
+                    'no-underline transition-all duration-200 '
+                    'hover:bg-action-hover hover:-translate-y-px '
+                    'hover:shadow-[0_8px_32px_rgba(129,140,248,0.35)]',
+
+                /// *** Initial version, restore if and when we set up pub.dev
+                /* classes:
+                    'inline-flex items-center gap-2 '
+                    'px-6 py-3 rounded-md '
                     'border border-slate-300 text-slate-600 '
                     'font-mono text-sm font-normal '
                     'no-underline transition-all duration-200 '
-                    'hover:border-brand hover:text-white hover:-translate-y-px',
+                    'hover:border-brand hover:text-white hover:-translate-y-px', */
                 [Component.text('Gallery')],
               ),
             ],
@@ -151,7 +162,7 @@ class Hero extends StatelessComponent {
             [
               _manifestItem('3', 'packages'),
               _manifestSep(),
-              _manifestItem('16', 'components'),
+              _manifestItem('25', 'components'),
               _manifestSep(),
               _manifestItem('9', 'theme aspects'),
               _manifestSep(),
@@ -208,8 +219,8 @@ class Hero extends StatelessComponent {
               ),
               _productChip(
                 title: 'Display',
-                count: '7 shipped',
-                detail: 'Avatar · Badge · Tag\nDivider · Progress · Icon',
+                count: '10 shipped',
+                detail: 'Avatar · Badge · Tag\nDivider · Progress · Loader · Icon',
                 bg: 'rgba(251, 191, 36, 0.02)',
                 accentRgb: '251, 191, 36',
                 fg: '#FDE68A',
@@ -226,8 +237,8 @@ class Hero extends StatelessComponent {
               ),
               _productChip(
                 title: 'In Progress',
-                count: '4 coming',
-                detail: 'BottomSheet · Toast\nModal · Tooltip',
+                count: '17 coming',
+                detail: 'Accordion · AuthCode · Carousel\nDrawer · Dropdown · Popover · ...',
                 bg: 'rgba(251, 113, 133, 0.02)',
                 accentRgb: '251, 113, 133',
                 fg: '#FECDD3',
@@ -398,7 +409,7 @@ class Hero extends StatelessComponent {
     'OutlinedButton',
     'TextButton',
     'IconButton',
-    'TextField',
+    'TextInput',
     'TextArea',
     'Checkbox',
     'Switch',
@@ -410,5 +421,14 @@ class Hero extends StatelessComponent {
     'CircularProgress',
     'LinearProgress',
     'Icon',
+    'CircularLoader',
+    'LinearLoader',
+    'EmptyState',
+    'Alert',
+    'BottomSheet',
+    'Modal',
+    'Snackbar',
+    'Banner',
+    'Tooltip',
   ];
 }

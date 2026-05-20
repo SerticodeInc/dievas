@@ -21,7 +21,7 @@ abstract final class DievasColourSemanticLight {
   static const int brand = DievasColourPrimitives.indigo500;
 
   /// Subtle brand tint. Backgrounds behind brand-coloured icons or badges.
-  static const int brandSubtle = DievasColourPrimitives.indigo50;
+  static const int brandSubtle = DievasColourPrimitives.indigo200;
 
   /// Text or icons placed on top of [brand] surfaces.
   static const int onBrand = DievasColourPrimitives.white;

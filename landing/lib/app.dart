@@ -110,26 +110,24 @@ class App extends StatelessComponent {
   const App({super.key});
 
   @override
-  Component build(BuildContext context) {
-    return Document(
-      title: 'Dievas — Flutter Design System',
-      lang: 'en',
-      meta: const {
-        'description':
-            'Dievas — a token-driven Flutter design system. '
-            'InheritedModel-first. Multi-brand. Zero hardcoded values. '
-            'Production-ready components built from the token layer up.',
-      },
-      head: [
-        link(rel: 'preconnect', href: 'https://fonts.googleapis.com'),
-        link(rel: 'preconnect', href: 'https://fonts.gstatic.com', attributes: const {'crossorigin': ''}),
-        link(rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap'),
-        link(rel: 'stylesheet', href: '/output.css'),
-        RawText(_inlineAnimationStyles),
-      ],
-      body: const _AppBody(),
-    );
-  }
+  Component build(BuildContext context) => Document(
+    title: 'Dievas — Flutter Design System',
+    lang: 'en',
+    meta: const {
+      'description':
+          'Dievas. A token driven Flutter design system. '
+          'InheritedModel first. Multi brand. Zero hardcoded values. '
+          'Production ready components built from the token layer up.',
+    },
+    head: [
+      link(rel: 'preconnect', href: 'https://fonts.googleapis.com'),
+      link(rel: 'preconnect', href: 'https://fonts.gstatic.com', attributes: const {'crossorigin': ''}),
+      link(rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap'),
+      link(rel: 'stylesheet', href: '/output.css'),
+      RawText(_inlineAnimationStyles),
+    ],
+    body: const _AppBody(),
+  );
 }
 
 // Single rAF triggers .js-loaded on body after the browser has painted its
@@ -197,19 +195,14 @@ class _AppBody extends StatelessComponent {
   const _AppBody();
 
   @override
-  Component build(BuildContext context) {
-    return div(id: 'main', classes: 'bg-bg-base text-text-hi antialiased', [
-      RawText(_jsLoadedScript),
-      const Nav(),
-      const Hero(),
-      const ManifestoSection(),
-      const ArchitectureSection(),
-      div(
-        attributes: const {'style': 'background: #FFFFFF;'},
-        [const ComponentsSection(), const FooterComponent()],
-      ),
-      RawText(_scrollRevealScript),
-      RawText(_navScrollScript),
-    ]);
-  }
+  Component build(BuildContext context) => div(id: 'main', classes: 'bg-bg-base text-text-hi antialiased', [
+    RawText(_jsLoadedScript),
+    const Nav(),
+    const Hero(),
+    const ManifestoSection(),
+    const ArchitectureSection(),
+    div(attributes: const {'style': 'background: #FFFFFF;'}, [const ComponentsSection(), const FooterComponent()]),
+    RawText(_scrollRevealScript),
+    RawText(_navScrollScript),
+  ]);
 }

@@ -26,9 +26,9 @@ class ComponentsSection extends StatelessComponent {
                 'font-display font-black text-[clamp(36px,5vw,60px)] '
                 'leading-[0.95] tracking-[-0.025em] text-slate-900',
             [
-              Component.text('16 shipped.'),
+              Component.text('25 shipped.'),
               br(),
-              span(classes: 'text-slate-400', [Component.text('4 in progress.')]),
+              span(classes: 'text-slate-400', [Component.text('17 in progress.')]),
             ],
           ),
           p(
@@ -68,7 +68,7 @@ class ComponentsSection extends StatelessComponent {
             'switches, and radio groups. Token driven states for focus, '
             'error, and disabled. Localized via DievasLocalizations.',
         preview: _formPreview(),
-        components: const ['Checkbox', 'Switch', 'TextField', 'TextArea', 'Radio'],
+        components: const ['Checkbox', 'Switch', 'TextInput', 'TextArea', 'Radio'],
         accentHex: '4ADE80',
         isFlipped: true,
         index: 1,
@@ -76,16 +76,42 @@ class ComponentsSection extends StatelessComponent {
 
       _categoryRow(
         label: 'Display',
-        count: '7',
+        count: '10',
         description:
-            'Avatar, badges, tags, dividers, and two progress variants '
+            'Avatar, badges, tags, dividers, loaders, and progress variants '
             'cover the visual data layer. Each derives color, sizing, '
             'and border radius entirely from DievasComponentThemeData.',
         preview: _displayPreview(),
-        components: const ['Avatar', 'Badge', 'Tag', 'Divider', 'CircularProgress', 'LinearProgress', 'Icon'],
+        components: const [
+          'Avatar',
+          'Badge',
+          'Tag',
+          'Divider',
+          'CircularProgress',
+          'LinearProgress',
+          'Icon',
+          'CircularLoader',
+          'LinearLoader',
+          'EmptyState',
+        ],
         accentHex: 'FBBF24',
         isFlipped: false,
         index: 2,
+      ),
+
+      // ── Overlays ────────────────────────────────────────────────────────────
+      _categoryRow(
+        label: 'Overlays',
+        count: '6',
+        description:
+            'Alert dialogs, bottom sheets, modals, snackbars, banners, '
+            'and tooltips provide contextual feedback. Each integrates '
+            'with DievasOverlayThemeData for backdrop and animation.',
+        preview: _overlaysPreview(),
+        components: const ['Alert', 'BottomSheet', 'Modal', 'Snackbar', 'Banner', 'Tooltip'],
+        accentHex: 'F472B6',
+        isFlipped: true,
+        index: 3,
       ),
 
       // ── In progress ─────────────────────────────────────────────────────────
@@ -99,7 +125,7 @@ class ComponentsSection extends StatelessComponent {
                 'inline-block px-3 py-1 rounded-full '
                 'border border-slate-200 bg-slate-100 '
                 'font-mono text-xs text-slate-400',
-            [Component.text('4')],
+            [Component.text('17')],
           ),
         ]),
         div(classes: 'flex flex-wrap gap-2', [for (final c in _wip) _wipPill(c)]),
@@ -326,9 +352,7 @@ class ComponentsSection extends StatelessComponent {
         ],
       ),
       div(
-        classes:
-            'inline-flex items-center px-2.5 py-1 rounded-full '
-            'font-mono text-[10px]',
+        classes: 'inline-flex items-center px-2.5 py-1 rounded-full font-mono text-[10px]',
         attributes: const {
           'style':
               'border: 1px solid rgba(251,191,36,0.35); '
@@ -349,14 +373,48 @@ class ComponentsSection extends StatelessComponent {
         div(classes: 'h-full rounded-full', attributes: const {'style': 'width: 38%; background: #FBBF24;'}, []),
       ]),
     ]),
-    // Circular progress
+    // Circular + Loader
     div(classes: 'flex items-center gap-3', [
       div(
         classes: 'w-7 h-7 rounded-full border-[3px] border-slate-200 border-t-action flex-shrink-0',
         attributes: const {'style': 'transform: rotate(-45deg)'},
         [],
       ),
-      span(classes: 'font-mono text-[10px] text-slate-400', [Component.text('CircularProgress')]),
+      div(
+        classes: 'w-6 h-6 rounded-full border-[2.5px] border-slate-200 border-t-slate-400 flex-shrink-0',
+        attributes: const {'style': 'animation: spin 1s linear infinite'},
+        [],
+      ),
+    ]),
+  ]);
+
+  Component _overlaysPreview() => div(classes: 'flex flex-col gap-3 w-full', [
+    // Alert
+    div(
+      classes: 'p-3 rounded-lg border border-amber-300/50 bg-amber-50',
+      attributes: const {'style': 'border-left: 3px solid #F59E0B;'},
+      [
+        div(classes: 'flex items-center gap-2 mb-1', [
+          span(classes: 'text-amber-600 font-mono text-xs font-bold', [Component.text('Alert')]),
+        ]),
+        span(classes: 'text-amber-700 font-mono text-[10px]', [Component.text('Important notice here')]),
+      ],
+    ),
+    // Snackbar
+    div(classes: 'px-3 py-2 rounded-md bg-slate-800 text-white flex items-center gap-2', [
+      div(classes: 'w-1 h-1 rounded-full bg-green-400', []),
+      span(classes: 'font-mono text-[10px]', [Component.text('Item saved')]),
+    ]),
+    // Modal preview (centered box)
+    div(classes: 'rounded-lg border border-slate-200 bg-white p-3 text-center', [
+      span(classes: 'font-mono text-xs text-slate-600', [Component.text('Modal')]),
+    ]),
+    // Tooltip
+    div(classes: 'flex items-center justify-center gap-2', [
+      div(classes: 'px-2 py-1 rounded bg-slate-100 border border-slate-200', [
+        span(classes: 'font-mono text-[10px] text-slate-400', [Component.text('Hover me')]),
+      ]),
+      div(classes: 'px-2 py-1 rounded bg-slate-800 text-white font-mono text-[9px]', [Component.text('Tooltip')]),
     ]),
   ]);
 
@@ -410,13 +468,22 @@ class ComponentsSection extends StatelessComponent {
     'Checkbox': 'checkbox',
     'Switch': 'switch',
     'TextArea': 'textarea',
-    'TextField': 'textinput',
+    'TextInput': 'textinput',
     'Radio': 'radio',
     'Tag': 'tag',
     'Divider': 'divider',
     'CircularProgress': 'circularprogress',
     'LinearProgress': 'linearprogress',
     'Icon': 'icon',
+    'CircularLoader': 'loader',
+    'LinearLoader': 'loader',
+    'EmptyState': 'empty_state',
+    'Alert': 'alert',
+    'BottomSheet': 'bottom_sheet',
+    'Modal': 'modal',
+    'Snackbar': 'snackbar',
+    'Banner': 'banner',
+    'Tooltip': 'tooltip',
   };
 
   static const _galleryFolder = <String, String>{
@@ -429,14 +496,41 @@ class ComponentsSection extends StatelessComponent {
     'Checkbox': 'form',
     'Switch': 'form',
     'TextArea': 'form',
-    'TextField': 'form',
+    'TextInput': 'form',
     'Radio': 'form',
     'Tag': 'display',
     'Divider': 'display',
     'CircularProgress': 'display',
     'LinearProgress': 'display',
     'Icon': 'display',
+    'CircularLoader': 'display',
+    'LinearLoader': 'display',
+    'EmptyState': 'display',
+    'Alert': 'overlays',
+    'BottomSheet': 'overlays',
+    'Modal': 'overlays',
+    'Snackbar': 'overlays',
+    'Banner': 'overlays',
+    'Tooltip': 'overlays',
   };
 
-  static const _wip = ['BottomSheet', 'Toast', 'Modal', 'Tooltip'];
+  static const _wip = [
+    'Accordion',
+    'AuthCode',
+    'BreadCrumb',
+    'Carousel',
+    'DotIndicator',
+    'Drawer',
+    'Dropdown',
+    'MenuItem',
+    'Popover',
+    'SegmentedControl',
+    'TabBar',
+    'Table',
+    'TextInputGroup',
+    'SearchWithList',
+    'SearchWithDropdown',
+    'SingleSelectComboBox',
+    'MultiSelectComboBox',
+  ];
 }

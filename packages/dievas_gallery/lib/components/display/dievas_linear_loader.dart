@@ -16,15 +16,13 @@ final linearLoaderComponent = WidgetbookComponent(
 class _Playground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final defaultWidthValue = "200.0";
+    final defaultWidthValue = 200.0;
     final useCustomWidth = context.knobs.boolean(label: 'Custom Width', initialValue: false);
-    final width = useCustomWidth
-        ? context.knobs.string(label: 'Width', initialValue: defaultWidthValue)
-        : defaultWidthValue;
+    final width = useCustomWidth ? context.knobs.double.input(label: 'Width', initialValue: 200.0) : defaultWidthValue;
 
     return Center(
       child: ComponentBoundary(
-        child: SizedBox(width: double.tryParse(width), child: const DievasLinearProgress()),
+        child: SizedBox(width: width, child: const DievasLinearProgress()),
       ),
     );
   }
@@ -36,9 +34,9 @@ class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.xl),
+      padding: .all(context.spacing.xl),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           ComponentBoundary(child: SizedBox(width: 200, child: const DievasLinearProgress())),
           SizedBox(height: context.spacing.lg),
@@ -55,9 +53,9 @@ class _WithLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.xl),
+      padding: .all(context.spacing.xl),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [ComponentBoundary(child: SizedBox(width: 240, child: const DievasLinearProgress()))],
       ),
     ),

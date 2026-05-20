@@ -44,15 +44,19 @@ class DievasIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sizing = DievasTheme.sizingOf(context);
-    final colors = DievasTheme.colorsOf(context);
 
     final dimension = switch (size) {
-      DievasIconSize.xs => sizing.iconXs,
-      DievasIconSize.sm => sizing.iconSm,
-      DievasIconSize.md => sizing.iconMd,
-      DievasIconSize.lg => sizing.iconLg,
+      .xs => sizing.iconXs,
+      .sm => sizing.iconSm,
+      .md => sizing.iconMd,
+      .lg => sizing.iconLg,
     };
 
-    return Icon(icon, size: dimension, color: color ?? colors.icon.iconPrimary, semanticLabel: semanticLabel);
+    return Icon(
+      icon,
+      size: dimension,
+      color: color ?? DievasTheme.colorsOf(context).icon.iconPrimary,
+      semanticLabel: semanticLabel,
+    );
   }
 }

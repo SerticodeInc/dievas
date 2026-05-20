@@ -1,72 +1,68 @@
+import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart';
 
 /// Custom home page shown in the Widgetbook canvas when no component is selected.
 ///
-/// Self-contained — uses inline color constants from the Dievas dark palette
-/// rather than InheritedWidget lookup (the addons haven't fired yet at this
-/// route, so DievasTheme.of(context) is not available here).
+/// Wraps itself in a [DievasScope] so that [DievasTheme.of(context)] is
+/// available to all sub-widgets — the Widgetbook addons have not fired yet at
+/// this route, so no inherited theme exists above this widget.
 class DievasHomePage extends StatelessWidget {
   const DievasHomePage({super.key});
 
-  static const _bg = Color(0xFF020617);
-  static const _bgSubtle = Color(0xFF0F172A);
-  static const _bgElevated = Color(0xFF1E293B);
-  static const _brand = Color(0xFF818CF8);
-  static const _textHi = Color(0xFFF8FAFC);
-  static const _textMid = Color(0xFF94A3B8);
-  static const _textLo = Color(0xFF64748B);
-  static const _border = Color(0xFF334155);
-  static const _borderBrand = Color(0xFF818CF8);
-  static const _success = Color(0xFF4ADE80);
-
   @override
-  Widget build(BuildContext context) => Scaffold(
-    backgroundColor: _bg,
+  Widget build(BuildContext context) => DievasScope(
+    lightTheme: DievasDarkThemeData(),
+    darkTheme: DievasDarkThemeData(),
+    global: false,
+    child: Builder(builder: _build),
+  );
+
+  Widget _build(BuildContext context) => Scaffold(
+    backgroundColor: context.colors.background.bgBase,
     body: SingleChildScrollView(
-      padding: const .symmetric(horizontal: 48, vertical: 64),
+      padding: EdgeInsets.symmetric(horizontal: context.spacing.x2l, vertical: context.spacing.x3l),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 640),
           child: Column(
-            crossAxisAlignment: .start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _Eyebrow(),
-              const SizedBox(height: 24),
+              SizedBox(height: context.spacing.lg),
               _Headline(),
-              const SizedBox(height: 16),
+              SizedBox(height: context.spacing.md),
               _Subtitle(),
-              const SizedBox(height: 56),
+              SizedBox(height: context.spacing.x2lPlus),
               _StatsRow(),
-              const SizedBox(height: 56),
+              SizedBox(height: context.spacing.x2lPlus),
               const _SectionLabel('Components'),
-              const SizedBox(height: 16),
+              SizedBox(height: context.spacing.md),
               _ComponentCategory(
                 name: 'Buttons',
                 count: 4,
                 components: const ['FilledButton', 'OutlinedButton', 'TextButton', 'IconButton'],
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: context.spacing.sm),
               _ComponentCategory(
                 name: 'Display',
                 count: 7,
                 components: const ['Avatar', 'Badge', 'CircularProgress', 'Divider', 'Icon', 'LinearProgress', 'Tag'],
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: context.spacing.sm),
               _ComponentCategory(
                 name: 'Form',
                 count: 5,
-                components: const ['Checkbox', 'Radio', 'Switch', 'TextField', 'TextArea'],
+                components: const ['Checkbox', 'Radio', 'Switch', 'TextInput', 'TextArea'],
               ),
-              const SizedBox(height: 8),
-              _ComponentCategory(
-                name: 'Overlays',
-                count: 4,
-                shipped: false,
-                components: const ['BottomSheet', 'Toast', 'Modal', 'Tooltip'],
-              ),
-              const SizedBox(height: 56),
+              SizedBox(height: context.spacing.sm),
+              _ComponentCategory(name: 'Feedback', count: 3, components: const ['Alert', 'Banner', 'Snackbar']),
+              SizedBox(height: context.spacing.sm),
+              _ComponentCategory(name: 'Overlays', count: 3, components: const ['BottomSheet', 'Modal', 'Tooltip']),
+              SizedBox(height: context.spacing.sm),
+              _ComponentCategory(name: 'Utility', count: 2, components: const ['Loader', 'EmptyState']),
+              SizedBox(height: context.spacing.x2lPlus),
               _HintBadge(),
-              const SizedBox(height: 64),
+              SizedBox(height: context.spacing.x3l),
             ],
           ),
         ),
@@ -82,18 +78,12 @@ class _Eyebrow extends StatelessWidget {
       Container(
         width: 6,
         height: 6,
-        decoration: const BoxDecoration(color: DievasHomePage._brand, shape: .circle),
+        decoration: BoxDecoration(color: context.colors.core.brand, shape: BoxShape.circle),
       ),
-      const SizedBox(width: 10),
-      const Text(
+      SizedBox(width: context.spacing.sm),
+      Text(
         'FLUTTER DESIGN SYSTEM',
-        style: TextStyle(
-          fontFamily: 'monospace',
-          fontSize: 11,
-          letterSpacing: 2.5,
-          color: DievasHomePage._brand,
-          fontWeight: .w500,
-        ),
+        style: context.typography.codeSm.copyWith(letterSpacing: 2.5, color: context.colors.core.brand),
       ),
     ],
   );
@@ -101,18 +91,18 @@ class _Eyebrow extends StatelessWidget {
 
 class _Headline extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => const Text(
+  Widget build(BuildContext context) => Text(
     'Dievas',
-    style: TextStyle(fontSize: 80, fontWeight: .w900, color: DievasHomePage._textHi, height: 0.92, letterSpacing: -3),
+    style: context.typography.displayLg.copyWith(fontWeight: FontWeight.w900, height: 0.92, letterSpacing: -3),
   );
 }
 
 class _Subtitle extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => const Text(
+  Widget build(BuildContext context) => Text(
     "Ports Moon Design System's component catalogue.\n"
     'Token-driven. InheritedModel-first. Multi-brand.',
-    style: TextStyle(fontSize: 15, color: DievasHomePage._textMid, height: 1.75, fontWeight: .w400),
+    style: context.typography.bodyMd.copyWith(height: 1.75, color: context.colors.text.textSecondary),
   );
 }
 
@@ -125,7 +115,7 @@ class _StatsRow extends StatelessWidget {
         _Divider(),
         _StatCell(value: '2', label: 'default themes'),
         _Divider(),
-        _StatCell(value: '16', label: 'components'),
+        _StatCell(value: '24', label: 'components'),
         _Divider(),
         _StatCell(value: '∞', label: 'brand configs'),
       ],
@@ -142,28 +132,13 @@ class _StatCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Expanded(
     child: Column(
-      crossAxisAlignment: .start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 36,
-            fontWeight: .w900,
-            color: DievasHomePage._textHi,
-            height: 1,
-            letterSpacing: -1,
-          ),
-        ),
-        const SizedBox(height: 6),
+        Text(value, style: context.typography.headingXl.copyWith(height: 1, letterSpacing: -1)),
+        SizedBox(height: context.spacing.sm),
         Text(
           label.toUpperCase(),
-          style: const TextStyle(
-            fontFamily: 'monospace',
-            fontSize: 10,
-            letterSpacing: 1.8,
-            color: DievasHomePage._textLo,
-            fontWeight: .w500,
-          ),
+          style: context.typography.codeSm.copyWith(letterSpacing: 1.8, color: context.colors.text.textTertiary),
         ),
       ],
     ),
@@ -172,8 +147,11 @@ class _StatCell extends StatelessWidget {
 
 class _Divider extends StatelessWidget {
   @override
-  Widget build(BuildContext context) =>
-      Container(width: 1, margin: const .symmetric(horizontal: 24), color: DievasHomePage._border);
+  Widget build(BuildContext context) => Container(
+    width: 1,
+    margin: EdgeInsets.symmetric(horizontal: context.spacing.lg),
+    color: context.colors.border.borderDefault,
+  );
 }
 
 class _SectionLabel extends StatelessWidget {
@@ -184,110 +162,84 @@ class _SectionLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     text.toUpperCase(),
-    style: const TextStyle(
-      fontFamily: 'monospace',
-      fontSize: 10,
-      letterSpacing: 2,
-      color: DievasHomePage._textLo,
-      fontWeight: .w500,
-    ),
+    style: context.typography.codeSm.copyWith(letterSpacing: 2, color: context.colors.text.textTertiary),
   );
 }
 
 class _ComponentCategory extends StatelessWidget {
-  const _ComponentCategory({required this.name, required this.count, required this.components, this.shipped = true});
+  const _ComponentCategory({required this.name, required this.count, required this.components});
 
   final String name;
   final int count;
   final List<String> components;
-  final bool shipped;
 
   @override
-  Widget build(BuildContext context) {
-    final dotColor = shipped ? DievasHomePage._success : DievasHomePage._border;
-    final borderColor = shipped ? DievasHomePage._border : DievasHomePage._bgElevated;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: DievasHomePage._bgSubtle,
-        border: Border.all(color: borderColor),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      child: Row(
-        children: [
-          Container(
-            width: 6,
-            height: 6,
-            decoration: BoxDecoration(color: dotColor, shape: .circle),
-          ),
-          const SizedBox(width: 12),
-          SizedBox(
-            width: 80,
-            child: Text(
-              name,
-              style: const TextStyle(
-                fontFamily: 'monospace',
-                fontSize: 12,
-                color: DievasHomePage._textHi,
-                fontWeight: .w500,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Wrap(
-              spacing: 6,
-              runSpacing: 6,
-              children: [
-                for (final c in components)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: DievasHomePage._bgElevated,
-                      borderRadius: BorderRadius.circular(4),
-                      border: Border.all(color: DievasHomePage._border.withAlpha(100)),
-                    ),
-                    child: Text(
-                      c,
-                      style: const TextStyle(fontFamily: 'monospace', fontSize: 10, color: DievasHomePage._textMid),
-                    ),
+  Widget build(BuildContext context) => Container(
+    decoration: BoxDecoration(
+      color: context.colors.background.bgSubtle,
+      border: Border.all(color: context.colors.border.borderDefault),
+      borderRadius: context.border.lg,
+    ),
+    padding: EdgeInsets.symmetric(horizontal: context.spacing.mdPlus, vertical: context.spacing.md),
+    child: Row(
+      children: [
+        Container(
+          width: 6,
+          height: 6,
+          decoration: BoxDecoration(color: context.colors.action.actionSuccess, shape: BoxShape.circle),
+        ),
+        SizedBox(width: context.spacing.smPlus),
+        SizedBox(
+          width: 80, // label column — gallery-only fixed width
+          child: Text(name, style: context.typography.codeSm.copyWith(color: context.colors.text.textPrimary)),
+        ),
+        Expanded(
+          child: Wrap(
+            spacing: context.spacing.xs,
+            runSpacing: context.spacing.xs,
+            children: [
+              for (final c in components)
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: context.spacing.sm, vertical: context.spacing.xs),
+                  decoration: BoxDecoration(
+                    color: context.colors.background.bgElevated,
+                    borderRadius: context.border.sm,
+                    border: Border.all(color: context.colors.border.borderDefault.withAlpha(100)),
                   ),
-              ],
-            ),
+                  child: Text(c, style: context.typography.codeSm.copyWith(color: context.colors.text.textSecondary)),
+                ),
+            ],
           ),
-          const SizedBox(width: 16),
-          Text(
-            '$count',
-            style: const TextStyle(fontFamily: 'monospace', fontSize: 13, color: DievasHomePage._textLo),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+        SizedBox(width: context.spacing.md),
+        Text('$count', style: context.typography.codeSm.copyWith(color: context.colors.text.textTertiary)),
+      ],
+    ),
+  );
 }
 
 class _HintBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
-    padding: const .symmetric(horizontal: 16, vertical: 12),
+    padding: EdgeInsets.symmetric(horizontal: context.spacing.md, vertical: context.spacing.smPlus),
     decoration: BoxDecoration(
-      color: DievasHomePage._bgSubtle,
-      border: .all(color: DievasHomePage._borderBrand.withAlpha(80)),
-      borderRadius: .circular(12),
+      color: context.colors.background.bgSubtle,
+      border: Border.all(color: context.colors.core.brand.withAlpha(80)),
+      borderRadius: context.border.lg,
     ),
     child: Row(
-      mainAxisSize: .min,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: 6,
           height: 6,
-          decoration: const BoxDecoration(color: DievasHomePage._brand, shape: .circle),
+          decoration: BoxDecoration(color: context.colors.core.brand, shape: BoxShape.circle),
         ),
-        const SizedBox(width: 12),
-        const Flexible(
+        SizedBox(width: context.spacing.smPlus),
+        Flexible(
           child: Text(
             'Select a component from the sidebar to explore use cases',
-            style: TextStyle(fontFamily: 'monospace', fontSize: 12, color: DievasHomePage._textMid),
+            style: context.typography.codeSm.copyWith(color: context.colors.text.textSecondary),
           ),
         ),
       ],

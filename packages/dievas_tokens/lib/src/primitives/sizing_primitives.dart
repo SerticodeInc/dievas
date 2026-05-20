@@ -5,11 +5,26 @@
 
 /// Raw sizing primitives for component dimensions.
 abstract final class DievasSizingPrimitives {
+  /// 4px — progress track height, fine structural lines.
+  static const double s4 = 4.0;
+
+  /// 8px — small dot indicators, radio inner dot.
+  static const double s8 = 8.0;
+
+  /// 10px — badge icon, decorative dot indicators.
+  static const double s10 = 10.0;
+
   /// 12px.
   static const double s12 = 12.0;
 
+  /// 14px — tag/chip icons, dismiss icons, small UI controls.
+  static const double s14 = 14.0;
+
   /// 16px.
   static const double s16 = 16.0;
+
+  /// 18px — snackbar icons, switch thumb, medium-small icons.
+  static const double s18 = 18.0;
 
   /// 20px.
   static const double s20 = 20.0;

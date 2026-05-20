@@ -221,17 +221,46 @@ Dart 3 idioms throughout — pattern matching with `switch` expressions, sealed 
 
 ---
 
+## Components
+
+16 components shipped across three groups:
+
+| Group       | Components                                                                                                                  |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **Buttons** | `DievasFilledButton`, `DievasOutlinedButton`, `DievasTextButton`, `DievasIconButton`                                        |
+| **Display** | `DievasAvatar`, `DievasBadge`, `DievasCircularProgress`, `DievasDivider`, `DievasIcon`, `DievasLinearProgress`, `DievasTag` |
+| **Form**    | `DievasCheckbox`, `DievasRadio`, `DievasSwitch`, `DievasTextInput`, `DievasTextArea`                                        |
+
+**Overlay components** (BottomSheet, Toast, Modal, Tooltip) — M4, pending.
+
+---
+
+## Gallery + Landing
+
+**Widget book gallery** — hosted on Cloudflare Pages:
+`https://master.dievas-gallery.pages.dev`
+
+Every component has four use-cases: Playground (full knobs), All Styles, All Sizes, All States.
+
+**Landing page** — Jaspr SSR + Tailwind v4, deployed on Railway:
+`https://dievas.serticode.com`
+
+Token bridge: `landing/tool/generate_theme.dart` reads `dievas_tokens` constants and emits Tailwind `@theme {}` CSS — the same token values power both the Flutter widgets and the server-rendered landing page.
+
+---
+
 ## Status
 
-`v0.0.1-dev` — **M1 complete** (semantic token layer). Theme architecture in progress. Target: complete system by **May 21, 2026**.
+`v0.0.1-dev` — core component library complete. Overlay components in progress. Target: full system by **May 21, 2026**.
 
-| Milestone                 | Status     | Window    |
-| ------------------------- | ---------- | --------- |
-| M1 — Semantic token layer | ✅ Done    | May 7–9   |
-| M2 — Theme architecture   | ✅ Done    | May 10–12 |
-| M3 — Core components      | 🔄 Next    | May 12–15 |
-| M4 — Composite components | ⬜ Pending | May 16–18 |
-| M5 — Gallery + polish     | ⬜ Pending | May 19–21 |
+| Milestone                          | Status     | Window    |
+| ---------------------------------- | ---------- | --------- |
+| M1 — Token layer                   | ✅ Done    | May 8     |
+| M2 — Theme architecture            | ✅ Done    | May 8–10  |
+| M3 — Core components (16)          | ✅ Done    | May 8–10  |
+| M4 — Overlay + feedback components | ⬜ Pending | May 14–17 |
+| M5 — Gallery scaffold + hosting    | ✅ Done    | May 9     |
+| M6 — Gallery pages + polish        | ⬜ Pending | May 19–21 |
 
 ---
 

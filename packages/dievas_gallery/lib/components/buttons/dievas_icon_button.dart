@@ -7,77 +7,90 @@ import '../../widgets/component_boundary.dart';
 final iconButtonComponent = WidgetbookComponent(
   name: 'IconButton',
   useCases: [
-    WidgetbookUseCase(name: 'Playground', builder: _playground),
-    WidgetbookUseCase(name: 'All Styles', builder: _allStyles),
-    WidgetbookUseCase(name: 'All Sizes', builder: _allSizes),
+    WidgetbookUseCase(name: 'Playground', builder: (ctx) => _Playground()),
+    WidgetbookUseCase(name: 'All Styles', builder: (ctx) => const _AllStyles()),
+    WidgetbookUseCase(name: 'All Sizes', builder: (ctx) => const _AllSizes()),
   ],
 );
 
-Widget _playground(BuildContext context) {
-  final style = context.knobs.object.dropdown<DievasIconButtonStyle>(
-    label: 'Style',
-    options: DievasIconButtonStyle.values,
-    labelBuilder: (v) => v.name,
-  );
+class _Playground extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final style = context.knobs.object.dropdown<DievasIconButtonStyle>(
+      label: 'Style',
+      options: DievasIconButtonStyle.values,
+      labelBuilder: (v) => v.name,
+    );
 
-  final size = context.knobs.object.dropdown<DievasButtonSize>(
-    label: 'Size',
-    options: DievasButtonSize.values,
-    labelBuilder: (v) => v.name,
-    initialOption: DievasButtonSize.md,
-  );
+    final size = context.knobs.object.dropdown<DievasButtonSize>(
+      label: 'Size',
+      options: DievasButtonSize.values,
+      labelBuilder: (v) => v.name,
+      initialOption: DievasButtonSize.md,
+    );
 
-  final shape = context.knobs.object.dropdown<DievasButtonShape>(
-    label: 'Shape',
-    options: DievasButtonShape.values,
-    labelBuilder: (v) => v.name,
-  );
+    final shape = context.knobs.object.dropdown<DievasButtonShape>(
+      label: 'Shape',
+      options: DievasButtonShape.values,
+      labelBuilder: (v) => v.name,
+    );
 
-  final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
+    final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
 
-  return Center(
-    child: ComponentBoundary(
-      child: DievasIconButton(
-        icon: const Icon(Icons.add_rounded),
-        style: style,
-        size: size,
-        shape: shape,
-        onPressed: enabled ? () {} : null,
+    return Center(
+      child: ComponentBoundary(
+        child: DievasIconButton(
+          icon: const Icon(Icons.add_rounded),
+          style: style,
+          size: size,
+          shape: shape,
+          onPressed: enabled ? () {} : null,
+        ),
+      ),
+    );
+  }
+}
+
+class _AllStyles extends StatelessWidget {
+  const _AllStyles();
+
+  @override
+  Widget build(BuildContext context) => Center(
+    child: Padding(
+      padding: EdgeInsets.all(context.spacing.lg),
+      child: Wrap(
+        spacing: context.spacing.smPlus,
+        runSpacing: context.spacing.smPlus,
+        alignment: WrapAlignment.center,
+        children: [
+          for (final style in DievasIconButtonStyle.values)
+            ComponentBoundary(
+              child: DievasIconButton(icon: const Icon(Icons.star_rounded), style: style, onPressed: () {}),
+            ),
+        ],
       ),
     ),
   );
 }
 
-Widget _allStyles(BuildContext context) => Center(
-  child: Padding(
-    padding: const EdgeInsets.all(24),
-    child: Wrap(
-      spacing: 12,
-      runSpacing: 12,
-      alignment: WrapAlignment.center,
-      children: [
-        for (final style in DievasIconButtonStyle.values)
-          ComponentBoundary(
-            child: DievasIconButton(icon: const Icon(Icons.star_rounded), style: style, onPressed: () {}),
-          ),
-      ],
-    ),
-  ),
-);
+class _AllSizes extends StatelessWidget {
+  const _AllSizes();
 
-Widget _allSizes(BuildContext context) => Center(
-  child: Padding(
-    padding: const EdgeInsets.all(24),
-    child: Wrap(
-      spacing: 12,
-      runSpacing: 12,
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: [
-        for (final size in DievasButtonSize.values)
-          ComponentBoundary(
-            child: DievasIconButton(icon: const Icon(Icons.star_rounded), size: size, onPressed: () {}),
-          ),
-      ],
+  @override
+  Widget build(BuildContext context) => Center(
+    child: Padding(
+      padding: EdgeInsets.all(context.spacing.lg),
+      child: Wrap(
+        spacing: context.spacing.smPlus,
+        runSpacing: context.spacing.smPlus,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          for (final size in DievasButtonSize.values)
+            ComponentBoundary(
+              child: DievasIconButton(icon: const Icon(Icons.star_rounded), size: size, onPressed: () {}),
+            ),
+        ],
+      ),
     ),
-  ),
-);
+  );
+}

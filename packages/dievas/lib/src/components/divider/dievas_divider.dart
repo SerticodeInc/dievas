@@ -36,21 +36,18 @@ class DievasDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = DievasTheme.colorsOf(context);
-    final border = DievasTheme.borderOf(context);
-
-    final color = colors.border.borderDefault;
-    final thickness = border.strokeThin;
+    final color = DievasTheme.colorsOf(context).border.borderDefault;
+    final thickness = DievasTheme.borderOf(context).strokeThick;
 
     return switch (orientation) {
-      DievasDividerOrientation.horizontal => Container(
+      .horizontal => Container(
         height: thickness,
-        margin: EdgeInsets.only(left: indent, right: endIndent),
+        margin: .only(left: indent, right: endIndent),
         color: color,
       ),
-      DievasDividerOrientation.vertical => Container(
+      .vertical => Container(
         width: thickness,
-        margin: EdgeInsets.only(top: indent, bottom: endIndent),
+        margin: .only(top: indent, bottom: endIndent),
         color: color,
       ),
     };

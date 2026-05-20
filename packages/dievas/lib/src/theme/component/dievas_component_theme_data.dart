@@ -1,18 +1,25 @@
 import 'package:equatable/equatable.dart';
 
+import 'alert/dievas_alert_theme_data.dart';
 import 'avatar/dievas_avatar_theme_data.dart';
 import 'badge/dievas_badge_theme_data.dart';
+import 'bottom_sheet/dievas_bottom_sheet_theme_data.dart';
 import 'button/dievas_filled_button_theme_data.dart';
 import 'button/dievas_icon_button_theme_data.dart';
 import 'button/dievas_outlined_button_theme_data.dart';
 import 'button/dievas_text_button_theme_data.dart';
 import 'checkbox/dievas_checkbox_theme_data.dart';
 import 'circular_progress/dievas_circular_progress_theme_data.dart';
+import 'empty_state/dievas_empty_state_theme_data.dart';
 import 'linear_progress/dievas_linear_progress_theme_data.dart';
+import 'loader/dievas_loader_theme_data.dart';
+import 'modal/dievas_modal_theme_data.dart';
 import 'radio/dievas_radio_theme_data.dart';
+import 'snackbar/dievas_snackbar_theme_data.dart';
 import 'switch/dievas_switch_theme_data.dart';
 import 'tag/dievas_tag_theme_data.dart';
 import 'text_input/dievas_text_input_theme_data.dart';
+import 'tooltip/dievas_tooltip_theme_data.dart';
 
 /// The component-level theme sub-system for a Dievas theme.
 ///
@@ -38,6 +45,13 @@ final class DievasComponentThemeData extends Equatable {
     required this.toggle,
     required this.radio,
     required this.textInput,
+    required this.alert,
+    required this.snackbar,
+    required this.bottomSheet,
+    required this.modal,
+    required this.tooltip,
+    required this.loader,
+    required this.emptyState,
   });
 
   /// Theme data for [DievasFilledButton] — primary, secondary, destructive variants.
@@ -81,6 +95,27 @@ final class DievasComponentThemeData extends Equatable {
   /// Theme data for [DievasTextInput] and [DievasTextArea].
   final DievasTextInputThemeData textInput;
 
+  /// Theme data for [DievasAlert].
+  final DievasAlertThemeData alert;
+
+  /// Theme data for [DievasSnackbar].
+  final DievasSnackbarThemeData snackbar;
+
+  /// Theme data for [DievasBottomSheet] and [showDievasBottomSheet].
+  final DievasBottomSheetThemeData bottomSheet;
+
+  /// Theme data for [DievasModal] and [showDievasModal].
+  final DievasModalThemeData modal;
+
+  /// Theme data for [DievasTooltip].
+  final DievasTooltipThemeData tooltip;
+
+  /// Theme data for [DievasLoader].
+  final DievasLoaderThemeData loader;
+
+  /// Theme data for [DievasEmptyState].
+  final DievasEmptyStateThemeData emptyState;
+
   DievasComponentThemeData copyWith({
     DievasFilledButtonGroupThemeData? filledButton,
     DievasOutlinedButtonGroupThemeData? outlinedButton,
@@ -95,6 +130,13 @@ final class DievasComponentThemeData extends Equatable {
     DievasSwitchThemeData? toggle,
     DievasRadioThemeData? radio,
     DievasTextInputThemeData? textInput,
+    DievasAlertThemeData? alert,
+    DievasSnackbarThemeData? snackbar,
+    DievasBottomSheetThemeData? bottomSheet,
+    DievasModalThemeData? modal,
+    DievasTooltipThemeData? tooltip,
+    DievasLoaderThemeData? loader,
+    DievasEmptyStateThemeData? emptyState,
   }) => DievasComponentThemeData(
     filledButton: filledButton ?? this.filledButton,
     outlinedButton: outlinedButton ?? this.outlinedButton,
@@ -109,6 +151,13 @@ final class DievasComponentThemeData extends Equatable {
     toggle: toggle ?? this.toggle,
     radio: radio ?? this.radio,
     textInput: textInput ?? this.textInput,
+    alert: alert ?? this.alert,
+    snackbar: snackbar ?? this.snackbar,
+    bottomSheet: bottomSheet ?? this.bottomSheet,
+    modal: modal ?? this.modal,
+    tooltip: tooltip ?? this.tooltip,
+    loader: loader ?? this.loader,
+    emptyState: emptyState ?? this.emptyState,
   );
 
   @override
@@ -126,5 +175,12 @@ final class DievasComponentThemeData extends Equatable {
     toggle,
     radio,
     textInput,
+    alert,
+    snackbar,
+    bottomSheet,
+    modal,
+    tooltip,
+    loader,
+    emptyState,
   ];
 }

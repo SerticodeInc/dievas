@@ -39,9 +39,9 @@ class DievasLinearProgress extends StatelessWidget {
     final theme = DievasTheme.componentsOf(context).linearProgress;
 
     final color = switch (style) {
-      DievasLinearProgressStyle.primary => theme.colorPrimary,
-      DievasLinearProgressStyle.success => theme.colorSuccess,
-      DievasLinearProgressStyle.error => theme.colorError,
+      .primary => theme.colorPrimary,
+      .success => theme.colorSuccess,
+      .error => theme.colorError,
     };
 
     return ClipRRect(

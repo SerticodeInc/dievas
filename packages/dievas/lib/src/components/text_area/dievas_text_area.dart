@@ -1,3 +1,4 @@
+import 'package:dievas/src/theme/component/text_input/dievas_text_input_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -82,9 +83,6 @@ class DievasTextArea extends StatelessWidget {
     final hasError = errorText != null && errorText!.isNotEmpty;
 
     // TextArea always uses md tokens
-    final contentPadding = theme.contentPadding.md;
-    final inputStyle = theme.inputStyle.md;
-    final placeholderStyle = theme.placeholderStyle.md;
 
     final borderColor = hasError ? theme.borderColorError : theme.borderColor;
     final focusedBorderColor = hasError ? theme.borderColorError : theme.borderColorFocused;
@@ -104,66 +102,93 @@ class DievasTextArea extends StatelessWidget {
       borderSide: BorderSide(color: theme.borderColor, width: theme.strokeWidth),
     );
 
-    final field = TextField(
-      controller: controller,
-      focusNode: focusNode,
-      style: inputStyle,
-      keyboardType: keyboardType,
-      textInputAction: textInputAction,
-      inputFormatters: inputFormatters,
-      onChanged: onChanged,
-      onSubmitted: onSubmitted,
-      onEditingComplete: onEditingComplete,
-      autofocus: autofocus,
-      maxLength: maxLength,
-      autocorrect: autocorrect,
-      enabled: enabled,
-      minLines: minLines,
-      maxLines: maxLines,
-      cursorColor: theme.borderColorFocused,
-      decoration: InputDecoration(
-        hintText: hint,
-        hintStyle: placeholderStyle,
-        contentPadding: contentPadding,
-        filled: true,
-        fillColor: theme.bgColor,
-        border: border,
-        enabledBorder: border,
-        focusedBorder: focusedBorder,
-        disabledBorder: disabledBorder,
-        errorBorder: focusedBorder,
-        focusedErrorBorder: focusedBorder,
-        isDense: true,
-        counterText: '',
+    final content = _DievasTextFieldContent(
+      theme: theme,
+      hasError: hasError,
+      label: label,
+      helperText: helperText,
+      errorText: errorText,
+      field: TextField(
+        controller: controller,
+        focusNode: focusNode,
+        style: theme.inputStyle.md,
+        keyboardType: keyboardType,
+        textInputAction: textInputAction,
+        inputFormatters: inputFormatters,
+        onChanged: onChanged,
+        onSubmitted: onSubmitted,
+        onEditingComplete: onEditingComplete,
+        autofocus: autofocus,
+        maxLength: maxLength,
+        autocorrect: autocorrect,
+        enabled: enabled,
+        minLines: minLines,
+        maxLines: maxLines,
+        cursorColor: theme.borderColorFocused,
+        decoration: InputDecoration(
+          hintText: hint,
+          hintStyle: theme.placeholderStyle.md,
+          contentPadding: theme.contentPadding.md,
+          filled: true,
+          fillColor: theme.bgColor,
+          border: border,
+          enabledBorder: border,
+          focusedBorder: focusedBorder,
+          disabledBorder: disabledBorder,
+          errorBorder: focusedBorder,
+          focusedErrorBorder: focusedBorder,
+          isDense: true,
+          counterText: '',
+        ),
       ),
     );
 
-    Widget column = Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (label != null) ...[
-          DefaultTextStyle(style: theme.labelStyle, child: Text(label!)),
-          SizedBox(height: theme.labelSpacing),
-        ],
-        field,
-        if (hasError) ...[
-          SizedBox(height: theme.helperSpacing),
-          DefaultTextStyle(
-            style: theme.errorStyle.copyWith(color: theme.borderColorError),
-            child: Text(errorText!),
-          ),
-        ] else if (helperText != null) ...[
-          SizedBox(height: theme.helperSpacing),
-          DefaultTextStyle(style: theme.helperStyle, child: Text(helperText!)),
-        ],
-      ],
-    );
-
     if (!enabled) {
-      return Opacity(opacity: theme.disabledOpacity, child: column);
+      return Opacity(opacity: theme.disabledOpacity, child: content);
     }
 
-    return column;
+    return content;
   }
+}
+
+class _DievasTextFieldContent extends StatelessWidget {
+  const _DievasTextFieldContent({
+    required this.theme,
+    required this.hasError,
+    required this.field,
+    this.label,
+    this.helperText,
+    this.errorText,
+  });
+
+  final DievasTextInputThemeData theme;
+  final bool hasError;
+  final Widget field;
+
+  final String? label;
+  final String? helperText;
+  final String? errorText;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: .min,
+    crossAxisAlignment: .start,
+    children: [
+      if (label case final text?) ...[
+        DefaultTextStyle(style: theme.labelStyle, child: Text(text)),
+        SizedBox(height: theme.labelSpacing),
+      ],
+      field,
+      if (errorText case final errorText? when hasError) ...[
+        SizedBox(height: theme.helperSpacing),
+        DefaultTextStyle(
+          style: theme.errorStyle.copyWith(color: theme.borderColorError),
+          child: Text(errorText),
+        ),
+      ] else if (helperText case final helperText?) ...[
+        SizedBox(height: theme.helperSpacing),
+        DefaultTextStyle(style: theme.helperStyle, child: Text(helperText)),
+      ],
+    ],
+  );
 }

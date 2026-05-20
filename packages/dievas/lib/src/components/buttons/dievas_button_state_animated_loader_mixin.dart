@@ -83,7 +83,6 @@ class _LoaderIcon extends StatelessWidget {
   const _LoaderIcon();
 
   @override
-  Widget build(BuildContext context) {
-    return const SizedBox(width: 20, height: 20, child: CircularProgressIndicator.adaptive(strokeWidth: 2));
-  }
+  Widget build(BuildContext context) =>
+      const SizedBox(width: 20, height: 20, child: CircularProgressIndicator.adaptive(strokeWidth: 2));
 }

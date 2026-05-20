@@ -1,3 +1,4 @@
+import 'package:dievas/src/theme/component/switch/dievas_switch_theme_data.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../theme/dievas_theme.dart';
@@ -33,11 +34,12 @@ class DievasSwitch extends StatefulWidget {
 class _DievasSwitchState extends State<DievasSwitch> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final CurvedAnimation _curve;
+  final _animationDuration = const Duration(milliseconds: 300);
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
+    _controller = AnimationController(vsync: this, duration: _animationDuration);
     _curve = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     if (widget.value) _controller.value = 1.0;
   }
@@ -63,64 +65,66 @@ class _DievasSwitchState extends State<DievasSwitch> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).toggle;
-    final isDisabled = widget.onChanged == null;
+    Widget track = _DievasSwitchTrackBuilder(curve: _curve, theme: theme);
 
-    Widget track = AnimatedBuilder(
-      animation: _curve,
-      builder: (context, _) {
-        final t = _curve.value;
-        final trackColor = Color.lerp(theme.trackColorOff, theme.trackColorOn, t)!;
-        final borderColor = Color.lerp(theme.borderColorOff, const Color(0x00000000), t)!;
-        final thumbOffset = t * (theme.trackWidth - theme.thumbSize - theme.thumbPadding * 2);
-
-        return Container(
-          width: theme.trackWidth,
-          height: theme.trackHeight,
-          decoration: BoxDecoration(
-            color: trackColor,
-            borderRadius: theme.trackRadius,
-            border: Border.all(color: borderColor),
-          ),
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Positioned(
-                left: theme.thumbPadding + thumbOffset,
-                top: theme.thumbPadding,
-                child: Container(
-                  width: theme.thumbSize,
-                  height: theme.thumbSize,
-                  decoration: BoxDecoration(color: theme.thumbColor, borderRadius: theme.thumbRadius),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-
-    if (widget.label != null) {
+    if (widget.label case final text?) {
       track = Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           track,
           SizedBox(width: theme.labelSpacing),
           DefaultTextStyle(
             style: theme.labelStyle,
-            child: Flexible(child: Text(widget.label!)),
+            child: Flexible(child: Text(text)),
           ),
         ],
       );
     }
 
-    if (isDisabled) {
+    if (widget.onChanged == null) {
       return Opacity(opacity: theme.disabledOpacity, child: track);
     }
 
-    return GestureDetector(
-      onTap: () => widget.onChanged!(!widget.value),
-      behavior: HitTestBehavior.opaque,
-      child: track,
-    );
+    return GestureDetector(onTap: () => widget.onChanged!(!widget.value), behavior: .opaque, child: track);
   }
+}
+
+class _DievasSwitchTrackBuilder extends StatelessWidget {
+  const _DievasSwitchTrackBuilder({required this.curve, required this.theme});
+
+  final CurvedAnimation curve;
+  final DievasSwitchThemeData theme;
+
+  @override
+  Widget build(BuildContext context) => AnimatedBuilder(
+    animation: curve,
+    builder: (context, _) {
+      final t = curve.value;
+      final thumbOffset = t * (theme.trackWidth - theme.thumbSize - theme.thumbPadding * 2);
+
+      return Container(
+        width: theme.trackWidth,
+        height: theme.trackHeight,
+        decoration: BoxDecoration(
+          color: .lerp(theme.trackColorOff, theme.trackColorOn, t)!,
+          borderRadius: theme.trackRadius,
+          border: .all(color: .lerp(theme.borderColorOff, const Color(0x00000000), t)!),
+        ),
+        child: Stack(
+          clipBehavior: .none,
+          children: [
+            Positioned(
+              left: theme.thumbPadding + thumbOffset,
+              top: theme.thumbPadding,
+              child: Container(
+                width: theme.thumbSize,
+                height: theme.thumbSize,
+                decoration: BoxDecoration(color: theme.thumbColor, borderRadius: theme.thumbRadius),
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }

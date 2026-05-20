@@ -44,35 +44,44 @@ class DievasRadio<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).radio;
-    final isDisabled = onChanged == null;
 
-    Widget circle = SizedBox.square(
-      dimension: theme.size,
-      child: CustomPaint(
-        painter: _RadioPainter(isSelected: _isSelected, theme: theme),
-      ),
-    );
+    Widget circle = _DievasRadioCircle(isSelected: _isSelected, theme: theme);
 
-    if (label != null) {
+    if (label case final text?) {
       circle = Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           circle,
           SizedBox(width: theme.labelSpacing),
           DefaultTextStyle(
             style: theme.labelStyle,
-            child: Flexible(child: Text(label!)),
+            child: Flexible(child: Text(text)),
           ),
         ],
       );
     }
 
-    if (isDisabled) {
+    if (onChanged == null) {
       return Opacity(opacity: theme.disabledOpacity, child: circle);
     }
 
-    return GestureDetector(onTap: () => onChanged!(value), behavior: HitTestBehavior.opaque, child: circle);
+    return GestureDetector(onTap: () => onChanged!(value), behavior: .opaque, child: circle);
   }
+}
+
+class _DievasRadioCircle extends StatelessWidget {
+  const _DievasRadioCircle({required this.isSelected, required this.theme});
+
+  final bool isSelected;
+  final DievasRadioThemeData theme;
+
+  @override
+  Widget build(BuildContext context) => SizedBox.square(
+    dimension: theme.size,
+    child: CustomPaint(
+      painter: _RadioPainter(isSelected: isSelected, theme: theme),
+    ),
+  );
 }
 
 class _RadioPainter extends CustomPainter {
@@ -91,19 +100,19 @@ class _RadioPainter extends CustomPainter {
       // Filled outer ring using brand colour
       final fillPaint = Paint()
         ..color = theme.colorSelected
-        ..style = PaintingStyle.fill;
+        ..style = .fill;
       canvas.drawCircle(center, radius, fillPaint);
 
       // Inner dot (white / token)
       final dotPaint = Paint()
         ..color = theme.dotColor
-        ..style = PaintingStyle.fill;
+        ..style = .fill;
       canvas.drawCircle(center, theme.dotSize / 2, dotPaint);
     } else {
       // Transparent fill + border ring
       final borderPaint = Paint()
         ..color = theme.borderColorUnselected
-        ..style = PaintingStyle.stroke
+        ..style = .stroke
         ..strokeWidth = theme.strokeWidth;
       canvas.drawCircle(center, radius - theme.strokeWidth / 2, borderPaint);
     }

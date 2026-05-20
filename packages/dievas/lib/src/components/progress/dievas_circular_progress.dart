@@ -48,14 +48,14 @@ class DievasCircularProgress extends StatelessWidget {
     final theme = DievasTheme.componentsOf(context).circularProgress;
 
     final diameter = switch (size) {
-      DievasCircularProgressSize.sm => theme.sizeSm,
-      DievasCircularProgressSize.md => theme.sizeMd,
-      DievasCircularProgressSize.lg => theme.sizeLg,
+      .sm => theme.sizeSm,
+      .md => theme.sizeMd,
+      .lg => theme.sizeLg,
     };
 
     final color = switch (style) {
-      DievasCircularProgressStyle.primary => theme.colorPrimary,
-      DievasCircularProgressStyle.onBrand => theme.colorOnBrand,
+      .primary => theme.colorPrimary,
+      .onBrand => theme.colorOnBrand,
     };
 
     return SizedBox.square(
@@ -65,7 +65,7 @@ class DievasCircularProgress extends StatelessWidget {
         strokeWidth: theme.strokeWidth,
         color: color,
         backgroundColor: theme.trackColor,
-        strokeCap: StrokeCap.round,
+        strokeCap: .round,
       ),
     );
   }

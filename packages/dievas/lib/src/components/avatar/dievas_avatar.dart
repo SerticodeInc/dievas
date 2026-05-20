@@ -49,8 +49,8 @@ class DievasAvatar extends StatelessWidget {
     super.key,
     this.imageProvider,
     this.initials,
-    this.size = DievasAvatarSize.md,
-    this.shape = DievasAvatarShape.circle,
+    this.size = .md,
+    this.shape = .circle,
     this.semanticLabel,
   });
 
@@ -74,38 +74,38 @@ class DievasAvatar extends StatelessWidget {
     final theme = DievasTheme.componentsOf(context).avatar;
 
     final dimension = switch (size) {
-      DievasAvatarSize.xs => theme.sizeXs,
-      DievasAvatarSize.sm => theme.sizeSm,
-      DievasAvatarSize.md => theme.sizeMd,
-      DievasAvatarSize.lg => theme.sizeLg,
-      DievasAvatarSize.xl => theme.sizeXl,
+      .xs => theme.sizeXs,
+      .sm => theme.sizeSm,
+      .md => theme.sizeMd,
+      .lg => theme.sizeLg,
+      .xl => theme.sizeXl,
     };
 
     final initialsStyle = switch (size) {
-      DievasAvatarSize.xs => theme.initialsStyleXs,
-      DievasAvatarSize.sm => theme.initialsStyleSm,
-      DievasAvatarSize.md => theme.initialsStyleMd,
-      DievasAvatarSize.lg => theme.initialsStyleLg,
-      DievasAvatarSize.xl => theme.initialsStyleXl,
+      .xs => theme.initialsStyleXs,
+      .sm => theme.initialsStyleSm,
+      .md => theme.initialsStyleMd,
+      .lg => theme.initialsStyleLg,
+      .xl => theme.initialsStyleXl,
     };
 
     final borderRadius = switch (shape) {
-      DievasAvatarShape.circle => BorderRadius.circular(dimension / 2),
-      DievasAvatarShape.square => theme.borderRadiusSquare,
+      .circle => BorderRadius.circular(dimension / 2),
+      .square => theme.borderRadiusSquare,
     };
 
     Widget content;
 
-    if (imageProvider != null) {
-      content = Image(image: imageProvider!, fit: BoxFit.cover, width: dimension, height: dimension);
-    } else if (initials != null && initials!.isNotEmpty) {
-      final label = initials!.length > 2 ? initials!.substring(0, 2).toUpperCase() : initials!.toUpperCase();
+    if (imageProvider case final provider?) {
+      content = Image(image: provider, fit: .cover, width: dimension, height: dimension);
+    } else if (initials case final text? when text.isNotEmpty) {
+      final label = text.length > 2 ? text.substring(0, 2).toUpperCase() : text.toUpperCase();
       content = Center(
         child: Text(
           label,
           style: initialsStyle.copyWith(color: theme.initialsColor),
           maxLines: 1,
-          overflow: TextOverflow.clip,
+          overflow: .clip,
         ),
       );
     } else {
@@ -125,7 +125,7 @@ class DievasAvatar extends StatelessWidget {
       width: dimension,
       height: dimension,
       decoration: BoxDecoration(color: theme.backgroundColor, borderRadius: borderRadius),
-      clipBehavior: Clip.antiAlias,
+      clipBehavior: .antiAlias,
       child: content,
     );
 

@@ -97,14 +97,14 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
                 border: .fromBorderSide(borderSide.copyWith(color: borderSide.color.withValues(alpha: opacityFactor))),
               );
 
-              Widget? maybeColourIcon(Widget? icon) {
-                if (icon == null) return null;
-                if (widget.iconStyleBehavior == .maintainOriginal) return icon;
-                return IconTheme(
+              Widget? maybeColourIcon(Widget? icon) => switch ((icon, widget.iconStyleBehavior)) {
+                (null, _) => null,
+                (final icon, .maintainOriginal) => icon,
+                (final icon?, _) => IconTheme(
                   data: IconThemeData(color: foreground, size: widget.iconSize),
                   child: icon,
-                );
-              }
+                ),
+              };
 
               // Estimate content height for padding calculation.
               // When icons are present the Row height is driven by iconSize, not
@@ -129,39 +129,39 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
                 child: Center(child: icon),
               );
 
-              final content = Row(
-                mainAxisSize: .min,
-                mainAxisAlignment: .center,
-                crossAxisAlignment: .center,
-                spacing: widget.iconSpacing,
-                children: [
-                  if (widget.leadingIcon != null) sizedIcon(maybeColourIcon(widget.leadingIcon)),
-                  if (widget.label.isNotEmpty)
-                    AnimatedDefaultTextStyle(
-                      duration: DievasButtonPressMixin.kAnimationDuration,
-                      style: widget.textStyle.copyWith(color: foreground),
-                      textAlign: .center,
-                      child: Text(widget.label),
-                    ),
-                  if (widget.trailingIcon != null) sizedIcon(maybeColourIcon(widget.trailingIcon)),
-                ],
-              );
-
               final DievasButtonDecorator(:height, :padding, :child) = widget.builder(
                 context,
                 DievasButtonDecoratorStateProps(
                   borderSide: borderSide,
                   estimatedTextHeight: estimatedTextHeight,
-                  child: content,
+                  child: Row(
+                    mainAxisSize: .min,
+                    mainAxisAlignment: .center,
+                    crossAxisAlignment: .center,
+                    spacing: widget.iconSpacing,
+                    children: [
+                      if (widget.leadingIcon != null) sizedIcon(maybeColourIcon(widget.leadingIcon)),
+                      if (widget.label.isNotEmpty)
+                        AnimatedDefaultTextStyle(
+                          duration: DievasButtonPressMixin.kAnimationDuration,
+                          style: widget.textStyle.copyWith(color: foreground),
+                          textAlign: .center,
+                          child: Text(widget.label),
+                        ),
+                      if (widget.trailingIcon != null) sizedIcon(maybeColourIcon(widget.trailingIcon)),
+                    ],
+                  ),
                 ),
               );
 
-              final loader = IconTheme(
-                data: IconThemeData(color: foreground, size: widget.iconSize),
-                child: animatedLoader,
+              final inner = DievasButtonStateSwitcher(
+                state: widget.state,
+                loader: IconTheme(
+                  data: IconThemeData(color: foreground, size: widget.iconSize),
+                  child: animatedLoader,
+                ),
+                content: child,
               );
-
-              final inner = DievasButtonStateSwitcher(state: widget.state, loader: loader, content: child);
 
               if (apple) {
                 return AnimatedContainer(

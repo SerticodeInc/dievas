@@ -44,12 +44,6 @@ class DievasCheckbox extends StatelessWidget {
   /// Optional label rendered to the right of the box.
   final String? label;
 
-  DievasCheckboxValue _nextValue() => switch (value) {
-    DievasCheckboxValue.checked => DievasCheckboxValue.unchecked,
-    DievasCheckboxValue.unchecked => DievasCheckboxValue.checked,
-    DievasCheckboxValue.indeterminate => DievasCheckboxValue.checked,
-  };
-
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).checkbox;
@@ -57,15 +51,15 @@ class DievasCheckbox extends StatelessWidget {
 
     Widget box = _CheckboxPainter(value: value, theme: theme);
 
-    if (label != null) {
+    if (label case final text?) {
       box = Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           box,
           SizedBox(width: theme.labelSpacing),
           DefaultTextStyle(
             style: theme.labelStyle,
-            child: Flexible(child: Text(label!)),
+            child: Flexible(child: Text(text)),
           ),
         ],
       );
@@ -75,8 +69,14 @@ class DievasCheckbox extends StatelessWidget {
       return Opacity(opacity: theme.disabledOpacity, child: box);
     }
 
-    return GestureDetector(onTap: () => onChanged!(_nextValue()), behavior: HitTestBehavior.opaque, child: box);
+    return GestureDetector(onTap: () => onChanged!(_nextValue()), behavior: .opaque, child: box);
   }
+
+  DievasCheckboxValue _nextValue() => switch (value) {
+    .checked => .unchecked,
+    .unchecked => .checked,
+    .indeterminate => .checked,
+  };
 }
 
 // Custom painter for the checkbox box and its check-mark / dash.
@@ -87,14 +87,12 @@ class _CheckboxPainter extends StatelessWidget {
   final DievasCheckboxThemeData theme;
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox.square(
-      dimension: theme.size,
-      child: CustomPaint(
-        painter: _BoxPainter(value: value, theme: theme),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => SizedBox.square(
+    dimension: theme.size,
+    child: CustomPaint(
+      painter: _BoxPainter(value: value, theme: theme),
+    ),
+  );
 }
 
 class _BoxPainter extends CustomPainter {
@@ -105,8 +103,8 @@ class _BoxPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final isChecked = value == DievasCheckboxValue.checked;
-    final isIndeterminate = value == DievasCheckboxValue.indeterminate;
+    final isChecked = value == .checked;
+    final isIndeterminate = value == .indeterminate;
     final isActive = isChecked || isIndeterminate;
 
     final rrect = RRect.fromRectAndCorners(
@@ -120,14 +118,14 @@ class _BoxPainter extends CustomPainter {
     // Fill
     final fillPaint = Paint()
       ..color = isActive ? theme.colorChecked : theme.colorUnchecked
-      ..style = PaintingStyle.fill;
+      ..style = .fill;
     canvas.drawRRect(rrect, fillPaint);
 
     // Border (only in unchecked state — active state uses fill colour)
     if (!isActive) {
       final borderPaint = Paint()
         ..color = theme.borderColorUnchecked
-        ..style = PaintingStyle.stroke
+        ..style = .stroke
         ..strokeWidth = theme.strokeWidth;
       canvas.drawRRect(rrect, borderPaint);
     }
@@ -143,10 +141,10 @@ class _BoxPainter extends CustomPainter {
   void _drawCheck(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = theme.checkColor
-      ..style = PaintingStyle.stroke
+      ..style = .stroke
       ..strokeWidth = theme.strokeWidth
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round;
+      ..strokeCap = .round
+      ..strokeJoin = .round;
 
     final path = Path()
       ..moveTo(size.width * 0.2, size.height * 0.5)
@@ -159,9 +157,9 @@ class _BoxPainter extends CustomPainter {
   void _drawDash(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = theme.checkColor
-      ..style = PaintingStyle.stroke
+      ..style = .stroke
       ..strokeWidth = theme.strokeWidth
-      ..strokeCap = StrokeCap.round;
+      ..strokeCap = .round;
 
     canvas.drawLine(Offset(size.width * 0.25, size.height * 0.5), Offset(size.width * 0.75, size.height * 0.5), paint);
   }

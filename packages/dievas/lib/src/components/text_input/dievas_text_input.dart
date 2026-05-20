@@ -1,3 +1,4 @@
+import 'package:dievas/src/theme/component/text_input/dievas_text_input_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -106,27 +107,27 @@ class _DievasTextInputState extends State<DievasTextInput> {
     final hasError = widget.errorText != null && widget.errorText!.isNotEmpty;
 
     final height = switch (widget.size) {
-      DievasTextInputSize.sm => theme.height.sm,
-      DievasTextInputSize.md => theme.height.md,
-      DievasTextInputSize.lg => theme.height.lg,
+      .sm => theme.height.sm,
+      .md => theme.height.md,
+      .lg => theme.height.lg,
     };
 
     final contentPadding = switch (widget.size) {
-      DievasTextInputSize.sm => theme.contentPadding.sm,
-      DievasTextInputSize.md => theme.contentPadding.md,
-      DievasTextInputSize.lg => theme.contentPadding.lg,
+      .sm => theme.contentPadding.sm,
+      .md => theme.contentPadding.md,
+      .lg => theme.contentPadding.lg,
     };
 
     final inputStyle = switch (widget.size) {
-      DievasTextInputSize.sm => theme.inputStyle.sm,
-      DievasTextInputSize.md => theme.inputStyle.md,
-      DievasTextInputSize.lg => theme.inputStyle.lg,
+      .sm => theme.inputStyle.sm,
+      .md => theme.inputStyle.md,
+      .lg => theme.inputStyle.lg,
     };
 
     final placeholderStyle = switch (widget.size) {
-      DievasTextInputSize.sm => theme.placeholderStyle.sm,
-      DievasTextInputSize.md => theme.placeholderStyle.md,
-      DievasTextInputSize.lg => theme.placeholderStyle.lg,
+      .sm => theme.placeholderStyle.sm,
+      .md => theme.placeholderStyle.md,
+      .lg => theme.placeholderStyle.lg,
     };
 
     final borderColor = hasError ? theme.borderColorError : theme.borderColor;
@@ -147,94 +148,125 @@ class _DievasTextInputState extends State<DievasTextInput> {
       borderSide: BorderSide(color: theme.borderColor, width: theme.strokeWidth),
     );
 
-    Widget field = SizedBox(
-      height: height,
-      child: TextField(
-        controller: widget.controller,
-        focusNode: widget.focusNode,
-        style: inputStyle,
-        obscureText: widget.obscureText,
-        keyboardType: widget.keyboardType,
-        textInputAction: widget.textInputAction,
-        inputFormatters: widget.inputFormatters,
-        onChanged: widget.onChanged,
-        onSubmitted: widget.onSubmitted,
-        onEditingComplete: widget.onEditingComplete,
-        autofocus: widget.autofocus,
-        maxLength: widget.maxLength,
-        autocorrect: widget.autocorrect,
-        enabled: widget.enabled,
-        maxLines: 1,
-        cursorColor: theme.borderColorFocused,
-        decoration: InputDecoration(
-          hintText: widget.hint,
-          hintStyle: placeholderStyle,
-          contentPadding: contentPadding,
-          filled: true,
-          fillColor: theme.bgColor,
-          prefixIcon: widget.leadingIcon == null
-              ? null
-              : Padding(
-                  padding: EdgeInsetsDirectional.only(start: contentPadding.left, end: theme.iconSpacing),
-                  child: IconTheme(
-                    data: IconThemeData(color: theme.iconColor, size: theme.iconSize),
-                    child: widget.leadingIcon!,
-                  ),
+    final content = _DievasTextInputFieldContent(
+      theme: theme,
+      hasError: hasError,
+      label: widget.label,
+      helperText: widget.helperText,
+      errorText: widget.errorText,
+      field: SizedBox(
+        height: height,
+        child: TextField(
+          controller: widget.controller,
+          focusNode: widget.focusNode,
+          style: inputStyle,
+          obscureText: widget.obscureText,
+          keyboardType: widget.keyboardType,
+          textInputAction: widget.textInputAction,
+          inputFormatters: widget.inputFormatters,
+          onChanged: widget.onChanged,
+          onSubmitted: widget.onSubmitted,
+          onEditingComplete: widget.onEditingComplete,
+          autofocus: widget.autofocus,
+          maxLength: widget.maxLength,
+          autocorrect: widget.autocorrect,
+          enabled: widget.enabled,
+          maxLines: 1,
+          cursorColor: theme.borderColorFocused,
+          decoration: InputDecoration(
+            hintText: widget.hint,
+            hintStyle: placeholderStyle,
+            contentPadding: contentPadding,
+            filled: true,
+            fillColor: theme.bgColor,
+            border: border,
+            enabledBorder: border,
+            focusedBorder: focusedBorder,
+            disabledBorder: disabledBorder,
+            errorBorder: focusedBorder,
+            focusedErrorBorder: focusedBorder,
+            // Suppress internal helper/error text — we render our own below.
+            isDense: true,
+            counterText: '',
+            prefixIconConstraints: switch (widget.leadingIcon) {
+              null => null,
+              _ => BoxConstraints(minWidth: theme.iconSize + contentPadding.left + theme.iconSpacing),
+            },
+            suffixIconConstraints: switch (widget.trailingIcon) {
+              null => null,
+              _ => BoxConstraints(minWidth: theme.iconSize + contentPadding.right + theme.iconSpacing),
+            },
+            prefixIcon: switch (widget.leadingIcon) {
+              null => null,
+              final leadingIcon => Padding(
+                padding: EdgeInsetsDirectional.only(start: contentPadding.left, end: theme.iconSpacing),
+                child: IconTheme(
+                  data: IconThemeData(color: theme.iconColor, size: theme.iconSize),
+                  child: leadingIcon,
                 ),
-          prefixIconConstraints: widget.leadingIcon == null
-              ? null
-              : BoxConstraints(minWidth: theme.iconSize + contentPadding.left + theme.iconSpacing),
-          suffixIcon: widget.trailingIcon == null
-              ? null
-              : Padding(
-                  padding: EdgeInsetsDirectional.only(end: contentPadding.right, start: theme.iconSpacing),
-                  child: IconTheme(
-                    data: IconThemeData(color: theme.iconColor, size: theme.iconSize),
-                    child: widget.trailingIcon!,
-                  ),
+              ),
+            },
+            suffixIcon: switch (widget.trailingIcon) {
+              null => null,
+              final trailingIcon => Padding(
+                padding: EdgeInsetsDirectional.only(end: contentPadding.right, start: theme.iconSpacing),
+                child: IconTheme(
+                  data: IconThemeData(color: theme.iconColor, size: theme.iconSize),
+                  child: trailingIcon,
                 ),
-          suffixIconConstraints: widget.trailingIcon == null
-              ? null
-              : BoxConstraints(minWidth: theme.iconSize + contentPadding.right + theme.iconSpacing),
-          border: border,
-          enabledBorder: border,
-          focusedBorder: focusedBorder,
-          disabledBorder: disabledBorder,
-          errorBorder: focusedBorder,
-          focusedErrorBorder: focusedBorder,
-          // Suppress internal helper/error text — we render our own below.
-          isDense: true,
-          counterText: '',
+              ),
+            },
+          ),
         ),
       ),
     );
 
-    Widget column = Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (widget.label != null) ...[
-          DefaultTextStyle(style: theme.labelStyle, child: Text(widget.label!)),
-          SizedBox(height: theme.labelSpacing),
-        ],
-        field,
-        if (hasError) ...[
-          SizedBox(height: theme.helperSpacing),
-          DefaultTextStyle(
-            style: theme.errorStyle.copyWith(color: theme.borderColorError),
-            child: Text(widget.errorText!),
-          ),
-        ] else if (widget.helperText != null) ...[
-          SizedBox(height: theme.helperSpacing),
-          DefaultTextStyle(style: theme.helperStyle, child: Text(widget.helperText!)),
-        ],
-      ],
-    );
-
     if (!widget.enabled) {
-      return Opacity(opacity: theme.disabledOpacity, child: column);
+      return Opacity(opacity: theme.disabledOpacity, child: content);
     }
 
-    return column;
+    return content;
   }
+}
+
+class _DievasTextInputFieldContent extends StatelessWidget {
+  const _DievasTextInputFieldContent({
+    required this.theme,
+    required this.hasError,
+    required this.field,
+    this.label,
+    this.helperText,
+    this.errorText,
+  });
+
+  final DievasTextInputThemeData theme;
+  final bool hasError;
+  final Widget field;
+
+  final String? label;
+  final String? helperText;
+  final String? errorText;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: .min,
+    crossAxisAlignment: .start,
+    children: [
+      if (label case final labelText?) ...[
+        DefaultTextStyle(style: theme.labelStyle, child: Text(labelText)),
+        SizedBox(height: theme.labelSpacing),
+      ],
+      field,
+      if (errorText case final errorText? when hasError) ...[
+        SizedBox(height: theme.helperSpacing),
+        DefaultTextStyle(
+          style: theme.errorStyle.copyWith(color: theme.borderColorError),
+          child: Text(errorText),
+        ),
+      ] else if (helperText case final helperText?) ...[
+        SizedBox(height: theme.helperSpacing),
+        DefaultTextStyle(style: theme.helperStyle, child: Text(helperText)),
+      ],
+    ],
+  );
 }

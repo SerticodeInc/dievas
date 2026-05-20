@@ -1,4 +1,5 @@
 import 'package:dievas/dievas.dart' show DievasColourThemeData;
+import 'package:dievas/src/theme/component/badge/dievas_badge_theme_data.dart' show DievasBadgeThemeData;
 import 'package:flutter/widgets.dart';
 
 import '../../theme/color/sets/feedback_colours.dart';
@@ -43,6 +44,7 @@ enum DievasBadgeTone {
 /// DievasBadge(label: '3', style: .filled, tone: .primary)
 /// DievasBadge(label: 'Active', tone: .success, leadingIcon: Icon(Icons.circle, size: 8))
 /// ```
+
 class DievasBadge extends StatelessWidget {
   const DievasBadge({super.key, required this.label, this.style = .tinted, this.tone = .neutral, this.leadingIcon});
 
@@ -53,85 +55,115 @@ class DievasBadge extends StatelessWidget {
   /// Optional leading icon. Sized by the badge theme's [iconSize] token.
   final Widget? leadingIcon;
 
-  // Resolves the (background, border, foreground) triple from the active
-  // colour sub-system for the current style × tone combination.
-  ({Color background, Color border, Color foreground}) _appearance(
-    DievasBadgeStyle style,
-    DievasBadgeTone tone,
-    _BadgeColors c,
-  ) {
-    final FeedbackColour feedback = switch (tone) {
-      .success => c.feedbackSuccess,
-      .warning => c.feedbackWarning,
-      .error => c.feedbackError,
-      _ => c.feedbackInfo, // not used for neutral/primary
-    };
-
-    return switch ((style, tone)) {
-      // filled × neutral
-      (.filled, .neutral) => (background: c.bgElevated, border: c.transparent, foreground: c.textPrimary),
-      // filled × primary
-      (.filled, .primary) => (background: c.actionPrimary, border: c.transparent, foreground: c.onBrand),
-      // filled × feedback tones
-      (.filled, _) => (background: feedback.background, border: c.transparent, foreground: feedback.text),
-      // tinted × neutral
-      (.tinted, .neutral) => (background: c.bgSubtle, border: c.transparent, foreground: c.textSecondary),
-      // tinted × primary
-      (.tinted, .primary) => (background: c.brandSubtle, border: c.transparent, foreground: c.actionPrimary),
-      // tinted × feedback tones
-      (.tinted, _) => (background: feedback.background, border: c.transparent, foreground: feedback.icon),
-      // outlined × neutral
-      (.outlined, .neutral) => (background: c.transparent, border: c.borderDefault, foreground: c.textSecondary),
-      // outlined × primary
-      (.outlined, .primary) => (background: c.transparent, border: c.actionPrimary, foreground: c.actionPrimary),
-      // outlined × feedback tones
-      (.outlined, _) => (background: c.transparent, border: feedback.border, foreground: feedback.icon),
-    };
-  }
-
   @override
   Widget build(BuildContext context) {
-    final colors = DievasTheme.colorsOf(context);
     final theme = DievasTheme.componentsOf(context).badge;
+    final badgeColours = _BadgeColors(DievasTheme.colorsOf(context));
+    final appearance = _appearance(style, tone, badgeColours);
 
-    final c = _BadgeColors(colors);
-    final appearance = _appearance(style, tone, c);
-
-    final hasBorder = appearance.border != c.transparent;
-
-    Widget content = DefaultTextStyle(
-      style: theme.textStyle.copyWith(color: appearance.foreground),
-      child: Row(
-        mainAxisSize: .min,
-        children: [
-          if (leadingIcon != null) ...[
-            SizedBox.square(
-              dimension: theme.iconSize,
-              child: Center(
-                child: IconTheme(
-                  data: IconThemeData(color: appearance.foreground, size: theme.iconSize),
-                  child: leadingIcon!,
-                ),
-              ),
-            ),
-            SizedBox(width: theme.iconSpacing),
-          ],
-          Text(label),
-        ],
-      ),
-    );
+    final hasBorder = appearance.border != badgeColours.transparent;
 
     return Container(
       padding: theme.padding,
       decoration: BoxDecoration(
         color: appearance.background,
         borderRadius: theme.borderRadius,
-        border: hasBorder ? Border.all(color: appearance.border) : null,
+        border: hasBorder ? .all(color: appearance.border) : null,
       ),
-      child: content,
+      child: _DievasBadgeContent(theme: theme, appearance: appearance, label: label, leadingIcon: leadingIcon),
     );
   }
+
+  // Resolves the (background, border, foreground) triple from the active
+  // colour sub-system for the current style × tone combination.
+  _BadgeAppearance _appearance(DievasBadgeStyle style, DievasBadgeTone tone, _BadgeColors badgeColours) {
+    final feedback = switch (tone) {
+      .success => badgeColours.feedbackSuccess,
+      .warning => badgeColours.feedbackWarning,
+      .error => badgeColours.feedbackError,
+      _ => badgeColours.feedbackInfo, // not used for neutral/primary
+    };
+
+    return switch ((style, tone)) {
+      // filled × neutral
+      (.filled, .neutral) => (
+        background: badgeColours.bgElevated,
+        border: badgeColours.transparent,
+        foreground: badgeColours.textPrimary,
+      ),
+      // filled × primary
+      (.filled, .primary) => (
+        background: badgeColours.actionPrimary,
+        border: badgeColours.transparent,
+        foreground: badgeColours.onBrand,
+      ),
+      // filled × feedback tones
+      (.filled, _) => (background: feedback.background, border: badgeColours.transparent, foreground: feedback.text),
+      // tinted × neutral
+      (.tinted, .neutral) => (
+        background: badgeColours.bgSubtle,
+        border: badgeColours.transparent,
+        foreground: badgeColours.textSecondary,
+      ),
+      // tinted × primary
+      (.tinted, .primary) => (
+        background: badgeColours.brandSubtle,
+        border: badgeColours.transparent,
+        foreground: badgeColours.actionPrimary,
+      ),
+      // tinted × feedback tones
+      (.tinted, _) => (background: feedback.background, border: badgeColours.transparent, foreground: feedback.icon),
+      // outlined × neutral
+      (.outlined, .neutral) => (
+        background: badgeColours.transparent,
+        border: badgeColours.borderDefault,
+        foreground: badgeColours.textSecondary,
+      ),
+      // outlined × primary
+      (.outlined, .primary) => (
+        background: badgeColours.transparent,
+        border: badgeColours.actionPrimary,
+        foreground: badgeColours.actionPrimary,
+      ),
+      // outlined × feedback tones
+      (.outlined, _) => (background: badgeColours.transparent, border: feedback.border, foreground: feedback.icon),
+    };
+  }
 }
+
+class _DievasBadgeContent extends StatelessWidget {
+  const _DievasBadgeContent({required this.theme, required this.appearance, required this.label, this.leadingIcon});
+
+  final String label;
+  final DievasBadgeThemeData theme;
+  final _BadgeAppearance appearance;
+  final Widget? leadingIcon;
+
+  @override
+  Widget build(BuildContext context) => DefaultTextStyle(
+    style: theme.textStyle.copyWith(color: appearance.foreground),
+    child: Row(
+      mainAxisSize: .min,
+      children: [
+        if (leadingIcon case final icon?) ...[
+          SizedBox.square(
+            dimension: theme.iconSize,
+            child: Center(
+              child: IconTheme(
+                data: IconThemeData(color: appearance.foreground, size: theme.iconSize),
+                child: icon,
+              ),
+            ),
+          ),
+          SizedBox(width: theme.iconSpacing),
+        ],
+        Text(label),
+      ],
+    ),
+  );
+}
+
+typedef _BadgeAppearance = ({Color background, Color border, Color foreground});
 
 // Private helper that bundles frequently needed colour lookups to avoid
 // deep chaining inside the switch expression.

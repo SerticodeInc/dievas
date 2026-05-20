@@ -32,3 +32,8 @@ Thumbs.db
 .idea/
 .vscode/
 *.iml
+
+makefile
+product.md
+design.md
+.impeccable

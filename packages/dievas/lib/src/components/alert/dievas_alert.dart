@@ -101,16 +101,16 @@ class DievasAlert extends StatelessWidget {
                     onTap: onDismiss,
                     child: Padding(
                       padding: const .only(left: 8),
-                    child: SizedBox.square(
-                      dimension: theme.dismissIconSize,
-                      child: IconTheme(
-                        data: IconThemeData(color: palette.icon, size: theme.dismissIconSize),
-                        child: const _InlineIcon(codePoint: 0xe5cd), // close
+                      child: SizedBox.square(
+                        dimension: theme.dismissIconSize,
+                        child: IconTheme(
+                          data: IconThemeData(color: palette.icon, size: theme.dismissIconSize),
+                          child: const _InlineIcon(codePoint: 0xe5cd), // close
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
             ],
           ),
         ),

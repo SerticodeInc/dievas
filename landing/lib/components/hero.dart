@@ -28,15 +28,21 @@ class Hero extends StatelessComponent {
             'flex justify-center overflow-hidden',
         [
           span(
-            classes: 'font-display font-black whitespace-nowrap text-brand',
+            classes: 'font-display font-black whitespace-nowrap text-brand flex',
             attributes: const {
               'style':
                   'font-size: clamp(110px, 24vw, 360px); '
                   'line-height: 0.85; '
-                  'letter-spacing: -0.02em; '
                   'opacity: 0.12;',
             },
-            [Component.text('DIEVAS')],
+            [
+              for (var i = 0; i < 'DIEVAS'.length; i++)
+                span(
+                  classes: 'letter-drop letter-drop-$i',
+                  attributes: {'style': 'margin-right: -0.02em;'},
+                  [Component.text('DIEVAS'[i])],
+                ),
+            ],
           ),
         ],
       ),

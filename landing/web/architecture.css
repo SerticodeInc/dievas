@@ -1,0 +1,57 @@
+/* ─────────────────────────────────────────────────────────────
+ * Architecture section — three-layer pipeline, principle cards
+ * ───────────────────────────────────────────────────────────── */
+
+/* Code layer blocks: equal height on desktop */
+@media (min-width: 1024px) {
+  .arch-pipeline {
+    align-items: stretch;
+  }
+  .arch-layer {
+    display: flex;
+    flex-direction: column;
+  }
+  .arch-layer-code {
+    flex: 1;
+  }
+}
+
+/* Principle cards — per-card accent borders */
+.pc-indigo { border-color: rgba(99, 102, 241, 0.4); }
+.pc-indigo:hover { border-color: rgba(99, 102, 241, 0.8); }
+
+.pc-sky { border-color: rgba(56, 189, 248, 0.4); }
+.pc-sky:hover { border-color: rgba(56, 189, 248, 0.8); }
+
+.pc-green { border-color: rgba(74, 222, 128, 0.4); }
+.pc-green:hover { border-color: rgba(74, 222, 128, 0.8); }
+
+.pc-amber { border-color: rgba(251, 191, 36, 0.4); }
+.pc-amber:hover { border-color: rgba(251, 191, 36, 0.8); }
+
+/* Principle card icon — spin/scale on hover */
+.pc-icon {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.3s ease,
+              border-color 0.3s ease;
+}
+.group:hover .pc-icon {
+  transform: scale(1.15) rotate(8deg);
+}
+
+/* Code panel window dot glow on hover */
+.code-dot {
+  transition: all 0.2s ease;
+}
+.code-panel pre {
+  margin: 0;
+}
+.code-panel:hover .code-dot-close {
+  box-shadow: 0 0 6px rgba(255, 95, 87, 0.8);
+}
+.code-panel:hover .code-dot-minimize {
+  box-shadow: 0 0 6px rgba(254, 188, 46, 0.8);
+}
+.code-panel:hover .code-dot-maximize {
+  box-shadow: 0 0 6px rgba(40, 200, 64, 0.8);
+}

@@ -1,0 +1,89 @@
+/* ─────────────────────────────────────────────────────────────
+ * Components section — catalog, preview cards, CTA island
+ * ───────────────────────────────────────────────────────────── */
+
+.mini-switch-thumb {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Cursor blink on text field mock */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.cursor-blink {
+  animation: cursor-blink 1.2s ease-in-out infinite;
+}
+
+/* Missing spin keyframe */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Preview card border shine */
+@keyframes border-shine {
+  0%   { border-color: rgba(129,140,248,0.2); }
+  50%  { border-color: rgba(129,140,248,0.6); }
+  100% { border-color: rgba(129,140,248,0.2); }
+}
+
+.preview-card {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.preview-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 0 32px rgba(var(--card-accent), 0.18) !important;
+}
+
+/* CTA island — subtle bg gradient animation */
+@keyframes bg-soft-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.cta-island {
+  background: linear-gradient(
+    135deg,
+    rgba(2,6,23,1) 0%,
+    rgba(15,23,42,1) 30%,
+    rgba(30,27,75,1) 60%,
+    rgba(2,6,23,1) 100%
+  );
+  background-size: 200% 200%;
+  animation: bg-soft-shift 8s ease-in-out infinite;
+}
+
+/* Shipped pill count badge — subtle pulse */
+@keyframes count-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.05); }
+}
+.count-badge {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.group:hover .count-badge,
+.count-badge:hover {
+  animation: count-pulse 1.5s ease-in-out infinite;
+}
+
+/* ── Reduced motion ───────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink { animation: none; opacity: 1; }
+  .cta-island { animation: none; }
+  .preview-card:hover { transform: none; box-shadow: none; }
+  .count-badge:hover { animation: none; }
+}

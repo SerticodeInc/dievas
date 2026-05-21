@@ -39,11 +39,11 @@ class Nav extends StatelessComponent {
                 'box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);',
           },
           [
-            // Logo mark
+            // Logo mark — subtle letter-spacing shift on hover
             a(
               href: '/',
               classes:
-                  'no-underline flex items-center gap-px '
+                  'logo-mark no-underline flex items-center gap-px '
                   'font-display font-medium text-xl tracking-[0.02em] text-text-hi',
               [
                 Component.text('die'),
@@ -52,21 +52,30 @@ class Nav extends StatelessComponent {
               ],
             ),
 
-            // Links
+            // Links — with hover dot indicators
             div(classes: 'flex items-center gap-7', [
               for (final lnk in _links)
                 a(
                   href: lnk.$2,
                   classes:
-                      'font-body font-medium text-xs tracking-[0.08em] uppercase '
+                      'nav-link font-body font-medium text-xs tracking-[0.08em] uppercase '
                       'text-text-mid no-underline '
                       'transition-colors duration-200 '
-                      'hover:text-white hover:underline hover:underline-offset-[3px]',
+                      'hover:text-white',
                   attributes: {
                     if (lnk.$3) 'target': '_blank',
                     if (lnk.$3) 'rel': 'noopener',
                   },
-                  [Component.text(lnk.$1)],
+                  [
+                    span(classes: 'flex items-center gap-2', [
+                      span(
+                        classes: 'nav-dot inline-block w-1 h-1 rounded-full bg-text-mid',
+                        attributes: const {'style': 'transition: all 0.3s cubic-bezier(0.22,1,0.36,1);'},
+                        [],
+                      ),
+                      Component.text(lnk.$1),
+                    ]),
+                  ],
                 ),
             ]),
           ],

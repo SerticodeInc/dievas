@@ -141,10 +141,11 @@ const _jsLoadedScript = '''<script>
 })();
 </script>''';
 
-// Scroll-reveal IntersectionObserver — fires `.is-visible` on `.reveal` and
-// `.reveal-group` elements as they enter the viewport (Anchor-style stagger).
+// Scroll-reveal IntersectionObserver — fires `.is-visible` on `.reveal`,
+// `.reveal-group`, and directional reveal elements as they enter the viewport.
 const _scrollRevealScript = '''<script>
 (function(){
+  var selectors = '.reveal,.reveal-group,.reveal-left,.reveal-right,.reveal-scale,.reveal-stagger';
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){
@@ -153,7 +154,7 @@ const _scrollRevealScript = '''<script>
       }
     });
   },{threshold:0.12});
-  document.querySelectorAll('.reveal,.reveal-group').forEach(function(el){
+  document.querySelectorAll(selectors).forEach(function(el){
     io.observe(el);
   });
 })();
@@ -164,6 +165,7 @@ const _navScrollScript = '''<script>
   var nav=document.getElementById('site-nav');
   if(!nav)return;
   var lastY=window.scrollY,ticking=false,deadZone=16,topZone=80;
+  var navInner=nav.querySelector('nav');
   window.addEventListener('scroll',function(){
     if(ticking)return;
     ticking=true;
@@ -171,12 +173,34 @@ const _navScrollScript = '''<script>
       var y=window.scrollY;
       if(y<topZone){
         nav.style.transform='translateY(0)';
+        navInner&&navInner.classList.remove('nav-scrolled');
       }else if(y-lastY>deadZone){
         nav.style.transform='translateY(-130%)';
+        navInner&&navInner.classList.add('nav-scrolled');
       }else if(lastY-y>deadZone){
         nav.style.transform='translateY(0)';
+        navInner&&navInner.classList.add('nav-scrolled');
       }
       lastY=y;
+      ticking=false;
+    });
+  },{passive:true});
+})();
+</script>''';
+
+const _scrollProgressScript = '''<script>
+(function(){
+  var bar=document.createElement('div');
+  bar.className='scroll-progress';
+  document.body.appendChild(bar);
+  var ticking=false;
+  window.addEventListener('scroll',function(){
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(function(){
+      var h=document.documentElement;
+      var p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+      bar.style.width=p+'%';
       ticking=false;
     });
   },{passive:true});
@@ -197,6 +221,7 @@ class _AppBody extends StatelessComponent {
   @override
   Component build(BuildContext context) => div(id: 'main', classes: 'bg-bg-base text-text-hi antialiased', [
     RawText(_jsLoadedScript),
+    RawText(_scrollProgressScript),
     const Nav(),
     const Hero(),
     const ManifestoSection(),

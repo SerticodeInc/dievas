@@ -483,11 +483,335 @@
 .pc-amber { border-color: rgba(251, 191, 36, 0.4); }
 .pc-amber:hover { border-color: rgba(251, 191, 36, 0.8); }
 
-/* Shipped pill arrow — full visibility on hover */
+/* Shipped pill arrow — slide + fade on hover */
 a.group:hover .arrow-span {
   opacity: 1 !important;
+  transform: translateX(2px);
 }
 .arrow-span {
   opacity: 0;
-  transition: opacity 150ms ease;
+  transform: translateX(-4px);
+  transition: opacity 150ms ease, transform 200ms ease;
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * Micro-interactions & smooth animations
+ * ───────────────────────────────────────────────────────────── */
+
+/* Missing spin keyframe (referenced in components_section) */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Hover lift — subtle card elevation on hover */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Scale pulse on tap/active */
+.hover-lift:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* ── Product chips (hero) — accent line, lift, scale + border glow ────────── */
+.product-chip {
+  overflow: hidden;
+  transition:
+    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease;
+}
+
+/* Accent line — sweeps in from left on bottom edge */
+.product-chip::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: rgba(var(--accent-rgb), 0.9);
+  border-radius: 0 0 20px 20px;
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-chip:hover::after {
+  width: 100%;
+}
+
+/* Border glow + shadow deepen — hover only (animation untouched) */
+.product-chip:hover {
+  border-color: rgba(var(--accent-rgb), 1);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.06) inset,
+    0 20px 56px rgba(0,0,0,0.3),
+    0 0 32px rgba(var(--accent-rgb), 0.2);
+}
+
+/* CTA glow pulse — subtle breathing shadow on action buttons */
+@keyframes cta-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.2); }
+  50%      { box-shadow: 0 0 32px rgba(99, 102, 241, 0.4); }
+}
+
+.cta-glow {
+  animation: cta-glow 3s ease-in-out infinite;
+}
+.cta-glow:hover {
+  animation-duration: 1.5s;
+}
+
+/* Arrow slide — for CTA arrows */
+@keyframes arrow-slide {
+  0%   { transform: translateX(0); opacity: 1; }
+  50%  { transform: translateX(4px); opacity: 0; }
+  51%  { transform: translateX(-4px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+.arrow-slide {
+  display: inline-block;
+}
+.group:hover .arrow-slide {
+  animation: arrow-slide 0.4s ease;
+}
+
+/* Nav link dot indicator — glows on hover */
+.nav-dot {
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link:hover .nav-dot {
+  background: rgba(129, 140, 248, 1) !important;
+  box-shadow: 0 0 8px rgba(129, 140, 248, 0.6);
+}
+
+/* Logo hover — subtle text color shift */
+.logo-mark {
+  transition: letter-spacing 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.logo-mark:hover {
+  letter-spacing: 0.04em;
+}
+
+/* Nav glass — intensify blur on scroll (class added via JS) */
+.nav-scrolled {
+  background: rgba(12, 12, 12, 0.75) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Marquee pause on hover */
+.marquee-track:hover {
+  animation-play-state: paused !important;
+}
+
+/* Badge shine — corner accent sweep on hover */
+@keyframes badge-shine {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.badge-shine {
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    transparent 30%,
+    rgba(255,255,255,0.08) 45%,
+    rgba(255,255,255,0.15) 50%,
+    rgba(255,255,255,0.08) 55%,
+    transparent 70%,
+    transparent 100%
+  );
+  background-size: 200% auto;
+  background-repeat: no-repeat;
+}
+.badge-shine:hover {
+  animation: badge-shine 0.8s ease forwards;
+}
+
+/* Code panel window dot glow on hover */
+.code-dot {
+  transition: all 0.2s ease;
+}
+
+/* Code panel — normalize pre margin */
+.code-panel pre {
+  margin: 0;
+}
+.code-panel:hover .code-dot-close {
+  box-shadow: 0 0 6px rgba(255, 95, 87, 0.8);
+}
+.code-panel:hover .code-dot-minimize {
+  box-shadow: 0 0 6px rgba(254, 188, 46, 0.8);
+}
+.code-panel:hover .code-dot-maximize {
+  box-shadow: 0 0 6px rgba(40, 200, 64, 0.8);
+}
+
+/* Principle card icon — spin/scale on hover */
+.pc-icon {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.3s ease,
+              border-color 0.3s ease;
+}
+.group:hover .pc-icon {
+  transform: scale(1.15) rotate(8deg);
+}
+
+/* Directional scroll reveals */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(129,140,248,0.6), rgba(129,140,248,1));
+  z-index: 100;
+  pointer-events: none;
+  transition: width 0.1s linear;
+}
+
+/* Smooth html scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Footer link underline animation */
+.footer-link {
+  position: relative;
+  text-decoration: none;
+}
+.footer-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.footer-link:hover::after {
+  width: 100%;
+}
+
+/* Preview card border shine */
+@keyframes border-shine {
+  0%   { border-color: rgba(129,140,248,0.2); }
+  50%  { border-color: rgba(129,140,248,0.6); }
+  100% { border-color: rgba(129,140,248,0.2); }
+}
+
+.preview-card {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.preview-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 0 32px rgba(var(--card-accent), 0.18) !important;
+}
+
+/* CTA island — subtle bg gradient animation */
+@keyframes bg-soft-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.cta-island {
+  background: linear-gradient(
+    135deg,
+    rgba(2,6,23,1) 0%,
+    rgba(15,23,42,1) 30%,
+    rgba(30,27,75,1) 60%,
+    rgba(2,6,23,1) 100%
+  );
+  background-size: 200% 200%;
+  animation: bg-soft-shift 8s ease-in-out infinite;
+}
+
+/* Staggered reveal for category rows */
+.reveal-stagger {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-stagger.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Shipped pill count badge — subtle pulse */
+@keyframes count-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.05); }
+}
+
+.count-badge {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.group:hover .count-badge,
+.count-badge:hover {
+  animation: count-pulse 1.5s ease-in-out infinite;
+}
+
+/* Reduced motion overrides for new animations */
+@media (prefers-reduced-motion: reduce) {
+  .hover-lift:hover { transform: none; box-shadow: none; }
+  .product-chip:hover { border-color: inherit; box-shadow: none; }
+  .product-chip::after { display: none; }
+  .cta-glow { animation: none; }
+  .marquee-track:hover { animation-play-state: running !important; }
+  .badge-shine:hover { animation: none; }
+  .group:hover .arrow-slide { animation: none; }
+  .group:hover .pc-icon { transform: none; }
+  .preview-card:hover { transform: none; box-shadow: none; }
+  .cta-island { animation: none; }
+  .scroll-progress { display: none; }
+  html { scroll-behavior: auto; }
+  .footer-link::after { display: none; }
+  .count-badge:hover { animation: none; }
 }

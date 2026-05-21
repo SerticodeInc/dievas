@@ -18,7 +18,7 @@ class FooterComponent extends StatelessComponent {
           a(
             href: DievasUrls.portfolio,
             attributes: const {'target': '_blank', 'rel': 'noopener'},
-            classes: 'text-brand no-underline hover:underline',
+            classes: 'footer-link text-brand no-underline',
             [Component.text('Serticode Inc.')],
           ),
         ]),

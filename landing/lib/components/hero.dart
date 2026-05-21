@@ -134,23 +134,15 @@ class Hero extends StatelessComponent {
                 href: DievasUrls.gallery,
                 attributes: const {'target': '_blank', 'rel': 'noopener'},
                 classes:
-                    'inline-flex items-center gap-2 '
+                    'group inline-flex items-center gap-2 '
                     'px-6 py-3 rounded-md '
                     'bg-action text-on-brand '
                     'font-mono text-sm font-medium tracking-wide '
                     'no-underline transition-all duration-200 '
                     'hover:bg-action-hover hover:-translate-y-px '
-                    'hover:shadow-[0_8px_32px_rgba(129,140,248,0.35)]',
-
-                /// *** Initial version, restore if and when we set up pub.dev
-                /* classes:
-                    'inline-flex items-center gap-2 '
-                    'px-6 py-3 rounded-md '
-                    'border border-slate-300 text-slate-600 '
-                    'font-mono text-sm font-normal '
-                    'no-underline transition-all duration-200 '
-                    'hover:border-brand hover:text-white hover:-translate-y-px', */
-                [Component.text('Gallery')],
+                    'hover:shadow-[0_8px_32px_rgba(129,140,248,0.35)] '
+                    'cta-glow',
+                [Component.text('Gallery'), span(classes: 'text-xs arrow-slide', [Component.text('→')])],
               ),
             ],
           ),
@@ -284,6 +276,7 @@ class Hero extends StatelessComponent {
             href: DievasUrls.portfolio,
             attributes: const {'target': '_blank', 'rel': 'noopener'},
             classes:
+                'group relative overflow-hidden '
                 'flex items-center gap-2.5 '
                 'bg-bg-elevated border border-border-brand '
                 'rounded-xl px-4 py-2.5 '
@@ -291,12 +284,15 @@ class Hero extends StatelessComponent {
                 'shadow-[0_8px_32px_rgba(0,0,0,0.5)] '
                 'transition-all duration-200 '
                 'hover:border-brand hover:text-brand hover:-translate-y-px',
-            [div(classes: 'w-2 h-2 rounded-full bg-brand flex-shrink-0', []), Component.text('Serticode Inc.')],
+            [div(classes: 'w-2 h-2 rounded-full bg-brand flex-shrink-0', []),
+             Component.text('Serticode Inc.'),
+             div(classes: 'badge-shine absolute inset-0 pointer-events-none rounded-xl', []),],
           ),
           a(
             href: DievasUrls.moonDs,
             attributes: const {'target': '_blank', 'rel': 'noopener'},
             classes:
+                'group relative overflow-hidden '
                 'flex items-center gap-2.5 '
                 'bg-bg-elevated border border-border '
                 'rounded-xl px-4 py-2.5 '
@@ -304,7 +300,9 @@ class Hero extends StatelessComponent {
                 'shadow-[0_8px_32px_rgba(0,0,0,0.5)] '
                 'transition-all duration-200 '
                 'hover:border-brand/50 hover:text-brand hover:-translate-y-px',
-            [div(classes: 'w-2 h-2 rounded-full bg-brand/50 flex-shrink-0', []), Component.text('Moon DS')],
+            [div(classes: 'w-2 h-2 rounded-full bg-brand/50 flex-shrink-0', []),
+             Component.text('Moon DS'),
+             div(classes: 'badge-shine absolute inset-0 pointer-events-none rounded-xl', []),],
           ),
         ],
       ),
@@ -328,9 +326,10 @@ class Hero extends StatelessComponent {
   }) {
     final delay = 1.1 + (index * 0.12);
     return div(
-      classes: 'chip-falling flex-shrink-0 rounded-2xl relative',
+      classes: 'chip-falling product-chip flex-shrink-0 rounded-2xl relative',
       attributes: {
         'style':
+            '--accent-rgb: $accentRgb; '
             'animation-delay: ${delay}s; '
             'background: $bg; '
             'backdrop-filter: blur(16px) saturate(200%); '

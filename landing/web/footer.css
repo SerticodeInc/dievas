@@ -1,0 +1,25 @@
+/* ─────────────────────────────────────────────────────────────
+ * Footer — link underline animation
+ * ───────────────────────────────────────────────────────────── */
+
+.footer-link {
+  position: relative;
+  text-decoration: none;
+}
+.footer-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.footer-link:hover::after {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-link::after { display: none; }
+}

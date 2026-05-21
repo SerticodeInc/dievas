@@ -14,6 +14,7 @@ class DievasHomePage extends StatelessWidget {
     lightTheme: DievasDarkThemeData(),
     darkTheme: DievasDarkThemeData(),
     global: false,
+    builder: (context, theme, child) => Theme(data: theme.material, child: child ?? const SizedBox()),
     child: _WidgetBookContent(),
   );
 }

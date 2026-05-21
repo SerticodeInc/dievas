@@ -133,7 +133,7 @@ class ComponentsSection extends StatelessComponent {
 
       // ── CTA island ─────────────────────────────────────────────────────────
       div(classes: 'max-w-5xl mx-auto px-3 lg:px-6 w-full pb-20 reveal', [
-        div(classes: 'py-16 text-center relative rounded-2xl overflow-hidden bg-bg-base', [
+        div(classes: 'cta-island py-16 text-center relative rounded-2xl overflow-hidden', [
           div(classes: 'relative px-6', [
             p(classes: 'section-eyebrow font-display text-sm tracking-[0.16em] uppercase mb-6', [
               Component.text('✶  proof of work'),
@@ -162,7 +162,7 @@ class ComponentsSection extends StatelessComponent {
                   'hover:shadow-[0_8px_32px_rgba(99,102,241,0.4)]',
               [
                 Component.text('Open Dievas Gallery'),
-                span(classes: 'text-xs opacity-70', [Component.text('→')]),
+                span(classes: 'text-xs arrow-slide', [Component.text('→')]),
               ],
             ),
           ]),
@@ -185,7 +185,8 @@ class ComponentsSection extends StatelessComponent {
     required String accentHex,
     required bool isFlipped,
     required int index,
-  }) {
+  }  ) {
+    final rgb = _hexToRgb(accentHex);
     final content = [
       // Text side
       div(classes: 'flex-1 flex flex-col justify-center py-10 lg:py-0', [
@@ -211,15 +212,16 @@ class ComponentsSection extends StatelessComponent {
         div(classes: 'flex flex-wrap gap-2', [for (final c in components) _shippedPill(c, accentHex)]),
       ]),
 
-      // Visual preview side
+      // Visual preview side — card lift + accent shadow on hover
       div(
         classes:
-            'lg:w-96 flex-shrink-0 '
+            'preview-card lg:w-96 flex-shrink-0 '
             'rounded-2xl overflow-hidden '
             'p-5 flex items-center justify-center '
             'border-2',
         attributes: {
           'style':
+              '--card-accent: $rgb; '
               'background: rgba(255,255,255,0.75); '
               'backdrop-filter: blur(20px) saturate(180%); '
               '-webkit-backdrop-filter: blur(20px) saturate(180%); '
@@ -448,6 +450,13 @@ class ComponentsSection extends StatelessComponent {
         'bg-slate-50/60',
     [div(classes: 'w-1.5 h-1.5 rounded-full bg-slate-300 flex-shrink-0', []), Component.text(name)],
   );
+
+  // ── Helpers ────────────────────────────────────────────────────────────────────
+
+  static String _hexToRgb(String hex) {
+    final value = int.parse(hex, radix: 16);
+    return '${(value >> 16) & 0xFF}, ${(value >> 8) & 0xFF}, ${value & 0xFF}';
+  }
 
   // ── URL helpers ──────────────────────────────────────────────────────────────
 

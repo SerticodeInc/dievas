@@ -53,6 +53,11 @@ abstract final class DievasFontFamilyPrimitives {
   /// Wider letter forms designed for large-scale use.
   static const String sansExtended = 'MaisonNeueExtended';
 
-  /// JetBrains Mono — code snippets and monospaced output.
-  static const String mono = 'JetBrainsMono';
+  /// Cascadia Code — code snippets, inline code, and monospaced output.
+  ///
+  /// For Flutter: download .ttf/.otf, drop in packages/dievas/assets/fonts/,
+  /// then register with family: "Cascadia Code" in packages/dievas/pubspec.yaml.
+  ///
+  /// For web: Google Fonts serves this family directly.
+  static const String mono = 'Cascadia Code';
 }

@@ -42,6 +42,40 @@ const _inlineAnimationStyles = '''<style>
   to   { transform: translateX(-50%); }
 }
 
+/* ── DIEVAS watermark letter-drop animation ────────────────────────────────
+   Letters fall staggered (~0.16s apart), all landed within ~4s, then hold
+   for ~4s before the cycle repeats at 8s.                                    */
+@keyframes letter-drop-0 {
+  0%   { transform: translateY(-120vh); }
+  38%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+@keyframes letter-drop-1 {
+  0%, 2%   { transform: translateY(-120vh); }
+  40%      { transform: translateY(0); }
+  100%     { transform: translateY(0); }
+}
+@keyframes letter-drop-2 {
+  0%, 4%   { transform: translateY(-120vh); }
+  42%      { transform: translateY(0); }
+  100%     { transform: translateY(0); }
+}
+@keyframes letter-drop-3 {
+  0%, 6%   { transform: translateY(-120vh); }
+  44%      { transform: translateY(0); }
+  100%     { transform: translateY(0); }
+}
+@keyframes letter-drop-4 {
+  0%, 8%   { transform: translateY(-120vh); }
+  46%      { transform: translateY(0); }
+  100%     { transform: translateY(0); }
+}
+@keyframes letter-drop-5 {
+  0%, 10%  { transform: translateY(-120vh); }
+  48%      { transform: translateY(0); }
+  100%     { transform: translateY(0); }
+}
+
 /* Initial state: invisible, laid out. Animations gate on body.js-loaded. */
 .word-in {
   display: inline-block;
@@ -69,25 +103,35 @@ const _inlineAnimationStyles = '''<style>
   animation: marquee 38s linear infinite;
 }
 
+.js-loaded .letter-drop-0 { animation: letter-drop-0 8s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+.js-loaded .letter-drop-1 { animation: letter-drop-1 8s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+.js-loaded .letter-drop-2 { animation: letter-drop-2 8s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+.js-loaded .letter-drop-3 { animation: letter-drop-3 8s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+.js-loaded .letter-drop-4 { animation: letter-drop-4 8s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+.js-loaded .letter-drop-5 { animation: letter-drop-5 8s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+
 /* Scroll-triggered reveal */
 .reveal {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal-group > * {
   opacity: 0;
   transform: translateY(20px);
+}
+.reveal-group.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.reveal-group.is-visible > * { opacity: 1; transform: translateY(0); }
 .reveal-group.is-visible > *:nth-child(2) { transition-delay: 0.1s; }
 .reveal-group.is-visible > *:nth-child(3) { transition-delay: 0.2s; }
 .reveal-group.is-visible > *:nth-child(4) { transition-delay: 0.3s; }
@@ -98,7 +142,9 @@ const _inlineAnimationStyles = '''<style>
   .js-loaded .word-in      { animation: none; opacity: 1; }
   .js-loaded .chip-falling { animation: none; opacity: 1; }
   .js-loaded .marquee-track { animation: none; }
-  .reveal, .reveal-group > * { opacity: 1; transform: none; transition: none; }
+  .js-loaded [class*="letter-drop"] { animation: none; }
+  .reveal, .reveal-group > * { opacity: 1; transform: none; }
+  .reveal.is-visible, .reveal-group.is-visible > * { transition: none; }
 }
 </style>''';
 
@@ -124,6 +170,13 @@ class App extends StatelessComponent {
       link(rel: 'preconnect', href: 'https://fonts.gstatic.com', attributes: const {'crossorigin': ''}),
       link(rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap'),
       link(rel: 'stylesheet', href: '/output.css'),
+      link(rel: 'stylesheet', href: '/base.css'),
+      link(rel: 'stylesheet', href: '/nav.css'),
+      link(rel: 'stylesheet', href: '/hero.css'),
+      link(rel: 'stylesheet', href: '/manifesto.css'),
+      link(rel: 'stylesheet', href: '/architecture.css'),
+      link(rel: 'stylesheet', href: '/components.css'),
+      link(rel: 'stylesheet', href: '/footer.css'),
       RawText(_inlineAnimationStyles),
     ],
     body: const _AppBody(),
@@ -141,10 +194,11 @@ const _jsLoadedScript = '''<script>
 })();
 </script>''';
 
-// Scroll-reveal IntersectionObserver — fires `.is-visible` on `.reveal` and
-// `.reveal-group` elements as they enter the viewport (Anchor-style stagger).
+// Scroll-reveal IntersectionObserver — fires `.is-visible` on `.reveal`,
+// `.reveal-group`, and directional reveal elements as they enter the viewport.
 const _scrollRevealScript = '''<script>
 (function(){
+  var selectors = '.reveal,.reveal-group,.reveal-left,.reveal-right,.reveal-scale,.reveal-stagger';
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){
@@ -152,8 +206,8 @@ const _scrollRevealScript = '''<script>
         io.unobserve(e.target);
       }
     });
-  },{threshold:0.12});
-  document.querySelectorAll('.reveal,.reveal-group').forEach(function(el){
+  },{threshold:0.25});
+  document.querySelectorAll(selectors).forEach(function(el){
     io.observe(el);
   });
 })();
@@ -164,6 +218,7 @@ const _navScrollScript = '''<script>
   var nav=document.getElementById('site-nav');
   if(!nav)return;
   var lastY=window.scrollY,ticking=false,deadZone=16,topZone=80;
+  var navInner=nav.querySelector('nav');
   window.addEventListener('scroll',function(){
     if(ticking)return;
     ticking=true;
@@ -171,12 +226,34 @@ const _navScrollScript = '''<script>
       var y=window.scrollY;
       if(y<topZone){
         nav.style.transform='translateY(0)';
+        navInner&&navInner.classList.remove('nav-scrolled');
       }else if(y-lastY>deadZone){
         nav.style.transform='translateY(-130%)';
+        navInner&&navInner.classList.add('nav-scrolled');
       }else if(lastY-y>deadZone){
         nav.style.transform='translateY(0)';
+        navInner&&navInner.classList.add('nav-scrolled');
       }
       lastY=y;
+      ticking=false;
+    });
+  },{passive:true});
+})();
+</script>''';
+
+const _scrollProgressScript = '''<script>
+(function(){
+  var bar=document.createElement('div');
+  bar.className='scroll-progress';
+  document.body.appendChild(bar);
+  var ticking=false;
+  window.addEventListener('scroll',function(){
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(function(){
+      var h=document.documentElement;
+      var p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+      bar.style.width=p+'%';
       ticking=false;
     });
   },{passive:true});
@@ -197,6 +274,7 @@ class _AppBody extends StatelessComponent {
   @override
   Component build(BuildContext context) => div(id: 'main', classes: 'bg-bg-base text-text-hi antialiased', [
     RawText(_jsLoadedScript),
+    RawText(_scrollProgressScript),
     const Nav(),
     const Hero(),
     const ManifestoSection(),

@@ -153,12 +153,68 @@ sealed class DievasGlobalThemeData implements DievasThemeData {
     final brightness = colors.brightness;
     final seedColor = colors.action.actionPrimary;
     final scaffoldBg = colors.background.bgBase;
+    final textColor = colors.text.textPrimary;
 
-    return ThemeData(
+    final base = ThemeData(
       brightness: brightness,
       colorScheme: .fromSeed(seedColor: seedColor, brightness: brightness),
       scaffoldBackgroundColor: scaffoldBg,
       useMaterial3: true,
+      fontFamily: DievasFontFamilyPrimitives.sans,
+    );
+
+    return base.copyWith(
+      textTheme: base.textTheme.copyWith(
+        displayLarge: base.textTheme.displayLarge?.copyWith(
+          fontFamily: DievasFontFamilyPrimitives.sansExtended,
+          color: textColor,
+        ),
+        displayMedium: base.textTheme.displayMedium?.copyWith(
+          fontFamily: DievasFontFamilyPrimitives.sansExtended,
+          color: textColor,
+        ),
+        displaySmall: base.textTheme.displaySmall?.copyWith(
+          fontFamily: DievasFontFamilyPrimitives.sansExtended,
+          color: textColor,
+        ),
+        headlineLarge: base.textTheme.headlineLarge?.copyWith(
+          fontFamily: DievasFontFamilyPrimitives.sansExtended,
+          color: textColor,
+        ),
+        headlineMedium: base.textTheme.headlineMedium?.copyWith(
+          fontFamily: DievasFontFamilyPrimitives.sansExtended,
+          color: textColor,
+        ),
+        headlineSmall: base.textTheme.headlineSmall?.copyWith(
+          fontFamily: DievasFontFamilyPrimitives.sansExtended,
+          color: textColor,
+        ),
+        titleLarge: base.textTheme.titleLarge?.copyWith(color: textColor),
+        titleMedium: base.textTheme.titleMedium?.copyWith(color: textColor),
+        titleSmall: base.textTheme.titleSmall?.copyWith(color: textColor),
+        bodyLarge: base.textTheme.bodyLarge?.copyWith(color: textColor),
+        bodyMedium: base.textTheme.bodyMedium?.copyWith(color: textColor),
+        bodySmall: base.textTheme.bodySmall?.copyWith(color: textColor),
+        labelLarge: base.textTheme.labelLarge?.copyWith(color: textColor),
+        labelMedium: base.textTheme.labelMedium?.copyWith(color: textColor),
+        labelSmall: base.textTheme.labelSmall?.copyWith(color: textColor),
+      ),
+      primaryTextTheme: base.primaryTextTheme.copyWith(
+        displayLarge: base.primaryTextTheme.displayLarge?.copyWith(fontFamily: DievasFontFamilyPrimitives.sansExtended),
+        displayMedium: base.primaryTextTheme.displayMedium?.copyWith(
+          fontFamily: DievasFontFamilyPrimitives.sansExtended,
+        ),
+        displaySmall: base.primaryTextTheme.displaySmall?.copyWith(fontFamily: DievasFontFamilyPrimitives.sansExtended),
+        headlineLarge: base.primaryTextTheme.headlineLarge?.copyWith(
+          fontFamily: DievasFontFamilyPrimitives.sansExtended,
+        ),
+        headlineMedium: base.primaryTextTheme.headlineMedium?.copyWith(
+          fontFamily: DievasFontFamilyPrimitives.sansExtended,
+        ),
+        headlineSmall: base.primaryTextTheme.headlineSmall?.copyWith(
+          fontFamily: DievasFontFamilyPrimitives.sansExtended,
+        ),
+      ),
     );
   }
 }

@@ -1,0 +1,8 @@
+/* ─────────────────────────────────────────────────────────────
+ * Manifesto section — before/after code contrast
+ * ───────────────────────────────────────────────────────────── */
+
+.code-panel-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}

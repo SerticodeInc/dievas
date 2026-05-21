@@ -1,0 +1,246 @@
+/* ─────────────────────────────────────────────────────────────
+ * Base — shared keyframes, utilities, micro-interactions
+ * Used across multiple sections. Section-specific overrides
+ * belong in the respective section .css file.
+ * ───────────────────────────────────────────────────────────── */
+
+/* ── Shared keyframes ─────────────────────────────────────── */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes eyebrow-shimmer {
+  0%   { background-position:  200% center; }
+  100% { background-position: -200% center; }
+}
+
+.section-eyebrow {
+  background: linear-gradient(
+    90deg,
+    rgba(100,116,139,1) 0%,
+    rgba(100,116,139,1) 25%,
+    rgba(129,140,248,1) 50%,
+    rgba(100,116,139,1) 75%,
+    rgba(100,116,139,1) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  animation: eyebrow-shimmer 5s linear infinite;
+}
+
+/* ── Utility layer ─────────────────────────────────────────── */
+
+@layer utilities {
+  .max-w-5xl { max-width: 64rem; }
+  .max-w-lg  { max-width: 32rem; }
+  .max-w-sm  { max-width: 24rem; }
+}
+
+/* ── Micro-interactions ────────────────────────────────────── */
+
+/* Hover lift — subtle card elevation */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+.hover-lift:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* CTA glow pulse */
+@keyframes cta-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.2); }
+  50%      { box-shadow: 0 0 32px rgba(99, 102, 241, 0.4); }
+}
+.cta-glow {
+  animation: cta-glow 3s ease-in-out infinite;
+}
+.cta-glow:hover {
+  animation-duration: 1.5s;
+}
+
+/* Arrow slide — for CTA arrows */
+@keyframes arrow-slide {
+  0%   { transform: translateX(0); opacity: 1; }
+  50%  { transform: translateX(4px); opacity: 0; }
+  51%  { transform: translateX(-4px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+.arrow-slide {
+  display: inline-block;
+}
+.group:hover .arrow-slide {
+  animation: arrow-slide 0.4s ease;
+}
+
+/* Shipped pill arrow — slide + fade on hover */
+.arrow-span {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 150ms ease, transform 200ms ease;
+}
+a.group:hover .arrow-span {
+  opacity: 1 !important;
+  transform: translateX(2px);
+}
+
+/* Badge shine — corner accent sweep on hover */
+@keyframes badge-shine {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.badge-shine {
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    transparent 30%,
+    rgba(255,255,255,0.08) 45%,
+    rgba(255,255,255,0.15) 50%,
+    rgba(255,255,255,0.08) 55%,
+    transparent 70%,
+    transparent 100%
+  );
+  background-size: 200% auto;
+  background-repeat: no-repeat;
+}
+.badge-shine:hover {
+  animation: badge-shine 0.8s ease forwards;
+}
+
+/* Shimmer on CTA button hover */
+@keyframes btn-shimmer {
+  from { background-position: 200% center; }
+  to   { background-position: -200% center; }
+}
+
+/* ── Scroll-triggered reveals ──────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-group > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.reveal-group.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-group.is-visible > *:nth-child(2) { transition-delay: 0.1s; }
+.reveal-group.is-visible > *:nth-child(3) { transition-delay: 0.2s; }
+.reveal-group.is-visible > *:nth-child(4) { transition-delay: 0.3s; }
+.reveal-group.is-visible > *:nth-child(5) { transition-delay: 0.4s; }
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+}
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+}
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-stagger {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.reveal-stagger.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Scroll progress bar ──────────────────────────────────── */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(129,140,248,0.6), rgba(129,140,248,1));
+  z-index: 100;
+  pointer-events: none;
+  transition: width 0.1s linear;
+}
+
+/* ── Misc globals ──────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Reduced motion — base overrides ──────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-lift:hover { transform: none; box-shadow: none; }
+  .cta-glow { animation: none; }
+  .badge-shine:hover { animation: none; }
+  .group:hover .arrow-slide { animation: none; }
+  .reveal, .reveal-group > *,
+  .reveal-left, .reveal-right, .reveal-scale, .reveal-stagger {
+    opacity: 1; transform: none;
+  }
+  .reveal.is-visible, .reveal-group.is-visible > *,
+  .reveal-left.is-visible, .reveal-right.is-visible,
+  .reveal-scale.is-visible, .reveal-stagger.is-visible {
+    transition: none;
+  }
+  .scroll-progress { display: none; }
+  html { scroll-behavior: auto; }
+  .section-eyebrow { animation: none; }
+}

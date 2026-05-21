@@ -67,19 +67,20 @@ class ArchitectureSection extends StatelessComponent {
 
           // ── Principle cards ────────────────────────────────────────────────
           div(classes: 'grid grid-cols-1 sm:grid-cols-2 gap-4 reveal-group', [
-            for (final p in _principles) _principleCard(p.$1, p.$2, p.$3, p.$4, p.$5),
+            for (final p in _principles) _principleCard(p.$1, p.$2, p.$3, p.$4, p.$5, p.$6),
           ]),
         ]),
       ],
     );
   }
 
-  Component _principleCard(String num, String title, String body, String symbol, String colorClass) => div(
+  Component _principleCard(String num, String title, String body, String symbol, String colorClass, String accentRgb) => div(
     classes:
         'group p-8 rounded-2xl border $colorClass '
         'bg-white '
         'transition-all duration-300 cursor-default '
-        'hover:shadow-[0_8px_32px_rgba(129,140,248,0.4)]',
+        'hover:shadow-[0_8px_32px_rgba(var(--card-accent),0.18)]',
+    attributes: {'style': '--card-accent: $accentRgb;'},
     [
       div(classes: 'flex items-center justify-between mb-6', [
         span(
@@ -89,7 +90,7 @@ class ArchitectureSection extends StatelessComponent {
         ),
         div(
           classes:
-              'w-9 h-9 rounded-xl border border-slate-700 bg-white/5 '
+              'pc-icon w-9 h-9 rounded-xl border border-slate-700 bg-white/5 '
               'flex items-center justify-center text-slate-400 text-base select-none '
               'group-hover:border-brand/25 group-hover:bg-brand/8 group-hover:text-brand '
               'transition-all duration-300',
@@ -155,6 +156,7 @@ class ArchitectureSection extends StatelessComponent {
       'Primitives → semantic aliases → Flutter Color. Nothing in a component file is ever a raw hex or a magic number.',
       '◈',
       'pc-indigo',
+      '99, 102, 241',
     ),
     (
       '02',
@@ -162,6 +164,7 @@ class ArchitectureSection extends StatelessComponent {
       'DievasTheme has 9 aspects. A widget reading colors never rebuilds when spacing changes. Surgical, not shotgun.',
       '⊞',
       'pc-sky',
+      '56, 189, 248',
     ),
     (
       '03',
@@ -169,6 +172,7 @@ class ArchitectureSection extends StatelessComponent {
       'Apps extend DievasGlobalThemeData with their own brand tokens. The design system never knows which brand is active.',
       '⋮',
       'pc-green',
+      '74, 222, 128',
     ),
     (
       '04',
@@ -176,6 +180,7 @@ class ArchitectureSection extends StatelessComponent {
       'dievas_tokens has zero Flutter imports. Safe for Jaspr, CLI, and server-side Dart targets. No platform lock-in.',
       '◎',
       'pc-amber',
+      '251, 191, 36',
     ),
   ];
 }
@@ -188,7 +193,7 @@ class _CodePanel extends StatelessComponent {
   @override
   Component build(BuildContext context) => div(
     classes:
-'rounded-2xl border border-slate-200 overflow-hidden transition-shadow duration-300 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)] h-full flex flex-col',
+'code-panel rounded-2xl border border-slate-200 overflow-hidden transition-shadow duration-300 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)] h-full flex flex-col',
     [
       div(
         classes:
@@ -196,9 +201,9 @@ class _CodePanel extends StatelessComponent {
             'flex items-center justify-between',
         [
           div(classes: 'flex items-center gap-1.5', [
-            div(classes: 'w-2 h-2 rounded-full bg-[#FF5F57]', []),
-            div(classes: 'w-2 h-2 rounded-full bg-[#FEBC2E]', []),
-            div(classes: 'w-2 h-2 rounded-full bg-[#28C840]', []),
+            div(classes: 'code-dot code-dot-close w-2 h-2 rounded-full bg-[#FF5F57]', []),
+            div(classes: 'code-dot code-dot-minimize w-2 h-2 rounded-full bg-[#FEBC2E]', []),
+            div(classes: 'code-dot code-dot-maximize w-2 h-2 rounded-full bg-[#28C840]', []),
           ]),
           span(classes: 'section-eyebrow font-display text-mid tracking-[0.07em] uppercase', [Component.text(label)]),
           span(

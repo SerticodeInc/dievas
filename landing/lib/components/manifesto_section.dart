@@ -154,8 +154,8 @@ class _CodePanel extends StatelessComponent {
   @override
   Component build(BuildContext context) => div(
     classes:
-        'rounded-2xl border $borderClass overflow-hidden '
-        'transition-shadow duration-300 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)]'
+        'code-panel rounded-2xl border $borderClass overflow-hidden '
+        'transition-shadow duration-300 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)] '
         'h-full flex flex-col',
     [
       div(
@@ -164,9 +164,9 @@ class _CodePanel extends StatelessComponent {
             'flex items-center justify-between',
         [
           div(classes: 'flex items-center gap-1.5', [
-            div(classes: 'w-2 h-2 rounded-full bg-[#FF5F57]', []),
-            div(classes: 'w-2 h-2 rounded-full bg-[#FEBC2E]', []),
-            div(classes: 'w-2 h-2 rounded-full bg-[#28C840]', []),
+            div(classes: 'code-dot code-dot-close w-2 h-2 rounded-full bg-[#FF5F57]', []),
+            div(classes: 'code-dot code-dot-minimize w-2 h-2 rounded-full bg-[#FEBC2E]', []),
+            div(classes: 'code-dot code-dot-maximize w-2 h-2 rounded-full bg-[#28C840]', []),
           ]),
           span(classes: 'section-eyebrow font-display text-sm tracking-[0.16em] uppercase', [Component.text(label)]),
           span(

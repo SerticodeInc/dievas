@@ -15,7 +15,7 @@ dependencies:
     equatable: ^2.0.5
     dievas_tokens:
         path: ../dievas_tokens
-    meta: ^1.17.0
+    meta: ^1.18.0
 
 dev_dependencies:
     flutter_test:

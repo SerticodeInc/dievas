@@ -17,7 +17,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
   return DievasComponentThemeData(
     filledButton: override?.filledButton ?? _createFilledButtonGroup(colors, typography, spacing, sizing, border),
     outlinedButton: override?.outlinedButton ?? _createOutlinedButtonGroup(colors, typography, spacing, sizing, border),
-    textButton: override?.textButton ?? _createTextButtonGroup(colors, typography),
+    textButton: override?.textButton ?? _createTextButtonGroup(colors, typography, spacing),
     iconButton: override?.iconButton ?? _createIconButtonGroup(colors, sizing, border),
     badge: override?.badge ?? _createBadgeTheme(typography, spacing, border),
     avatar: override?.avatar ?? _createAvatarTheme(colors, typography, sizing, border),
@@ -26,14 +26,14 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
     circularProgress: override?.circularProgress ?? _createCircularProgressTheme(colors),
     checkbox: override?.checkbox ?? _createCheckboxTheme(colors, typography, spacing, border),
     toggle: override?.toggle ?? _createSwitchTheme(colors, typography, spacing, animation),
-    radio: override?.radio ?? _createRadioTheme(colors, typography, spacing),
+    radio: override?.radio ?? _createRadioTheme(colors, typography, spacing, border),
     textInput: override?.textInput ?? _createTextInputTheme(colors, typography, spacing, sizing, border),
     alert: override?.alert ?? _createAlertTheme(typography, spacing, border),
     snackbar: override?.snackbar ?? _createSnackbarTheme(colors, typography, spacing, border),
     bottomSheet: override?.bottomSheet ?? _createBottomSheetTheme(colors, border),
     modal: override?.modal ?? _createModalTheme(colors, typography, spacing, border),
     tooltip: override?.tooltip ?? _createTooltipTheme(colors, typography, spacing, border, animation),
-    loader: override?.loader ?? _createLoaderTheme(colors, typography, spacing),
+    loader: override?.loader ?? _createLoaderTheme(colors, typography, spacing, animation),
     emptyState: override?.emptyState ?? _createEmptyStateTheme(colors, typography, spacing),
     accordion: override?.accordion ?? _createAccordionTheme(typography, spacing, border, animation, elevation),
     drawer: override?.drawer ?? _createDrawerTheme(colors, border, animation),
@@ -41,10 +41,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
   );
 }
 
-// Component-level constants — values with no general-purpose token family. Stroke widths, thumb padding, and scrim colour are component-specific; layout extents (minWidth/maxWidth) are overlay-sizing constraints.
-const double _kStrokeThin = 1.0; // input/alert border default
-const double _kStrokeFocused = 1.5; // input border focused
-const double _kStrokeControl = 2.0; // checkbox / radio ring
+// Component-level constants — layout extents (minWidth/maxWidth) are overlay-sizing constraints.
 const double _kStrokeProgress = 2.5; // circular progress arc
 const double _kStrokeLoader = 3.0; // loader spinner
 const double _kSwitchThumbPadding = 3.0; // inset between thumb and track edge
@@ -52,8 +49,6 @@ const double _kSnackbarMinWidth = 280.0;
 const double _kSnackbarMaxWidth = 480.0;
 const double _kModalMinWidth = 320.0;
 const double _kModalMaxWidth = 520.0;
-// 50% opaque black — standard Material scrim for bottom sheet and modal.
-const Color _kBarrierColor = Color(0x80000000);
 
 // Shared layout helper
 /// Extracts a [Radius] from a [BorderRadius] (uses topLeft corner).
@@ -67,6 +62,7 @@ typedef _SharedLayout = ({
   DievasButtonThemeValue<({Radius square, Radius pill})> radius,
   DievasButtonThemeValue<EdgeInsets> padding,
   double disabledOpacity,
+  double pressOpacity,
 });
 
 _SharedLayout _sharedButtonLayout(
@@ -91,6 +87,7 @@ _SharedLayout _sharedButtonLayout(
       lg: .symmetric(horizontal: spacing.md),
     ),
     disabledOpacity: DievasOpacitySemantic.disabled,
+    pressOpacity: 0.7,
   );
 }
 
@@ -114,6 +111,7 @@ DievasFilledButtonGroupThemeData _createFilledButtonGroup(
     radius: layout.radius,
     padding: layout.padding,
     disabledOpacity: layout.disabledOpacity,
+    pressOpacity: layout.pressOpacity,
     style: style,
   );
 
@@ -165,6 +163,7 @@ DievasOutlinedButtonGroupThemeData _createOutlinedButtonGroup(
         radius: layout.radius,
         padding: layout.padding,
         disabledOpacity: layout.disabledOpacity,
+        pressOpacity: layout.pressOpacity,
         style: style,
       );
 
@@ -200,14 +199,16 @@ DievasOutlinedButtonGroupThemeData _createOutlinedButtonGroup(
 DievasTextButtonGroupThemeData _createTextButtonGroup(
   DievasColourThemeData colors,
   DievasTypographyThemeData typography,
+  DievasSpacingThemeData spacing,
 ) {
   final c = colors.action;
 
   DievasTextButtonThemeData makeThemeData(DievasTextButtonThemeStateStyle style) => DievasTextButtonThemeData(
     textStyle: (sm: typography.labelSm, md: typography.labelMd, lg: typography.labelLg),
     iconSize: (sm: DievasSizingPrimitives.s14, md: DievasSizingPrimitives.s16, lg: DievasSizingPrimitives.s18),
-    iconSpacing: (sm: DievasSpacingPrimitives.s1, md: DievasSpacingPrimitives.s1, lg: 6.0),
+    iconSpacing: (sm: DievasSpacingPrimitives.s1, md: DievasSpacingPrimitives.s1, lg: DievasSpacingPrimitives.s2),
     disabledOpacity: DievasOpacitySemantic.disabled,
+    pressOpacity: 0.7,
     style: style,
   );
 
@@ -238,6 +239,7 @@ DievasIconButtonGroupThemeData _createIconButtonGroup(
     iconSize: (sm: sizing.iconSm, md: sizing.iconMd, lg: sizing.iconLg),
     radius: (sm: _extractRadius(border.sm), md: _extractRadius(border.md), lg: _extractRadius(border.md)),
     disabledOpacity: DievasOpacitySemantic.disabled,
+    pressOpacity: 0.7,
     style: style,
   );
 
@@ -354,7 +356,7 @@ DievasCheckboxThemeData _createCheckboxTheme(
   return DievasCheckboxThemeData(
     size: DievasSizingPrimitives.s20,
     borderRadius: border.xs,
-    strokeWidth: _kStrokeControl,
+    strokeWidth: border.strokeThick,
     colorChecked: colors.action.actionPrimary,
     colorUnchecked: colors.staticColours.staticTransparent,
     colorDisabled: colors.action.actionPrimaryDisabled,
@@ -397,9 +399,10 @@ DievasRadioThemeData _createRadioTheme(
   DievasColourThemeData colors,
   DievasTypographyThemeData typography,
   DievasSpacingThemeData spacing,
+  DievasBorderThemeData border,
 ) => DievasRadioThemeData(
   size: DievasSizingPrimitives.s20,
-  strokeWidth: _kStrokeControl,
+  strokeWidth: border.strokeThick,
   dotSize: DievasSizingPrimitives.s8,
   colorSelected: colors.action.actionPrimary,
   colorUnselected: colors.staticColours.staticTransparent,
@@ -436,8 +439,8 @@ DievasTextInputThemeData _createTextInputTheme(
     lg: EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
   ),
   borderRadius: border.md,
-  strokeWidth: _kStrokeThin,
-  strokeWidthFocused: _kStrokeFocused,
+  strokeWidth: border.strokeThin,
+  strokeWidthFocused: border.strokeDefault,
   bgColor: colors.input.inputBg,
   borderColor: colors.input.inputBorder,
   borderColorFocused: colors.input.inputBorderFocus,
@@ -462,7 +465,7 @@ DievasAlertThemeData _createAlertTheme(
   iconSpacing: spacing.sm,
   padding: .all(spacing.smPlus),
   borderRadius: border.md,
-  borderWidth: _kStrokeThin,
+  borderWidth: border.strokeThin,
   dismissIconSize: DievasSizingPrimitives.s18,
 );
 
@@ -493,8 +496,8 @@ DievasBottomSheetThemeData _createBottomSheetTheme(DievasColourThemeData colors,
     handleRadius: border.full,
     handleTopInset: DievasSpacingPrimitives.s3,
     backgroundColor: colors.background.bgElevated,
-    barrierColor: _kBarrierColor,
-    elevation: DievasElevationPrimitives.e3,
+    barrierColor: colors.background.bgOverlay,
+    elevation: DievasElevationSemantic.md,
   );
 }
 
@@ -509,13 +512,13 @@ DievasModalThemeData _createModalTheme(
     titleStyle: typography.titleMd,
     bodyStyle: typography.bodyMd,
     backgroundColor: colors.background.bgElevated,
-    barrierColor: _kBarrierColor,
+    barrierColor: colors.background.bgOverlay,
     borderRadius: border.lg,
     padding: .all(spacing.lg),
     minWidth: _kModalMinWidth,
     maxWidth: _kModalMaxWidth,
     closeIconSize: DievasSizingPrimitives.s20,
-    elevation: DievasElevationPrimitives.e4,
+    elevation: DievasElevationSemantic.lg,
   );
 }
 
@@ -529,7 +532,7 @@ DievasTooltipThemeData _createTooltipTheme(
 ) {
   return DievasTooltipThemeData(
     textStyle: typography.labelXs.copyWith(color: colors.text.textInverse),
-    backgroundColor: colors.background.bgOverlay,
+    backgroundColor: colors.background.bgElevated,
     borderRadius: border.sm,
     padding: .symmetric(horizontal: spacing.smPlus, vertical: spacing.xs),
     verticalOffset: DievasSizingPrimitives.s20,
@@ -543,6 +546,7 @@ DievasLoaderThemeData _createLoaderTheme(
   DievasColourThemeData colors,
   DievasTypographyThemeData typography,
   DievasSpacingThemeData spacing,
+  DievasAnimationThemeData animation,
 ) {
   return DievasLoaderThemeData(
     spinnerSizeSm: DievasSizingPrimitives.s20,
@@ -553,6 +557,7 @@ DievasLoaderThemeData _createLoaderTheme(
     trackColor: colors.background.bgSubtle,
     labelStyle: typography.bodySm.copyWith(color: colors.text.textSecondary),
     labelSpacing: spacing.sm,
+    animationDuration: animation.standard,
   );
 }
 
@@ -590,18 +595,12 @@ DievasAccordionThemeData _createAccordionTheme(
     padding: .symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
     contentPadding: .symmetric(horizontal: spacing.md, vertical: spacing.sm),
     borderRadius: border.md,
-    borderWidth: _kStrokeThin,
+    borderWidth: border.strokeThin,
     iconSize: DievasSizingPrimitives.s20,
     iconSpacing: spacing.sm,
     dividerIndent: spacing.md,
     animationDuration: animation.standard,
-    shadows: [
-      BoxShadow(
-        color: shadowColor,
-        blurRadius: level.blur,
-        offset: Offset.zero,
-      ),
-    ],
+    shadows: [BoxShadow(color: shadowColor, blurRadius: level.blur, offset: Offset.zero)],
   );
 }
 
@@ -615,9 +614,9 @@ DievasDrawerThemeData _createDrawerTheme(
     backgroundColor: colors.background.bgElevated,
     width: DievasSizingPrimitives.s64 * 4,
     borderRadius: .only(topRight: _extractRadius(border.xl), bottomRight: _extractRadius(border.xl)),
-    barrierColor: _kBarrierColor,
+    barrierColor: colors.background.bgOverlay,
     animationDuration: animation.moderate,
-    elevation: DievasElevationPrimitives.e4,
+    elevation: DievasElevationSemantic.lg,
   );
 }
 
@@ -637,8 +636,9 @@ DievasPopoverThemeData _createPopoverTheme(
     verticalOffset: DievasSizingPrimitives.s8,
     horizontalOffset: DievasSizingPrimitives.s8,
     arrowSize: DievasSizingPrimitives.s8,
-    barrierColor: _kBarrierColor,
+    barrierColor: colors.background.bgOverlay,
     animationDuration: animation.standard,
-    elevation: DievasElevationPrimitives.e3,
+    elevation: DievasElevationSemantic.md,
+    maxWidth: 280.0,
   );
 }

@@ -16,6 +16,7 @@ final class DievasAnimationThemeData extends Equatable {
     this.emphasized = DievasAnimationSemantic.emphasized,
     this.slow = DievasAnimationSemantic.slow,
     this.xSlow = DievasAnimationSemantic.xSlow,
+    this.loader = DievasAnimationSemantic.loader,
     this.tooltipShow = DievasAnimationSemantic.tooltipShow,
     this.snackbarDismiss = DievasAnimationSemantic.snackbarDismiss,
   });
@@ -44,6 +45,9 @@ final class DievasAnimationThemeData extends Equatable {
   /// 500ms — tooltip wait, brief feedback pauses.
   final Duration xSlow;
 
+  /// 800ms — loader spinner rotation cycle.
+  final Duration loader;
+
   /// 2s — tooltip visible duration.
   final Duration tooltipShow;
 
@@ -59,6 +63,7 @@ final class DievasAnimationThemeData extends Equatable {
     Duration? emphasized,
     Duration? slow,
     Duration? xSlow,
+    Duration? loader,
     Duration? tooltipShow,
     Duration? snackbarDismiss,
   }) => DievasAnimationThemeData(
@@ -70,6 +75,7 @@ final class DievasAnimationThemeData extends Equatable {
     emphasized: emphasized ?? this.emphasized,
     slow: slow ?? this.slow,
     xSlow: xSlow ?? this.xSlow,
+    loader: loader ?? this.loader,
     tooltipShow: tooltipShow ?? this.tooltipShow,
     snackbarDismiss: snackbarDismiss ?? this.snackbarDismiss,
   );
@@ -84,6 +90,7 @@ final class DievasAnimationThemeData extends Equatable {
     emphasized,
     slow,
     xSlow,
+    loader,
     tooltipShow,
     snackbarDismiss,
   ];

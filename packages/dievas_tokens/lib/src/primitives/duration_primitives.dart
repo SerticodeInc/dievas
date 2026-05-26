@@ -30,6 +30,9 @@ abstract final class DievasDurationPrimitives {
   /// 500ms — tooltip wait, brief feedback pauses.
   static const Duration d500 = Duration(milliseconds: 500);
 
+  /// 800ms — loader spinner rotation cycle.
+  static const Duration d800 = Duration(milliseconds: 800);
+
   /// 1000ms / 1s — noticeable delays and auto-dismiss timers.
   static const Duration d1000 = Duration(milliseconds: 1000);
 

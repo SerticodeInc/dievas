@@ -13,6 +13,7 @@ final class DievasPopoverThemeData extends Equatable {
     required this.barrierColor,
     required this.animationDuration,
     required this.elevation,
+    required this.maxWidth,
   });
 
   final Color backgroundColor;
@@ -26,6 +27,9 @@ final class DievasPopoverThemeData extends Equatable {
   final Duration animationDuration;
   final double elevation;
 
+  /// Maximum width constraint for the popover content area.
+  final double maxWidth;
+
   @override
   List<Object?> get props => [
     backgroundColor,
@@ -38,5 +42,6 @@ final class DievasPopoverThemeData extends Equatable {
     barrierColor,
     animationDuration,
     elevation,
+    maxWidth,
   ];
 }

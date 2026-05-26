@@ -62,7 +62,7 @@ class _DievasPopoverState extends State<DievasPopover> {
                 opacity: _isOpen ? 1.0 : 0.0,
                 duration: theme.animationDuration,
                 child: Container(
-                  constraints: const BoxConstraints(maxWidth: 280),
+                  constraints: BoxConstraints(maxWidth: theme.maxWidth),
                   padding: theme.padding,
                   decoration: BoxDecoration(
                     color: theme.backgroundColor,

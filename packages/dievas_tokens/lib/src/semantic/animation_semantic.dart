@@ -33,6 +33,9 @@ abstract final class DievasAnimationSemantic {
   /// 500ms — tooltip wait, brief feedback pauses.
   static const Duration xSlow = DievasDurationPrimitives.d500;
 
+  /// 800ms — loader spinner rotation cycle.
+  static const Duration loader = DievasDurationPrimitives.d800;
+
   /// 2s — tooltip visible duration.
   static const Duration tooltipShow = DievasDurationPrimitives.d2000;
 

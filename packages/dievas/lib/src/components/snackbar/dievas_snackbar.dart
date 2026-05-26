@@ -49,7 +49,7 @@ class DievasSnackbar extends StatelessWidget {
           decoration: BoxDecoration(
             color: bg,
             borderRadius: theme.borderRadius,
-            boxShadow: [BoxShadow(color: const Color(0x1A000000), blurRadius: 12, offset: const Offset(0, 4))],
+            boxShadow: DievasTheme.elevationOf(context).md,
           ),
           child: Padding(
             padding: theme.padding,

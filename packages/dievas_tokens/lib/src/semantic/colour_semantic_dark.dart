@@ -71,7 +71,7 @@ abstract final class DievasColourSemanticDark {
   static const int bgElevated = DievasColourPrimitives.slate800;
 
   /// Scrim / overlay behind modals and bottom sheets.
-  static const int bgOverlay = DievasColourPrimitives.black;
+  static const int bgOverlay = 0x80000000;
 
   // Border
 

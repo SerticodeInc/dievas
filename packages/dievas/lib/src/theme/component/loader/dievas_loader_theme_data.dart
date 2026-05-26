@@ -12,6 +12,7 @@ final class DievasLoaderThemeData extends Equatable {
     required this.trackColor,
     required this.labelStyle,
     required this.labelSpacing,
+    required this.animationDuration,
   });
 
   /// Spinner diameter for [DievasLoaderSize.sm].
@@ -38,6 +39,9 @@ final class DievasLoaderThemeData extends Equatable {
   /// Vertical gap between the spinner and the label.
   final double labelSpacing;
 
+  /// Duration of one full spinner rotation cycle.
+  final Duration animationDuration;
+
   @override
   List<Object?> get props => [
     spinnerSizeSm,
@@ -48,5 +52,6 @@ final class DievasLoaderThemeData extends Equatable {
     trackColor,
     labelStyle,
     labelSpacing,
+    animationDuration,
   ];
 }

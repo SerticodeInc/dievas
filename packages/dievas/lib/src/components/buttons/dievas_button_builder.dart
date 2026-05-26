@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 
 import '../../theme/component/button/dievas_button_theme_state_style.dart';
 import '../../theme/component/button/dievas_button_theme_style.dart';
+import '../../theme/dievas_theme.dart';
 import 'dievas_button_state_animated_loader_mixin.dart';
 import 'dievas_button_state_switcher.dart';
 import 'dievas_button_press_mixin.dart';
@@ -26,6 +27,8 @@ class DievasButtonBuilder extends StatefulWidget with DievasButtonStateAnimatedL
     required this.builder,
     required this.borderRadius,
     required this.disabledOpacity,
+    required this.pressOpacity,
+    required this.loaderRotationDuration,
     required this.iconSpacing,
     required this.iconSize,
     required this.textStyle,
@@ -34,6 +37,9 @@ class DievasButtonBuilder extends StatefulWidget with DievasButtonStateAnimatedL
     required this.trailingIcon,
     required this.onPressed,
   });
+
+  @override
+  final Duration loaderRotationDuration;
 
   @override
   final DievasButtonState state;
@@ -45,6 +51,7 @@ class DievasButtonBuilder extends StatefulWidget with DievasButtonStateAnimatedL
 
   final BorderRadius borderRadius;
   final double disabledOpacity;
+  final double pressOpacity;
   final double iconSpacing;
   final double iconSize;
   final TextStyle textStyle;
@@ -62,6 +69,7 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
   @override
   Widget build(BuildContext context) {
     final apple = isApplePlatform;
+    final pressDuration = DievasTheme.animationOf(context).quick;
 
     return Semantics(
       button: true,
@@ -83,7 +91,7 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
 
               final opacityFactor = isDisabled
                   ? widget.disabledOpacity
-                  : (apple && isPressed ? DievasButtonPressMixin.kApplePressedOpacity : 1.0);
+                  : (apple && isPressed ? widget.pressOpacity : 1.0);
 
               final activeStyle = isPressed ? widget.style.focused : widget.style.idle;
 
@@ -143,7 +151,7 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
                       if (widget.leadingIcon != null) sizedIcon(maybeColourIcon(widget.leadingIcon)),
                       if (widget.label.isNotEmpty)
                         AnimatedDefaultTextStyle(
-                          duration: DievasButtonPressMixin.kAnimationDuration,
+                          duration: pressDuration,
                           style: widget.textStyle.copyWith(color: foreground),
                           textAlign: .center,
                           child: Text(widget.label),
@@ -165,7 +173,7 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
 
               if (apple) {
                 return AnimatedContainer(
-                  duration: DievasButtonPressMixin.kAnimationDuration,
+                  duration: pressDuration,
                   height: height,
                   padding: padding,
                   decoration: decoration,

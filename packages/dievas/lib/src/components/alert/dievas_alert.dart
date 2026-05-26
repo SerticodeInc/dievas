@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:dievas/l10n/dievas_localizations.dart';
+import '../../extensions/dievas_theme_context_extension.dart';
 import '../../theme/color/sets/feedback_colours.dart';
 import '../../theme/dievas_theme.dart';
 
@@ -85,8 +86,8 @@ class DievasAlert extends StatelessWidget {
                   children: [
                     Text(title, style: theme.titleStyle.copyWith(color: palette.text)),
                     if (description case final text?) ...[
-                      const SizedBox(height: 4),
-                      Text(text, style: theme.bodyStyle.copyWith(color: palette.text.withAlpha(200))),
+                      SizedBox(height: context.spacing.xs),
+                      Text(text, style: theme.bodyStyle.copyWith(color: palette.text)),
                     ],
                   ],
                 ),
@@ -100,7 +101,7 @@ class DievasAlert extends StatelessWidget {
                   child: GestureDetector(
                     onTap: onDismiss,
                     child: Padding(
-                      padding: const .only(left: 8),
+                      padding: EdgeInsets.only(left: context.spacing.sm),
                       child: SizedBox.square(
                         dimension: theme.dismissIconSize,
                         child: IconTheme(

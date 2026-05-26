@@ -21,6 +21,7 @@ sealed class DievasButtonThemeData<T extends DievasButtonThemeStyle> extends Equ
     required this.radius,
     required this.padding,
     required this.disabledOpacity,
+    required this.pressOpacity,
     required this.style,
   });
 
@@ -45,11 +46,24 @@ sealed class DievasButtonThemeData<T extends DievasButtonThemeStyle> extends Equ
   /// Opacity applied to the entire button when disabled.
   final double disabledOpacity;
 
+  /// Opacity applied during press on Apple platforms (instead of ink ripple).
+  final double pressOpacity;
+
   /// Idle and focused style resolved from the colour token set.
   final DievasButtonThemeStateStyle<T> style;
 
   @override
-  List<Object?> get props => [textStyle, height, iconSize, iconSpacing, radius, padding, disabledOpacity, style];
+  List<Object?> get props => [
+    textStyle,
+    height,
+    iconSize,
+    iconSpacing,
+    radius,
+    padding,
+    disabledOpacity,
+    pressOpacity,
+    style,
+  ];
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -62,6 +76,7 @@ sealed class DievasButtonThemeData<T extends DievasButtonThemeStyle> extends Equ
       ..add(DiagnosticsProperty('radius', radius))
       ..add(DiagnosticsProperty('padding', padding))
       ..add(DoubleProperty('disabledOpacity', disabledOpacity))
+      ..add(DoubleProperty('pressOpacity', pressOpacity))
       ..add(DiagnosticsProperty('style', style));
   }
 }
@@ -78,6 +93,7 @@ final class DievasFilledButtonThemeData extends DievasButtonThemeData<DievasFill
     required super.radius,
     required super.padding,
     required super.disabledOpacity,
+    required super.pressOpacity,
     required super.style,
   });
 }
@@ -94,6 +110,7 @@ final class DievasOutlinedButtonThemeData extends DievasButtonThemeData<DievasOu
     required super.radius,
     required super.padding,
     required super.disabledOpacity,
+    required super.pressOpacity,
     required super.style,
   });
 }
@@ -110,6 +127,7 @@ final class DievasTextButtonThemeData extends Equatable with Diagnosticable {
     required this.iconSize,
     required this.iconSpacing,
     required this.disabledOpacity,
+    required this.pressOpacity,
     required this.style,
   });
 
@@ -125,11 +143,14 @@ final class DievasTextButtonThemeData extends Equatable with Diagnosticable {
   /// Opacity when disabled.
   final double disabledOpacity;
 
+  /// Opacity applied during press on Apple platforms.
+  final double pressOpacity;
+
   /// Idle and focused foreground colours.
   final DievasTextButtonThemeStateStyle style;
 
   @override
-  List<Object?> get props => [textStyle, iconSize, iconSpacing, disabledOpacity, style];
+  List<Object?> get props => [textStyle, iconSize, iconSpacing, disabledOpacity, pressOpacity, style];
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -152,6 +173,7 @@ final class DievasIconButtonThemeData extends Equatable with Diagnosticable {
     required this.iconSize,
     required this.radius,
     required this.disabledOpacity,
+    required this.pressOpacity,
     required this.style,
   });
 
@@ -167,11 +189,14 @@ final class DievasIconButtonThemeData extends Equatable with Diagnosticable {
   /// Opacity when disabled.
   final double disabledOpacity;
 
+  /// Opacity applied during press on Apple platforms.
+  final double pressOpacity;
+
   /// Idle and focused style.
   final DievasIconButtonThemeStateStyle style;
 
   @override
-  List<Object?> get props => [size, iconSize, radius, disabledOpacity, style];
+  List<Object?> get props => [size, iconSize, radius, disabledOpacity, pressOpacity, style];
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

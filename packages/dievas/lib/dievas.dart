@@ -44,6 +44,9 @@ export 'src/components/buttons/button_types/dievas_button_state.dart';
 export 'src/components/buttons/button_types/dievas_button_style.dart';
 
 //  Components — Form
+export 'src/components/auth_code/dievas_auth_code.dart';
+export 'src/components/breadcrumb/dievas_breadcrumb.dart';
+export 'src/components/dot_indicator/dievas_dot_indicator.dart';
 export 'src/components/checkbox/dievas_checkbox.dart';
 export 'src/components/radio/dievas_radio.dart';
 export 'src/components/switch/dievas_switch.dart';

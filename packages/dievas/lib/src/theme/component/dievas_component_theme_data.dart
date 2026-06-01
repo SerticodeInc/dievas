@@ -1,9 +1,11 @@
 import 'package:equatable/equatable.dart';
 
 import 'accordion/dievas_accordion_theme_data.dart';
+import 'auth_code/dievas_auth_code_theme_data.dart';
 import 'alert/dievas_alert_theme_data.dart';
 import 'avatar/dievas_avatar_theme_data.dart';
 import 'badge/dievas_badge_theme_data.dart';
+import 'breadcrumb/dievas_breadcrumb_theme_data.dart';
 import 'bottom_sheet/dievas_bottom_sheet_theme_data.dart';
 import 'button/dievas_filled_button_theme_data.dart';
 import 'button/dievas_icon_button_theme_data.dart';
@@ -11,6 +13,7 @@ import 'button/dievas_outlined_button_theme_data.dart';
 import 'button/dievas_text_button_theme_data.dart';
 import 'checkbox/dievas_checkbox_theme_data.dart';
 import 'circular_progress/dievas_circular_progress_theme_data.dart';
+import 'dot_indicator/dievas_dot_indicator_theme_data.dart';
 import 'drawer/dievas_drawer_theme_data.dart';
 import 'empty_state/dievas_empty_state_theme_data.dart';
 import 'linear_progress/dievas_linear_progress_theme_data.dart';
@@ -18,6 +21,7 @@ import 'loader/dievas_loader_theme_data.dart';
 import 'modal/dievas_modal_theme_data.dart';
 import 'popover/dievas_popover_theme_data.dart';
 import 'radio/dievas_radio_theme_data.dart';
+import 'search/dievas_search_theme_data.dart';
 import 'snackbar/dievas_snackbar_theme_data.dart';
 import 'switch/dievas_switch_theme_data.dart';
 import 'tag/dievas_tag_theme_data.dart';
@@ -41,6 +45,7 @@ final class DievasComponentThemeData extends Equatable {
     required this.textButton,
     required this.iconButton,
     required this.badge,
+    required this.breadcrumb,
     required this.avatar,
     required this.tag,
     required this.linearProgress,
@@ -57,10 +62,19 @@ final class DievasComponentThemeData extends Equatable {
     required this.tooltip,
     required this.loader,
     required this.emptyState,
+    required this.authCode,
     required this.accordion,
+    required this.dotIndicator,
     required this.drawer,
+    required this.search,
     required this.popover,
   });
+
+  /// Theme data for [DievasAuthCode].
+  final DievasAuthCodeThemeData authCode;
+
+  /// Theme data for [DievasSearchWithList] and [DievasSearchWithDropdown].
+  final DievasSearchThemeData search;
 
   /// Theme data for [DievasFilledButton] — primary, secondary, destructive variants.
   final DievasFilledButtonGroupThemeData filledButton;
@@ -76,6 +90,9 @@ final class DievasComponentThemeData extends Equatable {
 
   /// Theme data for [DievasBadge] — layout and typography only (colour is dynamic).
   final DievasBadgeThemeData badge;
+
+  /// Theme data for [DievasBreadcrumb].
+  final DievasBreadcrumbThemeData breadcrumb;
 
   /// Theme data for [DievasAvatar] — sizes, radii, fallback colours.
   final DievasAvatarThemeData avatar;
@@ -130,6 +147,9 @@ final class DievasComponentThemeData extends Equatable {
   /// Theme data for [DievasAccordion].
   final DievasAccordionThemeData accordion;
 
+  /// Theme data for [DievasDotIndicator].
+  final DievasDotIndicatorThemeData dotIndicator;
+
   /// Theme data for [DievasDrawer].
   final DievasDrawerThemeData drawer;
 
@@ -142,6 +162,7 @@ final class DievasComponentThemeData extends Equatable {
     DievasTextButtonGroupThemeData? textButton,
     DievasIconButtonGroupThemeData? iconButton,
     DievasBadgeThemeData? badge,
+    DievasBreadcrumbThemeData? breadcrumb,
     DievasAvatarThemeData? avatar,
     DievasTagThemeData? tag,
     DievasLinearProgressThemeData? linearProgress,
@@ -158,8 +179,11 @@ final class DievasComponentThemeData extends Equatable {
     DievasTooltipThemeData? tooltip,
     DievasLoaderThemeData? loader,
     DievasEmptyStateThemeData? emptyState,
+    DievasAuthCodeThemeData? authCode,
     DievasAccordionThemeData? accordion,
+    DievasDotIndicatorThemeData? dotIndicator,
     DievasDrawerThemeData? drawer,
+    DievasSearchThemeData? search,
     DievasPopoverThemeData? popover,
   }) => DievasComponentThemeData(
     filledButton: filledButton ?? this.filledButton,
@@ -167,6 +191,7 @@ final class DievasComponentThemeData extends Equatable {
     textButton: textButton ?? this.textButton,
     iconButton: iconButton ?? this.iconButton,
     badge: badge ?? this.badge,
+    breadcrumb: breadcrumb ?? this.breadcrumb,
     avatar: avatar ?? this.avatar,
     tag: tag ?? this.tag,
     linearProgress: linearProgress ?? this.linearProgress,
@@ -183,8 +208,11 @@ final class DievasComponentThemeData extends Equatable {
     tooltip: tooltip ?? this.tooltip,
     loader: loader ?? this.loader,
     emptyState: emptyState ?? this.emptyState,
+    authCode: authCode ?? this.authCode,
     accordion: accordion ?? this.accordion,
+    dotIndicator: dotIndicator ?? this.dotIndicator,
     drawer: drawer ?? this.drawer,
+    search: search ?? this.search,
     popover: popover ?? this.popover,
   );
 
@@ -195,6 +223,7 @@ final class DievasComponentThemeData extends Equatable {
     textButton,
     iconButton,
     badge,
+    breadcrumb,
     avatar,
     tag,
     linearProgress,
@@ -211,8 +240,11 @@ final class DievasComponentThemeData extends Equatable {
     tooltip,
     loader,
     emptyState,
+    authCode,
     accordion,
+    dotIndicator,
     drawer,
+    search,
     popover,
   ];
 }

@@ -26,9 +26,9 @@ class ComponentsSection extends StatelessComponent {
                 'font-display font-black text-[clamp(36px,5vw,60px)] '
                 'leading-[0.95] tracking-[-0.025em] text-slate-900',
             [
-              Component.text('28 shipped.'),
+              Component.text('34 shipped.'),
               br(),
-              span(classes: 'text-slate-400', [Component.text('14 in progress.')]),
+              span(classes: 'text-slate-400', [Component.text('8 in progress.')]),
             ],
           ),
           p(
@@ -579,18 +579,12 @@ class ComponentsSection extends StatelessComponent {
   };
 
   static const _wip = [
-    'AuthCode',
-    'BreadCrumb',
     'Carousel',
-    'DotIndicator',
     'Dropdown',
     'MenuItem',
     'SegmentedControl',
     'TabBar',
     'Table',
-    'TextInputGroup',
-    'SearchWithList',
-    'SearchWithDropdown',
     'SingleSelectComboBox',
     'MultiSelectComboBox',
   ];

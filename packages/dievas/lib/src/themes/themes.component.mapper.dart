@@ -20,6 +20,8 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
     textButton: override?.textButton ?? _createTextButtonGroup(colors, typography, spacing),
     iconButton: override?.iconButton ?? _createIconButtonGroup(colors, sizing, border),
     badge: override?.badge ?? _createBadgeTheme(typography, spacing, border),
+    breadcrumb: override?.breadcrumb ?? _createBreadcrumbTheme(colors, typography, spacing, sizing),
+    dotIndicator: override?.dotIndicator ?? _createDotIndicatorTheme(colors, animation),
     avatar: override?.avatar ?? _createAvatarTheme(colors, typography, sizing, border),
     tag: override?.tag ?? _createTagTheme(typography, spacing, border),
     linearProgress: override?.linearProgress ?? _createLinearProgressTheme(colors, border),
@@ -28,7 +30,9 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
     toggle: override?.toggle ?? _createSwitchTheme(colors, typography, spacing, animation),
     radio: override?.radio ?? _createRadioTheme(colors, typography, spacing, border),
     textInput: override?.textInput ?? _createTextInputTheme(colors, typography, spacing, sizing, border),
+    authCode: override?.authCode ?? _createAuthCodeTheme(colors, typography, sizing, spacing, border),
     textInputGroup: override?.textInputGroup ?? _createTextInputGroupTheme(colors, sizing, spacing, border),
+    search: override?.search ?? _createSearchTheme(colors, typography, sizing, spacing, border),
     alert: override?.alert ?? _createAlertTheme(typography, spacing, border),
     snackbar: override?.snackbar ?? _createSnackbarTheme(colors, typography, spacing, border),
     bottomSheet: override?.bottomSheet ?? _createBottomSheetTheme(colors, border),
@@ -264,6 +268,35 @@ DievasIconButtonGroupThemeData _createIconButtonGroup(
   );
 }
 
+// DotIndicator
+DievasDotIndicatorThemeData _createDotIndicatorTheme(DievasColourThemeData colors, DievasAnimationThemeData animation) =>
+    DievasDotIndicatorThemeData(
+      dotSize: DievasSizingPrimitives.s8,
+      activeDotSize: DievasSizingPrimitives.s10,
+      dotSpacing: DievasSpacingPrimitives.s2,
+      colorActive: colors.action.actionPrimary,
+      colorInactive: colors.border.borderDefault,
+      animationDuration: animation.standard,
+      disabledOpacity: DievasOpacitySemantic.disabled,
+    );
+
+// Breadcrumb
+DievasBreadcrumbThemeData _createBreadcrumbTheme(
+  DievasColourThemeData colors,
+  DievasTypographyThemeData typography,
+  DievasSpacingThemeData spacing,
+  DievasSizingThemeData sizing,
+) => DievasBreadcrumbThemeData(
+  itemStyle: typography.bodySm.copyWith(color: colors.text.textSecondary),
+  activeItemStyle: typography.bodySm.copyWith(color: colors.text.textPrimary),
+  separatorStyle: typography.bodySm.copyWith(color: colors.icon.iconDisabled),
+  separatorSpacing: spacing.xs,
+  iconSize: sizing.iconSm,
+  iconSpacing: spacing.xs,
+  minHitHeight: DievasSizingPrimitives.s40,
+  disabledOpacity: DievasOpacitySemantic.disabled,
+);
+
 // Badge
 DievasBadgeThemeData _createBadgeTheme(
   DievasTypographyThemeData typography,
@@ -475,6 +508,59 @@ DievasTextInputGroupThemeData _createTextInputGroupTheme(
   borderColorFocused: colors.input.inputBorderFocus,
   dividerColor: colors.border.borderDefault,
   dividerWidth: border.strokeThin,
+  disabledOpacity: DievasOpacitySemantic.disabled,
+);
+
+// AuthCode
+DievasAuthCodeThemeData _createAuthCodeTheme(
+  DievasColourThemeData colors,
+  DievasTypographyThemeData typography,
+  DievasSizingThemeData sizing,
+  DievasSpacingThemeData spacing,
+  DievasBorderThemeData border,
+) => DievasAuthCodeThemeData(
+  digitStyle: typography.titleLg,
+  height: sizing.inputHeightLg,
+  width: sizing.inputHeightLg,
+  borderRadius: border.md,
+  strokeWidth: border.strokeThin,
+  strokeWidthFocused: border.strokeDefault,
+  bgColor: colors.input.inputBg,
+  borderColor: colors.input.inputBorder,
+  borderColorFocused: colors.action.actionPrimary,
+  borderColorError: colors.input.inputBorderError,
+  cursorColor: colors.action.actionPrimary,
+  cursorWidth: 2.0,
+  cursorHeight: DievasSizingPrimitives.s24,
+  gap: spacing.sm,
+  disabledOpacity: DievasOpacitySemantic.disabled,
+);
+
+// Search (shared by DievasSearchWithList and DievasSearchWithDropdown)
+DievasSearchThemeData _createSearchTheme(
+  DievasColourThemeData colors,
+  DievasTypographyThemeData typography,
+  DievasSizingThemeData sizing,
+  DievasSpacingThemeData spacing,
+  DievasBorderThemeData border,
+) => DievasSearchThemeData(
+  inputStyle: typography.bodyMd,
+  placeholderStyle: typography.bodyMd.copyWith(color: colors.input.inputPlaceholder),
+  height: sizing.inputHeightMd,
+  borderRadius: border.md,
+  strokeWidth: border.strokeThin,
+  strokeWidthFocused: border.strokeDefault,
+  bgColor: colors.input.inputBg,
+  borderColor: colors.input.inputBorder,
+  borderColorFocused: colors.input.inputBorderFocus,
+  iconColor: colors.icon.iconSecondary,
+  iconSize: DievasSizingPrimitives.s20,
+  contentPadding: EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.sm),
+  resultItemStyle: typography.bodyMd,
+  resultItemPadding: EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
+  resultMaxHeight: 240.0,
+  dividerColor: colors.border.borderDefault,
+  dividerIndent: spacing.md,
   disabledOpacity: DievasOpacitySemantic.disabled,
 );
 

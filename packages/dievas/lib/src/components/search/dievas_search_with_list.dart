@@ -9,9 +9,8 @@ import '../../theme/dievas_theme.dart';
 /// directly below the search field. Tapping an item calls [onSelected]
 /// and clears the search text.
 ///
-/// Uses [DievasTextInputThemeData] for the search field — no separate
-/// theme data class. The results list reads [colors], [spacing], and
-/// [typography] from [DievasTheme].
+/// All styling is derived from [DievasSearchThemeData] via
+/// [DievasTheme.componentsOf].
 ///
 /// Moon reference: SearchWithList
 ///
@@ -105,49 +104,35 @@ class _DievasSearchWithListState<T> extends State<DievasSearchWithList<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = DievasTheme.colorsOf(context);
-    final typo = DievasTheme.typographyOf(context);
-    final spacing = DievasTheme.spacingOf(context);
-    final borderRadius = DievasTheme.borderOf(context).md;
+    final theme = DievasTheme.componentsOf(context).search;
 
     return Column(
       mainAxisSize: .min,
       crossAxisAlignment: .stretch,
       children: [
         SizedBox(
-          height: DievasTheme.sizingOf(context).inputHeightMd,
+          height: theme.height,
           child: TextField(
             controller: _controller,
             focusNode: _focusNode,
             enabled: widget.enabled,
-            style: typo.bodyMd,
+            style: theme.inputStyle,
             decoration: InputDecoration(
               hintText: widget.hint,
-              hintStyle: typo.bodyMd.copyWith(color: colors.input.inputPlaceholder),
-              contentPadding: EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.sm),
+              hintStyle: theme.placeholderStyle,
+              contentPadding: theme.contentPadding,
               filled: true,
-              fillColor: colors.input.inputBg,
+              fillColor: theme.bgColor,
               prefixIcon: Padding(
-                padding: EdgeInsetsDirectional.only(start: spacing.md, end: spacing.xs),
-                child: IconTheme(
-                  data: IconThemeData(color: colors.icon.iconSecondary, size: 20),
-                  child: widget.leadingIcon ?? const Icon(Icons.search),
-                ),
+                padding: EdgeInsetsDirectional.only(start: theme.dividerIndent, end: theme.iconSize / 4),
+                child: IconTheme(data: IconThemeData(color: theme.iconColor, size: theme.iconSize), child: widget.leadingIcon ?? const Icon(Icons.search)),
               ),
               prefixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 0),
-              border: OutlineInputBorder(
-                borderRadius: borderRadius,
-                borderSide: BorderSide(color: colors.input.inputBorder),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: borderRadius,
-                borderSide: BorderSide(color: colors.input.inputBorder),
-              ),
+              border: OutlineInputBorder(borderRadius: theme.borderRadius, borderSide: BorderSide(color: theme.borderColor)),
+              enabledBorder: OutlineInputBorder(borderRadius: theme.borderRadius, borderSide: BorderSide(color: theme.borderColor)),
               focusedBorder: OutlineInputBorder(
-                borderRadius: _showResults
-                    ? BorderRadius.vertical(top: borderRadius.topLeft)
-                    : borderRadius,
-                borderSide: BorderSide(color: colors.input.inputBorderFocus),
+                borderRadius: _showResults ? BorderRadius.vertical(top: theme.borderRadius.topLeft) : theme.borderRadius,
+                borderSide: BorderSide(color: theme.borderColorFocused),
               ),
               isDense: true,
             ),
@@ -165,11 +150,7 @@ class _DievasSearchWithListState<T> extends State<DievasSearchWithList<T>> {
 }
 
 class _ResultsList<T> extends StatelessWidget {
-  const _ResultsList({
-    required this.results,
-    required this.displayString,
-    required this.onItemTap,
-  });
+  const _ResultsList({required this.results, required this.displayString, required this.onItemTap});
 
   final List<T> results;
   final String Function(T) displayString;
@@ -177,24 +158,21 @@ class _ResultsList<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = DievasTheme.colorsOf(context);
-    final typo = DievasTheme.typographyOf(context);
-    final spacing = DievasTheme.spacingOf(context);
-    final border = DievasTheme.borderOf(context);
+    final theme = DievasTheme.componentsOf(context).search;
 
     return Container(
-      constraints: const BoxConstraints(maxHeight: 240),
+      constraints: BoxConstraints(maxHeight: theme.resultMaxHeight),
       decoration: BoxDecoration(
-        color: colors.background.bgElevated,
-        borderRadius: BorderRadius.vertical(bottom: border.md.topLeft),
+        color: theme.bgColor,
+        borderRadius: BorderRadius.vertical(bottom: theme.borderRadius.topLeft),
         border: Border(
-          left: BorderSide(color: colors.input.inputBorderFocus),
-          right: BorderSide(color: colors.input.inputBorderFocus),
-          bottom: BorderSide(color: colors.input.inputBorderFocus),
+          left: BorderSide(color: theme.borderColorFocused),
+          right: BorderSide(color: theme.borderColorFocused),
+          bottom: BorderSide(color: theme.borderColorFocused),
         ),
         boxShadow: [
           BoxShadow(
-            color: colors.background.bgOverlay,
+            color: theme.borderColorFocused.withValues(alpha: 0.15),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -204,16 +182,18 @@ class _ResultsList<T> extends StatelessWidget {
         padding: EdgeInsets.zero,
         shrinkWrap: true,
         itemCount: results.length,
-        separatorBuilder: (_, _) =>
-            Divider(height: 1, thickness: 1, color: colors.border.borderDefault, indent: spacing.md, endIndent: spacing.md),
+        separatorBuilder: (_, _) => Divider(
+          height: 1,
+          thickness: 1,
+          color: theme.dividerColor,
+          indent: theme.dividerIndent,
+          endIndent: theme.dividerIndent,
+        ),
         itemBuilder: (context, i) {
           final item = results[i];
           return InkWell(
             onTap: () => onItemTap(item),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
-              child: Text(displayString(item), style: typo.bodyMd),
-            ),
+            child: Padding(padding: theme.resultItemPadding, child: Text(displayString(item), style: theme.resultItemStyle)),
           );
         },
       ),

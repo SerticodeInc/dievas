@@ -25,6 +25,7 @@ class DievasGallery extends StatelessWidget {
           WidgetbookFolder(
             name: 'Display',
             children: [
+              dotIndicatorComponent,
               avatarComponent,
               badgeComponent,
               circularLoaderComponent,
@@ -39,12 +40,13 @@ class DievasGallery extends StatelessWidget {
           ),
           WidgetbookFolder(
             name: 'Form',
-            children: [checkboxComponent, radioComponent, switchComponent, textInputComponent, textAreaComponent],
+            children: [authCodeComponent, checkboxComponent, radioComponent, switchComponent, textInputComponent, textAreaComponent, textInputGroupComponent],
           ),
           WidgetbookFolder(name: 'Feedback', children: [alertComponent, bannerComponent, snackbarComponent]),
           WidgetbookFolder(name: 'Overlays', children: [bottomSheetComponent, modalComponent, tooltipComponent]),
           WidgetbookFolder(name: 'Utility', children: [loaderComponent]),
-          WidgetbookFolder(name: 'Nav / Disclosure', children: [accordionComponent, drawerComponent, popoverComponent]),
+          WidgetbookFolder(name: 'Search', children: [searchWithListComponent, searchWithDropdownComponent]),
+          WidgetbookFolder(name: 'Nav / Disclosure', children: [breadcrumbComponent, accordionComponent, drawerComponent, popoverComponent]),
         ],
       ),
     ],

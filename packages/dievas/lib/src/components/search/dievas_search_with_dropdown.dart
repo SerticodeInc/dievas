@@ -12,6 +12,9 @@ import '../../theme/dievas_theme.dart';
 /// variant uses an [Overlay] so the dropdown can extend beyond the parent's
 /// clip bounds — useful inside dialogs, side panels, or tight layouts.
 ///
+/// All styling is derived from [DievasSearchThemeData] via
+/// [DievasTheme.componentsOf].
+///
 /// Moon reference: SearchWithDropdown
 ///
 /// ```dart
@@ -134,37 +137,31 @@ class _DievasSearchWithDropdownState<T> extends State<DievasSearchWithDropdown<T
 
   @override
   Widget build(BuildContext context) {
-    final colors = DievasTheme.colorsOf(context);
-    final typo = DievasTheme.typographyOf(context);
-    final spacing = DievasTheme.spacingOf(context);
-    final borderRadius = DievasTheme.borderOf(context).md;
+    final theme = DievasTheme.componentsOf(context).search;
 
     return SizedBox(
       key: _fieldKey,
-      height: DievasTheme.sizingOf(context).inputHeightMd,
+      height: theme.height,
       child: TextField(
         controller: _controller,
         enabled: widget.enabled,
-        style: typo.bodyMd,
+        style: theme.inputStyle,
         decoration: InputDecoration(
           hintText: widget.hint,
-          hintStyle: typo.bodyMd.copyWith(color: colors.input.inputPlaceholder),
-          contentPadding: EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.sm),
+          hintStyle: theme.placeholderStyle,
+          contentPadding: theme.contentPadding,
           filled: true,
-          fillColor: colors.input.inputBg,
+          fillColor: theme.bgColor,
           prefixIcon: Padding(
-            padding: EdgeInsetsDirectional.only(start: spacing.md, end: spacing.xs),
-            child: IconTheme(
-              data: IconThemeData(color: colors.icon.iconSecondary, size: 20),
-              child: const Icon(Icons.search),
-            ),
+            padding: EdgeInsetsDirectional.only(start: theme.dividerIndent, end: theme.iconSize / 4),
+            child: IconTheme(data: IconThemeData(color: theme.iconColor, size: theme.iconSize), child: const Icon(Icons.search)),
           ),
           prefixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 0),
           suffixIcon: _controller.text.isNotEmpty
               ? Padding(
-                padding: EdgeInsetsDirectional.only(end: spacing.sm, start: spacing.xs),
+                padding: EdgeInsetsDirectional.only(end: theme.iconSize / 4, start: theme.iconSize / 4),
                 child: IconTheme(
-                  data: IconThemeData(color: colors.icon.iconSecondary, size: 16),
+                  data: IconThemeData(color: theme.iconColor, size: theme.iconSize * 0.8),
                   child: GestureDetector(
                     onTap: () {
                       _controller.clear();
@@ -176,18 +173,9 @@ class _DievasSearchWithDropdownState<T> extends State<DievasSearchWithDropdown<T
               )
               : null,
           suffixIconConstraints: const BoxConstraints(minWidth: 32, minHeight: 0),
-          border: OutlineInputBorder(
-            borderRadius: borderRadius,
-            borderSide: BorderSide(color: colors.input.inputBorder),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: borderRadius,
-            borderSide: BorderSide(color: colors.input.inputBorder),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: borderRadius,
-            borderSide: BorderSide(color: colors.input.inputBorderFocus),
-          ),
+          border: OutlineInputBorder(borderRadius: theme.borderRadius, borderSide: BorderSide(color: theme.borderColor)),
+          enabledBorder: OutlineInputBorder(borderRadius: theme.borderRadius, borderSide: BorderSide(color: theme.borderColor)),
+          focusedBorder: OutlineInputBorder(borderRadius: theme.borderRadius, borderSide: BorderSide(color: theme.borderColorFocused)),
           isDense: true,
         ),
       ),
@@ -216,18 +204,13 @@ class _DropdownResults<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = DievasTheme.colorsOf(context);
-    final typo = DievasTheme.typographyOf(context);
-    final spacing = DievasTheme.spacingOf(context);
-    final border = DievasTheme.borderOf(context);
+    final theme = DievasTheme.componentsOf(context).search;
 
-    final sizing = DievasTheme.sizingOf(context);
-    final rowHeight = sizing.inputHeightSm;
+    final rowHeight = theme.height * 0.8;
     final maxHeight = (results.length * rowHeight).clamp(0.0, rowHeight * 7);
 
     return Stack(
       children: [
-        // Full-screen tap-to-dismiss layer
         Positioned.fill(
           child: GestureDetector(onTap: onDismiss, behavior: .opaque, child: const SizedBox.expand()),
         ),
@@ -237,17 +220,17 @@ class _DropdownResults<T> extends StatelessWidget {
           width: width,
           child: Material(
             elevation: 0,
-            color: colors.background.bgElevated,
-            borderRadius: BorderRadius.vertical(bottom: border.md.topLeft),
+            color: theme.bgColor,
+            borderRadius: BorderRadius.vertical(bottom: theme.borderRadius.topLeft),
             child: Container(
               constraints: BoxConstraints(maxHeight: maxHeight),
               decoration: BoxDecoration(
-                color: colors.background.bgElevated,
-                borderRadius: BorderRadius.vertical(bottom: border.md.topLeft),
-                border: Border.all(color: colors.input.inputBorderFocus),
+                color: theme.bgColor,
+                borderRadius: BorderRadius.vertical(bottom: theme.borderRadius.topLeft),
+                border: Border.all(color: theme.borderColorFocused),
                 boxShadow: [
                   BoxShadow(
-                    color: colors.background.bgOverlay,
+                    color: theme.borderColorFocused.withValues(alpha: 0.15),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
@@ -260,18 +243,15 @@ class _DropdownResults<T> extends StatelessWidget {
                 separatorBuilder: (_, _) => Divider(
                   height: 1,
                   thickness: 1,
-                  color: colors.border.borderDefault,
-                  indent: spacing.md,
-                  endIndent: spacing.md,
+                  color: theme.dividerColor,
+                  indent: theme.dividerIndent,
+                  endIndent: theme.dividerIndent,
                 ),
                 itemBuilder: (context, i) {
                   final item = results[i];
                   return InkWell(
                     onTap: () => onItemTap(item),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
-                      child: Text(displayString(item), style: typo.bodyMd),
-                    ),
+                    child: Padding(padding: theme.resultItemPadding, child: Text(displayString(item), style: theme.resultItemStyle)),
                   );
                 },
               ),

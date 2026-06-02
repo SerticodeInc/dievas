@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' show ThemeData;
 import 'package:flutter/widgets.dart';
 
+import 'animation/dievas_animation_theme_data.dart';
 import 'border/dievas_border_theme_data.dart';
 import 'color/dievas_colour_theme_data.dart';
 import 'component/dievas_component_theme_data.dart';
@@ -16,7 +17,18 @@ import 'typography/dievas_typography_theme_data.dart';
 ///
 /// Example: a widget that reads only [DievasThemeAspect.colors] will not
 /// rebuild when [DievasThemeAspect.spacing] changes.
-enum DievasThemeAspect { border, colors, components, elevation, material, opacity, sizing, spacing, typography }
+enum DievasThemeAspect {
+  animation,
+  border,
+  colors,
+  components,
+  elevation,
+  material,
+  opacity,
+  sizing,
+  spacing,
+  typography,
+}
 
 /// The Dievas InheritedModel — the single source of truth for theme data
 /// in the widget tree.
@@ -72,6 +84,10 @@ class DievasTheme extends InheritedModel<DievasThemeAspect> {
   static DievasElevationThemeData elevationOf(BuildContext context) =>
       InheritedModel.inheritFrom<DievasTheme>(context, aspect: DievasThemeAspect.elevation)!.data.elevation;
 
+  /// Returns only the [DievasAnimationThemeData]. Rebuilds when animation changes.
+  static DievasAnimationThemeData animationOf(BuildContext context) =>
+      InheritedModel.inheritFrom<DievasTheme>(context, aspect: DievasThemeAspect.animation)!.data.animation;
+
   /// Returns only the [DievasOpacityThemeData]. Rebuilds when opacity changes.
   static DievasOpacityThemeData opacityOf(BuildContext context) =>
       InheritedModel.inheritFrom<DievasTheme>(context, aspect: DievasThemeAspect.opacity)!.data.opacity;
@@ -94,6 +110,7 @@ class DievasTheme extends InheritedModel<DievasThemeAspect> {
   @override
   bool updateShouldNotifyDependent(DievasTheme oldWidget, Set<DievasThemeAspect> dependencies) => dependencies.any(
     (aspect) => switch (aspect) {
+      .animation => data.animation != oldWidget.data.animation,
       .border => data.border != oldWidget.data.border,
       .colors => data.colors != oldWidget.data.colors,
       .components => data.components != oldWidget.data.components,

@@ -46,6 +46,10 @@
     0 2px 8px rgba(0, 0, 0, 0.06),
     0 0 32px rgba(var(--card-accent), 0.18) !important;
 }
+.preview-card:active {
+  transform: translateY(-2px) scale(0.98);
+  transition: transform 100ms ease-out;
+}
 
 /* CTA island — subtle bg gradient animation */
 @keyframes bg-soft-shift {
@@ -62,7 +66,7 @@
     rgba(2,6,23,1) 100%
   );
   background-size: 200% 200%;
-  animation: bg-soft-shift 8s ease-in-out infinite;
+  animation: bg-soft-shift 6s ease-in-out infinite;
 }
 
 /* Shipped pill count badge — subtle pulse */
@@ -79,11 +83,34 @@
   animation: count-pulse 1.5s ease-in-out infinite;
 }
 
+/* WIP pill — subtle hover lift */
+.wip-pill {
+  transition: transform 0.15s ease-out,
+              background 0.15s ease-out,
+              border-color 0.15s ease-out;
+}
+.wip-pill:hover {
+  transform: translateY(-1px);
+  background: rgba(241, 245, 249, 0.9);
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+/* Shipped pill — active press feedback */
+.shipped-pill {
+  transition: transform 100ms ease-out;
+}
+.shipped-pill:active {
+  transform: scale(0.97);
+}
+
 /* ── Reduced motion ───────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
   .cursor-blink { animation: none; opacity: 1; }
   .cta-island { animation: none; }
   .preview-card:hover { transform: none; box-shadow: none; }
+  .preview-card:active { transform: none; }
   .count-badge:hover { animation: none; }
+  .wip-pill:hover { transform: none; }
+  .shipped-pill:active { transform: none; }
 }

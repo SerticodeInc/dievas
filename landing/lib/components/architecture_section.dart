@@ -50,8 +50,8 @@ class ArchitectureSection extends StatelessComponent {
           ]),
 
           // ── Code pipeline ─────────────────────────────────────────────────
-          div(classes: 'mb-24 reveal', [
-            div(classes: 'flex flex-col lg:flex-row items-stretch gap-3', [
+          div(classes: 'mb-24', [
+            div(classes: 'flex flex-col lg:flex-row items-stretch gap-3 reveal-group', [
               _CodePanel(
                 label: 'Tokens.',
                 badgeClass:
@@ -74,33 +74,34 @@ class ArchitectureSection extends StatelessComponent {
     );
   }
 
-  Component _principleCard(String num, String title, String body, String symbol, String colorClass, String accentRgb) => div(
-    classes:
-        'group p-8 rounded-2xl border $colorClass '
-        'bg-white '
-        'transition-all duration-300 cursor-default '
-        'hover:shadow-[0_8px_32px_rgba(var(--card-accent),0.18)]',
-    attributes: {'style': '--card-accent: $accentRgb;'},
-    [
-      div(classes: 'flex items-center justify-between mb-6', [
-        span(
-          classes: 'font-mono text-[12px] tracking-[0.2em] uppercase',
-          attributes: const {'style': 'color: rgba(129,140,248,0.7)'},
-          [Component.text(num)],
-        ),
-        div(
-          classes:
-              'pc-icon w-9 h-9 rounded-xl border border-slate-700 bg-white/5 '
-              'flex items-center justify-center text-slate-400 text-base select-none '
-              'group-hover:border-brand/25 group-hover:bg-brand/8 group-hover:text-brand '
-              'transition-all duration-300',
-          [Component.text(symbol)],
-        ),
-      ]),
-      p(classes: 'font-display font-semibold text-slate-900 text-base leading-snug mb-3', [Component.text(title)]),
-      p(classes: 'font-body font-light text-sm leading-relaxed text-text-mid', [Component.text(body)]),
-    ],
-  );
+  Component _principleCard(String num, String title, String body, String symbol, String colorClass, String accentRgb) =>
+      div(
+        classes:
+            'group principle-card p-8 rounded-2xl border $colorClass '
+            'bg-white '
+            'transition-all duration-300 cursor-default '
+            'hover:shadow-[0_8px_32px_rgba(var(--card-accent),0.18)]',
+        attributes: {'style': '--card-accent: $accentRgb;'},
+        [
+          div(classes: 'flex items-center justify-between mb-6', [
+            span(
+              classes: 'font-mono text-[12px] tracking-[0.2em] uppercase',
+              attributes: const {'style': 'color: rgba(129,140,248,0.7)'},
+              [Component.text(num)],
+            ),
+            div(
+              classes:
+                  'pc-icon w-9 h-9 rounded-xl border border-slate-700 bg-white/5 '
+                  'flex items-center justify-center text-slate-400 text-base select-none '
+                  'group-hover:border-brand/25 group-hover:bg-brand/8 group-hover:text-brand '
+                  'transition-all duration-300',
+              [Component.text(symbol)],
+            ),
+          ]),
+          p(classes: 'font-display font-semibold text-slate-900 text-base leading-snug mb-3', [Component.text(title)]),
+          p(classes: 'font-body font-light text-sm leading-relaxed text-text-mid', [Component.text(body)]),
+        ],
+      );
 
   static const _tokensCode = r'''
 <pre style="font-family:ui-monospace,monospace;font-size:11px;line-height:1.85;color:#94a3b8;white-space:pre"><code><span style="color:#64748b">// primitive scale — raw ints</span>
@@ -193,7 +194,7 @@ class _CodePanel extends StatelessComponent {
   @override
   Component build(BuildContext context) => div(
     classes:
-'code-panel rounded-2xl border border-slate-200 overflow-hidden transition-shadow duration-300 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)] h-full flex flex-col',
+        'code-panel rounded-2xl border border-slate-200 overflow-hidden transition-shadow duration-300 hover:shadow-[0_8px_40px_rgba(0,0,0,0.3)] h-full flex flex-col',
     [
       div(
         classes:

@@ -53,6 +53,13 @@
 
 /* ── Micro-interactions ────────────────────────────────────── */
 
+/* Shared press-scale — Emil: buttons must feel responsive, 100-160ms */
+.btn-press:active,
+.pill-press:active {
+  transform: scale(0.97);
+  transition: transform 100ms ease-out;
+}
+
 /* Hover lift — subtle card elevation */
 .hover-lift {
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
@@ -64,6 +71,7 @@
 }
 .hover-lift:active {
   transform: translateY(-1px) scale(0.98);
+  transition: transform 100ms ease-out;
 }
 
 /* CTA glow pulse */
@@ -141,8 +149,8 @@ a.group:hover .arrow-span {
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal-group > * {
@@ -152,13 +160,13 @@ a.group:hover .arrow-span {
 .reveal-group.is-visible > * {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.reveal-group.is-visible > *:nth-child(2) { transition-delay: 0.1s; }
-.reveal-group.is-visible > *:nth-child(3) { transition-delay: 0.2s; }
-.reveal-group.is-visible > *:nth-child(4) { transition-delay: 0.3s; }
-.reveal-group.is-visible > *:nth-child(5) { transition-delay: 0.4s; }
+.reveal-group.is-visible > *:nth-child(2) { transition-delay: 0.06s; }
+.reveal-group.is-visible > *:nth-child(3) { transition-delay: 0.12s; }
+.reveal-group.is-visible > *:nth-child(4) { transition-delay: 0.18s; }
+.reveal-group.is-visible > *:nth-child(5) { transition-delay: 0.24s; }
 
 .reveal-left {
   opacity: 0;
@@ -167,8 +175,8 @@ a.group:hover .arrow-span {
 .reveal-left.is-visible {
   opacity: 1;
   transform: translateX(0);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal-right {
@@ -178,8 +186,8 @@ a.group:hover .arrow-span {
 .reveal-right.is-visible {
   opacity: 1;
   transform: translateX(0);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal-scale {
@@ -189,8 +197,8 @@ a.group:hover .arrow-span {
 .reveal-scale.is-visible {
   opacity: 1;
   transform: scale(1);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-stagger {
@@ -200,8 +208,8 @@ a.group:hover .arrow-span {
 .reveal-stagger.is-visible {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ── Scroll progress bar ──────────────────────────────────── */

@@ -148,7 +148,10 @@ class Hero extends StatelessComponent {
                     'hover:bg-action-hover hover:-translate-y-px '
                     'hover:shadow-[0_8px_32px_rgba(129,140,248,0.35)] '
                     'cta-glow',
-                [Component.text('Gallery'), span(classes: 'text-xs arrow-slide', [Component.text('→')])],
+                [
+                  Component.text('Gallery'),
+                  span(classes: 'text-xs arrow-slide', [Component.text('→')]),
+                ],
               ),
             ],
           ),
@@ -160,7 +163,7 @@ class Hero extends StatelessComponent {
             [
               _manifestItem('3', 'packages'),
               _manifestSep(),
-              _manifestItem('25', 'components'),
+              _manifestItem('32', 'components'),
               _manifestSep(),
               _manifestItem('9', 'theme aspects'),
               _manifestSep(),
@@ -208,8 +211,8 @@ class Hero extends StatelessComponent {
               ),
               _productChip(
                 title: 'Form',
-                count: '5 shipped',
-                detail: 'TextField · TextArea\nCheckbox · Switch · Radio',
+                count: '10 shipped',
+                detail: 'TextField · TextArea · Search\nCheckbox · Switch · Radio · AuthCode',
                 bg: 'rgba(74, 222, 128, 0.02)',
                 accentRgb: '74, 222, 128',
                 fg: '#A7F3D0',
@@ -217,8 +220,8 @@ class Hero extends StatelessComponent {
               ),
               _productChip(
                 title: 'Display',
-                count: '10 shipped',
-                detail: 'Avatar · Badge · Tag\nDivider · Progress · Loader · Icon',
+                count: '9 shipped',
+                detail: 'Avatar · Badge · Tag · Icon\nDivider · Progress · Loader',
                 bg: 'rgba(251, 191, 36, 0.02)',
                 accentRgb: '251, 191, 36',
                 fg: '#FDE68A',
@@ -234,9 +237,9 @@ class Hero extends StatelessComponent {
                 index: 3,
               ),
               _productChip(
-                title: 'In Progress',
-                count: '17 coming',
-                detail: 'Accordion · AuthCode · Carousel\nDrawer · Dropdown · Popover · ...',
+                title: 'Up Next',
+                count: '8 planned',
+                detail: 'Carousel · Dropdown · MenuItem\nSegmentedControl · TabBar · Table · ...',
                 bg: 'rgba(251, 113, 133, 0.02)',
                 accentRgb: '251, 113, 133',
                 fg: '#FECDD3',
@@ -290,9 +293,11 @@ class Hero extends StatelessComponent {
                 'shadow-[0_8px_32px_rgba(0,0,0,0.5)] '
                 'transition-all duration-200 '
                 'hover:border-brand hover:text-brand hover:-translate-y-px',
-            [div(classes: 'w-2 h-2 rounded-full bg-brand flex-shrink-0', []),
-             Component.text('Serticode Inc.'),
-             div(classes: 'badge-shine absolute inset-0 pointer-events-none rounded-xl', []),],
+            [
+              div(classes: 'w-2 h-2 rounded-full bg-brand flex-shrink-0', []),
+              Component.text('Serticode Inc.'),
+              div(classes: 'badge-shine absolute inset-0 pointer-events-none rounded-xl', []),
+            ],
           ),
           a(
             href: DievasUrls.moonDs,
@@ -306,9 +311,11 @@ class Hero extends StatelessComponent {
                 'shadow-[0_8px_32px_rgba(0,0,0,0.5)] '
                 'transition-all duration-200 '
                 'hover:border-brand/50 hover:text-brand hover:-translate-y-px',
-            [div(classes: 'w-2 h-2 rounded-full bg-brand/50 flex-shrink-0', []),
-             Component.text('Moon DS'),
-             div(classes: 'badge-shine absolute inset-0 pointer-events-none rounded-xl', []),],
+            [
+              div(classes: 'w-2 h-2 rounded-full bg-brand/50 flex-shrink-0', []),
+              Component.text('Moon DS'),
+              div(classes: 'badge-shine absolute inset-0 pointer-events-none rounded-xl', []),
+            ],
           ),
         ],
       ),
@@ -414,11 +421,16 @@ class Hero extends StatelessComponent {
     'OutlinedButton',
     'TextButton',
     'IconButton',
-    'TextInput',
-    'TextArea',
+    'AuthCode',
+    'Breadcrumb',
+    'DotIndicator',
     'Checkbox',
     'Switch',
+    'TextInput',
+    'TextArea',
     'Radio',
+    'TextInputGroup',
+    'Search',
     'Avatar',
     'Badge',
     'Tag',
@@ -426,14 +438,16 @@ class Hero extends StatelessComponent {
     'CircularProgress',
     'LinearProgress',
     'Icon',
-    'CircularLoader',
-    'LinearLoader',
+    'Loader',
     'EmptyState',
     'Alert',
-    'BottomSheet',
-    'Modal',
     'Snackbar',
     'Banner',
+    'BottomSheet',
+    'Modal',
     'Tooltip',
+    'Accordion',
+    'Drawer',
+    'Popover',
   ];
 }

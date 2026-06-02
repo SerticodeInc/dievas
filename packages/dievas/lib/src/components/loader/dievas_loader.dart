@@ -43,7 +43,8 @@ class _DievasLoaderState extends State<DievasLoader> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 900))..repeat();
+    final theme = DievasTheme.componentsOf(context).loader;
+    _controller = AnimationController(vsync: this, duration: theme.animationDuration)..repeat();
   }
 
   @override

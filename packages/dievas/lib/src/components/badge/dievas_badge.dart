@@ -1,5 +1,4 @@
-import 'package:dievas/dievas.dart' show DievasColourThemeData;
-import 'package:dievas/src/theme/component/badge/dievas_badge_theme_data.dart' show DievasBadgeThemeData;
+import 'package:dievas/dievas.dart' show DievasBadgeThemeData, DievasColourThemeData;
 import 'package:flutter/widgets.dart';
 
 import '../../theme/color/sets/feedback_colours.dart';
@@ -181,7 +180,7 @@ final class _BadgeColors {
       feedbackWarning = c.feedback.feedbackWarning,
       feedbackError = c.feedback.feedbackError,
       feedbackInfo = c.feedback.feedbackInfo,
-      transparent = const Color(0x00000000);
+      transparent = c.staticColours.staticTransparent;
 
   final Color actionPrimary;
   final Color onBrand;

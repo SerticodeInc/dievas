@@ -51,30 +51,34 @@ class ManifestoSection extends StatelessComponent {
           ]),
 
           // ── Before / After code panels ────────────────────────────────────
-          div(classes: 'grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 reveal', [
-            _CodePanel(
-              label: 'typical flutter widget',
-              badge: 'before',
-              badgeClass:
-                  'text-[rgba(248,113,113,1)] border-[rgba(248,113,113,0.3)] '
-                  'bg-[rgba(248,113,113,0.08)]',
-              borderClass: 'border-slate-200',
-              codeHtml: _beforeCode,
-            ),
-            _CodePanel(
-              label: 'with dievas',
-              badge: 'after',
-              badgeClass: 'text-brand border-brand/30 bg-brand/10',
-              borderClass: 'border-slate-200',
-              codeHtml: _afterCode,
-            ),
+          div(classes: 'grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6', [
+            div(classes: 'reveal-left', [
+              _CodePanel(
+                label: 'typical flutter widget',
+                badge: 'before',
+                badgeClass:
+                    'text-[rgba(248,113,113,1)] border-[rgba(248,113,113,0.3)] '
+                    'bg-[rgba(248,113,113,0.08)]',
+                borderClass: 'border-slate-200',
+                codeHtml: _beforeCode,
+              ),
+            ]),
+            div(classes: 'reveal-right reveal-delayed', [
+              _CodePanel(
+                label: 'with dievas',
+                badge: 'after',
+                badgeClass: 'text-brand border-brand/30 bg-brand/10',
+                borderClass: 'border-slate-200',
+                codeHtml: _afterCode,
+              ),
+            ]),
           ]),
 
           // ── Rule strip ─────────────────────────────────────────────────────
           div(
             classes:
                 'mt-16 pt-16 '
-                'flex items-center gap-3 flex-wrap reveal',
+                'flex items-center gap-3 flex-wrap reveal-scale reveal-strong',
             [
               div(
                 classes:

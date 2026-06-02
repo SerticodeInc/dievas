@@ -53,6 +53,7 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
   @override
   Widget build(BuildContext context) {
     final components = DievasTheme.componentsOf(context);
+    final pressDuration = DievasTheme.animationOf(context).quick;
     final buttonTheme = switch (widget.style) {
       .ghost => components.iconButton.ghost,
       .tinted => components.iconButton.tinted,
@@ -90,7 +91,9 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
               final isPressed = states.contains(WidgetState.pressed);
               final isDisabled = states.contains(WidgetState.disabled) || widget.onPressed == null;
 
-              final opacityFactor = isDisabled ? buttonTheme.disabledOpacity : 1.0;
+              final opacityFactor = isDisabled
+                  ? buttonTheme.disabledOpacity
+                  : (isPressed ? buttonTheme.pressOpacity : 1.0);
 
               final activeStyle = isPressed ? buttonTheme.style.focused : buttonTheme.style.idle;
 
@@ -98,7 +101,7 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
               final iconColor = activeStyle.icon.withValues(alpha: opacityFactor);
 
               return AnimatedContainer(
-                duration: DievasButtonPressMixin.kAnimationDuration,
+                duration: pressDuration,
                 width: containerSize,
                 height: containerSize,
                 decoration: BoxDecoration(color: bgColor, borderRadius: borderRadius),

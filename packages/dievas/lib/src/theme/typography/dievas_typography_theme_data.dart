@@ -25,6 +25,7 @@ final class DievasTypographyThemeData extends Equatable {
     required this.titleLg,
     required this.titleMd,
     required this.titleSm,
+    required this.titleXsm,
     // Body
     required this.bodyLg,
     required this.bodyMd,
@@ -73,6 +74,9 @@ final class DievasTypographyThemeData extends Equatable {
   /// Title small — compact sub-headings, sidebar labels, dense list headers.
   final TextStyle titleSm;
 
+  /// Title extra small — compact sub-headings, sidebar labels, dense list headers.
+  final TextStyle titleXsm;
+
   /// Body large — long-form reading content.
   final TextStyle bodyLg;
 
@@ -116,6 +120,7 @@ final class DievasTypographyThemeData extends Equatable {
         titleLg: TextStyle.lerp(a.titleLg, b.titleLg, t)!,
         titleMd: TextStyle.lerp(a.titleMd, b.titleMd, t)!,
         titleSm: TextStyle.lerp(a.titleSm, b.titleSm, t)!,
+        titleXsm: TextStyle.lerp(a.titleXsm, b.titleXsm, t)!,
         bodyLg: TextStyle.lerp(a.bodyLg, b.bodyLg, t)!,
         bodyMd: TextStyle.lerp(a.bodyMd, b.bodyMd, t)!,
         bodySm: TextStyle.lerp(a.bodySm, b.bodySm, t)!,

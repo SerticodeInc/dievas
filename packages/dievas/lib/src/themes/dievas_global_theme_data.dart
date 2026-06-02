@@ -27,23 +27,35 @@ part of '../themes.dart';
 sealed class DievasGlobalThemeData implements DievasThemeData {
   DievasGlobalThemeData({
     required DievasColourThemeData colors,
+    DievasAnimationThemeData animation = const DievasAnimationThemeData(),
     DievasBorderThemeData border = const DievasBorderThemeData(),
     DievasSpacingThemeData spacing = const DievasSpacingThemeData(),
     DievasSizingThemeData sizing = const DievasSizingThemeData(),
     DievasElevationThemeData? elevation,
     DievasOpacityThemeData opacity = const DievasOpacityThemeData(),
     DievasComponentThemeData? components,
-  }) : _colors = colors,
+  }) : _animation = animation,
+       _colors = colors,
        _border = border,
        _spacing = spacing,
        _sizing = sizing,
        _opacity = opacity {
     _typography = _createTypographyData(colors.text.textPrimary);
     _elevation = elevation ?? _buildDefaultElevation(colors);
-    _components = _deriveDievasComponentThemeData(colors, _typography, spacing, sizing, border, components);
+    _components = _deriveDievasComponentThemeData(
+      colors,
+      _typography,
+      spacing,
+      sizing,
+      border,
+      animation,
+      _elevation,
+      components,
+    );
     _material = _buildMaterial(colors);
   }
 
+  final DievasAnimationThemeData _animation;
   final DievasColourThemeData _colors;
   final DievasBorderThemeData _border;
   final DievasSpacingThemeData _spacing;
@@ -53,6 +65,9 @@ sealed class DievasGlobalThemeData implements DievasThemeData {
   late final DievasElevationThemeData _elevation;
   late final DievasComponentThemeData _components;
   late final ThemeData _material;
+
+  @override
+  DievasAnimationThemeData get animation => _animation;
 
   @override
   DievasColourThemeData get colors => _colors;

@@ -40,6 +40,7 @@ DievasTypographyThemeData _createTypographyData(Color textColor) {
     titleLg: style(DievasTypographySemantic.titleLg),
     titleMd: style(DievasTypographySemantic.titleMd),
     titleSm: style(DievasTypographySemantic.titleSm),
+    titleXsm: style(DievasTypographySemantic.titleXsm),
     bodyLg: style(DievasTypographySemantic.bodyLg),
     bodyMd: style(DievasTypographySemantic.bodyMd),
     bodySm: style(DievasTypographySemantic.bodySm),

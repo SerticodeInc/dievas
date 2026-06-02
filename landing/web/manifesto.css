@@ -6,3 +6,20 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+/* After panel — slight delay for dramatic reveal (Emil: stagger creates cascade) */
+.reveal-right.reveal-delayed.is-visible {
+  transition-delay: 0.12s;
+}
+
+/* Rule strip — uses reveal-scale with a stronger ease (Emil: confident entrance) */
+.reveal-scale.reveal-strong.is-visible {
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-right.reveal-delayed.is-visible {
+    transition-delay: 0ms;
+  }
+}

@@ -1,3 +1,4 @@
+import 'package:device_frame/device_frame.dart' as device_frame;
 import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
@@ -30,7 +31,7 @@ enum DievasThemeMode {
 /// [DievasScope.darkTheme] so the scope's internal brightness detection is
 /// bypassed — the addon dropdown is the single source of truth.
 class DievasThemeAddon extends WidgetbookAddon<WidgetbookTheme<DievasThemeData>> {
-  DievasThemeAddon({this.initialMode = .dark}) : super(name: 'Dievas Theme');
+  DievasThemeAddon({this.initialMode = .light}) : super(name: 'Dievas Theme');
 
   final DievasThemeMode initialMode;
 
@@ -51,16 +52,21 @@ class DievasThemeAddon extends WidgetbookAddon<WidgetbookTheme<DievasThemeData>>
   }
 
   @override
-  Widget buildUseCase(BuildContext context, Widget child, WidgetbookTheme<DievasThemeData> setting) => DievasScope(
-    lightTheme: setting.data,
-    darkTheme: setting.data,
-    global: false,
-    child: DievasTheme(
-      data: setting.data,
-      child: Theme(
-        data: setting.data.material,
-        child: ColoredBox(color: setting.data.colors.background.bgBase, child: child),
+  Widget buildUseCase(BuildContext context, Widget child, WidgetbookTheme<DievasThemeData> setting) {
+    return device_frame.DeviceFrame(
+      device: device_frame.Devices.ios.iPhone12ProMax,
+      screen: DievasScope(
+        lightTheme: setting.data,
+        darkTheme: setting.data,
+        global: false,
+        child: DievasTheme(
+          data: setting.data,
+          child: Theme(
+            data: setting.data.material,
+            child: Scaffold(backgroundColor: setting.data.colors.background.bgBase, body: child),
+          ),
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

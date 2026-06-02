@@ -31,27 +31,36 @@
 
 /* Principle card icon — spin/scale on hover */
 .pc-icon {
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              background 0.3s ease,
-              border-color 0.3s ease;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.2s ease,
+              border-color 0.2s ease;
 }
 .group:hover .pc-icon {
   transform: scale(1.15) rotate(8deg);
 }
 
-/* Code panel window dot glow on hover */
+/* Principle card — active press feedback */
+.group.principle-card:active {
+  transform: scale(0.98);
+  transition: transform 100ms ease-out;
+}
+
+/* Code panel window dot glow — staggered on hover */
 .code-dot {
-  transition: all 0.2s ease;
+  transition: box-shadow 0.15s ease-out;
 }
 .code-panel pre {
   margin: 0;
 }
 .code-panel:hover .code-dot-close {
   box-shadow: 0 0 6px rgba(255, 95, 87, 0.8);
+  transition-delay: 0ms;
 }
 .code-panel:hover .code-dot-minimize {
   box-shadow: 0 0 6px rgba(254, 188, 46, 0.8);
+  transition-delay: 40ms;
 }
 .code-panel:hover .code-dot-maximize {
   box-shadow: 0 0 6px rgba(40, 200, 64, 0.8);
+  transition-delay: 80ms;
 }

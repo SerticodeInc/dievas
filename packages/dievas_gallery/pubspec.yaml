@@ -1,5 +1,5 @@
 name: dievas_gallery
-description: "Dievas design system — Widgetbook component gallery."
+description: "Dievas design system — Widget book component gallery."
 
 publish_to: "none"
 
@@ -17,6 +17,7 @@ dependencies:
     dievas:
         path: ../dievas
     widgetbook: ^3.20.2
+    device_frame: ^1.4.0
 
 dev_dependencies:
     flutter_test:

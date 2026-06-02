@@ -1,10 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/painting.dart';
 
-/// Size-keyed record for [DievasTextInputThemeData] properties.
-///
-/// Covers the three input sizes: sm (40 dp), md (48 dp), lg (52 dp).
-typedef DievasInputThemeValue<T> = ({T sm, T md, T lg});
+import '../dievas_input_theme_value.dart';
 
 /// Theme data for [DievasTextInput] and [DievasTextArea].
 ///

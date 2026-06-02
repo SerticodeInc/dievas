@@ -25,12 +25,6 @@ import 'package:meta/meta.dart';
 /// ```
 @internal
 mixin DievasButtonPressMixin<T extends StatefulWidget> on State<T> {
-  /// Duration for press-opacity fade animations (iOS/macOS buttons).
-  static const Duration kAnimationDuration = Duration(milliseconds: 100);
-
-  /// Opacity applied on press on Apple platforms instead of an ink ripple.
-  static const double kApplePressedOpacity = 0.7;
-
   /// Tracks hover, pressed, and focused states for the interactive surface.
   ///
   /// Pass to [InkWell.statesController] and listen via [ValueListenableBuilder].

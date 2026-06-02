@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'button_types/dievas_button_state.dart';
 
-/// Duration of one full loader rotation cycle.
-const Duration _kLoaderRotationDuration = Duration(milliseconds: 800);
-
 /// Attaches the rotating loader animation to a [StatefulWidget].
 ///
 /// Apply to the [StatefulWidget] class:
@@ -20,6 +17,9 @@ const Duration _kLoaderRotationDuration = Duration(milliseconds: 800);
 mixin DievasButtonStateAnimatedLoaderMixin on StatefulWidget {
   /// The current button state. Drives loader start/stop.
   DievasButtonState get state;
+
+  /// Duration of one full loader rotation cycle.
+  Duration get loaderRotationDuration;
 }
 
 /// Provides the loader [AnimationController] and the pre-built [animatedLoader]
@@ -40,7 +40,7 @@ mixin DievasButtonStateAnimatedLoaderProviderMixin<T extends DievasButtonStateAn
   @visibleForTesting
   AnimationController get loaderController => _loaderController;
 
-  late final _loaderController = AnimationController(duration: _kLoaderRotationDuration, vsync: this);
+  late final _loaderController = AnimationController(duration: widget.loaderRotationDuration, vsync: this);
 
   /// A spinning [RotationTransition] sized to its parent. Wire this into the
   /// button's build tree when [DievasButtonState.loading] is active.
@@ -79,10 +79,17 @@ mixin DievasButtonStateAnimatedLoaderProviderMixin<T extends DievasButtonStateAn
 /// Minimal circular loader rendered as a thin ring.
 ///
 /// Sized via [FittedBox] by the parent so it inherits the icon slot dimensions.
+/// Reads its size from the parent [IconTheme] and uses a proportional stroke width.
 class _LoaderIcon extends StatelessWidget {
   const _LoaderIcon();
 
   @override
-  Widget build(BuildContext context) =>
-      const SizedBox(width: 20, height: 20, child: CircularProgressIndicator.adaptive(strokeWidth: 2));
+  Widget build(BuildContext context) {
+    final iconTheme = IconTheme.of(context);
+    final size = iconTheme.size ?? 20.0;
+    return SizedBox.square(
+      dimension: size,
+      child: CircularProgressIndicator.adaptive(strokeWidth: size / 10),
+    );
+  }
 }

@@ -1,5 +1,14 @@
 // Gallery barrel — all Widgetbook use-case components and addons.
-//
+
+// Search
+export 'components/search/dievas_search_with_dropdown.dart';
+export 'components/search/dievas_search_with_list.dart';
+
+// Navigation / Disclosure
+export 'components/nav_disclosure/dievas_breadcrumb.dart';
+export 'components/accordion/dievas_accordion.dart';
+export 'components/drawer/dievas_drawer.dart';
+export 'components/popover/dievas_popover.dart';
 // main.dart imports only this file; individual component files are not
 // imported directly from the entry point.
 export 'addons/component_boundary_addon.dart';
@@ -17,6 +26,7 @@ export 'components/display/dievas_avatar.dart';
 export 'components/display/dievas_badge.dart';
 export 'components/display/dievas_circular_loader.dart';
 export 'components/display/dievas_circular_progress.dart';
+export 'components/display/dievas_dot_indicator.dart';
 export 'components/display/dievas_divider.dart';
 export 'components/display/dievas_empty_state.dart';
 export 'components/display/dievas_icon.dart';
@@ -25,11 +35,13 @@ export 'components/display/dievas_linear_progress.dart';
 export 'components/display/dievas_tag.dart';
 
 // Form
+export 'components/form/dievas_auth_code.dart';
 export 'components/form/dievas_checkbox.dart';
 export 'components/form/dievas_radio.dart';
 export 'components/form/dievas_switch.dart';
 export 'components/form/dievas_text_area.dart';
 export 'components/form/dievas_text_input.dart';
+export 'components/form/dievas_text_input_group.dart';
 
 // Overlays
 export 'components/overlays/dievas_alert.dart';

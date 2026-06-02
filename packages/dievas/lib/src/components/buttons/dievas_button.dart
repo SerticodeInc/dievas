@@ -98,6 +98,8 @@ class DievasButton extends StatelessWidget {
       style: themeData.style,
       borderRadius: borderRadius,
       disabledOpacity: themeData.disabledOpacity,
+      pressOpacity: themeData.pressOpacity,
+      loaderRotationDuration: DievasTheme.animationOf(context).loader,
       iconSpacing: iconSpacing,
       iconSize: iconSize,
       textStyle: textStyle,

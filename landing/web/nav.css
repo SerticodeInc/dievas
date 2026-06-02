@@ -4,11 +4,18 @@
 
 /* Nav link dot indicator — glows on hover */
 .nav-dot {
-  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: background 0.15s ease-out,
+              box-shadow 0.15s ease-out;
 }
 .nav-link:hover .nav-dot {
   background: rgba(129, 140, 248, 1) !important;
   box-shadow: 0 0 8px rgba(129, 140, 248, 0.6);
+}
+
+/* Nav link — active press feedback */
+.nav-link:active {
+  transform: scale(0.96);
+  transition: transform 100ms ease-out;
 }
 
 /* Logo hover — subtle text color shift */
@@ -17,6 +24,10 @@
 }
 .logo-mark:hover {
   letter-spacing: 0.04em;
+}
+.logo-mark:active {
+  transform: scale(0.97);
+  transition: transform 100ms ease-out;
 }
 
 /* Nav glass — intensify blur on scroll (class added via JS) */

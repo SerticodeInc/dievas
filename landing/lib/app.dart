@@ -118,8 +118,8 @@ const _inlineAnimationStyles = '''<style>
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal-group > * {
@@ -129,13 +129,13 @@ const _inlineAnimationStyles = '''<style>
 .reveal-group.is-visible > * {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.reveal-group.is-visible > *:nth-child(2) { transition-delay: 0.1s; }
-.reveal-group.is-visible > *:nth-child(3) { transition-delay: 0.2s; }
-.reveal-group.is-visible > *:nth-child(4) { transition-delay: 0.3s; }
-.reveal-group.is-visible > *:nth-child(5) { transition-delay: 0.4s; }
+.reveal-group.is-visible > *:nth-child(2) { transition-delay: 0.06s; }
+.reveal-group.is-visible > *:nth-child(3) { transition-delay: 0.12s; }
+.reveal-group.is-visible > *:nth-child(4) { transition-delay: 0.18s; }
+.reveal-group.is-visible > *:nth-child(5) { transition-delay: 0.24s; }
 
 @media (prefers-reduced-motion: reduce) {
   .word-in, .chip-falling { opacity: 1; }
@@ -196,14 +196,28 @@ const _jsLoadedScript = '''<script>
 
 // Scroll-reveal IntersectionObserver — fires `.is-visible` on `.reveal`,
 // `.reveal-group`, and directional reveal elements as they enter the viewport.
+// A 350ms delay ensures the user has settled into the section before motion fires.
 const _scrollRevealScript = '''<script>
 (function(){
+  var REVEAL_DELAY = 350;
   var selectors = '.reveal,.reveal-group,.reveal-left,.reveal-right,.reveal-scale,.reveal-stagger';
+  var timers = new WeakMap();
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){
-        e.target.classList.add('is-visible');
-        io.unobserve(e.target);
+        var target = e.target;
+        var timer = setTimeout(function(){
+          target.classList.add('is-visible');
+          io.unobserve(target);
+          timers.delete(target);
+        }, REVEAL_DELAY);
+        timers.set(target, timer);
+      } else {
+        var pending = timers.get(e.target);
+        if (pending) {
+          clearTimeout(pending);
+          timers.delete(e.target);
+        }
       }
     });
   },{threshold:0.25});

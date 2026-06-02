@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' show ThemeData;
 
+import 'animation/dievas_animation_theme_data.dart';
 import 'border/dievas_border_theme_data.dart';
 import 'color/dievas_colour_theme_data.dart';
 import 'component/dievas_component_theme_data.dart';
@@ -46,6 +47,9 @@ abstract interface class DievasThemeData {
 
   /// Border sub-system — radius and stroke-width tokens.
   DievasBorderThemeData get border;
+
+  /// Animation sub-system — motion durations by speed intent.
+  DievasAnimationThemeData get animation;
 
   /// Component-level theme data — derived from all token sub-systems.
   DievasComponentThemeData get components;

@@ -62,10 +62,7 @@ class Nav extends StatelessComponent {
                       'text-text-mid no-underline '
                       'transition-colors duration-200 '
                       'hover:text-white',
-                  attributes: {
-                    if (lnk.$3) 'target': '_blank',
-                    if (lnk.$3) 'rel': 'noopener',
-                  },
+                  attributes: {if (lnk.$3) 'target': '_blank', if (lnk.$3) 'rel': 'noopener'},
                   [
                     span(classes: 'flex items-center gap-2', [
                       span(

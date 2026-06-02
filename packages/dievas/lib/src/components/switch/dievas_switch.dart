@@ -34,12 +34,12 @@ class DievasSwitch extends StatefulWidget {
 class _DievasSwitchState extends State<DievasSwitch> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final CurvedAnimation _curve;
-  final _animationDuration = const Duration(milliseconds: 300);
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: _animationDuration);
+    final theme = DievasTheme.componentsOf(context).toggle;
+    _controller = AnimationController(vsync: this, duration: theme.animationDuration);
     _curve = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     if (widget.value) _controller.value = 1.0;
   }
@@ -108,7 +108,9 @@ class _DievasSwitchTrackBuilder extends StatelessWidget {
         decoration: BoxDecoration(
           color: .lerp(theme.trackColorOff, theme.trackColorOn, t)!,
           borderRadius: theme.trackRadius,
-          border: .all(color: .lerp(theme.borderColorOff, const Color(0x00000000), t)!),
+          border: .all(
+            color: .lerp(theme.borderColorOff, DievasTheme.colorsOf(context).staticColours.staticTransparent, t)!,
+          ),
         ),
         child: Stack(
           clipBehavior: .none,

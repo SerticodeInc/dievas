@@ -1,3 +1,4 @@
+import 'package:dievas_tokens/dievas_tokens.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme/dievas_theme.dart';
@@ -37,7 +38,11 @@ class DievasTextButton extends StatefulWidget with DievasButtonStateAnimatedLoad
     this.leadingIcon,
     this.trailingIcon,
     this.onPressed,
+    this.loaderRotationDuration = DievasAnimationSemantic.loader,
   });
+
+  @override
+  final Duration loaderRotationDuration;
 
   final String label;
   final DievasTextButtonStyle style;
@@ -86,6 +91,7 @@ class _DievasTextButtonState extends State<DievasTextButton>
     };
 
     final apple = isApplePlatform;
+    final pressDuration = DievasTheme.animationOf(context).quick;
 
     return Semantics(
       button: true,
@@ -106,7 +112,7 @@ class _DievasTextButtonState extends State<DievasTextButton>
 
               final opacityFactor = isDisabled
                   ? buttonTheme.disabledOpacity
-                  : (apple && isPressed ? DievasButtonPressMixin.kApplePressedOpacity : 1.0);
+                  : (apple && isPressed ? buttonTheme.pressOpacity : 1.0);
 
               final themeStyle = buttonTheme.style;
               final activeStyle = isPressed ? themeStyle.focused : themeStyle.idle;
@@ -122,7 +128,7 @@ class _DievasTextButtonState extends State<DievasTextButton>
                       child: icon,
                     ),
                   AnimatedDefaultTextStyle(
-                    duration: DievasButtonPressMixin.kAnimationDuration,
+                    duration: pressDuration,
                     style: textStyle.copyWith(color: foreground),
                     child: Text(widget.label),
                   ),

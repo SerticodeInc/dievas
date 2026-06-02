@@ -26,9 +26,9 @@ class ComponentsSection extends StatelessComponent {
                 'font-display font-black text-[clamp(36px,5vw,60px)] '
                 'leading-[0.95] tracking-[-0.025em] text-slate-900',
             [
-              Component.text('34 shipped.'),
+              Component.text('32 shipped.'),
               br(),
-              span(classes: 'text-slate-400', [Component.text('8 in progress.')]),
+              span(classes: 'text-slate-400', [Component.text('8 not started.')]),
             ],
           ),
           p(
@@ -62,13 +62,25 @@ class ComponentsSection extends StatelessComponent {
 
       _categoryRow(
         label: 'Form Inputs',
-        count: '5',
+        count: '10',
         description:
             'The full input surface: text fields, text areas, checkboxes, '
-            'switches, and radio groups. Token driven states for focus, '
+            'switches, radio groups, auth codes, breadcrumbs, dot indicators, '
+            'input groups, and search. Token driven states for focus, '
             'error, and disabled. Localized via DievasLocalizations.',
         preview: _formPreview(),
-        components: const ['Checkbox', 'Switch', 'TextInput', 'TextArea', 'Radio'],
+        components: const [
+          'AuthCode',
+          'Breadcrumb',
+          'DotIndicator',
+          'Checkbox',
+          'Switch',
+          'TextInput',
+          'TextArea',
+          'Radio',
+          'TextInputGroup',
+          'Search',
+        ],
         accentHex: '4ADE80',
         isFlipped: true,
         index: 1,
@@ -76,7 +88,7 @@ class ComponentsSection extends StatelessComponent {
 
       _categoryRow(
         label: 'Display',
-        count: '10',
+        count: '9',
         description:
             'Avatar, badges, tags, dividers, loaders, and progress variants '
             'cover the visual data layer. Each derives color, sizing, '
@@ -90,8 +102,7 @@ class ComponentsSection extends StatelessComponent {
           'CircularProgress',
           'LinearProgress',
           'Icon',
-          'CircularLoader',
-          'LinearLoader',
+          'Loader',
           'EmptyState',
         ],
         accentHex: 'FBBF24',
@@ -140,7 +151,7 @@ class ComponentsSection extends StatelessComponent {
                 'inline-block px-3 py-1 rounded-full '
                 'border border-slate-200 bg-slate-100 '
                 'font-mono text-xs text-slate-400',
-            [Component.text('14')],
+            [Component.text('8')],
           ),
         ]),
         div(classes: 'flex flex-wrap gap-2', [for (final c in _wip) _wipPill(c)]),
@@ -521,20 +532,24 @@ class ComponentsSection extends StatelessComponent {
     'OutlinedButton': 'outlinedbutton',
     'TextButton': 'textbutton',
     'IconButton': 'iconbutton',
-    'Avatar': 'avatar',
-    'Badge': 'badge',
+    'AuthCode': 'auth_code',
+    'Breadcrumb': 'breadcrumb',
+    'DotIndicator': 'dot_indicator',
     'Checkbox': 'checkbox',
     'Switch': 'switch',
     'TextArea': 'textarea',
     'TextInput': 'textinput',
     'Radio': 'radio',
+    'TextInputGroup': 'text_input_group',
+    'Search': 'search',
+    'Avatar': 'avatar',
+    'Badge': 'badge',
     'Tag': 'tag',
     'Divider': 'divider',
     'CircularProgress': 'circularprogress',
     'LinearProgress': 'linearprogress',
     'Icon': 'icon',
-    'CircularLoader': 'loader',
-    'LinearLoader': 'loader',
+    'Loader': 'loader',
     'EmptyState': 'empty_state',
     'Alert': 'alert',
     'BottomSheet': 'bottom_sheet',
@@ -552,20 +567,24 @@ class ComponentsSection extends StatelessComponent {
     'OutlinedButton': 'buttons',
     'TextButton': 'buttons',
     'IconButton': 'buttons',
-    'Avatar': 'display',
-    'Badge': 'display',
+    'AuthCode': 'form',
+    'Breadcrumb': 'form',
+    'DotIndicator': 'form',
     'Checkbox': 'form',
     'Switch': 'form',
     'TextArea': 'form',
     'TextInput': 'form',
     'Radio': 'form',
+    'TextInputGroup': 'form',
+    'Search': 'form',
+    'Avatar': 'display',
+    'Badge': 'display',
     'Tag': 'display',
     'Divider': 'display',
     'CircularProgress': 'display',
     'LinearProgress': 'display',
     'Icon': 'display',
-    'CircularLoader': 'display',
-    'LinearLoader': 'display',
+    'Loader': 'display',
     'EmptyState': 'display',
     'Alert': 'overlays',
     'BottomSheet': 'overlays',

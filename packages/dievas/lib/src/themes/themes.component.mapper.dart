@@ -269,16 +269,18 @@ DievasIconButtonGroupThemeData _createIconButtonGroup(
 }
 
 // DotIndicator
-DievasDotIndicatorThemeData _createDotIndicatorTheme(DievasColourThemeData colors, DievasAnimationThemeData animation) =>
-    DievasDotIndicatorThemeData(
-      dotSize: DievasSizingPrimitives.s8,
-      activeDotSize: DievasSizingPrimitives.s10,
-      dotSpacing: DievasSpacingPrimitives.s2,
-      colorActive: colors.action.actionPrimary,
-      colorInactive: colors.border.borderDefault,
-      animationDuration: animation.standard,
-      disabledOpacity: DievasOpacitySemantic.disabled,
-    );
+DievasDotIndicatorThemeData _createDotIndicatorTheme(
+  DievasColourThemeData colors,
+  DievasAnimationThemeData animation,
+) => DievasDotIndicatorThemeData(
+  dotSize: DievasSizingPrimitives.s8,
+  activeDotSize: DievasSizingPrimitives.s10,
+  dotSpacing: DievasSpacingPrimitives.s2,
+  colorActive: colors.action.actionPrimary,
+  colorInactive: colors.border.borderDefault,
+  animationDuration: animation.standard,
+  disabledOpacity: DievasOpacitySemantic.disabled,
+);
 
 // Breadcrumb
 DievasBreadcrumbThemeData _createBreadcrumbTheme(
@@ -699,7 +701,7 @@ DievasAccordionThemeData _createAccordionTheme(
   DievasElevationThemeData elevation,
 ) {
   const level = DievasElevationShadowLayer.xs;
-  final shadowColor = elevation.xs.first.color;
+  final shadowColor = elevation.xs.isNotEmpty ? elevation.xs.first.color : Colors.transparent;
   return DievasAccordionThemeData(
     headerStyle: typography.titleXsm,
     contentStyle: typography.bodySm,

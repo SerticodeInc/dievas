@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../theme/component/auth_code/dievas_auth_code_theme_data.dart';
 import '../../theme/dievas_theme.dart';
 
 /// A digit-by-digit passcode entry field.
@@ -56,14 +57,14 @@ class _DievasAuthCodeState extends State<DievasAuthCode> with SingleTickerProvid
     super.initState();
     _controller = TextEditingController();
     _focusNode = FocusNode();
-    _cursorController = AnimationController(vsync: this, duration: const Duration(milliseconds: 600))..repeat(reverse: true);
+    _cursorController = AnimationController(vsync: this, duration: const Duration(milliseconds: 600))
+      ..repeat(reverse: true);
     _focusNode.addListener(() => setState(() {}));
   }
 
   @override
   void dispose() {
     _controller.dispose();
-    _focusNode.removeListener(() {});
     _focusNode.dispose();
     _cursorController.dispose();
     super.dispose();
@@ -104,29 +105,36 @@ class _DievasAuthCodeState extends State<DievasAuthCode> with SingleTickerProvid
                 enabled: widget.enabled,
                 autofocus: widget.autofocus,
                 maxLength: widget.codeLength,
-                buildCounter: (_, {required int currentLength, required bool isFocused, required int? maxLength}) => const SizedBox.shrink(),
+                buildCounter: (_, {required int currentLength, required bool isFocused, required int? maxLength}) =>
+                    const SizedBox.shrink(),
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 enableInteractiveSelection: false,
                 onChanged: _onTextChange,
                 style: theme.digitStyle,
-                decoration: const InputDecoration(border: InputBorder.none, isDense: true, contentPadding: EdgeInsets.zero),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  isDense: true,
+                  contentPadding: EdgeInsets.zero,
+                ),
               ),
             ),
           ),
           Row(
             mainAxisSize: .min,
-            children: [for (var i = 0; i < widget.codeLength; i++) ...[
-              if (i > 0) SizedBox(width: theme.gap),
-              _DigitBox(
-                index: i,
-                controller: _controller,
-                filledCount: _filledCount,
-                isFocused: _focusNode.hasFocus,
-                obscureText: widget.obscureText,
-                cursorController: _cursorController,
-              ),
-            ]],
+            children: [
+              for (var i = 0; i < widget.codeLength; i++) ...[
+                if (i > 0) SizedBox(width: theme.gap),
+                _DigitBox(
+                  index: i,
+                  controller: _controller,
+                  filledCount: _filledCount,
+                  isFocused: _focusNode.hasFocus,
+                  obscureText: widget.obscureText,
+                  cursorController: _cursorController,
+                ),
+              ],
+            ],
           ),
         ],
       ),
@@ -186,11 +194,15 @@ class _DigitBox extends StatelessWidget {
     );
   }
 
-  Widget _buildContent(dynamic theme) {
+  Widget _buildContent(DievasAuthCodeThemeData theme) {
     if (_isFilled) {
       if (obscureText) {
         final r = theme.cursorHeight / 3;
-        return Container(width: r, height: r, decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.black));
+        return Container(
+          width: r,
+          height: r,
+          decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+        );
       }
       final char = controller.text[index];
       return Text(char, style: theme.digitStyle);
@@ -204,7 +216,10 @@ class _DigitBox extends StatelessWidget {
           child: Container(
             width: theme.cursorWidth,
             height: theme.cursorHeight,
-            decoration: BoxDecoration(color: theme.cursorColor, borderRadius: BorderRadius.circular(theme.cursorWidth / 2)),
+            decoration: BoxDecoration(
+              color: theme.cursorColor,
+              borderRadius: BorderRadius.circular(theme.cursorWidth / 2),
+            ),
           ),
         ),
       );

@@ -73,7 +73,10 @@ class DievasBreadcrumb<T> extends StatelessWidget {
             padding: EdgeInsetsDirectional.only(end: theme.iconSpacing),
             child: GestureDetector(
               onTap: onHomeTap,
-              child: SizedBox(height: theme.minHitHeight, child: Center(child: homeIcon ?? defaultHomeIcon)),
+              child: SizedBox(
+                height: theme.minHitHeight,
+                child: Center(child: homeIcon ?? defaultHomeIcon),
+              ),
             ),
           ),
         for (var i = 0; i < items.length; i++) ...[
@@ -125,12 +128,18 @@ class _Crumb<T> extends StatelessWidget {
     final style = isSelected ? theme.activeItemStyle : theme.itemStyle;
 
     if (!enabled || !isSelected && onTap == null) {
-      return SizedBox(height: theme.minHitHeight, child: Center(child: Text(displayString(item), style: style)));
+      return SizedBox(
+        height: theme.minHitHeight,
+        child: Center(child: Text(displayString(item), style: style)),
+      );
     }
 
     return GestureDetector(
       onTap: isSelected ? null : onTap,
-      child: SizedBox(height: theme.minHitHeight, child: Center(child: Text(displayString(item), style: style))),
+      child: SizedBox(
+        height: theme.minHitHeight,
+        child: Center(child: Text(displayString(item), style: style)),
+      ),
     );
   }
 }

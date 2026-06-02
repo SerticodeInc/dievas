@@ -24,7 +24,9 @@ class _Playground extends StatelessWidget {
     final clampedActive = activeIndex.clamp(0, count - 1);
 
     return Center(
-      child: ComponentBoundary(child: DievasDotIndicator(count: count, activeIndex: clampedActive, enabled: enabled)),
+      child: ComponentBoundary(
+        child: DievasDotIndicator(count: count, activeIndex: clampedActive, enabled: enabled),
+      ),
     );
   }
 }

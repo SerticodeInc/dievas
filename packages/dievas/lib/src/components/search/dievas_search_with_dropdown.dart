@@ -61,7 +61,7 @@ class DievasSearchWithDropdown<T> extends StatefulWidget {
 
 class _DievasSearchWithDropdownState<T> extends State<DievasSearchWithDropdown<T>> {
   final _controller = TextEditingController();
-  final _fieldKey = GlobalKey();
+  final _link = LayerLink();
   OverlayEntry? _dropdown;
 
   @override
@@ -97,23 +97,14 @@ class _DievasSearchWithDropdownState<T> extends State<DievasSearchWithDropdown<T
     }
   }
 
-  bool _defaultFilter(T item, String query) =>
-      widget.displayString(item).toLowerCase().contains(query.toLowerCase());
+  bool _defaultFilter(T item, String query) => widget.displayString(item).toLowerCase().contains(query.toLowerCase());
 
   void _showOverlay(List<T> results) {
-    final renderBox = _fieldKey.currentContext?.findRenderObject() as RenderBox?;
-    if (renderBox == null) return;
-
-    final offset = renderBox.localToGlobal(Offset.zero);
-    final size = renderBox.size;
-
     _removeDropdown();
 
     _dropdown = OverlayEntry(
       builder: (context) => _DropdownResults<T>(
-        top: offset.dy + size.height,
-        left: offset.dx,
-        width: size.width,
+        link: _link,
         results: results,
         displayString: widget.displayString,
         onItemTap: _onItemTap,
@@ -139,44 +130,58 @@ class _DievasSearchWithDropdownState<T> extends State<DievasSearchWithDropdown<T
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).search;
 
-    return SizedBox(
-      key: _fieldKey,
-      height: theme.height,
-      child: TextField(
-        controller: _controller,
-        enabled: widget.enabled,
-        style: theme.inputStyle,
-        decoration: InputDecoration(
-          hintText: widget.hint,
-          hintStyle: theme.placeholderStyle,
-          contentPadding: theme.contentPadding,
-          filled: true,
-          fillColor: theme.bgColor,
-          prefixIcon: Padding(
-            padding: EdgeInsetsDirectional.only(start: theme.dividerIndent, end: theme.iconSize / 4),
-            child: IconTheme(data: IconThemeData(color: theme.iconColor, size: theme.iconSize), child: const Icon(Icons.search)),
+    return CompositedTransformTarget(
+      link: _link,
+      child: SizedBox(
+        height: theme.height,
+        child: TextField(
+          controller: _controller,
+          enabled: widget.enabled,
+          style: theme.inputStyle,
+          decoration: InputDecoration(
+            hintText: widget.hint,
+            hintStyle: theme.placeholderStyle,
+            contentPadding: theme.contentPadding,
+            filled: true,
+            fillColor: theme.bgColor,
+            prefixIcon: Padding(
+              padding: EdgeInsetsDirectional.only(start: theme.dividerIndent, end: theme.iconSize / 4),
+              child: IconTheme(
+                data: IconThemeData(color: theme.iconColor, size: theme.iconSize),
+                child: const Icon(Icons.search),
+              ),
+            ),
+            prefixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 0),
+            suffixIcon: _controller.text.isNotEmpty
+                ? Padding(
+                    padding: EdgeInsetsDirectional.only(end: theme.iconSize / 4, start: theme.iconSize / 4),
+                    child: IconTheme(
+                      data: IconThemeData(color: theme.iconColor, size: theme.iconSize * 0.8),
+                      child: GestureDetector(
+                        onTap: () {
+                          _controller.clear();
+                          _removeDropdown();
+                        },
+                        child: const Icon(Icons.close),
+                      ),
+                    ),
+                  )
+                : null,
+            suffixIconConstraints: const BoxConstraints(minWidth: 32, minHeight: 0),
+            border: OutlineInputBorder(
+              borderRadius: theme.borderRadius,
+              borderSide: BorderSide(color: theme.borderColor),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: theme.borderRadius,
+              borderSide: BorderSide(color: theme.borderColor),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: theme.borderRadius,
+              borderSide: BorderSide(color: theme.borderColorFocused),
+            ),
+            isDense: true,
           ),
-          prefixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 0),
-          suffixIcon: _controller.text.isNotEmpty
-              ? Padding(
-                padding: EdgeInsetsDirectional.only(end: theme.iconSize / 4, start: theme.iconSize / 4),
-                child: IconTheme(
-                  data: IconThemeData(color: theme.iconColor, size: theme.iconSize * 0.8),
-                  child: GestureDetector(
-                    onTap: () {
-                      _controller.clear();
-                      _removeDropdown();
-                    },
-                    child: const Icon(Icons.close),
-                  ),
-                ),
-              )
-              : null,
-          suffixIconConstraints: const BoxConstraints(minWidth: 32, minHeight: 0),
-          border: OutlineInputBorder(borderRadius: theme.borderRadius, borderSide: BorderSide(color: theme.borderColor)),
-          enabledBorder: OutlineInputBorder(borderRadius: theme.borderRadius, borderSide: BorderSide(color: theme.borderColor)),
-          focusedBorder: OutlineInputBorder(borderRadius: theme.borderRadius, borderSide: BorderSide(color: theme.borderColorFocused)),
-          isDense: true,
         ),
       ),
     );
@@ -185,18 +190,14 @@ class _DievasSearchWithDropdownState<T> extends State<DievasSearchWithDropdown<T
 
 class _DropdownResults<T> extends StatelessWidget {
   const _DropdownResults({
-    required this.top,
-    required this.left,
-    required this.width,
+    required this.link,
     required this.results,
     required this.displayString,
     required this.onItemTap,
     required this.onDismiss,
   });
 
-  final double top;
-  final double left;
-  final double width;
+  final LayerLink link;
   final List<T> results;
   final String Function(T) displayString;
   final ValueChanged<T> onItemTap;
@@ -214,10 +215,10 @@ class _DropdownResults<T> extends StatelessWidget {
         Positioned.fill(
           child: GestureDetector(onTap: onDismiss, behavior: .opaque, child: const SizedBox.expand()),
         ),
-        Positioned(
-          top: top,
-          left: left,
-          width: width,
+        CompositedTransformFollower(
+          link: link,
+          targetAnchor: .bottomLeft,
+          followerAnchor: .topLeft,
           child: Material(
             elevation: 0,
             color: theme.bgColor,
@@ -251,7 +252,10 @@ class _DropdownResults<T> extends StatelessWidget {
                   final item = results[i];
                   return InkWell(
                     onTap: () => onItemTap(item),
-                    child: Padding(padding: theme.resultItemPadding, child: Text(displayString(item), style: theme.resultItemStyle)),
+                    child: Padding(
+                      padding: theme.resultItemPadding,
+                      child: Text(displayString(item), style: theme.resultItemStyle),
+                    ),
                   );
                 },
               ),

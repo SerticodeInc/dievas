@@ -31,17 +31,22 @@ class DievasDrawerState extends State<DievasDrawer> {
     final theme = DievasTheme.componentsOf(context).drawer;
     final drawerWidth = widget.width ?? theme.width;
 
-    return DrawerController(
-      key: _drawerKey,
-      alignment: .start,
-      drawerCallback: (isOpen) => setState(() => _isOpen = isOpen),
-      scrimColor: theme.barrierColor,
-      child: Drawer(
-        width: drawerWidth,
-        elevation: theme.elevation,
-        backgroundColor: theme.backgroundColor,
-        child: widget.drawer,
-      ),
+    return Stack(
+      children: [
+        widget.child,
+        DrawerController(
+          key: _drawerKey,
+          alignment: .start,
+          drawerCallback: (isOpen) => setState(() => _isOpen = isOpen),
+          scrimColor: theme.barrierColor,
+          child: Drawer(
+            width: drawerWidth,
+            elevation: theme.elevation,
+            backgroundColor: theme.backgroundColor,
+            child: widget.drawer,
+          ),
+        ),
+      ],
     );
   }
 }

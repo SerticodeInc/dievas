@@ -68,7 +68,10 @@ class _AllSizes extends StatelessWidget {
                   child: ComponentBoundary(
                     child: DievasTextInputGroup(
                       size: size,
-                      children: const [DievasTextInput(hint: 'First'), DievasTextInput(hint: 'Last')],
+                      children: const [
+                        DievasTextInput(hint: 'First'),
+                        DievasTextInput(hint: 'Last'),
+                      ],
                     ),
                   ),
                 ),
@@ -94,7 +97,12 @@ class _AllStates extends StatelessWidget {
         children: [
           const _StateBlock(
             'Two Segments',
-            child: DievasTextInputGroup(children: [DievasTextInput(hint: 'First'), DievasTextInput(hint: 'Last')]),
+            child: DievasTextInputGroup(
+              children: [
+                DievasTextInput(hint: 'First'),
+                DievasTextInput(hint: 'Last'),
+              ],
+            ),
           ),
           SizedBox(height: context.spacing.mdPlus),
           const _StateBlock(
@@ -124,7 +132,10 @@ class _AllStates extends StatelessWidget {
             'Disabled',
             child: DievasTextInputGroup(
               enabled: false,
-              children: const [DievasTextInput(hint: 'First'), DievasTextInput(hint: 'Last')],
+              children: const [
+                DievasTextInput(hint: 'First'),
+                DievasTextInput(hint: 'Last'),
+              ],
             ),
           ),
         ],

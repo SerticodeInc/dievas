@@ -20,7 +20,17 @@ class _Playground extends StatelessWidget {
     final hint = context.knobs.string(label: 'Hint', initialValue: 'Search fruits...');
     final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
 
-    const fruits = ['Apple', 'Apricot', 'Banana', 'Blackberry', 'Blueberry', 'Cherry', 'Coconut', 'Date', 'Dragonfruit'];
+    const fruits = [
+      'Apple',
+      'Apricot',
+      'Banana',
+      'Blackberry',
+      'Blueberry',
+      'Cherry',
+      'Coconut',
+      'Date',
+      'Dragonfruit',
+    ];
 
     return Center(
       child: Padding(

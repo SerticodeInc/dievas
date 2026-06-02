@@ -42,7 +42,16 @@ sealed class DievasGlobalThemeData implements DievasThemeData {
        _opacity = opacity {
     _typography = _createTypographyData(colors.text.textPrimary);
     _elevation = elevation ?? _buildDefaultElevation(colors);
-    _components = _deriveDievasComponentThemeData(colors, _typography, spacing, sizing, border, animation, _elevation, components);
+    _components = _deriveDievasComponentThemeData(
+      colors,
+      _typography,
+      spacing,
+      sizing,
+      border,
+      animation,
+      _elevation,
+      components,
+    );
     _material = _buildMaterial(colors);
   }
 

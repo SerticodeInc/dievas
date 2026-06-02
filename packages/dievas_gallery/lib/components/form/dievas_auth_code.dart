@@ -39,25 +39,16 @@ class _Configurations extends StatelessWidget {
       child: Column(
         mainAxisSize: .min,
         children: [
-          _DemoBlock(
-            '4-digit — plain',
-            child: DievasAuthCode(codeLength: 4, onCompleted: (_) {}),
-          ),
+          _DemoBlock('4-digit — plain', child: DievasAuthCode(codeLength: 4, onCompleted: (_) {})),
           SizedBox(height: context.spacing.lg),
-          _DemoBlock(
-            '6-digit — plain',
-            child: DievasAuthCode(codeLength: 6, onCompleted: (_) {}),
-          ),
+          _DemoBlock('6-digit — plain', child: DievasAuthCode(codeLength: 6, onCompleted: (_) {})),
           SizedBox(height: context.spacing.lg),
           _DemoBlock(
             '6-digit — obscured',
             child: DievasAuthCode(codeLength: 6, obscureText: true, onCompleted: (_) {}),
           ),
           SizedBox(height: context.spacing.lg),
-          _DemoBlock(
-            '4-digit — disabled',
-            child: DievasAuthCode(codeLength: 4, enabled: false, onCompleted: (_) {}),
-          ),
+          _DemoBlock('4-digit — disabled', child: DievasAuthCode(codeLength: 4, enabled: false, onCompleted: (_) {})),
         ],
       ),
     ),

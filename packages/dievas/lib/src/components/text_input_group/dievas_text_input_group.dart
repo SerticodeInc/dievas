@@ -119,7 +119,12 @@ class _DievasTextInputGroupState extends State<DievasTextInputGroup> {
             padding: contentPadding,
             decoration: BoxDecoration(
               color: theme.bgColor,
-              border: Border.all(color: strokeColor, width: strokeWidth),
+              border: Border(
+                top: BorderSide(color: strokeColor, width: strokeWidth),
+                bottom: BorderSide(color: strokeColor, width: strokeWidth),
+                left: isFirst ? BorderSide(color: strokeColor, width: strokeWidth) : BorderSide.none,
+                right: isLast ? BorderSide(color: strokeColor, width: strokeWidth) : BorderSide.none,
+              ),
               borderRadius: segmentRadius,
             ),
             child: widget.children[i],

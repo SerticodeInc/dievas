@@ -93,8 +93,7 @@ class _DievasSearchWithListState<T> extends State<DievasSearchWithList<T>> {
     setState(() => _results = widget.items.where((item) => filter(item, query)).toList());
   }
 
-  bool _defaultFilter(T item, String query) =>
-      widget.displayString(item).toLowerCase().contains(query.toLowerCase());
+  bool _defaultFilter(T item, String query) => widget.displayString(item).toLowerCase().contains(query.toLowerCase());
 
   void _onItemTap(T item) {
     _controller.clear();
@@ -125,13 +124,28 @@ class _DievasSearchWithListState<T> extends State<DievasSearchWithList<T>> {
               fillColor: theme.bgColor,
               prefixIcon: Padding(
                 padding: EdgeInsetsDirectional.only(start: theme.dividerIndent, end: theme.iconSize / 4),
-                child: IconTheme(data: IconThemeData(color: theme.iconColor, size: theme.iconSize), child: widget.leadingIcon ?? const Icon(Icons.search)),
+                child: IconTheme(
+                  data: IconThemeData(color: theme.iconColor, size: theme.iconSize),
+                  child: widget.leadingIcon ?? const Icon(Icons.search),
+                ),
               ),
               prefixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 0),
-              border: OutlineInputBorder(borderRadius: theme.borderRadius, borderSide: BorderSide(color: theme.borderColor)),
-              enabledBorder: OutlineInputBorder(borderRadius: theme.borderRadius, borderSide: BorderSide(color: theme.borderColor)),
+              border: OutlineInputBorder(
+                borderRadius: _showResults
+                    ? BorderRadius.vertical(top: theme.borderRadius.topLeft)
+                    : theme.borderRadius,
+                borderSide: BorderSide(color: theme.borderColor),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: _showResults
+                    ? BorderRadius.vertical(top: theme.borderRadius.topLeft)
+                    : theme.borderRadius,
+                borderSide: BorderSide(color: theme.borderColor),
+              ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: _showResults ? BorderRadius.vertical(top: theme.borderRadius.topLeft) : theme.borderRadius,
+                borderRadius: _showResults
+                    ? BorderRadius.vertical(top: theme.borderRadius.topLeft)
+                    : theme.borderRadius,
                 borderSide: BorderSide(color: theme.borderColorFocused),
               ),
               isDense: true,
@@ -139,11 +153,7 @@ class _DievasSearchWithListState<T> extends State<DievasSearchWithList<T>> {
           ),
         ),
         if (_showResults)
-          _ResultsList<T>(
-            results: _results,
-            displayString: widget.displayString,
-            onItemTap: _onItemTap,
-          ),
+          _ResultsList<T>(results: _results, displayString: widget.displayString, onItemTap: _onItemTap),
       ],
     );
   }
@@ -171,11 +181,7 @@ class _ResultsList<T> extends StatelessWidget {
           bottom: BorderSide(color: theme.borderColorFocused),
         ),
         boxShadow: [
-          BoxShadow(
-            color: theme.borderColorFocused.withValues(alpha: 0.15),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
+          BoxShadow(color: theme.borderColorFocused.withValues(alpha: 0.15), blurRadius: 8, offset: const Offset(0, 4)),
         ],
       ),
       child: ListView.separated(
@@ -193,7 +199,10 @@ class _ResultsList<T> extends StatelessWidget {
           final item = results[i];
           return InkWell(
             onTap: () => onItemTap(item),
-            child: Padding(padding: theme.resultItemPadding, child: Text(displayString(item), style: theme.resultItemStyle)),
+            child: Padding(
+              padding: theme.resultItemPadding,
+              child: Text(displayString(item), style: theme.resultItemStyle),
+            ),
           );
         },
       ),

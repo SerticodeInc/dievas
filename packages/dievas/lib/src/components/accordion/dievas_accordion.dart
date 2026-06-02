@@ -94,7 +94,7 @@ class _AccordionCardState extends State<_AccordionCard> with SingleTickerProvide
   @override
   void initState() {
     super.initState();
-    _expanded = widget.item.initiallyExpanded;
+    _expanded = widget.allowMultiple ? widget.item.initiallyExpanded : widget.notifier.value == widget.index;
     _chevronController = AnimationController(vsync: this, duration: kThemeAnimationDuration);
     if (_expanded) _chevronController.value = 0.5;
     _chevronTurns = Tween<double>(begin: 0.0, end: 0.5).animate(_chevronController);

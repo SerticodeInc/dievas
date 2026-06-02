@@ -50,8 +50,8 @@ class ArchitectureSection extends StatelessComponent {
           ]),
 
           // ── Code pipeline ─────────────────────────────────────────────────
-          div(classes: 'mb-24 reveal', [
-            div(classes: 'flex flex-col lg:flex-row items-stretch gap-3', [
+          div(classes: 'mb-24', [
+            div(classes: 'flex flex-col lg:flex-row items-stretch gap-3 reveal-group', [
               _CodePanel(
                 label: 'Tokens.',
                 badgeClass:
@@ -77,7 +77,7 @@ class ArchitectureSection extends StatelessComponent {
   Component _principleCard(String num, String title, String body, String symbol, String colorClass, String accentRgb) =>
       div(
         classes:
-            'group p-8 rounded-2xl border $colorClass '
+            'group principle-card p-8 rounded-2xl border $colorClass '
             'bg-white '
             'transition-all duration-300 cursor-default '
             'hover:shadow-[0_8px_32px_rgba(var(--card-accent),0.18)]',

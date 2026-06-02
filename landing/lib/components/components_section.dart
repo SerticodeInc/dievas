@@ -140,8 +140,8 @@ class ComponentsSection extends StatelessComponent {
         index: 4,
       ),
 
-      // ── In progress ─────────────────────────────────────────────────────────
-      div(classes: 'max-w-5xl mx-auto px-3 lg:px-6 w-full py-12 reveal', [
+      // ── WIP / not started ────────────────────────────────────────────────────
+      div(classes: 'max-w-5xl mx-auto px-3 lg:px-6 w-full py-12 reveal-scale', [
         div(classes: 'flex items-center gap-3 mb-5', [
           span(classes: 'font-mono text-sm tracking-[0.12em] uppercase text-slate-400', [
             Component.text('In progress'),
@@ -158,7 +158,7 @@ class ComponentsSection extends StatelessComponent {
       ]),
 
       // ── CTA island ─────────────────────────────────────────────────────────
-      div(classes: 'max-w-5xl mx-auto px-3 lg:px-6 w-full pb-20 reveal', [
+      div(classes: 'max-w-5xl mx-auto px-3 lg:px-6 w-full pb-20 reveal-scale', [
         div(classes: 'cta-island py-16 text-center relative rounded-2xl overflow-hidden', [
           div(classes: 'relative px-6', [
             p(classes: 'section-eyebrow font-display text-sm tracking-[0.16em] uppercase mb-6', [
@@ -213,6 +213,7 @@ class ComponentsSection extends StatelessComponent {
     required int index,
   }) {
     final rgb = _hexToRgb(accentHex);
+    final revealClass = isFlipped ? 'reveal-right' : 'reveal-left';
     final content = [
       // Text side
       div(classes: 'flex-1 flex flex-col justify-center py-10 lg:py-0', [
@@ -261,7 +262,7 @@ class ComponentsSection extends StatelessComponent {
     return div(
       classes:
           'max-w-5xl mx-auto px-3 lg:px-6 w-full '
-          'border-t border-[rgba(129,140,248,0.2)] reveal',
+          'border-t border-[rgba(129,140,248,0.2)] $revealClass',
       [
         div(
           classes:
@@ -486,7 +487,7 @@ class ComponentsSection extends StatelessComponent {
     href: _galleryHref(name),
     attributes: const {'target': '_blank', 'rel': 'noopener'},
     classes:
-        'group inline-flex items-center gap-2 '
+        'shipped-pill group inline-flex items-center gap-2 '
         'px-4 py-2.5 '
         'border border-slate-200 rounded-full '
         'font-mono text-sm text-slate-600 '
@@ -503,7 +504,7 @@ class ComponentsSection extends StatelessComponent {
 
   Component _wipPill(String name) => div(
     classes:
-        'inline-flex items-center gap-2 '
+        'wip-pill inline-flex items-center gap-2 '
         'px-4 py-2.5 '
         'border border-slate-200 rounded-full '
         'font-mono text-sm text-slate-400 '

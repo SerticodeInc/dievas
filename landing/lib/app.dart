@@ -177,6 +177,7 @@ class App extends StatelessComponent {
       link(rel: 'stylesheet', href: '/architecture.css'),
       link(rel: 'stylesheet', href: '/components.css'),
       link(rel: 'stylesheet', href: '/footer.css'),
+      link(rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg'),
       RawText(_inlineAnimationStyles),
     ],
     body: const _AppBody(),

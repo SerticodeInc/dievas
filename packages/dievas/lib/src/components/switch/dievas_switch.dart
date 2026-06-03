@@ -108,9 +108,6 @@ class _DievasSwitchTrackBuilder extends StatelessWidget {
         decoration: BoxDecoration(
           color: .lerp(theme.trackColorOff, theme.trackColorOn, t)!,
           borderRadius: theme.trackRadius,
-          border: .all(
-            color: .lerp(theme.borderColorOff, DievasTheme.colorsOf(context).staticColours.staticTransparent, t)!,
-          ),
         ),
         child: Stack(
           clipBehavior: .none,

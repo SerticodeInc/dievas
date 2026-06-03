@@ -141,7 +141,7 @@ class _StatsRow extends StatelessWidget {
         _Divider(),
         _StatCell(value: '2', label: 'default themes'),
         _Divider(),
-        _StatCell(value: '28', label: 'components'),
+        _StatCell(value: '35', label: 'components'),
         _Divider(),
         _StatCell(value: '∞', label: 'brand configs'),
       ],

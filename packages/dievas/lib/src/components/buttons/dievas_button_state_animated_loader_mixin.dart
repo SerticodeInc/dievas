@@ -1,3 +1,4 @@
+import 'package:dievas_tokens/dievas_tokens.dart';
 import 'package:flutter/material.dart';
 
 import 'button_types/dievas_button_state.dart';
@@ -79,17 +80,19 @@ mixin DievasButtonStateAnimatedLoaderProviderMixin<T extends DievasButtonStateAn
 /// Minimal circular loader rendered as a thin ring.
 ///
 /// Sized via [FittedBox] by the parent so it inherits the icon slot dimensions.
-/// Reads its size from the parent [IconTheme] and uses a proportional stroke width.
+/// Reads its size from the parent [IconTheme] and derives a proportional stroke.
 class _LoaderIcon extends StatelessWidget {
   const _LoaderIcon();
+
+  static const double _kStrokeRatio = 0.1;
 
   @override
   Widget build(BuildContext context) {
     final iconTheme = IconTheme.of(context);
-    final size = iconTheme.size ?? 20.0;
+    final size = iconTheme.size ?? DievasSizingPrimitives.s20;
     return SizedBox.square(
       dimension: size,
-      child: CircularProgressIndicator.adaptive(strokeWidth: size / 10),
+      child: CircularProgressIndicator.adaptive(strokeWidth: size * _kStrokeRatio),
     );
   }
 }

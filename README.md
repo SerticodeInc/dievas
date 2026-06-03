@@ -1,18 +1,18 @@
 # Dievas Design System
 
-> A Flutter design system inspired by [Genesis Design] and the visual language of [Moon Design System](https://flutter.moon.io). Multi-brand from day one.
-
----
+> A Flutter design system inspired by the visual language of [Moon Design System](https://flutter.moon.io). Multi brand from day one.
 
 ## What It Is
 
-Dievas is a Melos monorepo that houses a token layer, a full theme architecture, a Flutter component library, and a live gallery app. It is **not an application** — it is the foundation that applications build on.
+Dievas is a Melos monorepo that houses a token layer, a full theme architecture, a Flutter component library, and a live gallery app.
 
-The three-layer model that drives it:
+It is **not an application**. It is the foundation that applications build on.
+
+The three layer model that drives it:
 
 ```text
 Moon Design System      →   component catalogue and visual reference  (what we port)
-Genesis Design Pattern  →   architectural blueprint                   (how we structure it)
+Dievas Design Pattern  →   architectural blueprint                   (how we structure it)
 Dievas                  →   the output                                (our system, our API)
 ```
 
@@ -23,7 +23,8 @@ dievas/
 ├── packages/
 │   ├── dievas_tokens/      # Pure Dart — primitive + semantic token layer
 │   ├── dievas/             # Flutter — theme stack + component library
-│   └── dievas_gallery/     # Flutter app — live component showcase
+│   └── dievas_gallery/     # Flutter app — live component showcase (Widget book)
+├── landing/                # Jaspr SSR + Tailwind v4 landing page
 ├── pubspec.yaml            # Melos workspace root
 └── analysis_options.yaml   # Shared lint rules (line length: 120)
 ```
@@ -34,13 +35,13 @@ dievas/
 dievas_gallery  →  dievas  →  dievas_tokens (pure Dart, zero Flutter dependency)
 ```
 
-`dievas_tokens` must never import Flutter. It is safe to use in Dart-only targets — CLI tools, Jaspr, server-side code. A Flutter import in that package is a bug.
+`dievas_tokens` must never import Flutter. It is safe to use in Dart only targets like CLI tools, Jaspr, server side code.
 
----
+A Flutter import in that package is a bug.
 
 ## Token Architecture
 
-### Two-tier model
+### Two tier model
 
 **Primitives** — raw values with no semantic meaning. Raw `int` or `double` constants, no Flutter types.
 
@@ -71,15 +72,17 @@ Colour roles use **grouped semantic naming** — `textPrimary`, `bgBase`, `actio
 | Family     | Primitives file              | Semantic file                     |
 | ---------- | ---------------------------- | --------------------------------- |
 | Colour     | `colour_primitives.dart`     | `colour_semantic_light/dark.dart` |
+| Typography | `typography_primitives.dart` | `typography_semantic.dart`        |
+| Spacing    | `spacing_primitives.dart`    | `spacing_semantic.dart`           |
+| Sizing     | `sizing_primitives.dart`     | `sizing_semantic.dart`            |
+| Radius     | `radius_primitives.dart`     | `radius_semantic.dart`            |
 | Elevation  | `elevation_primitives.dart`  | `elevation_semantic.dart`         |
 | Opacity    | `opacity_primitives.dart`    | `opacity_semantic.dart`           |
-| Radius     | `radius_primitives.dart`     | `radius_semantic.dart`            |
-| Spacing    | `spacing_primitives.dart`    | `spacing_semantic.dart`           |
-| Typography | `typography_primitives.dart` | `typography_semantic.dart`        |
+| Duration   | `duration_primitives.dart`   | —                                 |
+| Offset     | `offset_primitives.dart`     | `offset_semantic.dart`            |
+| Animation  | —                            | `animation_semantic.dart`         |
 
 Typography uses **Maison Neue** (body, label, title) and **Maison Neue Extended** (display, heading), with JetBrains Mono for code.
-
----
 
 ## Theme Architecture
 
@@ -93,7 +96,7 @@ DievasThemeData               ← abstract interface (the contract)
        └── [AppThemeData]         ← consumer app's brand (lives in the app, not here)
 ```
 
-`DievasTheme` is an `InheritedModel<DievasThemeAspect>`. Each sub-system (`colors`, `typography`, `spacing`, `sizing`, `border`, `elevation`, `opacity`, `components`, `material`) is a named aspect — a widget that depends only on `colors` does not rebuild when `spacing` changes.
+`DievasTheme` is an `InheritedModel<DievasThemeAspect>`. Each sub system (`colors`, `typography`, `spacing`, `sizing`, `border`, `elevation`, `opacity`, `components`, `material`) is a named aspect; a widget that depends only on `colors` does not rebuild when `spacing` changes.
 
 ### Context extension — flat API
 
@@ -101,18 +104,18 @@ DievasThemeData               ← abstract interface (the contract)
 // Inside any widget's build method
 final color = context.colors.action.actionPrimary;
 final style = context.typography.labelMd;
-final gap   = context.spacing.md;
+final gap   = context.spacing.s4;
 final cols  = context.grid.columns;
 ```
 
 ### Plugging in a brand theme
 
-Consumer apps never touch `DievasLightThemeData` directly — they extend `DievasGlobalThemeData` with their own brand tokens:
+Consumer apps never touch `DievasLightThemeData` directly. They extend `DievasGlobalThemeData` with their own brand tokens:
 
 ```dart
-// In the Cadence app — not in this repo
-class CadenceLightThemeData extends DievasGlobalThemeData {
-  CadenceLightThemeData({super.components})
+// In an Example app — not in this repo
+class ExampleLightThemeData extends DievasGlobalThemeData {
+  ExampleLightThemeData({super.components})
     : super(
         colors: DievasColourThemeData(
           brightness: Brightness.light,
@@ -127,19 +130,17 @@ Then at the app root:
 
 ```dart
 DievasScope(
-  lightTheme: CadenceLightThemeData(),
-  darkTheme: CadenceDarkThemeData(),
+  lightTheme: ExampleLightThemeData(),
+  darkTheme: ExampleDarkThemeData(),
   child: MaterialApp.router(...),
 )
 ```
 
 The design system never knows which brand is running. Brand is resolved at `DievasScope` instantiation.
 
----
-
 ## Component Anatomy
 
-Every component follows a strict four-layer pattern. No exceptions.
+Every component follows a strict four layer pattern. No exceptions.
 
 ```text
 Widget side                          Theme side
@@ -159,13 +160,25 @@ Rules components always follow:
 - No hardcoded colour, size, or spacing value — everything comes from `context.*`
 - No `ThemeData` parameters on the widget itself — components read from `DievasTheme.componentsOf(context)`
 - The `style` field is always a sealed class or enum, never a raw string
-- No string literals — all copy goes through `context.l10n.*`
 
----
+## Components
+
+35 components shipped across eight groups:
+
+| Group                | Count | Components                                                                                                                                                                                                          |
+| -------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Buttons**          | 4     | `DievasFilledButton`, `DievasOutlinedButton`, `DievasTextButton`, `DievasIconButton`                                                                                                                                |
+| **Display**          | 11    | `DievasAvatar`, `DievasBadge`, `DievasCircularLoader`, `DievasCircularProgress`, `DievasDivider`, `DievasDotIndicator`, `DievasEmptyState`, `DievasIcon`, `DievasLinearLoader`, `DievasLinearProgress`, `DievasTag` |
+| **Form**             | 7     | `DievasAuthCode`, `DievasCheckbox`, `DievasRadio`, `DievasSwitch`, `DievasTextArea`, `DievasTextInput`, `DievasTextInputGroup`                                                                                      |
+| **Feedback**         | 3     | `DievasAlert`, `DievasBanner`, `DievasSnackbar`                                                                                                                                                                     |
+| **Overlays**         | 3     | `DievasBottomSheet`, `DievasModal`, `DievasTooltip`                                                                                                                                                                 |
+| **Search**           | 2     | `DievasSearchWithList`, `DievasSearchWithDropdown`                                                                                                                                                                  |
+| **Nav / Disclosure** | 4     | `DievasAccordion`, `DievasBreadcrumb`, `DievasDrawer`, `DievasPopover`                                                                                                                                              |
+| **Utility**          | 1     | `DievasLoader`                                                                                                                                                                                                      |
 
 ## Grid System
 
-`DievasGrid` gives any widget breakpoint-aware layout via `LayoutBuilder`.
+`DievasGrid` gives any widget breakpoint aware layout via `LayoutBuilder`.
 
 | Breakpoint | Min width | Columns | Margin | Gutter |
 | ---------- | --------- | ------- | ------ | ------ |
@@ -174,8 +187,6 @@ Rules components always follow:
 | `medium`   | 700px     | 8       | 32     | 24     |
 | `large`    | 1000px    | 12      | 32     | 24     |
 | `xLarge`   | 1348px    | 12      | 32     | 24     |
-
----
 
 ## Running Locally
 
@@ -200,69 +211,21 @@ cd packages/dievas_gallery
 flutter run
 ```
 
----
-
 ## Dart / Flutter Version
 
 ```text
 SDK: >=3.11.4 <4.0.0
 ```
 
-Dart 3 idioms throughout — pattern matching with `switch` expressions, sealed classes, records, exhaustive matching. No legacy pre-null-safety patterns.
-
----
+Dart 3 idioms throughout — pattern matching with `switch` expressions, sealed classes, records, exhaustive matching. No legacy pre null safety patterns.
 
 ## Reference Systems
 
-| Reference                                                        | Role in Dievas                                                     |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------ |
-| [Moon Design System](https://flutter.moon.io)                    | Component catalogue, visual language                               |
-| [Genesis Design System](https://github.com/bushadigital/warlock) | Architectural pattern, theme inheritance, InheritedModel structure |
+| Reference                                     | Role in Dievas                       |
+| --------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------ |
+| [Moon Design System](https://flutter.moon.io) | Component catalogue, visual language | **Landing page** — Jaspr SSR + Tailwind v4, deployed on Railway at `dievas.serticode.com`. |
 
----
-
-## Components
-
-16 components shipped across three groups:
-
-| Group       | Components                                                                                                                  |
-| ----------- | --------------------------------------------------------------------------------------------------------------------------- |
-| **Buttons** | `DievasFilledButton`, `DievasOutlinedButton`, `DievasTextButton`, `DievasIconButton`                                        |
-| **Display** | `DievasAvatar`, `DievasBadge`, `DievasCircularProgress`, `DievasDivider`, `DievasIcon`, `DievasLinearProgress`, `DievasTag` |
-| **Form**    | `DievasCheckbox`, `DievasRadio`, `DievasSwitch`, `DievasTextInput`, `DievasTextArea`                                        |
-
-**Overlay components** (BottomSheet, Toast, Modal, Tooltip) — M4, pending.
-
----
-
-## Gallery + Landing
-
-**Widget book gallery** — hosted on Cloudflare Pages:
-`https://master.dievas-gallery.pages.dev`
-
-Every component has four use-cases: Playground (full knobs), All Styles, All Sizes, All States.
-
-**Landing page** — Jaspr SSR + Tailwind v4, deployed on Railway:
-`https://dievas.serticode.com`
-
-Token bridge: `landing/tool/generate_theme.dart` reads `dievas_tokens` constants and emits Tailwind `@theme {}` CSS — the same token values power both the Flutter widgets and the server-rendered landing page.
-
----
-
-## Status
-
-`v0.0.1-dev` — core component library complete. Overlay components in progress. Target: full system by **May 21, 2026**.
-
-| Milestone                          | Status     | Window    |
-| ---------------------------------- | ---------- | --------- |
-| M1 — Token layer                   | ✅ Done    | May 8     |
-| M2 — Theme architecture            | ✅ Done    | May 8–10  |
-| M3 — Core components (16)          | ✅ Done    | May 8–10  |
-| M4 — Overlay + feedback components | ⬜ Pending | May 14–17 |
-| M5 — Gallery scaffold + hosting    | ✅ Done    | May 9     |
-| M6 — Gallery pages + polish        | ⬜ Pending | May 19–21 |
-
----
+Token bridge: `landing/tool/generate_theme.dart` reads `dievas_tokens` constants and emits Tailwind `@theme {}` CSS — the same token values power both the Flutter widgets and the server rendered landing page.
 
 ## Team
 

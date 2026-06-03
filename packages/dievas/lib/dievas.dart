@@ -45,8 +45,6 @@ export 'src/components/buttons/button_types/dievas_button_style.dart';
 
 //  Components — Form
 export 'src/components/auth_code/dievas_auth_code.dart';
-export 'src/components/breadcrumb/dievas_breadcrumb.dart';
-export 'src/components/dot_indicator/dievas_dot_indicator.dart';
 export 'src/components/checkbox/dievas_checkbox.dart';
 export 'src/components/radio/dievas_radio.dart';
 export 'src/components/switch/dievas_switch.dart';
@@ -60,6 +58,7 @@ export 'src/components/search/dievas_search_with_dropdown.dart';
 export 'src/components/avatar/dievas_avatar.dart';
 export 'src/components/badge/dievas_badge.dart';
 export 'src/components/divider/dievas_divider.dart';
+export 'src/components/dot_indicator/dievas_dot_indicator.dart';
 export 'src/components/icon/dievas_icon.dart';
 export 'src/components/progress/dievas_circular_progress.dart';
 export 'src/components/progress/dievas_linear_progress.dart';
@@ -77,6 +76,7 @@ export 'src/components/tooltip/dievas_tooltip.dart';
 
 //  Components — Navigation / Disclosure
 export 'src/components/accordion/dievas_accordion.dart';
+export 'src/components/breadcrumb/dievas_breadcrumb.dart';
 export 'src/components/drawer/dievas_drawer.dart';
 export 'src/components/popover/dievas_popover.dart';
 

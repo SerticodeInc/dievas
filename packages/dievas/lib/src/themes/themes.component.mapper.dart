@@ -292,9 +292,9 @@ DievasBreadcrumbThemeData _createBreadcrumbTheme(
   itemStyle: typography.bodySm.copyWith(color: colors.text.textSecondary),
   activeItemStyle: typography.bodySm.copyWith(color: colors.text.textPrimary),
   separatorStyle: typography.bodySm.copyWith(color: colors.icon.iconDisabled),
-  separatorSpacing: spacing.xs,
+  separatorSpacing: spacing.sm,
   iconSize: sizing.iconSm,
-  iconSpacing: spacing.xs,
+  iconSpacing: spacing.sm,
   minHitHeight: DievasSizingPrimitives.s40,
   disabledOpacity: DievasOpacitySemantic.disabled,
 );
@@ -470,9 +470,9 @@ DievasTextInputThemeData _createTextInputTheme(
   ),
   height: (sm: sizing.inputHeightSm, md: sizing.inputHeightMd, lg: sizing.inputHeightLg),
   contentPadding: (
-    sm: EdgeInsets.symmetric(horizontal: spacing.smPlus, vertical: spacing.xs),
-    md: EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.sm),
-    lg: EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
+    sm: .symmetric(horizontal: spacing.smPlus, vertical: spacing.xs),
+    md: .symmetric(horizontal: spacing.md, vertical: spacing.sm),
+    lg: .symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
   ),
   borderRadius: border.md,
   strokeWidth: border.strokeThin,
@@ -483,9 +483,9 @@ DievasTextInputThemeData _createTextInputTheme(
   borderColorError: colors.input.inputBorderError,
   iconColor: colors.icon.iconSecondary,
   iconSize: DievasSizingPrimitives.s20,
-  iconSpacing: spacing.xs,
-  labelSpacing: spacing.xs,
-  helperSpacing: spacing.xs,
+  iconSpacing: spacing.sm,
+  labelSpacing: spacing.sm,
+  helperSpacing: spacing.sm,
   disabledOpacity: DievasOpacitySemantic.disabled,
 );
 
@@ -700,8 +700,6 @@ DievasAccordionThemeData _createAccordionTheme(
   DievasAnimationThemeData animation,
   DievasElevationThemeData elevation,
 ) {
-  const level = DievasElevationShadowLayer.xs;
-  final shadowColor = elevation.xs.isNotEmpty ? elevation.xs.first.color : Colors.transparent;
   return DievasAccordionThemeData(
     headerStyle: typography.titleXsm,
     contentStyle: typography.bodySm,
@@ -713,7 +711,7 @@ DievasAccordionThemeData _createAccordionTheme(
     iconSpacing: spacing.sm,
     dividerIndent: spacing.md,
     animationDuration: animation.standard,
-    shadows: [BoxShadow(color: shadowColor, blurRadius: level.blur, offset: Offset.zero)],
+    shadows: elevation.xs,
   );
 }
 

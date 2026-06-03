@@ -82,7 +82,7 @@ class DievasBreadcrumb<T> extends StatelessWidget {
         for (var i = 0; i < items.length; i++) ...[
           if (i > 0 || homeIcon != null || onHomeTap != null)
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: theme.separatorSpacing),
+              padding: .symmetric(horizontal: theme.separatorSpacing),
               child: separator ?? defaultSeparator,
             ),
           _Crumb<T>(

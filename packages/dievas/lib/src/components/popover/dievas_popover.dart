@@ -93,7 +93,7 @@ class _DievasPopoverState extends State<DievasPopover> {
   Widget build(BuildContext context) {
     return CompositedTransformTarget(
       link: _link,
-      child: GestureDetector(onTap: _toggle, child: widget.trigger),
+      child: Listener(behavior: .opaque, onPointerDown: (_) => _toggle(), child: widget.trigger),
     );
   }
 }

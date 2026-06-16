@@ -16,7 +16,7 @@ dependencies:
 
     dievas:
         path: ../dievas
-    widgetbook: ^3.20.2
+    widgetbook: ^3.24.0
     device_frame: ^1.4.0
 
 dev_dependencies:

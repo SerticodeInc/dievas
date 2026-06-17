@@ -33,7 +33,10 @@ void main() {
         Harness(
           child: Builder(
             builder: (context) => GestureDetector(
-              onTap: () => showDievasBottomSheet(context: context, builder: (_) => const DievasBottomSheet(child: Text('Sheet'))),
+              onTap: () => showDievasBottomSheet(
+                context: context,
+                builder: (_) => const DievasBottomSheet(child: Text('Sheet')),
+              ),
               child: const Text('Open'),
             ),
           ),

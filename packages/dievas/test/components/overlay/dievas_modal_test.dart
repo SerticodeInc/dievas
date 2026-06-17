@@ -61,7 +61,10 @@ void main() {
         Harness(
           child: Builder(
             builder: (context) => GestureDetector(
-              onTap: () => showDievasModal(context: context, builder: (_) => const DievasModal(title: 'Dialog Title')),
+              onTap: () => showDievasModal(
+                context: context,
+                builder: (_) => const DievasModal(title: 'Dialog Title'),
+              ),
               child: const Text('Open'),
             ),
           ),

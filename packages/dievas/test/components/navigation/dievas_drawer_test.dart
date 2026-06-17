@@ -12,31 +12,25 @@ Widget _drawerHarness(Widget child) => MediaQuery(
 void main() {
   group('DievasDrawer', () {
     testWidgets('renders child widget', (tester) async {
-      await tester.pumpWidget(_drawerHarness(
-        const DievasDrawer(child: Text('Body'), drawer: Text('Drawer')),
-      ));
+      await tester.pumpWidget(_drawerHarness(const DievasDrawer(child: Text('Body'), drawer: Text('Drawer'))));
       expect(find.text('Body'), findsOneWidget);
     });
 
     testWidgets('renders drawer widget without throwing', (tester) async {
-      await tester.pumpWidget(_drawerHarness(
-        const DievasDrawer(child: Text('Body'), drawer: Text('Drawer')),
-      ));
+      await tester.pumpWidget(_drawerHarness(const DievasDrawer(child: Text('Body'), drawer: Text('Drawer'))));
       expect(tester.takeException(), isNull);
     });
 
     testWidgets('drawer is hidden initially outside the viewport', (tester) async {
-      await tester.pumpWidget(_drawerHarness(
-        const DievasDrawer(child: Text('Body'), drawer: Text('Drawer')),
-      ));
+      await tester.pumpWidget(_drawerHarness(const DievasDrawer(child: Text('Body'), drawer: Text('Drawer'))));
       expect(tester.takeException(), isNull);
     });
 
     testWidgets('open and close via state key', (tester) async {
       final key = GlobalKey<DievasDrawerState>();
-      await tester.pumpWidget(_drawerHarness(
-        DievasDrawer(key: key, child: const Text('Body'), drawer: const Text('Drawer')),
-      ));
+      await tester.pumpWidget(
+        _drawerHarness(DievasDrawer(key: key, child: const Text('Body'), drawer: const Text('Drawer'))),
+      );
       key.currentState?.open();
       await tester.pumpAndSettle();
       key.currentState?.close();
@@ -44,9 +38,9 @@ void main() {
     });
 
     testWidgets('renders with custom width', (tester) async {
-      await tester.pumpWidget(_drawerHarness(
-        const DievasDrawer(child: Text('Body'), drawer: Text('Drawer'), width: 300),
-      ));
+      await tester.pumpWidget(
+        _drawerHarness(const DievasDrawer(child: Text('Body'), drawer: Text('Drawer'), width: 300)),
+      );
       expect(tester.takeException(), isNull);
     });
   });

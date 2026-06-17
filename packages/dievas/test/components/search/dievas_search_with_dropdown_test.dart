@@ -7,45 +7,51 @@ import '../../cross_cutting_concerns/harness.dart';
 void main() {
   group('DievasSearchWithDropdown', () {
     testWidgets('renders without throwing', (tester) async {
-      await tester.pumpWidget(Harness(
-        child: SizedBox(
-          width: 400,
-          child: DievasSearchWithDropdown<String>(
-            items: const ['Apple', 'Banana'],
-            displayString: (s) => s,
-            onSelected: (_) {},
+      await tester.pumpWidget(
+        Harness(
+          child: SizedBox(
+            width: 400,
+            child: DievasSearchWithDropdown<String>(
+              items: const ['Apple', 'Banana'],
+              displayString: (s) => s,
+              onSelected: (_) {},
+            ),
           ),
         ),
-      ));
+      );
       expect(tester.takeException(), isNull);
     });
 
     testWidgets('shows hint text when provided', (tester) async {
-      await tester.pumpWidget(Harness(
-        child: SizedBox(
-          width: 400,
-          child: DievasSearchWithDropdown<String>(
-            items: const ['Apple', 'Banana'],
-            displayString: (s) => s,
-            onSelected: (_) {},
-            hint: 'Search fruits',
+      await tester.pumpWidget(
+        Harness(
+          child: SizedBox(
+            width: 400,
+            child: DievasSearchWithDropdown<String>(
+              items: const ['Apple', 'Banana'],
+              displayString: (s) => s,
+              onSelected: (_) {},
+              hint: 'Search fruits',
+            ),
           ),
         ),
-      ));
+      );
       expect(find.text('Search fruits'), findsOneWidget);
     });
 
     testWidgets('shows dropdown when typing', (tester) async {
-      await tester.pumpWidget(Harness(
-        child: SizedBox(
-          width: 400,
-          child: DievasSearchWithDropdown<String>(
-            items: const ['Apple', 'Banana', 'Apricot'],
-            displayString: (s) => s,
-            onSelected: (_) {},
+      await tester.pumpWidget(
+        Harness(
+          child: SizedBox(
+            width: 400,
+            child: DievasSearchWithDropdown<String>(
+              items: const ['Apple', 'Banana', 'Apricot'],
+              displayString: (s) => s,
+              onSelected: (_) {},
+            ),
           ),
         ),
-      ));
+      );
       await tester.enterText(find.byType(TextField), 'Ap');
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
@@ -56,16 +62,18 @@ void main() {
 
     testWidgets('tapping result calls onSelected and clears text', (tester) async {
       String? selected;
-      await tester.pumpWidget(Harness(
-        child: SizedBox(
-          width: 400,
-          child: DievasSearchWithDropdown<String>(
-            items: const ['Apple', 'Banana'],
-            displayString: (s) => s,
-            onSelected: (item) => selected = item,
+      await tester.pumpWidget(
+        Harness(
+          child: SizedBox(
+            width: 400,
+            child: DievasSearchWithDropdown<String>(
+              items: const ['Apple', 'Banana'],
+              displayString: (s) => s,
+              onSelected: (item) => selected = item,
+            ),
           ),
         ),
-      ));
+      );
       await tester.enterText(find.byType(TextField), 'Apple');
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
@@ -76,32 +84,36 @@ void main() {
     });
 
     testWidgets('disables search field when enabled is false', (tester) async {
-      await tester.pumpWidget(Harness(
-        child: SizedBox(
-          width: 400,
-          child: DievasSearchWithDropdown<String>(
-            items: const ['Apple'],
-            displayString: (s) => s,
-            onSelected: (_) {},
-            enabled: false,
+      await tester.pumpWidget(
+        Harness(
+          child: SizedBox(
+            width: 400,
+            child: DievasSearchWithDropdown<String>(
+              items: const ['Apple'],
+              displayString: (s) => s,
+              onSelected: (_) {},
+              enabled: false,
+            ),
           ),
         ),
-      ));
+      );
       final textField = tester.widget<TextField>(find.byType(TextField));
       expect(textField.enabled, isFalse);
     });
 
     testWidgets('close button clears text and dismisses dropdown', (tester) async {
-      await tester.pumpWidget(Harness(
-        child: SizedBox(
-          width: 400,
-          child: DievasSearchWithDropdown<String>(
-            items: const ['Apple', 'Banana'],
-            displayString: (s) => s,
-            onSelected: (_) {},
+      await tester.pumpWidget(
+        Harness(
+          child: SizedBox(
+            width: 400,
+            child: DievasSearchWithDropdown<String>(
+              items: const ['Apple', 'Banana'],
+              displayString: (s) => s,
+              onSelected: (_) {},
+            ),
           ),
         ),
-      ));
+      );
       // Enter text with no matches so dropdown doesn't obscure the close button
       await tester.enterText(find.byType(TextField), 'XYZ');
       await tester.pump();

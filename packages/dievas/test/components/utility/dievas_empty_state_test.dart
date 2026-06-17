@@ -12,33 +12,31 @@ void main() {
     });
 
     testWidgets('renders custom title', (tester) async {
-      await tester.pumpWidget(
-        Harness(child: const DievasEmptyState(title: 'Custom Title')),
-      );
+      await tester.pumpWidget(Harness(child: const DievasEmptyState(title: 'Custom Title')));
       expect(find.text('Custom Title'), findsOneWidget);
     });
 
     testWidgets('renders custom description', (tester) async {
-      await tester.pumpWidget(
-        Harness(child: const DievasEmptyState(description: 'Custom description')),
-      );
+      await tester.pumpWidget(Harness(child: const DievasEmptyState(description: 'Custom description')));
       expect(find.text('Custom description'), findsOneWidget);
     });
 
     testWidgets('renders custom icon', (tester) async {
       await tester.pumpWidget(
-        Harness(child: const DievasEmptyState(
-          icon: Icon(Icons.inbox, key: Key('empty_icon')),
-        )),
+        Harness(
+          child: const DievasEmptyState(icon: Icon(Icons.inbox, key: Key('empty_icon'))),
+        ),
       );
       expect(find.byKey(const Key('empty_icon')), findsOneWidget);
     });
 
     testWidgets('renders action widget', (tester) async {
       await tester.pumpWidget(
-        Harness(child: DievasEmptyState(
-          action: TextButton(onPressed: () {}, child: const Text('CTA')),
-        )),
+        Harness(
+          child: DievasEmptyState(
+            action: TextButton(onPressed: () {}, child: const Text('CTA')),
+          ),
+        ),
       );
       expect(find.text('CTA'), findsOneWidget);
     });

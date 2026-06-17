@@ -7,23 +7,27 @@ import '../../cross_cutting_concerns/harness.dart';
 void main() {
   group('DievasPopover', () {
     testWidgets('renders trigger without throwing', (tester) async {
-      await tester.pumpWidget(Harness(
-        child: DievasPopover(
-          trigger: const Text('Open', key: Key('trigger')),
-          content: const Text('Content'),
+      await tester.pumpWidget(
+        Harness(
+          child: DievasPopover(
+            trigger: const Text('Open', key: Key('trigger')),
+            content: const Text('Content'),
+          ),
         ),
-      ));
+      );
       expect(tester.takeException(), isNull);
       expect(find.byKey(const Key('trigger')), findsOneWidget);
     });
 
     testWidgets('shows content on trigger tap', (tester) async {
-      await tester.pumpWidget(Harness(
-        child: DievasPopover(
-          trigger: const Text('Open', key: Key('trigger')),
-          content: const Text('Popover Content'),
+      await tester.pumpWidget(
+        Harness(
+          child: DievasPopover(
+            trigger: const Text('Open', key: Key('trigger')),
+            content: const Text('Popover Content'),
+          ),
         ),
-      ));
+      );
       await tester.tap(find.byKey(const Key('trigger')));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
@@ -31,12 +35,14 @@ void main() {
     });
 
     testWidgets('hides content on second tap', (tester) async {
-      await tester.pumpWidget(Harness(
-        child: DievasPopover(
-          trigger: const Text('Open', key: Key('trigger')),
-          content: const Text('Popover Content'),
+      await tester.pumpWidget(
+        Harness(
+          child: DievasPopover(
+            trigger: const Text('Open', key: Key('trigger')),
+            content: const Text('Popover Content'),
+          ),
         ),
-      ));
+      );
       await tester.tap(find.byKey(const Key('trigger')));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
@@ -48,12 +54,14 @@ void main() {
     });
 
     testWidgets('hides content on barrier tap', (tester) async {
-      await tester.pumpWidget(Harness(
-        child: DievasPopover(
-          trigger: const Text('Open', key: Key('trigger')),
-          content: const Text('Popover Content'),
+      await tester.pumpWidget(
+        Harness(
+          child: DievasPopover(
+            trigger: const Text('Open', key: Key('trigger')),
+            content: const Text('Popover Content'),
+          ),
         ),
-      ));
+      );
       await tester.tap(find.byKey(const Key('trigger')));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
@@ -67,13 +75,11 @@ void main() {
 
     testWidgets('renders with different positions', (tester) async {
       for (final position in DievasPopoverPosition.values) {
-        await tester.pumpWidget(Harness(
-          child: DievasPopover(
-            trigger: const Text('Open'),
-            content: const Text('Content'),
-            position: position,
+        await tester.pumpWidget(
+          Harness(
+            child: DievasPopover(trigger: const Text('Open'), content: const Text('Content'), position: position),
           ),
-        ));
+        );
         expect(tester.takeException(), isNull);
       }
     });

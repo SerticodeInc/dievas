@@ -26,11 +26,7 @@ void main() {
       int? selected;
       await tester.pumpWidget(
         Harness(
-          child: DievasTabBar(
-            tabs: ['A', 'B', 'C'],
-            selectedIndex: 0,
-            onChanged: (i) => selected = i,
-          ),
+          child: DievasTabBar(tabs: ['A', 'B', 'C'], selectedIndex: 0, onChanged: (i) => selected = i),
         ),
       );
       await tester.tap(find.text('B'));
@@ -41,12 +37,7 @@ void main() {
       int? selected;
       await tester.pumpWidget(
         Harness(
-          child: DievasTabBar(
-            tabs: ['A', 'B', 'C'],
-            selectedIndex: 0,
-            onChanged: (i) => selected = i,
-            enabled: false,
-          ),
+          child: DievasTabBar(tabs: ['A', 'B', 'C'], selectedIndex: 0, onChanged: (i) => selected = i, enabled: false),
         ),
       );
       await tester.tap(find.text('B'));
@@ -55,9 +46,7 @@ void main() {
 
     testWidgets('does not fire onChanged when onChanged is null', (tester) async {
       await tester.pumpWidget(
-        Harness(
-          child: const DievasTabBar(tabs: ['A', 'B', 'C'], selectedIndex: 0, onChanged: null),
-        ),
+        Harness(child: const DievasTabBar(tabs: ['A', 'B', 'C'], selectedIndex: 0, onChanged: null)),
       );
       await tester.tap(find.text('B'));
       // No exception means it completed without firing

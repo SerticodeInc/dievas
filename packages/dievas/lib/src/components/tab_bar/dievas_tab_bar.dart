@@ -12,13 +12,7 @@ import '../../theme/dievas_theme.dart';
 /// )
 /// ```
 class DievasTabBar extends StatelessWidget {
-  const DievasTabBar({
-    super.key,
-    required this.tabs,
-    required this.selectedIndex,
-    this.onChanged,
-    this.enabled = true,
-  });
+  const DievasTabBar({super.key, required this.tabs, required this.selectedIndex, this.onChanged, this.enabled = true});
 
   /// The list of tab labels.
   final List<String> tabs;
@@ -69,10 +63,7 @@ class DievasTabBar extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              height: 1,
-              color: theme.dividerColor,
-            ),
+            Container(height: 1, color: theme.dividerColor),
           ],
         ),
       ),
@@ -117,9 +108,7 @@ class _Tab extends StatelessWidget {
         padding: padding,
         decoration: BoxDecoration(
           border: Border(
-            bottom: isSelected
-                ? BorderSide(color: indicatorColor, width: indicatorHeight)
-                : BorderSide.none,
+            bottom: isSelected ? BorderSide(color: indicatorColor, width: indicatorHeight) : BorderSide.none,
           ),
         ),
         alignment: Alignment.center,

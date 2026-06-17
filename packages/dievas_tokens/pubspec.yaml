@@ -3,6 +3,7 @@ description: "Dievas design tokens. Primitive and semantic layers. Pure Dart, no
 version: 0.0.2
 repository: https://github.com/Serticode/dievas
 homepage: https://dievas.serticode.com
+resolution: workspace
 topics: [design-tokens, design-system, ui, theming]
 
 environment:

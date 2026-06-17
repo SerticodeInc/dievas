@@ -3,6 +3,7 @@ description: "Dievas design system. Flutter theme and component layer."
 version: 0.0.2
 repository: https://github.com/Serticode/dievas
 homepage: https://dievas.serticode.com
+resolution: workspace
 
 environment:
     sdk: ">=3.11.4 <4.0.0"

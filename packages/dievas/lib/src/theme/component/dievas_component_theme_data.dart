@@ -15,6 +15,7 @@ import 'checkbox/dievas_checkbox_theme_data.dart';
 import 'circular_progress/dievas_circular_progress_theme_data.dart';
 import 'dot_indicator/dievas_dot_indicator_theme_data.dart';
 import 'drawer/dievas_drawer_theme_data.dart';
+import 'dropdown/dievas_dropdown_theme_data.dart';
 import 'empty_state/dievas_empty_state_theme_data.dart';
 import 'linear_progress/dievas_linear_progress_theme_data.dart';
 import 'loader/dievas_loader_theme_data.dart';
@@ -69,6 +70,7 @@ final class DievasComponentThemeData extends Equatable {
     required this.accordion,
     required this.dotIndicator,
     required this.drawer,
+    required this.dropdown,
     required this.search,
     required this.segmentedControl,
     required this.popover,
@@ -160,6 +162,9 @@ final class DievasComponentThemeData extends Equatable {
   /// Theme data for [DievasDrawer].
   final DievasDrawerThemeData drawer;
 
+  /// Theme data for [DievasDropdown].
+  final DievasDropdownThemeData dropdown;
+
   /// Theme data for [DievasSegmentedControl].
   final DievasSegmentedControlThemeData segmentedControl;
 
@@ -194,6 +199,7 @@ final class DievasComponentThemeData extends Equatable {
     DievasAccordionThemeData? accordion,
     DievasDotIndicatorThemeData? dotIndicator,
     DievasDrawerThemeData? drawer,
+    DievasDropdownThemeData? dropdown,
     DievasSearchThemeData? search,
     DievasSegmentedControlThemeData? segmentedControl,
     DievasPopoverThemeData? popover,
@@ -225,6 +231,7 @@ final class DievasComponentThemeData extends Equatable {
     accordion: accordion ?? this.accordion,
     dotIndicator: dotIndicator ?? this.dotIndicator,
     drawer: drawer ?? this.drawer,
+    dropdown: dropdown ?? this.dropdown,
     search: search ?? this.search,
     segmentedControl: segmentedControl ?? this.segmentedControl,
     popover: popover ?? this.popover,
@@ -259,6 +266,7 @@ final class DievasComponentThemeData extends Equatable {
     accordion,
     dotIndicator,
     drawer,
+    dropdown,
     search,
     segmentedControl,
     popover,

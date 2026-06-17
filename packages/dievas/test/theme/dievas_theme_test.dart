@@ -56,6 +56,7 @@ void main() {
       expect(t.accordion, isNotNull);
       expect(t.dotIndicator, isNotNull);
       expect(t.drawer, isNotNull);
+      expect(t.dropdown, isNotNull);
       expect(t.search, isNotNull);
       expect(t.popover, isNotNull);
     });
@@ -300,6 +301,7 @@ void main() {
       final accordion = DievasLightThemeData().components.accordion;
       final dotIndicator = DievasLightThemeData().components.dotIndicator;
       final drawer = DievasLightThemeData().components.drawer;
+      final dropdown = DievasLightThemeData().components.dropdown;
       final search = DievasLightThemeData().components.search;
       final segmentedControl = DievasLightThemeData().components.segmentedControl;
       final menuItem = DievasLightThemeData().components.menuItem;
@@ -334,6 +336,7 @@ void main() {
           accordion: accordion,
           dotIndicator: dotIndicator,
           drawer: drawer,
+          dropdown: dropdown,
           search: search,
           segmentedControl: segmentedControl,
           popover: popover,

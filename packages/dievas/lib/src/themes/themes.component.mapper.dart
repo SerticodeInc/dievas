@@ -44,6 +44,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
     emptyState: override?.emptyState ?? _createEmptyStateTheme(colors, typography, spacing),
     accordion: override?.accordion ?? _createAccordionTheme(typography, spacing, border, animation, elevation),
     drawer: override?.drawer ?? _createDrawerTheme(colors, border, animation),
+    dropdown: override?.dropdown ?? _createDropdownTheme(colors, typography, spacing, sizing, border, elevation, animation),
     popover: override?.popover ?? _createPopoverTheme(colors, typography, spacing, border, animation),
   );
 }
@@ -779,6 +780,41 @@ DievasMenuItemThemeData _createMenuItemTheme(
   iconColor: colors.icon.iconPrimary,
   iconColorDisabled: colors.icon.iconDisabled,
   disabledOpacity: DievasOpacitySemantic.disabled,
+);
+
+// Dropdown
+DievasDropdownThemeData _createDropdownTheme(
+  DievasColourThemeData colors,
+  DievasTypographyThemeData typography,
+  DievasSpacingThemeData spacing,
+  DievasSizingThemeData sizing,
+  DievasBorderThemeData border,
+  DievasElevationThemeData elevation,
+  DievasAnimationThemeData animation,
+) => DievasDropdownThemeData(
+  triggerStyle: typography.bodyMd.copyWith(color: colors.text.textPrimary),
+  hintStyle: typography.bodyMd.copyWith(color: colors.input.inputPlaceholder),
+  labelStyle: typography.labelSm.copyWith(color: colors.text.textSecondary),
+  labelSpacing: spacing.sm,
+  triggerBgColor: colors.input.inputBg,
+  triggerBorderColor: colors.border.borderDefault,
+  triggerBorderColorFocused: colors.action.actionPrimary,
+  borderRadius: border.md,
+  triggerPadding: EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.sm),
+  iconSize: sizing.iconSm,
+  iconColor: colors.icon.iconSecondary,
+  overlayBgColor: colors.background.bgElevated,
+  overlayBorderColor: colors.border.borderDefault,
+  overlayBorderRadius: border.md,
+  overlayElevation: elevation.md,
+  optionStyle: typography.bodyMd,
+  optionSelectedColor: colors.background.bgSubtle,
+  optionTextColor: colors.text.textPrimary,
+  optionTextColorDisabled: colors.text.textDisabled,
+  optionPadding: EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
+  disabledOpacity: DievasOpacitySemantic.disabled,
+  animationDuration: animation.standard,
+  minHeight: sizing.inputHeightMd,
 );
 
 // Popover

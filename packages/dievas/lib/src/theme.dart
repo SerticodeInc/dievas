@@ -33,6 +33,7 @@ export 'theme/component/dievas_component_theme_data.dart';
 export 'theme/component/dievas_input_theme_value.dart';
 export 'theme/component/dot_indicator/dievas_dot_indicator_theme_data.dart';
 export 'theme/component/drawer/dievas_drawer_theme_data.dart';
+export 'theme/component/dropdown/dievas_dropdown_theme_data.dart';
 export 'theme/component/empty_state/dievas_empty_state_theme_data.dart';
 export 'theme/component/linear_progress/dievas_linear_progress_theme_data.dart';
 export 'theme/component/loader/dievas_loader_theme_data.dart';

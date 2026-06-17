@@ -43,6 +43,7 @@ class DievasGallery extends StatelessWidget {
             children: [
               authCodeComponent,
               checkboxComponent,
+              dropdownComponent,
               radioComponent,
               segmentedControlComponent,
               switchComponent,

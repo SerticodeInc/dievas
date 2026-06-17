@@ -3,7 +3,7 @@ description: "Dievas design system — Widget book component gallery."
 
 publish_to: "none"
 
-version: 0.0.1+1
+version: 0.0.1
 resolution: workspace
 
 environment:

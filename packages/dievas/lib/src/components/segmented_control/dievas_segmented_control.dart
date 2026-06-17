@@ -61,7 +61,10 @@ class DievasSegmentedControl<T> extends StatelessWidget {
             children: [
               for (var i = 0; i < options.length; i++) ...[
                 if (i > 0)
-                  SizedBox(width: 1, child: DecoratedBox(decoration: BoxDecoration(color: theme.borderColor))),
+                  SizedBox(
+                    width: 1,
+                    child: DecoratedBox(decoration: BoxDecoration(color: theme.borderColor)),
+                  ),
                 _SegmentTile(
                   key: ValueKey(options[i]),
                   label: labelOf(options[i]),
@@ -122,10 +125,7 @@ class _SegmentTile extends StatelessWidget {
         curve: Curves.easeOutCubic,
         constraints: BoxConstraints(minWidth: minSegmentWidth, minHeight: minHeight),
         padding: padding,
-        decoration: BoxDecoration(
-          color: isSelected ? selectedBgColor : null,
-          borderRadius: borderRadius,
-        ),
+        decoration: BoxDecoration(color: isSelected ? selectedBgColor : null, borderRadius: borderRadius),
         alignment: Alignment.center,
         child: Text(label, style: isSelected ? selectedLabelStyle : unselectedLabelStyle),
       ),

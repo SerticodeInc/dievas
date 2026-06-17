@@ -18,21 +18,16 @@ class _Playground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tabs = ['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4'];
-    final selected = context.knobs.listOptions<int>(
+    final selected = context.knobs.object.dropdown<int>(
       label: 'Selected index',
-      options: [0, 1, 2, 3],
-      initialIndex: 0,
+      options: const [0, 1, 2, 3],
+      initialOption: 0,
     );
     final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
 
     return Center(
       child: ComponentBoundary(
-        child: DievasTabBar(
-          tabs: tabs,
-          selectedIndex: selected,
-          onChanged: (_) {},
-          enabled: enabled,
-        ),
+        child: DievasTabBar(tabs: tabs, selectedIndex: selected, onChanged: (_) {}, enabled: enabled),
       ),
     );
   }
@@ -43,15 +38,24 @@ class _Configurations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-    mainAxisSize: MainAxisSize.min,
+    mainAxisSize: .min,
     children: [
       const _DemoBlock('2 tabs', child: DievasTabBar(tabs: ['On', 'Off'], selectedIndex: 0, onChanged: null)),
       SizedBox(height: context.spacing.lg),
-      const _DemoBlock('3 tabs', child: DievasTabBar(tabs: ['Details', 'Activity', 'Settings'], selectedIndex: 1, onChanged: null)),
+      const _DemoBlock(
+        '3 tabs',
+        child: DievasTabBar(tabs: ['Details', 'Activity', 'Settings'], selectedIndex: 1, onChanged: null),
+      ),
       SizedBox(height: context.spacing.lg),
-      const _DemoBlock('4 tabs', child: DievasTabBar(tabs: ['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4'], selectedIndex: 2, onChanged: null)),
+      const _DemoBlock(
+        '4 tabs',
+        child: DievasTabBar(tabs: ['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4'], selectedIndex: 2, onChanged: null),
+      ),
       SizedBox(height: context.spacing.lg),
-      const _DemoBlock('Disabled', child: DievasTabBar(tabs: ['One', 'Two', 'Three'], selectedIndex: 1, onChanged: null, enabled: false)),
+      const _DemoBlock(
+        'Disabled',
+        child: DievasTabBar(tabs: ['One', 'Two', 'Three'], selectedIndex: 1, onChanged: null, enabled: false),
+      ),
     ],
   );
 }
@@ -63,14 +67,12 @@ class _DemoBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: .start,
+    mainAxisSize: .min,
     children: [
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.spacing.md),
-        child: Text(name,
-          style: context.typography.labelXs.copyWith(color: context.colors.text.textTertiary),
-        ),
+        padding: .symmetric(horizontal: context.spacing.md),
+        child: Text(name, style: context.typography.labelXs.copyWith(color: context.colors.text.textTertiary)),
       ),
       SizedBox(height: context.spacing.xs),
       ComponentBoundary(child: child),

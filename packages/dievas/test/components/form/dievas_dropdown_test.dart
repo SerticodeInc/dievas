@@ -7,22 +7,24 @@ import '../../cross_cutting_concerns/harness.dart';
 void main() {
   group('DievasDropdown', () {
     testWidgets('renders without throwing — default args', (tester) async {
-      await tester.pumpWidget(
-        Harness(child: const DievasDropdown<String>(options: ['A', 'B', 'C'], onChanged: null)),
-      );
+      await tester.pumpWidget(Harness(child: const DievasDropdown<String>(options: ['A', 'B', 'C'], onChanged: null)));
       expect(tester.takeException(), isNull);
     });
 
     testWidgets('shows hint text when no value is selected', (tester) async {
       await tester.pumpWidget(
-        Harness(child: const DievasDropdown<String>(options: ['A', 'B', 'C'], hint: 'Pick one', onChanged: null)),
+        Harness(
+          child: const DievasDropdown<String>(options: ['A', 'B', 'C'], hint: 'Pick one', onChanged: null),
+        ),
       );
       expect(find.text('Pick one'), findsOneWidget);
     });
 
     testWidgets('shows selected value when value is provided', (tester) async {
       await tester.pumpWidget(
-        Harness(child: const DievasDropdown<String>(options: ['A', 'B', 'C'], value: 'B', onChanged: null)),
+        Harness(
+          child: const DievasDropdown<String>(options: ['A', 'B', 'C'], value: 'B', onChanged: null),
+        ),
       );
       expect(find.text('B'), findsOneWidget);
     });
@@ -30,11 +32,7 @@ void main() {
     testWidgets('shows label when provided', (tester) async {
       await tester.pumpWidget(
         Harness(
-          child: const DievasDropdown<String>(
-            options: ['A', 'B', 'C'],
-            label: 'Fruit',
-            onChanged: null,
-          ),
+          child: const DievasDropdown<String>(options: ['A', 'B', 'C'], label: 'Fruit', onChanged: null),
         ),
       );
       expect(find.text('Fruit'), findsOneWidget);
@@ -54,14 +52,10 @@ void main() {
       expect(find.text('Banana'), findsOneWidget);
     });
 
-    testWidgets('opens overlay on tap and selects option', (tester) async {
-      String? selected;
+    testWidgets('opens overlay on tap', (tester) async {
       await tester.pumpWidget(
         Harness(
-          child: DievasDropdown<String>(
-            options: ['A', 'B', 'C'],
-            onChanged: (v) => selected = v,
-          ),
+          child: DievasDropdown<String>(options: ['A', 'B', 'C'], onChanged: (_) {}),
         ),
       );
 
@@ -77,10 +71,7 @@ void main() {
       String? selected;
       await tester.pumpWidget(
         Harness(
-          child: DievasDropdown<String>(
-            options: ['A', 'B', 'C'],
-            onChanged: (v) => selected = v,
-          ),
+          child: DievasDropdown<String>(options: ['A', 'B', 'C'], onChanged: (v) => selected = v),
         ),
       );
 
@@ -95,11 +86,7 @@ void main() {
       String? selected;
       await tester.pumpWidget(
         Harness(
-          child: DievasDropdown<String>(
-            options: ['A', 'B', 'C'],
-            onChanged: (v) => selected = v,
-            enabled: false,
-          ),
+          child: DievasDropdown<String>(options: ['A', 'B', 'C'], onChanged: (v) => selected = v, enabled: false),
         ),
       );
 
@@ -111,14 +98,7 @@ void main() {
     });
 
     testWidgets('does not respond to tap when onChanged is null', (tester) async {
-      await tester.pumpWidget(
-        Harness(
-          child: const DievasDropdown<String>(
-            options: ['A', 'B', 'C'],
-            onChanged: null,
-          ),
-        ),
-      );
+      await tester.pumpWidget(Harness(child: const DievasDropdown<String>(options: ['A', 'B', 'C'], onChanged: null)));
 
       await tester.tap(find.byIcon(Icons.keyboard_arrow_down));
       await tester.pump();

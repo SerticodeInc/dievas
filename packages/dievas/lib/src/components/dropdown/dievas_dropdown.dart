@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../../theme/dievas_theme.dart';
 
@@ -112,8 +111,9 @@ class _DievasDropdownState<T> extends State<DievasDropdown<T>> {
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).dropdown;
     final labelOf = widget.labelBuilder ?? ((T v) => v.toString());
-    final hasValue = widget.value != null;
-    final selectedLabel = hasValue ? labelOf(widget.value as T) : null;
+    final value = widget.value;
+    final hasValue = value != null;
+    final selectedLabel = hasValue ? labelOf(value) : null;
 
     final trigger = GestureDetector(
       key: _triggerKey,
@@ -139,12 +139,13 @@ class _DievasDropdownState<T> extends State<DievasDropdown<T>> {
       ),
     );
 
-    final content = widget.label != null
+    final label = widget.label;
+    final content = label != null
         ? Column(
-            mainAxisSize: .min,
-            crossAxisAlignment: .start,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.label!, style: theme.labelStyle),
+              Text(label, style: theme.labelStyle),
               SizedBox(height: theme.labelSpacing),
               trigger,
             ],

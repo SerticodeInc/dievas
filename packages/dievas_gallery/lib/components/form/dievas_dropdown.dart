@@ -18,10 +18,7 @@ class _Playground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
-    final selected = context.knobs.string(
-      label: 'Selected',
-      initialValue: '',
-    );
+    final selected = context.knobs.string(label: 'Selected', initialValue: '');
     final hint = context.knobs.stringOrNull(label: 'Hint', initialValue: 'Select an option');
     final label = context.knobs.stringOrNull(label: 'Label', initialValue: 'Choose');
     final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
@@ -54,34 +51,43 @@ class _Configurations extends StatelessWidget {
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const _DemoBlock('Without label', child: SizedBox(
-          width: 240,
-          child: DievasDropdown<String>(
-            options: ['Option 1', 'Option 2', 'Option 3'],
-            onChanged: null,
-            hint: 'Select an option',
+        const _DemoBlock(
+          'Without label',
+          child: SizedBox(
+            width: 240,
+            child: DievasDropdown<String>(
+              options: ['Option 1', 'Option 2', 'Option 3'],
+              onChanged: null,
+              hint: 'Select an option',
+            ),
           ),
-        )),
+        ),
         SizedBox(height: context.spacing.lg),
-        const _DemoBlock('With label', child: SizedBox(
-          width: 240,
-          child: DievasDropdown<String>(
-            options: ['Option 1', 'Option 2', 'Option 3'],
-            value: 'Option 2',
-            onChanged: null,
-            label: 'Choose option',
+        const _DemoBlock(
+          'With label',
+          child: SizedBox(
+            width: 240,
+            child: DievasDropdown<String>(
+              options: ['Option 1', 'Option 2', 'Option 3'],
+              value: 'Option 2',
+              onChanged: null,
+              label: 'Choose option',
+            ),
           ),
-        )),
+        ),
         SizedBox(height: context.spacing.lg),
-        const _DemoBlock('Disabled', child: SizedBox(
-          width: 240,
-          child: DievasDropdown<String>(
-            options: ['Option 1', 'Option 2', 'Option 3'],
-            onChanged: null,
-            hint: 'Select an option',
-            enabled: false,
+        const _DemoBlock(
+          'Disabled',
+          child: SizedBox(
+            width: 240,
+            child: DievasDropdown<String>(
+              options: ['Option 1', 'Option 2', 'Option 3'],
+              onChanged: null,
+              hint: 'Select an option',
+              enabled: false,
+            ),
           ),
-        )),
+        ),
       ],
     ),
   );

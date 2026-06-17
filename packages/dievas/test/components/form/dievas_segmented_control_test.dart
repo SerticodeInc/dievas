@@ -7,7 +7,9 @@ void main() {
   group('DievasSegmentedControl', () {
     testWidgets('renders without throwing — default args', (tester) async {
       await tester.pumpWidget(
-        Harness(child: const DievasSegmentedControl(options: ['Day', 'Week', 'Month'], value: 'Week', onChanged: null)),
+        Harness(
+          child: const DievasSegmentedControl(options: ['Day', 'Week', 'Month'], value: 'Week', onChanged: null),
+        ),
       );
       expect(tester.takeException(), isNull);
       expect(find.text('Day'), findsOneWidget);
@@ -16,13 +18,12 @@ void main() {
     });
 
     testWidgets('highlights the selected option', (tester) async {
-      String? selected;
       await tester.pumpWidget(
         Harness(
-          child: DievasSegmentedControl<String>(
+          child: const DievasSegmentedControl<String>(
             options: ['Day', 'Week', 'Month'],
             value: 'Week',
-            onChanged: (v) => selected = v,
+            onChanged: null,
           ),
         ),
       );

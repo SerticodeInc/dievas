@@ -18,22 +18,14 @@ class _Playground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final options = ['Day', 'Week', 'Month', 'Year'];
-    final selected = context.knobs.string(
-      label: 'Selected',
-      initialValue: 'Week',
-    );
+    final selected = context.knobs.string(label: 'Selected', initialValue: 'Week');
     final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
 
     final clamped = options.contains(selected) ? selected : options.first;
 
     return Center(
       child: ComponentBoundary(
-        child: DievasSegmentedControl<String>(
-          options: options,
-          value: clamped,
-          onChanged: (_) {},
-          enabled: enabled,
-        ),
+        child: DievasSegmentedControl<String>(options: options, value: clamped, onChanged: (_) {}, enabled: enabled),
       ),
     );
   }
@@ -47,13 +39,30 @@ class _Configurations extends StatelessWidget {
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const _DemoBlock('2 segments', child: DievasSegmentedControl(options: ['On', 'Off'], value: 'On', onChanged: null)),
+        const _DemoBlock(
+          '2 segments',
+          child: DievasSegmentedControl(options: ['On', 'Off'], value: 'On', onChanged: null),
+        ),
         SizedBox(height: context.spacing.lg),
-        const _DemoBlock('3 segments', child: DievasSegmentedControl(options: ['Day', 'Week', 'Month'], value: 'Week', onChanged: null)),
+        const _DemoBlock(
+          '3 segments',
+          child: DievasSegmentedControl(options: ['Day', 'Week', 'Month'], value: 'Week', onChanged: null),
+        ),
         SizedBox(height: context.spacing.lg),
-        const _DemoBlock('4 segments', child: DievasSegmentedControl(options: ['Day', 'Week', 'Month', 'Year'], value: 'Month', onChanged: null)),
+        const _DemoBlock(
+          '4 segments',
+          child: DievasSegmentedControl(options: ['Day', 'Week', 'Month', 'Year'], value: 'Month', onChanged: null),
+        ),
         SizedBox(height: context.spacing.lg),
-        const _DemoBlock('Disabled', child: DievasSegmentedControl(options: ['Day', 'Week', 'Month'], value: 'Week', onChanged: null, enabled: false)),
+        const _DemoBlock(
+          'Disabled',
+          child: DievasSegmentedControl(
+            options: ['Day', 'Week', 'Month'],
+            value: 'Week',
+            onChanged: null,
+            enabled: false,
+          ),
+        ),
       ],
     ),
   );

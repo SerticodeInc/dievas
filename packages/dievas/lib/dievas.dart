@@ -1,4 +1,4 @@
-/// Dievas design system — Flutter theme and component layer.
+/// Dievas design system. Flutter theme and component layer.
 ///
 /// Import this library to access the full Dievas public API:
 /// - [DievasScope] — entry-point widget; wraps your app

@@ -58,6 +58,7 @@ void main() {
       expect(t.drawer, isNotNull);
       expect(t.dropdown, isNotNull);
       expect(t.search, isNotNull);
+      expect(t.tabBar, isNotNull);
       expect(t.popover, isNotNull);
     });
 
@@ -305,6 +306,7 @@ void main() {
       final search = DievasLightThemeData().components.search;
       final segmentedControl = DievasLightThemeData().components.segmentedControl;
       final menuItem = DievasLightThemeData().components.menuItem;
+      final tabBar = DievasLightThemeData().components.tabBar;
       final popover = DievasLightThemeData().components.popover;
 
       expect(
@@ -339,6 +341,7 @@ void main() {
           dropdown: dropdown,
           search: search,
           segmentedControl: segmentedControl,
+          tabBar: tabBar,
           popover: popover,
         ),
         returnsNormally,

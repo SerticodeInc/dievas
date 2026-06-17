@@ -7,6 +7,7 @@ export 'components/search/dievas_search_with_list.dart';
 // Navigation / Disclosure
 export 'components/nav_disclosure/dievas_breadcrumb.dart';
 export 'components/nav_disclosure/dievas_menu_item.dart';
+export 'components/nav_disclosure/dievas_tab_bar.dart';
 export 'components/accordion/dievas_accordion.dart';
 export 'components/drawer/dievas_drawer.dart';
 export 'components/popover/dievas_popover.dart';

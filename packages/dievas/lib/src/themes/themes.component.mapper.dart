@@ -33,7 +33,9 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
     authCode: override?.authCode ?? _createAuthCodeTheme(colors, typography, sizing, spacing, border),
     textInputGroup: override?.textInputGroup ?? _createTextInputGroupTheme(colors, sizing, spacing, border),
     search: override?.search ?? _createSearchTheme(colors, typography, sizing, spacing, border),
-    segmentedControl: override?.segmentedControl ?? _createSegmentedControlTheme(colors, typography, spacing, sizing, border, animation),
+    segmentedControl:
+        override?.segmentedControl ??
+        _createSegmentedControlTheme(colors, typography, spacing, sizing, border, animation),
     alert: override?.alert ?? _createAlertTheme(typography, spacing, border),
     snackbar: override?.snackbar ?? _createSnackbarTheme(colors, typography, spacing, border),
     bottomSheet: override?.bottomSheet ?? _createBottomSheetTheme(colors, border),
@@ -44,7 +46,9 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
     emptyState: override?.emptyState ?? _createEmptyStateTheme(colors, typography, spacing),
     accordion: override?.accordion ?? _createAccordionTheme(typography, spacing, border, animation, elevation),
     drawer: override?.drawer ?? _createDrawerTheme(colors, border, animation),
-    dropdown: override?.dropdown ?? _createDropdownTheme(colors, typography, spacing, sizing, border, elevation, animation),
+    dropdown:
+        override?.dropdown ?? _createDropdownTheme(colors, typography, spacing, sizing, border, elevation, animation),
+    tabBar: override?.tabBar ?? _createTabBarTheme(colors, typography, spacing, sizing, border, animation),
     popover: override?.popover ?? _createPopoverTheme(colors, typography, spacing, border, animation),
   );
 }
@@ -815,6 +819,27 @@ DievasDropdownThemeData _createDropdownTheme(
   disabledOpacity: DievasOpacitySemantic.disabled,
   animationDuration: animation.standard,
   minHeight: sizing.inputHeightMd,
+);
+
+// TabBar
+DievasTabBarThemeData _createTabBarTheme(
+  DievasColourThemeData colors,
+  DievasTypographyThemeData typography,
+  DievasSpacingThemeData spacing,
+  DievasSizingThemeData sizing,
+  DievasBorderThemeData border,
+  DievasAnimationThemeData animation,
+) => DievasTabBarThemeData(
+  labelStyle: typography.bodyMd.copyWith(color: colors.text.textSecondary),
+  selectedLabelStyle: typography.labelSm.copyWith(color: colors.text.textPrimary),
+  indicatorColor: colors.action.actionPrimary,
+  indicatorHeight: 2,
+  dividerColor: colors.border.borderDefault,
+  tabPadding: EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.sm),
+  animationDuration: animation.standard,
+  disabledOpacity: DievasOpacitySemantic.disabled,
+  minTabWidth: DievasSizingPrimitives.s64,
+  height: sizing.inputHeightMd,
 );
 
 // Popover

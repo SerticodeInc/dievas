@@ -78,6 +78,7 @@ export 'src/components/tooltip/dievas_tooltip.dart';
 export 'src/components/accordion/dievas_accordion.dart';
 export 'src/components/breadcrumb/dievas_breadcrumb.dart';
 export 'src/components/drawer/dievas_drawer.dart';
+export 'src/components/menu_item/dievas_menu_item.dart';
 export 'src/components/popover/dievas_popover.dart';
 
 //  Components — Utility

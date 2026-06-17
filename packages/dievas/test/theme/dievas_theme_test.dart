@@ -301,6 +301,7 @@ void main() {
       final dotIndicator = DievasLightThemeData().components.dotIndicator;
       final drawer = DievasLightThemeData().components.drawer;
       final search = DievasLightThemeData().components.search;
+      final menuItem = DievasLightThemeData().components.menuItem;
       final popover = DievasLightThemeData().components.popover;
 
       expect(
@@ -326,6 +327,7 @@ void main() {
           modal: modal,
           tooltip: tooltip,
           loader: loader,
+          menuItem: menuItem,
           emptyState: emptyState,
           authCode: authCode,
           accordion: accordion,

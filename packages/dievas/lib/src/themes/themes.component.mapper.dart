@@ -39,6 +39,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
     modal: override?.modal ?? _createModalTheme(colors, typography, spacing, border),
     tooltip: override?.tooltip ?? _createTooltipTheme(colors, typography, spacing, border, animation),
     loader: override?.loader ?? _createLoaderTheme(colors, typography, spacing, animation),
+    menuItem: override?.menuItem ?? _createMenuItemTheme(colors, typography, spacing, sizing, border),
     emptyState: override?.emptyState ?? _createEmptyStateTheme(colors, typography, spacing),
     accordion: override?.accordion ?? _createAccordionTheme(typography, spacing, border, animation, elevation),
     drawer: override?.drawer ?? _createDrawerTheme(colors, border, animation),
@@ -730,6 +731,30 @@ DievasDrawerThemeData _createDrawerTheme(
     elevation: DievasElevationSemantic.lg,
   );
 }
+
+// MenuItem
+DievasMenuItemThemeData _createMenuItemTheme(
+  DievasColourThemeData colors,
+  DievasTypographyThemeData typography,
+  DievasSpacingThemeData spacing,
+  DievasSizingThemeData sizing,
+  DievasBorderThemeData border,
+) => DievasMenuItemThemeData(
+  textStyle: typography.titleSm.copyWith(color: colors.text.textPrimary),
+  subtitleStyle: typography.bodyXs.copyWith(color: colors.text.textSecondary),
+  iconSize: sizing.iconSm,
+  iconSpacing: spacing.sm,
+  padding: .symmetric(horizontal: spacing.sm, vertical: spacing.sm),
+  densePadding: .symmetric(horizontal: spacing.sm, vertical: spacing.xs),
+  borderRadius: border.sm,
+  textColor: colors.text.textPrimary,
+  textColorDisabled: colors.text.textDisabled,
+  subtitleColor: colors.text.textSecondary,
+  subtitleColorDisabled: colors.text.textDisabled,
+  iconColor: colors.icon.iconPrimary,
+  iconColorDisabled: colors.icon.iconDisabled,
+  disabledOpacity: DievasOpacitySemantic.disabled,
+);
 
 // Popover
 DievasPopoverThemeData _createPopoverTheme(

@@ -18,6 +18,7 @@ import 'drawer/dievas_drawer_theme_data.dart';
 import 'empty_state/dievas_empty_state_theme_data.dart';
 import 'linear_progress/dievas_linear_progress_theme_data.dart';
 import 'loader/dievas_loader_theme_data.dart';
+import 'menu_item/dievas_menu_item_theme_data.dart';
 import 'modal/dievas_modal_theme_data.dart';
 import 'popover/dievas_popover_theme_data.dart';
 import 'radio/dievas_radio_theme_data.dart';
@@ -61,6 +62,7 @@ final class DievasComponentThemeData extends Equatable {
     required this.modal,
     required this.tooltip,
     required this.loader,
+    required this.menuItem,
     required this.emptyState,
     required this.authCode,
     required this.accordion,
@@ -141,6 +143,9 @@ final class DievasComponentThemeData extends Equatable {
   /// Theme data for [DievasLoader].
   final DievasLoaderThemeData loader;
 
+  /// Theme data for [DievasMenuItem].
+  final DievasMenuItemThemeData menuItem;
+
   /// Theme data for [DievasEmptyState].
   final DievasEmptyStateThemeData emptyState;
 
@@ -178,6 +183,7 @@ final class DievasComponentThemeData extends Equatable {
     DievasModalThemeData? modal,
     DievasTooltipThemeData? tooltip,
     DievasLoaderThemeData? loader,
+    DievasMenuItemThemeData? menuItem,
     DievasEmptyStateThemeData? emptyState,
     DievasAuthCodeThemeData? authCode,
     DievasAccordionThemeData? accordion,
@@ -207,6 +213,7 @@ final class DievasComponentThemeData extends Equatable {
     modal: modal ?? this.modal,
     tooltip: tooltip ?? this.tooltip,
     loader: loader ?? this.loader,
+    menuItem: menuItem ?? this.menuItem,
     emptyState: emptyState ?? this.emptyState,
     authCode: authCode ?? this.authCode,
     accordion: accordion ?? this.accordion,
@@ -239,6 +246,7 @@ final class DievasComponentThemeData extends Equatable {
     modal,
     tooltip,
     loader,
+    menuItem,
     emptyState,
     authCode,
     accordion,

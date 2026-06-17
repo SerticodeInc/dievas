@@ -36,6 +36,7 @@ export 'theme/component/drawer/dievas_drawer_theme_data.dart';
 export 'theme/component/empty_state/dievas_empty_state_theme_data.dart';
 export 'theme/component/linear_progress/dievas_linear_progress_theme_data.dart';
 export 'theme/component/loader/dievas_loader_theme_data.dart';
+export 'theme/component/menu_item/dievas_menu_item_theme_data.dart';
 export 'theme/component/modal/dievas_modal_theme_data.dart';
 export 'theme/component/popover/dievas_popover_theme_data.dart';
 export 'theme/component/radio/dievas_radio_theme_data.dart';

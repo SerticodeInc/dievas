@@ -56,7 +56,7 @@ class DievasGallery extends StatelessWidget {
           WidgetbookFolder(name: 'Search', children: [searchWithListComponent, searchWithDropdownComponent]),
           WidgetbookFolder(
             name: 'Nav / Disclosure',
-            children: [breadcrumbComponent, accordionComponent, drawerComponent, popoverComponent],
+            children: [breadcrumbComponent, menuItemComponent, accordionComponent, drawerComponent, popoverComponent],
           ),
         ],
       ),

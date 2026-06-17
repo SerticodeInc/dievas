@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../theme.dart';
-import '../themes.dart';
+import 'package:dievas/src/theme.dart';
+import 'package:dievas/src/themes.dart';
 
 /// Builds an app subtree with access to the resolved Dievas theme.
 typedef DievasAppBuilder = Widget Function(BuildContext context, DievasThemeData theme, Widget? child);
@@ -33,7 +33,6 @@ class DievasScope extends StatefulWidget {
     super.key,
     DievasThemeData? lightTheme,
     DievasThemeData? darkTheme,
-    this.global = true,
     this.themeMode = .system,
     this.onThemeChanged,
     this.builder,
@@ -46,9 +45,6 @@ class DievasScope extends StatefulWidget {
 
   /// Theme data for dark mode. Defaults to [DievasDarkThemeData].
   final DievasThemeData darkTheme;
-
-  /// Whether this scope owns a top-level overlay layer for transient surfaces.
-  final bool global;
 
   /// Controls which theme is active. Defaults to [ThemeMode.system].
   final ThemeMode themeMode;
@@ -71,7 +67,7 @@ class DievasScope extends StatefulWidget {
       return result.state;
     }
 
-    throw UnsupportedError('No DievasScope found in context.');
+    throw FlutterError('No DievasScope found in context.');
   }
 
   @override
@@ -182,47 +178,38 @@ class DievasScopeState extends State<DievasScope>
   }
 
   @override
-  Widget build(BuildContext context) {
-    final scope = _DievasScopeStateMarker(
-      state: this,
-      child: ValueListenableBuilder<ThemeMode>(
-        valueListenable: _themeModeNotifier,
-        builder: (context, mode, child) {
-          final theme = _themeFor(mode);
-          final content =
-              widget.builder?.call(context, theme, widget.child) ?? widget.child ?? child ?? const SizedBox();
+  Widget build(BuildContext context) => _DievasScopeStateMarker(
+    state: this,
+    child: ValueListenableBuilder<ThemeMode>(
+      valueListenable: _themeModeNotifier,
+      builder: (context, mode, child) {
+        final theme = _themeFor(mode);
+        final content = widget.builder?.call(context, theme, widget.child) ?? widget.child ?? child ?? const SizedBox();
 
-          return DievasTheme(
-            data: theme,
-            child: Stack(
-              fit: .expand,
-              children: [
-                content,
-                _DievasOverlaySlot(
-                  alignment: .topCenter,
-                  animation: _bannerAnimationController,
-                  notifier: _bannerNotifier,
-                ),
-                _DievasOverlaySlot(
-                  alignment: .bottomCenter,
-                  animation: _snackbarAnimationController,
-                  notifier: _snackbarNotifier,
-                ),
-              ],
-            ),
-          );
-        },
-        child: widget.child,
-      ),
-    );
-
-    if (!widget.global) return scope;
-
-    return Directionality(
-      textDirection: .ltr,
-      child: Overlay(initialEntries: [OverlayEntry(builder: (_) => scope)]),
-    );
-  }
+        return DievasTheme(
+          data: theme,
+          child: Stack(
+            alignment: Alignment.topCenter,
+            fit: .expand,
+            children: [
+              content,
+              _DievasOverlaySlot(
+                alignment: .topCenter,
+                animation: _bannerAnimationController,
+                notifier: _bannerNotifier,
+              ),
+              _DievasOverlaySlot(
+                alignment: .bottomCenter,
+                animation: _snackbarAnimationController,
+                notifier: _snackbarNotifier,
+              ),
+            ],
+          ),
+        );
+      },
+      child: widget.child,
+    ),
+  );
 
   DievasThemeData _themeFor(ThemeMode mode) => switch (mode) {
     .light => widget.lightTheme,
@@ -231,13 +218,10 @@ class DievasScopeState extends State<DievasScope>
   };
 }
 
-class _DievasScopeStateMarker extends InheritedTheme {
+class _DievasScopeStateMarker extends InheritedWidget {
   const _DievasScopeStateMarker({required super.child, required this.state});
 
   final DievasScopeController state;
-
-  @override
-  Widget wrap(BuildContext context, Widget child) => _DievasScopeStateMarker(state: state, child: child);
 
   @override
   bool updateShouldNotify(_DievasScopeStateMarker oldWidget) => oldWidget.state != state;

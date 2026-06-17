@@ -2,7 +2,7 @@ import 'package:dievas/src/theme/component/text_input/dievas_text_input_theme_da
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// A multiline text input area.
 ///

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// A horizontal row of mutually exclusive segments.
 ///

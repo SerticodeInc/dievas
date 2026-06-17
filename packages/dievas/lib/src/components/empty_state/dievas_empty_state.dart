@@ -1,6 +1,6 @@
 import 'package:dievas/l10n/dievas_localizations.dart';
 import 'package:flutter/widgets.dart';
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// A structured empty state surface — icon, title, description, optional CTA.
 ///

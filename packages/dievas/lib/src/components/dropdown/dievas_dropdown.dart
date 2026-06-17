@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// A select-style dropdown that shows a trigger with the current selection
 /// and opens an overlay with options on tap.

@@ -29,6 +29,7 @@ class _DievasGridData extends InheritedWidget {
 ///
 /// Read the current breakpoint via [DievasGrid.breakpointOf] or the
 /// `context.grid` extension shorthand.
+@immutable
 class DievasGrid extends StatelessWidget {
   const DievasGrid({super.key, required this.child});
 

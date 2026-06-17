@@ -3,9 +3,9 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-import '../../theme/component/button/dievas_button_theme_data.dart';
-import '../../theme/component/button/dievas_button_theme_style.dart';
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/component/button/dievas_button_theme_data.dart';
+import 'package:dievas/src/theme/component/button/dievas_button_theme_style.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 import 'dievas_button_builder.dart';
 import 'button_types/dievas_button_icon_style_behavior.dart';
 import 'button_types/dievas_button_shape.dart';

@@ -1,6 +1,6 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// Size variants for [DievasAvatar].
 enum DievasAvatarSize {
@@ -113,11 +113,7 @@ class DievasAvatar extends StatelessWidget {
       // We use a proportional icon size (60% of container) so it scales naturally.
       final iconDimension = dimension * 0.55;
       content = Center(
-        child: Icon(
-          const IconData(0xe7fd, fontFamily: 'MaterialIcons'), // person
-          size: iconDimension,
-          color: theme.placeholderColor,
-        ),
+        child: Icon(Icons.person, size: iconDimension, color: theme.placeholderColor),
       );
     }
 

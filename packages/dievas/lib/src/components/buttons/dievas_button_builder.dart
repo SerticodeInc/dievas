@@ -4,9 +4,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-import '../../theme/component/button/dievas_button_theme_state_style.dart';
-import '../../theme/component/button/dievas_button_theme_style.dart';
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/component/button/dievas_button_theme_state_style.dart';
+import 'package:dievas/src/theme/component/button/dievas_button_theme_style.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 import 'dievas_button_state_animated_loader_mixin.dart';
 import 'dievas_button_state_switcher.dart';
 import 'dievas_button_press_mixin.dart';

@@ -1,8 +1,9 @@
-import 'package:dievas/dievas.dart' show DievasBadgeThemeData, DievasColourThemeData;
-import 'package:flutter/widgets.dart';
+import 'package:dievas/src/theme/color/dievas_colour_theme_data.dart';
+import 'package:dievas/src/theme/component/badge/dievas_badge_theme_data.dart';
+import 'package:flutter/material.dart';
 
-import '../../theme/color/sets/feedback_colours.dart';
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/color/sets/feedback_colours.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// Visual style of [DievasBadge].
 enum DievasBadgeStyle {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../theme/component/auth_code/dievas_auth_code_theme_data.dart';
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/component/auth_code/dievas_auth_code_theme_data.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// A digit-by-digit passcode entry field.
 ///

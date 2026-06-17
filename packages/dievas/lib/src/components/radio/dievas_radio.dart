@@ -1,7 +1,7 @@
 import 'package:dievas/src/theme/component/radio/dievas_radio_theme_data.dart' show DievasRadioThemeData;
 import 'package:flutter/widgets.dart';
 
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// A custom-drawn radio button that uses only Dievas theme tokens.
 ///

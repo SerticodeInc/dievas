@@ -2,7 +2,7 @@ import 'package:dievas/src/extensions/dievas_theme_context_extension.dart';
 import 'package:flutter/material.dart' show Material, showDialog;
 import 'package:flutter/widgets.dart';
 import 'package:dievas/l10n/dievas_localizations.dart';
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// Shows a Dievas-styled modal dialog.
 ///

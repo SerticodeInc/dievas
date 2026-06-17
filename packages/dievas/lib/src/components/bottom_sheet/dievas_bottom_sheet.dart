@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' show RoundedRectangleBorder, showModalBottomSheet;
 import 'package:flutter/widgets.dart';
 import 'package:dievas/l10n/dievas_localizations.dart';
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// Shows a Dievas-styled modal bottom sheet.
 ///

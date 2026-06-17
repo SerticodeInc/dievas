@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 class DievasAccordionItem {
   const DievasAccordionItem({

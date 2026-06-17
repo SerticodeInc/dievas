@@ -1,8 +1,8 @@
-import 'package:dievas/dievas.dart' show DievasColourThemeData;
+import 'package:dievas/src/theme/color/dievas_colour_theme_data.dart';
 import 'package:dievas/src/theme/component/tag/dievas_tag_theme_data.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// Visual style of [DievasTag].
 enum DievasTagStyle {
@@ -160,11 +160,7 @@ class _DievasTagRow extends StatelessWidget {
           child: SizedBox.square(
             dimension: theme.removeIconSize,
             child: Center(
-              child: Icon(
-                const IconData(0xe5cd, fontFamily: 'MaterialIcons'), // close
-                size: theme.removeIconSize,
-                color: appearance.foreground,
-              ),
+              child: Icon(Icons.close, size: theme.removeIconSize, color: appearance.foreground),
             ),
           ),
         ),

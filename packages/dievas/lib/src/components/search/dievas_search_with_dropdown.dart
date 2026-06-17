@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// A search field with an overlay dropdown showing filtered results.
 ///

@@ -41,7 +41,4 @@ abstract final class DievasAnimationSemantic {
 
   /// 3s — snackbar auto-dismiss.
   static const Duration snackbarDismiss = DievasDurationPrimitives.d3000;
-
-  /// 3s — snackbar auto-dismiss.
-  static const Duration snackbarDismissLong = DievasDurationPrimitives.d5000;
 }

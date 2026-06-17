@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// A horizontal row of tabs with an animated underline indicator.
 ///
@@ -36,14 +36,14 @@ class DievasTabBar extends StatelessWidget {
       child: SizedBox(
         height: theme.height,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: .min,
           children: [
             Expanded(
               child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
+                scrollDirection: .horizontal,
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: .min,
+                  crossAxisAlignment: .stretch,
                   children: [
                     for (var i = 0; i < tabs.length; i++)
                       _Tab(
@@ -98,22 +98,20 @@ class _Tab extends StatelessWidget {
   final VoidCallback? onTap;
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: animationDuration,
-        curve: Curves.easeOutCubic,
-        constraints: BoxConstraints(minWidth: minTabWidth),
-        padding: padding,
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: isSelected ? BorderSide(color: indicatorColor, width: indicatorHeight) : BorderSide.none,
-          ),
+  Widget build(BuildContext context) => GestureDetector(
+    onTap: onTap,
+    child: AnimatedContainer(
+      duration: animationDuration,
+      curve: Curves.easeOutCubic,
+      constraints: BoxConstraints(minWidth: minTabWidth),
+      padding: padding,
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: isSelected ? BorderSide(color: indicatorColor, width: indicatorHeight) : BorderSide.none,
         ),
-        alignment: Alignment.center,
-        child: Text(label, style: isSelected ? selectedLabelStyle : labelStyle),
       ),
-    );
-  }
+      alignment: .center,
+      child: Text(label, style: isSelected ? selectedLabelStyle : labelStyle),
+    ),
+  );
 }

@@ -1,7 +1,7 @@
 import 'package:dievas/src/theme/component/checkbox/dievas_checkbox_theme_data.dart' show DievasCheckboxThemeData;
 import 'package:flutter/widgets.dart';
 
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// State values for [DievasCheckbox].
 enum DievasCheckboxValue {

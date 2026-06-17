@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:dievas/l10n/dievas_localizations.dart';
-import '../theme.dart';
+import 'package:dievas/src/theme.dart';
 
 /// Flat [BuildContext] extension for accessing Dievas theme sub-systems.
 ///

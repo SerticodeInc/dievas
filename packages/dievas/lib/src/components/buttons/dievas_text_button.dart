@@ -1,7 +1,7 @@
 import 'package:dievas_tokens/dievas_tokens.dart';
 import 'package:flutter/material.dart';
 
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 import 'dievas_button_state_animated_loader_mixin.dart';
 import 'dievas_button_state_switcher.dart';
 import 'dievas_button_press_mixin.dart';

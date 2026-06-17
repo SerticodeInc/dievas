@@ -58,7 +58,6 @@ class DievasThemeAddon extends WidgetbookAddon<WidgetbookTheme<DievasThemeData>>
       screen: DievasScope(
         lightTheme: setting.data,
         darkTheme: setting.data,
-        global: false,
         child: DievasTheme(
           data: setting.data,
           child: Theme(

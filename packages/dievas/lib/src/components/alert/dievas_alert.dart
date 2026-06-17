@@ -1,8 +1,8 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:dievas/l10n/dievas_localizations.dart';
-import '../../extensions/dievas_theme_context_extension.dart';
-import '../../theme/color/sets/feedback_colours.dart';
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/extensions/dievas_theme_context_extension.dart';
+import 'package:dievas/src/theme/color/sets/feedback_colours.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// Semantic tone of a [DievasAlert].
 enum DievasAlertTone {
@@ -106,7 +106,7 @@ class DievasAlert extends StatelessWidget {
                         dimension: theme.dismissIconSize,
                         child: IconTheme(
                           data: IconThemeData(color: palette.icon, size: theme.dismissIconSize),
-                          child: const _InlineIcon(codePoint: 0xe5cd), // close
+                          child: const Icon(Icons.close),
                         ),
                       ),
                     ),
@@ -144,29 +144,13 @@ class _DievasAlertDefaultIcon extends StatelessWidget {
 
       /// Simple geometric stand-ins — consumers can supply their own via leadingIcon.
       child: switch (tone) {
-        .success => const _InlineIcon(codePoint: 0xe876), // check_circle
-        .warning => const _InlineIcon(codePoint: 0xe002), // warning
-        .error => const _InlineIcon(codePoint: 0xe000), // error
-        .info => const _InlineIcon(codePoint: 0xe88e), // info
+        .success => const Icon(Icons.check_circle),
+        .warning => const Icon(Icons.warning),
+        .error => const Icon(Icons.error),
+        .info => const Icon(Icons.info),
       },
     ),
   );
-}
-
-// Minimal icon that avoids a Material dependency by using IconData directly.
-class _InlineIcon extends StatelessWidget {
-  const _InlineIcon({required this.codePoint});
-
-  final int codePoint;
-
-  @override
-  Widget build(BuildContext context) {
-    final iconTheme = IconTheme.of(context);
-    return Text(
-      .fromCharCode(codePoint),
-      style: TextStyle(fontFamily: 'MaterialIcons', fontSize: iconTheme.size, color: iconTheme.color),
-    );
-  }
 }
 
 final class _AlertPalette {

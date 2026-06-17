@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' show Tooltip;
 import 'package:flutter/widgets.dart';
 
-import '../../theme/dievas_theme.dart';
+import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// A Dievas-styled tooltip that wraps the platform [Tooltip] widget.
 ///

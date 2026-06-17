@@ -13,7 +13,6 @@ class DievasHomePage extends StatelessWidget {
   Widget build(BuildContext context) => DievasScope(
     lightTheme: DievasDarkThemeData(),
     darkTheme: DievasDarkThemeData(),
-    global: false,
     builder: (context, theme, child) => Theme(data: theme.material, child: child ?? const SizedBox()),
     child: _WidgetBookContent(),
   );

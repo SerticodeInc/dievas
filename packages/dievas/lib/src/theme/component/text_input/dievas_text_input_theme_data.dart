@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/painting.dart';
 
-import '../dievas_input_theme_value.dart';
+import 'package:dievas/src/theme/component/dievas_input_theme_value.dart';
 
 /// Theme data for [DievasTextInput] and [DievasTextArea].
 ///

@@ -39,4 +39,5 @@ linter:
     - sort_constructors_first
     - always_put_required_named_parameters_first
     - directives_ordering
+    - always_use_package_imports
     - sort_pub_dependencies

@@ -41,6 +41,7 @@ export 'theme/component/modal/dievas_modal_theme_data.dart';
 export 'theme/component/popover/dievas_popover_theme_data.dart';
 export 'theme/component/radio/dievas_radio_theme_data.dart';
 export 'theme/component/search/dievas_search_theme_data.dart';
+export 'theme/component/segmented_control/dievas_segmented_control_theme_data.dart';
 export 'theme/component/snackbar/dievas_snackbar_theme_data.dart';
 export 'theme/component/switch/dievas_switch_theme_data.dart';
 export 'theme/component/tag/dievas_tag_theme_data.dart';

@@ -301,6 +301,7 @@ void main() {
       final dotIndicator = DievasLightThemeData().components.dotIndicator;
       final drawer = DievasLightThemeData().components.drawer;
       final search = DievasLightThemeData().components.search;
+      final segmentedControl = DievasLightThemeData().components.segmentedControl;
       final menuItem = DievasLightThemeData().components.menuItem;
       final popover = DievasLightThemeData().components.popover;
 
@@ -334,6 +335,7 @@ void main() {
           dotIndicator: dotIndicator,
           drawer: drawer,
           search: search,
+          segmentedControl: segmentedControl,
           popover: popover,
         ),
         returnsNormally,

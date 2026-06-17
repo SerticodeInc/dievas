@@ -33,6 +33,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
     authCode: override?.authCode ?? _createAuthCodeTheme(colors, typography, sizing, spacing, border),
     textInputGroup: override?.textInputGroup ?? _createTextInputGroupTheme(colors, sizing, spacing, border),
     search: override?.search ?? _createSearchTheme(colors, typography, sizing, spacing, border),
+    segmentedControl: override?.segmentedControl ?? _createSegmentedControlTheme(colors, typography, spacing, sizing, border, animation),
     alert: override?.alert ?? _createAlertTheme(typography, spacing, border),
     snackbar: override?.snackbar ?? _createSnackbarTheme(colors, typography, spacing, border),
     bottomSheet: override?.bottomSheet ?? _createBottomSheetTheme(colors, border),
@@ -731,6 +732,30 @@ DievasDrawerThemeData _createDrawerTheme(
     elevation: DievasElevationSemantic.lg,
   );
 }
+
+// SegmentedControl
+DievasSegmentedControlThemeData _createSegmentedControlTheme(
+  DievasColourThemeData colors,
+  DievasTypographyThemeData typography,
+  DievasSpacingThemeData spacing,
+  DievasSizingThemeData sizing,
+  DievasBorderThemeData border,
+  DievasAnimationThemeData animation,
+) => DievasSegmentedControlThemeData(
+  labelStyle: typography.bodyMd.copyWith(color: colors.text.textPrimary),
+  selectedLabelStyle: typography.labelSm.copyWith(color: colors.core.onBrand),
+  borderRadius: border.md,
+  padding: EdgeInsets.symmetric(horizontal: spacing.smPlus, vertical: spacing.sm),
+  bgColor: colors.background.bgSubtle,
+  selectedBgColor: colors.action.actionPrimary,
+  borderColor: colors.border.borderDefault,
+  textColor: colors.text.textPrimary,
+  selectedTextColor: colors.core.onBrand,
+  disabledOpacity: DievasOpacitySemantic.disabled,
+  animationDuration: animation.standard,
+  minSegmentWidth: DievasSizingPrimitives.s64,
+  minHeight: DievasSizingPrimitives.s32,
+);
 
 // MenuItem
 DievasMenuItemThemeData _createMenuItemTheme(

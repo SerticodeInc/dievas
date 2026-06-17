@@ -23,6 +23,7 @@ import 'modal/dievas_modal_theme_data.dart';
 import 'popover/dievas_popover_theme_data.dart';
 import 'radio/dievas_radio_theme_data.dart';
 import 'search/dievas_search_theme_data.dart';
+import 'segmented_control/dievas_segmented_control_theme_data.dart';
 import 'snackbar/dievas_snackbar_theme_data.dart';
 import 'switch/dievas_switch_theme_data.dart';
 import 'tag/dievas_tag_theme_data.dart';
@@ -69,6 +70,7 @@ final class DievasComponentThemeData extends Equatable {
     required this.dotIndicator,
     required this.drawer,
     required this.search,
+    required this.segmentedControl,
     required this.popover,
   });
 
@@ -158,6 +160,9 @@ final class DievasComponentThemeData extends Equatable {
   /// Theme data for [DievasDrawer].
   final DievasDrawerThemeData drawer;
 
+  /// Theme data for [DievasSegmentedControl].
+  final DievasSegmentedControlThemeData segmentedControl;
+
   /// Theme data for [DievasPopover].
   final DievasPopoverThemeData popover;
 
@@ -190,6 +195,7 @@ final class DievasComponentThemeData extends Equatable {
     DievasDotIndicatorThemeData? dotIndicator,
     DievasDrawerThemeData? drawer,
     DievasSearchThemeData? search,
+    DievasSegmentedControlThemeData? segmentedControl,
     DievasPopoverThemeData? popover,
   }) => DievasComponentThemeData(
     filledButton: filledButton ?? this.filledButton,
@@ -220,6 +226,7 @@ final class DievasComponentThemeData extends Equatable {
     dotIndicator: dotIndicator ?? this.dotIndicator,
     drawer: drawer ?? this.drawer,
     search: search ?? this.search,
+    segmentedControl: segmentedControl ?? this.segmentedControl,
     popover: popover ?? this.popover,
   );
 
@@ -253,6 +260,7 @@ final class DievasComponentThemeData extends Equatable {
     dotIndicator,
     drawer,
     search,
+    segmentedControl,
     popover,
   ];
 }

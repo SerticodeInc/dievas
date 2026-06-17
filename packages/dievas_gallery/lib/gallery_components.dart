@@ -38,6 +38,7 @@ export 'components/display/dievas_tag.dart';
 // Form
 export 'components/form/dievas_auth_code.dart';
 export 'components/form/dievas_checkbox.dart';
+export 'components/form/dievas_segmented_control.dart';
 export 'components/form/dievas_radio.dart';
 export 'components/form/dievas_switch.dart';
 export 'components/form/dievas_text_area.dart';

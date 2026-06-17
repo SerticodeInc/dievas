@@ -44,6 +44,7 @@ class DievasGallery extends StatelessWidget {
               authCodeComponent,
               checkboxComponent,
               radioComponent,
+              segmentedControlComponent,
               switchComponent,
               textInputComponent,
               textAreaComponent,

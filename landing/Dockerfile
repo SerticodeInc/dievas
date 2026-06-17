@@ -69,6 +69,9 @@ COPY --from=dart-builder /build/landing/build/jaspr/ ./
 # Overlay the Tailwind-generated CSS into the web assets dir
 COPY --from=css-builder /build/landing/web/output.css ./web/output.css
 
+# Copy favicon (jaspr build doesn't include .svg files in its manifest)
+COPY landing/web/favicon.svg ./web/favicon.svg
+
 # Ensure the binary is executable
 RUN chmod +x /app/app
 

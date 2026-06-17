@@ -1,17 +1,25 @@
 name: Publish to pub.dev
 
-# Publishes dievas_tokens (pure Dart) and/or dievas (Flutter) to pub.dev
-# when a matching tag is pushed. Uses trusted publishing (OIDC) so no
-# PUB_DEV_PUBLISH_ACCESS_TOKEN secret is needed.
+# Publishes dievas_tokens (pure Dart) and/or dievas (Flutter) to pub.dev.
+# Uses trusted publishing (OIDC) so no PUB_DEV_PUBLISH_ACCESS_TOKEN is needed.
 #
-# Tag format:
-#   dievas_tokens-v<version>  → publishes dievas_tokens
-#   dievas-v<version>         → publishes dievas
+# Triggers:
+#   Manual  → Actions tab → Run workflow → select package
+#   Tag     → dievas_tokens-v<version> or dievas-v<version>
 #
-# Each tag triggers its own job with a GitHub Environment entry, so the
-# repo's Deployments section tracks what was published and when.
+# Each job has its own GitHub Environment entry for deployment tracking.
 
 on:
+    workflow_dispatch:
+        inputs:
+            package:
+                description: Package to publish
+                required: true
+                type: choice
+                options:
+                    - dievas_tokens
+                    - dievas
+                    - both
     push:
         tags:
             - 'dievas_tokens-v*'
@@ -25,7 +33,10 @@ jobs:
     publish-dievas-tokens:
         name: Publish dievas_tokens
         needs: [analyze-format-test]
-        if: startsWith(github.ref_name, 'dievas_tokens-v')
+        if: |
+            startsWith(github.ref_name, 'dievas_tokens-v') ||
+            (github.event_name == 'workflow_dispatch' &&
+             contains(fromJson('["dievas_tokens", "both"]'), github.event.inputs.package))
         runs-on: ubuntu-latest
         environment:
             name: pub.dev-dievas_tokens
@@ -46,7 +57,10 @@ jobs:
     publish-dievas:
         name: Publish dievas
         needs: [analyze-format-test]
-        if: startsWith(github.ref_name, 'dievas-v')
+        if: |
+            startsWith(github.ref_name, 'dievas-v') ||
+            (github.event_name == 'workflow_dispatch' &&
+             contains(fromJson('["dievas", "both"]'), github.event.inputs.package))
         runs-on: ubuntu-latest
         environment:
             name: pub.dev-dievas

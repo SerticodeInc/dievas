@@ -1,0 +1,55 @@
+name: Publish to pub.dev
+
+# Publishes dievas_tokens (pure Dart) and/or dievas (Flutter) to pub.dev
+# when a matching tag is pushed. Uses trusted publishing (OIDC) so no
+# PUB_DEV_PUBLISH_ACCESS_TOKEN secret is needed.
+#
+# Tag format:
+#   dievas_tokens-v<version>  → publishes dievas_tokens
+#   dievas-v<version>         → publishes dievas
+#
+# Both tags can be pushed in the same commit — each publish step runs
+# independently based on which tag(s) match.
+
+on:
+    push:
+        tags:
+            - 'dievas_tokens-v*'
+            - 'dievas-v*'
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+    cancel-in-progress: true
+
+jobs:
+    analyze-format-test:
+        name: Analyze, Format & Test
+        uses: ./.github/workflows/ci.yml
+
+    publish:
+        name: Publish to pub.dev
+        needs: [analyze-format-test]
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            id-token: write
+
+        steps:
+            - uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
+            - uses: subosito/flutter-action@v2
+              with:
+                  channel: stable
+                  cache: true
+
+            - name: Publish dievas_tokens to pub.dev
+              if: startsWith(github.ref_name, 'dievas_tokens-v')
+              working-directory: packages/dievas_tokens
+              run: dart pub publish --force
+
+            - name: Publish dievas to pub.dev
+              if: startsWith(github.ref_name, 'dievas-v')
+              working-directory: packages/dievas
+              run: flutter pub publish --force

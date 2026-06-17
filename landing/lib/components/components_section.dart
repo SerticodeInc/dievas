@@ -17,40 +17,32 @@ class ComponentsSection extends StatelessComponent {
     return section(classes: 'bg-transparent w-full', [
       // ── Section header ─────────────────────────────────────────────────────
       div(classes: 'max-w-5xl mx-auto px-3 lg:px-6 w-full py-8 reveal', [
-        p(
-          classes:
-              'section-eyebrow font-display text-sm tracking-[0.16em] uppercase mb-6',
-          [Component.text('✶  Component catalog')],
-        ),
-        div(
-          classes:
-              'flex flex-col lg:flex-row lg:items-end justify-between gap-6',
-          [
-            h2(
-              classes:
-                  'font-display font-black text-[clamp(36px,5vw,60px)] '
-                  'leading-[0.95] tracking-[-0.025em] text-slate-900',
-              [
-                Component.text('36 shipped.'),
-                br(),
-                span(classes: 'text-slate-400', [
-                  Component.text('4 not started.'),
-                ]),
-              ],
-            ),
-            p(
-              classes:
-                  'font-body font-light text-base leading-[1.8] text-slate-500 mb-8 '
-                  'max-w-[260px]',
-              [
-                Component.text(
-                  'Every component covers all sizes, states, and variants. '
-                  'All verified in the live gallery.',
-                ),
-              ],
-            ),
-          ],
-        ),
+        p(classes: 'section-eyebrow font-display text-sm tracking-[0.16em] uppercase mb-6', [
+          Component.text('✶  Component catalog'),
+        ]),
+        div(classes: 'flex flex-col lg:flex-row lg:items-end justify-between gap-6', [
+          h2(
+            classes:
+                'font-display font-black text-[clamp(36px,5vw,60px)] '
+                'leading-[0.95] tracking-[-0.025em] text-slate-900',
+            [
+              Component.text('36 shipped.'),
+              br(),
+              span(classes: 'text-slate-400', [Component.text('4 not started.')]),
+            ],
+          ),
+          p(
+            classes:
+                'font-body font-light text-base leading-[1.8] text-slate-500 mb-8 '
+                'max-w-[260px]',
+            [
+              Component.text(
+                'Every component covers all sizes, states, and variants. '
+                'All verified in the live gallery.',
+              ),
+            ],
+          ),
+        ]),
       ]),
 
       // ── Category rows — Anchor alternating layout ─────────────────────────
@@ -62,12 +54,7 @@ class ComponentsSection extends StatelessComponent {
             'Filled, outlined, ghost, and square icon variants '
             'all driven by DievasButtonThemeData, no hardcoded values.',
         preview: _buttonsPreview(),
-        components: const [
-          'FilledButton',
-          'OutlinedButton',
-          'TextButton',
-          'IconButton',
-        ],
+        components: const ['FilledButton', 'OutlinedButton', 'TextButton', 'IconButton'],
         accentHex: '818CF8',
         isFlipped: false,
         index: 0,
@@ -135,14 +122,7 @@ class ComponentsSection extends StatelessComponent {
             'and tooltips provide contextual feedback. Each integrates '
             'with DievasOverlayThemeData for backdrop and animation.',
         preview: _overlaysPreview(),
-        components: const [
-          'Alert',
-          'BottomSheet',
-          'Modal',
-          'Snackbar',
-          'Banner',
-          'Tooltip',
-        ],
+        components: const ['Alert', 'BottomSheet', 'Modal', 'Snackbar', 'Banner', 'Tooltip'],
         accentHex: 'F472B6',
         isFlipped: true,
         index: 3,
@@ -158,13 +138,7 @@ class ComponentsSection extends StatelessComponent {
             'All surfaces are token-driven and animated via '
             'DievasAnimationThemeData.',
         preview: _navPreview(),
-        components: const [
-          'Accordion',
-          'Drawer',
-          'MenuItem',
-          'Popover',
-          'TabBar',
-        ],
+        components: const ['Accordion', 'Drawer', 'MenuItem', 'Popover', 'TabBar'],
         accentHex: 'A78BFA',
         isFlipped: false,
         index: 4,
@@ -173,11 +147,9 @@ class ComponentsSection extends StatelessComponent {
       // ── WIP / not started ────────────────────────────────────────────────────
       div(classes: 'max-w-5xl mx-auto px-3 lg:px-6 w-full py-12 reveal-scale', [
         div(classes: 'flex items-center gap-3 mb-5', [
-          span(
-            classes:
-                'font-mono text-sm tracking-[0.12em] uppercase text-slate-400',
-            [Component.text('In progress')],
-          ),
+          span(classes: 'font-mono text-sm tracking-[0.12em] uppercase text-slate-400', [
+            Component.text('In progress'),
+          ]),
           span(
             classes:
                 'inline-block px-3 py-1 rounded-full '
@@ -186,57 +158,45 @@ class ComponentsSection extends StatelessComponent {
             [Component.text('4')],
           ),
         ]),
-        div(classes: 'flex flex-wrap gap-2', [
-          for (final c in _wip) _wipPill(c),
-        ]),
+        div(classes: 'flex flex-wrap gap-2', [for (final c in _wip) _wipPill(c)]),
       ]),
 
       // ── CTA island ─────────────────────────────────────────────────────────
       div(classes: 'max-w-5xl mx-auto px-3 lg:px-6 w-full pb-20 reveal-scale', [
-        div(
-          classes:
-              'cta-island py-16 text-center relative rounded-2xl overflow-hidden',
-          [
-            div(classes: 'relative px-6', [
-              p(
-                classes:
-                    'section-eyebrow font-display text-sm tracking-[0.16em] uppercase mb-6',
-                [Component.text('✶  proof of work')],
-              ),
-              h2(
-                classes:
-                    'font-display text-[clamp(32px,4.5vw,56px)] font-black tracking-[-0.025em] '
-                    'leading-[1.05] mb-5 text-text-hi',
-                [Component.text('The gallery is the proof.')],
-              ),
-              p(
-                classes:
-                    'font-body text-sm text-text-mid mb-10 max-w-sm mx-auto',
-                [
-                  Component.text('Every component. Every state. Every size.'),
-                  br(),
-                  Component.text('Toggle themes, resize viewports — live.'),
-                ],
-              ),
-              a(
-                href: DievasUrls.gallery,
-                attributes: const {'target': '_blank', 'rel': 'noopener'},
-                classes:
-                    'inline-flex items-center gap-2 '
-                    'px-7 py-3.5 rounded-md '
-                    'bg-action text-on-brand '
-                    'font-mono text-sm font-medium tracking-wide '
-                    'no-underline transition-all duration-200 '
-                    'hover:bg-action-hover hover:-translate-y-0.5 '
-                    'hover:shadow-[0_8px_32px_rgba(99,102,241,0.4)]',
-                [
-                  Component.text('Open Dievas Gallery'),
-                  span(classes: 'text-xs arrow-slide', [Component.text('→')]),
-                ],
-              ),
+        div(classes: 'cta-island py-16 text-center relative rounded-2xl overflow-hidden', [
+          div(classes: 'relative px-6', [
+            p(classes: 'section-eyebrow font-display text-sm tracking-[0.16em] uppercase mb-6', [
+              Component.text('✶  proof of work'),
             ]),
-          ],
-        ),
+            h2(
+              classes:
+                  'font-display text-[clamp(32px,4.5vw,56px)] font-black tracking-[-0.025em] '
+                  'leading-[1.05] mb-5 text-text-hi',
+              [Component.text('The gallery is the proof.')],
+            ),
+            p(classes: 'font-body text-sm text-text-mid mb-10 max-w-sm mx-auto', [
+              Component.text('Every component. Every state. Every size.'),
+              br(),
+              Component.text('Toggle themes, resize viewports — live.'),
+            ]),
+            a(
+              href: DievasUrls.gallery,
+              attributes: const {'target': '_blank', 'rel': 'noopener'},
+              classes:
+                  'inline-flex items-center gap-2 '
+                  'px-7 py-3.5 rounded-md '
+                  'bg-action text-on-brand '
+                  'font-mono text-sm font-medium tracking-wide '
+                  'no-underline transition-all duration-200 '
+                  'hover:bg-action-hover hover:-translate-y-0.5 '
+                  'hover:shadow-[0_8px_32px_rgba(99,102,241,0.4)]',
+              [
+                Component.text('Open Dievas Gallery'),
+                span(classes: 'text-xs arrow-slide', [Component.text('→')]),
+              ],
+            ),
+          ]),
+        ]),
       ]),
     ]);
   }
@@ -262,14 +222,9 @@ class ComponentsSection extends StatelessComponent {
       // Text side
       div(classes: 'flex-1 flex flex-col justify-center py-10 lg:py-0', [
         div(classes: 'flex items-center gap-3 mb-6', [
+          span(classes: 'font-mono text-sm tracking-[0.12em] uppercase text-slate-400', [Component.text(label)]),
           span(
-            classes:
-                'font-mono text-sm tracking-[0.12em] uppercase text-slate-400',
-            [Component.text(label)],
-          ),
-          span(
-            classes:
-                'inline-block px-3 py-1 rounded-full border font-mono text-xs',
+            classes: 'inline-block px-3 py-1 rounded-full border font-mono text-xs',
             attributes: {
               'style':
                   'border-color: #${accentHex}40; '
@@ -285,9 +240,7 @@ class ComponentsSection extends StatelessComponent {
               'max-w-[380px]',
           [Component.text(description)],
         ),
-        div(classes: 'flex flex-wrap gap-2', [
-          for (final c in components) _shippedPill(c, accentHex),
-        ]),
+        div(classes: 'flex flex-wrap gap-2', [for (final c in components) _shippedPill(c, accentHex)]),
       ]),
 
       // Visual preview side — card lift + accent shadow on hover
@@ -329,50 +282,30 @@ class ComponentsSection extends StatelessComponent {
 
   Component _navPreview() => div(classes: 'flex flex-col gap-3 w-full', [
     // Accordion (expanded)
-    div(
-      classes: 'rounded-lg border border-slate-200 bg-white overflow-hidden',
-      [
-        div(
-          classes: 'flex items-center justify-between px-3 py-2',
-          attributes: const {'style': 'background: rgba(167,139,250,0.08);'},
-          [
-            span(classes: 'font-mono text-xs text-slate-700', [
-              Component.text('Section'),
-            ]),
-            span(
-              classes: 'font-mono text-xs',
-              attributes: const {'style': 'color: #A78BFA;'},
-              [Component.text('−')],
-            ),
-          ],
-        ),
-        div(classes: 'px-3 py-2 border-t border-slate-100', [
-          span(classes: 'font-mono text-[10px] text-slate-400', [
-            Component.text('Content'),
-          ]),
-        ]),
-      ],
-    ),
+    div(classes: 'rounded-lg border border-slate-200 bg-white overflow-hidden', [
+      div(
+        classes: 'flex items-center justify-between px-3 py-2',
+        attributes: const {'style': 'background: rgba(167,139,250,0.08);'},
+        [
+          span(classes: 'font-mono text-xs text-slate-700', [Component.text('Section')]),
+          span(classes: 'font-mono text-xs', attributes: const {'style': 'color: #A78BFA;'}, [Component.text('−')]),
+        ],
+      ),
+      div(classes: 'px-3 py-2 border-t border-slate-100', [
+        span(classes: 'font-mono text-[10px] text-slate-400', [Component.text('Content')]),
+      ]),
+    ]),
     // Drawer (mini preview)
     div(classes: 'flex gap-2', [
-      div(
-        classes:
-            'w-24 rounded-lg border border-slate-200 bg-white p-2 flex flex-col gap-1.5',
-        [
-          div(classes: 'h-1.5 w-3/4 rounded-full bg-slate-300', []),
-          div(classes: 'h-1.5 w-1/2 rounded-full bg-slate-200', []),
-          div(classes: 'h-1.5 w-2/3 rounded-full bg-slate-200', []),
-        ],
-      ),
+      div(classes: 'w-24 rounded-lg border border-slate-200 bg-white p-2 flex flex-col gap-1.5', [
+        div(classes: 'h-1.5 w-3/4 rounded-full bg-slate-300', []),
+        div(classes: 'h-1.5 w-1/2 rounded-full bg-slate-200', []),
+        div(classes: 'h-1.5 w-2/3 rounded-full bg-slate-200', []),
+      ]),
       // Popover (mini tooltip)
-      div(
-        classes: 'rounded-lg border border-slate-200 bg-white p-2 shadow-sm',
-        [
-          span(classes: 'font-mono text-[10px] text-slate-500', [
-            Component.text('Popover'),
-          ]),
-        ],
-      ),
+      div(classes: 'rounded-lg border border-slate-200 bg-white p-2 shadow-sm', [
+        span(classes: 'font-mono text-[10px] text-slate-500', [Component.text('Popover')]),
+      ]),
     ]),
   ]);
 
@@ -385,10 +318,7 @@ class ComponentsSection extends StatelessComponent {
             'inline-flex items-center gap-1 px-4 py-2 rounded-md '
             'bg-action text-on-brand font-mono text-xs font-medium '
             'shadow-[0_2px_8px_rgba(99,102,241,0.3)]',
-        [
-          div(classes: 'w-2 h-2 rounded-sm bg-white/30', []),
-          Component.text('Filled'),
-        ],
+        [div(classes: 'w-2 h-2 rounded-sm bg-white/30', []), Component.text('Filled')],
       ),
       div(
         classes:
@@ -396,11 +326,7 @@ class ComponentsSection extends StatelessComponent {
             'border border-brand/40 text-brand font-mono text-xs',
         [Component.text('Outlined')],
       ),
-      div(
-        classes:
-            'inline-flex items-center px-3 py-2 text-slate-400 font-mono text-xs',
-        [Component.text('Ghost')],
-      ),
+      div(classes: 'inline-flex items-center px-3 py-2 text-slate-400 font-mono text-xs', [Component.text('Ghost')]),
       div(
         classes:
             'inline-flex items-center justify-center w-9 h-9 rounded-md '
@@ -433,27 +359,17 @@ class ComponentsSection extends StatelessComponent {
             'w-4 h-4 rounded flex items-center justify-center flex-shrink-0 '
             'bg-action',
         [
-          span(classes: 'text-white font-mono text-[8px] leading-none', [
-            Component.text('✓'),
-          ]),
+          span(classes: 'text-white font-mono text-[8px] leading-none', [Component.text('✓')]),
         ],
       ),
-      span(classes: 'font-mono text-xs text-slate-600', [
-        Component.text('Checkbox — checked'),
-      ]),
+      span(classes: 'font-mono text-xs text-slate-600', [Component.text('Checkbox — checked')]),
     ]),
     // Switch
     div(classes: 'flex items-center gap-3', [
       div(classes: 'w-9 h-5 rounded-full bg-action relative flex-shrink-0', [
-        div(
-          classes:
-              'absolute right-0.5 top-0.5 w-4 h-4 rounded-full bg-white shadow-sm',
-          [],
-        ),
+        div(classes: 'absolute right-0.5 top-0.5 w-4 h-4 rounded-full bg-white shadow-sm', []),
       ]),
-      span(classes: 'font-mono text-xs text-slate-600', [
-        Component.text('Switch — on'),
-      ]),
+      span(classes: 'font-mono text-xs text-slate-600', [Component.text('Switch — on')]),
     ]),
     // Text field
     div(
@@ -461,25 +377,16 @@ class ComponentsSection extends StatelessComponent {
           'flex items-center gap-2 px-3 py-2 rounded-lg '
           'border-2 border-action/60 bg-white w-full',
       [
-        div(
-          classes: 'w-0.5 h-3.5 bg-action/80 animate-pulse flex-shrink-0',
-          [],
-        ),
-        span(classes: 'font-mono text-[10px] text-slate-300', [
-          Component.text('Enter value...'),
-        ]),
+        div(classes: 'w-0.5 h-3.5 bg-action/80 animate-pulse flex-shrink-0', []),
+        span(classes: 'font-mono text-[10px] text-slate-300', [Component.text('Enter value...')]),
       ],
     ),
     // Radio
     div(classes: 'flex items-center gap-3', [
-      div(
-        classes:
-            'w-4 h-4 rounded-full border-2 border-action relative flex-shrink-0',
-        [div(classes: 'absolute inset-1 rounded-full bg-action', [])],
-      ),
-      span(classes: 'font-mono text-xs text-slate-600', [
-        Component.text('Radio — selected'),
+      div(classes: 'w-4 h-4 rounded-full border-2 border-action relative flex-shrink-0', [
+        div(classes: 'absolute inset-1 rounded-full bg-action', []),
       ]),
+      span(classes: 'font-mono text-xs text-slate-600', [Component.text('Radio — selected')]),
     ]),
   ]);
 
@@ -487,12 +394,8 @@ class ComponentsSection extends StatelessComponent {
     // Avatar + Badge
     div(classes: 'flex items-center gap-3', [
       div(
-        classes:
-            'relative w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0',
-        attributes: const {
-          'style':
-              'background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3);',
-        },
+        classes: 'relative w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0',
+        attributes: const {'style': 'background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3);'},
         [
           span(
             classes: 'font-mono text-xs font-medium',
@@ -511,8 +414,7 @@ class ComponentsSection extends StatelessComponent {
         ],
       ),
       div(
-        classes:
-            'inline-flex items-center px-2.5 py-1 rounded-full font-mono text-[10px]',
+        classes: 'inline-flex items-center px-2.5 py-1 rounded-full font-mono text-[10px]',
         attributes: const {
           'style':
               'border: 1px solid rgba(251,191,36,0.35); '
@@ -527,31 +429,21 @@ class ComponentsSection extends StatelessComponent {
     // Progress bars
     div(classes: 'flex flex-col gap-2', [
       div(classes: 'w-full h-1.5 rounded-full bg-slate-200 overflow-hidden', [
-        div(
-          classes: 'h-full rounded-full bg-action',
-          attributes: const {'style': 'width: 62%'},
-          [],
-        ),
+        div(classes: 'h-full rounded-full bg-action', attributes: const {'style': 'width: 62%'}, []),
       ]),
       div(classes: 'w-full h-1.5 rounded-full bg-slate-200 overflow-hidden', [
-        div(
-          classes: 'h-full rounded-full',
-          attributes: const {'style': 'width: 38%; background: #FBBF24;'},
-          [],
-        ),
+        div(classes: 'h-full rounded-full', attributes: const {'style': 'width: 38%; background: #FBBF24;'}, []),
       ]),
     ]),
     // Circular + Loader
     div(classes: 'flex items-center gap-3', [
       div(
-        classes:
-            'w-7 h-7 rounded-full border-[3px] border-slate-200 border-t-action flex-shrink-0',
+        classes: 'w-7 h-7 rounded-full border-[3px] border-slate-200 border-t-action flex-shrink-0',
         attributes: const {'style': 'transform: rotate(-45deg)'},
         [],
       ),
       div(
-        classes:
-            'w-6 h-6 rounded-full border-[2.5px] border-slate-200 border-t-slate-400 flex-shrink-0',
+        classes: 'w-6 h-6 rounded-full border-[2.5px] border-slate-200 border-t-slate-400 flex-shrink-0',
         attributes: const {'style': 'animation: spin 1s linear infinite'},
         [],
       ),
@@ -565,45 +457,26 @@ class ComponentsSection extends StatelessComponent {
       attributes: const {'style': 'border-left: 3px solid #F59E0B;'},
       [
         div(classes: 'flex items-center gap-2 mb-1', [
-          span(classes: 'text-amber-600 font-mono text-xs font-bold', [
-            Component.text('Alert'),
-          ]),
+          span(classes: 'text-amber-600 font-mono text-xs font-bold', [Component.text('Alert')]),
         ]),
-        span(classes: 'text-amber-700 font-mono text-[10px]', [
-          Component.text('Important notice here'),
-        ]),
+        span(classes: 'text-amber-700 font-mono text-[10px]', [Component.text('Important notice here')]),
       ],
     ),
     // Snackbar
-    div(
-      classes:
-          'px-3 py-2 rounded-md bg-slate-800 text-white flex items-center gap-2',
-      [
-        div(classes: 'w-1 h-1 rounded-full bg-green-400', []),
-        span(classes: 'font-mono text-[10px]', [Component.text('Item saved')]),
-      ],
-    ),
+    div(classes: 'px-3 py-2 rounded-md bg-slate-800 text-white flex items-center gap-2', [
+      div(classes: 'w-1 h-1 rounded-full bg-green-400', []),
+      span(classes: 'font-mono text-[10px]', [Component.text('Item saved')]),
+    ]),
     // Modal preview (centered box)
-    div(
-      classes: 'rounded-lg border border-slate-200 bg-white p-3 text-center',
-      [
-        span(classes: 'font-mono text-xs text-slate-600', [
-          Component.text('Modal'),
-        ]),
-      ],
-    ),
+    div(classes: 'rounded-lg border border-slate-200 bg-white p-3 text-center', [
+      span(classes: 'font-mono text-xs text-slate-600', [Component.text('Modal')]),
+    ]),
     // Tooltip
     div(classes: 'flex items-center justify-center gap-2', [
       div(classes: 'px-2 py-1 rounded bg-slate-100 border border-slate-200', [
-        span(classes: 'font-mono text-[10px] text-slate-400', [
-          Component.text('Hover me'),
-        ]),
+        span(classes: 'font-mono text-[10px] text-slate-400', [Component.text('Hover me')]),
       ]),
-      div(
-        classes:
-            'px-2 py-1 rounded bg-slate-800 text-white font-mono text-[9px]',
-        [Component.text('Tooltip')],
-      ),
+      div(classes: 'px-2 py-1 rounded bg-slate-800 text-white font-mono text-[9px]', [Component.text('Tooltip')]),
     ]),
   ]);
 
@@ -622,17 +495,9 @@ class ComponentsSection extends StatelessComponent {
         'hover:text-slate-900 '
         'hover:shadow-[0_2px_12px_rgba(0,0,0,0.08)]',
     [
-      div(
-        classes: 'w-1.5 h-1.5 rounded-full flex-shrink-0',
-        attributes: {'style': 'background: #$accentHex;'},
-        [],
-      ),
+      div(classes: 'w-1.5 h-1.5 rounded-full flex-shrink-0', attributes: {'style': 'background: #$accentHex;'}, []),
       Component.text(name),
-      span(
-        classes: 'text-[12px] arrow-span',
-        attributes: {'style': 'color: #$accentHex;'},
-        [Component.text('→')],
-      ),
+      span(classes: 'text-[12px] arrow-span', attributes: {'style': 'color: #$accentHex;'}, [Component.text('→')]),
     ],
   );
 
@@ -643,10 +508,7 @@ class ComponentsSection extends StatelessComponent {
         'border border-slate-200 rounded-full '
         'font-mono text-sm text-slate-400 '
         'bg-slate-50/60',
-    [
-      div(classes: 'w-1.5 h-1.5 rounded-full bg-slate-300 flex-shrink-0', []),
-      Component.text(name),
-    ],
+    [div(classes: 'w-1.5 h-1.5 rounded-full bg-slate-300 flex-shrink-0', []), Component.text(name)],
   );
 
   // ── Helpers ────────────────────────────────────────────────────────────────────
@@ -743,10 +605,5 @@ class ComponentsSection extends StatelessComponent {
     'TabBar': 'nav-disclosure',
   };
 
-  static const _wip = [
-    'Carousel',
-    'Table',
-    'SingleSelectComboBox',
-    'MultiSelectComboBox',
-  ];
+  static const _wip = ['Carousel', 'Table', 'SingleSelectComboBox', 'MultiSelectComboBox'];
 }

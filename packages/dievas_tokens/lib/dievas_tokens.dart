@@ -1,4 +1,4 @@
-/// Dievas design tokens — primitive and semantic layers.
+/// Dievas design tokens. Primitive and semantic layers.
 ///
 /// Pure Dart. No Flutter dependency. Safe to import in Jaspr,
 /// CLI tools, or any Dart target alongside Flutter packages.

@@ -20,11 +20,8 @@ class Nav extends StatelessComponent {
   Component build(BuildContext context) {
     return header(
       id: 'site-nav',
-      classes:
-          'fixed top-5 left-0 right-0 z-50 flex justify-center pointer-events-none',
-      attributes: const {
-        'style': 'transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);',
-      },
+      classes: 'fixed top-5 left-0 right-0 z-50 flex justify-center pointer-events-none',
+      attributes: const {'style': 'transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);'},
       [
         nav(
           classes:
@@ -65,19 +62,12 @@ class Nav extends StatelessComponent {
                       'text-text-mid no-underline '
                       'transition-colors duration-200 '
                       'hover:text-white',
-                  attributes: {
-                    if (lnk.$3) 'target': '_blank',
-                    if (lnk.$3) 'rel': 'noopener',
-                  },
+                  attributes: {if (lnk.$3) 'target': '_blank', if (lnk.$3) 'rel': 'noopener'},
                   [
                     span(classes: 'flex items-center gap-2', [
                       span(
-                        classes:
-                            'nav-dot inline-block w-1 h-1 rounded-full bg-text-mid',
-                        attributes: const {
-                          'style':
-                              'transition: all 0.3s cubic-bezier(0.22,1,0.36,1);',
-                        },
+                        classes: 'nav-dot inline-block w-1 h-1 rounded-full bg-text-mid',
+                        attributes: const {'style': 'transition: all 0.3s cubic-bezier(0.22,1,0.36,1);'},
                         [],
                       ),
                       Component.text(lnk.$1),

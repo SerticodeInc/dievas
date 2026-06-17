@@ -28,8 +28,7 @@ class Hero extends StatelessComponent {
             'flex justify-center overflow-hidden',
         [
           span(
-            classes:
-                'font-display font-black whitespace-nowrap text-brand flex',
+            classes: 'font-display font-black whitespace-nowrap text-brand flex',
             attributes: const {
               'style':
                   'font-size: clamp(110px, 24vw, 360px); '
@@ -53,28 +52,19 @@ class Hero extends StatelessComponent {
       // pt-40 = 160px clears the fixed nav (top-5 + ~48px pill height + comfort).
       div(
         classes: 'relative z-10 flex flex-col items-center text-center px-6',
-        attributes: const {
-          'style': 'padding-top: 160px; padding-bottom: 32px;',
-        },
+        attributes: const {'style': 'padding-top: 160px; padding-bottom: 32px;'},
         [
           // Eyebrow
           p(
-            classes:
-                'section-eyebrow font-display text-sm tracking-[0.16em] uppercase word-in',
-            attributes: const {
-              'style': 'animation-delay: 0.06s; margin-bottom: 32px;',
-            },
+            classes: 'section-eyebrow font-display text-sm tracking-[0.16em] uppercase word-in',
+            attributes: const {'style': 'animation-delay: 0.06s; margin-bottom: 32px;'},
             [Component.text('✶  Flutter Design System')],
           ),
 
           // Headline — each word is a separate animated span (Anchor word-reveal)
           h1(
-            classes:
-                'font-display font-black leading-[0.92] tracking-[-0.025em] text-text-hi',
-            attributes: const {
-              'style':
-                  'font-size: clamp(54px, 8.5vw, 116px); margin-bottom: 32px;',
-            },
+            classes: 'font-display font-black leading-[0.92] tracking-[-0.025em] text-text-hi',
+            attributes: const {'style': 'font-size: clamp(54px, 8.5vw, 116px); margin-bottom: 32px;'},
             [
               span(
                 classes: 'word-in',
@@ -114,11 +104,8 @@ class Hero extends StatelessComponent {
 
           // Subtitle
           p(
-            classes:
-                'max-w-sm font-body font-light text-base leading-[1.8] text-slate-500 word-in',
-            attributes: const {
-              'style': 'animation-delay: 0.7s; margin-bottom: 40px;',
-            },
+            classes: 'max-w-sm font-body font-light text-base leading-[1.8] text-slate-500 word-in',
+            attributes: const {'style': 'animation-delay: 0.7s; margin-bottom: 40px;'},
             [
               Component.text(
                 'Production grade Flutter components built from the token layer up. '
@@ -133,8 +120,8 @@ class Hero extends StatelessComponent {
             attributes: const {'style': 'animation-delay: 0.82s'},
             [
               /// *** Keep the below for a forth night till we decide if we want to send this to pub.dev.
-              /* a(
-                href: DievasUrls.pubDev,
+              a(
+                href: DievasUrls.dievasPubDevURL,
                 attributes: const {'target': '_blank', 'rel': 'noopener'},
                 classes:
                     'inline-flex items-center gap-2 '
@@ -148,7 +135,7 @@ class Hero extends StatelessComponent {
                   Component.text('View on pub.dev'),
                   span(classes: 'text-xs', [Component.text('→')]),
                 ],
-              ), */
+              ),
               a(
                 href: DievasUrls.gallery,
                 attributes: const {'target': '_blank', 'rel': 'noopener'},
@@ -172,10 +159,7 @@ class Hero extends StatelessComponent {
           // Manifest strip — stat bar
           div(
             classes: 'flex items-center flex-wrap justify-center word-in',
-            attributes: const {
-              'style':
-                  'animation-delay: 0.94s; margin-top: 56px; padding-top: 40px;',
-            },
+            attributes: const {'style': 'animation-delay: 0.94s; margin-top: 56px; padding-top: 40px;'},
             [
               _manifestItem('3', 'packages'),
               _manifestSep(),
@@ -238,8 +222,7 @@ class Hero extends StatelessComponent {
               _productChip(
                 title: 'Display',
                 count: '9 shipped',
-                detail:
-                    'Avatar · Badge · Tag · Icon\nDivider · Progress · Loader',
+                detail: 'Avatar · Badge · Tag · Icon\nDivider · Progress · Loader',
                 bg: 'rgba(251, 191, 36, 0.02)',
                 accentRgb: '251, 191, 36',
                 fg: '#FDE68A',
@@ -257,8 +240,7 @@ class Hero extends StatelessComponent {
               _productChip(
                 title: 'Up Next',
                 count: '4 planned',
-                detail:
-                    'Carousel · Table\nSingleSelectComboBox · MultiSelectComboBox',
+                detail: 'Carousel · Table\nSingleSelectComboBox · MultiSelectComboBox',
                 bg: 'rgba(251, 113, 133, 0.02)',
                 accentRgb: '251, 113, 133',
                 fg: '#FECDD3',
@@ -281,17 +263,11 @@ class Hero extends StatelessComponent {
             for (final name in [..._allComponents, ..._allComponents])
               span(
                 classes: 'font-mono text-xs text-slate-400 whitespace-nowrap',
-                attributes: const {
-                  'style':
-                      'display: inline-flex; align-items: center; gap: 8px; padding: 0 20px;',
-                },
+                attributes: const {'style': 'display: inline-flex; align-items: center; gap: 8px; padding: 0 20px;'},
                 [
                   div(
                     classes: 'inline-block rounded-full flex-shrink-0',
-                    attributes: const {
-                      'style':
-                          'width: 4px; height: 4px; background: rgba(148,163,184,0.6);',
-                    },
+                    attributes: const {'style': 'width: 4px; height: 4px; background: rgba(148,163,184,0.6);'},
                     [],
                   ),
                   Component.text(name),
@@ -321,11 +297,7 @@ class Hero extends StatelessComponent {
             [
               div(classes: 'w-2 h-2 rounded-full bg-brand flex-shrink-0', []),
               Component.text('Serticode Inc.'),
-              div(
-                classes:
-                    'badge-shine absolute inset-0 pointer-events-none rounded-xl',
-                [],
-              ),
+              div(classes: 'badge-shine absolute inset-0 pointer-events-none rounded-xl', []),
             ],
           ),
           a(
@@ -341,16 +313,9 @@ class Hero extends StatelessComponent {
                 'transition-all duration-200 '
                 'hover:border-brand/50 hover:text-brand hover:-translate-y-px',
             [
-              div(
-                classes: 'w-2 h-2 rounded-full bg-brand/50 flex-shrink-0',
-                [],
-              ),
+              div(classes: 'w-2 h-2 rounded-full bg-brand/50 flex-shrink-0', []),
               Component.text('Moon DS'),
-              div(
-                classes:
-                    'badge-shine absolute inset-0 pointer-events-none rounded-xl',
-                [],
-              ),
+              div(classes: 'badge-shine absolute inset-0 pointer-events-none rounded-xl', []),
             ],
           ),
         ],
@@ -397,10 +362,7 @@ class Hero extends StatelessComponent {
       [
         // Top row: count label + arrow
         div(
-          attributes: const {
-            'style':
-                'display: flex; align-items: center; justify-content: space-between;',
-          },
+          attributes: const {'style': 'display: flex; align-items: center; justify-content: space-between;'},
           [
             span(
               attributes: {
@@ -448,16 +410,12 @@ class Hero extends StatelessComponent {
     );
   }
 
-  Component _manifestItem(String value, String label) =>
-      span(classes: 'font-mono text-base text-text-mid', [
-        span(classes: 'text-text-hi', [Component.text(value)]),
-        Component.text(' $label'),
-      ]);
+  Component _manifestItem(String value, String label) => span(classes: 'font-mono text-base text-text-mid', [
+    span(classes: 'text-text-hi', [Component.text(value)]),
+    Component.text(' $label'),
+  ]);
 
-  Component _manifestSep() => span(
-    classes: 'font-mono text-sm text-text-lo mx-3 select-none',
-    [Component.text('·')],
-  );
+  Component _manifestSep() => span(classes: 'font-mono text-sm text-text-lo mx-3 select-none', [Component.text('·')]);
 
   static const _allComponents = [
     'FilledButton',

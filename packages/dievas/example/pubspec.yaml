@@ -1,0 +1,13 @@
+name: dievas_example
+description: Example usage of the Dievas design system.
+publish_to: none
+
+environment:
+    sdk: ">=3.11.4 <4.0.0"
+    flutter: ">=3.22.0"
+
+dependencies:
+    flutter:
+        sdk: flutter
+    dievas:
+        path: ../

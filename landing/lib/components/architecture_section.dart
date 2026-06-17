@@ -17,126 +17,91 @@ class ArchitectureSection extends StatelessComponent {
       [
         div(classes: 'max-w-5xl mx-auto px-3 lg:px-6 w-full py-8', [
           // ── Section header ─────────────────────────────────────────────────
-          div(
-            classes:
-                'mb-20 flex flex-col lg:flex-row lg:items-end justify-between gap-8 reveal',
-            [
-              div([
-                p(
-                  classes:
-                      'section-eyebrow font-display text-sm tracking-[0.16em] uppercase mb-6',
-                  [Component.text('✶  Architecture')],
-                ),
-                h2(
-                  classes:
-                      'font-display font-black text-[clamp(36px,5vw,60px)] '
-                      'leading-[0.95] tracking-[-0.025em] text-slate-900',
-                  [
-                    Component.text('Three layers.'),
-                    br(),
-                    span(classes: 'text-slate-400', [
-                      Component.text('One rule.'),
-                    ]),
-                  ],
-                ),
+          div(classes: 'mb-20 flex flex-col lg:flex-row lg:items-end justify-between gap-8 reveal', [
+            div([
+              p(classes: 'section-eyebrow font-display text-sm tracking-[0.16em] uppercase mb-6', [
+                Component.text('✶  Architecture'),
               ]),
-              p(
+              h2(
                 classes:
-                    'font-body font-light text-base leading-[1.8] text-slate-500 mb-8 '
-                    'max-w-[260px]',
+                    'font-display font-black text-[clamp(36px,5vw,60px)] '
+                    'leading-[0.95] tracking-[-0.025em] text-slate-900',
                 [
-                  Component.text('Each layer has exactly one responsibility.'),
+                  Component.text('Three layers.'),
                   br(),
-                  Component.text('Tokens define.'),
-                  br(),
-                  Component.text('Theme composes.'),
-                  br(),
-                  Component.text('Components consume.'),
+                  span(classes: 'text-slate-400', [Component.text('One rule.')]),
                 ],
               ),
-            ],
-          ),
-
-          // ── Code pipeline ─────────────────────────────────────────────────
-          div(classes: 'mb-24', [
-            div(
+            ]),
+            p(
               classes:
-                  'flex flex-col lg:flex-row items-stretch gap-3 reveal-group',
+                  'font-body font-light text-base leading-[1.8] text-slate-500 mb-8 '
+                  'max-w-[260px]',
               [
-                _CodePanel(
-                  label: 'Tokens.',
-                  badgeClass:
-                      'text-[rgba(248,113,113,1)] border-[rgba(248,113,113,0.3)] '
-                      'bg-[rgba(248,113,113,0.08)]',
-                  badge: 'Pure Dart',
-                  codeHtml: _tokensCode,
-                ),
-                _CodePanel(
-                  label: 'theme + components',
-                  badge: 'Flutter',
-                  badgeClass: '#93c5fd',
-                  codeHtml: _dievasCode,
-                ),
-                _CodePanel(
-                  label: 'Your app',
-                  badge: 'Consumer',
-                  badgeClass: '#818cf8',
-                  codeHtml: _appCode,
-                ),
+                Component.text('Each layer has exactly one responsibility.'),
+                br(),
+                Component.text('Tokens define.'),
+                br(),
+                Component.text('Theme composes.'),
+                br(),
+                Component.text('Components consume.'),
               ],
             ),
           ]),
 
+          // ── Code pipeline ─────────────────────────────────────────────────
+          div(classes: 'mb-24', [
+            div(classes: 'flex flex-col lg:flex-row items-stretch gap-3 reveal-group', [
+              _CodePanel(
+                label: 'Tokens.',
+                badgeClass:
+                    'text-[rgba(248,113,113,1)] border-[rgba(248,113,113,0.3)] '
+                    'bg-[rgba(248,113,113,0.08)]',
+                badge: 'Pure Dart',
+                codeHtml: _tokensCode,
+              ),
+              _CodePanel(label: 'theme + components', badge: 'Flutter', badgeClass: '#93c5fd', codeHtml: _dievasCode),
+              _CodePanel(label: 'Your app', badge: 'Consumer', badgeClass: '#818cf8', codeHtml: _appCode),
+            ]),
+          ]),
+
           // ── Principle cards ────────────────────────────────────────────────
           div(classes: 'grid grid-cols-1 sm:grid-cols-2 gap-4 reveal-group', [
-            for (final p in _principles)
-              _principleCard(p.$1, p.$2, p.$3, p.$4, p.$5, p.$6),
+            for (final p in _principles) _principleCard(p.$1, p.$2, p.$3, p.$4, p.$5, p.$6),
           ]),
         ]),
       ],
     );
   }
 
-  Component _principleCard(
-    String num,
-    String title,
-    String body,
-    String symbol,
-    String colorClass,
-    String accentRgb,
-  ) => div(
-    classes:
-        'group principle-card p-8 rounded-2xl border $colorClass '
-        'bg-white '
-        'transition-all duration-300 cursor-default '
-        'hover:shadow-[0_8px_32px_rgba(var(--card-accent),0.18)]',
-    attributes: {'style': '--card-accent: $accentRgb;'},
-    [
-      div(classes: 'flex items-center justify-between mb-6', [
-        span(
-          classes: 'font-mono text-[12px] tracking-[0.2em] uppercase',
-          attributes: const {'style': 'color: rgba(129,140,248,0.7)'},
-          [Component.text(num)],
-        ),
-        div(
-          classes:
-              'pc-icon w-9 h-9 rounded-xl border border-slate-700 bg-white/5 '
-              'flex items-center justify-center text-slate-400 text-base select-none '
-              'group-hover:border-brand/25 group-hover:bg-brand/8 group-hover:text-brand '
-              'transition-all duration-300',
-          [Component.text(symbol)],
-        ),
-      ]),
-      p(
+  Component _principleCard(String num, String title, String body, String symbol, String colorClass, String accentRgb) =>
+      div(
         classes:
-            'font-display font-semibold text-slate-900 text-base leading-snug mb-3',
-        [Component.text(title)],
-      ),
-      p(classes: 'font-body font-light text-sm leading-relaxed text-text-mid', [
-        Component.text(body),
-      ]),
-    ],
-  );
+            'group principle-card p-8 rounded-2xl border $colorClass '
+            'bg-white '
+            'transition-all duration-300 cursor-default '
+            'hover:shadow-[0_8px_32px_rgba(var(--card-accent),0.18)]',
+        attributes: {'style': '--card-accent: $accentRgb;'},
+        [
+          div(classes: 'flex items-center justify-between mb-6', [
+            span(
+              classes: 'font-mono text-[12px] tracking-[0.2em] uppercase',
+              attributes: const {'style': 'color: rgba(129,140,248,0.7)'},
+              [Component.text(num)],
+            ),
+            div(
+              classes:
+                  'pc-icon w-9 h-9 rounded-xl border border-slate-700 bg-white/5 '
+                  'flex items-center justify-center text-slate-400 text-base select-none '
+                  'group-hover:border-brand/25 group-hover:bg-brand/8 group-hover:text-brand '
+                  'transition-all duration-300',
+              [Component.text(symbol)],
+            ),
+          ]),
+          p(classes: 'font-display font-semibold text-slate-900 text-base leading-snug mb-3', [Component.text(title)]),
+          p(classes: 'font-body font-light text-sm leading-relaxed text-text-mid', [Component.text(body)]),
+        ],
+      );
 
   static const _tokensCode = r'''
 <pre style="font-family:ui-monospace,monospace;font-size:11px;line-height:1.85;color:#94a3b8;white-space:pre"><code><span style="color:#64748b">// primitive scale — raw ints</span>
@@ -222,12 +187,7 @@ class ArchitectureSection extends StatelessComponent {
 }
 
 class _CodePanel extends StatelessComponent {
-  const _CodePanel({
-    required this.label,
-    required this.badge,
-    required this.badgeClass,
-    required this.codeHtml,
-  });
+  const _CodePanel({required this.label, required this.badge, required this.badgeClass, required this.codeHtml});
 
   final String label, badge, badgeClass, codeHtml;
 
@@ -242,27 +202,11 @@ class _CodePanel extends StatelessComponent {
             'flex items-center justify-between',
         [
           div(classes: 'flex items-center gap-1.5', [
-            div(
-              classes:
-                  'code-dot code-dot-close w-2 h-2 rounded-full bg-[#FF5F57]',
-              [],
-            ),
-            div(
-              classes:
-                  'code-dot code-dot-minimize w-2 h-2 rounded-full bg-[#FEBC2E]',
-              [],
-            ),
-            div(
-              classes:
-                  'code-dot code-dot-maximize w-2 h-2 rounded-full bg-[#28C840]',
-              [],
-            ),
+            div(classes: 'code-dot code-dot-close w-2 h-2 rounded-full bg-[#FF5F57]', []),
+            div(classes: 'code-dot code-dot-minimize w-2 h-2 rounded-full bg-[#FEBC2E]', []),
+            div(classes: 'code-dot code-dot-maximize w-2 h-2 rounded-full bg-[#28C840]', []),
           ]),
-          span(
-            classes:
-                'section-eyebrow font-display text-mid tracking-[0.07em] uppercase',
-            [Component.text(label)],
-          ),
+          span(classes: 'section-eyebrow font-display text-mid tracking-[0.07em] uppercase', [Component.text(label)]),
           span(
             classes:
                 'font-mono text-[8px] tracking-wider px-2 py-0.5 '
@@ -271,9 +215,7 @@ class _CodePanel extends StatelessComponent {
           ),
         ],
       ),
-      div(classes: 'bg-bg-base p-5 overflow-x-auto flex-1', [
-        RawText(codeHtml),
-      ]),
+      div(classes: 'bg-bg-base p-5 overflow-x-auto flex-1', [RawText(codeHtml)]),
     ],
   );
 }

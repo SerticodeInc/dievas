@@ -17,44 +17,38 @@ class ManifestoSection extends StatelessComponent {
       [
         div(classes: 'max-w-5xl mx-auto px-3 lg:px-6 w-full py-8', [
           // ── Header ────────────────────────────────────────────────────────
-          div(
-            classes:
-                'mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-10 reveal',
-            [
-              div([
-                p(
-                  classes:
-                      'section-eyebrow font-display text-sm tracking-[0.16em] uppercase mb-6',
-                  [Component.text('✶  The problem')],
-                ),
-                h2(
-                  classes:
-                      'font-display font-black text-[clamp(36px,5vw,64px)] '
-                      'leading-[0.93] tracking-[-0.03em]',
-                  attributes: const {'style': 'color: #171717;'},
-                  [
-                    Component.text('Components that know'),
-                    br(),
-                    span(classes: 'text-brand', [Component.text('nothing')]),
-                    Component.text(' about brands.'),
-                  ],
-                ),
+          div(classes: 'mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-10 reveal', [
+            div([
+              p(classes: 'section-eyebrow font-display text-sm tracking-[0.16em] uppercase mb-6', [
+                Component.text('✶  The problem'),
               ]),
-              p(
+              h2(
                 classes:
-                    'font-body font-light text-base leading-relaxed text-text-mid '
-                    'lg:text-right lg:pb-2 lg:flex-shrink-0 lg:w-72',
+                    'font-display font-black text-[clamp(36px,5vw,64px)] '
+                    'leading-[0.93] tracking-[-0.03em]',
+                attributes: const {'style': 'color: #171717;'},
                 [
-                  Component.text(
-                    'Most Flutter codebases scatter Color(), TextStyle(), '
-                    'and magic numbers across every widget.',
-                  ),
+                  Component.text('Components that know'),
                   br(),
-                  Component.text('Dievas moves them all to the token layer.'),
+                  span(classes: 'text-brand', [Component.text('nothing')]),
+                  Component.text(' about brands.'),
                 ],
               ),
-            ],
-          ),
+            ]),
+            p(
+              classes:
+                  'font-body font-light text-base leading-relaxed text-text-mid '
+                  'lg:text-right lg:pb-2 lg:flex-shrink-0 lg:w-72',
+              [
+                Component.text(
+                  'Most Flutter codebases scatter Color(), TextStyle(), '
+                  'and magic numbers across every widget.',
+                ),
+                br(),
+                Component.text('Dievas moves them all to the token layer.'),
+              ],
+            ),
+          ]),
 
           // ── Before / After code panels ────────────────────────────────────
           div(classes: 'grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6', [
@@ -174,27 +168,11 @@ class _CodePanel extends StatelessComponent {
             'flex items-center justify-between',
         [
           div(classes: 'flex items-center gap-1.5', [
-            div(
-              classes:
-                  'code-dot code-dot-close w-2 h-2 rounded-full bg-[#FF5F57]',
-              [],
-            ),
-            div(
-              classes:
-                  'code-dot code-dot-minimize w-2 h-2 rounded-full bg-[#FEBC2E]',
-              [],
-            ),
-            div(
-              classes:
-                  'code-dot code-dot-maximize w-2 h-2 rounded-full bg-[#28C840]',
-              [],
-            ),
+            div(classes: 'code-dot code-dot-close w-2 h-2 rounded-full bg-[#FF5F57]', []),
+            div(classes: 'code-dot code-dot-minimize w-2 h-2 rounded-full bg-[#FEBC2E]', []),
+            div(classes: 'code-dot code-dot-maximize w-2 h-2 rounded-full bg-[#28C840]', []),
           ]),
-          span(
-            classes:
-                'section-eyebrow font-display text-sm tracking-[0.16em] uppercase',
-            [Component.text(label)],
-          ),
+          span(classes: 'section-eyebrow font-display text-sm tracking-[0.16em] uppercase', [Component.text(label)]),
           span(
             classes:
                 'font-mono text-[9px] tracking-wider px-2 py-0.5 '
@@ -203,9 +181,7 @@ class _CodePanel extends StatelessComponent {
           ),
         ],
       ),
-      div(classes: 'bg-bg-base p-5 overflow-x-auto flex-1', [
-        RawText(codeHtml),
-      ]),
+      div(classes: 'bg-bg-base p-5 overflow-x-auto flex-1', [RawText(codeHtml)]),
     ],
   );
 }

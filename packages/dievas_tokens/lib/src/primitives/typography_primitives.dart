@@ -45,13 +45,13 @@ abstract final class DievasLetterSpacingPrimitives {
 }
 
 abstract final class DievasFontFamilyPrimitives {
-  /// Maison Neue — body, label, title, and UI copy.
+  /// Martian Mono — body, label, title, and UI copy.
   /// Font files registered in packages/dievas/pubspec.yaml under flutter: fonts:.
-  static const String sans = 'MaisonNeue';
+  static const String sans = 'MartianMono';
 
-  /// Maison Neue Extended — display and heading styles.
-  /// Wider letter forms designed for large-scale use.
-  static const String sansExtended = 'MaisonNeueExtended';
+  /// Martian Mono — display and heading styles.
+  /// Same family; weight selected via typography tokens.
+  static const String sansExtended = 'MartianMono';
 
   /// Cascadia Code — code snippets, inline code, and monospaced output.
   ///

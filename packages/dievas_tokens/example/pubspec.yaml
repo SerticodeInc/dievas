@@ -1,0 +1,10 @@
+name: dievas_tokens_example
+description: Example usage of dievas_tokens.
+publish_to: none
+
+environment:
+    sdk: ^3.11.4
+
+dependencies:
+    dievas_tokens:
+        path: ../

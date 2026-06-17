@@ -1,0 +1,69 @@
+name: Publish to pub.dev
+
+# Publishes dievas_tokens (pure Dart) and/or dievas (Flutter) to pub.dev
+# when a matching tag is pushed. Uses trusted publishing (OIDC) so no
+# PUB_DEV_PUBLISH_ACCESS_TOKEN secret is needed.
+#
+# Tag format:
+#   dievas_tokens-v<version>  → publishes dievas_tokens
+#   dievas-v<version>         → publishes dievas
+#
+# Each tag triggers its own job with a GitHub Environment entry, so the
+# repo's Deployments section tracks what was published and when.
+
+on:
+    push:
+        tags:
+            - 'dievas_tokens-v*'
+            - 'dievas-v*'
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+    cancel-in-progress: true
+
+jobs:
+    analyze-format-test:
+        name: Analyze, Format & Test
+        uses: ./.github/workflows/ci.yml
+
+    publish-dievas-tokens:
+        name: Publish dievas_tokens
+        needs: [analyze-format-test]
+        if: startsWith(github.ref_name, 'dievas_tokens-v')
+        runs-on: ubuntu-latest
+        environment:
+            name: pub.dev (dievas_tokens)
+            url: https://pub.dev/packages/dievas_tokens
+        permissions:
+            contents: read
+            id-token: write
+        steps:
+            - uses: actions/checkout@v6
+            - uses: subosito/flutter-action@v2
+              with:
+                  channel: stable
+                  cache: true
+            - name: Publish to pub.dev
+              working-directory: packages/dievas_tokens
+              run: dart pub publish --force
+
+    publish-dievas:
+        name: Publish dievas
+        needs: [analyze-format-test]
+        if: startsWith(github.ref_name, 'dievas-v')
+        runs-on: ubuntu-latest
+        environment:
+            name: pub.dev (dievas)
+            url: https://pub.dev/packages/dievas
+        permissions:
+            contents: read
+            id-token: write
+        steps:
+            - uses: actions/checkout@v6
+            - uses: subosito/flutter-action@v2
+              with:
+                  channel: stable
+                  cache: true
+            - name: Publish to pub.dev
+              working-directory: packages/dievas
+              run: flutter pub publish --force

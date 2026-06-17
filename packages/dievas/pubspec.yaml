@@ -1,8 +1,8 @@
 name: dievas
-publish_to: none
-description: "Dievas design system — Flutter theme and component layer."
-version: 0.0.1
-homepage:
+description: "Dievas design system. Flutter theme and component layer."
+version: 0.0.2
+repository: https://github.com/Serticode/dievas
+homepage: https://dievas.serticode.com
 resolution: workspace
 
 environment:
@@ -13,9 +13,8 @@ dependencies:
     flutter:
         sdk: flutter
     equatable: ^2.0.5
-    dievas_tokens:
-        path: ../dievas_tokens
-    meta: '>=1.17.0 <2.0.0'
+    dievas_tokens: ^0.0.1
+    meta: ">=1.17.0 <2.0.0"
 
 dev_dependencies:
     flutter_test:
@@ -24,9 +23,13 @@ dev_dependencies:
 
 flutter:
     fonts:
-        - family: MaisonNeue
+        - family: MartianMono
           fonts:
-              - asset: packages/dievas/assets/fonts/maison_neue_medium.ttf
-        - family: MaisonNeueExtended
-          fonts:
-              - asset: packages/dievas/assets/fonts/maison_neue_extended_medium.otf
+              - asset: lib/assets/fonts/MartianMono-Light.ttf
+                weight: 300
+              - asset: lib/assets/fonts/MartianMono-Regular.ttf
+                weight: 400
+              - asset: lib/assets/fonts/MartianMono-Medium.ttf
+                weight: 500
+              - asset: lib/assets/fonts/MartianMono-SemiBold.ttf
+                weight: 600

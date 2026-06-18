@@ -26,3 +26,4 @@ export 'src/semantic/sizing_semantic.dart';
 export 'src/semantic/spacing_semantic.dart';
 export 'src/semantic/breakpoint_semantic.dart';
 export 'src/semantic/typography_semantic.dart';
+export 'src/semantic/z_index_semantic.dart';

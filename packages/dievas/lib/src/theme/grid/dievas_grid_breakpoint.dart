@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:dievas_tokens/dievas_tokens.dart';
 
 /// A single breakpoint in the Dievas grid system.
 ///
@@ -39,7 +40,7 @@ final class DievasGridBreakpoint implements Comparable<DievasGridBreakpoint> {
   /// 0–359px · 4 columns · mobile
   static const DievasGridBreakpoint xSmall = DievasGridBreakpoint._(
     name: 'xSmall',
-    minWidth: 0,
+    minWidth: DievasBreakpointSemantic.xs,
     columns: 4,
     margin: 16,
     gutter: 16,
@@ -49,7 +50,7 @@ final class DievasGridBreakpoint implements Comparable<DievasGridBreakpoint> {
   /// 360–699px · 4 columns · mobile
   static const DievasGridBreakpoint small = DievasGridBreakpoint._(
     name: 'small',
-    minWidth: 360,
+    minWidth: DievasBreakpointSemantic.sm,
     columns: 4,
     margin: 16,
     gutter: 16,
@@ -59,7 +60,7 @@ final class DievasGridBreakpoint implements Comparable<DievasGridBreakpoint> {
   /// 700–999px · 8 columns · tablet
   static const DievasGridBreakpoint medium = DievasGridBreakpoint._(
     name: 'medium',
-    minWidth: 700,
+    minWidth: DievasBreakpointSemantic.md,
     columns: 8,
     margin: 32,
     gutter: 24,
@@ -69,7 +70,7 @@ final class DievasGridBreakpoint implements Comparable<DievasGridBreakpoint> {
   /// 1000–1347px · 12 columns · tablet
   static const DievasGridBreakpoint large = DievasGridBreakpoint._(
     name: 'large',
-    minWidth: 1000,
+    minWidth: DievasBreakpointSemantic.lg,
     columns: 12,
     margin: 32,
     gutter: 24,
@@ -79,7 +80,7 @@ final class DievasGridBreakpoint implements Comparable<DievasGridBreakpoint> {
   /// 1348px+ · 12 columns · desktop
   static const DievasGridBreakpoint xLarge = DievasGridBreakpoint._(
     name: 'xLarge',
-    minWidth: 1348,
+    minWidth: DievasBreakpointSemantic.xl,
     columns: 12,
     margin: 32,
     gutter: 24,

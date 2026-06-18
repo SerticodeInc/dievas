@@ -35,6 +35,13 @@ abstract final class DievasElevationSemantic {
   static const double xl = DievasElevationPrimitives.e5;
 }
 
+/// A single shadow layer consisting of a blur radius and Y-offset.
+///
+/// Used by [DievasElevationShadowLayer] to define multi-layered
+/// Material-style shadows. Opacity is applied at BoxShadow construction
+/// time in the `dievas` Flutter package.
+typedef DievasElevationShadow = ({double blur, double offsetY});
+
 /// Concrete shadow layer definitions for elevation tiers.
 ///
 /// Each tier is a record containing the blur radius and y-offset for
@@ -42,54 +49,54 @@ abstract final class DievasElevationSemantic {
 /// constants — these are applied at the point of BoxShadow construction
 /// in the dievas Flutter package.
 ///
-/// Layer structure: ({double blur, double offsetY})
+/// Layer structure: [DievasElevationShadow]
 abstract final class DievasElevationShadowLayer {
   /// Elevation xs — single-layer subtle shadow.
-  static const ({double blur, double offsetY}) xs = (
+  static const DievasElevationShadow xs = (
     blur: DievasElevationPrimitives.e1,
     offsetY: DievasOffsetSemantic.xs,
   );
 
   /// Elevation sm — two-layer shadow (upper + lower).
-  static const ({double blur, double offsetY}) smUpper = (
+  static const DievasElevationShadow smUpper = (
     blur: DievasElevationPrimitives.e1,
     offsetY: DievasOffsetSemantic.xs,
   );
 
-  static const ({double blur, double offsetY}) smLower = (
+  static const DievasElevationShadow smLower = (
     blur: DievasElevationPrimitives.e2,
     offsetY: DievasOffsetSemantic.sm,
   );
 
   /// Elevation md — two-layer shadow.
-  static const ({double blur, double offsetY}) mdUpper = (
+  static const DievasElevationShadow mdUpper = (
     blur: DievasElevationPrimitives.e2,
     offsetY: DievasOffsetSemantic.sm,
   );
 
-  static const ({double blur, double offsetY}) mdLower = (
+  static const DievasElevationShadow mdLower = (
     blur: DievasElevationPrimitives.e3,
     offsetY: DievasOffsetSemantic.md,
   );
 
   /// Elevation lg — two-layer shadow.
-  static const ({double blur, double offsetY}) lgUpper = (
+  static const DievasElevationShadow lgUpper = (
     blur: DievasElevationPrimitives.e3,
     offsetY: DievasOffsetSemantic.md,
   );
 
-  static const ({double blur, double offsetY}) lgLower = (
+  static const DievasElevationShadow lgLower = (
     blur: DievasElevationPrimitives.e4,
     offsetY: DievasOffsetSemantic.lg,
   );
 
   /// Elevation xl — two-layer shadow.
-  static const ({double blur, double offsetY}) xlUpper = (
+  static const DievasElevationShadow xlUpper = (
     blur: DievasElevationPrimitives.e4,
     offsetY: DievasOffsetSemantic.lg,
   );
 
-  static const ({double blur, double offsetY}) xlLower = (
+  static const DievasElevationShadow xlLower = (
     blur: DievasElevationPrimitives.e5,
     offsetY: DievasOffsetSemantic.xl,
   );

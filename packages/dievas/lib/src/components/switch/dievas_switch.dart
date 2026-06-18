@@ -96,8 +96,7 @@ class _DievasSwitchState extends State<DievasSwitch> with SingleTickerProviderSt
 }
 
 class _DievasSwitchTrackBuilder extends AnimatedWidget {
-  const _DievasSwitchTrackBuilder({required this.curve, required this.theme})
-    : super(listenable: curve);
+  const _DievasSwitchTrackBuilder({required this.curve, required this.theme}) : super(listenable: curve);
 
   final CurvedAnimation curve;
   final DievasSwitchThemeData theme;

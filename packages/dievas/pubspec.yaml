@@ -1,6 +1,6 @@
 name: dievas
 description: "Dievas design system. Flutter theme and component layer."
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/Serticode/dievas
 homepage: https://dievas.serticode.com
 resolution: workspace
@@ -15,7 +15,7 @@ dependencies:
     flutter:
         sdk: flutter
     equatable: ^2.0.5
-    dievas_tokens: ^0.0.2
+    dievas_tokens: ^0.0.3
     meta: ">=1.17.0 <2.0.0"
 
 dev_dependencies:

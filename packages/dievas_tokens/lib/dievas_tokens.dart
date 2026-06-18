@@ -12,6 +12,7 @@ export 'src/primitives/opacity_primitives.dart';
 export 'src/primitives/radius_primitives.dart';
 export 'src/primitives/sizing_primitives.dart';
 export 'src/primitives/spacing_primitives.dart';
+export 'src/primitives/breakpoint_primitives.dart';
 export 'src/primitives/typography_primitives.dart';
 
 export 'src/semantic/animation_semantic.dart';
@@ -23,4 +24,5 @@ export 'src/semantic/opacity_semantic.dart';
 export 'src/semantic/radius_semantic.dart';
 export 'src/semantic/sizing_semantic.dart';
 export 'src/semantic/spacing_semantic.dart';
+export 'src/semantic/breakpoint_semantic.dart';
 export 'src/semantic/typography_semantic.dart';

@@ -12,24 +12,24 @@ Widget _drawerHarness(Widget child) => MediaQuery(
 void main() {
   group('DievasDrawer', () {
     testWidgets('renders child widget', (tester) async {
-      await tester.pumpWidget(_drawerHarness(const DievasDrawer(child: Text('Body'), drawer: Text('Drawer'))));
+      await tester.pumpWidget(_drawerHarness(const DievasDrawer(drawer: Text('Drawer'), child: Text('Body'))));
       expect(find.text('Body'), findsOneWidget);
     });
 
     testWidgets('renders drawer widget without throwing', (tester) async {
-      await tester.pumpWidget(_drawerHarness(const DievasDrawer(child: Text('Body'), drawer: Text('Drawer'))));
+      await tester.pumpWidget(_drawerHarness(const DievasDrawer(drawer: Text('Drawer'), child: Text('Body'))));
       expect(tester.takeException(), isNull);
     });
 
     testWidgets('drawer is hidden initially outside the viewport', (tester) async {
-      await tester.pumpWidget(_drawerHarness(const DievasDrawer(child: Text('Body'), drawer: Text('Drawer'))));
+      await tester.pumpWidget(_drawerHarness(const DievasDrawer(drawer: Text('Drawer'), child: Text('Body'))));
       expect(tester.takeException(), isNull);
     });
 
     testWidgets('open and close via state key', (tester) async {
       final key = GlobalKey<DievasDrawerState>();
       await tester.pumpWidget(
-        _drawerHarness(DievasDrawer(key: key, child: const Text('Body'), drawer: const Text('Drawer'))),
+        _drawerHarness(DievasDrawer(key: key, drawer: const Text('Drawer'), child: const Text('Body'))),
       );
       key.currentState?.open();
       await tester.pumpAndSettle();
@@ -39,7 +39,7 @@ void main() {
 
     testWidgets('renders with custom width', (tester) async {
       await tester.pumpWidget(
-        _drawerHarness(const DievasDrawer(child: Text('Body'), drawer: Text('Drawer'), width: 300)),
+        _drawerHarness(const DievasDrawer(drawer: Text('Drawer'), width: 300, child: Text('Body'))),
       );
       expect(tester.takeException(), isNull);
     });

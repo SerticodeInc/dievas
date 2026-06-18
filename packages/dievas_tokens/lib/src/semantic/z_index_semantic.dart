@@ -1,7 +1,7 @@
 // Semantic z-index tokens.
 //
 // Pure Dart. No Flutter dependency.
-// Centralised stacking order to prevent z-index conflicts across the
+// Centralized stacking order to prevent z-index conflicts across the
 // design system. Every overlay, popover, and floating element must
 // reference these constants — never raw integers.
 
@@ -32,7 +32,7 @@ abstract final class DievasZIndexSemantic {
   /// Tooltips on hover or focus.
   static const int tooltip = 700;
 
-  /// Toast notifications and snackbars.
+  /// Toast notifications and snack bars.
   static const int toast = 800;
 
   /// Full-screen loaders and spinners.

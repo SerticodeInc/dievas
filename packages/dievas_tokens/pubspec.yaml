@@ -1,6 +1,6 @@
 name: dievas_tokens
 description: "Dievas design tokens. Primitive and semantic layers. Pure Dart, no Flutter dependency."
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/Serticode/dievas
 homepage: https://dievas.serticode.com
 resolution: workspace

@@ -6,6 +6,7 @@ library;
 
 export 'src/primitives/colour_primitives.dart';
 export 'src/primitives/duration_primitives.dart';
+export 'src/primitives/easing_primitives.dart';
 export 'src/primitives/elevation_primitives.dart';
 export 'src/primitives/offset_primitives.dart';
 export 'src/primitives/opacity_primitives.dart';
@@ -16,6 +17,7 @@ export 'src/primitives/breakpoint_primitives.dart';
 export 'src/primitives/typography_primitives.dart';
 
 export 'src/semantic/animation_semantic.dart';
+export 'src/semantic/easing_semantic.dart';
 export 'src/semantic/colour_semantic_dark.dart';
 export 'src/semantic/colour_semantic_light.dart';
 export 'src/semantic/elevation_semantic.dart';

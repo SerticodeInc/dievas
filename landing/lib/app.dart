@@ -8,108 +8,11 @@ import 'components/hero.dart';
 import 'components/manifesto_section.dart';
 import 'components/nav.dart';
 
-// Animation CSS inlined directly into <head> so it's always present regardless
-// of whether output.css (Tailwind compiled output) has been rebuilt.
-// This is the authoritative source for all Anchor-style animation rules.
+// Shared animation CSS inlined into <head> so scroll-reveal and reduced-motion
+// rules fire regardless of whether hero.css / output.css have loaded.
+// Hero-specific entry animations (word-in, chip-fall, gradient-mesh) live in
+// hero.css — this block owns only cross-section concerns.
 const _inlineAnimationStyles = '''<style>
-@keyframes word-in {
-  from {
-    opacity: 0;
-    transform: perspective(1200px) rotateX(-30deg) translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: perspective(1200px) rotateX(0deg) translateY(0);
-  }
-}
-
-@keyframes chip-fall {
-  0% {
-    opacity: 0;
-    transform: perspective(900px) rotateX(-22deg) translateY(-56px) scale(0.96);
-  }
-  65% {
-    transform: perspective(900px) rotateX(1.5deg) translateY(3px) scale(1.003);
-  }
-  100% {
-    opacity: 1;
-    transform: perspective(900px) rotateX(0deg) translateY(0) scale(1);
-  }
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* ── DIEVAS watermark letter-drop animation ────────────────────────────────
-   Letters fall staggered (~0.16s apart), all landed within ~4s, then hold
-   for ~4s before the cycle repeats at 8s.                                    */
-@keyframes letter-drop-0 {
-  0%   { transform: translateY(-120vh); }
-  38%  { transform: translateY(0); }
-  100% { transform: translateY(0); }
-}
-@keyframes letter-drop-1 {
-  0%, 2%   { transform: translateY(-120vh); }
-  40%      { transform: translateY(0); }
-  100%     { transform: translateY(0); }
-}
-@keyframes letter-drop-2 {
-  0%, 4%   { transform: translateY(-120vh); }
-  42%      { transform: translateY(0); }
-  100%     { transform: translateY(0); }
-}
-@keyframes letter-drop-3 {
-  0%, 6%   { transform: translateY(-120vh); }
-  44%      { transform: translateY(0); }
-  100%     { transform: translateY(0); }
-}
-@keyframes letter-drop-4 {
-  0%, 8%   { transform: translateY(-120vh); }
-  46%      { transform: translateY(0); }
-  100%     { transform: translateY(0); }
-}
-@keyframes letter-drop-5 {
-  0%, 10%  { transform: translateY(-120vh); }
-  48%      { transform: translateY(0); }
-  100%     { transform: translateY(0); }
-}
-
-/* Initial state: invisible, laid out. Animations gate on body.js-loaded. */
-.word-in {
-  display: inline-block;
-  opacity: 0;
-}
-
-.chip-falling {
-  opacity: 0;
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-}
-
-.js-loaded .word-in {
-  animation: word-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.js-loaded .chip-falling {
-  animation: chip-fall 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.js-loaded .marquee-track {
-  animation: marquee 38s linear infinite;
-}
-
-.js-loaded .letter-drop-0 { animation: letter-drop-0 8s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
-.js-loaded .letter-drop-1 { animation: letter-drop-1 8s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
-.js-loaded .letter-drop-2 { animation: letter-drop-2 8s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
-.js-loaded .letter-drop-3 { animation: letter-drop-3 8s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
-.js-loaded .letter-drop-4 { animation: letter-drop-4 8s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
-.js-loaded .letter-drop-5 { animation: letter-drop-5 8s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
-
 /* Scroll-triggered reveal */
 .reveal {
   opacity: 0;
@@ -138,11 +41,6 @@ const _inlineAnimationStyles = '''<style>
 .reveal-group.is-visible > *:nth-child(5) { transition-delay: 0.24s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .word-in, .chip-falling { opacity: 1; }
-  .js-loaded .word-in      { animation: none; opacity: 1; }
-  .js-loaded .chip-falling { animation: none; opacity: 1; }
-  .js-loaded .marquee-track { animation: none; }
-  .js-loaded [class*="letter-drop"] { animation: none; }
   .reveal, .reveal-group > * { opacity: 1; transform: none; }
   .reveal.is-visible, .reveal-group.is-visible > * { transition: none; }
 }
@@ -278,7 +176,7 @@ const _scrollProgressScript = '''<script>
 /// Body content — rendered inside [Document]'s [body].
 ///
 /// Page flow:
-///   1. Hero — above-the-fold, dark canvas, interactive mock
+///   1. Hero — above-the-fold, gradient mesh, glassmorphism
 ///   2. ManifestoSection — the problem, before/after code (dark)
 ///   3. ArchitectureSection — three-layer code pipeline (white)
 ///   4. ComponentsSection — categorized catalog + CTA (light/indigo gradient)

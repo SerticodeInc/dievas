@@ -3,16 +3,17 @@ import 'package:jaspr/dom.dart';
 
 import '../constants.dart';
 
-/// Fixed top navigation — glass pill matching Serti0x.
+/// Fixed top navigation — glass pill.
 ///
 /// Centered pill, `min(860px, calc(100% - 20vw))` wide.
 /// Glass: rgba(12,12,12,0.55) + backdrop-filter blur(20px) saturate(180%).
 /// Maison Neue Extended for the logo mark, Maison Neue for links.
 /// Server-rendered; all motion is CSS-only.
 ///
-/// Micro animations:
-/// - dievas text scales to 1.25rem
-/// - nav links fade to white on hover
+/// Three-section layout:
+///   Left:  dievas logo
+///   Center: nav links (hidden on mobile)
+///   Right:  pub.dev CTA pill
 class Nav extends StatelessComponent {
   const Nav({super.key});
 
@@ -27,7 +28,7 @@ class Nav extends StatelessComponent {
           classes:
               'pointer-events-auto '
               'flex items-center justify-between '
-              'px-7 py-3.5 '
+              'px-4 md:px-7 py-3 '
               'rounded-full',
           attributes: const {
             'style':
@@ -39,12 +40,13 @@ class Nav extends StatelessComponent {
                 'box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);',
           },
           [
-            // Logo mark — subtle letter-spacing shift on hover
+            // ── Left: Logo ──────────────────────────────────────────────────
             a(
               href: '/',
               classes:
                   'logo-mark no-underline flex items-center gap-px '
-                  'font-display font-medium text-xl tracking-[0.02em] text-text-hi',
+                  'font-display font-medium text-lg md:text-xl '
+                  'tracking-[0.02em] text-text-hi',
               [
                 Component.text('die'),
                 span(classes: 'text-brand', [Component.text('v')]),
@@ -52,8 +54,8 @@ class Nav extends StatelessComponent {
               ],
             ),
 
-            // Links — with hover dot indicators
-            div(classes: 'flex items-center gap-7', [
+            // ── Center: Nav links — hidden on mobile ─────────────────────────
+            div(classes: 'hidden md:flex items-center gap-6', [
               for (final lnk in _links)
                 a(
                   href: lnk.$2,
@@ -75,6 +77,27 @@ class Nav extends StatelessComponent {
                   ],
                 ),
             ]),
+
+            // ── Right: CTA pill ─────────────────────────────────────────────
+            a(
+              href: DievasUrls.dievasPubDevURL,
+              attributes: const {'target': '_blank', 'rel': 'noopener'},
+              classes:
+                  'inline-flex items-center gap-1.5 '
+                  'px-3.5 md:px-4 py-1.5 md:py-2 '
+                  'rounded-full '
+                  'bg-action text-on-brand '
+                  'font-mono text-xs font-medium tracking-wide '
+                  'no-underline '
+                  'transition-all duration-200 '
+                  'hover:bg-action-hover hover:-translate-y-px '
+                  'hover:shadow-[0_4px_16px_rgba(99,102,241,0.35)]',
+              [
+                span(classes: 'hidden md:inline', [Component.text('pub.dev')]),
+                span(classes: 'md:hidden', [Component.text('pub')]),
+                Component.text(' →'),
+              ],
+            ),
           ],
         ),
       ],
@@ -82,8 +105,9 @@ class Nav extends StatelessComponent {
   }
 
   static const _links = [
-    /// *** We might need to have docs here to show people how to use it
-    ///('Docs', '#', false),
+    ('Components', '#components', false),
+    ('Architecture', '#architecture', false),
     ('Gallery', DievasUrls.gallery, true),
+    ('GitHub', DievasUrls.github, true),
   ];
 }

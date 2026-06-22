@@ -14,7 +14,7 @@ class ComponentsSection extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
-    return section(classes: 'bg-transparent w-full', [
+    return section(id: 'components', classes: 'bg-transparent w-full', [
       // ── Section header ─────────────────────────────────────────────────────
       div(classes: 'max-w-5xl mx-auto px-3 lg:px-6 w-full py-8 reveal', [
         p(classes: 'section-eyebrow font-display text-sm tracking-[0.16em] uppercase mb-6', [

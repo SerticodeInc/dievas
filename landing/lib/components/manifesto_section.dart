@@ -12,6 +12,7 @@ class ManifestoSection extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     return section(
+      id: 'manifesto',
       classes: 'w-full',
       attributes: const {'style': 'background: #FFFFFF;'},
       [

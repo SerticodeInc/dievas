@@ -753,10 +753,10 @@ packages:
     dependency: transitive
     description:
       name: widgetbook
-      sha256: "7ce2a15c59990610aefb0a8a4d69f67dd842d41676b7af6b5b746aa3371d32cf"
+      sha256: "88b10102d294d0bec64ca294c81f15b1a620ce66df950067ff8f89274f1c95e8"
       url: "https://pub.dev"
     source: hosted
-    version: "3.24.0"
+    version: "3.25.0"
   widgetbook_annotation:
     dependency: transitive
     description:

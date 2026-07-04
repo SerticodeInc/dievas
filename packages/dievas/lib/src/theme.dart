@@ -47,6 +47,7 @@ export 'theme/component/segmented_control/dievas_segmented_control_theme_data.da
 export 'theme/component/snackbar/dievas_snackbar_theme_data.dart';
 export 'theme/component/switch/dievas_switch_theme_data.dart';
 export 'theme/component/tab_bar/dievas_tab_bar_theme_data.dart';
+export 'theme/component/tag/dievas_tag_border_radius.dart';
 export 'theme/component/tag/dievas_tag_theme_data.dart';
 export 'theme/component/text_input/dievas_text_input_theme_data.dart';
 export 'theme/component/text_input_group/dievas_text_input_group_theme_data.dart';

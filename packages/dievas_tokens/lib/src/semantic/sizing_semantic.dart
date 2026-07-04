@@ -3,7 +3,7 @@
 // Pure Dart aliases over DievasSizingPrimitives for component heights,
 // icon sizes, avatar dimensions, and minimum touch targets.
 
-import '../primitives/sizing_primitives.dart';
+import 'package:dievas_tokens/src/primitives/sizing_primitives.dart';
 
 /// Semantic sizing tokens for the Dievas design system.
 ///

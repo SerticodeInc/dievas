@@ -7,7 +7,7 @@
 // Naming: grouped descriptive names matching DievasColourSemanticLight.
 // Every role defined in the light file has a counterpart here.
 
-import '../primitives/colour_primitives.dart';
+import 'package:dievas_tokens/src/primitives/colour_primitives.dart';
 
 /// Dark-theme semantic colour tokens for the Dievas design system.
 ///
@@ -71,6 +71,11 @@ abstract final class DievasColourSemanticDark {
   static const int bgElevated = DievasColourPrimitives.slate800;
 
   /// Scrim / overlay behind modals and bottom sheets.
+  ///
+  /// Expressed as a raw hex value rather than composed from
+  /// [DievasColourPrimitives.black] + alpha because const composition
+  /// across two primitives isn't possible without a runtime helper.
+  /// 0x80 = 50% opacity intentionally chosen for scrims.
   static const int bgOverlay = 0x80000000;
 
   //Surface

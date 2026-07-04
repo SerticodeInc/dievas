@@ -4,7 +4,7 @@
 // Intent-based aliases over DievasEasingPrimitives for animation curves
 // used across the design system.
 
-import '../primitives/easing_primitives.dart';
+import 'package:dievas_tokens/src/primitives/easing_primitives.dart';
 
 /// Semantic easing tokens for the Dievas design system.
 ///

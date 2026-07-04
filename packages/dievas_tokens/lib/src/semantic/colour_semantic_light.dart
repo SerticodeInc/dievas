@@ -7,7 +7,7 @@
 // Naming: grouped descriptive names (textPrimary, bgBase, actionPrimary).
 // Moon DS role names are referenced in comments for cross-reference only.
 
-import '../primitives/colour_primitives.dart';
+import 'package:dievas_tokens/src/primitives/colour_primitives.dart';
 
 /// Light-theme semantic colour tokens for the Dievas design system.
 ///
@@ -77,6 +77,11 @@ abstract final class DievasColourSemanticLight {
   static const int bgElevated = DievasColourPrimitives.white;
 
   /// Scrim / overlay behind modals and bottom sheets.
+  ///
+  /// Expressed as a raw hex value rather than composed from
+  /// [DievasColourPrimitives.black] + alpha because const composition
+  /// across two primitives isn't possible without a runtime helper.
+  /// 0x80 = 50% opacity intentionally chosen for scrims.
   static const int bgOverlay = 0x80000000;
 
   //Surface

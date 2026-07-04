@@ -13,7 +13,7 @@ workspace:
 
 dev_dependencies:
     lints: ^6.1.0
-    melos: ^7.8.2
+    melos: ^8.0.0
 melos:
     packages:
         - packages/*

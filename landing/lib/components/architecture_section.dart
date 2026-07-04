@@ -12,6 +12,7 @@ class ArchitectureSection extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     return section(
+      id: 'architecture',
       classes: 'w-full',
       attributes: const {'style': 'background: #FFFFFF;'},
       [

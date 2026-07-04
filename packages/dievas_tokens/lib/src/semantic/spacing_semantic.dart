@@ -4,7 +4,7 @@
 // Named aliases over DievasSpacingPrimitives for use in padding, gap,
 // margin, and positional offsets throughout the system.
 
-import '../primitives/spacing_primitives.dart';
+import 'package:dievas_tokens/src/primitives/spacing_primitives.dart';
 
 /// Semantic spacing tokens for the Dievas design system.
 ///

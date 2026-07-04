@@ -16,4 +16,7 @@ abstract final class DievasUrls {
 
   /// Moon Design System — the upstream component catalogue Dievas ports.
   static const String moonDs = 'https://flutter.moon.io';
+
+  /// Dievas GitHub repo.
+  static const String github = 'https://github.com/Serticode/dievas';
 }

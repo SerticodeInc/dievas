@@ -5,12 +5,9 @@ import '../constants.dart';
 
 /// Hero section — above-the-fold landing content.
 ///
-/// Animation layers — all gated on body.js-loaded (added via rAF in app.dart):
-///   • Eyebrow + headline words → `.word-in` (perspective rotateX tilt reveal)
-///   • Product chips → `.chip-falling` (perspective rotateX + translateY fall)
-///   • Marquee strip → `.marquee-track` CSS infinite scroll
-///
-/// No Jaspr client hydration required.
+/// Gradient mesh background, glassmorphism elements, animated entry.
+/// Sub-components (badge, bottom cards, product chips) inlined as
+/// private methods for a single-file section.
 class Hero extends StatelessComponent {
   const Hero({super.key});
 
@@ -18,175 +15,43 @@ class Hero extends StatelessComponent {
   Component build(BuildContext context) => section(
     id: 'hero',
     classes: 'relative overflow-hidden flex flex-col',
-    attributes: const {'style': 'min-height: 120svh; background: #171717;'},
+    attributes: const {'style': 'min-height: 100svh;'},
     [
-      // ── Background word mark ──────────────────────────────────────────────────
+      // Decorative floating particles
+      for (var i = 0; i < 6; i++) div(classes: 'particle-dot', []),
+
+      // ── MAIN CONTENT — viewport height area ────────────────────────────────
       div(
-        classes:
-            'pointer-events-none select-none '
-            'absolute inset-x-0 bottom-0 '
-            'flex justify-center overflow-hidden',
+        classes: 'relative z-10 flex flex-col flex-1',
+        attributes: const {'style': 'padding-top: 140px;'},
         [
-          span(
-            classes: 'font-display font-black whitespace-nowrap text-brand flex',
-            attributes: const {
-              'style':
-                  'font-size: clamp(110px, 24vw, 360px); '
-                  'line-height: 0.85; '
-                  'opacity: 0.12;',
-            },
-            [
-              for (var i = 0; i < 'DIEVAS'.length; i++)
-                span(
-                  classes: 'letter-drop letter-drop-$i',
-                  attributes: {'style': 'margin-right: -0.02em;'},
-                  [Component.text('DIEVAS'[i])],
-                ),
-            ],
+          // Center content
+          div(classes: 'flex flex-col items-center text-center px-6', [
+            _heroBadge(),
+            _headline(),
+            _subtitle(),
+            _ctas(),
+          ]),
+
+          // Push bottom cards to the bottom
+          div(classes: 'flex-1', []),
+
+          // Bottom row
+          div(
+            classes: 'flex items-end justify-between px-6 pb-6 md:px-8 md:pb-8',
+            [_bottomLeftCard(), _bottomRightCorner()],
           ),
         ],
       ),
 
-      // ── CENTER CONTENT — above fold ──────────────────────────────────────────
-      // Inline padding-top so this compiles regardless of Tailwind JIT cache.
-      // pt-40 = 160px clears the fixed nav (top-5 + ~48px pill height + comfort).
-      div(
-        classes: 'relative z-10 flex flex-col items-center text-center px-6',
-        attributes: const {'style': 'padding-top: 160px; padding-bottom: 32px;'},
-        [
-          // Eyebrow
-          p(
-            classes: 'section-eyebrow font-display text-sm tracking-[0.16em] uppercase word-in',
-            attributes: const {'style': 'animation-delay: 0.06s; margin-bottom: 32px;'},
-            [Component.text('✶  Flutter Design System')],
-          ),
-
-          // Headline — each word is a separate animated span (Anchor word-reveal)
-          h1(
-            classes: 'font-display font-black leading-[0.92] tracking-[-0.025em] text-text-hi',
-            attributes: const {'style': 'font-size: clamp(54px, 8.5vw, 116px); margin-bottom: 32px;'},
-            [
-              span(
-                classes: 'word-in',
-                attributes: const {'style': 'animation-delay: 0.16s'},
-                [Component.text('Every')],
-              ),
-              Component.text(' '),
-              span(
-                classes: 'word-in',
-                attributes: const {'style': 'animation-delay: 0.27s'},
-                [Component.text('token')],
-              ),
-              span(
-                classes: 'word-in text-brand',
-                attributes: const {'style': 'animation-delay: 0.31s'},
-                [Component.text('.')],
-              ),
-              br(),
-              span(
-                classes: 'word-in text-slate-400',
-                attributes: const {'style': 'animation-delay: 0.43s'},
-                [Component.text('Every')],
-              ),
-              Component.text(' '),
-              span(
-                classes: 'word-in text-slate-400',
-                attributes: const {'style': 'animation-delay: 0.54s'},
-                [Component.text('brand')],
-              ),
-              span(
-                classes: 'word-in text-slate-400',
-                attributes: const {'style': 'animation-delay: 0.58s'},
-                [Component.text('.')],
-              ),
-            ],
-          ),
-
-          // Subtitle
-          p(
-            classes: 'max-w-sm font-body font-light text-base leading-[1.8] text-slate-500 word-in',
-            attributes: const {'style': 'animation-delay: 0.7s; margin-bottom: 40px;'},
-            [
-              Component.text(
-                'Production grade Flutter components built from the token layer up. '
-                'Your apps own the brand. The system stays out of the way.',
-              ),
-            ],
-          ),
-
-          // CTAs
-          div(
-            classes: 'flex items-center gap-4 flex-wrap justify-center word-in',
-            attributes: const {'style': 'animation-delay: 0.82s'},
-            [
-              /// *** Keep the below for a forth night till we decide if we want to send this to pub.dev.
-              a(
-                href: DievasUrls.dievasPubDevURL,
-                attributes: const {'target': '_blank', 'rel': 'noopener'},
-                classes:
-                    'inline-flex items-center gap-2 '
-                    'px-6 py-3 rounded-md '
-                    'bg-action text-on-brand '
-                    'font-mono text-sm font-medium tracking-wide '
-                    'no-underline transition-all duration-200 '
-                    'hover:bg-action-hover hover:-translate-y-px '
-                    'hover:shadow-[0_8px_32px_rgba(129,140,248,0.35)]',
-                [
-                  Component.text('View on pub.dev'),
-                  span(classes: 'text-xs', [Component.text('→')]),
-                ],
-              ),
-              a(
-                href: DievasUrls.gallery,
-                attributes: const {'target': '_blank', 'rel': 'noopener'},
-                classes:
-                    'group inline-flex items-center gap-2 '
-                    'px-6 py-3 rounded-md '
-                    'bg-action text-on-brand '
-                    'font-mono text-sm font-medium tracking-wide '
-                    'no-underline transition-all duration-200 '
-                    'hover:bg-action-hover hover:-translate-y-px '
-                    'hover:shadow-[0_8px_32px_rgba(129,140,248,0.35)] '
-                    'cta-glow',
-                [
-                  Component.text('Gallery'),
-                  span(classes: 'text-xs arrow-slide', [Component.text('→')]),
-                ],
-              ),
-            ],
-          ),
-
-          // Manifest strip — stat bar
-          div(
-            classes: 'flex items-center flex-wrap justify-center word-in',
-            attributes: const {'style': 'animation-delay: 0.94s; margin-top: 56px; padding-top: 40px;'},
-            [
-              _manifestItem('3', 'packages'),
-              _manifestSep(),
-              _manifestItem('36', 'components'),
-              _manifestSep(),
-              _manifestItem('9', 'theme aspects'),
-              _manifestSep(),
-              _manifestItem('∞', 'brands'),
-            ],
-          ),
-        ],
-      ),
-
-      // ── PRODUCT CHIP STRIP — Anchor cc-falling cards ─────────────────────────
-      //
-      // Five category cards analogous to Anchor's product-tool chips.
-      // Each falls with a staggered chip-fall animation (3D perspective + overshoot).
-      // Horizontally scrollable on mobile — like Anchor's cc-sliding section.
-      // Glass morphism: semi-transparent dark backgrounds + backdrop-filter blur.
+      // ── PRODUCT CHIPS — below viewport fold ─────────────────────────────────
       div(
         classes: 'relative z-10 w-full overflow-x-auto',
         attributes: const {
           'style':
-              '-webkit-overflow-scrolling: touch; '
               'scrollbar-width: none; '
-              'padding-bottom: 4px; '
-              'margin-top: 40px;',
+              '-webkit-overflow-scrolling: touch; '
+              'padding-bottom: 48px;',
         },
         [
           div(
@@ -194,7 +59,7 @@ class Hero extends StatelessComponent {
               'style':
                   'display: flex; '
                   'gap: 12px; '
-                  'padding: 0 4px 4px; '
+                  'padding: 0 24px 4px; '
                   'min-width: max-content; '
                   'max-width: 1152px; '
                   'margin: 0 auto;',
@@ -204,7 +69,7 @@ class Hero extends StatelessComponent {
                 title: 'Buttons',
                 count: '4 shipped',
                 detail: 'Filled · Outlined · Text · Icon',
-                bg: 'rgba(99, 102, 241, 0.02)',
+                bg: 'rgba(99, 102, 241, 0.03)',
                 accentRgb: '129, 140, 248',
                 fg: '#C7D2FE',
                 index: 0,
@@ -213,8 +78,9 @@ class Hero extends StatelessComponent {
                 title: 'Form',
                 count: '12 shipped',
                 detail:
-                    'TextField · TextArea · Search · AuthCode\nCheckbox · Switch · Radio · Dropdown · SegmentedControl',
-                bg: 'rgba(74, 222, 128, 0.02)',
+                    'TextField · TextArea · Search · AuthCode\n'
+                    'Checkbox · Switch · Radio · Dropdown · SegmentedControl',
+                bg: 'rgba(74, 222, 128, 0.03)',
                 accentRgb: '74, 222, 128',
                 fg: '#A7F3D0',
                 index: 1,
@@ -223,7 +89,7 @@ class Hero extends StatelessComponent {
                 title: 'Display',
                 count: '9 shipped',
                 detail: 'Avatar · Badge · Tag · Icon\nDivider · Progress · Loader',
-                bg: 'rgba(251, 191, 36, 0.02)',
+                bg: 'rgba(251, 191, 36, 0.03)',
                 accentRgb: '251, 191, 36',
                 fg: '#FDE68A',
                 index: 2,
@@ -232,7 +98,7 @@ class Hero extends StatelessComponent {
                 title: 'System',
                 count: '9 typed aspects',
                 detail: 'InheritedModel · Multi-brand\nZero hardcoded values',
-                bg: 'rgba(56, 189, 248, 0.02)',
+                bg: 'rgba(56, 189, 248, 0.03)',
                 accentRgb: '56, 189, 248',
                 fg: '#BAE6FD',
                 index: 3,
@@ -241,7 +107,7 @@ class Hero extends StatelessComponent {
                 title: 'Up Next',
                 count: '4 planned',
                 detail: 'Carousel · Table\nSingleSelectComboBox · MultiSelectComboBox',
-                bg: 'rgba(251, 113, 133, 0.02)',
+                bg: 'rgba(251, 113, 133, 0.03)',
                 accentRgb: '251, 113, 133',
                 fg: '#FECDD3',
                 index: 4,
@@ -250,84 +116,167 @@ class Hero extends StatelessComponent {
           ),
         ],
       ),
+    ],
+  );
 
-      // ── MARQUEE STRIP — infinite component name ticker ────────────────────────
-      //
-      // `.marquee-track` animation fires only when body.js-loaded is set.
-      // Outer div clips overflow so only the visible portion is shown.
-      div(
-        classes: 'relative z-10 w-full',
-        attributes: const {'style': 'overflow: hidden; padding: 14px 0;'},
+  // ── HeroBadge — glass pill with sparkle ─────────────────────────────────────
+
+  Component _heroBadge() => div(
+    classes: 'hero-badge word-in',
+    attributes: const {'style': 'animation-delay: 0.06s; margin-bottom: 32px;'},
+    [
+      RawText(_sparkleSvg),
+      span(classes: 'font-mono text-xs tracking-[0.12em] uppercase text-brand', [
+        Component.text('Dievas Design System'),
+      ]),
+    ],
+  );
+
+  // ── Headline — word-in staggered ───────────────────────────────────────────
+
+  Component _headline() => h1(
+    classes: 'font-display font-black leading-[0.92] tracking-[-0.025em] text-text-hi',
+    attributes: const {'style': 'font-size: clamp(48px, 7.5vw, 104px); margin-bottom: 24px;'},
+    [
+      span(classes: 'word-in', attributes: const {'style': 'animation-delay: 0.16s'}, [
+        Component.text('Tokens'),
+      ]),
+      Component.text(' '),
+      span(classes: 'word-in', attributes: const {'style': 'animation-delay: 0.27s'}, [
+        Component.text('that'),
+      ]),
+      Component.text(' '),
+      span(classes: 'word-in text-brand', attributes: const {'style': 'animation-delay: 0.38s'}, [
+        Component.text('scale.'),
+      ]),
+    ],
+  );
+
+  // ── Subtitle ───────────────────────────────────────────────────────────────
+
+  Component _subtitle() => p(
+    classes: 'max-w-md font-body font-light text-base leading-[1.8] text-slate-500 word-in',
+    attributes: const {'style': 'animation-delay: 0.55s; margin-bottom: 40px;'},
+    [
+      Component.text(
+        'Production-grade Flutter components built from the token layer up. '
+        'Every brand. Zero hardcoded values.',
+      ),
+    ],
+  );
+
+  // ── CTA buttons ────────────────────────────────────────────────────────────
+
+  Component _ctas() => div(
+    classes: 'flex items-center gap-4 flex-wrap justify-center word-in cta-group',
+    attributes: const {'style': 'animation-delay: 0.7s'},
+    [
+      a(
+        href: DievasUrls.dievasPubDevURL,
+        attributes: const {'target': '_blank', 'rel': 'noopener'},
+        classes:
+            'inline-flex items-center gap-2 '
+            'px-6 py-3 rounded-md '
+            'bg-action text-on-brand '
+            'font-mono text-sm font-medium tracking-wide '
+            'no-underline transition-all duration-200 '
+            'hover:bg-action-hover hover:-translate-y-px '
+            'hover:shadow-[0_8px_32px_rgba(129,140,248,0.35)]',
         [
-          div(classes: 'marquee-track', [
-            for (final name in [..._allComponents, ..._allComponents])
-              span(
-                classes: 'font-mono text-xs text-slate-400 whitespace-nowrap',
-                attributes: const {'style': 'display: inline-flex; align-items: center; gap: 8px; padding: 0 20px;'},
-                [
-                  div(
-                    classes: 'inline-block rounded-full flex-shrink-0',
-                    attributes: const {'style': 'width: 4px; height: 4px; background: rgba(148,163,184,0.6);'},
-                    [],
-                  ),
-                  Component.text(name),
-                ],
-              ),
-          ]),
+          Component.text('View on pub.dev'),
+          span(classes: 'cta-arrow text-xs', [Component.text('→')]),
         ],
       ),
-
-      // ── LINK BADGES ──────────────────────────────────────────────────────────
-      div(
-        classes: 'relative z-10 flex items-center justify-center gap-3',
-        attributes: const {'style': 'padding: 20px 24px 32px;'},
+      a(
+        href: DievasUrls.gallery,
+        attributes: const {'target': '_blank', 'rel': 'noopener'},
+        classes:
+            'group inline-flex items-center gap-2 '
+            'px-6 py-3 rounded-md '
+            'bg-action text-on-brand '
+            'font-mono text-sm font-medium tracking-wide '
+            'no-underline transition-all duration-200 '
+            'hover:bg-action-hover hover:-translate-y-px '
+            'hover:shadow-[0_8px_32px_rgba(129,140,248,0.35)]',
         [
-          a(
-            href: DievasUrls.portfolio,
-            attributes: const {'target': '_blank', 'rel': 'noopener'},
-            classes:
-                'group relative overflow-hidden '
-                'flex items-center gap-2.5 '
-                'bg-bg-elevated border border-border-brand '
-                'rounded-xl px-4 py-2.5 '
-                'font-mono text-xs text-text-hi no-underline '
-                'shadow-[0_8px_32px_rgba(0,0,0,0.5)] '
-                'transition-all duration-200 '
-                'hover:border-brand hover:text-brand hover:-translate-y-px',
-            [
-              div(classes: 'w-2 h-2 rounded-full bg-brand flex-shrink-0', []),
-              Component.text('Serticode Inc.'),
-              div(classes: 'badge-shine absolute inset-0 pointer-events-none rounded-xl', []),
-            ],
-          ),
-          a(
-            href: DievasUrls.moonDs,
-            attributes: const {'target': '_blank', 'rel': 'noopener'},
-            classes:
-                'group relative overflow-hidden '
-                'flex items-center gap-2.5 '
-                'bg-bg-elevated border border-border '
-                'rounded-xl px-4 py-2.5 '
-                'font-mono text-xs text-text-hi no-underline '
-                'shadow-[0_8px_32px_rgba(0,0,0,0.5)] '
-                'transition-all duration-200 '
-                'hover:border-brand/50 hover:text-brand hover:-translate-y-px',
-            [
-              div(classes: 'w-2 h-2 rounded-full bg-brand/50 flex-shrink-0', []),
-              Component.text('Moon DS'),
-              div(classes: 'badge-shine absolute inset-0 pointer-events-none rounded-xl', []),
-            ],
-          ),
+          Component.text('Gallery'),
+          span(classes: 'cta-arrow text-xs', [Component.text('→')]),
         ],
       ),
     ],
   );
 
-  // ── Product chip (Anchor product-tool card) ──────────────────────────────────
-  //
-  // Glass morphism: semi-transparent dark background + backdrop-filter blur so
-  // the hero canvas (dark + DIEVAS watermark) subtly bleeds through.
-  // Matches Anchor's cc-falling pattern: title · count label · detail · arrow.
+  // ── BottomLeftCard — glass stat card ───────────────────────────────────────
+
+  Component _bottomLeftCard() => div(
+    classes:
+        'glass-card rounded-2xl p-4 md:p-5 '
+        'flex flex-col gap-3 md:gap-4 '
+        'min-w-[160px] md:min-w-[200px]',
+    [
+      div(classes: 'flex items-end gap-4 md:gap-6', [
+        _statBlock('36', 'components'),
+        _statBlock('9', 'aspects'),
+        _statBlock('3', 'packages'),
+      ]),
+      a(
+        href: DievasUrls.gallery,
+        attributes: {'target': '_blank', 'rel': 'noopener'},
+        classes:
+            'inline-flex items-center gap-2 self-start '
+            'px-3.5 py-1.5 rounded-full '
+            'bg-white/10 text-brand '
+            'font-mono text-[11px] font-medium tracking-wide '
+            'no-underline '
+            'transition-all duration-200 '
+            'hover:bg-white/15 hover:-translate-y-px',
+        [
+          Component.text('View Gallery'),
+          RawText(_arrowUpRightSvg),
+        ],
+      ),
+    ],
+  );
+
+  Component _statBlock(String value, String label) => div(classes: 'bottom-card-stat', [
+    span(classes: 'bottom-card-stat-value', [Component.text(value)]),
+    span(classes: 'bottom-card-stat-label', [Component.text(label)]),
+  ]);
+
+  // ── BottomRightCorner — glass docs card ────────────────────────────────────
+
+  Component _bottomRightCorner() => div(
+    classes: 'glass-card corner-card p-3 md:p-4 flex items-center gap-3 md:gap-4',
+    [
+      div(
+        classes:
+            'flex items-center justify-center '
+            'w-9 h-9 md:w-11 md:h-11 '
+            'rounded-full bg-white/5 border border-white/10',
+        [RawText(_arrowUpRightSvg)],
+      ),
+      div(classes: 'flex flex-col', [
+        span(classes: 'font-display font-semibold text-sm md:text-base text-text-hi leading-tight', [
+          Component.text('GitHub'),
+        ]),
+        a(
+          href: DievasUrls.github,
+          attributes: {'target': '_blank', 'rel': 'noopener'},
+          classes:
+              'flex items-center gap-1 '
+              'text-xs text-text-mid no-underline '
+              'transition-colors duration-200 '
+              'hover:text-brand',
+          [
+            Component.text('Repository'),
+            RawText(_chevronRightSvg),
+          ],
+        ),
+      ]),
+    ],
+  );
+
+  // ── Product chip — glass category card ──────────────────────────────────────
 
   Component _productChip({
     required String title,
@@ -348,19 +297,18 @@ class Hero extends StatelessComponent {
             'background: $bg; '
             'backdrop-filter: blur(16px) saturate(200%); '
             '-webkit-backdrop-filter: blur(16px) saturate(200%); '
-            'border: 1px solid rgba($accentRgb, 0.8); '
+            'border: 1px solid rgba($accentRgb, 0.6); '
             'box-shadow: '
-            '  0 1px 0 rgba(255,255,255,0.05) inset, '
-            '  0 8px 24px rgba(0,0,0,0.05); '
-            'width: 280px; '
-            'height: 240px; '
-            'padding: 16px; '
+            '  0 1px 0 rgba(255,255,255,0.04) inset, '
+            '  0 8px 24px rgba(0,0,0,0.08); '
+            'width: 260px; '
+            'height: 220px; '
+            'padding: 20px; '
             'display: flex; '
             'flex-direction: column; '
             'justify-content: space-between;',
       },
       [
-        // Top row: count label + arrow
         div(
           attributes: const {'style': 'display: flex; align-items: center; justify-content: space-between;'},
           [
@@ -368,7 +316,7 @@ class Hero extends StatelessComponent {
               attributes: {
                 'style':
                     'font-family: ui-monospace, monospace; '
-                    'font-size: 12px; '
+                    'font-size: 11px; '
                     'letter-spacing: 0.14em; '
                     'text-transform: uppercase; '
                     'color: rgba($accentRgb, 1); '
@@ -378,27 +326,23 @@ class Hero extends StatelessComponent {
             ),
           ],
         ),
-
-        // Large category name
         span(
           attributes: {
             'style':
                 'font-family: "Maison Neue Extended", system-ui, sans-serif; '
-                'font-size: 28px; '
+                'font-size: 26px; '
                 'font-weight: 900; '
-                'letter-spacing: -0.025em; '
+                'letter-spacing: -0.02em; '
                 'color: $fg; '
                 'line-height: 1.0;',
           },
           [Component.text(title)],
         ),
-
-        // Detail / component list
         span(
           attributes: {
             'style':
                 'font-family: ui-monospace, monospace; '
-                'font-size: 12px; '
+                'font-size: 11px; '
                 'color: $fg; '
                 'opacity: 0.45; '
                 'line-height: 1.7; '
@@ -410,49 +354,14 @@ class Hero extends StatelessComponent {
     );
   }
 
-  Component _manifestItem(String value, String label) => span(classes: 'font-mono text-base text-text-mid', [
-    span(classes: 'text-text-hi', [Component.text(value)]),
-    Component.text(' $label'),
-  ]);
+  // ── Inline SVGs ────────────────────────────────────────────────────────────
 
-  Component _manifestSep() => span(classes: 'font-mono text-sm text-text-lo mx-3 select-none', [Component.text('·')]);
+  static const _sparkleSvg =
+      '''<svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.09 8.26L18 6L14.74 11.91L20 13.17L13.83 14.26L16 20L10.09 15.91L7 21L7.74 14.26L2 11.91L8.26 10.09L6 5L11.91 8.09L12 2Z" fill="#818CF8"/></svg>''';
 
-  static const _allComponents = [
-    'FilledButton',
-    'OutlinedButton',
-    'TextButton',
-    'IconButton',
-    'AuthCode',
-    'Breadcrumb',
-    'DotIndicator',
-    'Checkbox',
-    'Dropdown',
-    'SegmentedControl',
-    'Switch',
-    'TextInput',
-    'TextArea',
-    'Radio',
-    'TextInputGroup',
-    'Search',
-    'Avatar',
-    'Badge',
-    'Tag',
-    'Divider',
-    'CircularProgress',
-    'LinearProgress',
-    'Icon',
-    'Loader',
-    'EmptyState',
-    'Alert',
-    'Snackbar',
-    'Banner',
-    'BottomSheet',
-    'Modal',
-    'Tooltip',
-    'Accordion',
-    'Drawer',
-    'MenuItem',
-    'Popover',
-    'TabBar',
-  ];
+  static const _arrowUpRightSvg =
+      '''<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7H17V17"/></svg>''';
+
+  static const _chevronRightSvg =
+      '''<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18L15 12L9 6"/></svg>''';
 }

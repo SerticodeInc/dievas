@@ -4,7 +4,7 @@
 // Named aliases over DievasBreakpointPrimitives for responsive layout
 // decisions across the design system.
 
-import '../primitives/breakpoint_primitives.dart';
+import 'package:dievas_tokens/src/primitives/breakpoint_primitives.dart';
 
 /// Semantic breakpoint tokens for the Dievas design system.
 ///

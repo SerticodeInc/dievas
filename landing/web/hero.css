@@ -1,166 +1,110 @@
 /* ─────────────────────────────────────────────────────────────
- * Hero section — app window interactivity, mobile preview,
- * Anchor-style animations, product chips
+ * Hero section — gradient mesh background, entry animations,
+ * product chips, bottom cards
  * ───────────────────────────────────────────────────────────── */
 
-/* ── App window — tab switcher ─────────────────────────────── */
+/* ── Gradient mesh background ──────────────────────────────── */
 
-.app-panel { display: none; }
-
-#app-tab-buttons:checked ~ .app-inner .panel-buttons,
-#app-tab-tokens:checked  ~ .app-inner .panel-tokens,
-#app-tab-type:checked    ~ .app-inner .panel-type,
-#app-tab-scope:checked   ~ .app-inner .panel-scope {
-  display: flex;
+@keyframes gradient-mesh {
+  0%   { background-position: 0% 20%, 100% 10%, 80% 90%, 20% 100%; }
+  25%  { background-position: 20% 0%, 80% 25%, 60% 100%, 35% 75%; }
+  50%  { background-position: 30% 40%, 60% 15%, 100% 60%, 5% 55%; }
+  75%  { background-position: 15% 70%, 40% 55%, 70% 25%, 55% 35%; }
+  100% { background-position: 5% 40%, 100% 70%, 55% 10%, 25% 25%; }
 }
 
-.tab-lbl {
-  transition: color 0.15s ease, border-color 0.15s ease;
+#hero {
+  background-color: #0A0A0F;
+  background-image:
+    radial-gradient(ellipse 80% 60% at -10% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 110% 10%, rgba(129, 140, 248, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 120% 80%, rgba(79, 70, 229, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 30% 110%, rgba(30, 27, 75, 0.20) 0%, transparent 60%);
+  background-size: 200% 200%, 200% 200%, 200% 200%, 200% 200%;
+  animation: gradient-mesh 20s ease-in-out infinite alternate;
 }
 
-#app-tab-buttons:checked ~ .app-inner .tab-lbl-buttons,
-#app-tab-tokens:checked  ~ .app-inner .tab-lbl-tokens,
-#app-tab-type:checked    ~ .app-inner .tab-lbl-type,
-#app-tab-scope:checked   ~ .app-inner .tab-lbl-scope {
-  color: var(--color-brand);
-  border-bottom-color: var(--color-brand);
+/* ── Glass card base ────────────────────────────────────────── */
+.glass-card {
+  background: rgba(12, 12, 12, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ── Theme toggle — icon/label swap ────────────────────────── */
-
-.theme-icon-light,
-.theme-label-light { display: none; }
-
-#app-theme:checked ~ .app-inner .theme-icon-dark,
-#app-theme:checked ~ .app-inner .theme-label-dark  { display: none; }
-
-#app-theme:checked ~ .app-inner .theme-icon-light,
-#app-theme:checked ~ .app-inner .theme-label-light { display: inline; }
-
-/* Light mode CSS token overrides */
-#app-theme:checked ~ .app-inner {
-  --color-bg-base:      rgba(248, 250, 252, 1);
-  --color-bg-subtle:    rgba(241, 245, 249, 1);
-  --color-bg-elevated:  rgba(226, 232, 240, 1);
-  --color-text-hi:      rgba(2,   6,  23,  1);
-  --color-text-mid:     rgba(71,  85, 105, 1);
-  --color-text-lo:      rgba(148, 163, 184, 1);
-  --color-text-off:     rgba(203, 213, 225, 1);
-  --color-border:       rgba(203, 213, 225, 1);
-  --color-border-hi:    rgba(100, 116, 139, 1);
-  --color-border-brand: rgba(99,  102, 241, 1);
-  --color-border-focus: rgba(99,  102, 241, 1);
-  --color-brand:        rgba(79,  70,  229, 1);
-  --color-action:       rgba(99,  102, 241, 1);
-  --color-action-hover: rgba(79,  70,  229, 1);
-  --color-action-sec:   rgba(238, 242, 255, 1);
-}
-
-/* Tooltip parallax */
-.hero-tooltip {
-  --px: 0px;
-  --py: 0px;
-  translate: var(--px) var(--py);
-  transition: translate 0.15s ease-out;
-}
-
-/* ── Mobile preview — auto-cycling panels ──────────────────── */
-
-.mp-panel {
-  position: absolute;
-  inset: 0;
-  padding: 12px 16px;
+/* ── Bottom left card ───────────────────────────────────────── */
+.bottom-card-stat {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  opacity: 0;
 }
 
-.mp-panel-1 { animation: mp-cycle-1 12s linear infinite; }
-.mp-panel-2 { animation: mp-cycle-2 12s linear infinite; }
-.mp-panel-3 { animation: mp-cycle-3 12s linear infinite; }
-.mp-panel-4 { animation: mp-cycle-4 12s linear infinite; }
-
-@keyframes mp-cycle-1 {
-  0%    { opacity: 1; }
-  23%   { opacity: 1; }
-  25%   { opacity: 0; }
-  97%   { opacity: 0; }
-  100%  { opacity: 1; }
+.bottom-card-stat-value {
+  font-family: "MaisonNeueExtended", system-ui, sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: rgba(248, 250, 252, 1);
+  line-height: 1;
 }
 
-@keyframes mp-cycle-2 {
-  0%    { opacity: 0; }
-  23%   { opacity: 0; }
-  25%   { opacity: 1; }
-  48%   { opacity: 1; }
-  50%   { opacity: 0; }
-  100%  { opacity: 0; }
+.bottom-card-stat-label {
+  font-family: "Cascadia Code", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.7);
+  margin-top: 2px;
 }
 
-@keyframes mp-cycle-3 {
-  0%    { opacity: 0; }
-  48%   { opacity: 0; }
-  50%   { opacity: 1; }
-  73%   { opacity: 1; }
-  75%   { opacity: 0; }
-  100%  { opacity: 0; }
+/* ── Bottom right corner ────────────────────────────────────── */
+.corner-card {
+  border-radius: 1.5rem 0 1.5rem 0;
+  overflow: hidden;
 }
 
-@keyframes mp-cycle-4 {
-  0%    { opacity: 0; }
-  73%   { opacity: 0; }
-  75%   { opacity: 1; }
-  97%   { opacity: 1; }
-  100%  { opacity: 0; }
+@media (min-width: 768px) {
+  .corner-card {
+    border-radius: 2rem 0 2rem 0;
+  }
 }
 
-/* Indicator dots */
-.mp-dot {
+/* ── Hero badge ────────────────────────────────────────────── */
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
   border-radius: 9999px;
-  background: rgba(71, 85, 105, 1);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.mp-dot-1 { animation: mp-dot-1 12s linear infinite; }
-.mp-dot-2 { animation: mp-dot-2 12s linear infinite; }
-.mp-dot-3 { animation: mp-dot-3 12s linear infinite; }
-.mp-dot-4 { animation: mp-dot-4 12s linear infinite; }
-
-@keyframes mp-dot-1 {
-  0%    { background: rgba(129, 140, 248, 1); }
-  23%   { background: rgba(129, 140, 248, 1); }
-  25%   { background: rgba(71, 85, 105, 1); }
-  100%  { background: rgba(71, 85, 105, 1); }
+/* ── Particle dots ─────────────────────────────────────────── */
+.particle-dot {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 9999px;
+  background: rgba(129, 140, 248, 0.3);
+  pointer-events: none;
 }
 
-@keyframes mp-dot-2 {
-  0%    { background: rgba(71, 85, 105, 1); }
-  23%   { background: rgba(71, 85, 105, 1); }
-  25%   { background: rgba(129, 140, 248, 1); }
-  48%   { background: rgba(129, 140, 248, 1); }
-  50%   { background: rgba(71, 85, 105, 1); }
-  100%  { background: rgba(71, 85, 105, 1); }
+.particle-dot:nth-child(1) { top: 15%; left: 10%; animation: float-particle 8s ease-in-out infinite; }
+.particle-dot:nth-child(2) { top: 25%; right: 15%; animation: float-particle 11s ease-in-out infinite 1s; }
+.particle-dot:nth-child(3) { bottom: 35%; left: 5%; animation: float-particle 9s ease-in-out infinite 2s; }
+.particle-dot:nth-child(4) { top: 10%; right: 30%; animation: float-particle 12s ease-in-out infinite 0.5s; }
+.particle-dot:nth-child(5) { bottom: 20%; right: 8%; animation: float-particle 10s ease-in-out infinite 1.5s; }
+.particle-dot:nth-child(6) { top: 40%; left: 85%; animation: float-particle 7s ease-in-out infinite 3s; }
+
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+  50%      { transform: translateY(-24px) scale(1.5); opacity: 0.8; }
 }
 
-@keyframes mp-dot-3 {
-  0%    { background: rgba(71, 85, 105, 1); }
-  48%   { background: rgba(71, 85, 105, 1); }
-  50%   { background: rgba(129, 140, 248, 1); }
-  73%   { background: rgba(129, 140, 248, 1); }
-  75%   { background: rgba(71, 85, 105, 1); }
-  100%  { background: rgba(71, 85, 105, 1); }
-}
-
-@keyframes mp-dot-4 {
-  0%    { background: rgba(71, 85, 105, 1); }
-  73%   { background: rgba(71, 85, 105, 1); }
-  75%   { background: rgba(129, 140, 248, 1); }
-  97%   { background: rgba(129, 140, 248, 1); }
-  100%  { background: rgba(71, 85, 105, 1); }
-}
-
-/* ── Anchor-style entry animations ─────────────────────────── */
-
+/* ── Word-in entry animation ────────────────────────────────── */
 @keyframes word-in {
   from {
     opacity: 0;
@@ -172,6 +116,16 @@
   }
 }
 
+.word-in {
+  display: inline-block;
+  opacity: 0;
+}
+
+.js-loaded .word-in {
+  animation: word-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Chip-fall animation ───────────────────────────────────── */
 @keyframes chip-fall {
   0% {
     opacity: 0;
@@ -186,45 +140,15 @@
   }
 }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* Initial state: invisible but laid out */
-.word-in {
-  display: inline-block;
-  opacity: 0;
-}
-
 .chip-falling {
   opacity: 0;
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-}
-
-/* Animations fire once body.js-loaded is set */
-.js-loaded .word-in {
-  animation: word-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .js-loaded .chip-falling {
   animation: chip-fall 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.js-loaded .marquee-track {
-  animation: marquee 38s linear infinite;
-}
-
-/* Marquee pause on hover */
-.marquee-track:hover {
-  animation-play-state: paused !important;
-}
-
-/* ── Product chips ─────────────────────────────────────────── */
+/* ── Product chips ──────────────────────────────────────────── */
 
 .product-chip {
   overflow: hidden;
@@ -257,22 +181,26 @@
     0 0 32px rgba(var(--accent-rgb), 0.2);
 }
 
+/* ── CTA button arrow animation ────────────────────────────── */
+.cta-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.cta-group:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
 /* ── Reduced motion ───────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  .mp-panel-1 { animation: none; opacity: 1; }
-  .mp-panel-2,
-  .mp-panel-3,
-  .mp-panel-4 { animation: none; opacity: 0; }
-  .mp-dot-1   { animation: none; background: rgba(129, 140, 248, 1); }
-  .mp-dot-2,
-  .mp-dot-3,
-  .mp-dot-4   { animation: none; }
-  .word-in, .chip-falling { opacity: 1; }
+  #hero {
+    animation: none;
+  }
   .js-loaded .word-in       { animation: none; opacity: 1; }
   .js-loaded .chip-falling  { animation: none; opacity: 1; }
-  .js-loaded .marquee-track { animation: none; }
   .product-chip:hover { border-color: inherit; box-shadow: none; }
   .product-chip::after { display: none; }
-  .marquee-track:hover { animation-play-state: running !important; }
+  .particle-dot { display: none; }
+  .cta-arrow { display: none; }
 }

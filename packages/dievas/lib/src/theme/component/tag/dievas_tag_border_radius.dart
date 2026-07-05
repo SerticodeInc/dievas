@@ -11,13 +11,11 @@ sealed class DievasTagBorderRadius {
   static const DievasTagBorderRadius pill = _PillTagBorderRadius();
 
   /// A specific [BorderRadius].
-  const factory DievasTagBorderRadius.rounded(BorderRadius radius) =
-      _RoundedTagBorderRadius;
+  const factory DievasTagBorderRadius.rounded(BorderRadius radius) = _RoundedTagBorderRadius;
 
   /// Resolves to a concrete [BorderRadius] for the given container height.
   BorderRadius resolve(double containerHeight) => switch (this) {
-    _PillTagBorderRadius() =>
-      BorderRadius.circular(containerHeight / 2),
+    _PillTagBorderRadius() => BorderRadius.circular(containerHeight / 2),
     _RoundedTagBorderRadius(:final radius) => radius,
   };
 

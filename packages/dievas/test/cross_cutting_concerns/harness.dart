@@ -2,11 +2,7 @@ import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart';
 
 class Harness extends StatelessWidget {
-  const Harness({
-    super.key,
-    required this.child,
-    this.themeOverrides,
-  });
+  const Harness({super.key, required this.child, this.themeOverrides});
 
   final Widget child;
   final DievasThemeData Function(DievasThemeData theme)? themeOverrides;

@@ -63,11 +63,7 @@ void main() {
     testWidgets('per-instance backgroundColor overrides style', (tester) async {
       await tester.pumpWidget(
         Harness(
-          child: const DievasTag(
-            label: 'Colourful',
-            backgroundColor: Colors.purple,
-            foregroundColor: Colors.white,
-          ),
+          child: const DievasTag(label: 'Colourful', backgroundColor: Colors.purple, foregroundColor: Colors.white),
         ),
       );
       expect(tester.takeException(), isNull);
@@ -77,11 +73,7 @@ void main() {
     testWidgets('per-instance borderColor applied to outlined style', (tester) async {
       await tester.pumpWidget(
         Harness(
-          child: const DievasTag(
-            label: 'Bordered',
-            style: DievasTagStyle.outlined,
-            borderColor: Colors.red,
-          ),
+          child: const DievasTag(label: 'Bordered', style: DievasTagStyle.outlined, borderColor: Colors.red),
         ),
       );
       expect(tester.takeException(), isNull);
@@ -117,9 +109,7 @@ void main() {
           child: const DievasTag(label: 'Pill'),
           themeOverrides: (theme) => theme.copyWith(
             components: theme.components.copyWith(
-              tag: theme.components.tag.copyWith(
-                borderRadius: DievasTagBorderRadius.pill,
-              ),
+              tag: theme.components.tag.copyWith(borderRadius: DievasTagBorderRadius.pill),
             ),
           ),
         ),

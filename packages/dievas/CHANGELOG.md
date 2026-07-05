@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.0.5
+
+- **New:** `DievasTag` — pill/rounded shape via `DievasTagBorderRadius` sealed class, per instance colour overrides (`backgroundColor`, `foregroundColor`, `borderColor`), and border width stable sizing across all styles.
+- **Change:** All American "Color" naming renamed to British "Colour" — `DievasTheme.coloursOf()`, `context.colours`, `DievasThemeAspect.colours`, `DievasColourThemeData`.
+- **API:** `DievasTagBorderRadius.pill` now uses `DievasRadiusSemantic.full` (9999.0) via `resolve()` instead of `containerHeight / 2`.
+- **Fix:** `DievasTag` stable-width test targets Container descendants of DievasTag instead of global `find.byType(Container)`.
+- **Internal:** Downgraded `widgetbook` to ^3.21.0, `meta` to `>=1.17.0 <2.0.0`, `test` to ^1.30.0 for Flutter SDK 3.41.9 compatibility.
+
 ## 0.0.4
 
 - **New:** `DievasGlobalThemeData` now accepts an optional `DievasTypographyThemeData? typography` parameter for custom type scales (instead of hardcoded `DievasTypographySemantic` defaults).

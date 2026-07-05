@@ -50,7 +50,7 @@ class DievasEmptyState extends StatelessWidget {
               dimension: theme.iconSize,
               child: Center(
                 child: IconTheme(
-                  data: IconThemeData(color: theme.iconColor, size: theme.iconSize),
+                  data: IconThemeData(color: theme.iconColour, size: theme.iconSize),
                   child: widget,
                 ),
               ),

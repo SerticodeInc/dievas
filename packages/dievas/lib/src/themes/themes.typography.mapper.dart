@@ -3,9 +3,9 @@ part of '../themes.dart';
 /// Derives [DievasTypographyThemeData] from a token record and a text colour.
 ///
 /// This mapper is the single place where [DievasTypographySemantic] token records
-/// are converted into Flutter [TextStyle] objects. The [textColor] is baked into
+/// are converted into Flutter [TextStyle] objects. The [textColour] is baked into
 /// every style — components never pass a colour to [Text] directly.
-DievasTypographyThemeData _createTypographyData(Color textColor) {
+DievasTypographyThemeData _createTypographyData(Color textColour) {
   FontWeight weight(int weight) => switch (weight) {
     100 => .w100,
     200 => .w200,
@@ -25,7 +25,7 @@ DievasTypographyThemeData _createTypographyData(Color textColor) {
     height: token.lineHeight,
     letterSpacing: token.letterSpacing,
     fontFamily: token.fontFamily,
-    color: textColor,
+    color: textColour,
   );
 
   return DievasTypographyThemeData(

@@ -57,9 +57,9 @@ class DievasMenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).menuItem;
 
-    final textColor = enabled ? theme.textColor : theme.textColorDisabled;
-    final iconColor = enabled ? theme.iconColor : theme.iconColorDisabled;
-    final subtitleColor = enabled ? theme.subtitleColor : theme.subtitleColorDisabled;
+    final textColour = enabled ? theme.textColour : theme.textColourDisabled;
+    final iconColour = enabled ? theme.iconColour : theme.iconColourDisabled;
+    final subtitleColour = enabled ? theme.subtitleColour : theme.subtitleColourDisabled;
 
     final content = Row(
       mainAxisSize: .min,
@@ -67,7 +67,7 @@ class DievasMenuItem extends StatelessWidget {
       children: [
         if (leadingIcon case final icon?) ...[
           IconTheme.merge(
-            data: IconThemeData(size: theme.iconSize, color: iconColor),
+            data: IconThemeData(size: theme.iconSize, color: iconColour),
             child: icon,
           ),
           SizedBox(width: theme.iconSpacing),
@@ -77,11 +77,11 @@ class DievasMenuItem extends StatelessWidget {
             mainAxisSize: .min,
             crossAxisAlignment: .start,
             children: [
-              Text(label, style: theme.textStyle.copyWith(color: textColor)),
+              Text(label, style: theme.textStyle.copyWith(color: textColour)),
               if (subtitle case final subtitle?) ...[
                 Padding(
                   padding: const .only(top: 2),
-                  child: Text(subtitle, style: theme.subtitleStyle.copyWith(color: subtitleColor)),
+                  child: Text(subtitle, style: theme.subtitleStyle.copyWith(color: subtitleColour)),
                 ),
               ],
             ],

@@ -130,22 +130,22 @@ class _DievasTextInputState extends State<DievasTextInput> {
       .lg => theme.placeholderStyle.lg,
     };
 
-    final borderColor = hasError ? theme.borderColorError : theme.borderColor;
-    final focusedBorderColor = hasError ? theme.borderColorError : theme.borderColorFocused;
+    final borderColour = hasError ? theme.borderColourError : theme.borderColour;
+    final focusedBorderColour = hasError ? theme.borderColourError : theme.borderColourFocused;
 
     final border = OutlineInputBorder(
       borderRadius: theme.borderRadius,
-      borderSide: BorderSide(color: borderColor, width: theme.strokeWidth),
+      borderSide: BorderSide(color: borderColour, width: theme.strokeWidth),
     );
 
     final focusedBorder = OutlineInputBorder(
       borderRadius: theme.borderRadius,
-      borderSide: BorderSide(color: focusedBorderColor, width: theme.strokeWidthFocused),
+      borderSide: BorderSide(color: focusedBorderColour, width: theme.strokeWidthFocused),
     );
 
     final disabledBorder = OutlineInputBorder(
       borderRadius: theme.borderRadius,
-      borderSide: BorderSide(color: theme.borderColor, width: theme.strokeWidth),
+      borderSide: BorderSide(color: theme.borderColour, width: theme.strokeWidth),
     );
 
     final content = _DievasTextInputFieldContent(
@@ -172,13 +172,13 @@ class _DievasTextInputState extends State<DievasTextInput> {
           autocorrect: widget.autocorrect,
           enabled: widget.enabled,
           maxLines: 1,
-          cursorColor: theme.borderColorFocused,
+          cursorColor: theme.borderColourFocused,
           decoration: InputDecoration(
             hintText: widget.hint,
             hintStyle: placeholderStyle,
             contentPadding: contentPadding,
             filled: true,
-            fillColor: theme.bgColor,
+            fillColor: theme.bgColour,
             border: border,
             enabledBorder: border,
             focusedBorder: focusedBorder,
@@ -201,7 +201,7 @@ class _DievasTextInputState extends State<DievasTextInput> {
               final leadingIcon => Padding(
                 padding: EdgeInsetsDirectional.only(start: contentPadding.left, end: theme.iconSpacing),
                 child: IconTheme(
-                  data: IconThemeData(color: theme.iconColor, size: theme.iconSize),
+                  data: IconThemeData(color: theme.iconColour, size: theme.iconSize),
                   child: leadingIcon,
                 ),
               ),
@@ -211,7 +211,7 @@ class _DievasTextInputState extends State<DievasTextInput> {
               final trailingIcon => Padding(
                 padding: EdgeInsetsDirectional.only(end: contentPadding.right, start: theme.iconSpacing),
                 child: IconTheme(
-                  data: IconThemeData(color: theme.iconColor, size: theme.iconSize),
+                  data: IconThemeData(color: theme.iconColour, size: theme.iconSize),
                   child: trailingIcon,
                 ),
               ),
@@ -260,7 +260,7 @@ class _DievasTextInputFieldContent extends StatelessWidget {
       if (errorText case final errorText? when hasError) ...[
         SizedBox(height: theme.helperSpacing),
         DefaultTextStyle(
-          style: theme.errorStyle.copyWith(color: theme.borderColorError),
+          style: theme.errorStyle.copyWith(color: theme.borderColourError),
           child: Text(errorText),
         ),
       ] else if (helperText case final helperText?) ...[

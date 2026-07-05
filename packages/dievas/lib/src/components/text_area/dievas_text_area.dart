@@ -84,22 +84,22 @@ class DievasTextArea extends StatelessWidget {
 
     // TextArea always uses md tokens
 
-    final borderColor = hasError ? theme.borderColorError : theme.borderColor;
-    final focusedBorderColor = hasError ? theme.borderColorError : theme.borderColorFocused;
+    final borderColour = hasError ? theme.borderColourError : theme.borderColour;
+    final focusedBorderColour = hasError ? theme.borderColourError : theme.borderColourFocused;
 
     final border = OutlineInputBorder(
       borderRadius: theme.borderRadius,
-      borderSide: BorderSide(color: borderColor, width: theme.strokeWidth),
+      borderSide: BorderSide(color: borderColour, width: theme.strokeWidth),
     );
 
     final focusedBorder = OutlineInputBorder(
       borderRadius: theme.borderRadius,
-      borderSide: BorderSide(color: focusedBorderColor, width: theme.strokeWidthFocused),
+      borderSide: BorderSide(color: focusedBorderColour, width: theme.strokeWidthFocused),
     );
 
     final disabledBorder = OutlineInputBorder(
       borderRadius: theme.borderRadius,
-      borderSide: BorderSide(color: theme.borderColor, width: theme.strokeWidth),
+      borderSide: BorderSide(color: theme.borderColour, width: theme.strokeWidth),
     );
 
     final content = _DievasTextFieldContent(
@@ -124,13 +124,13 @@ class DievasTextArea extends StatelessWidget {
         enabled: enabled,
         minLines: minLines,
         maxLines: maxLines,
-        cursorColor: theme.borderColorFocused,
+        cursorColor: theme.borderColourFocused,
         decoration: InputDecoration(
           hintText: hint,
           hintStyle: theme.placeholderStyle.md,
           contentPadding: theme.contentPadding.md,
           filled: true,
-          fillColor: theme.bgColor,
+          fillColor: theme.bgColour,
           border: border,
           enabledBorder: border,
           focusedBorder: focusedBorder,
@@ -182,7 +182,7 @@ class _DievasTextFieldContent extends StatelessWidget {
       if (errorText case final errorText? when hasError) ...[
         SizedBox(height: theme.helperSpacing),
         DefaultTextStyle(
-          style: theme.errorStyle.copyWith(color: theme.borderColorError),
+          style: theme.errorStyle.copyWith(color: theme.borderColourError),
           child: Text(errorText),
         ),
       ] else if (helperText case final helperText?) ...[

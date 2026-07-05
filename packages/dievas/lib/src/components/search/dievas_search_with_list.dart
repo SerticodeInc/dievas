@@ -121,11 +121,11 @@ class _DievasSearchWithListState<T> extends State<DievasSearchWithList<T>> {
               hintStyle: theme.placeholderStyle,
               contentPadding: theme.contentPadding,
               filled: true,
-              fillColor: theme.bgColor,
+              fillColor: theme.bgColour,
               prefixIcon: Padding(
                 padding: EdgeInsetsDirectional.only(start: theme.dividerIndent, end: theme.iconSize / 4),
                 child: IconTheme(
-                  data: IconThemeData(color: theme.iconColor, size: theme.iconSize),
+                  data: IconThemeData(color: theme.iconColour, size: theme.iconSize),
                   child: widget.leadingIcon ?? const Icon(Icons.search),
                 ),
               ),
@@ -134,19 +134,19 @@ class _DievasSearchWithListState<T> extends State<DievasSearchWithList<T>> {
                 borderRadius: _showResults
                     ? BorderRadius.vertical(top: theme.borderRadius.topLeft)
                     : theme.borderRadius,
-                borderSide: BorderSide(color: theme.borderColor),
+                borderSide: BorderSide(color: theme.borderColour),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: _showResults
                     ? BorderRadius.vertical(top: theme.borderRadius.topLeft)
                     : theme.borderRadius,
-                borderSide: BorderSide(color: theme.borderColor),
+                borderSide: BorderSide(color: theme.borderColour),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: _showResults
                     ? BorderRadius.vertical(top: theme.borderRadius.topLeft)
                     : theme.borderRadius,
-                borderSide: BorderSide(color: theme.borderColorFocused),
+                borderSide: BorderSide(color: theme.borderColourFocused),
               ),
               isDense: true,
             ),
@@ -173,15 +173,15 @@ class _ResultsList<T> extends StatelessWidget {
     return Container(
       constraints: BoxConstraints(maxHeight: theme.resultMaxHeight),
       decoration: BoxDecoration(
-        color: theme.bgColor,
+        color: theme.bgColour,
         borderRadius: BorderRadius.vertical(bottom: theme.borderRadius.topLeft),
         border: Border(
-          left: BorderSide(color: theme.borderColorFocused),
-          right: BorderSide(color: theme.borderColorFocused),
-          bottom: BorderSide(color: theme.borderColorFocused),
+          left: BorderSide(color: theme.borderColourFocused),
+          right: BorderSide(color: theme.borderColourFocused),
+          bottom: BorderSide(color: theme.borderColourFocused),
         ),
         boxShadow: [
-          BoxShadow(color: theme.borderColorFocused.withValues(alpha: 0.15), blurRadius: 8, offset: const Offset(0, 4)),
+          BoxShadow(color: theme.borderColourFocused.withValues(alpha: 0.15), blurRadius: 8, offset: const Offset(0, 4)),
         ],
       ),
       child: ListView.separated(
@@ -191,7 +191,7 @@ class _ResultsList<T> extends StatelessWidget {
         separatorBuilder: (_, _) => Divider(
           height: 1,
           thickness: 1,
-          color: theme.dividerColor,
+          color: theme.dividerColour,
           indent: theme.dividerIndent,
           endIndent: theme.dividerIndent,
         ),

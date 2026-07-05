@@ -103,7 +103,7 @@ class DievasAvatar extends StatelessWidget {
       content = Center(
         child: Text(
           label,
-          style: initialsStyle.copyWith(color: theme.initialsColor),
+          style: initialsStyle.copyWith(color: theme.initialsColour),
           maxLines: 1,
           overflow: .clip,
         ),
@@ -113,14 +113,14 @@ class DievasAvatar extends StatelessWidget {
       // We use a proportional icon size (60% of container) so it scales naturally.
       final iconDimension = dimension * 0.55;
       content = Center(
-        child: Icon(Icons.person, size: iconDimension, color: theme.placeholderColor),
+        child: Icon(Icons.person, size: iconDimension, color: theme.placeholderColour),
       );
     }
 
     final container = Container(
       width: dimension,
       height: dimension,
-      decoration: BoxDecoration(color: theme.backgroundColor, borderRadius: borderRadius),
+      decoration: BoxDecoration(color: theme.backgroundColour, borderRadius: borderRadius),
       clipBehavior: .antiAlias,
       child: content,
     );

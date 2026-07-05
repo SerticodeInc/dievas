@@ -99,19 +99,19 @@ class _RadioPainter extends CustomPainter {
     if (isSelected) {
       // Filled outer ring using brand colour
       final fillPaint = Paint()
-        ..color = theme.colorSelected
+        ..color = theme.colourSelected
         ..style = .fill;
       canvas.drawCircle(center, radius, fillPaint);
 
       // Inner dot (white / token)
       final dotPaint = Paint()
-        ..color = theme.dotColor
+        ..color = theme.dotColour
         ..style = .fill;
       canvas.drawCircle(center, theme.dotSize / 2, dotPaint);
     } else {
       // Transparent fill + border ring
       final borderPaint = Paint()
-        ..color = theme.borderColorUnselected
+        ..color = theme.borderColourUnselected
         ..style = .stroke
         ..strokeWidth = theme.strokeWidth;
       canvas.drawCircle(center, radius - theme.strokeWidth / 2, borderPaint);

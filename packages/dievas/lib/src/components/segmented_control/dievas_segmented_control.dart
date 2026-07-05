@@ -52,8 +52,8 @@ class DievasSegmentedControl<T> extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: theme.borderRadius,
-          border: Border.all(color: theme.borderColor),
-          color: theme.bgColor,
+          border: Border.all(color: theme.borderColour),
+          color: theme.bgColour,
         ),
         child: IntrinsicHeight(
           child: Row(
@@ -63,7 +63,7 @@ class DievasSegmentedControl<T> extends StatelessWidget {
                 if (i > 0)
                   SizedBox(
                     width: 1,
-                    child: DecoratedBox(decoration: BoxDecoration(color: theme.borderColor)),
+                    child: DecoratedBox(decoration: BoxDecoration(color: theme.borderColour)),
                   ),
                 _SegmentTile(
                   key: ValueKey(options[i]),
@@ -74,9 +74,9 @@ class DievasSegmentedControl<T> extends StatelessWidget {
                   minHeight: theme.minHeight,
                   padding: theme.padding,
                   borderRadius: theme.borderRadius,
-                  selectedBgColor: theme.selectedBgColor,
-                  selectedLabelStyle: theme.selectedLabelStyle.copyWith(color: theme.selectedTextColor),
-                  unselectedLabelStyle: theme.labelStyle.copyWith(color: theme.textColor),
+                  selectedBgColour: theme.selectedBgColour,
+                  selectedLabelStyle: theme.selectedLabelStyle.copyWith(color: theme.selectedTextColour),
+                  unselectedLabelStyle: theme.labelStyle.copyWith(color: theme.textColour),
                   onTap: (enabled && onChanged != null) ? () => onChanged!(options[i]) : null,
                 ),
               ],
@@ -98,7 +98,7 @@ class _SegmentTile extends StatelessWidget {
     required this.minHeight,
     required this.padding,
     required this.borderRadius,
-    required this.selectedBgColor,
+    required this.selectedBgColour,
     required this.selectedLabelStyle,
     required this.unselectedLabelStyle,
     required this.onTap,
@@ -111,7 +111,7 @@ class _SegmentTile extends StatelessWidget {
   final double minHeight;
   final EdgeInsets padding;
   final BorderRadius borderRadius;
-  final Color selectedBgColor;
+  final Color selectedBgColour;
   final TextStyle selectedLabelStyle;
   final TextStyle unselectedLabelStyle;
   final VoidCallback? onTap;
@@ -125,7 +125,7 @@ class _SegmentTile extends StatelessWidget {
         curve: DievasTheme.animationOf(context).easingEnter,
         constraints: BoxConstraints(minWidth: minSegmentWidth, minHeight: minHeight),
         padding: padding,
-        decoration: BoxDecoration(color: isSelected ? selectedBgColor : null, borderRadius: borderRadius),
+        decoration: BoxDecoration(color: isSelected ? selectedBgColour : null, borderRadius: borderRadius),
         alignment: Alignment.center,
         child: Text(label, style: isSelected ? selectedLabelStyle : unselectedLabelStyle),
       ),

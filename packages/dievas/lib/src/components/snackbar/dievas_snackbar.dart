@@ -18,7 +18,7 @@ import 'package:flutter/widgets.dart';
 ///
 /// Moon reference: Toast
 class DievasSnackbar extends StatelessWidget {
-  const DievasSnackbar({super.key, required this.message, this.leadingIcon, this.action, this.backgroundColor});
+  const DievasSnackbar({super.key, required this.message, this.leadingIcon, this.action, this.backgroundColour});
 
   /// The message to display.
   final String message;
@@ -30,15 +30,15 @@ class DievasSnackbar extends StatelessWidget {
   final DievasSnackbarAction? action;
 
   /// Override for the snackbar surface colour. Defaults to theme bg.
-  final Color? backgroundColor;
+  final Color? backgroundColour;
 
   @override
   Widget build(BuildContext context) {
     final colors = DievasTheme.colorsOf(context);
     final theme = DievasTheme.componentsOf(context).snackbar;
 
-    final bg = backgroundColor ?? colors.background.bgElevated;
-    final fgColor = colors.text.textPrimary;
+    final bg = backgroundColour ?? colors.background.bgElevated;
+    final fgColour = colors.text.textPrimary;
     final spacing = context.spacing;
 
     return Padding(
@@ -61,7 +61,7 @@ class DievasSnackbar extends StatelessWidget {
                     dimension: theme.iconSize,
                     child: Center(
                       child: IconTheme(
-                        data: IconThemeData(color: fgColor, size: theme.iconSize),
+                        data: IconThemeData(color: fgColour, size: theme.iconSize),
                         child: icon,
                       ),
                     ),
@@ -71,7 +71,7 @@ class DievasSnackbar extends StatelessWidget {
                 Expanded(
                   child: Text(
                     message,
-                    style: theme.messageStyle.copyWith(color: fgColor),
+                    style: theme.messageStyle.copyWith(color: fgColour),
                     maxLines: 2,
                     overflow: .ellipsis,
                   ),

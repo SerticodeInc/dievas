@@ -2,7 +2,7 @@ import 'package:dievas/dievas.dart';
 import 'package:flutter/widgets.dart';
 import 'package:widgetbook/widgetbook.dart';
 
-final colorTokensComponent = WidgetbookComponent(
+final colourTokensComponent = WidgetbookComponent(
   name: 'Colour Tokens',
   useCases: [
     WidgetbookUseCase(name: 'All Colour Sets', builder: (ctx) => const _AllSets()),

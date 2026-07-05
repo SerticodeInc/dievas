@@ -11,21 +11,21 @@ final class DievasDropdownThemeData extends Equatable {
     required this.hintStyle,
     required this.labelStyle,
     required this.labelSpacing,
-    required this.triggerBgColor,
-    required this.triggerBorderColor,
-    required this.triggerBorderColorFocused,
+    required this.triggerBgColour,
+    required this.triggerBorderColour,
+    required this.triggerBorderColourFocused,
     required this.borderRadius,
     required this.triggerPadding,
     required this.iconSize,
-    required this.iconColor,
-    required this.overlayBgColor,
-    required this.overlayBorderColor,
+    required this.iconColour,
+    required this.overlayBgColour,
+    required this.overlayBorderColour,
     required this.overlayBorderRadius,
     required this.overlayElevation,
     required this.optionStyle,
-    required this.optionSelectedColor,
-    required this.optionTextColor,
-    required this.optionTextColorDisabled,
+    required this.optionSelectedColour,
+    required this.optionTextColour,
+    required this.optionTextColourDisabled,
     required this.optionPadding,
     required this.disabledOpacity,
     required this.animationDuration,
@@ -45,13 +45,13 @@ final class DievasDropdownThemeData extends Equatable {
   final double labelSpacing;
 
   /// Background colour of the trigger.
-  final Color triggerBgColor;
+  final Color triggerBgColour;
 
   /// Default border colour of the trigger.
-  final Color triggerBorderColor;
+  final Color triggerBorderColour;
 
   /// Border colour when the dropdown is open.
-  final Color triggerBorderColorFocused;
+  final Color triggerBorderColourFocused;
 
   /// Corner radius for trigger and overlay.
   final BorderRadius borderRadius;
@@ -63,13 +63,13 @@ final class DievasDropdownThemeData extends Equatable {
   final double iconSize;
 
   /// Chevron icon colour.
-  final Color iconColor;
+  final Color iconColour;
 
   /// Background colour of the dropdown overlay.
-  final Color overlayBgColor;
+  final Color overlayBgColour;
 
   /// Border colour of the dropdown overlay.
-  final Color overlayBorderColor;
+  final Color overlayBorderColour;
 
   /// Corner radius of the overlay.
   final BorderRadius overlayBorderRadius;
@@ -81,13 +81,13 @@ final class DievasDropdownThemeData extends Equatable {
   final TextStyle optionStyle;
 
   /// Background colour for the selected (or hovered) option.
-  final Color optionSelectedColor;
+  final Color optionSelectedColour;
 
   /// Option label colour.
-  final Color optionTextColor;
+  final Color optionTextColour;
 
   /// Disabled option label colour.
-  final Color optionTextColorDisabled;
+  final Color optionTextColourDisabled;
 
   /// Internal padding for each option row.
   final EdgeInsets optionPadding;
@@ -107,21 +107,21 @@ final class DievasDropdownThemeData extends Equatable {
     hintStyle,
     labelStyle,
     labelSpacing,
-    triggerBgColor,
-    triggerBorderColor,
-    triggerBorderColorFocused,
+    triggerBgColour,
+    triggerBorderColour,
+    triggerBorderColourFocused,
     borderRadius,
     triggerPadding,
     iconSize,
-    iconColor,
-    overlayBgColor,
-    overlayBorderColor,
+    iconColour,
+    overlayBgColour,
+    overlayBorderColour,
     overlayBorderRadius,
     overlayElevation,
     optionStyle,
-    optionSelectedColor,
-    optionTextColor,
-    optionTextColorDisabled,
+    optionSelectedColour,
+    optionTextColour,
+    optionTextColourDisabled,
     optionPadding,
     disabledOpacity,
     animationDuration,

@@ -76,7 +76,7 @@ class _DievasLoaderState extends State<DievasLoader> with SingleTickerProviderSt
           child: _SpinnerAnimation(
             controller: _controller,
             color: theme.color,
-            trackColor: theme.trackColor,
+            trackColour: theme.trackColour,
             strokeWidth: theme.strokeWidth,
           ),
         ),
@@ -93,13 +93,13 @@ class _SpinnerAnimation extends AnimatedWidget {
   const _SpinnerAnimation({
     required this.controller,
     required this.color,
-    required this.trackColor,
+    required this.trackColour,
     required this.strokeWidth,
   }) : super(listenable: controller);
 
   final AnimationController controller;
   final Color color;
-  final Color trackColor;
+  final Color trackColour;
   final double strokeWidth;
 
   @override
@@ -107,7 +107,7 @@ class _SpinnerAnimation extends AnimatedWidget {
     painter: _SpinnerPainter(
       progress: controller.value,
       color: color,
-      trackColor: trackColor,
+      trackColour: trackColour,
       strokeWidth: strokeWidth,
     ),
   );
@@ -117,13 +117,13 @@ class _SpinnerPainter extends CustomPainter {
   const _SpinnerPainter({
     required this.progress,
     required this.color,
-    required this.trackColor,
+    required this.trackColour,
     required this.strokeWidth,
   });
 
   final double progress;
   final Color color;
-  final Color trackColor;
+  final Color trackColour;
   final double strokeWidth;
 
   @override
@@ -134,7 +134,7 @@ class _SpinnerPainter extends CustomPainter {
     const startAngle = -1.5707963267948966;
 
     final trackPaint = Paint()
-      ..color = trackColor
+      ..color = trackColour
       ..strokeWidth = strokeWidth
       ..style = .stroke
       ..strokeCap = .round;
@@ -160,5 +160,5 @@ class _SpinnerPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_SpinnerPainter old) =>
-      progress != old.progress || color != old.color || trackColor != old.trackColor || strokeWidth != old.strokeWidth;
+      progress != old.progress || color != old.color || trackColour != old.trackColour || strokeWidth != old.strokeWidth;
 }

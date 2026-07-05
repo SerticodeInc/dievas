@@ -15,10 +15,10 @@ final class DievasTextInputGroupThemeData extends Equatable {
     required this.borderRadius,
     required this.strokeWidth,
     required this.strokeWidthFocused,
-    required this.bgColor,
-    required this.borderColor,
-    required this.borderColorFocused,
-    required this.dividerColor,
+    required this.bgColour,
+    required this.borderColour,
+    required this.borderColourFocused,
+    required this.dividerColour,
     required this.dividerWidth,
     required this.disabledOpacity,
   });
@@ -39,16 +39,16 @@ final class DievasTextInputGroupThemeData extends Equatable {
   final double strokeWidthFocused;
 
   /// Segment surface background.
-  final Color bgColor;
+  final Color bgColour;
 
   /// Default group border colour.
-  final Color borderColor;
+  final Color borderColour;
 
   /// Group border colour when any child is focused.
-  final Color borderColorFocused;
+  final Color borderColourFocused;
 
   /// Vertical divider colour between segments.
-  final Color dividerColor;
+  final Color dividerColour;
 
   /// Vertical divider width between segments (dp).
   final double dividerWidth;
@@ -63,10 +63,10 @@ final class DievasTextInputGroupThemeData extends Equatable {
     borderRadius,
     strokeWidth,
     strokeWidthFocused,
-    bgColor,
-    borderColor,
-    borderColorFocused,
-    dividerColor,
+    bgColour,
+    borderColour,
+    borderColourFocused,
+    dividerColour,
     dividerWidth,
     disabledOpacity,
   ];

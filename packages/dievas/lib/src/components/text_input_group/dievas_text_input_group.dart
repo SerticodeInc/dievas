@@ -93,7 +93,7 @@ class _DievasTextInputGroupState extends State<DievasTextInputGroup> {
       .lg => theme.contentPadding.lg,
     };
 
-    final strokeColor = _isFocused ? theme.borderColorFocused : theme.borderColor;
+    final strokeColour = _isFocused ? theme.borderColourFocused : theme.borderColour;
     final strokeWidth = _isFocused ? theme.strokeWidthFocused : theme.strokeWidth;
 
     final rowChildren = <Widget>[];
@@ -118,12 +118,12 @@ class _DievasTextInputGroupState extends State<DievasTextInputGroup> {
             height: height,
             padding: contentPadding,
             decoration: BoxDecoration(
-              color: theme.bgColor,
+              color: theme.bgColour,
               border: Border(
-                top: BorderSide(color: strokeColor, width: strokeWidth),
-                bottom: BorderSide(color: strokeColor, width: strokeWidth),
-                left: isFirst ? BorderSide(color: strokeColor, width: strokeWidth) : BorderSide.none,
-                right: isLast ? BorderSide(color: strokeColor, width: strokeWidth) : BorderSide.none,
+                top: BorderSide(color: strokeColour, width: strokeWidth),
+                bottom: BorderSide(color: strokeColour, width: strokeWidth),
+                left: isFirst ? BorderSide(color: strokeColour, width: strokeWidth) : BorderSide.none,
+                right: isLast ? BorderSide(color: strokeColour, width: strokeWidth) : BorderSide.none,
               ),
               borderRadius: segmentRadius,
             ),
@@ -133,7 +133,7 @@ class _DievasTextInputGroupState extends State<DievasTextInputGroup> {
       );
 
       if (!isLast) {
-        rowChildren.add(Container(height: height, width: theme.dividerWidth, color: theme.dividerColor));
+        rowChildren.add(Container(height: height, width: theme.dividerWidth, color: theme.dividerColour));
       }
     }
 

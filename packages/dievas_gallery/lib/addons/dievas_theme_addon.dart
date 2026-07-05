@@ -63,7 +63,7 @@ class DievasThemeAddon extends WidgetbookAddon<WidgetbookTheme<DievasThemeData>>
           child: Theme(
             data: setting.data.material,
             child: Scaffold(
-              backgroundColor: setting.data.colors.background.bgBase,
+              backgroundColor: setting.data.colours.background.bgBase,
               body: SafeArea(child: child),
             ),
           ),

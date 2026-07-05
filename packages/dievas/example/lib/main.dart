@@ -20,7 +20,7 @@ class ExampleScreen extends StatelessWidget {
     final spacing = context.spacing;
 
     return Scaffold(
-      backgroundColor: context.colors.background.bgBase,
+      backgroundColor: context.colours.background.bgBase,
       appBar: AppBar(title: const Text('Dievas Example')),
       body: Center(
         child: Padding(

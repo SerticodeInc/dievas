@@ -97,17 +97,17 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
 
               final activeStyle = isPressed ? buttonTheme.style.focused : buttonTheme.style.idle;
 
-              final bgColor = (activeStyle.background ?? Colors.transparent).withValues(alpha: opacityFactor);
-              final iconColor = activeStyle.icon.withValues(alpha: opacityFactor);
+              final bgColour = (activeStyle.background ?? Colors.transparent).withValues(alpha: opacityFactor);
+              final iconColour = activeStyle.icon.withValues(alpha: opacityFactor);
 
               return AnimatedContainer(
                 duration: pressDuration,
                 width: containerSize,
                 height: containerSize,
-                decoration: BoxDecoration(color: bgColor, borderRadius: borderRadius),
+                decoration: BoxDecoration(color: bgColour, borderRadius: borderRadius),
                 child: Center(
                   child: IconTheme(
-                    data: IconThemeData(color: iconColor, size: iconSize),
+                    data: IconThemeData(color: iconColour, size: iconSize),
                     child: widget.icon,
                   ),
                 ),

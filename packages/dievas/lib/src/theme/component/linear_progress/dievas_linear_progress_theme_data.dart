@@ -9,10 +9,10 @@ final class DievasLinearProgressThemeData extends Equatable {
   const DievasLinearProgressThemeData({
     required this.height,
     required this.borderRadius,
-    required this.trackColor,
-    required this.colorPrimary,
-    required this.colorSuccess,
-    required this.colorError,
+    required this.trackColour,
+    required this.colourPrimary,
+    required this.colourSuccess,
+    required this.colourError,
   });
 
   /// Track height in logical pixels.
@@ -22,17 +22,17 @@ final class DievasLinearProgressThemeData extends Equatable {
   final BorderRadius borderRadius;
 
   /// Unfilled track background colour.
-  final Color trackColor;
+  final Color trackColour;
 
   /// Fill colour for [DievasLinearProgressStyle.primary].
-  final Color colorPrimary;
+  final Color colourPrimary;
 
   /// Fill colour for [DievasLinearProgressStyle.success].
-  final Color colorSuccess;
+  final Color colourSuccess;
 
   /// Fill colour for [DievasLinearProgressStyle.error].
-  final Color colorError;
+  final Color colourError;
 
   @override
-  List<Object?> get props => [height, borderRadius, trackColor, colorPrimary, colorSuccess, colorError];
+  List<Object?> get props => [height, borderRadius, trackColour, colourPrimary, colourSuccess, colourError];
 }

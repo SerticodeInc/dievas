@@ -58,7 +58,7 @@ class DievasBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).badge;
-    final badgeColours = _BadgeColors(DievasTheme.colorsOf(context));
+    final badgeColours = _BadgeColours(DievasTheme.coloursOf(context));
     final appearance = _appearance(style, tone, badgeColours);
 
     final hasBorder = appearance.border != badgeColours.transparent;
@@ -76,7 +76,7 @@ class DievasBadge extends StatelessWidget {
 
   // Resolves the (background, border, foreground) triple from the active
   // colour sub-system for the current style × tone combination.
-  _BadgeAppearance _appearance(DievasBadgeStyle style, DievasBadgeTone tone, _BadgeColors badgeColours) {
+  _BadgeAppearance _appearance(DievasBadgeStyle style, DievasBadgeTone tone, _BadgeColours badgeColours) {
     final feedback = switch (tone) {
       .success => badgeColours.feedbackSuccess,
       .warning => badgeColours.feedbackWarning,
@@ -167,8 +167,8 @@ typedef _BadgeAppearance = ({Color background, Color border, Color foreground});
 
 // Private helper that bundles frequently needed colour lookups to avoid
 // deep chaining inside the switch expression.
-final class _BadgeColors {
-  _BadgeColors(DievasColourThemeData c)
+final class _BadgeColours {
+  _BadgeColours(DievasColourThemeData c)
     : actionPrimary = c.action.actionPrimary,
       onBrand = c.core.onBrand,
       brandSubtle = c.core.brandSubtle,

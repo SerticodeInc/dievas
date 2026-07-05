@@ -3,27 +3,27 @@ import 'package:flutter/painting.dart';
 
 final class DievasPopoverThemeData extends Equatable {
   const DievasPopoverThemeData({
-    required this.backgroundColor,
+    required this.backgroundColour,
     required this.textStyle,
     required this.borderRadius,
     required this.padding,
     required this.verticalOffset,
     required this.horizontalOffset,
     required this.arrowSize,
-    required this.barrierColor,
+    required this.barrierColour,
     required this.animationDuration,
     required this.elevation,
     required this.maxWidth,
   });
 
-  final Color backgroundColor;
+  final Color backgroundColour;
   final TextStyle textStyle;
   final BorderRadius borderRadius;
   final EdgeInsets padding;
   final double verticalOffset;
   final double horizontalOffset;
   final double arrowSize;
-  final Color barrierColor;
+  final Color barrierColour;
   final Duration animationDuration;
   final double elevation;
 
@@ -32,14 +32,14 @@ final class DievasPopoverThemeData extends Equatable {
 
   @override
   List<Object?> get props => [
-    backgroundColor,
+    backgroundColour,
     textStyle,
     borderRadius,
     padding,
     verticalOffset,
     horizontalOffset,
     arrowSize,
-    barrierColor,
+    barrierColour,
     animationDuration,
     elevation,
     maxWidth,

@@ -92,7 +92,7 @@ class _StateBlock extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisSize: MainAxisSize.min,
     children: [
-      Text(name, style: context.typography.labelXs.copyWith(color: context.colors.text.textTertiary)),
+      Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
       SizedBox(height: context.spacing.sm),
       ComponentBoundary(child: child),
     ],

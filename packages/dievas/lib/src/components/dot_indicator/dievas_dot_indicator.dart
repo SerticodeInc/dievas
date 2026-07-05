@@ -73,7 +73,7 @@ class _Dot extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).dotIndicator;
     final size = isActive ? theme.activeDotSize : theme.dotSize;
-    final color = isActive ? theme.colorActive : theme.colorInactive;
+    final color = isActive ? theme.colourActive : theme.colourInactive;
 
     return GestureDetector(
       onTap: enabled ? onTap : null,

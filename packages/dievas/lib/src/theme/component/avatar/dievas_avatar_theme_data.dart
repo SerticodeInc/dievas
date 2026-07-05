@@ -20,9 +20,9 @@ final class DievasAvatarThemeData extends Equatable {
     required this.initialsStyleMd,
     required this.initialsStyleLg,
     required this.initialsStyleXl,
-    required this.backgroundColor,
-    required this.initialsColor,
-    required this.placeholderColor,
+    required this.backgroundColour,
+    required this.initialsColour,
+    required this.placeholderColour,
   });
 
   /// Container size for [DievasAvatarSize.xs] — 24 dp.
@@ -59,13 +59,13 @@ final class DievasAvatarThemeData extends Equatable {
   final TextStyle initialsStyleXl;
 
   /// Fallback container background (used when no image is provided).
-  final Color backgroundColor;
+  final Color backgroundColour;
 
   /// Initials / placeholder icon colour.
-  final Color initialsColor;
+  final Color initialsColour;
 
   /// Placeholder icon colour when neither image nor initials are provided.
-  final Color placeholderColor;
+  final Color placeholderColour;
 
   @override
   List<Object?> get props => [
@@ -80,8 +80,8 @@ final class DievasAvatarThemeData extends Equatable {
     initialsStyleMd,
     initialsStyleLg,
     initialsStyleXl,
-    backgroundColor,
-    initialsColor,
-    placeholderColor,
+    backgroundColour,
+    initialsColour,
+    placeholderColour,
   ];
 }

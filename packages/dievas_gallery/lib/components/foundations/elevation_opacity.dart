@@ -16,7 +16,7 @@ class _ElevationLevels extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final elevation = DievasTheme.elevationOf(context);
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
 
     final levels = [
       ('none', elevation.none),
@@ -41,7 +41,7 @@ class _ElevationLevels extends StatelessWidget {
                   width: 96, // elevation card demo — gallery-only visual dimension
                   height: 64, // elevation card demo — gallery-only visual dimension
                   decoration: BoxDecoration(
-                    color: colors.background.bgElevated,
+                    color: colours.background.bgElevated,
                     borderRadius: DievasTheme.borderOf(context).md,
                     boxShadow: shadows,
                   ),
@@ -51,7 +51,7 @@ class _ElevationLevels extends StatelessWidget {
                   name,
                   style: DievasTheme.typographyOf(
                     context,
-                  ).labelXs.copyWith(fontFamily: 'monospace', color: colors.text.textTertiary),
+                  ).labelXs.copyWith(fontFamily: 'monospace', color: colours.text.textTertiary),
                 ),
               ],
             ),
@@ -67,7 +67,7 @@ class _OpacityTokens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final opacity = DievasTheme.opacityOf(context);
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
 
     final entries = [
       ('disabled', opacity.disabled),
@@ -94,14 +94,14 @@ class _OpacityTokens extends StatelessWidget {
                       name,
                       style: DievasTheme.typographyOf(
                         context,
-                      ).labelXs.copyWith(fontFamily: 'monospace', color: colors.text.textTertiary),
+                      ).labelXs.copyWith(fontFamily: 'monospace', color: colours.text.textTertiary),
                     ),
                   ),
                   Text(
                     '${(value * 100).round()}%',
                     style: DievasTheme.typographyOf(
                       context,
-                    ).labelXs.copyWith(color: colors.text.textSecondary, fontFamily: 'monospace'),
+                    ).labelXs.copyWith(color: colours.text.textSecondary, fontFamily: 'monospace'),
                   ),
                   SizedBox(width: context.spacing.lg),
                   Opacity(
@@ -110,7 +110,7 @@ class _OpacityTokens extends StatelessWidget {
                       width: 80, // opacity chip demo — gallery-only visual dimension
                       height: 28, // opacity chip demo — gallery-only visual dimension
                       decoration: BoxDecoration(
-                        color: colors.action.actionPrimary,
+                        color: colours.action.actionPrimary,
                         borderRadius: DievasTheme.borderOf(context).sm,
                       ),
                     ),

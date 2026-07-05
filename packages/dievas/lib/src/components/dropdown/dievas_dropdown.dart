@@ -122,9 +122,9 @@ class _DievasDropdownState<T> extends State<DievasDropdown<T>> {
         constraints: BoxConstraints(minHeight: theme.minHeight),
         padding: theme.triggerPadding,
         decoration: BoxDecoration(
-          color: theme.triggerBgColor,
+          color: theme.triggerBgColour,
           borderRadius: theme.borderRadius,
-          border: Border.all(color: _isOpen ? theme.triggerBorderColorFocused : theme.triggerBorderColor),
+          border: Border.all(color: _isOpen ? theme.triggerBorderColourFocused : theme.triggerBorderColour),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -133,7 +133,7 @@ class _DievasDropdownState<T> extends State<DievasDropdown<T>> {
               child: Text(selectedLabel ?? widget.hint ?? '', style: hasValue ? theme.triggerStyle : theme.hintStyle),
             ),
             SizedBox(width: theme.iconSize / 2),
-            Icon(Icons.keyboard_arrow_down, size: theme.iconSize, color: theme.iconColor),
+            Icon(Icons.keyboard_arrow_down, size: theme.iconSize, color: theme.iconColour),
           ],
         ),
       ),
@@ -200,9 +200,9 @@ class _DropdownOverlay<T> extends StatelessWidget {
             child: Container(
               width: width,
               decoration: BoxDecoration(
-                color: theme.overlayBgColor,
+                color: theme.overlayBgColour,
                 borderRadius: theme.overlayBorderRadius,
-                border: .all(color: theme.overlayBorderColor),
+                border: .all(color: theme.overlayBorderColour),
                 boxShadow: theme.overlayElevation,
               ),
               constraints: const BoxConstraints(maxHeight: 240),
@@ -216,8 +216,8 @@ class _DropdownOverlay<T> extends StatelessWidget {
                       isSelected: value != null && option == value,
                       padding: theme.optionPadding,
                       style: theme.optionStyle,
-                      textColor: theme.optionTextColor,
-                      selectedColor: theme.optionSelectedColor,
+                      textColour: theme.optionTextColour,
+                      selectedColour: theme.optionSelectedColour,
                       onTap: () => onSelected(option),
                     ),
                 ],
@@ -236,8 +236,8 @@ class _OptionRow extends StatelessWidget {
     required this.isSelected,
     required this.padding,
     required this.style,
-    required this.textColor,
-    required this.selectedColor,
+    required this.textColour,
+    required this.selectedColour,
     required this.onTap,
   });
 
@@ -245,8 +245,8 @@ class _OptionRow extends StatelessWidget {
   final bool isSelected;
   final EdgeInsets padding;
   final TextStyle style;
-  final Color textColor;
-  final Color selectedColor;
+  final Color textColour;
+  final Color selectedColour;
   final VoidCallback onTap;
 
   @override
@@ -254,8 +254,8 @@ class _OptionRow extends StatelessWidget {
     onTap: onTap,
     child: Container(
       padding: padding,
-      decoration: BoxDecoration(color: isSelected ? selectedColor : null),
-      child: Text(label, style: style.copyWith(color: textColor)),
+      decoration: BoxDecoration(color: isSelected ? selectedColour : null),
+      child: Text(label, style: style.copyWith(color: textColour)),
     ),
   );
 }

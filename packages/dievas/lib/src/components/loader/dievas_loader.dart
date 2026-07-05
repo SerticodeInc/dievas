@@ -75,8 +75,8 @@ class _DievasLoaderState extends State<DievasLoader> with SingleTickerProviderSt
           dimension: diameter,
           child: _SpinnerAnimation(
             controller: _controller,
-            color: theme.color,
-            trackColor: theme.trackColor,
+            colour: theme.color,
+            trackColour: theme.trackColour,
             strokeWidth: theme.strokeWidth,
           ),
         ),
@@ -92,22 +92,22 @@ class _DievasLoaderState extends State<DievasLoader> with SingleTickerProviderSt
 class _SpinnerAnimation extends AnimatedWidget {
   const _SpinnerAnimation({
     required this.controller,
-    required this.color,
-    required this.trackColor,
+    required this.colour,
+    required this.trackColour,
     required this.strokeWidth,
   }) : super(listenable: controller);
 
   final AnimationController controller;
-  final Color color;
-  final Color trackColor;
+  final Color colour;
+  final Color trackColour;
   final double strokeWidth;
 
   @override
   Widget build(BuildContext context) => CustomPaint(
     painter: _SpinnerPainter(
       progress: controller.value,
-      color: color,
-      trackColor: trackColor,
+      colour: colour,
+      trackColour: trackColour,
       strokeWidth: strokeWidth,
     ),
   );
@@ -116,14 +116,14 @@ class _SpinnerAnimation extends AnimatedWidget {
 class _SpinnerPainter extends CustomPainter {
   const _SpinnerPainter({
     required this.progress,
-    required this.color,
-    required this.trackColor,
+    required this.colour,
+    required this.trackColour,
     required this.strokeWidth,
   });
 
   final double progress;
-  final Color color;
-  final Color trackColor;
+  final Color colour;
+  final Color trackColour;
   final double strokeWidth;
 
   @override
@@ -134,13 +134,13 @@ class _SpinnerPainter extends CustomPainter {
     const startAngle = -1.5707963267948966;
 
     final trackPaint = Paint()
-      ..color = trackColor
+      ..color = trackColour
       ..strokeWidth = strokeWidth
       ..style = .stroke
       ..strokeCap = .round;
 
     final arcPaint = Paint()
-      ..color = color
+      ..color = colour
       ..strokeWidth = strokeWidth
       ..style = .stroke
       ..strokeCap = .round;
@@ -160,5 +160,8 @@ class _SpinnerPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_SpinnerPainter old) =>
-      progress != old.progress || color != old.color || trackColor != old.trackColor || strokeWidth != old.strokeWidth;
+      progress != old.progress ||
+      colour != old.colour ||
+      trackColour != old.trackColour ||
+      strokeWidth != old.strokeWidth;
 }

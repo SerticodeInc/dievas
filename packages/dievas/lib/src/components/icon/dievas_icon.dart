@@ -27,7 +27,7 @@ enum DievasIconSize {
 ///
 /// ```dart
 /// DievasIcon(Icons.check)
-/// DievasIcon(Icons.warning, color: context.colors.feedback.feedbackWarning.icon)
+/// DievasIcon(Icons.warning, color: context.colours.feedback.feedbackWarning.icon)
 /// ```
 class DievasIcon extends StatelessWidget {
   const DievasIcon(this.icon, {super.key, this.size = .md, this.color, this.semanticLabel});
@@ -55,7 +55,7 @@ class DievasIcon extends StatelessWidget {
     return Icon(
       icon,
       size: dimension,
-      color: color ?? DievasTheme.colorsOf(context).icon.iconPrimary,
+      color: color ?? DievasTheme.coloursOf(context).icon.iconPrimary,
       semanticLabel: semanticLabel,
     );
   }

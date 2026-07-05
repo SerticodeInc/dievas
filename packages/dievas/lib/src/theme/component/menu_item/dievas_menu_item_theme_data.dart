@@ -14,12 +14,12 @@ final class DievasMenuItemThemeData extends Equatable {
     required this.padding,
     required this.densePadding,
     required this.borderRadius,
-    required this.textColor,
-    required this.textColorDisabled,
-    required this.subtitleColor,
-    required this.subtitleColorDisabled,
-    required this.iconColor,
-    required this.iconColorDisabled,
+    required this.textColour,
+    required this.textColourDisabled,
+    required this.subtitleColour,
+    required this.subtitleColourDisabled,
+    required this.iconColour,
+    required this.iconColourDisabled,
     required this.disabledOpacity,
   });
 
@@ -45,22 +45,22 @@ final class DievasMenuItemThemeData extends Equatable {
   final BorderRadius borderRadius;
 
   /// Label colour when enabled.
-  final Color textColor;
+  final Color textColour;
 
   /// Label colour when disabled.
-  final Color textColorDisabled;
+  final Color textColourDisabled;
 
   /// Subtitle colour when enabled.
-  final Color subtitleColor;
+  final Color subtitleColour;
 
   /// Subtitle colour when disabled.
-  final Color subtitleColorDisabled;
+  final Color subtitleColourDisabled;
 
   /// Leading icon colour when enabled.
-  final Color iconColor;
+  final Color iconColour;
 
   /// Leading icon colour when disabled.
-  final Color iconColorDisabled;
+  final Color iconColourDisabled;
 
   /// Opacity multiplier applied when disabled.
   final double disabledOpacity;
@@ -74,12 +74,12 @@ final class DievasMenuItemThemeData extends Equatable {
     padding,
     densePadding,
     borderRadius,
-    textColor,
-    textColorDisabled,
-    subtitleColor,
-    subtitleColorDisabled,
-    iconColor,
-    iconColorDisabled,
+    textColour,
+    textColourDisabled,
+    subtitleColour,
+    subtitleColourDisabled,
+    iconColour,
+    iconColourDisabled,
     disabledOpacity,
   ];
 }

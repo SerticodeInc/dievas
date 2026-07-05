@@ -23,7 +23,7 @@ class _WidgetBookContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: context.colors.background.bgSubtle,
+    backgroundColor: context.colours.background.bgSubtle,
     body: SingleChildScrollView(
       padding: .symmetric(horizontal: context.spacing.xl, vertical: context.spacing.x3l),
       child: Center(
@@ -98,7 +98,7 @@ class _Eyebrow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final spacing = context.spacing;
-    final colours = context.colors.core;
+    final colours = context.colours.core;
 
     return Row(
       children: [
@@ -127,7 +127,7 @@ class _Subtitle extends StatelessWidget {
   Widget build(BuildContext context) => Text(
     "Ports Moon Design System's component catalogue.\n"
     'Token driven. InheritedModel first. Multi brand.',
-    style: context.typography.bodyMd.copyWith(height: 2.0, color: context.colors.text.textSecondary),
+    style: context.typography.bodyMd.copyWith(height: 2.0, color: context.colours.text.textSecondary),
   );
 }
 
@@ -163,7 +163,7 @@ class _StatCell extends StatelessWidget {
         SizedBox(height: context.spacing.sm),
         Text(
           label.toUpperCase(),
-          style: context.typography.codeMd.copyWith(letterSpacing: 1.8, color: context.colors.text.textTertiary),
+          style: context.typography.codeMd.copyWith(letterSpacing: 1.8, color: context.colours.text.textTertiary),
         ),
       ],
     ),
@@ -175,7 +175,7 @@ class _Divider extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     width: context.spacing.sm - 6,
     margin: .symmetric(horizontal: context.spacing.lg),
-    color: context.colors.border.borderDefault,
+    color: context.colours.border.borderDefault,
   );
 }
 
@@ -186,7 +186,7 @@ class _SectionLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      Text(text.toUpperCase(), style: context.typography.codeMd.copyWith(color: context.colors.text.textTertiary));
+      Text(text.toUpperCase(), style: context.typography.codeMd.copyWith(color: context.colours.text.textTertiary));
 }
 
 class _ComponentCategory extends StatelessWidget {
@@ -198,14 +198,14 @@ class _ComponentCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colours = context.colors;
+    final colours = context.colours;
     final spacing = context.spacing;
     final typography = context.typography;
 
     return Container(
       decoration: BoxDecoration(
         color: colours.background.bgSubtle,
-        border: .all(color: context.colors.border.borderDefault),
+        border: .all(color: context.colours.border.borderDefault),
         borderRadius: context.border.lg,
       ),
       padding: .all(spacing.md),
@@ -236,9 +236,12 @@ class _ComponentCategory extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: colours.background.bgElevated,
                       borderRadius: context.border.md,
-                      border: .all(color: context.colors.border.borderDefault),
+                      border: .all(color: context.colours.border.borderDefault),
                     ),
-                    child: Text(component, style: typography.bodyXs.copyWith(color: context.colors.text.textSecondary)),
+                    child: Text(
+                      component,
+                      style: typography.bodyXs.copyWith(color: context.colours.text.textSecondary),
+                    ),
                   ),
               ],
             ),
@@ -255,7 +258,7 @@ class _HintBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final spacing = context.spacing;
-    final colours = context.colors;
+    final colours = context.colours;
 
     return Container(
       padding: .all(spacing.md),
@@ -289,6 +292,6 @@ class _FooterText extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     "Built with Dievas. \n💙 Serticode Inc.",
-    style: context.typography.bodyLg.copyWith(color: context.colors.text.textDisabled),
+    style: context.typography.bodyLg.copyWith(color: context.colours.text.textDisabled),
   );
 }

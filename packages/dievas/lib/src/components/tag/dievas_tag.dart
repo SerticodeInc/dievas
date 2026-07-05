@@ -73,7 +73,7 @@ class DievasTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).tag;
-    final colours = _TagColors(DievasTheme.colorsOf(context));
+    final colours = _TagColors(DievasTheme.coloursOf(context));
 
     final content = _DievasTagContent(
       theme: theme,

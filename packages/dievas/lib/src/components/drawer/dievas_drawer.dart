@@ -38,11 +38,11 @@ class DievasDrawerState extends State<DievasDrawer> {
           key: _drawerKey,
           alignment: .start,
           drawerCallback: (isOpen) => setState(() => _isOpen = isOpen),
-          scrimColor: theme.barrierColor,
+          scrimColor: theme.barrierColour,
           child: Drawer(
             width: drawerWidth,
             elevation: theme.elevation,
-            backgroundColor: theme.backgroundColor,
+            backgroundColor: theme.backgroundColour,
             child: widget.drawer,
           ),
         ),

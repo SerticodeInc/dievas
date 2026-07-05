@@ -172,9 +172,9 @@ class _DigitBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).authCode;
 
-    final borderColor = switch ((_isFilled, _isActive)) {
-      (true, _) || (_, true) => theme.borderColorFocused,
-      _ => theme.borderColor,
+    final borderColour = switch ((_isFilled, _isActive)) {
+      (true, _) || (_, true) => theme.borderColourFocused,
+      _ => theme.borderColour,
     };
     final strokeWidth = switch ((_isFilled, _isActive)) {
       (true, _) || (_, true) => theme.strokeWidthFocused,
@@ -185,9 +185,9 @@ class _DigitBox extends StatelessWidget {
       width: theme.width,
       height: theme.height,
       decoration: BoxDecoration(
-        color: theme.bgColor,
+        color: theme.bgColour,
         borderRadius: theme.borderRadius,
-        border: Border.all(color: borderColor, width: strokeWidth),
+        border: Border.all(color: borderColour, width: strokeWidth),
       ),
       alignment: .center,
       child: switch ((_isFilled, _isActive)) {
@@ -211,11 +211,11 @@ class _FilledDigit extends StatelessWidget {
   Widget build(BuildContext context) {
     if (obscureText) {
       final r = theme.cursorHeight / 3;
-      final dotColor = theme.digitStyle.color ?? DievasTheme.colorsOf(context).text.textPrimary;
+      final dotColour = theme.digitStyle.color ?? DievasTheme.coloursOf(context).text.textPrimary;
       return Container(
         width: r,
         height: r,
-        decoration: BoxDecoration(shape: .circle, color: dotColor),
+        decoration: BoxDecoration(shape: .circle, color: dotColour),
       );
     }
     return Text(controller.text[index], style: theme.digitStyle);
@@ -234,7 +234,7 @@ class _Cursor extends AnimatedWidget {
     child: Container(
       width: theme.cursorWidth,
       height: theme.cursorHeight,
-      decoration: BoxDecoration(color: theme.cursorColor, borderRadius: .circular(theme.cursorWidth / 2)),
+      decoration: BoxDecoration(color: theme.cursorColour, borderRadius: .circular(theme.cursorWidth / 2)),
     ),
   );
 }

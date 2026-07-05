@@ -8,7 +8,7 @@
 /// - [DievasLightThemeData] / [DievasDarkThemeData] — default themes
 /// - All ThemeData sub-systems (colours, typography, spacing, etc.)
 /// - [DievasGrid] / [DievasGridBreakpoint] — responsive grid
-/// - Context extensions (`context.colors`, `context.typography`, ...)
+/// - Context extensions (`context.colours`, `context.typography`, ...)
 /// - [DievasLocalizations] — l10n delegate and context extension
 /// - Button components: [DievasFilledButton], [DievasOutlinedButton],
 ///   [DievasTextButton], [DievasIconButton]

@@ -13,7 +13,7 @@ class DievasGallery extends StatelessWidget {
     directories: [
       WidgetbookCategory(
         name: 'Foundations',
-        children: [colorTokensComponent, typographyScaleComponent, spacingTokensComponent, elevationOpacityComponent],
+        children: [colourTokensComponent, typographyScaleComponent, spacingTokensComponent, elevationOpacityComponent],
       ),
       WidgetbookCategory(
         name: 'Components',

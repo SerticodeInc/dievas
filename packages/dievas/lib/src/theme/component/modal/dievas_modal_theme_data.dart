@@ -6,8 +6,8 @@ final class DievasModalThemeData extends Equatable {
   const DievasModalThemeData({
     required this.titleStyle,
     required this.bodyStyle,
-    required this.backgroundColor,
-    required this.barrierColor,
+    required this.backgroundColour,
+    required this.barrierColour,
     required this.borderRadius,
     required this.padding,
     required this.minWidth,
@@ -23,10 +23,10 @@ final class DievasModalThemeData extends Equatable {
   final TextStyle bodyStyle;
 
   /// Background colour of the modal card.
-  final Color backgroundColor;
+  final Color backgroundColour;
 
   /// Colour of the modal barrier.
-  final Color barrierColor;
+  final Color barrierColour;
 
   /// Corner radius of the modal card.
   final BorderRadius borderRadius;
@@ -50,8 +50,8 @@ final class DievasModalThemeData extends Equatable {
   List<Object?> get props => [
     titleStyle,
     bodyStyle,
-    backgroundColor,
-    barrierColor,
+    backgroundColour,
+    barrierColour,
     borderRadius,
     padding,
     minWidth,

@@ -5,7 +5,7 @@ import 'package:flutter/painting.dart';
 final class DievasTooltipThemeData extends Equatable {
   const DievasTooltipThemeData({
     required this.textStyle,
-    required this.backgroundColor,
+    required this.backgroundColour,
     required this.borderRadius,
     required this.padding,
     required this.verticalOffset,
@@ -17,7 +17,7 @@ final class DievasTooltipThemeData extends Equatable {
   final TextStyle textStyle;
 
   /// Background colour of the tooltip bubble.
-  final Color backgroundColor;
+  final Color backgroundColour;
 
   /// Corner radius of the tooltip bubble.
   final BorderRadius borderRadius;
@@ -37,7 +37,7 @@ final class DievasTooltipThemeData extends Equatable {
   @override
   List<Object?> get props => [
     textStyle,
-    backgroundColor,
+    backgroundColour,
     borderRadius,
     padding,
     verticalOffset,

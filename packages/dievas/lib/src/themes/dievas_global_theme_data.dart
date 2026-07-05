@@ -4,7 +4,7 @@ part of '../themes.dart';
 ///
 /// Sub classing [DievasGlobalThemeData] is the contract for both the built-in
 /// default themes and consumer app brand themes. Subclasses provide:
-/// - [colors] — the full colour token set for their brand / mode
+/// - [colours] — the full colour token set for their brand / mode
 /// - [border] — optional border radius overrides (defaults work for most brands)
 ///
 /// Everything else — typography, component theme data, Material bridge — is
@@ -15,7 +15,7 @@ part of '../themes.dart';
 /// class CadenceLightThemeData extends DievasGlobalThemeData {
 ///   CadenceLightThemeData({super.components})
 ///     : super(
-///         colors: const DievasColourThemeData(...),
+///         colours: const DievasColourThemeData(...),
 ///         border: const DievasBorderThemeData(),
 ///       );
 ///
@@ -26,7 +26,7 @@ part of '../themes.dart';
 /// ```
 base class DievasGlobalThemeData implements DievasThemeData {
   DievasGlobalThemeData({
-    required DievasColourThemeData colors,
+    required DievasColourThemeData colours,
     DievasAnimationThemeData animation = const DievasAnimationThemeData(),
     DievasBorderThemeData border = const DievasBorderThemeData(),
     DievasSpacingThemeData spacing = const DievasSpacingThemeData(),
@@ -36,15 +36,15 @@ base class DievasGlobalThemeData implements DievasThemeData {
     DievasComponentThemeData? components,
     DievasTypographyThemeData? typography,
   }) : _animation = animation,
-       _colors = colors,
+       _colours = colours,
        _border = border,
        _spacing = spacing,
        _sizing = sizing,
        _opacity = opacity {
-    _typography = typography ?? _createTypographyData(colors.text.textPrimary);
-    _elevation = elevation ?? _buildDefaultElevation(colors);
+    _typography = typography ?? _createTypographyData(colours.text.textPrimary);
+    _elevation = elevation ?? _buildDefaultElevation(colours);
     _components = _deriveDievasComponentThemeData(
-      colors,
+      colours,
       _typography,
       spacing,
       sizing,
@@ -53,11 +53,11 @@ base class DievasGlobalThemeData implements DievasThemeData {
       _elevation,
       components,
     );
-    _material = _buildMaterial(colors);
+    _material = _buildMaterial(colours);
   }
 
   DievasGlobalThemeData._raw({
-    required DievasColourThemeData colors,
+    required DievasColourThemeData colours,
     required DievasTypographyThemeData typography,
     required DievasElevationThemeData elevation,
     required DievasComponentThemeData components,
@@ -68,7 +68,7 @@ base class DievasGlobalThemeData implements DievasThemeData {
     required DievasSizingThemeData sizing,
     required DievasOpacityThemeData opacity,
   }) : _animation = animation,
-       _colors = colors,
+       _colours = colours,
        _border = border,
        _spacing = spacing,
        _sizing = sizing,
@@ -79,7 +79,7 @@ base class DievasGlobalThemeData implements DievasThemeData {
        _material = material;
 
   final DievasAnimationThemeData _animation;
-  final DievasColourThemeData _colors;
+  final DievasColourThemeData _colours;
   final DievasBorderThemeData _border;
   final DievasSpacingThemeData _spacing;
   final DievasSizingThemeData _sizing;
@@ -93,7 +93,7 @@ base class DievasGlobalThemeData implements DievasThemeData {
   DievasAnimationThemeData get animation => _animation;
 
   @override
-  DievasColourThemeData get colors => _colors;
+  DievasColourThemeData get colours => _colours;
 
   @override
   DievasTypographyThemeData get typography => _typography;
@@ -127,7 +127,7 @@ base class DievasGlobalThemeData implements DievasThemeData {
 
     final newTypography = typography ?? _typography;
     final newComponents = _deriveDievasComponentThemeData(
-      _colors,
+      _colours,
       newTypography,
       _spacing,
       _sizing,
@@ -138,7 +138,7 @@ base class DievasGlobalThemeData implements DievasThemeData {
     );
 
     return DievasGlobalThemeData._raw(
-      colors: _colors,
+      colours: _colours,
       animation: _animation,
       border: _border,
       spacing: _spacing,
@@ -151,9 +151,9 @@ base class DievasGlobalThemeData implements DievasThemeData {
     );
   }
 
-  static DievasElevationThemeData _buildDefaultElevation(DievasColourThemeData colors) {
+  static DievasElevationThemeData _buildDefaultElevation(DievasColourThemeData colours) {
     // Shadow colour: always derived from the overlay base — not the brand colour.
-    final shadow = colors.staticColours.staticBlack;
+    final shadow = colours.staticColours.staticBlack;
 
     // Helper to construct BoxShadow from tokens.
     BoxShadow layer({required double blur, required double offsetY, required double opacity}) =>
@@ -219,15 +219,15 @@ base class DievasGlobalThemeData implements DievasThemeData {
     );
   }
 
-  static ThemeData _buildMaterial(DievasColourThemeData colors) {
-    final brightness = colors.brightness;
-    final seedColor = colors.action.actionPrimary;
-    final scaffoldBg = colors.background.bgBase;
-    final textColor = colors.text.textPrimary;
+  static ThemeData _buildMaterial(DievasColourThemeData colours) {
+    final brightness = colours.brightness;
+    final seedColour = colours.action.actionPrimary;
+    final scaffoldBg = colours.background.bgBase;
+    final textColour = colours.text.textPrimary;
 
     final base = ThemeData(
       brightness: brightness,
-      colorScheme: .fromSeed(seedColor: seedColor, brightness: brightness),
+      colorScheme: .fromSeed(seedColor: seedColour, brightness: brightness),
       scaffoldBackgroundColor: scaffoldBg,
       useMaterial3: true,
       fontFamily: DievasFontFamilyPrimitives.sans,
@@ -237,37 +237,37 @@ base class DievasGlobalThemeData implements DievasThemeData {
       textTheme: base.textTheme.copyWith(
         displayLarge: base.textTheme.displayLarge?.copyWith(
           fontFamily: DievasFontFamilyPrimitives.sansExtended,
-          color: textColor,
+          color: textColour,
         ),
         displayMedium: base.textTheme.displayMedium?.copyWith(
           fontFamily: DievasFontFamilyPrimitives.sansExtended,
-          color: textColor,
+          color: textColour,
         ),
         displaySmall: base.textTheme.displaySmall?.copyWith(
           fontFamily: DievasFontFamilyPrimitives.sansExtended,
-          color: textColor,
+          color: textColour,
         ),
         headlineLarge: base.textTheme.headlineLarge?.copyWith(
           fontFamily: DievasFontFamilyPrimitives.sansExtended,
-          color: textColor,
+          color: textColour,
         ),
         headlineMedium: base.textTheme.headlineMedium?.copyWith(
           fontFamily: DievasFontFamilyPrimitives.sansExtended,
-          color: textColor,
+          color: textColour,
         ),
         headlineSmall: base.textTheme.headlineSmall?.copyWith(
           fontFamily: DievasFontFamilyPrimitives.sansExtended,
-          color: textColor,
+          color: textColour,
         ),
-        titleLarge: base.textTheme.titleLarge?.copyWith(color: textColor),
-        titleMedium: base.textTheme.titleMedium?.copyWith(color: textColor),
-        titleSmall: base.textTheme.titleSmall?.copyWith(color: textColor),
-        bodyLarge: base.textTheme.bodyLarge?.copyWith(color: textColor),
-        bodyMedium: base.textTheme.bodyMedium?.copyWith(color: textColor),
-        bodySmall: base.textTheme.bodySmall?.copyWith(color: textColor),
-        labelLarge: base.textTheme.labelLarge?.copyWith(color: textColor),
-        labelMedium: base.textTheme.labelMedium?.copyWith(color: textColor),
-        labelSmall: base.textTheme.labelSmall?.copyWith(color: textColor),
+        titleLarge: base.textTheme.titleLarge?.copyWith(color: textColour),
+        titleMedium: base.textTheme.titleMedium?.copyWith(color: textColour),
+        titleSmall: base.textTheme.titleSmall?.copyWith(color: textColour),
+        bodyLarge: base.textTheme.bodyLarge?.copyWith(color: textColour),
+        bodyMedium: base.textTheme.bodyMedium?.copyWith(color: textColour),
+        bodySmall: base.textTheme.bodySmall?.copyWith(color: textColour),
+        labelLarge: base.textTheme.labelLarge?.copyWith(color: textColour),
+        labelMedium: base.textTheme.labelMedium?.copyWith(color: textColour),
+        labelSmall: base.textTheme.labelSmall?.copyWith(color: textColour),
       ),
       primaryTextTheme: base.primaryTextTheme.copyWith(
         displayLarge: base.primaryTextTheme.displayLarge?.copyWith(fontFamily: DievasFontFamilyPrimitives.sansExtended),

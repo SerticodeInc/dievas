@@ -97,10 +97,10 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
 
               final foreground = activeStyle.foreground.withValues(alpha: opacityFactor);
               final borderSide = activeStyle.borderSide ?? .none;
-              final bgColor = (activeStyle.background ?? Colors.transparent).withValues(alpha: opacityFactor);
+              final bgColour = (activeStyle.background ?? Colors.transparent).withValues(alpha: opacityFactor);
 
               final decoration = BoxDecoration(
-                color: bgColor,
+                color: bgColour,
                 borderRadius: widget.borderRadius,
                 border: .fromBorderSide(borderSide.copyWith(color: borderSide.color.withValues(alpha: opacityFactor))),
               );

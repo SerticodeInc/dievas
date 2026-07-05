@@ -6,9 +6,9 @@ part of '../themes.dart';
 /// the fallback theme for the gallery. Consumer apps do not subclass this —
 /// they subclass [DievasGlobalThemeData] and provide their own brand tokens.
 final class DievasLightThemeData extends DievasGlobalThemeData {
-  DievasLightThemeData({super.components, super.typography}) : super(colors: _lightColors);
+  DievasLightThemeData({super.components, super.typography}) : super(colours: _lightColours);
 
-  static final DievasColourThemeData _lightColors = DievasColourThemeData(
+  static final DievasColourThemeData _lightColours = DievasColourThemeData(
     brightness: .light,
     core: const CoreColours(
       brand: Color(DievasColourSemanticLight.brand),

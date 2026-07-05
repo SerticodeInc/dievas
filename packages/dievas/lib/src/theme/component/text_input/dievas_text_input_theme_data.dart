@@ -20,11 +20,11 @@ final class DievasTextInputThemeData extends Equatable {
     required this.borderRadius,
     required this.strokeWidth,
     required this.strokeWidthFocused,
-    required this.bgColor,
-    required this.borderColor,
-    required this.borderColorFocused,
-    required this.borderColorError,
-    required this.iconColor,
+    required this.bgColour,
+    required this.borderColour,
+    required this.borderColourFocused,
+    required this.borderColourError,
+    required this.iconColour,
     required this.iconSize,
     required this.iconSpacing,
     required this.labelSpacing,
@@ -63,19 +63,19 @@ final class DievasTextInputThemeData extends Equatable {
   final double strokeWidthFocused;
 
   /// Input surface background colour.
-  final Color bgColor;
+  final Color bgColour;
 
   /// Default border colour (resting state).
-  final Color borderColor;
+  final Color borderColour;
 
   /// Border colour when focused.
-  final Color borderColorFocused;
+  final Color borderColourFocused;
 
   /// Border colour in error state.
-  final Color borderColorError;
+  final Color borderColourError;
 
   /// Leading / trailing icon colour.
-  final Color iconColor;
+  final Color iconColour;
 
   /// Leading / trailing icon size (dp).
   final double iconSize;
@@ -104,11 +104,11 @@ final class DievasTextInputThemeData extends Equatable {
     borderRadius,
     strokeWidth,
     strokeWidthFocused,
-    bgColor,
-    borderColor,
-    borderColorFocused,
-    borderColorError,
-    iconColor,
+    bgColour,
+    borderColour,
+    borderColourFocused,
+    borderColourError,
+    iconColour,
     iconSize,
     iconSpacing,
     labelSpacing,

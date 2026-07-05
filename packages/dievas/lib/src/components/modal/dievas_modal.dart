@@ -30,7 +30,7 @@ Future<T?> showDievasModal<T>({
   return showDialog<T>(
     context: context,
     barrierDismissible: barrierDismissible,
-    barrierColor: theme.barrierColor,
+    barrierColor: theme.barrierColour,
     routeSettings: routeSettings,
     builder: builder,
   );
@@ -78,7 +78,7 @@ class DievasModal extends StatelessWidget {
       child: ConstrainedBox(
         constraints: BoxConstraints(minWidth: theme.minWidth, maxWidth: theme.maxWidth),
         child: Material(
-          color: theme.backgroundColor,
+          color: theme.backgroundColour,
           elevation: theme.elevation,
           borderRadius: theme.borderRadius,
           child: Padding(
@@ -101,7 +101,7 @@ class DievasModal extends StatelessWidget {
                             dimension: theme.closeIconSize,
                             child: IconTheme(
                               data: IconThemeData(
-                                color: DievasTheme.colorsOf(context).icon.iconSecondary,
+                                color: DievasTheme.coloursOf(context).icon.iconSecondary,
                                 size: theme.closeIconSize,
                               ),
                               child: const _CloseIcon(),

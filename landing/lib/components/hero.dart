@@ -37,10 +37,10 @@ class Hero extends StatelessComponent {
           div(classes: 'flex-1', []),
 
           // Bottom row
-          div(
-            classes: 'flex items-end justify-between px-6 pb-6 md:px-8 md:pb-8',
-            [_bottomLeftCard(), _bottomRightCorner()],
-          ),
+          div(classes: 'flex items-end justify-between px-6 pb-6 md:px-8 md:pb-8', [
+            _bottomLeftCard(),
+            _bottomRightCorner(),
+          ]),
         ],
       ),
 
@@ -138,17 +138,15 @@ class Hero extends StatelessComponent {
     classes: 'font-display font-black leading-[0.92] tracking-[-0.025em] text-text-hi',
     attributes: const {'style': 'font-size: clamp(48px, 7.5vw, 104px); margin-bottom: 24px;'},
     [
-      span(classes: 'word-in', attributes: const {'style': 'animation-delay: 0.16s'}, [
-        Component.text('Tokens'),
-      ]),
+      span(classes: 'word-in', attributes: const {'style': 'animation-delay: 0.16s'}, [Component.text('Tokens')]),
       Component.text(' '),
-      span(classes: 'word-in', attributes: const {'style': 'animation-delay: 0.27s'}, [
-        Component.text('that'),
-      ]),
+      span(classes: 'word-in', attributes: const {'style': 'animation-delay: 0.27s'}, [Component.text('that')]),
       Component.text(' '),
-      span(classes: 'word-in text-brand', attributes: const {'style': 'animation-delay: 0.38s'}, [
-        Component.text('scale.'),
-      ]),
+      span(
+        classes: 'word-in text-brand',
+        attributes: const {'style': 'animation-delay: 0.38s'},
+        [Component.text('scale.')],
+      ),
     ],
   );
 
@@ -230,10 +228,7 @@ class Hero extends StatelessComponent {
             'no-underline '
             'transition-all duration-200 '
             'hover:bg-white/15 hover:-translate-y-px',
-        [
-          Component.text('View Gallery'),
-          RawText(_arrowUpRightSvg),
-        ],
+        [Component.text('View Gallery'), RawText(_arrowUpRightSvg)],
       ),
     ],
   );
@@ -245,36 +240,30 @@ class Hero extends StatelessComponent {
 
   // ── BottomRightCorner — glass docs card ────────────────────────────────────
 
-  Component _bottomRightCorner() => div(
-    classes: 'glass-card corner-card p-3 md:p-4 flex items-center gap-3 md:gap-4',
-    [
-      div(
-        classes:
-            'flex items-center justify-center '
-            'w-9 h-9 md:w-11 md:h-11 '
-            'rounded-full bg-white/5 border border-white/10',
-        [RawText(_arrowUpRightSvg)],
-      ),
-      div(classes: 'flex flex-col', [
-        span(classes: 'font-display font-semibold text-sm md:text-base text-text-hi leading-tight', [
-          Component.text('GitHub'),
-        ]),
-        a(
-          href: DievasUrls.github,
-          attributes: {'target': '_blank', 'rel': 'noopener'},
-          classes:
-              'flex items-center gap-1 '
-              'text-xs text-text-mid no-underline '
-              'transition-colors duration-200 '
-              'hover:text-brand',
-          [
-            Component.text('Repository'),
-            RawText(_chevronRightSvg),
-          ],
-        ),
+  Component _bottomRightCorner() => div(classes: 'glass-card corner-card p-3 md:p-4 flex items-center gap-3 md:gap-4', [
+    div(
+      classes:
+          'flex items-center justify-center '
+          'w-9 h-9 md:w-11 md:h-11 '
+          'rounded-full bg-white/5 border border-white/10',
+      [RawText(_arrowUpRightSvg)],
+    ),
+    div(classes: 'flex flex-col', [
+      span(classes: 'font-display font-semibold text-sm md:text-base text-text-hi leading-tight', [
+        Component.text('GitHub'),
       ]),
-    ],
-  );
+      a(
+        href: DievasUrls.github,
+        attributes: {'target': '_blank', 'rel': 'noopener'},
+        classes:
+            'flex items-center gap-1 '
+            'text-xs text-text-mid no-underline '
+            'transition-colors duration-200 '
+            'hover:text-brand',
+        [Component.text('Repository'), RawText(_chevronRightSvg)],
+      ),
+    ]),
+  ]);
 
   // ── Product chip — glass category card ──────────────────────────────────────
 

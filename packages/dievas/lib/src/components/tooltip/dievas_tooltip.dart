@@ -37,7 +37,7 @@ class DievasTooltip extends StatelessWidget {
       verticalOffset: theme.verticalOffset,
       waitDuration: theme.waitDuration,
       showDuration: theme.showDuration,
-      decoration: BoxDecoration(color: theme.backgroundColor, borderRadius: theme.borderRadius),
+      decoration: BoxDecoration(color: theme.backgroundColour, borderRadius: theme.borderRadius),
       textStyle: theme.textStyle,
       padding: theme.padding,
       child: child,

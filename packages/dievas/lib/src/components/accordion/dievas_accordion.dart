@@ -140,7 +140,7 @@ class _AccordionCardState extends State<_AccordionCard> with SingleTickerProvide
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).accordion;
-    final colours = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
     final iconColour = widget.item.disabled ? colours.icon.iconDisabled : colours.icon.iconSecondary;
 
     return DecoratedBox(

@@ -110,7 +110,7 @@ class _DievasSwitchTrackBuilder extends AnimatedWidget {
       width: theme.trackWidth,
       height: theme.trackHeight,
       decoration: BoxDecoration(
-        color: .lerp(theme.trackColorOff, theme.trackColorOn, t) ?? theme.trackColorOff,
+        color: .lerp(theme.trackColourOff, theme.trackColourOn, t) ?? theme.trackColourOff,
         borderRadius: theme.trackRadius,
       ),
       child: Stack(
@@ -122,7 +122,7 @@ class _DievasSwitchTrackBuilder extends AnimatedWidget {
             child: Container(
               width: theme.thumbSize,
               height: theme.thumbSize,
-              decoration: BoxDecoration(color: theme.thumbColor, borderRadius: theme.thumbRadius),
+              decoration: BoxDecoration(color: theme.thumbColour, borderRadius: theme.thumbRadius),
             ),
           ),
         ],

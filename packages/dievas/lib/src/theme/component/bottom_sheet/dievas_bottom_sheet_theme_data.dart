@@ -9,8 +9,8 @@ final class DievasBottomSheetThemeData extends Equatable {
     required this.handleHeight,
     required this.handleRadius,
     required this.handleTopInset,
-    required this.backgroundColor,
-    required this.barrierColor,
+    required this.backgroundColour,
+    required this.barrierColour,
     required this.elevation,
   });
 
@@ -30,10 +30,10 @@ final class DievasBottomSheetThemeData extends Equatable {
   final double handleTopInset;
 
   /// Background colour of the sheet surface.
-  final Color backgroundColor;
+  final Color backgroundColour;
 
   /// Colour of the modal barrier behind the sheet.
-  final Color barrierColor;
+  final Color barrierColour;
 
   /// Shadow elevation of the sheet.
   final double elevation;
@@ -45,8 +45,8 @@ final class DievasBottomSheetThemeData extends Equatable {
     handleHeight,
     handleRadius,
     handleTopInset,
-    backgroundColor,
-    barrierColor,
+    backgroundColour,
+    barrierColour,
     elevation,
   ];
 }

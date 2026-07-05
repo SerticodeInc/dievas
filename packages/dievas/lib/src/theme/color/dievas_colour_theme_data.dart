@@ -16,8 +16,8 @@ import 'sets/text_colours.dart';
 /// The complete colour sub-system for a Dievas theme.
 ///
 /// Holds all typed colour set structs — one per domain. Consuming widgets
-/// read from this via [DievasTheme.colorsOf(context)] or the context
-/// extension shorthand `context.colors`.
+/// read from this via [DievasTheme.coloursOf(context)] or the context
+/// extension shorthand `context.colours`.
 ///
 /// Never reference primitive or semantic token integers directly in component
 /// code — always go through this struct.

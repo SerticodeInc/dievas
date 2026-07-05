@@ -14,10 +14,10 @@ final class DievasSwitchThemeData extends Equatable {
     required this.thumbSize,
     required this.thumbRadius,
     required this.thumbPadding,
-    required this.trackColorOn,
-    required this.trackColorOff,
-    required this.thumbColor,
-    required this.borderColorOff,
+    required this.trackColourOn,
+    required this.trackColourOff,
+    required this.thumbColour,
+    required this.borderColourOff,
     required this.disabledOpacity,
     required this.animationDuration,
     required this.labelStyle,
@@ -43,16 +43,16 @@ final class DievasSwitchThemeData extends Equatable {
   final double thumbPadding;
 
   /// Track background when ON.
-  final Color trackColorOn;
+  final Color trackColourOn;
 
   /// Track background when OFF.
-  final Color trackColorOff;
+  final Color trackColourOff;
 
   /// Thumb fill in both states.
-  final Color thumbColor;
+  final Color thumbColour;
 
   /// Track border when OFF (1 dp stroke, transparent when ON).
-  final Color borderColorOff;
+  final Color borderColourOff;
 
   /// Opacity multiplier applied to the whole widget when disabled.
   final double disabledOpacity;
@@ -74,10 +74,10 @@ final class DievasSwitchThemeData extends Equatable {
     thumbSize,
     thumbRadius,
     thumbPadding,
-    trackColorOn,
-    trackColorOff,
-    thumbColor,
-    borderColorOff,
+    trackColourOn,
+    trackColourOff,
+    thumbColour,
+    borderColourOff,
     disabledOpacity,
     animationDuration,
     labelStyle,

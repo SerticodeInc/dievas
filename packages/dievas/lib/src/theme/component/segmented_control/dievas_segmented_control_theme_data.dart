@@ -11,11 +11,11 @@ final class DievasSegmentedControlThemeData extends Equatable {
     required this.selectedLabelStyle,
     required this.borderRadius,
     required this.padding,
-    required this.bgColor,
-    required this.selectedBgColor,
-    required this.borderColor,
-    required this.textColor,
-    required this.selectedTextColor,
+    required this.bgColour,
+    required this.selectedBgColour,
+    required this.borderColour,
+    required this.textColour,
+    required this.selectedTextColour,
     required this.disabledOpacity,
     required this.animationDuration,
     required this.minSegmentWidth,
@@ -35,19 +35,19 @@ final class DievasSegmentedControlThemeData extends Equatable {
   final EdgeInsets padding;
 
   /// Background colour for unselected segments.
-  final Color bgColor;
+  final Color bgColour;
 
   /// Background colour for the selected segment.
-  final Color selectedBgColor;
+  final Color selectedBgColour;
 
   /// Border colour for unselected segments (applied as container border).
-  final Color borderColor;
+  final Color borderColour;
 
   /// Label colour for unselected segments.
-  final Color textColor;
+  final Color textColour;
 
   /// Label colour for the selected segment.
-  final Color selectedTextColor;
+  final Color selectedTextColour;
 
   /// Opacity multiplier when disabled.
   final double disabledOpacity;
@@ -67,11 +67,11 @@ final class DievasSegmentedControlThemeData extends Equatable {
     selectedLabelStyle,
     borderRadius,
     padding,
-    bgColor,
-    selectedBgColor,
-    borderColor,
-    textColor,
-    selectedTextColor,
+    bgColour,
+    selectedBgColour,
+    borderColour,
+    textColour,
+    selectedTextColour,
     disabledOpacity,
     animationDuration,
     minSegmentWidth,

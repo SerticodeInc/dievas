@@ -10,12 +10,12 @@ void main() {
       expect(DievasLightThemeData(), isA<DievasThemeData>());
     });
 
-    test('colors have light brightness', () {
-      expect(DievasLightThemeData().colors.brightness, Brightness.light);
+    test('colours have light brightness', () {
+      expect(DievasLightThemeData().colours.brightness, Brightness.light);
     });
 
-    test('all color sets are non-null', () {
-      final t = DievasLightThemeData().colors;
+    test('all colour sets are non-null', () {
+      final t = DievasLightThemeData().colours;
       expect(t.core, isNotNull);
       expect(t.text, isNotNull);
       expect(t.icon, isNotNull);
@@ -148,8 +148,8 @@ void main() {
       expect(DievasDarkThemeData(), isA<DievasThemeData>());
     });
 
-    test('colors have dark brightness', () {
-      expect(DievasDarkThemeData().colors.brightness, Brightness.dark);
+    test('colours have dark brightness', () {
+      expect(DievasDarkThemeData().colours.brightness, Brightness.dark);
     });
 
     test('material theme data is non-null', () {
@@ -159,7 +159,7 @@ void main() {
 
   group('DievasColourThemeData', () {
     test('copyWith preserves unset fields', () {
-      final t = DievasLightThemeData().colors;
+      final t = DievasLightThemeData().colours;
       final copy = t.copyWith();
       expect(copy.brightness, t.brightness);
       expect(copy.core, t.core);
@@ -167,15 +167,15 @@ void main() {
     });
 
     test('copyWith overrides specified field', () {
-      final t = DievasLightThemeData().colors;
+      final t = DievasLightThemeData().colours;
       final copy = t.copyWith(brightness: .dark);
       expect(copy.brightness, Brightness.dark);
       expect(copy.core, t.core);
     });
 
     test('lerp between light and dark', () {
-      final light = DievasLightThemeData().colors;
-      final dark = DievasDarkThemeData().colors;
+      final light = DievasLightThemeData().colours;
+      final dark = DievasDarkThemeData().colours;
       final mid = DievasColourThemeData.lerp(light, dark, 0.5);
       expect(mid, isA<DievasColourThemeData>());
     });
@@ -191,10 +191,10 @@ void main() {
       expect(theme, isA<DievasThemeData>());
     });
 
-    testWidgets('colorsOf returns colour theme', (tester) async {
+    testWidgets('coloursOf returns colour theme', (tester) async {
       await tester.pumpWidget(const Harness(child: SizedBox(key: childKey)));
       final ctx = tester.element(find.byKey(childKey));
-      expect(DievasTheme.colorsOf(ctx), isA<DievasColourThemeData>());
+      expect(DievasTheme.coloursOf(ctx), isA<DievasColourThemeData>());
     });
 
     testWidgets('spacingOf returns spacing theme', (tester) async {
@@ -224,7 +224,7 @@ void main() {
     testWidgets('updateShouldNotify returns true for different data', (tester) async {
       await tester.pumpWidget(const Harness(child: SizedBox(key: childKey)));
       final ctx = tester.element(find.byKey(childKey));
-      expect(DievasTheme.of(ctx).colors.brightness, anyOf(Brightness.light, Brightness.dark));
+      expect(DievasTheme.of(ctx).colours.brightness, anyOf(Brightness.light, Brightness.dark));
     });
   });
 

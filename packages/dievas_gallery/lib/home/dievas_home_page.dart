@@ -238,7 +238,10 @@ class _ComponentCategory extends StatelessWidget {
                       borderRadius: context.border.md,
                       border: .all(color: context.colours.border.borderDefault),
                     ),
-                    child: Text(component, style: typography.bodyXs.copyWith(color: context.colours.text.textSecondary)),
+                    child: Text(
+                      component,
+                      style: typography.bodyXs.copyWith(color: context.colours.text.textSecondary),
+                    ),
                   ),
               ],
             ),

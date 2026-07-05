@@ -55,7 +55,7 @@ class _BothOrientations extends StatelessWidget {
             'Horizontal',
             style: context.typography.labelXs.copyWith(
               fontWeight: FontWeight.w600,
-              color: context.colors.text.textPrimary,
+              color: context.colours.text.textPrimary,
             ),
           ),
           SizedBox(height: context.spacing.sm),
@@ -65,7 +65,7 @@ class _BothOrientations extends StatelessWidget {
             'Horizontal with indent',
             style: context.typography.labelXs.copyWith(
               fontWeight: FontWeight.w600,
-              color: context.colors.text.textPrimary,
+              color: context.colours.text.textPrimary,
             ),
           ),
           SizedBox(height: context.spacing.sm),
@@ -75,7 +75,7 @@ class _BothOrientations extends StatelessWidget {
             'Vertical',
             style: context.typography.labelXs.copyWith(
               fontWeight: FontWeight.w600,
-              color: context.colors.text.textPrimary,
+              color: context.colours.text.textPrimary,
             ),
           ),
           SizedBox(height: context.spacing.sm),

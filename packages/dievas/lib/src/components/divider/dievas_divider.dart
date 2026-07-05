@@ -13,7 +13,7 @@ enum DievasDividerOrientation {
 
 /// A thin hairline rule that separates content regions.
 ///
-/// Automatically uses `colors.border.borderDefault` and `border.strokeThin`
+/// Automatically uses `colours.border.borderDefault` and `border.strokeThin`
 /// from the active [DievasTheme].
 ///
 /// Moon reference: Divider
@@ -36,7 +36,7 @@ class DievasDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = DievasTheme.colorsOf(context).border.borderDefault;
+    final color = DievasTheme.coloursOf(context).border.borderDefault;
     final thickness = DievasTheme.borderOf(context).strokeThick;
 
     return switch (orientation) {

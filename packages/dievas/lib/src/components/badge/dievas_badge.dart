@@ -58,7 +58,7 @@ class DievasBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).badge;
-    final badgeColours = _BadgeColours(DievasTheme.colorsOf(context));
+    final badgeColours = _BadgeColours(DievasTheme.coloursOf(context));
     final appearance = _appearance(style, tone, badgeColours);
 
     final hasBorder = appearance.border != badgeColours.transparent;

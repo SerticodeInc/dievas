@@ -34,11 +34,11 @@ class DievasSnackbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
     final theme = DievasTheme.componentsOf(context).snackbar;
 
-    final bg = backgroundColour ?? colors.background.bgElevated;
-    final fgColour = colors.text.textPrimary;
+    final bg = backgroundColour ?? colours.background.bgElevated;
+    final fgColour = colours.text.textPrimary;
     final spacing = context.spacing;
 
     return Padding(
@@ -80,7 +80,7 @@ class DievasSnackbar extends StatelessWidget {
                   SizedBox(width: spacing.md),
                   GestureDetector(
                     onTap: action.onPressed,
-                    child: Text(action.label, style: theme.actionStyle.copyWith(color: colors.action.actionPrimary)),
+                    child: Text(action.label, style: theme.actionStyle.copyWith(color: colours.action.actionPrimary)),
                   ),
                 ],
               ],

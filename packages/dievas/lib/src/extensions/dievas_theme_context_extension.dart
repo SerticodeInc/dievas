@@ -9,13 +9,13 @@ import 'package:dievas/src/theme.dart';
 ///
 /// Usage inside a widget's [build] method:
 /// ```dart
-/// final color = context.colors.action.actionPrimary;
+/// final color = context.colours.action.actionPrimary;
 /// final style = context.typography.labelMd;
 /// final gap   = context.spacing.md;
 /// ```
 extension DievasThemeContextExtension on BuildContext {
   /// The complete colour sub-system for the current theme.
-  DievasColourThemeData get colors => DievasTheme.colorsOf(this);
+  DievasColourThemeData get colours => DievasTheme.coloursOf(this);
 
   /// The complete typography sub-system — the full type ramp as [TextStyle] objects.
   DievasTypographyThemeData get typography => DievasTheme.typographyOf(this);

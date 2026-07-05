@@ -101,7 +101,7 @@ class DievasModal extends StatelessWidget {
                             dimension: theme.closeIconSize,
                             child: IconTheme(
                               data: IconThemeData(
-                                color: DievasTheme.colorsOf(context).icon.iconSecondary,
+                                color: DievasTheme.coloursOf(context).icon.iconSecondary,
                                 size: theme.closeIconSize,
                               ),
                               child: const _CloseIcon(),

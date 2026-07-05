@@ -211,7 +211,7 @@ class _FilledDigit extends StatelessWidget {
   Widget build(BuildContext context) {
     if (obscureText) {
       final r = theme.cursorHeight / 3;
-      final dotColour = theme.digitStyle.color ?? DievasTheme.colorsOf(context).text.textPrimary;
+      final dotColour = theme.digitStyle.color ?? DievasTheme.coloursOf(context).text.textPrimary;
       return Container(
         width: r,
         height: r,

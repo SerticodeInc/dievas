@@ -105,7 +105,7 @@ class _DemoBlock extends StatelessWidget {
     crossAxisAlignment: .start,
     mainAxisSize: .min,
     children: [
-      Text(name, style: context.typography.labelXs.copyWith(color: context.colors.text.textTertiary)),
+      Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
       SizedBox(height: context.spacing.sm),
       ComponentBoundary(child: child),
     ],

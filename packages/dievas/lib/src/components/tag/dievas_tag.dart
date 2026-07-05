@@ -58,7 +58,7 @@ class DievasTag extends StatelessWidget {
 
     final content = _DievasTagContent(
       theme: theme,
-      appearance: _appearance(_TagColors(DievasTheme.colorsOf(context))),
+      appearance: _appearance(_TagColors(DievasTheme.coloursOf(context))),
       label: label,
       leadingIcon: leadingIcon,
       onRemove: onRemove,
@@ -102,7 +102,7 @@ class _DievasTagContent extends StatelessWidget {
     decoration: BoxDecoration(
       color: appearance.background,
       borderRadius: theme.borderRadius,
-      border: appearance.border != _TagColors(DievasTheme.colorsOf(context)).transparent
+      border: appearance.border != _TagColors(DievasTheme.coloursOf(context)).transparent
           ? .all(color: appearance.border)
           : null,
     ),

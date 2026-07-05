@@ -1,4 +1,5 @@
 import 'package:dievas/src/theme/color/dievas_colour_theme_data.dart';
+import 'package:dievas/src/theme/component/tag/dievas_tag_border_radius.dart';
 import 'package:dievas/src/theme/component/tag/dievas_tag_theme_data.dart';
 import 'package:flutter/material.dart';
 
@@ -47,6 +48,7 @@ class DievasTag extends StatelessWidget {
     this.backgroundColor,
     this.foregroundColor,
     this.borderColor,
+    this.borderRadius,
   });
 
   final String label;
@@ -70,6 +72,11 @@ class DievasTag extends StatelessWidget {
   /// Overrides the tag border colour for this instance only.
   final Color? borderColor;
 
+  /// Overrides the border radius shape for this instance only.
+  ///
+  /// When `null` the theme level [DievasTagThemeData.borderRadius] is used.
+  final DievasTagBorderRadius? borderRadius;
+
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).tag;
@@ -77,6 +84,7 @@ class DievasTag extends StatelessWidget {
 
     final content = _DievasTagContent(
       theme: theme,
+      borderRadius: borderRadius,
       appearance: _appearance(
         colours,
         instanceBackground: backgroundColor ?? theme.backgroundColor,
@@ -88,11 +96,10 @@ class DievasTag extends StatelessWidget {
       onRemove: onRemove,
     );
 
-    if (onPressed == null) {
-      return content;
-    }
-
-    return GestureDetector(onTap: onPressed, behavior: .opaque, child: content);
+    return switch (onPressed) {
+      final onPressed? => GestureDetector(onTap: onPressed, behavior: .opaque, child: content),
+      _ => content,
+    };
   }
 
   _DievasTagAppearance _appearance(
@@ -124,6 +131,7 @@ class _DievasTagContent extends StatelessWidget {
     required this.theme,
     required this.appearance,
     required this.label,
+    this.borderRadius,
     this.leadingIcon,
     this.onRemove,
   });
@@ -131,6 +139,7 @@ class _DievasTagContent extends StatelessWidget {
   final String label;
   final _DievasTagAppearance appearance;
   final DievasTagThemeData theme;
+  final DievasTagBorderRadius? borderRadius;
 
   final Widget? leadingIcon;
   final VoidCallback? onRemove;
@@ -141,7 +150,7 @@ class _DievasTagContent extends StatelessWidget {
     padding: theme.padding,
     decoration: BoxDecoration(
       color: appearance.background,
-      borderRadius: theme.borderRadius.resolve(theme.minHeight),
+      borderRadius: (borderRadius ?? theme.borderRadius).resolve(theme.minHeight),
       border: .all(color: appearance.border, width: theme.borderWidth),
     ),
     child: _DievasTagRow(

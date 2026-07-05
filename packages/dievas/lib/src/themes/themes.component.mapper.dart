@@ -351,13 +351,14 @@ DievasTagThemeData _createTagTheme(
 ) {
   return DievasTagThemeData(
     textStyle: typography.labelSm,
-    borderRadius: border.sm,
+    borderRadius: DievasTagBorderRadius.rounded(border.sm),
     padding: .symmetric(horizontal: spacing.smPlus, vertical: spacing.xs),
     iconSize: DievasSizingPrimitives.s14,
     iconSpacing: spacing.xs,
     removeIconSize: DievasSizingPrimitives.s14,
     removeIconSpacing: spacing.xs,
     minHeight: DievasSizingPrimitives.s28,
+    borderWidth: border.strokeDefault,
   );
 }
 

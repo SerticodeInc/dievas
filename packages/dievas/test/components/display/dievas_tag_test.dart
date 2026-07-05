@@ -59,5 +59,68 @@ void main() {
       await tester.pumpWidget(Harness(child: const DievasTag(label: 'Static')));
       expect(tester.takeException(), isNull);
     });
+
+    testWidgets('per-instance backgroundColor overrides style', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: const DievasTag(label: 'Colourful', backgroundColor: Colors.purple, foregroundColor: Colors.white),
+        ),
+      );
+      expect(tester.takeException(), isNull);
+      expect(find.text('Colourful'), findsOneWidget);
+    });
+
+    testWidgets('per-instance borderColor applied to outlined style', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: const DievasTag(label: 'Bordered', style: DievasTagStyle.outlined, borderColor: Colors.red),
+        ),
+      );
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('stable width between filled and outlined styles', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: Row(
+            children: [
+              DievasTag(label: 'Same', style: DievasTagStyle.filled),
+              DievasTag(label: 'Same', style: DievasTagStyle.outlined),
+            ],
+          ),
+        ),
+      );
+      expect(tester.takeException(), isNull);
+
+      final tags = find.byType(DievasTag);
+      final filledTag = tester.widget<Container>(
+        find.descendant(of: tags.first, matching: find.byType(Container)).first,
+      );
+      final outlinedTag = tester.widget<Container>(
+        find.descendant(of: tags.last, matching: find.byType(Container)).first,
+      );
+
+      // Both should have a BorderDecoration with a border (even if transparent)
+      final filledBox = filledTag.decoration as BoxDecoration;
+      final outlinedBox = outlinedTag.decoration as BoxDecoration;
+
+      expect(filledBox.border, isNotNull);
+      expect(outlinedBox.border, isNotNull);
+    });
+
+    testWidgets('pill borderRadius resolves correctly', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: const DievasTag(label: 'Pill'),
+          themeOverrides: (theme) => theme.copyWith(
+            components: theme.components.copyWith(
+              tag: theme.components.tag.copyWith(borderRadius: DievasTagBorderRadius.pill),
+            ),
+          ),
+        ),
+      );
+      expect(tester.takeException(), isNull);
+      expect(find.text('Pill'), findsOneWidget);
+    });
   });
 }

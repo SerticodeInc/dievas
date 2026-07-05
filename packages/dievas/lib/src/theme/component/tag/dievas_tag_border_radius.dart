@@ -1,3 +1,4 @@
+import 'package:dievas_tokens/dievas_tokens.dart';
 import 'package:flutter/painting.dart';
 
 /// Defines the border radius shape for [DievasTag].
@@ -7,15 +8,15 @@ import 'package:flutter/painting.dart';
 sealed class DievasTagBorderRadius {
   const DievasTagBorderRadius._();
 
-  /// Fully rounded pill shape — radius is half the container height.
+  /// Fully rounded pill shape.
   static const DievasTagBorderRadius pill = _PillTagBorderRadius();
 
   /// A specific [BorderRadius].
   const factory DievasTagBorderRadius.rounded(BorderRadius radius) = _RoundedTagBorderRadius;
 
-  /// Resolves to a concrete [BorderRadius] for the given container height.
-  BorderRadius resolve(double containerHeight) => switch (this) {
-    _PillTagBorderRadius() => BorderRadius.circular(containerHeight / 2),
+  /// Resolves to a concrete [BorderRadius].
+  BorderRadius resolve() => switch (this) {
+    _PillTagBorderRadius() => BorderRadius.circular(DievasRadiusSemantic.full),
     _RoundedTagBorderRadius(:final radius) => radius,
   };
 

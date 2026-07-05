@@ -92,8 +92,9 @@ void main() {
       );
       expect(tester.takeException(), isNull);
 
-      final filledTag = tester.widget<Container>(find.byType(Container).first);
-      final outlinedTag = tester.widget<Container>(find.byType(Container).last);
+      final tags = find.byType(DievasTag);
+      final filledTag = tester.widget<Container>(find.descendant(of: tags.first, matching: find.byType(Container)).first);
+      final outlinedTag = tester.widget<Container>(find.descendant(of: tags.last, matching: find.byType(Container)).first);
 
       // Both should have a BorderDecoration with a border (even if transparent)
       final filledBox = filledTag.decoration as BoxDecoration;

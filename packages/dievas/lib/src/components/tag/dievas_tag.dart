@@ -150,7 +150,7 @@ class _DievasTagContent extends StatelessWidget {
     padding: theme.padding,
     decoration: BoxDecoration(
       color: appearance.background,
-      borderRadius: (borderRadius ?? theme.borderRadius).resolve(theme.minHeight),
+      borderRadius: (borderRadius ?? theme.borderRadius).resolve(),
       border: .all(color: appearance.border, width: theme.borderWidth),
     ),
     child: _DievasTagRow(

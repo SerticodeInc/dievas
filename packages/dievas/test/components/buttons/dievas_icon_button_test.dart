@@ -37,15 +37,27 @@ void main() {
       }
     });
 
-    testWidgets('renders both shapes', (tester) async {
-      for (final shape in DievasButtonShape.values) {
-        await tester.pumpWidget(
-          Harness(
-            child: DievasIconButton(icon: const Icon(Icons.star), shape: shape, onPressed: () {}),
+    testWidgets('renders with BorderRadiusGeometry shape', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: DievasIconButton(icon: const Icon(Icons.star), shape: BorderRadius.circular(12), onPressed: () {}),
+        ),
+      );
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('renders with colour overrides', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: DievasIconButton(
+            icon: const Icon(Icons.star),
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.white,
+            onPressed: () {},
           ),
-        );
-        expect(tester.takeException(), isNull);
-      }
+        ),
+      );
+      expect(tester.takeException(), isNull);
     });
 
     testWidgets('disabled when onPressed is null', (tester) async {

@@ -31,26 +31,32 @@ enum DievasTextButtonStyle {
 class DievasTextButton extends StatefulWidget with DievasButtonStateAnimatedLoaderMixin {
   const DievasTextButton({
     super.key,
-    required this.label,
     this.style = .primary,
     this.size = .md,
     this.state = .idle,
+    this.label,
+    this.child,
+    this.shape,
+    this.foregroundColor,
     this.leadingIcon,
     this.trailingIcon,
     this.onPressed,
     this.loaderRotationDuration = DievasAnimationSemantic.loader,
-  });
+  }) : assert(label != null || child != null, 'Either label or child must be provided');
 
   @override
   final Duration loaderRotationDuration;
 
-  final String label;
   final DievasTextButtonStyle style;
   final DievasButtonSize size;
 
   @override
   final DievasButtonState state;
 
+  final String? label;
+  final Widget? child;
+  final BorderRadiusGeometry? shape;
+  final Color? foregroundColor;
   final Widget? leadingIcon;
   final Widget? trailingIcon;
 
@@ -100,6 +106,7 @@ class _DievasTextButtonState extends State<DievasTextButton>
         child: InkWell(
           statesController: statesController,
           onTap: (widget.state == .loading || widget.state == .disabled) ? null : widget.onPressed,
+          borderRadius: widget.shape?.resolve(Directionality.of(context)),
           splashFactory: NoSplash.splashFactory,
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,
@@ -116,29 +123,31 @@ class _DievasTextButtonState extends State<DievasTextButton>
 
               final themeStyle = buttonTheme.style;
               final activeStyle = isPressed ? themeStyle.focused : themeStyle.idle;
-              final foreground = activeStyle.foreground.withValues(alpha: opacityFactor);
+              final foreground = (widget.foregroundColor ?? activeStyle.foreground).withValues(alpha: opacityFactor);
 
-              final content = Row(
-                mainAxisSize: .min,
-                spacing: iconSpacing,
-                children: [
-                  if (widget.leadingIcon case final icon?)
-                    IconTheme(
-                      data: IconThemeData(color: foreground, size: iconSize),
-                      child: icon,
-                    ),
-                  AnimatedDefaultTextStyle(
-                    duration: pressDuration,
-                    style: textStyle.copyWith(color: foreground),
-                    child: Text(widget.label),
-                  ),
-                  if (widget.trailingIcon case final icon?)
-                    IconTheme(
-                      data: IconThemeData(color: foreground, size: iconSize),
-                      child: icon,
-                    ),
-                ],
-              );
+              final content = widget.child ??
+                Row(
+                  mainAxisSize: .min,
+                  spacing: iconSpacing,
+                  children: [
+                    if (widget.leadingIcon case final icon?)
+                      IconTheme(
+                        data: IconThemeData(color: foreground, size: iconSize),
+                        child: icon,
+                      ),
+                    if (widget.label case final label? when label.isNotEmpty)
+                      AnimatedDefaultTextStyle(
+                        duration: pressDuration,
+                        style: textStyle.copyWith(color: foreground),
+                        child: Text(label),
+                      ),
+                    if (widget.trailingIcon case final icon?)
+                      IconTheme(
+                        data: IconThemeData(color: foreground, size: iconSize),
+                        child: icon,
+                      ),
+                  ],
+                );
 
               return DievasButtonStateSwitcher(
                 state: widget.state,

@@ -31,6 +31,8 @@ export 'theme/component/button/dievas_text_button_theme_data.dart';
 export 'theme/component/checkbox/dievas_checkbox_theme_data.dart';
 export 'theme/component/circular_progress/dievas_circular_progress_theme_data.dart';
 export 'theme/component/dievas_component_theme_data.dart';
+export 'theme/component/divider/dievas_divider_indent.dart';
+export 'theme/component/divider/dievas_divider_theme_data.dart';
 export 'theme/component/dievas_input_theme_value.dart';
 export 'theme/component/dot_indicator/dievas_dot_indicator_theme_data.dart';
 export 'theme/component/drawer/dievas_drawer_theme_data.dart';

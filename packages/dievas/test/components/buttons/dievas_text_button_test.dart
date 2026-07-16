@@ -77,5 +77,24 @@ void main() {
       await tester.tap(find.byType(DievasTextButton));
       expect(tapped, isTrue);
     });
+
+    testWidgets('renders with custom child instead of label', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: DievasTextButton(child: const Text('Custom child'), onPressed: () {}),
+        ),
+      );
+      expect(tester.takeException(), isNull);
+      expect(find.text('Custom child'), findsOneWidget);
+    });
+
+    testWidgets('renders with foreground colour override', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: DievasTextButton(label: 'Colourful', foregroundColor: Colors.teal, onPressed: () {}),
+        ),
+      );
+      expect(tester.takeException(), isNull);
+    });
   });
 }

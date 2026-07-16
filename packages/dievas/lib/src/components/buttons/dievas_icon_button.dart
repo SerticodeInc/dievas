@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:dievas_tokens/dievas_tokens.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
 import 'dievas_button_press_mixin.dart';
-import 'button_types/dievas_button_shape.dart';
 import 'button_types/dievas_button_size.dart';
 
 /// Visual style variants for [DievasIconButton].
@@ -29,7 +27,9 @@ class DievasIconButton extends StatefulWidget {
     required this.icon,
     this.style = .ghost,
     this.size = .md,
-    this.shape = .square,
+    this.shape,
+    this.backgroundColor,
+    this.foregroundColor,
     this.semanticLabel,
     this.onPressed,
   });
@@ -37,7 +37,9 @@ class DievasIconButton extends StatefulWidget {
   final Widget icon;
   final DievasIconButtonStyle style;
   final DievasButtonSize size;
-  final DievasButtonShape shape;
+  final BorderRadiusGeometry? shape;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
 
   /// Screen-reader label. Defaults to the icon's own semantic label if set.
   final String? semanticLabel;
@@ -65,12 +67,7 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
       .lg => (buttonTheme.size.lg, buttonTheme.iconSize.lg, buttonTheme.radius.lg),
     };
 
-    final effectiveRadius = switch (widget.shape) {
-      .square => radius,
-      .pill => Radius.circular(DievasRadiusSemantic.full),
-    };
-
-    final borderRadius = BorderRadius.all(effectiveRadius);
+    final borderRadius = widget.shape?.resolve(Directionality.of(context)) ?? BorderRadius.all(radius);
 
     return Semantics(
       button: true,
@@ -97,8 +94,8 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
 
               final activeStyle = isPressed ? buttonTheme.style.focused : buttonTheme.style.idle;
 
-              final bgColour = (activeStyle.background ?? Colors.transparent).withValues(alpha: opacityFactor);
-              final iconColour = activeStyle.icon.withValues(alpha: opacityFactor);
+              final bgColour = (widget.backgroundColor ?? activeStyle.background ?? Colors.transparent).withValues(alpha: opacityFactor);
+              final iconColour = (widget.foregroundColor ?? activeStyle.icon).withValues(alpha: opacityFactor);
 
               return AnimatedContainer(
                 duration: pressDuration,

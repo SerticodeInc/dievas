@@ -5,6 +5,7 @@ import 'package:dievas/src/theme/dievas_theme.dart';
 import 'dievas_button_state_animated_loader_mixin.dart';
 import 'dievas_button_state_switcher.dart';
 import 'dievas_button_press_mixin.dart';
+import 'dievas_button_color_utils.dart';
 import 'button_types/dievas_button_size.dart';
 import 'button_types/dievas_button_state.dart';
 
@@ -42,7 +43,11 @@ class DievasTextButton extends StatefulWidget with DievasButtonStateAnimatedLoad
     this.trailingIcon,
     this.onPressed,
     this.loaderRotationDuration = DievasAnimationSemantic.loader,
-  }) : assert(label != null || child != null, 'Either label or child must be provided');
+  }) : assert(label != null || child != null, 'Either label or child must be provided'),
+       assert(
+         child == null || (leadingIcon == null && trailingIcon == null),
+         'leadingIcon/trailingIcon are ignored when child is provided',
+       );
 
   @override
   final Duration loaderRotationDuration;
@@ -123,7 +128,11 @@ class _DievasTextButtonState extends State<DievasTextButton>
 
               final themeStyle = buttonTheme.style;
               final activeStyle = isPressed ? themeStyle.focused : themeStyle.idle;
-              final foreground = (widget.foregroundColor ?? activeStyle.foreground).withValues(alpha: opacityFactor);
+              final foreground = resolveColour(
+                override: widget.foregroundColor,
+                fallback: activeStyle.foreground,
+                opacity: opacityFactor,
+              );
 
               final content = widget.child ??
                 Row(

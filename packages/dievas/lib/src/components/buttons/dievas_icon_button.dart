@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:dievas/src/theme/dievas_theme.dart';
 import 'dievas_button_press_mixin.dart';
+import 'dievas_button_color_utils.dart';
 import 'button_types/dievas_button_size.dart';
 
 /// Visual style variants for [DievasIconButton].
@@ -94,8 +95,16 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
 
               final activeStyle = isPressed ? buttonTheme.style.focused : buttonTheme.style.idle;
 
-              final bgColour = (widget.backgroundColor ?? activeStyle.background ?? Colors.transparent).withValues(alpha: opacityFactor);
-              final iconColour = (widget.foregroundColor ?? activeStyle.icon).withValues(alpha: opacityFactor);
+              final bgColour = resolveColour(
+                override: widget.backgroundColor,
+                fallback: activeStyle.background,
+                opacity: opacityFactor,
+              );
+              final iconColour = resolveColour(
+                override: widget.foregroundColor,
+                fallback: activeStyle.icon,
+                opacity: opacityFactor,
+              );
 
               return AnimatedContainer(
                 duration: pressDuration,

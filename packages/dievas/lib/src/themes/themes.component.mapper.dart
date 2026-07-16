@@ -846,8 +846,6 @@ DievasDividerThemeData _createDividerTheme(DievasColourThemeData colours, Dievas
     DievasDividerThemeData(
       colour: colours.border.borderDefault,
       thickness: border.strokeThick,
-      indent: .none,
-      endIndent: .none,
     );
 
 // Popover

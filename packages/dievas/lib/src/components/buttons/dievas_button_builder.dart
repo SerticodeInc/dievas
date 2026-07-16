@@ -10,6 +10,7 @@ import 'package:dievas/src/theme/dievas_theme.dart';
 import 'dievas_button_state_animated_loader_mixin.dart';
 import 'dievas_button_state_switcher.dart';
 import 'dievas_button_press_mixin.dart';
+import 'dievas_button_color_utils.dart';
 import 'button_types/dievas_button_icon_style_behavior.dart';
 import 'button_types/dievas_button_state.dart';
 
@@ -104,9 +105,21 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
               final activeStyle = isPressed ? widget.style.focused : widget.style.idle;
 
               final borderSide = activeStyle.borderSide ?? .none;
-              final foreground = (widget.foregroundColor ?? activeStyle.foreground).withValues(alpha: opacityFactor);
-              final bgColour = (widget.backgroundColor ?? activeStyle.background ?? Colors.transparent).withValues(alpha: opacityFactor);
-              final borderColour = (widget.borderColor ?? borderSide.color).withValues(alpha: opacityFactor);
+              final foreground = resolveColour(
+                override: widget.foregroundColor,
+                fallback: activeStyle.foreground,
+                opacity: opacityFactor,
+              );
+              final bgColour = resolveColour(
+                override: widget.backgroundColor,
+                fallback: activeStyle.background,
+                opacity: opacityFactor,
+              );
+              final borderColour = resolveColour(
+                override: widget.borderColor,
+                fallback: borderSide.color,
+                opacity: opacityFactor,
+              );
 
               final decoration = BoxDecoration(
                 color: bgColour,

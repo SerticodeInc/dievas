@@ -35,7 +35,8 @@ class DievasButton extends StatelessWidget {
     this.leadingIcon,
     this.trailingIcon,
     this.onPressed,
-  }) : assert(label != null || child != null, 'Either label or child must be provided');
+  }) : assert(label != null || child != null, 'Either label or child must be provided'),
+       assert(child == null || (leadingIcon == null && trailingIcon == null), 'leadingIcon/trailingIcon are ignored when child is provided');
 
   final DievasButtonStyle style;
   final DievasButtonSize size;

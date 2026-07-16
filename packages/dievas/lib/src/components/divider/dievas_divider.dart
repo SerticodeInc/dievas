@@ -14,9 +14,8 @@ enum DievasDividerOrientation {
 
 /// A thin hairline rule that separates content regions.
 ///
-/// Uses [DievasDividerThemeData] from the active [DievasTheme].
-/// Per-instance [colour], [thickness], [indent], and [endIndent] override
-/// the theme value.
+/// Uses [DievasDividerThemeData] from the active [DievasTheme] for colour
+/// and thickness. Per-instance [colour] and [thickness] override the theme.
 ///
 /// Use [DievasDividerIndent] named constants for token-aligned spacing:
 /// ```dart
@@ -44,11 +43,9 @@ class DievasDivider extends StatelessWidget {
   final DievasDividerOrientation orientation;
 
   /// Leading inset. Uses [DievasDividerIndent] for token-aligned spacing.
-  /// Falls back to [DievasDividerThemeData.indent].
   final DievasDividerIndent indent;
 
   /// Trailing inset. Uses [DievasDividerIndent] for token-aligned spacing.
-  /// Falls back to [DievasDividerThemeData.endIndent].
   final DievasDividerIndent endIndent;
 
   /// Override colour. Falls back to [DievasDividerThemeData.colour].

@@ -38,7 +38,6 @@ export 'src/components/buttons/dievas_icon_button.dart';
 export 'src/components/buttons/dievas_outlined_button.dart';
 export 'src/components/buttons/dievas_text_button.dart';
 export 'src/components/buttons/button_types/dievas_button_icon_style_behavior.dart';
-export 'src/components/buttons/button_types/dievas_button_shape.dart';
 export 'src/components/buttons/button_types/dievas_button_size.dart';
 export 'src/components/buttons/button_types/dievas_button_state.dart';
 export 'src/components/buttons/button_types/dievas_button_style.dart';

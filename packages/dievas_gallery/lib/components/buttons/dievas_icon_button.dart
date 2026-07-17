@@ -29,13 +29,16 @@ class _Playground extends StatelessWidget {
       initialOption: DievasButtonSize.md,
     );
 
-    final shape = context.knobs.object.dropdown<DievasButtonShape>(
-      label: 'Shape',
-      options: DievasButtonShape.values,
-      labelBuilder: (v) => v.name,
-    );
-
+    final borderRadiusOverride = context.knobs.double.slider(label: 'Border radius', initialValue: 0, min: 0, max: 24);
     final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
+
+    final useCustomColours = context.knobs.boolean(label: 'Custom colours');
+    final backgroundColor = useCustomColours
+        ? context.knobs.color(label: 'Background colour', initialValue: const Color(0xFF6200EE))
+        : null;
+    final foregroundColor = useCustomColours
+        ? context.knobs.color(label: 'Foreground colour', initialValue: Colors.white)
+        : null;
 
     return Center(
       child: ComponentBoundary(
@@ -43,7 +46,9 @@ class _Playground extends StatelessWidget {
           icon: const Icon(Icons.add_rounded),
           style: style,
           size: size,
-          shape: shape,
+          shape: borderRadiusOverride > 0 ? BorderRadius.circular(borderRadiusOverride) : null,
+          backgroundColor: backgroundColor,
+          foregroundColor: foregroundColor,
           onPressed: enabled ? () {} : null,
         ),
       ),

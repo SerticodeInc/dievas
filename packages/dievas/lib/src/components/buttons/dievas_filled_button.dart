@@ -25,11 +25,15 @@ import 'button_types/dievas_button_style.dart';
 class DievasFilledButton extends DievasButton {
   const DievasFilledButton({
     super.key,
-    required super.label,
+    super.label,
+    super.child,
     DievasFilledButtonStyle super.style = .primary,
     super.size = .md,
     super.state = .idle,
-    super.shape = .square,
+    super.shape,
+    super.backgroundColor,
+    super.foregroundColor,
+    super.borderColor,
     super.iconStyleBehavior = .inheritFromState,
     super.leadingIcon,
     super.trailingIcon,

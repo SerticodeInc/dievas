@@ -1,4 +1,5 @@
 import 'package:dievas/dievas.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../cross_cutting_concerns/harness.dart';
@@ -75,15 +76,38 @@ void main() {
       expect(tapped, isFalse);
     });
 
-    testWidgets('renders both shapes', (tester) async {
-      for (final shape in DievasButtonShape.values) {
-        await tester.pumpWidget(
-          Harness(
-            child: DievasFilledButton(label: 'Shape', shape: shape, onPressed: () {}),
+    testWidgets('renders with BorderRadiusGeometry shape', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: DievasFilledButton(label: 'Shape', shape: BorderRadius.circular(12), onPressed: () {}),
+        ),
+      );
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('renders with custom child instead of label', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: DievasFilledButton(child: const Text('Custom'), onPressed: () {}),
+        ),
+      );
+      expect(tester.takeException(), isNull);
+      expect(find.text('Custom'), findsOneWidget);
+    });
+
+    testWidgets('renders with colour overrides', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: DievasFilledButton(
+            label: 'Colourful',
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
+            borderColor: Colors.blue,
+            onPressed: () {},
           ),
-        );
-        expect(tester.takeException(), isNull);
-      }
+        ),
+      );
+      expect(tester.takeException(), isNull);
     });
   });
 }

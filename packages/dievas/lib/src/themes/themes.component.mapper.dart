@@ -51,6 +51,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
         override?.dropdown ?? _createDropdownTheme(colours, typography, spacing, sizing, border, elevation, animation),
     tabBar: override?.tabBar ?? _createTabBarTheme(colours, typography, spacing, sizing, border, animation),
     popover: override?.popover ?? _createPopoverTheme(colours, typography, spacing, border, animation),
+    divider: override?.divider ?? _createDividerTheme(colours, border),
   );
 }
 
@@ -839,6 +840,10 @@ DievasTabBarThemeData _createTabBarTheme(
   minTabWidth: DievasSizingPrimitives.s64,
   height: sizing.inputHeightMd,
 );
+
+// Divider
+DievasDividerThemeData _createDividerTheme(DievasColourThemeData colours, DievasBorderThemeData border) =>
+    DievasDividerThemeData(colour: colours.border.borderDefault, thickness: border.strokeThick);
 
 // Popover
 DievasPopoverThemeData _createPopoverTheme(

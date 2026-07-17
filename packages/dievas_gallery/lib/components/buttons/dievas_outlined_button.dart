@@ -32,32 +32,43 @@ class _Playground extends StatelessWidget {
       initialOption: DievasButtonSize.md,
     );
 
-    final shape = context.knobs.object.dropdown<DievasButtonShape>(
-      label: 'Shape',
-      options: DievasButtonShape.values,
-      labelBuilder: (v) => v.name,
-    );
-
     final state = context.knobs.object.dropdown<DievasButtonState>(
       label: 'State',
       options: DievasButtonState.values,
       labelBuilder: (v) => v.name,
     );
 
+    final borderRadiusOverride = context.knobs.double.slider(label: 'Border radius', initialValue: 0, min: 0, max: 24);
     final leadingIcon = context.knobs.boolean(label: 'Leading Icon');
     final trailingIcon = context.knobs.boolean(label: 'Trailing Icon');
     final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
+    final useChild = context.knobs.boolean(label: 'Use custom child');
+
+    final useCustomColours = context.knobs.boolean(label: 'Custom colours');
+    final backgroundColor = useCustomColours
+        ? context.knobs.color(label: 'Background colour', initialValue: const Color(0xFF6200EE))
+        : null;
+    final foregroundColor = useCustomColours
+        ? context.knobs.color(label: 'Foreground colour', initialValue: Colors.white)
+        : null;
+    final borderColor = useCustomColours
+        ? context.knobs.color(label: 'Border colour', initialValue: const Color(0xFF6200EE))
+        : null;
 
     return Center(
       child: ComponentBoundary(
         child: DievasOutlinedButton(
-          label: label.isEmpty ? 'Cancel' : label,
+          label: useChild ? null : (label.isEmpty ? 'Cancel' : label),
           style: style,
           size: size,
-          shape: shape,
+          shape: borderRadiusOverride > 0 ? BorderRadius.circular(borderRadiusOverride) : null,
           state: state,
-          leadingIcon: leadingIcon ? const Icon(Icons.close_rounded) : null,
-          trailingIcon: trailingIcon ? const Icon(Icons.arrow_back_rounded) : null,
+          backgroundColor: backgroundColor,
+          foregroundColor: foregroundColor,
+          borderColor: borderColor,
+          leadingIcon: useChild ? null : (leadingIcon ? const Icon(Icons.close_rounded) : null),
+          trailingIcon: useChild ? null : (trailingIcon ? const Icon(Icons.arrow_back_rounded) : null),
+          child: useChild ? const Text('Custom child') : null,
           onPressed: enabled ? () {} : null,
         ),
       ),

@@ -16,11 +16,15 @@ import 'button_types/dievas_button_style.dart';
 class DievasOutlinedButton extends DievasButton {
   const DievasOutlinedButton({
     super.key,
-    required super.label,
+    super.label,
+    super.child,
     DievasOutlinedButtonStyle super.style = .primary,
     super.size = .md,
     super.state = .idle,
-    super.shape = .square,
+    super.shape,
+    super.backgroundColor,
+    super.foregroundColor,
+    super.borderColor,
     super.iconStyleBehavior = .inheritFromState,
     super.leadingIcon,
     super.trailingIcon,

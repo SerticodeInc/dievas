@@ -21,18 +21,38 @@ class _Playground extends StatelessWidget {
       labelBuilder: (v) => v.name,
     );
 
-    final indent = context.knobs.double.slider(label: 'Indent', initialValue: 0, min: 0, max: 48);
+    final indent = context.knobs.object.dropdown<DievasDividerIndent>(
+      label: 'Indent',
+      options: DievasDividerIndent.values,
+      labelBuilder: (v) => '${v.resolve().toInt()}dp',
+    );
 
-    final endIndent = context.knobs.double.slider(label: 'End Indent', initialValue: 0, min: 0, max: 48);
+    final endIndent = context.knobs.object.dropdown<DievasDividerIndent>(
+      label: 'End Indent',
+      options: DievasDividerIndent.values,
+      labelBuilder: (v) => '${v.resolve().toInt()}dp',
+    );
+
+    final useCustomColour = context.knobs.boolean(label: 'Custom colour', initialValue: false);
+
+    final colour = useCustomColour ? context.knobs.color(label: 'Colour', initialValue: const Color(0xFFE3F2FD)) : null;
+
+    final thickness = context.knobs.double.slider(label: 'Thickness', initialValue: 2, min: 0.5, max: 3);
 
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(context.spacing.lg),
+        padding: .all(context.spacing.lg),
         child: ComponentBoundary(
           child: SizedBox(
-            width: orientation == DievasDividerOrientation.horizontal ? 280 : 1,
-            height: orientation == DievasDividerOrientation.vertical ? 80 : 1,
-            child: DievasDivider(orientation: orientation, indent: indent, endIndent: endIndent),
+            width: orientation == .horizontal ? 280 : 3,
+            height: orientation == .vertical ? 80 : 3,
+            child: DievasDivider(
+              orientation: orientation,
+              indent: indent,
+              endIndent: endIndent,
+              colour: colour,
+              thickness: thickness,
+            ),
           ),
         ),
       ),
@@ -46,43 +66,39 @@ class _BothOrientations extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: .all(context.spacing.lg),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: .min,
+        crossAxisAlignment: .start,
         children: [
           Text(
             'Horizontal',
-            style: context.typography.labelXs.copyWith(
-              fontWeight: FontWeight.w600,
-              color: context.colours.text.textPrimary,
-            ),
+            style: context.typography.labelXs.copyWith(fontWeight: .w600, color: context.colours.text.textPrimary),
           ),
           SizedBox(height: context.spacing.sm),
           const ComponentBoundary(child: SizedBox(width: 280, child: DievasDivider())),
           SizedBox(height: context.spacing.lg),
           Text(
             'Horizontal with indent',
-            style: context.typography.labelXs.copyWith(
-              fontWeight: FontWeight.w600,
-              color: context.colours.text.textPrimary,
-            ),
+            style: context.typography.labelXs.copyWith(fontWeight: .w600, color: context.colours.text.textPrimary),
           ),
           SizedBox(height: context.spacing.sm),
-          const ComponentBoundary(child: SizedBox(width: 280, child: DievasDivider(indent: 16, endIndent: 16))),
+          const ComponentBoundary(
+            child: SizedBox(
+              width: 280,
+              child: DievasDivider(indent: DievasDividerIndent.md, endIndent: DievasDividerIndent.md),
+            ),
+          ),
           SizedBox(height: context.spacing.lg),
           Text(
             'Vertical',
-            style: context.typography.labelXs.copyWith(
-              fontWeight: FontWeight.w600,
-              color: context.colours.text.textPrimary,
-            ),
+            style: context.typography.labelXs.copyWith(fontWeight: .w600, color: context.colours.text.textPrimary),
           ),
           SizedBox(height: context.spacing.sm),
           ComponentBoundary(
             child: SizedBox(
               height: context.spacing.x2l,
-              child: const DievasDivider(orientation: DievasDividerOrientation.vertical),
+              child: const DievasDivider(orientation: .vertical),
             ),
           ),
         ],

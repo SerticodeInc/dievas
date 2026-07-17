@@ -10,6 +10,7 @@ import 'package:dievas/src/theme/dievas_theme.dart';
 import 'dievas_button_state_animated_loader_mixin.dart';
 import 'dievas_button_state_switcher.dart';
 import 'dievas_button_press_mixin.dart';
+import 'dievas_button_color_utils.dart';
 import 'button_types/dievas_button_icon_style_behavior.dart';
 import 'button_types/dievas_button_state.dart';
 
@@ -22,7 +23,8 @@ class DievasButtonBuilder extends StatefulWidget with DievasButtonStateAnimatedL
   const DievasButtonBuilder({
     super.key,
     required this.state,
-    required this.label,
+    this.label,
+    this.child,
     required this.style,
     required this.builder,
     required this.borderRadius,
@@ -33,9 +35,12 @@ class DievasButtonBuilder extends StatefulWidget with DievasButtonStateAnimatedL
     required this.iconSize,
     required this.textStyle,
     required this.iconStyleBehavior,
-    required this.leadingIcon,
-    required this.trailingIcon,
-    required this.onPressed,
+    this.leadingIcon,
+    this.trailingIcon,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.borderColor,
+    this.onPressed,
   });
 
   @override
@@ -43,7 +48,8 @@ class DievasButtonBuilder extends StatefulWidget with DievasButtonStateAnimatedL
 
   @override
   final DievasButtonState state;
-  final String label;
+  final String? label;
+  final Widget? child;
   final DievasButtonThemeStateStyle<DievasButtonThemeStyle> style;
 
   /// Callback that receives resolved state props and returns layout values.
@@ -58,6 +64,9 @@ class DievasButtonBuilder extends StatefulWidget with DievasButtonStateAnimatedL
   final DievasButtonIconStyleBehavior iconStyleBehavior;
   final Widget? leadingIcon;
   final Widget? trailingIcon;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+  final Color? borderColor;
   final VoidCallback? onPressed;
 
   @override
@@ -95,14 +104,27 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
 
               final activeStyle = isPressed ? widget.style.focused : widget.style.idle;
 
-              final foreground = activeStyle.foreground.withValues(alpha: opacityFactor);
               final borderSide = activeStyle.borderSide ?? .none;
-              final bgColour = (activeStyle.background ?? Colors.transparent).withValues(alpha: opacityFactor);
+              final foreground = resolveColour(
+                override: widget.foregroundColor,
+                fallback: activeStyle.foreground,
+                opacity: opacityFactor,
+              );
+              final bgColour = resolveColour(
+                override: widget.backgroundColor,
+                fallback: activeStyle.background,
+                opacity: opacityFactor,
+              );
+              final borderColour = resolveColour(
+                override: widget.borderColor,
+                fallback: borderSide.color,
+                opacity: opacityFactor,
+              );
 
               final decoration = BoxDecoration(
                 color: bgColour,
                 borderRadius: widget.borderRadius,
-                border: .fromBorderSide(borderSide.copyWith(color: borderSide.color.withValues(alpha: opacityFactor))),
+                border: .fromBorderSide(borderSide.copyWith(color: borderColour)),
               );
 
               Widget? maybeColourIcon(Widget? icon) => switch ((icon, widget.iconStyleBehavior)) {
@@ -137,28 +159,32 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
                 child: Center(child: icon),
               );
 
-              final DievasButtonDecorator(:height, :padding, :child) = widget.builder(
-                context,
-                DievasButtonDecoratorStateProps(
-                  borderSide: borderSide,
-                  estimatedTextHeight: estimatedTextHeight,
-                  child: Row(
+              final innerWidget =
+                  widget.child ??
+                  Row(
                     mainAxisSize: .min,
                     mainAxisAlignment: .center,
                     crossAxisAlignment: .center,
                     spacing: widget.iconSpacing,
                     children: [
                       if (widget.leadingIcon != null) sizedIcon(maybeColourIcon(widget.leadingIcon)),
-                      if (widget.label.isNotEmpty)
+                      if (widget.label case final label? when label.isNotEmpty)
                         AnimatedDefaultTextStyle(
                           duration: pressDuration,
                           style: widget.textStyle.copyWith(color: foreground),
                           textAlign: .center,
-                          child: Text(widget.label),
+                          child: Text(label),
                         ),
                       if (widget.trailingIcon != null) sizedIcon(maybeColourIcon(widget.trailingIcon)),
                     ],
-                  ),
+                  );
+
+              final DievasButtonDecorator(:height, :padding, :child) = widget.builder(
+                context,
+                DievasButtonDecoratorStateProps(
+                  borderSide: borderSide,
+                  estimatedTextHeight: estimatedTextHeight,
+                  child: innerWidget,
                 ),
               );
 

@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:dievas/src/theme/dievas_theme.dart';
+import 'package:dievas/src/theme/component/divider/dievas_divider_indent.dart';
 
 /// Orientation of [DievasDivider].
 enum DievasDividerOrientation {
@@ -13,43 +14,61 @@ enum DievasDividerOrientation {
 
 /// A thin hairline rule that separates content regions.
 ///
-/// Automatically uses `colours.border.borderDefault` and `border.strokeThin`
-/// from the active [DievasTheme].
+/// Uses [DievasDividerThemeData] from the active [DievasTheme] for colour
+/// and thickness. Per-instance [colour] and [thickness] override the theme.
+///
+/// Use [DievasDividerIndent] named constants for token-aligned spacing:
+/// ```dart
+/// DievasDivider(indent: DievasDividerIndent.md)
+/// ```
 ///
 /// Moon reference: Divider
 ///
 /// ```dart
 /// const DievasDivider()
 /// const DievasDivider(orientation: DievasDividerOrientation.vertical)
-/// const DievasDivider(indent: 16, endIndent: 16)
+/// const DievasDivider(indent: DievasDividerIndent.md, endIndent: DievasDividerIndent.md)
+/// const DievasDivider(colour: myColour, thickness: 1)
 /// ```
 class DievasDivider extends StatelessWidget {
-  const DievasDivider({super.key, this.orientation = .horizontal, this.indent = 0, this.endIndent = 0});
+  const DievasDivider({
+    super.key,
+    this.orientation = .horizontal,
+    this.indent = .none,
+    this.endIndent = .none,
+    this.colour,
+    this.thickness,
+  });
 
   final DievasDividerOrientation orientation;
 
-  /// Leading inset before the line starts (dp).
-  final double indent;
+  /// Leading inset. Uses [DievasDividerIndent] for token-aligned spacing.
+  final DievasDividerIndent indent;
 
-  /// Trailing inset after the line ends (dp).
-  final double endIndent;
+  /// Trailing inset. Uses [DievasDividerIndent] for token-aligned spacing.
+  final DievasDividerIndent endIndent;
+
+  /// Override colour. Falls back to [DievasDividerThemeData.colour].
+  final Color? colour;
+
+  /// Override thickness (dp). Falls back to [DievasDividerThemeData.thickness].
+  final double? thickness;
 
   @override
   Widget build(BuildContext context) {
-    final color = DievasTheme.coloursOf(context).border.borderDefault;
-    final thickness = DievasTheme.borderOf(context).strokeThick;
+    final theme = DievasTheme.componentsOf(context).divider;
+    final resolvedThickness = thickness ?? theme.thickness;
 
-    return switch (orientation) {
-      .horizontal => Container(
-        height: thickness,
-        margin: .only(left: indent, right: endIndent),
-        color: color,
+    return Padding(
+      padding: switch (orientation) {
+        .horizontal => .only(left: indent.resolve(), right: endIndent.resolve()),
+        .vertical => .only(top: indent.resolve(), bottom: endIndent.resolve()),
+      },
+      child: SizedBox(
+        height: orientation == .horizontal ? resolvedThickness : null,
+        width: orientation == .vertical ? resolvedThickness : null,
+        child: ColoredBox(color: colour ?? theme.colour),
       ),
-      .vertical => Container(
-        width: thickness,
-        margin: .only(top: indent, bottom: endIndent),
-        color: color,
-      ),
-    };
+    );
   }
 }

@@ -308,6 +308,7 @@ void main() {
       final menuItem = DievasLightThemeData().components.menuItem;
       final tabBar = DievasLightThemeData().components.tabBar;
       final popover = DievasLightThemeData().components.popover;
+      final divider = DievasLightThemeData().components.divider;
 
       expect(
         () => DievasComponentThemeData(
@@ -343,6 +344,7 @@ void main() {
           segmentedControl: segmentedControl,
           tabBar: tabBar,
           popover: popover,
+          divider: divider,
         ),
         returnsNormally,
       );

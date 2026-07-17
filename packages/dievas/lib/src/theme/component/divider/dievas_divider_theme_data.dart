@@ -7,10 +7,7 @@ import 'package:flutter/material.dart';
 /// [DievasComponentThemeData.divider].
 @immutable
 final class DievasDividerThemeData extends Equatable {
-  const DievasDividerThemeData({
-    required this.thickness,
-    required this.colour,
-  });
+  const DievasDividerThemeData({required this.thickness, required this.colour});
 
   /// Divider stroke thickness (dp).
   final double thickness;
@@ -19,13 +16,8 @@ final class DievasDividerThemeData extends Equatable {
   final Color colour;
 
   /// Creates a copy of this [DievasDividerThemeData] with the given fields replaced.
-  DievasDividerThemeData copyWith({
-    double? thickness,
-    Color? colour,
-  }) => DievasDividerThemeData(
-    thickness: thickness ?? this.thickness,
-    colour: colour ?? this.colour,
-  );
+  DievasDividerThemeData copyWith({double? thickness, Color? colour}) =>
+      DievasDividerThemeData(thickness: thickness ?? this.thickness, colour: colour ?? this.colour);
 
   @override
   List<Object?> get props => [thickness, colour];

@@ -843,10 +843,7 @@ DievasTabBarThemeData _createTabBarTheme(
 
 // Divider
 DievasDividerThemeData _createDividerTheme(DievasColourThemeData colours, DievasBorderThemeData border) =>
-    DievasDividerThemeData(
-      colour: colours.border.borderDefault,
-      thickness: border.strokeThick,
-    );
+    DievasDividerThemeData(colour: colours.border.borderDefault, thickness: border.strokeThick);
 
 // Popover
 DievasPopoverThemeData _createPopoverTheme(

@@ -159,24 +159,25 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
                 child: Center(child: icon),
               );
 
-              final innerWidget = widget.child ??
-                Row(
-                  mainAxisSize: .min,
-                  mainAxisAlignment: .center,
-                  crossAxisAlignment: .center,
-                  spacing: widget.iconSpacing,
-                  children: [
-                    if (widget.leadingIcon != null) sizedIcon(maybeColourIcon(widget.leadingIcon)),
-                    if (widget.label case final label? when label.isNotEmpty)
-                      AnimatedDefaultTextStyle(
-                        duration: pressDuration,
-                        style: widget.textStyle.copyWith(color: foreground),
-                        textAlign: .center,
-                        child: Text(label),
-                      ),
-                    if (widget.trailingIcon != null) sizedIcon(maybeColourIcon(widget.trailingIcon)),
-                  ],
-                );
+              final innerWidget =
+                  widget.child ??
+                  Row(
+                    mainAxisSize: .min,
+                    mainAxisAlignment: .center,
+                    crossAxisAlignment: .center,
+                    spacing: widget.iconSpacing,
+                    children: [
+                      if (widget.leadingIcon != null) sizedIcon(maybeColourIcon(widget.leadingIcon)),
+                      if (widget.label case final label? when label.isNotEmpty)
+                        AnimatedDefaultTextStyle(
+                          duration: pressDuration,
+                          style: widget.textStyle.copyWith(color: foreground),
+                          textAlign: .center,
+                          child: Text(label),
+                        ),
+                      if (widget.trailingIcon != null) sizedIcon(maybeColourIcon(widget.trailingIcon)),
+                    ],
+                  );
 
               final DievasButtonDecorator(:height, :padding, :child) = widget.builder(
                 context,

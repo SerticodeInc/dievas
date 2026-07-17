@@ -7,8 +7,5 @@ import 'dart:ui';
 /// final fg = widget.foregroundColor ?? activeStyle.foreground;
 /// final resolved = fg.withValues(alpha: opacityFactor);
 /// ```
-Color resolveColour({
-  Color? override,
-  Color? fallback,
-  required double opacity,
-}) => (override ?? fallback ?? const Color(0x00000000)).withValues(alpha: opacity);
+Color resolveColour({Color? override, Color? fallback, required double opacity}) =>
+    (override ?? fallback ?? const Color(0x00000000)).withValues(alpha: opacity);

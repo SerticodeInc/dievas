@@ -17,9 +17,7 @@ sealed class DievasDividerIndent {
   const DievasDividerIndent._();
 
   /// All predefined indent values, ordered smallest to largest.
-  static const List<DievasDividerIndent> values = [
-    none, xs, sm, smPlus, md, mdPlus, lg, xl, x2l, x3l,
-  ];
+  static const List<DievasDividerIndent> values = [none, xs, sm, smPlus, md, mdPlus, lg, xl, x2l, x3l];
 
   /// 0dp.
   static const DievasDividerIndent none = _DievasDividerIndent(DievasSpacingPrimitives.s0);

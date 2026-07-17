@@ -134,29 +134,30 @@ class _DievasTextButtonState extends State<DievasTextButton>
                 opacity: opacityFactor,
               );
 
-              final content = widget.child ??
-                Row(
-                  mainAxisSize: .min,
-                  spacing: iconSpacing,
-                  children: [
-                    if (widget.leadingIcon case final icon?)
-                      IconTheme(
-                        data: IconThemeData(color: foreground, size: iconSize),
-                        child: icon,
-                      ),
-                    if (widget.label case final label? when label.isNotEmpty)
-                      AnimatedDefaultTextStyle(
-                        duration: pressDuration,
-                        style: textStyle.copyWith(color: foreground),
-                        child: Text(label),
-                      ),
-                    if (widget.trailingIcon case final icon?)
-                      IconTheme(
-                        data: IconThemeData(color: foreground, size: iconSize),
-                        child: icon,
-                      ),
-                  ],
-                );
+              final content =
+                  widget.child ??
+                  Row(
+                    mainAxisSize: .min,
+                    spacing: iconSpacing,
+                    children: [
+                      if (widget.leadingIcon case final icon?)
+                        IconTheme(
+                          data: IconThemeData(color: foreground, size: iconSize),
+                          child: icon,
+                        ),
+                      if (widget.label case final label? when label.isNotEmpty)
+                        AnimatedDefaultTextStyle(
+                          duration: pressDuration,
+                          style: textStyle.copyWith(color: foreground),
+                          child: Text(label),
+                        ),
+                      if (widget.trailingIcon case final icon?)
+                        IconTheme(
+                          data: IconThemeData(color: foreground, size: iconSize),
+                          child: icon,
+                        ),
+                    ],
+                  );
 
               return DievasButtonStateSwitcher(
                 state: widget.state,

@@ -33,8 +33,12 @@ class _Playground extends StatelessWidget {
     final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
 
     final useCustomColours = context.knobs.boolean(label: 'Custom colours');
-    final backgroundColor = useCustomColours ? context.knobs.color(label: 'Background colour', initialValue: const Color(0xFF6200EE)) : null;
-    final foregroundColor = useCustomColours ? context.knobs.color(label: 'Foreground colour', initialValue: Colors.white) : null;
+    final backgroundColor = useCustomColours
+        ? context.knobs.color(label: 'Background colour', initialValue: const Color(0xFF6200EE))
+        : null;
+    final foregroundColor = useCustomColours
+        ? context.knobs.color(label: 'Foreground colour', initialValue: Colors.white)
+        : null;
 
     return Center(
       child: ComponentBoundary(

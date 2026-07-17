@@ -80,10 +80,7 @@ class _DievasSwitchState extends State<DievasSwitch> with SingleTickerProviderSt
         children: [
           track,
           SizedBox(width: theme.labelSpacing),
-          DefaultTextStyle(
-            style: theme.labelStyle,
-            child: Flexible(child: Text(text)),
-          ),
+          DefaultTextStyle(style: theme.labelStyle, child: Text(text)),
         ],
       );
     }
@@ -122,7 +119,10 @@ class _DievasSwitchTrackBuilder extends AnimatedWidget {
             child: Container(
               width: theme.thumbSize,
               height: theme.thumbSize,
-              decoration: BoxDecoration(color: theme.thumbColour, borderRadius: theme.thumbRadius),
+              decoration: BoxDecoration(
+                color: Color.lerp(theme.thumbColourOff, theme.thumbColourOn, t),
+                borderRadius: theme.thumbRadius,
+              ),
             ),
           ),
         ],

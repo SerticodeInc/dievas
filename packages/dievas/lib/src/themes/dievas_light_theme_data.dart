@@ -96,7 +96,8 @@ final class DievasLightThemeData extends DievasGlobalThemeData {
     switchColours: const SwitchColours(
       switchTrackOn: Color(DievasColourSemanticLight.switchTrackOn),
       switchTrackOff: Color(DievasColourSemanticLight.switchTrackOff),
-      switchThumb: Color(DievasColourSemanticLight.switchThumb),
+      switchThumbOn: Color(DievasColourSemanticLight.switchThumbOn),
+      switchThumbOff: Color(DievasColourSemanticLight.switchThumbOff),
       switchBorder: Color(DievasColourSemanticLight.switchBorder),
     ),
     staticColours: const StaticColours(

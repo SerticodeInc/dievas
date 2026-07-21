@@ -247,9 +247,6 @@ abstract final class DievasColourSemanticLight {
   /// Thumb (knob) colour when the switch is OFF.
   static const int switchThumbOff = DievasColourPrimitives.slate300;
 
-  /// Switch track border (outlined switch variant).
-  static const int switchBorder = DievasColourPrimitives.slate300;
-
   //Static
 
   /// Pure white. Theme-invariant. Never flips in dark mode.

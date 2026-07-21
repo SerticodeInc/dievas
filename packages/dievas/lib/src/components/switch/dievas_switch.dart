@@ -120,7 +120,7 @@ class _DievasSwitchTrackBuilder extends AnimatedWidget {
               width: theme.thumbSize,
               height: theme.thumbSize,
               decoration: BoxDecoration(
-                color: Color.lerp(theme.thumbColourOff, theme.thumbColourOn, t),
+                color: Color.lerp(theme.thumbColourOff, theme.thumbColourOn, t) ?? theme.thumbColourOff,
                 borderRadius: theme.thumbRadius,
               ),
             ),

@@ -8,7 +8,6 @@ final class SwitchColours extends Equatable {
     required this.switchTrackOff,
     required this.switchThumbOn,
     required this.switchThumbOff,
-    required this.switchBorder,
   });
 
   /// Track colour when the switch is in the ON state.
@@ -23,21 +22,16 @@ final class SwitchColours extends Equatable {
   /// Thumb (knob) colour when the switch is OFF.
   final Color switchThumbOff;
 
-  /// Track border for the outlined switch variant.
-  final Color switchBorder;
-
   SwitchColours copyWith({
     Color? switchTrackOn,
     Color? switchTrackOff,
     Color? switchThumbOn,
     Color? switchThumbOff,
-    Color? switchBorder,
   }) => SwitchColours(
     switchTrackOn: switchTrackOn ?? this.switchTrackOn,
     switchTrackOff: switchTrackOff ?? this.switchTrackOff,
     switchThumbOn: switchThumbOn ?? this.switchThumbOn,
     switchThumbOff: switchThumbOff ?? this.switchThumbOff,
-    switchBorder: switchBorder ?? this.switchBorder,
   );
 
   static SwitchColours lerp(SwitchColours a, SwitchColours b, double t) => SwitchColours(
@@ -45,9 +39,8 @@ final class SwitchColours extends Equatable {
     switchTrackOff: Color.lerp(a.switchTrackOff, b.switchTrackOff, t) ?? a.switchTrackOff,
     switchThumbOn: Color.lerp(a.switchThumbOn, b.switchThumbOn, t) ?? a.switchThumbOn,
     switchThumbOff: Color.lerp(a.switchThumbOff, b.switchThumbOff, t) ?? a.switchThumbOff,
-    switchBorder: Color.lerp(a.switchBorder, b.switchBorder, t) ?? a.switchBorder,
   );
 
   @override
-  List<Object?> get props => [switchTrackOn, switchTrackOff, switchThumbOn, switchThumbOff, switchBorder];
+  List<Object?> get props => [switchTrackOn, switchTrackOff, switchThumbOn, switchThumbOff];
 }

@@ -22,17 +22,13 @@ final class SwitchColours extends Equatable {
   /// Thumb (knob) colour when the switch is OFF.
   final Color switchThumbOff;
 
-  SwitchColours copyWith({
-    Color? switchTrackOn,
-    Color? switchTrackOff,
-    Color? switchThumbOn,
-    Color? switchThumbOff,
-  }) => SwitchColours(
-    switchTrackOn: switchTrackOn ?? this.switchTrackOn,
-    switchTrackOff: switchTrackOff ?? this.switchTrackOff,
-    switchThumbOn: switchThumbOn ?? this.switchThumbOn,
-    switchThumbOff: switchThumbOff ?? this.switchThumbOff,
-  );
+  SwitchColours copyWith({Color? switchTrackOn, Color? switchTrackOff, Color? switchThumbOn, Color? switchThumbOff}) =>
+      SwitchColours(
+        switchTrackOn: switchTrackOn ?? this.switchTrackOn,
+        switchTrackOff: switchTrackOff ?? this.switchTrackOff,
+        switchThumbOn: switchThumbOn ?? this.switchThumbOn,
+        switchThumbOff: switchThumbOff ?? this.switchThumbOff,
+      );
 
   static SwitchColours lerp(SwitchColours a, SwitchColours b, double t) => SwitchColours(
     switchTrackOn: Color.lerp(a.switchTrackOn, b.switchTrackOn, t) ?? a.switchTrackOn,

@@ -46,7 +46,7 @@ class DievasButton extends StatelessWidget {
   final DievasButtonState state;
   final String? label;
   final Widget? child;
-  final BorderRadiusGeometry? shape;
+  final OutlinedBorder? shape;
   final Color? backgroundColor;
   final Color? foregroundColor;
   final Color? borderColor;
@@ -98,14 +98,14 @@ class DievasButton extends StatelessWidget {
       ),
     };
 
-    final borderRadius = shape?.resolve(Directionality.of(context)) ?? BorderRadius.all(radius.square);
+    final effectiveShape = shape ?? RoundedRectangleBorder(borderRadius: BorderRadius.all(radius.square));
 
     return DievasButtonBuilder(
       state: state,
       label: label,
       child: child,
       style: themeData.style,
-      borderRadius: borderRadius,
+      shape: effectiveShape,
       disabledOpacity: themeData.disabledOpacity,
       pressOpacity: themeData.pressOpacity,
       loaderRotationDuration: DievasTheme.animationOf(context).loader,

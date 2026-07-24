@@ -27,7 +27,7 @@ class DievasButtonBuilder extends StatefulWidget with DievasButtonStateAnimatedL
     this.child,
     required this.style,
     required this.builder,
-    required this.borderRadius,
+    required this.shape,
     required this.disabledOpacity,
     required this.pressOpacity,
     required this.loaderRotationDuration,
@@ -55,7 +55,7 @@ class DievasButtonBuilder extends StatefulWidget with DievasButtonStateAnimatedL
   /// Callback that receives resolved state props and returns layout values.
   final DievasButtonDecoratorBuilder builder;
 
-  final BorderRadius borderRadius;
+  final OutlinedBorder shape;
   final double disabledOpacity;
   final double pressOpacity;
   final double iconSpacing;
@@ -87,7 +87,7 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
         child: InkWell(
           statesController: statesController,
           onTap: (widget.state == .loading || widget.state == .disabled) ? null : widget.onPressed,
-          borderRadius: widget.borderRadius,
+          customBorder: widget.shape,
           splashFactory: apple ? NoSplash.splashFactory : InkRipple.splashFactory,
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,
@@ -121,10 +121,9 @@ class _DievasButtonBuilderState extends State<DievasButtonBuilder>
                 opacity: opacityFactor,
               );
 
-              final decoration = BoxDecoration(
+              final decoration = ShapeDecoration(
+                shape: widget.shape.copyWith(side: borderSide.copyWith(color: borderColour)),
                 color: bgColour,
-                borderRadius: widget.borderRadius,
-                border: .fromBorderSide(borderSide.copyWith(color: borderColour)),
               );
 
               Widget? maybeColourIcon(Widget? icon) => switch ((icon, widget.iconStyleBehavior)) {

@@ -46,7 +46,7 @@ class _Playground extends StatelessWidget {
           icon: const Icon(Icons.add_rounded),
           style: style,
           size: size,
-          shape: borderRadiusOverride > 0 ? BorderRadius.circular(borderRadiusOverride) : null,
+          shape: borderRadiusOverride > 0 ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadiusOverride)) : null,
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
           onPressed: enabled ? () {} : null,

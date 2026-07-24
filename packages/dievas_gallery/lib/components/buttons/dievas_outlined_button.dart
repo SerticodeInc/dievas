@@ -61,7 +61,7 @@ class _Playground extends StatelessWidget {
           label: useChild ? null : (label.isEmpty ? 'Cancel' : label),
           style: style,
           size: size,
-          shape: borderRadiusOverride > 0 ? BorderRadius.circular(borderRadiusOverride) : null,
+          shape: borderRadiusOverride > 0 ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadiusOverride)) : null,
           state: state,
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,

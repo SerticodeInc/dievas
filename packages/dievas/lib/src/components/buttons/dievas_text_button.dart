@@ -60,7 +60,7 @@ class DievasTextButton extends StatefulWidget with DievasButtonStateAnimatedLoad
 
   final String? label;
   final Widget? child;
-  final BorderRadiusGeometry? shape;
+  final OutlinedBorder? shape;
   final Color? foregroundColor;
   final Widget? leadingIcon;
   final Widget? trailingIcon;
@@ -111,7 +111,7 @@ class _DievasTextButtonState extends State<DievasTextButton>
         child: InkWell(
           statesController: statesController,
           onTap: (widget.state == .loading || widget.state == .disabled) ? null : widget.onPressed,
-          borderRadius: widget.shape?.resolve(Directionality.of(context)),
+          customBorder: widget.shape,
           splashFactory: NoSplash.splashFactory,
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,

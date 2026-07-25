@@ -79,7 +79,11 @@ void main() {
     testWidgets('renders with OutlinedBorder shape', (tester) async {
       await tester.pumpWidget(
         Harness(
-          child: DievasFilledButton(label: 'Shape', shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), onPressed: () {}),
+          child: DievasFilledButton(
+            label: 'Shape',
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            onPressed: () {},
+          ),
         ),
       );
       expect(tester.takeException(), isNull);

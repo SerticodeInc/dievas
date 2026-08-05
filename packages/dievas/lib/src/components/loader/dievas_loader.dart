@@ -21,17 +21,28 @@ enum DievasLoaderSize {
 ///
 /// ```dart
 /// DievasLoader(size: .md, label: 'Loading…')
+/// DievasLoader(size: .lg, colour: DievasTheme.of(context).colours.action.actionError)
 /// ```
 ///
 /// Moon reference: Loader
 class DievasLoader extends StatefulWidget {
-  const DievasLoader({super.key, this.size = .md, this.label});
+  const DievasLoader({super.key, this.size = .md, this.label, this.colour, this.trackColour});
 
   /// Controls spinner diameter (sm / md / lg).
   final DievasLoaderSize size;
 
   /// Optional label shown below the spinner.
   final String? label;
+
+  /// Colour of the active spinning arc.
+  ///
+  /// Defaults to the theme's loader colour when `null`.
+  final Color? colour;
+
+  /// Colour of the background track arc.
+  ///
+  /// Defaults to the theme's loader track colour when `null`.
+  final Color? trackColour;
 
   @override
   State<DievasLoader> createState() => _DievasLoaderState();
@@ -75,8 +86,8 @@ class _DievasLoaderState extends State<DievasLoader> with SingleTickerProviderSt
           dimension: diameter,
           child: _SpinnerAnimation(
             controller: _controller,
-            colour: theme.color,
-            trackColour: theme.trackColour,
+            colour: widget.colour ?? theme.color,
+            trackColour: widget.trackColour ?? theme.trackColour,
             strokeWidth: theme.strokeWidth,
           ),
         ),

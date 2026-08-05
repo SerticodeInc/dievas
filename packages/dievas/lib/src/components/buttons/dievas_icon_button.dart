@@ -38,7 +38,7 @@ class DievasIconButton extends StatefulWidget {
   final Widget icon;
   final DievasIconButtonStyle style;
   final DievasButtonSize size;
-  final BorderRadiusGeometry? shape;
+  final OutlinedBorder? shape;
   final Color? backgroundColor;
   final Color? foregroundColor;
 
@@ -68,7 +68,7 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
       .lg => (buttonTheme.size.lg, buttonTheme.iconSize.lg, buttonTheme.radius.lg),
     };
 
-    final borderRadius = widget.shape?.resolve(Directionality.of(context)) ?? BorderRadius.all(radius);
+    final effectiveShape = widget.shape ?? RoundedRectangleBorder(borderRadius: BorderRadius.all(radius));
 
     return Semantics(
       button: true,
@@ -79,7 +79,7 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
         child: InkWell(
           statesController: statesController,
           onTap: widget.onPressed,
-          borderRadius: borderRadius,
+          customBorder: effectiveShape,
           splashFactory: NoSplash.splashFactory,
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,
@@ -110,7 +110,7 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
                 duration: pressDuration,
                 width: containerSize,
                 height: containerSize,
-                decoration: BoxDecoration(color: bgColour, borderRadius: borderRadius),
+                decoration: ShapeDecoration(shape: effectiveShape, color: bgColour),
                 child: Center(
                   child: IconTheme(
                     data: IconThemeData(color: iconColour, size: iconSize),

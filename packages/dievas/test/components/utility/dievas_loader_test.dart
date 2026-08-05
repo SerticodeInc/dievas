@@ -31,11 +31,7 @@ void main() {
     testWidgets('accepts per-instance colour overrides', (tester) async {
       await tester.pumpWidget(
         Harness(
-          child: const DievasLoader(
-            size: .lg,
-            colour: Color(0xFF123456),
-            trackColour: Color(0xFF654321),
-          ),
+          child: const DievasLoader(size: .lg, colour: Color(0xFF123456), trackColour: Color(0xFF654321)),
         ),
       );
       expect(tester.takeException(), isNull);

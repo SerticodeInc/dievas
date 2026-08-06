@@ -23,10 +23,17 @@ class _Playground extends StatelessWidget {
       initialOption: .md,
     );
     final label = context.knobs.string(label: 'Label', initialValue: '');
+    final useCustomColours = context.knobs.boolean(label: 'Custom colours');
+    final colour = useCustomColours
+        ? context.knobs.color(label: 'Colour', initialValue: const Color(0xFF4A90E2))
+        : null;
+    final trackColour = useCustomColours
+        ? context.knobs.color(label: 'Track colour', initialValue: const Color(0xFFE0E6EF))
+        : null;
 
     return Center(
       child: ComponentBoundary(
-        child: DievasLoader(size: size, label: label.isEmpty ? null : label),
+        child: DievasLoader(size: size, label: label.isEmpty ? null : label, colour: colour, trackColour: trackColour),
       ),
     );
   }

@@ -33,9 +33,35 @@ class _Playground extends StatelessWidget {
 
     final showInitials = context.knobs.boolean(label: 'Show Initials', initialValue: true);
 
+    final customColours = context.knobs.boolean(label: 'Custom Colours');
+
+    final avatarTheme = DievasTheme.componentsOf(context).avatar;
+    final colours = context.colours;
+
+    final background = customColours
+        ? context.knobs.color(label: 'Background', initialValue: avatarTheme.backgroundColour)
+        : null;
+    final initialsColour = customColours
+        ? context.knobs.color(label: 'Initials', initialValue: avatarTheme.initialsColour)
+        : null;
+    final placeholder = customColours
+        ? context.knobs.color(label: 'Placeholder', initialValue: avatarTheme.placeholderColour)
+        : null;
+    final border = customColours
+        ? context.knobs.color(label: 'Border', initialValue: colours.border.borderDefault)
+        : null;
+
     return Center(
       child: ComponentBoundary(
-        child: DievasAvatar(initials: showInitials ? initials : null, size: size, shape: shape),
+        child: DievasAvatar(
+          initials: showInitials ? initials : null,
+          size: size,
+          shape: shape,
+          backgroundColour: background,
+          initialsColour: initialsColour,
+          placeholderColour: placeholder,
+          borderColour: border,
+        ),
       ),
     );
   }
@@ -45,54 +71,62 @@ class _AllSizes extends StatelessWidget {
   const _AllSizes();
 
   @override
-  Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Wrap(
-        spacing: context.spacing.md,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          for (final size in DievasAvatarSize.values)
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ComponentBoundary(
-                  child: DievasAvatar(initials: 'AB', size: size),
-                ),
-                SizedBox(height: context.spacing.sm),
-                Text(size.name, style: context.typography.labelXs),
-              ],
-            ),
-        ],
+  Widget build(BuildContext context) {
+    final spacing = context.spacing;
+
+    return Center(
+      child: Padding(
+        padding: .all(spacing.lg),
+        child: Wrap(
+          spacing: spacing.md,
+          crossAxisAlignment: .center,
+          children: [
+            for (final size in DievasAvatarSize.values)
+              Column(
+                mainAxisSize: .min,
+                spacing: spacing.sm,
+                children: [
+                  ComponentBoundary(
+                    child: DievasAvatar(initials: 'AB', size: size),
+                  ),
+                  Text(size.name, style: context.typography.labelXs),
+                ],
+              ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class _AllShapes extends StatelessWidget {
   const _AllShapes();
 
   @override
-  Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Wrap(
-        spacing: context.spacing.lg,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          for (final shape in DievasAvatarShape.values)
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ComponentBoundary(
-                  child: DievasAvatar(initials: 'AB', size: DievasAvatarSize.lg, shape: shape),
-                ),
-                SizedBox(height: context.spacing.sm),
-                Text(shape.name, style: context.typography.labelXs),
-              ],
-            ),
-        ],
+  Widget build(BuildContext context) {
+    final spacing = context.spacing;
+
+    return Center(
+      child: Padding(
+        padding: .all(spacing.lg),
+        child: Wrap(
+          spacing: spacing.lg,
+          crossAxisAlignment: .center,
+          children: [
+            for (final shape in DievasAvatarShape.values)
+              Column(
+                mainAxisSize: .min,
+                spacing: spacing.sm,
+                children: [
+                  ComponentBoundary(
+                    child: DievasAvatar(initials: 'AB', size: DievasAvatarSize.lg, shape: shape),
+                  ),
+                  Text(shape.name, style: context.typography.labelXs),
+                ],
+              ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

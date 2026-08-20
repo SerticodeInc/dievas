@@ -57,7 +57,11 @@ void main() {
     });
 
     testWidgets('applies per-instance initials colour', (tester) async {
-      await tester.pumpWidget(Harness(child: const DievasAvatar(initials: 'AB', initialsColour: Color(0xFF654321))));
+      await tester.pumpWidget(
+        Harness(
+          child: const DievasAvatar(initials: 'AB', initialsColour: Color(0xFF654321)),
+        ),
+      );
       final text = tester.widget<Text>(find.text('AB'));
       expect(text.style?.color, const Color(0xFF654321));
     });

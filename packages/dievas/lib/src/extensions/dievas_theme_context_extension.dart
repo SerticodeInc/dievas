@@ -9,7 +9,7 @@ import 'package:dievas/src/theme.dart';
 ///
 /// Usage inside a widget's [build] method:
 /// ```dart
-/// final color = context.colours.action.actionPrimary;
+/// final colour = context.colours.action.actionPrimary;
 /// final style = context.typography.labelMd;
 /// final gap   = context.spacing.md;
 /// ```
@@ -34,6 +34,9 @@ extension DievasThemeContextExtension on BuildContext {
 
   /// The opacity sub-system — fractional opacity values.
   DievasOpacityThemeData get opacity => DievasTheme.opacityOf(this);
+
+  /// The animation sub-system — motion durations and easing curves.
+  DievasAnimationThemeData get animation => DievasTheme.animationOf(this);
 
   /// The component-level theme data sub-system.
   DievasComponentThemeData get components => DievasTheme.componentsOf(this);

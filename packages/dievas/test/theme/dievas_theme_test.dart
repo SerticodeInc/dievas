@@ -209,6 +209,13 @@ void main() {
       expect(DievasTheme.componentsOf(ctx), isA<DievasComponentThemeData>());
     });
 
+    testWidgets('context.animation returns animation theme', (tester) async {
+      await tester.pumpWidget(const Harness(child: SizedBox(key: childKey)));
+      final ctx = tester.element(find.byKey(childKey));
+      expect(ctx.animation, isA<DievasAnimationThemeData>());
+      expect(ctx.animation, same(DievasTheme.animationOf(ctx)));
+    });
+
     testWidgets('typographyOf returns typography theme', (tester) async {
       await tester.pumpWidget(const Harness(child: SizedBox(key: childKey)));
       final ctx = tester.element(find.byKey(childKey));

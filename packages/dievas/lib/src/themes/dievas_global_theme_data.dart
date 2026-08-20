@@ -53,7 +53,7 @@ base class DievasGlobalThemeData implements DievasThemeData {
       _elevation,
       components,
     );
-    _material = _buildMaterial(colours);
+    _material = _buildMaterial(colours, _typography);
   }
 
   DievasGlobalThemeData._raw({
@@ -219,46 +219,30 @@ base class DievasGlobalThemeData implements DievasThemeData {
     );
   }
 
-  static ThemeData _buildMaterial(DievasColourThemeData colours) {
+  static ThemeData _buildMaterial(DievasColourThemeData colours, DievasTypographyThemeData typography) {
     final brightness = colours.brightness;
     final seedColour = colours.action.actionPrimary;
     final scaffoldBg = colours.background.bgBase;
     final textColour = colours.text.textPrimary;
+    final baseFont = typography.bodyMd.fontFamily ?? DievasFontFamilyPrimitives.sans;
+    final displayFont = typography.displaySm.fontFamily ?? DievasFontFamilyPrimitives.sansExtended;
 
     final base = ThemeData(
       brightness: brightness,
       colorScheme: .fromSeed(seedColor: seedColour, brightness: brightness),
       scaffoldBackgroundColor: scaffoldBg,
       useMaterial3: true,
-      fontFamily: DievasFontFamilyPrimitives.sans,
+      fontFamily: baseFont,
     );
 
     return base.copyWith(
       textTheme: base.textTheme.copyWith(
-        displayLarge: base.textTheme.displayLarge?.copyWith(
-          fontFamily: DievasFontFamilyPrimitives.sansExtended,
-          color: textColour,
-        ),
-        displayMedium: base.textTheme.displayMedium?.copyWith(
-          fontFamily: DievasFontFamilyPrimitives.sansExtended,
-          color: textColour,
-        ),
-        displaySmall: base.textTheme.displaySmall?.copyWith(
-          fontFamily: DievasFontFamilyPrimitives.sansExtended,
-          color: textColour,
-        ),
-        headlineLarge: base.textTheme.headlineLarge?.copyWith(
-          fontFamily: DievasFontFamilyPrimitives.sansExtended,
-          color: textColour,
-        ),
-        headlineMedium: base.textTheme.headlineMedium?.copyWith(
-          fontFamily: DievasFontFamilyPrimitives.sansExtended,
-          color: textColour,
-        ),
-        headlineSmall: base.textTheme.headlineSmall?.copyWith(
-          fontFamily: DievasFontFamilyPrimitives.sansExtended,
-          color: textColour,
-        ),
+        displayLarge: base.textTheme.displayLarge?.copyWith(fontFamily: displayFont, color: textColour),
+        displayMedium: base.textTheme.displayMedium?.copyWith(fontFamily: displayFont, color: textColour),
+        displaySmall: base.textTheme.displaySmall?.copyWith(fontFamily: displayFont, color: textColour),
+        headlineLarge: base.textTheme.headlineLarge?.copyWith(fontFamily: displayFont, color: textColour),
+        headlineMedium: base.textTheme.headlineMedium?.copyWith(fontFamily: displayFont, color: textColour),
+        headlineSmall: base.textTheme.headlineSmall?.copyWith(fontFamily: displayFont, color: textColour),
         titleLarge: base.textTheme.titleLarge?.copyWith(color: textColour),
         titleMedium: base.textTheme.titleMedium?.copyWith(color: textColour),
         titleSmall: base.textTheme.titleSmall?.copyWith(color: textColour),
@@ -270,20 +254,12 @@ base class DievasGlobalThemeData implements DievasThemeData {
         labelSmall: base.textTheme.labelSmall?.copyWith(color: textColour),
       ),
       primaryTextTheme: base.primaryTextTheme.copyWith(
-        displayLarge: base.primaryTextTheme.displayLarge?.copyWith(fontFamily: DievasFontFamilyPrimitives.sansExtended),
-        displayMedium: base.primaryTextTheme.displayMedium?.copyWith(
-          fontFamily: DievasFontFamilyPrimitives.sansExtended,
-        ),
-        displaySmall: base.primaryTextTheme.displaySmall?.copyWith(fontFamily: DievasFontFamilyPrimitives.sansExtended),
-        headlineLarge: base.primaryTextTheme.headlineLarge?.copyWith(
-          fontFamily: DievasFontFamilyPrimitives.sansExtended,
-        ),
-        headlineMedium: base.primaryTextTheme.headlineMedium?.copyWith(
-          fontFamily: DievasFontFamilyPrimitives.sansExtended,
-        ),
-        headlineSmall: base.primaryTextTheme.headlineSmall?.copyWith(
-          fontFamily: DievasFontFamilyPrimitives.sansExtended,
-        ),
+        displayLarge: base.primaryTextTheme.displayLarge?.copyWith(fontFamily: displayFont),
+        displayMedium: base.primaryTextTheme.displayMedium?.copyWith(fontFamily: displayFont),
+        displaySmall: base.primaryTextTheme.displaySmall?.copyWith(fontFamily: displayFont),
+        headlineLarge: base.primaryTextTheme.headlineLarge?.copyWith(fontFamily: displayFont),
+        headlineMedium: base.primaryTextTheme.headlineMedium?.copyWith(fontFamily: displayFont),
+        headlineSmall: base.primaryTextTheme.headlineSmall?.copyWith(fontFamily: displayFont),
       ),
     );
   }

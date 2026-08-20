@@ -60,10 +60,12 @@ class DievasScope extends StatefulWidget {
 
   /// Returns the [DievasScopeController] from the nearest [DievasScope] ancestor.
   ///
-  /// Use this to call [DievasScopeController.setThemeMode] programmatically, e.g.
-  /// from a settings screen.
+  /// Establishing a dependency on the scope, so the calling widget rebuilds
+  /// whenever the active [themeMode] changes. Use this to call
+  /// [DievasScopeController.setThemeMode] programmatically, e.g. from a settings
+  /// screen.
   static DievasScopeController of(BuildContext context) {
-    if (context.getInheritedWidgetOfExactType<_DievasScopeStateMarker>() case final result?) {
+    if (context.dependOnInheritedWidgetOfExactType<_DievasScopeStateMarker>() case final result?) {
       return result.state;
     }
 
@@ -178,15 +180,16 @@ class DievasScopeState extends State<DievasScope>
   }
 
   @override
-  Widget build(BuildContext context) => _DievasScopeStateMarker(
-    state: this,
-    child: ValueListenableBuilder<ThemeMode>(
-      valueListenable: _themeModeNotifier,
-      builder: (context, mode, child) {
-        final theme = _themeFor(mode);
-        final content = widget.builder?.call(context, theme, widget.child) ?? widget.child ?? child ?? const SizedBox();
+  Widget build(BuildContext context) => ValueListenableBuilder<ThemeMode>(
+    valueListenable: _themeModeNotifier,
+    builder: (context, mode, child) {
+      final theme = _themeFor(mode);
+      final content = widget.builder?.call(context, theme, widget.child) ?? widget.child ?? child ?? const SizedBox();
 
-        return DievasTheme(
+      return _DievasScopeStateMarker(
+        state: this,
+        themeMode: mode,
+        child: DievasTheme(
           data: theme,
           child: Stack(
             alignment: Alignment.topCenter,
@@ -205,10 +208,10 @@ class DievasScopeState extends State<DievasScope>
               ),
             ],
           ),
-        );
-      },
-      child: widget.child,
-    ),
+        ),
+      );
+    },
+    child: widget.child,
   );
 
   DievasThemeData _themeFor(ThemeMode mode) => switch (mode) {
@@ -219,12 +222,14 @@ class DievasScopeState extends State<DievasScope>
 }
 
 class _DievasScopeStateMarker extends InheritedWidget {
-  const _DievasScopeStateMarker({required super.child, required this.state});
+  const _DievasScopeStateMarker({required super.child, required this.state, required this.themeMode});
 
   final DievasScopeController state;
+  final ThemeMode themeMode;
 
   @override
-  bool updateShouldNotify(_DievasScopeStateMarker oldWidget) => oldWidget.state != state;
+  bool updateShouldNotify(_DievasScopeStateMarker oldWidget) =>
+      oldWidget.state != state || oldWidget.themeMode != themeMode;
 }
 
 class _DievasOverlaySlot extends StatelessWidget {

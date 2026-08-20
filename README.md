@@ -108,7 +108,7 @@ DievasThemeData               ← abstract interface (the contract)
 final color = context.colours.action.actionPrimary;
 final style = context.typography.labelMd;
 final gap   = context.spacing.md;
-final dur   = context.animation.standard;
+final cols  = context.grid.columns;   // inside a DievasGrid
 ```
 
 ### Plugging in a brand theme

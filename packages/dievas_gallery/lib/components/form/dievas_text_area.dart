@@ -19,6 +19,7 @@ class _Playground extends StatelessWidget {
     final hint = context.knobs.string(label: 'Hint', initialValue: 'Tell us about yourself...');
     final helperText = context.knobs.string(label: 'Helper', initialValue: 'Max 300 characters.');
     final errorText = context.knobs.string(label: 'Error', initialValue: '');
+    final warningText = context.knobs.string(label: 'Warning', initialValue: '');
 
     final minLines = context.knobs.double.slider(label: 'Min Lines', initialValue: 3, min: 1, max: 8).round();
     final maxLines = context.knobs.double.slider(label: 'Max Lines', initialValue: 6, min: 2, max: 12).round();
@@ -33,6 +34,7 @@ class _Playground extends StatelessWidget {
             hint: hint.isEmpty ? null : hint,
             helperText: helperText.isEmpty ? null : helperText,
             errorText: errorText.isEmpty ? null : errorText,
+            warningText: warningText.isEmpty ? null : warningText,
             minLines: minLines.clamp(1, maxLines),
             maxLines: maxLines,
             enabled: !disabled,
@@ -69,6 +71,15 @@ class _AllStates extends StatelessWidget {
               label: 'Bio',
               hint: 'Tell us about yourself...',
               errorText: 'Bio cannot be empty.',
+            ),
+          ),
+          SizedBox(height: context.spacing.mdPlus),
+          _StateBlock(
+            'Warning',
+            child: const DievasTextArea(
+              label: 'Bio',
+              hint: 'Tell us about yourself...',
+              warningText: 'Bio is very short — add a little more detail.',
             ),
           ),
           SizedBox(height: context.spacing.mdPlus),

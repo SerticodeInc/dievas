@@ -10,6 +10,7 @@ final textInputComponent = WidgetbookComponent(
     WidgetbookUseCase(name: 'Playground', builder: (ctx) => _Playground()),
     WidgetbookUseCase(name: 'All Sizes', builder: (ctx) => _AllSizes()),
     WidgetbookUseCase(name: 'All States', builder: (ctx) => _AllStates()),
+    WidgetbookUseCase(name: 'Theme Override', builder: (ctx) => _ThemeOverride()),
   ],
 );
 
@@ -27,6 +28,7 @@ class _Playground extends StatelessWidget {
     final hint = context.knobs.string(label: 'Hint', initialValue: 'you@example.com');
     final helperText = context.knobs.string(label: 'Helper', initialValue: "We'll never share your email.");
     final errorText = context.knobs.string(label: 'Error', initialValue: '');
+    final warningText = context.knobs.string(label: 'Warning', initialValue: '');
     final showLeadingIcon = context.knobs.boolean(label: 'Leading Icon');
     final showTrailingIcon = context.knobs.boolean(label: 'Trailing Icon');
     final disabled = context.knobs.boolean(label: 'Disabled');
@@ -41,6 +43,7 @@ class _Playground extends StatelessWidget {
             hint: hint.isEmpty ? null : hint,
             helperText: helperText.isEmpty ? null : helperText,
             errorText: errorText.isEmpty ? null : errorText,
+            warningText: warningText.isEmpty ? null : warningText,
             enabled: !disabled,
             leadingIcon: showLeadingIcon ? const Icon(Icons.email_outlined) : null,
             trailingIcon: showTrailingIcon ? const Icon(Icons.visibility_outlined) : null,
@@ -110,6 +113,15 @@ class _AllStates extends StatelessWidget {
           ),
           SizedBox(height: context.spacing.mdPlus),
           _StateBlock(
+            'Warning',
+            child: DievasTextInput(
+              label: 'Email',
+              hint: 'you@serticodeinc.com',
+              warningText: 'This email is close to a registered one.',
+            ),
+          ),
+          SizedBox(height: context.spacing.mdPlus),
+          _StateBlock(
             'With Icons',
             child: DievasTextInput(
               hint: 'Search...',
@@ -126,6 +138,48 @@ class _AllStates extends StatelessWidget {
       ),
     ),
   );
+}
+
+class _ThemeOverride extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final base = DievasLightThemeData();
+    final overridden = base.copyWith(
+      components: base.components.copyWith(
+        textInput: base.components.textInput.copyWith(
+          borderColourFocused: const Color(0xFF0D9488),
+          borderColourWarning: const Color(0xFFF59E0B),
+        ),
+      ),
+    );
+
+    return Center(
+      child: Padding(
+        padding: .symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
+        child: Column(
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
+          children: [
+            Text(
+              'Focus + warning colours overridden per instance via copyWith',
+              style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary),
+            ),
+            SizedBox(height: context.spacing.md),
+            ComponentBoundary(
+              child: DievasTheme(
+                data: overridden,
+                child: DievasTextInput(
+                  label: 'Email',
+                  hint: 'you@example.com',
+                  warningText: 'Focus ring and warning border are custom colours.',
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class _StateBlock extends StatelessWidget {

@@ -84,6 +84,7 @@ final class DievasLightThemeData extends DievasGlobalThemeData {
       inputBorder: Color(DievasColourSemanticLight.inputBorder),
       inputBorderFocus: Color(DievasColourSemanticLight.inputBorderFocus),
       inputBorderError: Color(DievasColourSemanticLight.inputBorderError),
+      inputBorderWarning: Color(DievasColourSemanticLight.inputBorderWarning),
       inputText: Color(DievasColourSemanticLight.inputText),
       inputPlaceholder: Color(DievasColourSemanticLight.inputPlaceholder),
     ),

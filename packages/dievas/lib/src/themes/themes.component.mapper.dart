@@ -487,6 +487,7 @@ DievasTextInputThemeData _createTextInputTheme(
   borderColour: colours.input.inputBorder,
   borderColourFocused: colours.input.inputBorderFocus,
   borderColourError: colours.input.inputBorderError,
+  borderColourWarning: colours.input.inputBorderWarning,
   iconColour: colours.icon.iconSecondary,
   iconSize: DievasSizingPrimitives.s20,
   iconSpacing: spacing.sm,

@@ -43,7 +43,15 @@ enum DievasAvatarShape {
 /// )
 /// DievasAvatar(initials: 'AB', size: .lg)
 /// DievasAvatar(size: .sm, shape: .square)
+/// DievasAvatar(
+///   initials: 'AB',
+///   backgroundColour: Colors.blue,
+///   initialsColour: Colors.white,
+///   borderColour: Colors.blueGrey,
+/// )
 /// ```
+///
+/// All colour parameters are optional; when `null` the theme values are used.
 class DievasAvatar extends StatelessWidget {
   const DievasAvatar({
     super.key,
@@ -52,6 +60,10 @@ class DievasAvatar extends StatelessWidget {
     this.size = .md,
     this.shape = .circle,
     this.semanticLabel,
+    this.backgroundColour,
+    this.initialsColour,
+    this.placeholderColour,
+    this.borderColour,
   });
 
   /// Image to display. Takes precedence over [initials] and the placeholder.
@@ -68,6 +80,18 @@ class DievasAvatar extends StatelessWidget {
 
   /// Screen-reader description of this avatar.
   final String? semanticLabel;
+
+  /// Container background colour — overrides the theme's default when provided.
+  final Color? backgroundColour;
+
+  /// Initials text colour — overrides the theme's default when provided.
+  final Color? initialsColour;
+
+  /// Placeholder icon colour — overrides the theme's default when provided.
+  final Color? placeholderColour;
+
+  /// Optional ring colour around the avatar. When `null`, no border is drawn.
+  final Color? borderColour;
 
   @override
   Widget build(BuildContext context) {
@@ -94,43 +118,44 @@ class DievasAvatar extends StatelessWidget {
       .square => theme.borderRadiusSquare,
     };
 
-    Widget content;
+    final background = backgroundColour ?? theme.backgroundColour;
 
-    if (imageProvider case final provider?) {
-      content = Image(image: provider, fit: .cover, width: dimension, height: dimension);
-    } else if (initials case final text? when text.isNotEmpty) {
-      final label = text.length > 2 ? text.substring(0, 2).toUpperCase() : text.toUpperCase();
-      content = Center(
+    final border = switch (borderColour) {
+      final colour? => Border.all(color: colour),
+      null => null,
+    };
+
+    final content = switch ((imageProvider, initials)) {
+      (final provider?, _) => Image(image: provider, fit: .cover, width: dimension, height: dimension),
+      (_, final text?) when text.isNotEmpty => Center(
         child: Text(
-          label,
-          style: initialsStyle.copyWith(color: theme.initialsColour),
+          (text.length > 2 ? text.substring(0, 2) : text).toUpperCase(),
+          style: initialsStyle.copyWith(color: initialsColour ?? theme.initialsColour),
           maxLines: 1,
           overflow: .clip,
         ),
-      );
-    } else {
-      // Placeholder — person outline icon via Unicode glyph or custom paint.
-      // We use a proportional icon size (60% of container) so it scales naturally.
-      final iconDimension = dimension * 0.55;
-      content = Center(
-        child: Icon(Icons.person, size: iconDimension, color: theme.placeholderColour),
-      );
-    }
+      ),
+      // Placeholder — person outline icon via Unicode glyph or custom paint. We use a proportional icon size (60% of container) so it scales naturally.
+      _ => Center(
+        child: Icon(Icons.person, size: dimension * 0.55, color: placeholderColour ?? theme.placeholderColour),
+      ),
+    };
 
     final container = Container(
       width: dimension,
       height: dimension,
-      decoration: BoxDecoration(color: theme.backgroundColour, borderRadius: borderRadius),
+      decoration: BoxDecoration(color: background, borderRadius: borderRadius, border: border),
       clipBehavior: .antiAlias,
       child: content,
     );
 
-    if (semanticLabel == null) return container;
-
-    return Semantics(
-      label: semanticLabel,
-      image: imageProvider != null,
-      child: ExcludeSemantics(child: container),
-    );
+    return switch (semanticLabel) {
+      final label? => Semantics(
+        label: label,
+        image: imageProvider != null,
+        child: ExcludeSemantics(child: container),
+      ),
+      _ => container,
+    };
   }
 }

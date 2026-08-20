@@ -80,7 +80,7 @@ Colour roles use **grouped semantic naming** — `textPrimary`, `bgBase`, `actio
 | Opacity    | `opacity_primitives.dart`    | `opacity_semantic.dart`           |
 | Duration   | `duration_primitives.dart`   | —                                 |
 | Offset     | `offset_primitives.dart`     | `offset_semantic.dart`            |
-| Animation  | —                            | `animation_semantic.dart`         |
+| Animation  | `duration_primitives.dart`   | `animation_semantic.dart`         |
 | Breakpoint | `breakpoint_primitives.dart` | `breakpoint_semantic.dart`        |
 | Easing     | `easing_primitives.dart`     | `easing_semantic.dart`            |
 | Z-Index    | —                            | `z_index_semantic.dart`           |
@@ -99,16 +99,16 @@ DievasThemeData               ← abstract interface (the contract)
        └── [AppThemeData]         ← consumer app's brand (lives in the app, not here)
 ```
 
-`DievasTheme` is an `InheritedModel<DievasThemeAspect>`. Each sub system (`colors`, `typography`, `spacing`, `sizing`, `border`, `elevation`, `opacity`, `components`, `material`) is a named aspect; a widget that depends only on `colors` does not rebuild when `spacing` changes.
+`DievasTheme` is an `InheritedModel<DievasThemeAspect>`. Each sub system (`colours`, `typography`, `spacing`, `sizing`, `border`, `elevation`, `opacity`, `animation`, `components`, `material`) is a named aspect; a widget that depends only on `colours` does not rebuild when `spacing` changes.
 
 ### Context extension — flat API
 
 ```dart
 // Inside any widget's build method
-final color = context.colors.action.actionPrimary;
+final color = context.colours.action.actionPrimary;
 final style = context.typography.labelMd;
-final gap   = context.spacing.s4;
-final cols  = context.grid.columns;
+final gap   = context.spacing.md;
+final dur   = context.animation.standard;
 ```
 
 ### Plugging in a brand theme
@@ -120,9 +120,9 @@ Consumer apps never touch `DievasLightThemeData` directly. They extend `DievasGl
 class ExampleLightThemeData extends DievasGlobalThemeData {
   ExampleLightThemeData({super.components})
     : super(
-        colors: DievasColourThemeData(
+        colours: DievasColourThemeData(
           brightness: Brightness.light,
-          action: ActionColors(actionPrimary: Color(0xFF7C3AED)),
+          action: ActionColours(actionPrimary: Color(0xFF7C3AED)),
         ),
         border: const DievasBorderThemeData(...),
       );
@@ -168,17 +168,17 @@ Rules components always follow:
 
 37 components shipped across nine groups:
 
-| Group                | Count | Components                                                                                                                                                                                                     |
-| -------------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Buttons**          | 4     | `DievasFilledButton`, `DievasOutlinedButton`, `DievasTextButton`, `DievasIconButton`                                                                                                                           |
-| **Display**          | 9     | `DievasAvatar`, `DievasBadge`, `DievasCircularProgress`, `DievasDivider`, `DievasDotIndicator`, `DievasEmptyState`, `DievasIcon`, `DievasLinearProgress`, `DievasTag`                                          |
-| **Form**             | 8     | `DievasAuthCode`, `DievasCheckbox`, `DievasRadio`, `DievasSegmentedControl`, `DievasSwitch`, `DievasTextArea`, `DievasTextInput`, `DievasTextInputGroup`                                                       |
-| **Feedback**         | 3     | `DievasAlert`, `DievasBanner`, `DievasSnackbar`                                                                                                                                                                |
-| **Menu**             | 2     | `DievasDropdown`, `DievasMenuItem`                                                                                                                                                                             |
-| **Overlays**         | 3     | `DievasBottomSheet`, `DievasModal`, `DievasTooltip`                                                                                                                                                            |
-| **Search**           | 2     | `DievasSearchWithList`, `DievasSearchWithDropdown`                                                                                                                                                             |
-| **Nav / Disclosure** | 5     | `DievasAccordion`, `DievasBreadcrumb`, `DievasDrawer`, `DievasPopover`, `DievasTabBar`                                                                                                                         |
-| **Utility**          | 1     | `DievasLoader`                                                                                                                                                                                                 |
+| Group                | Count | Components                                                                                                                                                            |
+| -------------------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Buttons**          | 4     | `DievasFilledButton`, `DievasOutlinedButton`, `DievasTextButton`, `DievasIconButton`                                                                                  |
+| **Display**          | 9     | `DievasAvatar`, `DievasBadge`, `DievasCircularProgress`, `DievasDivider`, `DievasDotIndicator`, `DievasEmptyState`, `DievasIcon`, `DievasLinearProgress`, `DievasTag` |
+| **Form**             | 8     | `DievasAuthCode`, `DievasCheckbox`, `DievasRadio`, `DievasSegmentedControl`, `DievasSwitch`, `DievasTextArea`, `DievasTextInput`, `DievasTextInputGroup`              |
+| **Feedback**         | 3     | `DievasAlert`, `DievasBanner`, `DievasSnackbar`                                                                                                                       |
+| **Menu**             | 2     | `DievasDropdown`, `DievasMenuItem`                                                                                                                                    |
+| **Overlays**         | 3     | `DievasBottomSheet`, `DievasModal`, `DievasTooltip`                                                                                                                   |
+| **Search**           | 2     | `DievasSearchWithList`, `DievasSearchWithDropdown`                                                                                                                    |
+| **Nav / Disclosure** | 5     | `DievasAccordion`, `DievasBreadcrumb`, `DievasDrawer`, `DievasPopover`, `DievasTabBar`                                                                                |
+| **Utility**          | 1     | `DievasLoader`                                                                                                                                                        |
 
 ## Grid System
 
@@ -221,15 +221,19 @@ flutter run
 SDK: >=3.11.4 <4.0.0
 ```
 
-Dart 3 idioms throughout — pattern matching with `switch` expressions, sealed classes, records, exhaustive matching. No legacy pre null safety patterns.
+Dart 3 idioms throughout: pattern matching with `switch` expressions, sealed classes, records, exhaustive matching.
+
+No legacy pre null safety patterns.
 
 ## Reference Systems
 
 | Reference                                     | Role in Dievas                       |
-| --------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------ |
-| [Moon Design System](https://flutter.moon.io) | Component catalogue, visual language | **Landing page** — Jaspr SSR + Tailwind v4, deployed on Railway at `dievas.serticode.com`. |
+| --------------------------------------------- | ------------------------------------ |
+| [Moon Design System](https://flutter.moon.io) | Component catalogue, visual language |
 
-Token bridge: `landing/tool/generate_theme.dart` reads `dievas_tokens` constants and emits Tailwind `@theme {}` CSS — the same token values power both the Flutter widgets and the server rendered landing page.
+The landing page is a Jaspr SSR + Tailwind v4 site deployed on Railway at `dievas.serticode.com`.
+
+Token bridge: `landing/tool/generate_theme.dart` reads `dievas_tokens` constants and emits Tailwind `@theme {}` CSS; the same token values power both the Flutter widgets and the server rendered landing page.
 
 ## Team
 

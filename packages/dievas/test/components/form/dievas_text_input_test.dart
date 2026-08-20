@@ -41,6 +41,49 @@ void main() {
       expect(find.text('Invalid email'), findsOneWidget);
     });
 
+    testWidgets('renders warning text', (tester) async {
+      await tester.pumpWidget(Harness(child: const DievasTextInput(warningText: 'Username is taken')));
+      expect(tester.takeException(), isNull);
+      expect(find.text('Username is taken'), findsOneWidget);
+    });
+
+    testWidgets('warning takes precedence over helper text', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: const DievasTextInput(helperText: 'Optional', warningText: 'Username is taken'),
+        ),
+      );
+      expect(find.text('Username is taken'), findsOneWidget);
+      expect(find.text('Optional'), findsNothing);
+    });
+
+    testWidgets('error takes precedence over warning', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: const DievasTextInput(errorText: 'Invalid email', warningText: 'Username is taken'),
+        ),
+      );
+      expect(find.text('Invalid email'), findsOneWidget);
+      expect(find.text('Username is taken'), findsNothing);
+    });
+
+    testWidgets('uses warning border colour when warningText is set', (tester) async {
+      const warningColour = Color(0xFF00FF00);
+      await tester.pumpWidget(
+        Harness(
+          child: const DievasTextInput(warningText: 'Watch out'),
+          themeOverrides: (theme) => theme.copyWith(
+            components: theme.components.copyWith(
+              textInput: theme.components.textInput.copyWith(borderColourWarning: warningColour),
+            ),
+          ),
+        ),
+      );
+      final decoration = tester.widget<TextField>(find.byType(TextField)).decoration!;
+      final border = decoration.enabledBorder! as OutlineInputBorder;
+      expect(border.borderSide.color, warningColour);
+    });
+
     testWidgets('renders with leading icon', (tester) async {
       await tester.pumpWidget(Harness(child: const DievasTextInput(leadingIcon: Icon(Icons.email_outlined))));
       expect(tester.takeException(), isNull);

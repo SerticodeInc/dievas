@@ -227,6 +227,9 @@ abstract final class DievasColourSemanticLight {
   /// Input border in error state.
   static const int inputBorderError = DievasColourPrimitives.red500;
 
+  /// Input border in warning state.
+  static const int inputBorderWarning = DievasColourPrimitives.amber500;
+
   /// Input text colour (typed value).
   static const int inputText = DievasColourPrimitives.slate900;
 

@@ -31,6 +31,7 @@ class DievasTextArea extends StatelessWidget {
     this.hint,
     this.helperText,
     this.errorText,
+    this.warningText,
     this.minLines = 3,
     this.maxLines = 6,
     this.enabled = true,
@@ -60,6 +61,11 @@ class DievasTextArea extends StatelessWidget {
   /// Error message. Overrides [helperText] and switches the border to error colour.
   final String? errorText;
 
+  /// Non-blocking validation feedback. Overrides [helperText] and switches the
+  /// border to the warning colour. Takes precedence over the normal state but
+  /// yields to [errorText] when both are set.
+  final String? warningText;
+
   /// Minimum visible lines. Defaults to 3.
   final int minLines;
 
@@ -80,12 +86,22 @@ class DievasTextArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).textInput;
-    final hasError = errorText != null && errorText!.isNotEmpty;
+    final hasError = switch (errorText) {
+      final error? => error.isNotEmpty,
+      _ => false,
+    };
+    final hasWarning = switch (warningText) {
+      final warning? when !hasError => warning.isNotEmpty,
+      _ => false,
+    };
 
     // TextArea always uses md tokens
 
-    final borderColour = hasError ? theme.borderColourError : theme.borderColour;
-    final focusedBorderColour = hasError ? theme.borderColourError : theme.borderColourFocused;
+    final (borderColour, focusedBorderColour) = switch ((hasError, hasWarning)) {
+      (true, _) => (theme.borderColourError, theme.borderColourError),
+      (false, true) => (theme.borderColourWarning, theme.borderColourWarning),
+      _ => (theme.borderColour, theme.borderColourFocused),
+    };
 
     final border = OutlineInputBorder(
       borderRadius: theme.borderRadius,
@@ -105,9 +121,11 @@ class DievasTextArea extends StatelessWidget {
     final content = _DievasTextFieldContent(
       theme: theme,
       hasError: hasError,
+      hasWarning: hasWarning,
       label: label,
       helperText: helperText,
       errorText: errorText,
+      warningText: warningText,
       field: TextField(
         controller: controller,
         focusNode: focusNode,
@@ -143,11 +161,10 @@ class DievasTextArea extends StatelessWidget {
       ),
     );
 
-    if (!enabled) {
-      return Opacity(opacity: theme.disabledOpacity, child: content);
-    }
-
-    return content;
+    return switch (enabled) {
+      true => content,
+      _ => Opacity(opacity: theme.disabledOpacity, child: content),
+    };
   }
 }
 
@@ -155,40 +172,53 @@ class _DievasTextFieldContent extends StatelessWidget {
   const _DievasTextFieldContent({
     required this.theme,
     required this.hasError,
+    required this.hasWarning,
     required this.field,
     this.label,
     this.helperText,
     this.errorText,
+    this.warningText,
   });
 
   final DievasTextInputThemeData theme;
   final bool hasError;
+  final bool hasWarning;
   final Widget field;
 
   final String? label;
   final String? helperText;
   final String? errorText;
+  final String? warningText;
 
   @override
-  Widget build(BuildContext context) => Column(
-    mainAxisSize: .min,
-    crossAxisAlignment: .start,
-    children: [
-      if (label case final text?) ...[
-        DefaultTextStyle(style: theme.labelStyle, child: Text(text)),
-        SizedBox(height: theme.labelSpacing),
+  Widget build(BuildContext context) {
+    final feedback = switch ((errorText, hasError, warningText, hasWarning, helperText)) {
+      (final error?, true, _, _, _) => (
+        message: error,
+        style: theme.errorStyle.copyWith(color: theme.borderColourError),
+      ),
+      (_, _, final warning?, true, _) => (
+        message: warning,
+        style: theme.errorStyle.copyWith(color: theme.borderColourWarning),
+      ),
+      (_, _, _, _, final helper?) => (message: helper, style: theme.helperStyle),
+      _ => null,
+    };
+
+    return Column(
+      mainAxisSize: .min,
+      crossAxisAlignment: .start,
+      children: [
+        if (label case final text?) ...[
+          DefaultTextStyle(style: theme.labelStyle, child: Text(text)),
+          SizedBox(height: theme.labelSpacing),
+        ],
+        field,
+        if (feedback case (message: final message, style: final style)?) ...[
+          SizedBox(height: theme.helperSpacing),
+          DefaultTextStyle(style: style, child: Text(message)),
+        ],
       ],
-      field,
-      if (errorText case final errorText? when hasError) ...[
-        SizedBox(height: theme.helperSpacing),
-        DefaultTextStyle(
-          style: theme.errorStyle.copyWith(color: theme.borderColourError),
-          child: Text(errorText),
-        ),
-      ] else if (helperText case final helperText?) ...[
-        SizedBox(height: theme.helperSpacing),
-        DefaultTextStyle(style: theme.helperStyle, child: Text(helperText)),
-      ],
-    ],
-  );
+    );
+  }
 }

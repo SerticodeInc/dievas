@@ -42,6 +42,7 @@ class DievasTextInput extends StatefulWidget {
     this.hint,
     this.helperText,
     this.errorText,
+    this.warningText,
     this.leadingIcon,
     this.trailingIcon,
     this.size = DievasTextInputSize.md,
@@ -74,6 +75,11 @@ class DievasTextInput extends StatefulWidget {
   /// error colour.
   final String? errorText;
 
+  /// Non-blocking validation feedback. Overrides [helperText] and switches the
+  /// border to the warning colour. Takes precedence over the normal state but
+  /// yields to [errorText] when both are set.
+  final String? warningText;
+
   /// Leading widget inside the input container (icon, prefix, etc.).
   final Widget? leadingIcon;
 
@@ -104,7 +110,14 @@ class _DievasTextInputState extends State<DievasTextInput> {
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).textInput;
-    final hasError = widget.errorText != null && widget.errorText!.isNotEmpty;
+    final hasError = switch (widget.errorText) {
+      final error? => error.isNotEmpty,
+      _ => false,
+    };
+    final hasWarning = switch (widget.warningText) {
+      final warning? when !hasError => warning.isNotEmpty,
+      _ => false,
+    };
 
     final height = switch (widget.size) {
       .sm => theme.height.sm,
@@ -130,8 +143,11 @@ class _DievasTextInputState extends State<DievasTextInput> {
       .lg => theme.placeholderStyle.lg,
     };
 
-    final borderColour = hasError ? theme.borderColourError : theme.borderColour;
-    final focusedBorderColour = hasError ? theme.borderColourError : theme.borderColourFocused;
+    final (borderColour, focusedBorderColour) = switch ((hasError, hasWarning)) {
+      (true, _) => (theme.borderColourError, theme.borderColourError),
+      (false, true) => (theme.borderColourWarning, theme.borderColourWarning),
+      _ => (theme.borderColour, theme.borderColourFocused),
+    };
 
     final border = OutlineInputBorder(
       borderRadius: theme.borderRadius,
@@ -151,9 +167,11 @@ class _DievasTextInputState extends State<DievasTextInput> {
     final content = _DievasTextInputFieldContent(
       theme: theme,
       hasError: hasError,
+      hasWarning: hasWarning,
       label: widget.label,
       helperText: widget.helperText,
       errorText: widget.errorText,
+      warningText: widget.warningText,
       field: SizedBox(
         height: height,
         child: TextField(
@@ -221,11 +239,10 @@ class _DievasTextInputState extends State<DievasTextInput> {
       ),
     );
 
-    if (!widget.enabled) {
-      return Opacity(opacity: theme.disabledOpacity, child: content);
-    }
-
-    return content;
+    return switch (widget.enabled) {
+      true => content,
+      _ => Opacity(opacity: theme.disabledOpacity, child: content),
+    };
   }
 }
 
@@ -233,40 +250,53 @@ class _DievasTextInputFieldContent extends StatelessWidget {
   const _DievasTextInputFieldContent({
     required this.theme,
     required this.hasError,
+    required this.hasWarning,
     required this.field,
     this.label,
     this.helperText,
     this.errorText,
+    this.warningText,
   });
 
   final DievasTextInputThemeData theme;
   final bool hasError;
+  final bool hasWarning;
   final Widget field;
 
   final String? label;
   final String? helperText;
   final String? errorText;
+  final String? warningText;
 
   @override
-  Widget build(BuildContext context) => Column(
-    mainAxisSize: .min,
-    crossAxisAlignment: .start,
-    children: [
-      if (label case final labelText?) ...[
-        DefaultTextStyle(style: theme.labelStyle, child: Text(labelText)),
-        SizedBox(height: theme.labelSpacing),
+  Widget build(BuildContext context) {
+    final feedback = switch ((errorText, hasError, warningText, hasWarning, helperText)) {
+      (final error?, true, _, _, _) => (
+        message: error,
+        style: theme.errorStyle.copyWith(color: theme.borderColourError),
+      ),
+      (_, _, final warning?, true, _) => (
+        message: warning,
+        style: theme.errorStyle.copyWith(color: theme.borderColourWarning),
+      ),
+      (_, _, _, _, final helper?) => (message: helper, style: theme.helperStyle),
+      _ => null,
+    };
+
+    return Column(
+      mainAxisSize: .min,
+      crossAxisAlignment: .start,
+      children: [
+        if (label case final labelText?) ...[
+          DefaultTextStyle(style: theme.labelStyle, child: Text(labelText)),
+          SizedBox(height: theme.labelSpacing),
+        ],
+        field,
+        if (feedback case (message: final message, style: final style)?) ...[
+          SizedBox(height: theme.helperSpacing),
+          DefaultTextStyle(style: style, child: Text(message)),
+        ],
       ],
-      field,
-      if (errorText case final errorText? when hasError) ...[
-        SizedBox(height: theme.helperSpacing),
-        DefaultTextStyle(
-          style: theme.errorStyle.copyWith(color: theme.borderColourError),
-          child: Text(errorText),
-        ),
-      ] else if (helperText case final helperText?) ...[
-        SizedBox(height: theme.helperSpacing),
-        DefaultTextStyle(style: theme.helperStyle, child: Text(helperText)),
-      ],
-    ],
-  );
+    );
+  }
 }

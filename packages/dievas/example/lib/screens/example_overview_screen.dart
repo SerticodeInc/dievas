@@ -43,7 +43,8 @@ class ExampleOverviewScreen extends StatelessWidget {
               title: 'Overlays',
               description:
                   'DievasScope owns a banner and a snackbar overlay. '
-                  'The builder returns a Dievas feedback component; the scope animates it.',
+                  'The builder returns a Dievas feedback component; the scope animates it. '
+                  'Both auto-dismiss on their own — pass Duration.zero to showBanner/showSnackbar for a sticky overlay.',
               child: _OverlayControls(),
             ),
             SizedBox(height: spacing.lg),
@@ -111,7 +112,7 @@ class _ThemeModeControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => DievasSegmentedControl<ThemeMode>(
-    options: const [ThemeMode.system, ThemeMode.light, ThemeMode.dark],
+    options: const [.system, .light, .dark],
     value: DievasScope.of(context).themeMode,
     onChanged: (mode) => DievasScope.of(context).setThemeMode(mode),
     labelBuilder: (mode) => switch (mode) {

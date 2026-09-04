@@ -1,7 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
+import 'package:dievas/l10n/dievas_localizations.dart';
 import 'package:dievas/src/theme.dart';
 import 'package:dievas/src/themes.dart';
+
+/// How long a banner stays visible before auto-dismissing.
+const Duration kDievasBannerAutoDismissDuration = Duration(seconds: 5);
+
+/// How long a snackbar stays visible before auto-dismissing.
+const Duration kDievasSnackbarAutoDismissDuration = Duration(seconds: 4);
 
 /// Builds an app subtree with access to the resolved Dievas theme.
 typedef DievasAppBuilder = Widget Function(BuildContext context, DievasThemeData theme, Widget? child);
@@ -83,6 +92,10 @@ mixin DievasScopeController on TickerProviderStateMixin<DievasScope> {
   late final ValueNotifier<ThemeMode> _themeModeNotifier;
   late final ValueNotifier<DievasOverlayBuilder?> _bannerNotifier;
   late final ValueNotifier<DievasOverlayBuilder?> _snackbarNotifier;
+  Timer? _bannerDismissTimer;
+  Timer? _snackbarDismissTimer;
+  int _bannerGeneration = 0;
+  int _snackbarGeneration = 0;
 
   /// The currently selected theme mode.
   ThemeMode get themeMode => _themeModeNotifier.value;
@@ -107,6 +120,8 @@ mixin DievasScopeController on TickerProviderStateMixin<DievasScope> {
 
   @override
   void dispose() {
+    _bannerDismissTimer?.cancel();
+    _snackbarDismissTimer?.cancel();
     _bannerAnimationController.dispose();
     _snackbarAnimationController.dispose();
     _themeModeNotifier.dispose();
@@ -119,30 +134,69 @@ mixin DievasScopeController on TickerProviderStateMixin<DievasScope> {
   void setThemeMode(ThemeMode mode) => themeMode = mode;
 
   /// Shows a banner overlay built by [builder].
-  void showBanner(DievasOverlayBuilder builder) {
+  ///
+  /// The banner auto-dismisses after [duration], defaulting to
+  /// [kDievasBannerAutoDismissDuration]. Pass [Duration.zero] to keep it
+  /// visible until [hideBanner] is called. Showing again while visible
+  /// restarts both the entrance and the countdown.
+  void showBanner(DievasOverlayBuilder builder, {Duration? duration}) {
     if (_bannerNotifier.value == builder) return;
 
+    _bannerGeneration++;
+    _bannerDismissTimer?.cancel();
     _bannerNotifier.value = builder;
     _bannerAnimationController.forward(from: 0);
+
+    final effectiveDuration = duration ?? kDievasBannerAutoDismissDuration;
+    if (effectiveDuration <= Duration.zero) return;
+    _bannerDismissTimer = Timer(effectiveDuration, hideBanner);
   }
 
   /// Hides the active banner overlay.
   void hideBanner() {
     if (_bannerNotifier.value == null) return;
-    _bannerAnimationController.reverse(from: 1).whenCompleteOrCancel(() => _bannerNotifier.value = null);
+    _bannerDismissTimer?.cancel();
+
+    // A show during the exit animation cancels this ticker, which would fire
+    // the callback and clear the freshly shown overlay — only clear if this
+    // exit still belongs to the current generation.
+    final generation = _bannerGeneration;
+    _bannerAnimationController.reverse(from: 1).whenCompleteOrCancel(() {
+      if (_bannerGeneration != generation) return;
+      _bannerNotifier.value = null;
+    });
   }
 
   /// Shows a snackbar overlay built by [builder].
-  void showSnackbar(DievasOverlayBuilder builder) {
+  ///
+  /// The snackbar auto-dismisses after [duration], defaulting to
+  /// [kDievasSnackbarAutoDismissDuration]. Pass [Duration.zero] to keep it
+  /// visible until [hideSnackbar] is called. Showing again while visible
+  /// restarts both the entrance and the countdown.
+  void showSnackbar(DievasOverlayBuilder builder, {Duration? duration}) {
     if (_snackbarNotifier.value == builder) return;
+
+    _snackbarGeneration++;
+    _snackbarDismissTimer?.cancel();
     _snackbarNotifier.value = builder;
     _snackbarAnimationController.forward(from: 0);
+
+    final effectiveDuration = duration ?? kDievasSnackbarAutoDismissDuration;
+    if (effectiveDuration <= Duration.zero) return;
+    _snackbarDismissTimer = Timer(effectiveDuration, hideSnackbar);
   }
 
   /// Hides the active snackbar overlay.
   void hideSnackbar() {
     if (_snackbarNotifier.value == null) return;
-    _snackbarAnimationController.reverse(from: 1).whenCompleteOrCancel(() => _snackbarNotifier.value = null);
+    _snackbarDismissTimer?.cancel();
+
+    // See hideBanner — same generation guard against a concurrent show.
+    final generation = _snackbarGeneration;
+    _snackbarAnimationController.reverse(from: 1).whenCompleteOrCancel(() {
+      if (_snackbarGeneration != generation) return;
+      _snackbarNotifier.value = null;
+    });
   }
 }
 
@@ -234,37 +288,62 @@ class _DievasScopeStateMarker extends InheritedWidget {
 
 class _DievasOverlaySlot extends StatelessWidget {
   const _DievasOverlaySlot({required this.alignment, required this.animation, required this.notifier});
-
   final AlignmentGeometry alignment;
   final Animation<double> animation;
   final ValueNotifier<DievasOverlayBuilder?> notifier;
 
   @override
-  Widget build(BuildContext context) => Positioned.fill(
-    child: Align(
-      alignment: alignment,
-      child: ValueListenableBuilder<DievasOverlayBuilder?>(
-        valueListenable: notifier,
-        builder: (context, builder, _) {
-          if (builder == null) {
-            return const SizedBox.shrink();
-          }
+  Widget build(BuildContext context) {
+    // Overlays render beside — not inside — MaterialApp, so the Directionality
+    // and MediaQuery the app provides never reach this subtree. Supply them or
+    // every Text/SafeArea below throws.
+    //
+    // Deliberately no Localizations here: mounting one outside MaterialApp
+    // defers the first frame and breaks semantics compilation. Component copy
+    // resolves through DievasLocalizations' built-in English fallback instead,
+    // so direction follows the same locale resolution the copy would.
+    final locale = basicLocaleListResolution(
+      WidgetsBinding.instance.platformDispatcher.locales,
+      DievasLocalizations.supportedLocales,
+    );
+    final textDirection = _textDirectionOf(locale);
 
-          return IgnorePointer(
-            ignoring: false,
-            child: FadeTransition(
-              opacity: animation,
-              child: SlideTransition(
-                position: Tween<Offset>(
-                  begin: const Offset(0, 0.1),
-                  end: .zero,
-                ).animate(CurvedAnimation(parent: animation, curve: DievasTheme.animationOf(context).easingEnter)),
-                child: builder(context, animation),
-              ),
+    return Positioned.fill(
+      child: Align(
+        alignment: alignment,
+        child: Directionality(
+          textDirection: textDirection,
+          child: MediaQuery.fromView(
+            view: View.of(context),
+            child: ValueListenableBuilder<DievasOverlayBuilder?>(
+              valueListenable: notifier,
+              builder: (context, builder, _) {
+                if (builder == null) {
+                  return const SizedBox.shrink();
+                }
+
+                return IgnorePointer(
+                  ignoring: false,
+                  child: FadeTransition(
+                    opacity: animation,
+                    child: SlideTransition(
+                      position: Tween<Offset>(begin: const Offset(0, 0.1), end: .zero).animate(
+                        CurvedAnimation(parent: animation, curve: DievasTheme.animationOf(context).easingEnter),
+                      ),
+                      child: builder(context, animation),
+                    ),
+                  ),
+                );
+              },
             ),
-          );
-        },
+          ),
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
+
+TextDirection _textDirectionOf(Locale locale) => switch (locale.languageCode) {
+  'ar' || 'ckb' || 'dv' || 'fa' || 'he' || 'ps' || 'sd' || 'ug' || 'ur' || 'yi' => .rtl,
+  _ => .ltr,
+};

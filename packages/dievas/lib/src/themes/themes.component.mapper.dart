@@ -747,8 +747,8 @@ DievasSegmentedControlThemeData _createSegmentedControlTheme(
   DievasBorderThemeData border,
   DievasAnimationThemeData animation,
 ) => DievasSegmentedControlThemeData(
-  labelStyle: typography.bodyMd.copyWith(color: colours.text.textPrimary),
-  selectedLabelStyle: typography.labelSm.copyWith(color: colours.core.onBrand),
+  labelStyle: typography.labelSm.copyWith(color: colours.text.textPrimary),
+  selectedLabelStyle: typography.labelSm.copyWith(fontWeight: .w700, color: colours.core.onBrand),
   borderRadius: border.md,
   padding: .symmetric(horizontal: spacing.smPlus, vertical: spacing.sm),
   bgColour: colours.background.bgSubtle,

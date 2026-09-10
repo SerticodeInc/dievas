@@ -8,6 +8,7 @@ environment:
 
 workspace:
     - packages/dievas
+    - packages/dievas/example
     - packages/dievas_gallery
     - packages/dievas_tokens
 

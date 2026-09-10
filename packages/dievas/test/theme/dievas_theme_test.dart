@@ -136,10 +136,54 @@ void main() {
       expect(DievasLightThemeData().material, isNotNull);
     });
 
+    test('material bridge derives font family from typography', () {
+      final typography = _typographyWithFamily(DievasLightThemeData().typography, 'TestBrandFont');
+      final theme = DievasLightThemeData(typography: typography);
+
+      expect(theme.material.textTheme.bodyMedium?.fontFamily, 'TestBrandFont');
+      expect(theme.material.textTheme.labelMedium?.fontFamily, 'TestBrandFont');
+      expect(theme.material.textTheme.displaySmall?.fontFamily, 'TestBrandFont');
+    });
+
     test('copyWith returns different instance', () {
       final t1 = DievasLightThemeData();
       final t2 = t1.copyWith();
       expect(t2, isNot(same(t1)));
+    });
+  });
+
+  group('DievasScope', () {
+    testWidgets('DievasScope.of dependents rebuild when themeMode changes', (tester) async {
+      var buildCount = 0;
+      var currentMode = ThemeMode.system;
+
+      await tester.pumpWidget(
+        DievasScope(
+          lightTheme: DievasLightThemeData(),
+          darkTheme: DievasDarkThemeData(),
+          child: MaterialApp(
+            home: Builder(
+              builder: (context) {
+                buildCount++;
+                currentMode = DievasScope.of(context).themeMode;
+                return TextButton(
+                  onPressed: () => DievasScope.of(context).setThemeMode(ThemeMode.dark),
+                  child: const Text('toggle'),
+                );
+              },
+            ),
+          ),
+        ),
+      );
+
+      expect(currentMode, ThemeMode.system);
+      final buildsBeforeTap = buildCount;
+
+      await tester.tap(find.text('toggle'));
+      await tester.pump();
+
+      expect(currentMode, ThemeMode.dark);
+      expect(buildCount, greaterThan(buildsBeforeTap));
     });
   });
 
@@ -365,4 +409,33 @@ void main() {
       expect(modified, defaultComponents);
     });
   });
+}
+
+DievasTypographyThemeData _typographyWithFamily(DievasTypographyThemeData t, String family) {
+  TextStyle withFamily(TextStyle style) => style.copyWith(fontFamily: family);
+
+  return DievasTypographyThemeData(
+    displayLg: withFamily(t.displayLg),
+    displayMd: withFamily(t.displayMd),
+    displaySm: withFamily(t.displaySm),
+    headingXl: withFamily(t.headingXl),
+    headingLg: withFamily(t.headingLg),
+    headingMd: withFamily(t.headingMd),
+    headingSm: withFamily(t.headingSm),
+    headingXs: withFamily(t.headingXs),
+    titleLg: withFamily(t.titleLg),
+    titleMd: withFamily(t.titleMd),
+    titleSm: withFamily(t.titleSm),
+    titleXsm: withFamily(t.titleXsm),
+    bodyLg: withFamily(t.bodyLg),
+    bodyMd: withFamily(t.bodyMd),
+    bodySm: withFamily(t.bodySm),
+    bodyXs: withFamily(t.bodyXs),
+    labelLg: withFamily(t.labelLg),
+    labelMd: withFamily(t.labelMd),
+    labelSm: withFamily(t.labelSm),
+    labelXs: withFamily(t.labelXs),
+    codeMd: withFamily(t.codeMd),
+    codeSm: withFamily(t.codeSm),
+  );
 }

@@ -279,18 +279,111 @@
 }
 
 .gal-tile {
-  width: 104px;
-  height: 72px;
+  width: 132px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--dv-border);
   background: var(--dv-bg-base);
+  padding: 16px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  transition: border-color 200ms var(--ease), transform 200ms var(--ease);
+}
+.gal-tile:hover {
+  border-color: var(--dv-border-hi);
+  transform: translateY(-2px);
+}
+
+.gal-preview {
+  height: 34px;
   display: grid;
   place-items: center;
+}
+
+.gal-name {
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--dv-text-lo);
+}
+
+/* Miniature component previews */
+
+.gp-btn {
+  padding: 7px 14px;
+  border-radius: var(--radius-md);
+  background: var(--dv-action);
+  color: var(--dv-on-brand);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.gp-switch {
+  width: 38px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--dv-switch-on);
+  position: relative;
+}
+.gp-switch .gp-knob {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--dv-switch-thumb);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.25);
+}
+
+.gp-field {
+  width: 92px;
+  padding: 7px 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--dv-border);
+  color: var(--dv-text-lo);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.gp-badge {
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--dv-brand-subtle);
+  color: var(--dv-brand);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gp-chip {
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--dv-border);
+  color: var(--dv-text-mid);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.gp-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--dv-border);
+}
+.gp-tabs .gp-tab {
+  padding: 5px 9px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--dv-text-lo);
+  border-bottom: 2px solid transparent;
+}
+.gp-tabs .gp-tab.is-active {
+  color: var(--dv-text-hi);
+  border-bottom-color: var(--dv-brand);
 }
 
 /* Mobile */

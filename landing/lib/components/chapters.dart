@@ -199,8 +199,12 @@ class Chapters extends StatelessComponent {
   // ── 05 · Gallery handoff ────────────────────────────────────
 
   Component _galleryDemo() => div(classes: 'gallery-strip', [
-    for (final t in _tiles)
-      div(classes: 'gal-tile', [Component.text(t)]),
+    _galTile('Button', _galButton()),
+    _galTile('Switch', _galSwitch()),
+    _galTile('Field', _galField()),
+    _galTile('Badge', _galBadge()),
+    _galTile('Chip', _galChip()),
+    _galTile('Tabs', _galTabs()),
     a(
       href: DievasUrls.gallery,
       classes: 'cta-ghost press',
@@ -209,5 +213,19 @@ class Chapters extends StatelessComponent {
     ),
   ]);
 
-  static const _tiles = ['Button', 'Switch', 'Field', 'Badge', 'Chip', 'Tabs'];
+  Component _galTile(String name, Component preview) => div(classes: 'gal-tile', [
+    div(classes: 'gal-preview', [preview]),
+    span(classes: 'gal-name', [Component.text(name)]),
+  ]);
+
+  Component _galButton() => span(classes: 'gp gp-btn', [Component.text('Button')]);
+  Component _galSwitch() => span(classes: 'gp gp-switch', [span(classes: 'gp-knob', [])]);
+  Component _galField() => span(classes: 'gp gp-field', [Component.text('Placeholder')]);
+  Component _galBadge() => span(classes: 'gp gp-badge', [Component.text('New')]);
+  Component _galChip() => span(classes: 'gp gp-chip', [Component.text('Filter')]);
+  Component _galTabs() => span(classes: 'gp gp-tabs', [
+    span(classes: 'gp-tab is-active', [Component.text('A')]),
+    span(classes: 'gp-tab', [Component.text('B')]),
+    span(classes: 'gp-tab', [Component.text('C')]),
+  ]);
 }

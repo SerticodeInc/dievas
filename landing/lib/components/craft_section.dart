@@ -34,7 +34,7 @@ class CraftSection extends StatelessComponent {
       ),
       _card(
         'Open, not orphaned',
-        'Apache-2.0 on pub.dev, a public Widgetbook gallery, and a living component catalogue behind it. Built by Serticode Inc.',
+        'On pub.dev with a public Widgetbook gallery and a living component catalogue behind it. Built by Serticode Inc.',
         _openSvg,
       ),
     ]),

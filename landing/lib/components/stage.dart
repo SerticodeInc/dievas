@@ -43,7 +43,7 @@ class Stage extends StatelessComponent {
       span(classes: 'stage-dot d-y', []),
       span(classes: 'stage-dot d-g', []),
     ]),
-    div(classes: 'stage-title', [Component.text('dievas — component stage')]),
+    div(classes: 'stage-title', [Component.text('dievas · component stage')]),
     button(
       type: ButtonType.button,
       classes: 'stage-theme press',
@@ -95,7 +95,6 @@ class Stage extends StatelessComponent {
       ]),
       div(
         classes: 'rail-code',
-        attributes: const {'data-readout-src': ''},
         [
           pre(classes: 'codestrip', [
             Component.text('// resolved from var(--dv-*)\n'),
@@ -117,10 +116,7 @@ class Stage extends StatelessComponent {
       div(classes: 'swatch-label', [
         b([Component.text(name)]),
         span(
-          attributes: {
-            'data-di-prop': prop,
-            'data-fallback': tokenRgba(lightValue),
-          },
+          attributes: {'data-di-prop': prop},
           [Component.text(tokenRgba(lightValue))],
         ),
       ]),
@@ -219,7 +215,7 @@ class Stage extends StatelessComponent {
   Component _foot() => div(classes: 'stage-foot', [
     Component.text('InheritedModel · 9 typed aspects'),
     span(classes: 'readout', attributes: const {'data-stage-label': ''}, [
-      Component.text('idle — nothing rebuilt'),
+      Component.text('idle, nothing rebuilt'),
     ]),
   ]);
 }

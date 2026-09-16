@@ -19,7 +19,7 @@ class ThemeSection extends StatelessComponent {
         p(
           classes: 'theme-lede sr sr-l',
           [
-            Component.text('Flip the toggle up top — the stage, the chapters, the page. Everything rebinds to the same semantic layer; nothing is themed twice.'),
+            Component.text('Flip the toggle up top. The stage, the chapters, and the page all rebind to the same semantic layer. Nothing is themed twice.'),
           ],
         ),
       ]),

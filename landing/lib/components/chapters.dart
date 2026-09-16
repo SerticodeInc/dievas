@@ -19,7 +19,7 @@ class Chapters extends StatelessComponent {
         p(
           classes: 'chapters-lede sr sr-l',
           [
-            Component.text('Five layers, one source of truth — nothing to reconcile, nothing to drift. Each chapter ends in something that runs.'),
+            Component.text('Five layers, one source of truth. Nothing to reconcile, nothing to drift. Each chapter ends in something that runs.'),
           ],
         ),
       ]),
@@ -28,7 +28,7 @@ class Chapters extends StatelessComponent {
         num: '01',
         meta: 'Tokens · dievas_tokens',
         heading: 'One source of truth.',
-        body: 'Primitives become semantic roles become context. The page you\'re reading is themed by the same three-hop chain your app will use — no landing-only colours, no special cases.',
+        body: 'Primitives become semantic roles become context. The page you\'re reading is themed by the same three-hop chain your app will use. No landing-only colours, no special cases.',
         demo: _tokenChainDemo(),
       ),
 
@@ -36,7 +36,7 @@ class Chapters extends StatelessComponent {
         num: '02',
         meta: 'Aspects · InheritedModel',
         heading: 'Rebuild what changed, nothing more.',
-        body: 'Nine typed aspects ride an InheritedModel. A single text change rebuilds the dependents that read text — never the layout, never the whole tree.',
+        body: 'Nine typed aspects ride an InheritedModel. A single text change rebuilds only the dependents that read text, never the layout and never the whole tree.',
         demo: _aspectDemo(),
       ),
 
@@ -44,7 +44,7 @@ class Chapters extends StatelessComponent {
         num: '03',
         meta: 'Components · Moon catalogue',
         heading: 'One catalogue, fifty states, today.',
-        body: 'Buttons, switches, inputs and more behave identically from first commit — focus, disabled, reduced-motion handling are baked into the component, not bolted on by you.',
+        body: 'Buttons, switches, inputs and more behave identically from first commit. Focus, disabled, and reduced-motion handling are baked into the component, not bolted on by you.',
         demo: _componentsDemo(),
       ),
 
@@ -52,7 +52,7 @@ class Chapters extends StatelessComponent {
         num: '04',
         meta: 'Multi-brand · DievasScope',
         heading: 'One app, every brand.',
-        body: 'DievasScope re-themes a running tree with zero code paths and zero restarts. Tap a brand — the card that follows rebinds to its tokens on the spot.',
+        body: 'DievasScope re-themes a running tree with zero code paths and zero restarts. Tap a brand, and the card that follows rebinds to its tokens on the spot.',
         demo: _brandDemo(),
       ),
 
@@ -60,7 +60,7 @@ class Chapters extends StatelessComponent {
         num: '05',
         meta: 'Gallery · Widgetbook',
         heading: 'Every permutation, running.',
-        body: 'Every component, every state, exercised in a live Widgetbook gallery against the real token set — in your browser, not a screenshot.',
+        body: 'Every component, every state, exercised in a live Widgetbook gallery against the real token set, in your browser and not a screenshot.',
         demo: _galleryDemo(),
       ),
     ],
@@ -141,7 +141,7 @@ class Chapters extends StatelessComponent {
       button(type: ButtonType.button, classes: 'dbtn dbtn-ghost press', [Component.text('Ghost')]),
     ]),
     div(classes: 'comp-row', [
-      _switchDemo('Hover, press, focus, disabled — shipped.'),
+      _switchDemo('Hover, press, focus, and disabled states, shipped.'),
     ]),
   ]);
 

@@ -29,7 +29,7 @@ class Hero extends StatelessComponent {
         [
           Component.text('The Flutter design system that ships '),
           Component.text('tokens, components, and themes'),
-          Component.text(' from one layer — rebuild only what changed, theme everything else.'),
+          Component.text(' from one layer. Rebuild only what changed, theme everything else.'),
         ],
       ),
       div(classes: 'hero-ctas hero-anim hr-c', [

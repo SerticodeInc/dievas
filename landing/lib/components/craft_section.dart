@@ -13,19 +13,19 @@ class CraftSection extends StatelessComponent {
       p(
         classes: 'craft-lede sr sr-l',
         [
-          Component.text('Four things Dievas holds true at every layer — verified in the code, shown on this page.'),
+          Component.text('Four things Dievas holds true at every layer, verified in the code and shown on this page.'),
         ],
       ),
     ]),
     div(classes: 'craft-grid', [
       _card(
         'Semantic by construction',
-        'Components read the semantic layer and nothing else. A widget never hardcodes a colour, radius, or duration — grep says so, not our docs.',
+        'Components read the semantic layer and nothing else. A widget never hardcodes a colour, radius, or duration. Grep says so, not our docs.',
         _globeSvg,
       ),
       _card(
         'Accessible from first frame',
-        'Focus, semantics, and reduced-motion handling are built into the components — not layered on by you at integration time.',
+        'Focus, semantics, and reduced-motion handling are built into the components, not layered on by you at integration time.',
         _a11ySvg,
       ),
       _card(

@@ -3,7 +3,61 @@
  * ───────────────────────────────────────────────────────────── */
 
 .chapters {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   padding-top: clamp(96px, 14vh, 160px);
+  background:
+    radial-gradient(115% 65% at 50% -22%, color-mix(in srgb, var(--dv-brand) 8%, transparent), transparent 64%),
+    radial-gradient(85% 55% at 112% 42%, color-mix(in srgb, var(--dv-brand) 5%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--dv-bg-subtle), var(--dv-bg-base) 42%);
+}
+
+/* ── Backdrop — grain + drifting glyphs ───────────────────── */
+
+.chapters-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Film grain — desaturated fractal noise, tiled. Overlay blend keeps it
+ * present in the highlights and shadows of both sheets without tinting. */
+.chapters-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  opacity: 0.38;
+  mix-blend-mode: overlay;
+}
+
+.ghost-char {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--dv-text-hi);
+  opacity: 0.055;
+  user-select: none;
+  white-space: nowrap;
+  animation: ghost-drift 20s var(--ease) infinite;
+}
+
+.ghost-char.is-brand {
+  color: var(--dv-brand);
+  opacity: 0.1;
+}
+
+@keyframes ghost-drift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-16px) rotate(-1.5deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghost-char { animation: none; }
 }
 
 .chapters-intro {

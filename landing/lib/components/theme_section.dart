@@ -14,7 +14,6 @@ class ThemeSection extends StatelessComponent {
   Component build(BuildContext context) => section(classes: 'theme-wall section', [
     div(classes: 'shell', [
       div(classes: 'theme-head', [
-        div(classes: 'eyebrow sr', [Component.text('Theming')]),
         h2(classes: 'theme-title sr sr-s', [Component.text('Two sheets, one token model.')]),
         p(
           classes: 'theme-lede sr sr-l',

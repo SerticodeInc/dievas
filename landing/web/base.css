@@ -97,28 +97,6 @@ button {
   padding-block: clamp(72px, 12vh, 120px);
 }
 
-/* ── Section header pattern ────────────────────────────────── */
-
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--dv-text-mid);
-}
-
-.eyebrow::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin-right: 10px;
-  border-radius: 999px;
-  background: var(--dv-brand);
-  vertical-align: 1px;
-}
-
 /* ── Scroll-reveal system ──────────────────────────────────── */
 /* Hidden only when JS is available (.js-on) — no-JS stays visible. */
 

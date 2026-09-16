@@ -14,7 +14,6 @@ class Chapters extends StatelessComponent {
     classes: 'chapters shell-narrow relative',
     [
       div(classes: 'chapters-intro', [
-        div(classes: 'eyebrow sr', [Component.text('How it\'s built')]),
         h2(classes: 'chapters-title sr sr-s', [Component.text('Compiled, not composed.')]),
         p(
           classes: 'chapters-lede sr sr-l',

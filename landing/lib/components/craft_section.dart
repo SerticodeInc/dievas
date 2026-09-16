@@ -8,7 +8,6 @@ class CraftSection extends StatelessComponent {
   @override
   Component build(BuildContext context) => section(classes: 'craft section shell', [
     div(classes: 'craft-head', [
-      div(classes: 'eyebrow sr', [Component.text('Craft')]),
       h2(classes: 'craft-title sr sr-s', [Component.text('Native to the last token.')]),
       p(
         classes: 'craft-lede sr sr-l',

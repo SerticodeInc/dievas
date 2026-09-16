@@ -13,19 +13,19 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 14px;
-  padding-block: 28px;
+  gap: 18px;
+  padding-block: 32px;
   border-top: 1px solid var(--dv-border);
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  color: var(--dv-text-lo);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--dv-text-mid);
 }
 
 .footer-links {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 24px;
   flex-wrap: wrap;
 }
 
@@ -41,7 +41,7 @@
 .footer-copy {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 22px;
   flex-wrap: wrap;
 }
 

@@ -15,7 +15,7 @@ class FooterComponent extends StatelessComponent {
   Component build(BuildContext context) => footer(classes: 'footer', [
     div(classes: 'shell footer-util', [
       div(classes: 'footer-copy', [
-        Component.text('Apache-2.0 · Serticode Inc.'),
+        Component.text('Serticode Inc.'),
         const ThemeToggle(),
       ]),
       div(classes: 'footer-links', [

@@ -109,20 +109,35 @@ class Chapters extends StatelessComponent {
   // ── 02 · Aspect rebuild readout ─────────────────────────────
 
   Component _aspectDemo() => div(classes: 'rebuild-well', [
-    for (final row in _aspectRows)
-      div(classes: 'rebuild-item', [
-        span([Component.text(row.$1)]),
-        span(
-          attributes: const {'style': 'display:flex;align-items:center;gap:10px;font-variant-numeric:tabular-nums;'},
-          [
-            span(classes: 'liv', [Component.text('rebuilt · ')]),
-            b(
-              attributes: {'data-rebuild-count': row.$1},
-              [Component.text(row.$2)],
-            ),
-          ],
+    div(classes: 'aspect-picker', [
+      for (final aspect in _aspectRows)
+        button(
+          type: ButtonType.button,
+          classes: 'aspect-btn press',
+          attributes: {
+            'data-aspect-trigger': aspect.$1,
+            'aria-pressed': aspect.$1 == 'text' ? 'true' : 'false',
+          },
+          [Component.text(aspect.$1)],
         ),
-      ]),
+    ]),
+    for (final row in _aspectRows)
+      div(
+        classes: 'rebuild-item',
+        attributes: {'data-rebuild-count': row.$1},
+        [
+          span([Component.text(row.$1)]),
+          span(
+            attributes: const {
+              'style': 'display:flex;align-items:center;gap:10px;font-variant-numeric:tabular-nums;',
+            },
+            [
+              span(classes: 'liv', [Component.text('rebuilt · ')]),
+              b([Component.text(row.$2)]),
+            ],
+          ),
+        ],
+      ),
     div(classes: 'touch-control', [
       button(
         type: ButtonType.button,
@@ -142,21 +157,51 @@ class Chapters extends StatelessComponent {
   // ── 03 · Component states ───────────────────────────────────
 
   Component _componentsDemo() => div(classes: 'comp-demo', [
-    div(classes: 'comp-row', [
-      button(type: ButtonType.button, classes: 'dbtn dbtn-primary press', [Component.text('Primary')]),
-      button(type: ButtonType.button, classes: 'dbtn dbtn-secondary press', [Component.text('Secondary')]),
-      button(type: ButtonType.button, classes: 'dbtn dbtn-text press', [Component.text('Text')]),
-      button(type: ButtonType.button, classes: 'dbtn dbtn-ghost press', [Component.text('Ghost')]),
+    div(classes: 'state-picker', [
+      for (final state in _states)
+        button(
+          type: ButtonType.button,
+          classes: 'state-btn press',
+          attributes: {
+            'data-state-trigger': state.$1,
+            'aria-pressed': state.$1 == 'default' ? 'true' : 'false',
+          },
+          [Component.text(state.$2)],
+        ),
     ]),
-    div(classes: 'comp-row', [
-      _switchDemo('Hover, press, focus, and disabled states, shipped.'),
-    ]),
+    div(
+      classes: 'state-demo',
+      attributes: const {'data-state-demo': '', 'data-state': 'default'},
+      [
+        div(classes: 'comp-row', [
+          button(type: ButtonType.button, classes: 'dbtn dbtn-primary press', [Component.text('Primary')]),
+          button(type: ButtonType.button, classes: 'dbtn dbtn-secondary press', [Component.text('Secondary')]),
+          button(type: ButtonType.button, classes: 'dbtn dbtn-text press', [Component.text('Text')]),
+          button(type: ButtonType.button, classes: 'dbtn dbtn-ghost press', [Component.text('Ghost')]),
+        ]),
+        div(classes: 'toggle-cluster', [
+          _switch('Wi-Fi', true),
+          _switch('Bluetooth', false),
+        ]),
+      ],
+    ),
   ]);
 
-  Component _switchDemo(String label) => button(
+  static const _states = [
+    ('default', 'Default'),
+    ('hover', 'Hover'),
+    ('pressed', 'Pressed'),
+    ('disabled', 'Disabled'),
+  ];
+
+  Component _switch(String label, bool on) => button(
     type: ButtonType.button,
-    classes: 't-switch press',
-    attributes: {'data-di-switch': '', 'aria-pressed': 'false', 'aria-label': 'Toggle demo'},
+    classes: on ? 't-switch press is-on' : 't-switch press',
+    attributes: {
+      'data-di-switch': '',
+      'aria-pressed': on ? 'true' : 'false',
+      'aria-label': 'Toggle $label',
+    },
     [
       span(classes: 'track', [span(classes: 'knob', [])]),
       span(classes: 't-label', [Component.text(label)]),

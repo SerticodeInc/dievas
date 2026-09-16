@@ -157,7 +157,7 @@ class Stage extends StatelessComponent {
 
   Component _switch(String label, bool on) => button(
     type: ButtonType.button,
-    classes: 't-switch press',
+    classes: on ? 't-switch press is-on' : 't-switch press',
     attributes: {
       'data-di-switch': '',
       'aria-pressed': on ? 'true' : 'false',

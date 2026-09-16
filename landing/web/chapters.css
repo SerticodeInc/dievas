@@ -142,6 +142,9 @@
 .rebuild-well {
   width: 100%;
   max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .rebuild-item {
@@ -156,11 +159,7 @@
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--dv-text-mid);
-  margin-bottom: 8px;
   transition: border-color 200ms var(--ease), opacity 200ms var(--ease);
-}
-.rebuild-item:last-child {
-  margin-bottom: 0;
 }
 .rebuild-item .liv {
   color: var(--dv-text-lo);
@@ -176,21 +175,24 @@
 }
 
 .touch-control {
-  margin-top: 14px;
   display: flex;
   justify-content: flex-end;
 }
 
-/* ── 04 · brand switcher ───────────────────────────────────── */
+/* ── Pickers (shared by chapters 02, 03, 04) ──────────────── */
 
-.brand-picker {
+.brand-picker,
+.state-picker,
+.aspect-picker {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.brand-btn {
+.brand-btn,
+.state-btn,
+.aspect-btn {
   padding: 7px 14px;
   border-radius: 999px;
   border: 1px solid var(--dv-border);
@@ -201,10 +203,56 @@
   color: var(--dv-text-mid);
   transition: border-color 200ms var(--ease), color 200ms var(--ease);
 }
-.brand-btn[aria-pressed="true"] {
+.brand-btn[aria-pressed="true"],
+.state-btn[aria-pressed="true"],
+.aspect-btn[aria-pressed="true"] {
   color: var(--dv-text-hi);
   border-color: var(--demo-accent, var(--dv-border-hi));
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--demo-accent, var(--dv-border-hi)) 18%, transparent);
+}
+
+/* ── 03 · component state switcher ─────────────────────────── */
+
+.state-demo {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  padding: 24px;
+  border: 1px solid var(--dv-border);
+  border-radius: var(--radius-xl);
+  background: var(--dv-bg-base);
+  transition: border-color 200ms var(--ease);
+}
+
+/* One component, restated by the picker above it. */
+.state-demo[data-state="hover"] {
+  border-color: var(--dv-border-brand);
+}
+.state-demo[data-state="hover"] .dbtn-primary { background: var(--dv-action-hover); }
+.state-demo[data-state="hover"] .dbtn-secondary { background: var(--dv-action-sec-hover); border-color: var(--dv-border-hi); }
+.state-demo[data-state="hover"] .dbtn-text { background: var(--dv-brand-subtle); }
+.state-demo[data-state="hover"] .dbtn-ghost { color: var(--dv-text-hi); border-color: var(--dv-border-hi); }
+.state-demo[data-state="hover"] .t-switch .track { border-color: var(--dv-border-brand); }
+
+.state-demo[data-state="pressed"] .dbtn { transform: scale(0.97); }
+.state-demo[data-state="pressed"] .dbtn-primary { background: var(--dv-action-hover); box-shadow: none; }
+.state-demo[data-state="pressed"] .t-switch .track { background: var(--dv-switch-on); border-color: var(--dv-switch-on); }
+.state-demo[data-state="pressed"] .t-switch .knob { transform: translateX(16px); }
+
+.state-demo[data-state="disabled"] .dbtn {
+  color: var(--dv-text-off);
+  background: var(--dv-action-disabled);
+  border-color: transparent;
+  box-shadow: none;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.state-demo[data-state="disabled"] .t-switch {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .brand-demo {

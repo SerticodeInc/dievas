@@ -185,8 +185,10 @@ const _interactionsScript = '''<script>
       var on = sw.getAttribute('aria-pressed') === 'true';
       sw.setAttribute('aria-pressed', on ? 'false' : 'true');
       sw.classList.toggle('is-on', !on);
-      rebuildCounter += 1;
-      setStageLabel('scoped rebuild → switch · ' + rebuildCounter);
+      if (stage && stage.contains(sw)) {
+        rebuildCounter += 1;
+        setStageLabel('scoped rebuild → switch · ' + rebuildCounter);
+      }
     });
   });
 
@@ -227,12 +229,24 @@ const _interactionsScript = '''<script>
   }
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* ── 6 · Chapter 02 · aspect touch ───────────────────────── */
+  /* ── 6 · Chapter 02 · aspect picker + rebuild readout ────── */
+  var aspect = 'text';
+  document.querySelectorAll('[data-aspect-trigger]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      aspect = btn.dataset.aspectTrigger;
+      document.querySelectorAll('[data-aspect-trigger]').forEach(function(b){
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+    });
+  });
   document.querySelectorAll('[data-di-touch]').forEach(function(btn){
     btn.addEventListener('click', function(){
-      var row = btn.closest('.rebuild-well').querySelector('.rebuild-item');
+      var row = btn.closest('.rebuild-well').querySelector(
+        '.rebuild-item[data-rebuild-count="' + aspect + '"]'
+      );
+      if (!row) return;
       row.classList.add('is-touched');
-      var count = row.querySelector('[data-rebuild-count]');
+      var count = row.querySelector('b');
       count.textContent = String(parseInt(count.textContent, 10) + 1);
     });
   });
@@ -248,7 +262,18 @@ const _interactionsScript = '''<script>
     });
   });
 
-  /* ── 8 · Copy chips ──────────────────────────────────────── */
+  /* ── 8 · Chapter 03 · component state switcher ───────────── */
+  var stateDemo = document.querySelector('[data-state-demo]');
+  document.querySelectorAll('[data-state-trigger]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('[data-state-trigger]').forEach(function(b){
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+      if (stateDemo) stateDemo.dataset.state = btn.dataset.stateTrigger;
+    });
+  });
+
+  /* ── 9 · Copy chips ──────────────────────────────────────── */
   document.querySelectorAll('[data-di-copy]').forEach(function(chip){
     chip.addEventListener('click', function(){
       var prop = chip.dataset.diCopy;
@@ -261,7 +286,7 @@ const _interactionsScript = '''<script>
     });
   });
 
-  /* ── 9 · Initial sync ────────────────────────────────────── */
+  /* ── 10 · Initial sync ───────────────────────────────────── */
   refreshVarReadouts();
 })();
 </script>''';

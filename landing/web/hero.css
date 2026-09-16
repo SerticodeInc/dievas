@@ -1,206 +1,115 @@
 /* ─────────────────────────────────────────────────────────────
- * Hero section — gradient mesh background, entry animations,
- * product chips, bottom cards
+ * Hero — headline, sub, CTAs + Component Stage shell
  * ───────────────────────────────────────────────────────────── */
 
-/* ── Gradient mesh background ──────────────────────────────── */
-
-@keyframes gradient-mesh {
-  0%   { background-position: 0% 20%, 100% 10%, 80% 90%, 20% 100%; }
-  25%  { background-position: 20% 0%, 80% 25%, 60% 100%, 35% 75%; }
-  50%  { background-position: 30% 40%, 60% 15%, 100% 60%, 5% 55%; }
-  75%  { background-position: 15% 70%, 40% 55%, 70% 25%, 55% 35%; }
-  100% { background-position: 5% 40%, 100% 70%, 55% 10%, 25% 25%; }
-}
-
-#hero {
-  background-color: #0A0A0F;
-  background-image:
-    radial-gradient(ellipse 80% 60% at -10% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 110% 10%, rgba(129, 140, 248, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 50% at 120% 80%, rgba(79, 70, 229, 0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 60% at 30% 110%, rgba(30, 27, 75, 0.20) 0%, transparent 60%);
-  background-size: 200% 200%, 200% 200%, 200% 200%, 200% 200%;
-  animation: gradient-mesh 20s ease-in-out infinite alternate;
-}
-
-/* ── Glass card base ────────────────────────────────────────── */
-.glass-card {
-  background: rgba(12, 12, 12, 0.6);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* ── Bottom left card ───────────────────────────────────────── */
-.bottom-card-stat {
+.hero {
+  position: relative;
+  overflow: clip;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
+  padding-top: calc(120px + env(safe-area-inset-top));
 }
 
-.bottom-card-stat-value {
-  font-family: "MaisonNeueExtended", system-ui, sans-serif;
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: -0.025em;
-  color: rgba(248, 250, 252, 1);
-  line-height: 1;
+.hero-head {
+  flex: 0 0 auto;
+  max-width: 1000px;
+  margin-inline: auto;
+  text-align: center;
+  padding-inline: 24px;
 }
 
-.bottom-card-stat-label {
-  font-family: "Cascadia Code", ui-monospace, monospace;
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(148, 163, 184, 0.7);
-  margin-top: 2px;
-}
-
-/* ── Bottom right corner ────────────────────────────────────── */
-.corner-card {
-  border-radius: 1.5rem 0 1.5rem 0;
-  overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .corner-card {
-    border-radius: 2rem 0 2rem 0;
-  }
-}
-
-/* ── Hero badge ────────────────────────────────────────────── */
-
-.hero-badge {
+.hero-eyebrow {
+  margin-bottom: 28px;
+  justify-content: center;
   display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ── Particle dots ─────────────────────────────────────────── */
-.particle-dot {
+.hero-display {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 8.2vw, 112px);
+  line-height: 1.02;
+  letter-spacing: -0.065em;
+  color: var(--dv-text-hi);
+  font-weight: 500;
+}
+
+.hero-display .accent {
+  color: var(--dv-brand);
+}
+
+.hero-sub {
+  max-width: 58ch;
+  margin: 28px auto 0;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--dv-text-mid);
+  letter-spacing: 0.005em;
+}
+
+.hero-sub strong {
+  font-weight: 500;
+  color: var(--dv-text-hi);
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+/* Entry choreography — fired once .js-loaded lands on <body> */
+.hero-anim {
+  opacity: 0;
+}
+.js-on .js-loaded .hero-anim {
+  animation: hero-rise 0.8s var(--ease) forwards;
+}
+.js-on .js-loaded .hero-anim.hr-e { animation-delay: 0.05s; }
+.js-on .js-loaded .hero-anim.hr-h { animation-delay: 0.18s; }
+.js-on .js-loaded .hero-anim.hr-s { animation-delay: 0.30s; }
+.js-on .js-loaded .hero-anim.hr-c { animation-delay: 0.44s; }
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* The stage — membrane between the vault and the page */
+.hero-stage {
+  flex: 1 0 auto;
+  width: min(1080px, calc(100% - 32px));
+  margin: clamp(44px, 7vh, 84px) auto 0;
+  position: relative;
+}
+
+/* Desk-light wash behind the window */
+.hero-stage::before {
+  content: "";
   position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 9999px;
-  background: rgba(129, 140, 248, 0.3);
+  inset: -8% -6% -2%;
+  z-index: -1;
+  border-radius: 48px;
+  background:
+    radial-gradient(46% 60% at 50% 38%,
+      color-mix(in srgb, var(--dv-brand) 12%, transparent),
+      transparent 72%);
   pointer-events: none;
 }
 
-.particle-dot:nth-child(1) { top: 15%; left: 10%; animation: float-particle 8s ease-in-out infinite; }
-.particle-dot:nth-child(2) { top: 25%; right: 15%; animation: float-particle 11s ease-in-out infinite 1s; }
-.particle-dot:nth-child(3) { bottom: 35%; left: 5%; animation: float-particle 9s ease-in-out infinite 2s; }
-.particle-dot:nth-child(4) { top: 10%; right: 30%; animation: float-particle 12s ease-in-out infinite 0.5s; }
-.particle-dot:nth-child(5) { bottom: 20%; right: 8%; animation: float-particle 10s ease-in-out infinite 1.5s; }
-.particle-dot:nth-child(6) { top: 40%; left: 85%; animation: float-particle 7s ease-in-out infinite 3s; }
-
-@keyframes float-particle {
-  0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
-  50%      { transform: translateY(-24px) scale(1.5); opacity: 0.8; }
+@media (max-width: 760px) {
+  .hero { padding-top: calc(108px + env(safe-area-inset-top)); }
+  .hero-display { font-size: clamp(44px, 13vw, 64px); line-height: 1.05; }
+  .hero-sub { font-size: 15px; }
 }
-
-/* ── Word-in entry animation ────────────────────────────────── */
-@keyframes word-in {
-  from {
-    opacity: 0;
-    transform: perspective(1200px) rotateX(-30deg) translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: perspective(1200px) rotateX(0deg) translateY(0);
-  }
-}
-
-.word-in {
-  display: inline-block;
-  opacity: 0;
-}
-
-.js-loaded .word-in {
-  animation: word-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-/* ── Chip-fall animation ───────────────────────────────────── */
-@keyframes chip-fall {
-  0% {
-    opacity: 0;
-    transform: perspective(900px) rotateX(-22deg) translateY(-56px) scale(0.96);
-  }
-  65% {
-    transform: perspective(900px) rotateX(1.5deg) translateY(3px) scale(1.003);
-  }
-  100% {
-    opacity: 1;
-    transform: perspective(900px) rotateX(0deg) translateY(0) scale(1);
-  }
-}
-
-.chip-falling {
-  opacity: 0;
-}
-
-.js-loaded .chip-falling {
-  animation: chip-fall 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-/* ── Product chips ──────────────────────────────────────────── */
-
-.product-chip {
-  overflow: hidden;
-  transition:
-    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.3s ease;
-}
-
-.product-chip::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: rgba(var(--accent-rgb), 0.9);
-  border-radius: 0 0 20px 20px;
-  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.product-chip:hover::after {
-  width: 100%;
-}
-
-.product-chip:hover {
-  border-color: rgba(var(--accent-rgb), 1);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,0.06) inset,
-    0 20px 56px rgba(0,0,0,0.3),
-    0 0 32px rgba(var(--accent-rgb), 0.2);
-}
-
-/* ── CTA button arrow animation ────────────────────────────── */
-.cta-arrow {
-  display: inline-block;
-  transition: transform 0.2s ease;
-}
-
-.cta-group:hover .cta-arrow {
-  transform: translateX(4px);
-}
-
-/* ── Reduced motion ───────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  #hero {
-    animation: none;
+  .js-on .js-loaded .hero-anim,
+  .js-on .hero-anim {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
-  .js-loaded .word-in       { animation: none; opacity: 1; }
-  .js-loaded .chip-falling  { animation: none; opacity: 1; }
-  .product-chip:hover { border-color: inherit; box-shadow: none; }
-  .product-chip::after { display: none; }
-  .particle-dot { display: none; }
-  .cta-arrow { display: none; }
 }

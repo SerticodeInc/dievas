@@ -1,0 +1,371 @@
+/* ─────────────────────────────────────────────────────────────
+ * Component Stage — the hero's app window
+ *
+ * A self-themed app window running live Dievas components. The
+ * window has its own scoped data-theme, so its content proves the
+ * token model without disturbing the page sheet.
+ * ───────────────────────────────────────────────────────────── */
+
+.stage-window {
+  position: relative;
+  border-radius: var(--radius-2xl);
+  background: var(--dv-bg-subtle);
+  border: 1px solid var(--dv-border);
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 24px 48px -24px rgba(15, 23, 42, 0.16),
+    0 60px 120px -40px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+  transition: background 260ms var(--ease), border-color 260ms var(--ease);
+}
+
+/* ── Title bar ─────────────────────────────────────────────── */
+
+.stage-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 46px;
+  padding-inline: 18px;
+  border-bottom: 1px solid var(--dv-border);
+  background: color-mix(in srgb, var(--dv-bg-base) 55%, transparent);
+}
+
+.stage-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.stage-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+}
+.stage-dot.d-r { background: #ff5f57; }
+.stage-dot.d-y { background: #febc2e; }
+.stage-dot.d-g { background: #28c840; }
+
+.stage-title {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--dv-text-mid);
+  text-align: center;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Scoped theme toggle (minor, inside the window chrome) */
+.stage-theme {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px 5px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--dv-border);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dv-text-mid);
+  background: color-mix(in srgb, var(--dv-bg-base) 60%, transparent);
+  transition: border-color 200ms var(--ease), color 200ms var(--ease);
+}
+.stage-theme:hover {
+  border-color: var(--dv-border-hi);
+  color: var(--dv-text-hi);
+}
+
+/* ── Tab bar (segmented) ───────────────────────────────────── */
+
+.stage-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 10px 14px 0;
+  border-bottom: 1px solid var(--dv-border);
+  background: color-mix(in srgb, var(--dv-bg-base) 30%, transparent);
+}
+
+.stage-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dv-text-mid);
+  transition: color 200ms var(--ease), background 200ms var(--ease);
+}
+.stage-tab:hover {
+  color: var(--dv-text-hi);
+}
+.stage-tab[aria-selected="true"] {
+  color: var(--dv-text-hi);
+  box-shadow: inset 0 -2px 0 var(--dv-brand);
+}
+
+/* ── Body ──────────────────────────────────────────────────── */
+
+.stage-body {
+  padding: clamp(20px, 3vw, 32px);
+  min-height: 320px;
+  display: grid;
+  place-content: center;
+}
+
+.stage-panel {
+  animation: stage-fade 260ms var(--ease);
+}
+.stage-panel[hidden] {
+  display: none;
+}
+
+@keyframes stage-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Panel: Primitives ─────────────────────────────────────── */
+
+.rail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+.swatch-card {
+  width: 132px;
+  padding: 12px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--dv-border);
+  background: var(--dv-bg-base);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 260ms var(--ease);
+}
+
+.swatch {
+  height: 46px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.swatch-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.swatch-label b {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dv-text-hi);
+}
+.swatch-label span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--dv-text-lo);
+}
+
+.rail-code {
+  margin-top: 20px;
+  text-align: left;
+}
+
+/* ── Panel: Components ─────────────────────────────────────── */
+
+.comp-demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+
+.comp-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Dievas-style buttons (mirror package variants) */
+.dbtn {
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  transition: background 160ms var(--ease), border-color 160ms var(--ease),
+              color 160ms var(--ease), transform 110ms var(--ease),
+              box-shadow 160ms var(--ease);
+}
+.dbtn:active {
+  transform: scale(0.97);
+}
+
+.dbtn-primary {
+  background: var(--dv-action);
+  color: var(--dv-on-brand);
+  box-shadow: 0 8px 20px -10px color-mix(in srgb, var(--dv-action) 60%, transparent);
+}
+.dbtn-primary:hover { background: var(--dv-action-hover); }
+
+.dbtn-secondary {
+  background: var(--dv-action-sec);
+  color: var(--dv-text-hi);
+  border: 1px solid var(--dv-border);
+}
+.dbtn-secondary:hover { background: var(--dv-action-sec-hover); }
+
+.dbtn-text {
+  color: var(--dv-brand);
+  padding-inline: 10px;
+  border-radius: var(--radius-md);
+}
+.dbtn-text:hover { background: var(--dv-brand-subtle); }
+
+.dbtn-ghost {
+  color: var(--dv-text-mid);
+  border: 1px solid var(--dv-border);
+}
+.dbtn-ghost:hover { color: var(--dv-text-hi); border-color: var(--dv-border-hi); }
+
+.dbtn-disabled {
+  color: var(--dv-text-off);
+  background: var(--dv-action-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+/* Switch + checkbox — custom, token-driven */
+.toggle-cluster {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.t-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.t-switch .track {
+  width: 42px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--dv-switch-off);
+  border: 1px solid var(--dv-switch-border);
+  position: relative;
+  transition: background 220ms var(--ease), border-color 220ms var(--ease);
+}
+.t-switch .track .knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--dv-switch-thumb);
+  box-shadow: 0 1px 3px rgba(15,23,42,0.25);
+  transition: transform 240ms var(--ease);
+}
+.t-switch.is-on .track {
+  background: var(--dv-switch-on);
+  border-color: var(--dv-switch-on);
+}
+.t-switch.is-on .track .knob {
+  transform: translateX(16px);
+}
+.t-switch .t-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dv-text-mid);
+}
+
+/* ── Panel: Tokens ─────────────────────────────────────────── */
+
+.token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  width: 100%;
+  max-width: 560px;
+}
+
+.token-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--dv-border);
+  background: var(--dv-bg-base);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--dv-text-mid);
+  cursor: copy;
+  transition: border-color 200ms var(--ease), color 200ms var(--ease);
+}
+.token-chip:hover {
+  border-color: var(--dv-border-hi);
+  color: var(--dv-text-hi);
+}
+.token-chip .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--chip);
+  border: 1px solid rgba(15,23,42,0.08);
+}
+.token-chip.is-copied {
+  color: var(--dv-brand);
+  border-color: var(--dv-border-brand);
+}
+
+/* ── Footer readout ────────────────────────────────────────── */
+
+.stage-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 20px;
+  border-top: 1px solid var(--dv-border);
+  background: color-mix(in srgb, var(--dv-bg-base) 30%, transparent);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dv-text-lo);
+}
+
+.stage-foot .readout {
+  color: var(--dv-text-mid);
+  font-variant-numeric: tabular-nums;
+}
+.stage-foot .readout b {
+  color: var(--dv-brand);
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .stage-body { min-height: 0; place-content: start; }
+  .swatch-card { width: calc(50% - 7px); }
+  .toggle-cluster { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .stage-title { text-align: left; }
+}

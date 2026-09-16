@@ -1,37 +1,180 @@
 /* ─────────────────────────────────────────────────────────────
- * Nav — site navigation styles
+ * Navigation — glass pill, collapse, theme toggle
  * ───────────────────────────────────────────────────────────── */
 
-/* Nav link dot indicator — glows on hover */
-.nav-dot {
-  transition: background 0.15s ease-out,
-              box-shadow 0.15s ease-out;
-}
-.nav-link:hover .nav-dot {
-  background: rgba(129, 140, 248, 1) !important;
-  box-shadow: 0 0 8px rgba(129, 140, 248, 0.6);
-}
-
-/* Nav link — active press feedback */
-.nav-link:active {
-  transform: scale(0.96);
-  transition: transform 100ms ease-out;
+.site-nav {
+  position: fixed;
+  top: 12px;
+  left: 0;
+  right: 0;
+  z-index: 110;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  padding-inline: 16px;
+  transition: transform 0.45s var(--ease);
 }
 
-/* Logo hover — subtle text color shift */
+.site-nav.is-hidden {
+  transform: translateY(-130%);
+}
+
+.nav-pill {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: min(900px, 100%);
+  padding: 8px 10px 8px 20px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--dv-bg-elevated) 72%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--dv-border);
+  box-shadow: 0 1px 2px rgba(15,23,42,0.05),
+              0 8px 32px -16px rgba(15,23,42,0.12);
+  transition: box-shadow 300ms var(--ease), background 300ms var(--ease);
+}
+
+.nav-pill.is-scrolled {
+  box-shadow: 0 1px 2px rgba(15,23,42,0.06),
+              0 12px 40px -18px rgba(15,23,42,0.18);
+}
+
+/* Logo mark */
 .logo-mark {
-  transition: letter-spacing 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--font-display);
+  font-size: 19px;
+  letter-spacing: 0.01em;
+  color: var(--dv-text-hi);
+  text-decoration: none;
+  white-space: nowrap;
 }
-.logo-mark:hover {
-  letter-spacing: 0.04em;
-}
-.logo-mark:active {
-  transform: scale(0.97);
-  transition: transform 100ms ease-out;
+.logo-mark .lg-v {
+  color: var(--dv-brand);
 }
 
-/* Nav glass — intensify blur on scroll (class added via JS) */
-.nav-scrolled {
-  background: rgba(12, 12, 12, 0.75) !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35) !important;
+/* Center links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding-inline: 8px;
+}
+
+.nav-link {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dv-text-mid);
+  text-decoration: none;
+  padding-block: 6px;
+  transition: color 200ms var(--ease);
+}
+.nav-link:hover {
+  color: var(--dv-text-hi);
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--dv-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms var(--ease);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Nav CTA */
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--dv-action);
+  color: var(--dv-on-brand);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 180ms var(--ease), transform 110ms var(--ease);
+}
+.nav-cta:hover {
+  background: var(--dv-action-hover);
+}
+.nav-cta:active {
+  transform: scale(0.96);
+}
+
+/* Theme toggle — sun/moon, icon crossfade */
+.theme-toggle {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid var(--dv-border);
+  background: color-mix(in srgb, var(--dv-bg-base) 60%, transparent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: background 200ms var(--ease), border-color 200ms var(--ease),
+              transform 110ms var(--ease);
+}
+.theme-toggle:hover {
+  border-color: var(--dv-border-hi);
+}
+.theme-toggle:active {
+  transform: scale(0.94);
+}
+
+.theme-toggle .ti {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  transition: transform 450ms var(--ease), opacity 250ms var(--ease);
+}
+.theme-toggle .ti-moon {
+  opacity: 0;
+  transform: translateY(16px) scale(0.7);
+}
+
+[data-theme="dark"] .theme-toggle .ti-sun {
+  opacity: 0;
+  transform: translateY(-16px) scale(0.7);
+}
+[data-theme="dark"] .theme-toggle .ti-moon {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Right cluster */
+.nav-cluster {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Mobile */
+@media (max-width: 860px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-pill {
+    padding-left: 16px;
+  }
 }

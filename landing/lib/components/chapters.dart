@@ -73,81 +73,124 @@ class Chapters extends StatelessComponent {
   ]);
 
   /// Section backdrop — a brand-tinted gradient, a film-grain noise tile,
-  /// and a few slow-drifting code glyphs. Decorative only: `aria-hidden`,
-  /// and pointer events are off in CSS so it never eats a click.
+  /// a reactive dot matrix on canvas, a handful of miniature Dievas
+  /// components adrift, and some twinkling geometry. Decorative only:
+  /// `aria-hidden`, and pointer events are off in CSS so it never eats
+  /// a click.
   Component _backdrop() => div(
     classes: 'chapters-backdrop',
     attributes: const {'aria-hidden': 'true'},
-    [for (final g in _ghosts) _ghost(g), div(classes: 'chapters-grain', [])],
+    [
+      RawText('<canvas class="chapters-matrix" data-chapter-matrix></canvas>'),
+      for (final m in _minis) _mini(m),
+      for (final s in _sparks) _sparkle(s),
+      div(classes: 'chapters-grain', []),
+    ],
   );
 
-  Component _ghost(_Ghost g) => span(
-    classes: g.brand ? 'ghost-char is-brand' : 'ghost-char',
+  /// A miniature Dievas component — button, switch, tabs, dots — drifting
+  /// behind the chapters. Shape only: it reads as UI, not as text to parse.
+  Component _mini(_Mini m) => div(
+    classes: 'mini mini-${m.kind}',
     attributes: {
       'style':
-          '${g.pos};font-size:${g.size};animation-duration:${g.dur};animation-delay:${g.delay};',
+          '${m.pos};animation-duration:${m.dur};animation-delay:${m.delay};',
     },
-    [Component.text(g.text)],
+    [
+      if (m.kind == 'tabs')
+        for (var i = 0; i < 3; i++)
+          span(classes: i == 1 ? 'mtab on' : 'mtab', []),
+      if (m.kind == 'dots')
+        for (var i = 0; i < 3; i++)
+          span(classes: i == 0 ? 'mdot on' : 'mdot', []),
+    ],
   );
 
-  static const _ghosts = <_Ghost>[
-    _Ghost(
-      text: '{ }',
-      pos: 'top:4%;left:2%',
-      size: '96px',
-      dur: '19s',
+  Component _sparkle(_Spark s) => span(
+    classes: s.brand ? 'sparkle is-brand' : 'sparkle',
+    attributes: {
+      'style':
+          '${s.pos};font-size:${s.size};animation-duration:${s.dur};animation-delay:${s.delay};',
+    },
+    [Component.text(s.char)],
+  );
+
+  static const _minis = <_Mini>[
+    _Mini(kind: 'btn', pos: 'top:7%;left:4%', dur: '21s', delay: '0s'),
+    _Mini(kind: 'switch', pos: 'top:13%;right:6%', dur: '24s', delay: '-5s'),
+    _Mini(kind: 'tabs', pos: 'top:29%;left:2%', dur: '22s', delay: '-9s'),
+    _Mini(kind: 'dots', pos: 'top:37%;right:4%', dur: '19s', delay: '-3s'),
+    _Mini(kind: 'badge', pos: 'top:55%;left:6%', dur: '23s', delay: '-12s'),
+    _Mini(kind: 'field', pos: 'top:63%;right:2%', dur: '20s', delay: '-7s'),
+    _Mini(kind: 'chip', pos: 'top:81%;left:4%', dur: '25s', delay: '-15s'),
+  ];
+
+  static const _sparks = <_Spark>[
+    _Spark(
+      char: '✦',
+      pos: 'top:5%;left:15%',
+      size: '24px',
+      dur: '5s',
       delay: '0s',
-    ),
-    _Ghost(
-      text: '0xFF6366F1',
-      pos: 'top:9%;right:1%',
-      size: '34px',
-      dur: '23s',
-      delay: '-4s',
       brand: true,
     ),
-    _Ghost(
-      text: 'context.colours',
-      pos: 'top:26%;left:-1%',
-      size: '30px',
-      dur: '21s',
-      delay: '-7s',
-    ),
-    _Ghost(
-      text: 'InheritedModel',
-      pos: 'top:34%;right:0%',
-      size: '30px',
-      dur: '25s',
+    _Spark(
+      char: '○',
+      pos: 'top:19%;right:13%',
+      size: '17px',
+      dur: '7s',
       delay: '-2s',
     ),
-    _Ghost(
-      text: '→',
-      pos: 'top:52%;left:3%',
-      size: '74px',
-      dur: '17s',
-      delay: '-11s',
+    _Spark(
+      char: '+',
+      pos: 'top:27%;left:11%',
+      size: '20px',
+      dur: '6s',
+      delay: '-4s',
+    ),
+    _Spark(
+      char: '◇',
+      pos: 'top:43%;right:9%',
+      size: '19px',
+      dur: '8s',
+      delay: '-1s',
       brand: true,
     ),
-    _Ghost(
-      text: 'DievasScope',
-      pos: 'top:60%;right:2%',
+    _Spark(
+      char: '·',
+      pos: 'top:51%;left:19%',
       size: '30px',
-      dur: '22s',
-      delay: '-9s',
+      dur: '5.5s',
+      delay: '-3s',
     ),
-    _Ghost(
-      text: '10 aspects',
-      pos: 'top:76%;left:1%',
-      size: '26px',
-      dur: '20s',
+    _Spark(
+      char: '✦',
+      pos: 'top:67%;right:17%',
+      size: '21px',
+      dur: '6.5s',
       delay: '-5s',
     ),
-    _Ghost(
-      text: ';',
-      pos: 'top:88%;right:4%',
-      size: '110px',
-      dur: '24s',
-      delay: '-14s',
+    _Spark(
+      char: '○',
+      pos: 'top:75%;left:9%',
+      size: '15px',
+      dur: '7.5s',
+      delay: '-2.5s',
+    ),
+    _Spark(
+      char: '◇',
+      pos: 'top:85%;right:11%',
+      size: '16px',
+      dur: '6s',
+      delay: '-6s',
+      brand: true,
+    ),
+    _Spark(
+      char: '+',
+      pos: 'top:93%;left:17%',
+      size: '18px',
+      dur: '8s',
+      delay: '-1.5s',
     ),
   ];
 
@@ -379,10 +422,28 @@ class Chapters extends StatelessComponent {
   ]);
 }
 
-/// A decorative backdrop glyph — a code symbol drifting behind the chapters.
-class _Ghost {
-  const _Ghost({
-    required this.text,
+/// A miniature component silhouette drifting behind the chapters.
+class _Mini {
+  const _Mini({
+    required this.kind,
+    required this.pos,
+    required this.dur,
+    required this.delay,
+  });
+
+  /// One of: btn, switch, tabs, dots, badge, field, chip.
+  final String kind;
+
+  /// CSS positioning fragment, e.g. `top:7%;left:4%`.
+  final String pos;
+  final String dur;
+  final String delay;
+}
+
+/// A twinkle — a small geometric mark pulsing in the backdrop.
+class _Spark {
+  const _Spark({
+    required this.char,
     required this.pos,
     required this.size,
     required this.dur,
@@ -390,9 +451,7 @@ class _Ghost {
     this.brand = false,
   });
 
-  final String text;
-
-  /// CSS positioning fragment, e.g. `top:4%;left:2%`.
+  final String char;
   final String pos;
   final String size;
   final String dur;

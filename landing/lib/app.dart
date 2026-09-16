@@ -30,10 +30,22 @@ class App extends StatelessComponent {
           'layer up.',
     },
     head: [
-      meta(name: 'theme-color', content: '#f8fafc', attributes: const {'id': 'theme-color'}),
+      meta(
+        name: 'theme-color',
+        content: '#f8fafc',
+        attributes: const {'id': 'theme-color'},
+      ),
       link(rel: 'preconnect', href: 'https://fonts.googleapis.com'),
-      link(rel: 'preconnect', href: 'https://fonts.gstatic.com', attributes: const {'crossorigin': ''}),
-      link(rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap'),
+      link(
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        attributes: const {'crossorigin': ''},
+      ),
+      link(
+        rel: 'stylesheet',
+        href:
+            'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap',
+      ),
       link(rel: 'stylesheet', href: '/output.css'),
       link(rel: 'stylesheet', href: '/base.css'),
       link(rel: 'stylesheet', href: '/nav.css'),
@@ -301,6 +313,94 @@ const _interactionsScript = '''<script>
       setTimeout(function(){ chip.classList.remove('is-copied'); }, 1200);
     });
   });
+
+  /* ── 10 · Chapters backdrop · reactive dot matrix ────────── */
+  /* A grid of dots on canvas. The far field shimmers idly; dots within
+   * RADIUS of the pointer bloom brand-coloured. Colours are resolved from
+   * the page sheet at build time — canvas cannot consume var(). RAF only
+   * runs while the section is on screen. */
+  var matrix = document.querySelector('[data-chapter-matrix]');
+  if (matrix) {
+    var GRID = 46;
+    var RADIUS = 190;
+    var ctx = matrix.getContext('2d');
+    var dots = [], w = 0, h = 0, col = { base: '', brand: '' };
+    var px = -9999, py = -9999;
+    var visible = false, raf = null;
+
+    function build() {
+      var rect = matrix.getBoundingClientRect();
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = rect.width;
+      h = rect.height;
+      matrix.width = Math.round(w * dpr);
+      matrix.height = Math.round(h * dpr);
+      if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      col = {
+        base: resolveVar(matrix, '--dv-border-hi'),
+        brand: resolveVar(matrix, '--dv-brand'),
+      };
+      dots = [];
+      for (var y = GRID / 2; y < h; y += GRID) {
+        for (var x = GRID / 2; x < w; x += GRID) {
+          dots.push({ x: x, y: y, ph: Math.random() * Math.PI * 2, near: 0 });
+        }
+      }
+    }
+
+    function frame(t) {
+      if (!visible) { raf = null; return; }
+      if (!ctx) return;
+      var now = t / 1000;
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = col.base;
+      for (var i = 0; i < dots.length; i++) {
+        var d = dots[i];
+        var dx = d.x - px, dy = d.y - py;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        d.near = dist < RADIUS ? 1 - dist / RADIUS : 0;
+        if (d.near > 0.05) continue;
+        var idle = (Math.sin(now * 1.6 + d.ph) + 1) / 2;
+        ctx.globalAlpha = 0.05 + idle * 0.07;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, 1, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.fillStyle = col.brand;
+      for (var j = 0; j < dots.length; j++) {
+        var e = dots[j];
+        if (e.near <= 0.05) continue;
+        var idle2 = (Math.sin(now * 1.6 + e.ph) + 1) / 2;
+        ctx.globalAlpha = 0.12 + e.near * 0.6 + idle2 * 0.05;
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, 1 + e.near * 2.4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      raf = requestAnimationFrame(frame);
+    }
+
+    function start() { if (raf == null) raf = requestAnimationFrame(frame); }
+
+    if (!reduce) {
+      build();
+      var mio = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          visible = e.isIntersecting;
+          if (visible) { build(); start(); }
+        });
+      }, { threshold: 0 });
+      mio.observe(matrix);
+      window.addEventListener('pointermove', function(e){
+        var rect = matrix.getBoundingClientRect();
+        px = e.clientX - rect.left;
+        py = e.clientY - rect.top;
+        start();
+      }, { passive: true });
+      window.addEventListener('resize', build);
+      document.addEventListener('dievas:theme', build);
+    }
+  }
 })();
 </script>''';
 

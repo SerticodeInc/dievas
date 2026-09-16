@@ -13,7 +13,8 @@
     linear-gradient(180deg, var(--dv-bg-subtle), var(--dv-bg-base) 42%);
 }
 
-/* ── Backdrop — grain + drifting glyphs ───────────────────── */
+/* ── Backdrop — matrix, mini components, sparkles, grain ──── */
+
 
 .chapters-backdrop {
   position: absolute;
@@ -34,30 +35,128 @@
   mix-blend-mode: overlay;
 }
 
-.ghost-char {
+/* ── Mini UI confetti — tiny Dievas components, drifting ──── */
+
+.mini {
+  position: absolute;
+  opacity: 0.1;
+  user-select: none;
+  animation: mini-drift 22s var(--ease) infinite;
+}
+
+.mini-btn {
+  width: 64px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--dv-brand);
+  box-shadow: 0 6px 14px -8px color-mix(in srgb, var(--dv-brand) 70%, transparent);
+}
+
+.mini-switch {
+  width: 36px;
+  height: 21px;
+  border-radius: 999px;
+  background: var(--dv-switch-on);
+  border: 1px solid var(--dv-switch-on);
+}
+.mini-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 15px;
+  height: 15px;
+  border-radius: 999px;
+  background: var(--dv-switch-thumb);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.25);
+}
+
+.mini-tabs {
+  display: flex;
+  gap: 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--dv-border);
+}
+.mini-tabs .mtab {
+  width: 18px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--dv-border-hi);
+}
+.mini-tabs .mtab.on { background: var(--dv-brand); }
+
+.mini-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.mini-dots .mdot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--dv-border-hi);
+}
+.mini-dots .mdot.on {
+  width: 18px;
+  background: var(--dv-brand);
+}
+
+.mini-badge {
+  width: 56px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--dv-brand-subtle);
+}
+
+.mini-field {
+  width: 88px;
+  height: 22px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--dv-border);
+  background: var(--dv-bg-base);
+}
+
+.mini-chip {
+  width: 60px;
+  height: 20px;
+  border-radius: 999px;
+  border: 1px solid var(--dv-border);
+}
+
+@keyframes mini-drift {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-14px) rotate(2deg); }
+}
+
+/* ── Sparkles — twinkling geometry ────────────────────────── */
+
+.sparkle {
   position: absolute;
   font-family: var(--font-mono);
-  font-weight: 500;
   line-height: 1;
   color: var(--dv-text-hi);
-  opacity: 0.055;
   user-select: none;
-  white-space: nowrap;
-  animation: ghost-drift 20s var(--ease) infinite;
+  animation: sparkle-twinkle 6s var(--ease) infinite;
+}
+.sparkle.is-brand { color: var(--dv-brand); }
+
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0.05; transform: scale(0.8); }
+  50%      { opacity: 0.24; transform: scale(1.15); }
 }
 
-.ghost-char.is-brand {
-  color: var(--dv-brand);
-  opacity: 0.1;
-}
+/* ── Reactive dot matrix ──────────────────────────────────── */
 
-@keyframes ghost-drift {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%      { transform: translateY(-16px) rotate(-1.5deg); }
+.chapters-matrix {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ghost-char { animation: none; }
+  .mini, .sparkle { animation: none; }
+  .sparkle { opacity: 0.12; }
 }
 
 .chapters-intro {

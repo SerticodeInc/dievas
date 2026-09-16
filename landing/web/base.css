@@ -119,22 +119,6 @@ button {
   vertical-align: 1px;
 }
 
-/* ── Hairlines (plates) ────────────────────────────────────── */
-
-.hairline {
-  border: 1px solid var(--dv-border);
-}
-
-/* ── Cards / wells ─────────────────────────────────────────── */
-
-.plate {
-  background: var(--dv-bg-subtle);
-  border: 1px solid var(--dv-border);
-  border-radius: var(--radius-2xl);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03),
-              0 8px 24px -12px rgba(15, 23, 42, 0.08);
-}
-
 /* ── Scroll-reveal system ──────────────────────────────────── */
 /* Hidden only when JS is available (.js-on) — no-JS stays visible. */
 
@@ -151,7 +135,6 @@ button {
 }
 
 .js-on .sr-s { transition-delay: 0.06s; }
-.js-on .sr-m { transition-delay: 0.14s; }
 .js-on .sr-l { transition-delay: 0.22s; }
 
 /* ── Micro-interactions ────────────────────────────────────── */
@@ -239,7 +222,6 @@ button {
   white-space: pre;
 }
 .codestrip .tok-k { color: var(--dv-brand); }
-.codestrip .tok-v { color: var(--dv-text-hi); }
 .codestrip .tok-c { color: var(--dv-text-lo); }
 
 /* ── Scroll progress bar ───────────────────────────────────── */

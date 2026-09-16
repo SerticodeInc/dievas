@@ -18,5 +18,5 @@ abstract final class DievasUrls {
   static const String moonDs = 'https://flutter.moon.io';
 
   /// Dievas GitHub repo.
-  static const String github = 'https://github.com/Serticode/dievas';
+  static const String github = 'https://github.com/SerticodeInc/dievas';
 }

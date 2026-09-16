@@ -145,11 +145,6 @@
   max-width: 520px;
 }
 
-.rebuild-row {
-  display: flex;
-  flex-direction: column;
-}
-
 .rebuild-item {
   display: flex;
   align-items: center;

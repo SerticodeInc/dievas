@@ -14,11 +14,11 @@ final class DievasAuthCodeThemeData extends Equatable {
     required this.borderRadius,
     required this.strokeWidth,
     required this.strokeWidthFocused,
-    required this.bgColor,
-    required this.borderColor,
-    required this.borderColorFocused,
-    required this.borderColorError,
-    required this.cursorColor,
+    required this.bgColour,
+    required this.borderColour,
+    required this.borderColourFocused,
+    required this.borderColourError,
+    required this.cursorColour,
     required this.cursorWidth,
     required this.cursorHeight,
     required this.gap,
@@ -44,19 +44,19 @@ final class DievasAuthCodeThemeData extends Equatable {
   final double strokeWidthFocused;
 
   /// Digit box surface background colour.
-  final Color bgColor;
+  final Color bgColour;
 
   /// Default border colour.
-  final Color borderColor;
+  final Color borderColour;
 
   /// Border colour when the box is focused or filled.
-  final Color borderColorFocused;
+  final Color borderColourFocused;
 
   /// Border colour in error state.
-  final Color borderColorError;
+  final Color borderColourError;
 
   /// Blinking cursor colour.
-  final Color cursorColor;
+  final Color cursorColour;
 
   /// Cursor width (dp).
   final double cursorWidth;
@@ -78,11 +78,11 @@ final class DievasAuthCodeThemeData extends Equatable {
     borderRadius,
     strokeWidth,
     strokeWidthFocused,
-    bgColor,
-    borderColor,
-    borderColorFocused,
-    borderColorError,
-    cursorColor,
+    bgColour,
+    borderColour,
+    borderColourFocused,
+    borderColourError,
+    cursorColour,
     cursorWidth,
     cursorHeight,
     gap,

@@ -12,9 +12,9 @@ final class DievasCircularProgressThemeData extends Equatable {
     required this.sizeMd,
     required this.sizeLg,
     required this.strokeWidth,
-    required this.colorPrimary,
-    required this.colorOnBrand,
-    required this.trackColor,
+    required this.colourPrimary,
+    required this.colourOnBrand,
+    required this.trackColour,
   });
 
   /// Diameter for [DievasCircularProgressSize.sm] (dp).
@@ -30,14 +30,14 @@ final class DievasCircularProgressThemeData extends Equatable {
   final double strokeWidth;
 
   /// Arc colour for the `primary` style variant.
-  final Color colorPrimary;
+  final Color colourPrimary;
 
   /// Arc colour for the `onBrand` style variant — white on brand surfaces.
-  final Color colorOnBrand;
+  final Color colourOnBrand;
 
   /// Background ring colour (the unfilled track).
-  final Color trackColor;
+  final Color trackColour;
 
   @override
-  List<Object?> get props => [sizeSm, sizeMd, sizeLg, strokeWidth, colorPrimary, colorOnBrand, trackColor];
+  List<Object?> get props => [sizeSm, sizeMd, sizeLg, strokeWidth, colourPrimary, colourOnBrand, trackColour];
 }

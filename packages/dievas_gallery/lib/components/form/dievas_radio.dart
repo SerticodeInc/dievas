@@ -125,7 +125,7 @@ class _StateRow extends StatelessWidget {
     children: [
       SizedBox(
         width: 180,
-        child: Text(name, style: context.typography.labelXs.copyWith(color: context.colors.text.textTertiary)),
+        child: Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
       ),
       ComponentBoundary(
         child: DievasRadio<bool>(value: true, groupValue: isSelected, onChanged: disabled ? null : (_) {}),

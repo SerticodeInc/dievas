@@ -18,7 +18,7 @@ class _FullScale extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = DievasTheme.typographyOf(context);
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
 
     final entries = [
       ('displayLg', t.displayLg),
@@ -53,7 +53,7 @@ class _FullScale extends StatelessWidget {
             _TypeRow(name: name, style: style),
             Container(
               height: 1,
-              color: colors.border.borderDefault,
+              color: colours.border.borderDefault,
               margin: EdgeInsets.symmetric(vertical: context.spacing.smPlus),
             ),
           ],
@@ -69,7 +69,7 @@ class _DisplayHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = DievasTheme.typographyOf(context);
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
 
     final entries = [
       ('displayLg', t.displayLg),
@@ -91,7 +91,7 @@ class _DisplayHeading extends StatelessWidget {
             _TypeRow(name: name, style: style),
             Container(
               height: 1,
-              color: colors.border.borderDefault,
+              color: colours.border.borderDefault,
               margin: EdgeInsets.symmetric(vertical: context.spacing.smPlus),
             ),
           ],
@@ -107,7 +107,7 @@ class _BodyLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = DievasTheme.typographyOf(context);
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
 
     final entries = [
       ('titleLg', t.titleLg),
@@ -132,7 +132,7 @@ class _BodyLabel extends StatelessWidget {
             _TypeRow(name: name, style: style),
             Container(
               height: 1,
-              color: colors.border.borderDefault,
+              color: colours.border.borderDefault,
               margin: EdgeInsets.symmetric(vertical: context.spacing.smPlus),
             ),
           ],
@@ -148,7 +148,7 @@ class _Code extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = DievasTheme.typographyOf(context);
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
 
     return SingleChildScrollView(
       padding: EdgeInsets.all(context.spacing.lg),
@@ -158,7 +158,7 @@ class _Code extends StatelessWidget {
           _TypeRow(name: 'codeMd', style: t.codeMd, sample: 'final result = compute(value);'),
           Container(
             height: 1,
-            color: colors.border.borderDefault,
+            color: colours.border.borderDefault,
             margin: EdgeInsets.symmetric(vertical: context.spacing.smPlus),
           ),
           _TypeRow(name: 'codeSm', style: t.codeSm, sample: 'final result = compute(value);'),
@@ -179,7 +179,7 @@ class _TypeRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final labelStyle = DievasTheme.typographyOf(
       context,
-    ).labelXs.copyWith(color: DievasTheme.colorsOf(context).text.textTertiary, fontFamily: 'monospace');
+    ).labelXs.copyWith(color: DievasTheme.coloursOf(context).text.textTertiary, fontFamily: 'monospace');
 
     final size = style.fontSize;
     final weight = style.fontWeight?.value ?? 3;

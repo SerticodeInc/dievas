@@ -11,8 +11,8 @@ final class DievasDotIndicatorThemeData extends Equatable {
     required this.dotSize,
     required this.activeDotSize,
     required this.dotSpacing,
-    required this.colorActive,
-    required this.colorInactive,
+    required this.colourActive,
+    required this.colourInactive,
     required this.animationDuration,
     required this.disabledOpacity,
   });
@@ -27,10 +27,10 @@ final class DievasDotIndicatorThemeData extends Equatable {
   final double dotSpacing;
 
   /// Active dot fill colour.
-  final Color colorActive;
+  final Color colourActive;
 
   /// Inactive dot fill colour.
-  final Color colorInactive;
+  final Color colourInactive;
 
   /// Duration of the size/colour transition when active index changes.
   final Duration animationDuration;
@@ -43,8 +43,8 @@ final class DievasDotIndicatorThemeData extends Equatable {
     dotSize,
     activeDotSize,
     dotSpacing,
-    colorActive,
-    colorInactive,
+    colourActive,
+    colourInactive,
     animationDuration,
     disabledOpacity,
   ];

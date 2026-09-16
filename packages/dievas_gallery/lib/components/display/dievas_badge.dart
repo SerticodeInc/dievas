@@ -84,7 +84,7 @@ class _AllTones extends StatelessWidget {
               style.name,
               style: context.typography.labelXs.copyWith(
                 fontWeight: FontWeight.w600,
-                color: context.colors.text.textPrimary,
+                color: context.colours.text.textPrimary,
               ),
             ),
             SizedBox(height: context.spacing.sm),

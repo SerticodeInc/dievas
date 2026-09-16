@@ -22,14 +22,4 @@ abstract final class DievasOpacityPrimitives {
   static const double o88 = 0.88;
   static const double o96 = 0.96;
   static const double o100 = 1.00;
-
-  /// Semantic aliases (used directly in component definitions)
-  /// disabled interactive elements
-  static const double disabled = o40;
-
-  /// modal / bottom sheet scrim
-  static const double overlay = o56;
-
-  /// ghost hover states
-  static const double ghost = o8;
 }

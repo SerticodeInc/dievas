@@ -60,10 +60,10 @@ class DievasBreadcrumb<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).breadcrumb;
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
 
-    final defaultSeparator = Icon(Icons.chevron_right_rounded, size: theme.iconSize, color: colors.icon.iconDisabled);
-    final defaultHomeIcon = Icon(Icons.home_outlined, size: theme.iconSize, color: colors.icon.iconPrimary);
+    final defaultSeparator = Icon(Icons.chevron_right_rounded, size: theme.iconSize, color: colours.icon.iconDisabled);
+    final defaultHomeIcon = Icon(Icons.home_outlined, size: theme.iconSize, color: colours.icon.iconPrimary);
 
     Widget trail = Row(
       mainAxisSize: .min,

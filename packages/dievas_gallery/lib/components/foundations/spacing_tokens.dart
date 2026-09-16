@@ -16,7 +16,7 @@ class _SpacingScale extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final spacing = DievasTheme.spacingOf(context);
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
 
     final entries = [
       ('none', spacing.none),
@@ -50,23 +50,23 @@ class _SpacingScale extends StatelessWidget {
                       name,
                       style: DievasTheme.typographyOf(
                         context,
-                      ).labelXs.copyWith(fontFamily: 'monospace', color: colors.text.textTertiary),
+                      ).labelXs.copyWith(fontFamily: 'monospace', color: colours.text.textTertiary),
                     ),
                   ),
                   Text(
                     '${value.toStringAsFixed(0)}dp',
                     style: DievasTheme.typographyOf(
                       context,
-                    ).labelXs.copyWith(color: colors.text.textSecondary, fontFamily: 'monospace'),
+                    ).labelXs.copyWith(color: colours.text.textSecondary, fontFamily: 'monospace'),
                   ),
                   SizedBox(width: context.spacing.md),
                   Container(
                     width: value,
                     height: 20,
                     decoration: BoxDecoration(
-                      color: colors.action.actionPrimary.withAlpha(80),
+                      color: colours.action.actionPrimary.withAlpha(80),
                       borderRadius: context.border.xs, // tiny bar viz — closest token
-                      border: Border.all(color: colors.action.actionPrimary),
+                      border: Border.all(color: colours.action.actionPrimary),
                     ),
                   ),
                 ],
@@ -84,7 +84,7 @@ class _BorderRadii extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final border = DievasTheme.borderOf(context);
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
 
     final entries = [
       ('xs', border.xs),
@@ -110,8 +110,8 @@ class _BorderRadii extends StatelessWidget {
                   width: 64, // radius demo box — gallery-only visual dimension
                   height: 64, // radius demo box — gallery-only visual dimension
                   decoration: BoxDecoration(
-                    color: colors.action.actionPrimary.withAlpha(30),
-                    border: Border.all(color: colors.action.actionPrimary),
+                    color: colours.action.actionPrimary.withAlpha(30),
+                    border: Border.all(color: colours.action.actionPrimary),
                     borderRadius: radius,
                   ),
                 ),
@@ -120,7 +120,7 @@ class _BorderRadii extends StatelessWidget {
                   name,
                   style: DievasTheme.typographyOf(
                     context,
-                  ).labelXs.copyWith(fontFamily: 'monospace', color: colors.text.textTertiary),
+                  ).labelXs.copyWith(fontFamily: 'monospace', color: colours.text.textTertiary),
                 ),
               ],
             ),

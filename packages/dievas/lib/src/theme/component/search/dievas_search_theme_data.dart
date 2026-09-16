@@ -15,16 +15,16 @@ final class DievasSearchThemeData extends Equatable {
     required this.borderRadius,
     required this.strokeWidth,
     required this.strokeWidthFocused,
-    required this.bgColor,
-    required this.borderColor,
-    required this.borderColorFocused,
-    required this.iconColor,
+    required this.bgColour,
+    required this.borderColour,
+    required this.borderColourFocused,
+    required this.iconColour,
     required this.iconSize,
     required this.contentPadding,
     required this.resultItemStyle,
     required this.resultItemPadding,
     required this.resultMaxHeight,
-    required this.dividerColor,
+    required this.dividerColour,
     required this.dividerIndent,
     required this.disabledOpacity,
   });
@@ -48,16 +48,16 @@ final class DievasSearchThemeData extends Equatable {
   final double strokeWidthFocused;
 
   /// Search field surface background colour.
-  final Color bgColor;
+  final Color bgColour;
 
   /// Default border colour (resting state).
-  final Color borderColor;
+  final Color borderColour;
 
   /// Border colour when focused.
-  final Color borderColorFocused;
+  final Color borderColourFocused;
 
   /// Leading / trailing icon colour.
-  final Color iconColor;
+  final Color iconColour;
 
   /// Leading / trailing icon size (dp).
   final double iconSize;
@@ -75,7 +75,7 @@ final class DievasSearchThemeData extends Equatable {
   final double resultMaxHeight;
 
   /// Divider colour between result items.
-  final Color dividerColor;
+  final Color dividerColour;
 
   /// Horizontal indent for result dividers (dp).
   final double dividerIndent;
@@ -91,16 +91,16 @@ final class DievasSearchThemeData extends Equatable {
     borderRadius,
     strokeWidth,
     strokeWidthFocused,
-    bgColor,
-    borderColor,
-    borderColorFocused,
-    iconColor,
+    bgColour,
+    borderColour,
+    borderColourFocused,
+    iconColour,
     iconSize,
     contentPadding,
     resultItemStyle,
     resultItemPadding,
     resultMaxHeight,
-    dividerColor,
+    dividerColour,
     dividerIndent,
     disabledOpacity,
   ];

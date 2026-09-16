@@ -21,17 +21,28 @@ enum DievasLoaderSize {
 ///
 /// ```dart
 /// DievasLoader(size: .md, label: 'Loading…')
+/// DievasLoader(size: .lg, colour: DievasTheme.of(context).colours.action.actionError)
 /// ```
 ///
 /// Moon reference: Loader
 class DievasLoader extends StatefulWidget {
-  const DievasLoader({super.key, this.size = .md, this.label});
+  const DievasLoader({super.key, this.size = .md, this.label, this.colour, this.trackColour});
 
   /// Controls spinner diameter (sm / md / lg).
   final DievasLoaderSize size;
 
   /// Optional label shown below the spinner.
   final String? label;
+
+  /// Colour of the active spinning arc.
+  ///
+  /// Defaults to the theme's loader colour when `null`.
+  final Color? colour;
+
+  /// Colour of the background track arc.
+  ///
+  /// Defaults to the theme's loader track colour when `null`.
+  final Color? trackColour;
 
   @override
   State<DievasLoader> createState() => _DievasLoaderState();
@@ -75,8 +86,8 @@ class _DievasLoaderState extends State<DievasLoader> with SingleTickerProviderSt
           dimension: diameter,
           child: _SpinnerAnimation(
             controller: _controller,
-            color: theme.color,
-            trackColor: theme.trackColor,
+            colour: widget.colour ?? theme.color,
+            trackColour: widget.trackColour ?? theme.trackColour,
             strokeWidth: theme.strokeWidth,
           ),
         ),
@@ -92,22 +103,22 @@ class _DievasLoaderState extends State<DievasLoader> with SingleTickerProviderSt
 class _SpinnerAnimation extends AnimatedWidget {
   const _SpinnerAnimation({
     required this.controller,
-    required this.color,
-    required this.trackColor,
+    required this.colour,
+    required this.trackColour,
     required this.strokeWidth,
   }) : super(listenable: controller);
 
   final AnimationController controller;
-  final Color color;
-  final Color trackColor;
+  final Color colour;
+  final Color trackColour;
   final double strokeWidth;
 
   @override
   Widget build(BuildContext context) => CustomPaint(
     painter: _SpinnerPainter(
       progress: controller.value,
-      color: color,
-      trackColor: trackColor,
+      colour: colour,
+      trackColour: trackColour,
       strokeWidth: strokeWidth,
     ),
   );
@@ -116,14 +127,14 @@ class _SpinnerAnimation extends AnimatedWidget {
 class _SpinnerPainter extends CustomPainter {
   const _SpinnerPainter({
     required this.progress,
-    required this.color,
-    required this.trackColor,
+    required this.colour,
+    required this.trackColour,
     required this.strokeWidth,
   });
 
   final double progress;
-  final Color color;
-  final Color trackColor;
+  final Color colour;
+  final Color trackColour;
   final double strokeWidth;
 
   @override
@@ -134,13 +145,13 @@ class _SpinnerPainter extends CustomPainter {
     const startAngle = -1.5707963267948966;
 
     final trackPaint = Paint()
-      ..color = trackColor
+      ..color = trackColour
       ..strokeWidth = strokeWidth
       ..style = .stroke
       ..strokeCap = .round;
 
     final arcPaint = Paint()
-      ..color = color
+      ..color = colour
       ..strokeWidth = strokeWidth
       ..style = .stroke
       ..strokeCap = .round;
@@ -160,5 +171,8 @@ class _SpinnerPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_SpinnerPainter old) =>
-      progress != old.progress || color != old.color || trackColor != old.trackColor || strokeWidth != old.strokeWidth;
+      progress != old.progress ||
+      colour != old.colour ||
+      trackColour != old.trackColour ||
+      strokeWidth != old.strokeWidth;
 }

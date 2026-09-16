@@ -136,11 +136,11 @@ void main() {
     _ColourRole('input-error', () => DievasColourSemanticLight.inputBorderError, () => DievasColourSemanticDark.inputBorderError),
     _ColourRole('input-text', () => DievasColourSemanticLight.inputText, () => DievasColourSemanticDark.inputText),
     _ColourRole('input-placeholder', () => DievasColourSemanticLight.inputPlaceholder, () => DievasColourSemanticDark.inputPlaceholder),
-    // Switch
+    // Switch (track on/off; thumb + border derive from real tokens)
     _ColourRole('switch-on', () => DievasColourSemanticLight.switchTrackOn, () => DievasColourSemanticDark.switchTrackOn),
     _ColourRole('switch-off', () => DievasColourSemanticLight.switchTrackOff, () => DievasColourSemanticDark.switchTrackOff),
-    _ColourRole('switch-thumb', () => DievasColourSemanticLight.switchThumb, () => DievasColourSemanticDark.switchThumb),
-    _ColourRole('switch-border', () => DievasColourSemanticLight.switchBorder, () => DievasColourSemanticDark.switchBorder),
+    _ColourRole('switch-thumb', () => DievasColourSemanticLight.switchThumbOn, () => DievasColourSemanticDark.switchThumbOn),
+    _ColourRole('switch-border', () => DievasColourSemanticLight.borderDefault, () => DievasColourSemanticDark.borderDefault),
     // Feedback
     _ColourRole('feedback-success-bg', () => DievasColourSemanticLight.feedbackSuccessBackground, () => DievasColourSemanticDark.feedbackSuccessBackground),
     _ColourRole('feedback-success-icon', () => DievasColourSemanticLight.feedbackSuccessIcon, () => DievasColourSemanticDark.feedbackSuccessIcon),

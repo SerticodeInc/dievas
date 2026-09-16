@@ -3,7 +3,7 @@
 // Pure Dart. No Flutter dependency.
 // Named aliases over DievasOffsetPrimitives for shadow positioning.
 
-import '../primitives/offset_primitives.dart';
+import 'package:dievas_tokens/src/primitives/offset_primitives.dart';
 
 /// Semantic offset tokens for the Dievas design system.
 ///

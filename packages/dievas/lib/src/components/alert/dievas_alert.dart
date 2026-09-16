@@ -58,7 +58,7 @@ class DievasAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).alert;
-    final palette = _palette(tone, _AlertPalette(DievasTheme.colorsOf(context).feedback));
+    final palette = _palette(tone, _AlertPalette(DievasTheme.coloursOf(context).feedback));
 
     return Semantics(
       container: true,

@@ -3,7 +3,7 @@
 // Pure Dart aliases over DievasDurationPrimitives organized by motion
 // speed intent (instant → xSlow) plus component-specific timers.
 
-import '../primitives/duration_primitives.dart';
+import 'package:dievas_tokens/src/primitives/duration_primitives.dart';
 
 /// Semantic animation tokens for the Dievas design system.
 ///
@@ -24,7 +24,7 @@ abstract final class DievasAnimationSemantic {
   /// 250ms — moderate transitions (drawer slide, panel reveal).
   static const Duration moderate = DievasDurationPrimitives.d250;
 
-  /// 300ms — emphasiZed transitions (modal entry, snackbar, bottom sheet).
+  /// 300ms — emphasized transitions (modal entry, snackbar, bottom sheet).
   static const Duration emphasized = DievasDurationPrimitives.d300;
 
   /// 400ms — leisurely transitions (hero animations).

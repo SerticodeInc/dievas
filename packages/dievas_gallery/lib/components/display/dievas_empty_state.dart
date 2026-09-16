@@ -87,7 +87,7 @@ class _InboxIcon extends StatelessWidget {
     style: TextStyle(
       fontFamily: 'MaterialIcons',
       fontSize: DievasTheme.componentsOf(context).emptyState.iconSize,
-      color: DievasTheme.componentsOf(context).emptyState.iconColor,
+      color: DievasTheme.componentsOf(context).emptyState.iconColour,
     ),
   );
 }

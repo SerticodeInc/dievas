@@ -20,9 +20,9 @@ final class DievasAvatarThemeData extends Equatable {
     required this.initialsStyleMd,
     required this.initialsStyleLg,
     required this.initialsStyleXl,
-    required this.backgroundColor,
-    required this.initialsColor,
-    required this.placeholderColor,
+    required this.backgroundColour,
+    required this.initialsColour,
+    required this.placeholderColour,
   });
 
   /// Container size for [DievasAvatarSize.xs] — 24 dp.
@@ -59,13 +59,46 @@ final class DievasAvatarThemeData extends Equatable {
   final TextStyle initialsStyleXl;
 
   /// Fallback container background (used when no image is provided).
-  final Color backgroundColor;
+  final Color backgroundColour;
 
   /// Initials / placeholder icon colour.
-  final Color initialsColor;
+  final Color initialsColour;
 
   /// Placeholder icon colour when neither image nor initials are provided.
-  final Color placeholderColor;
+  final Color placeholderColour;
+
+  /// Creates a copy of this [DievasAvatarThemeData] with the given fields replaced.
+  DievasAvatarThemeData copyWith({
+    double? sizeXs,
+    double? sizeSm,
+    double? sizeMd,
+    double? sizeLg,
+    double? sizeXl,
+    BorderRadius? borderRadiusSquare,
+    TextStyle? initialsStyleXs,
+    TextStyle? initialsStyleSm,
+    TextStyle? initialsStyleMd,
+    TextStyle? initialsStyleLg,
+    TextStyle? initialsStyleXl,
+    Color? backgroundColour,
+    Color? initialsColour,
+    Color? placeholderColour,
+  }) => DievasAvatarThemeData(
+    sizeXs: sizeXs ?? this.sizeXs,
+    sizeSm: sizeSm ?? this.sizeSm,
+    sizeMd: sizeMd ?? this.sizeMd,
+    sizeLg: sizeLg ?? this.sizeLg,
+    sizeXl: sizeXl ?? this.sizeXl,
+    borderRadiusSquare: borderRadiusSquare ?? this.borderRadiusSquare,
+    initialsStyleXs: initialsStyleXs ?? this.initialsStyleXs,
+    initialsStyleSm: initialsStyleSm ?? this.initialsStyleSm,
+    initialsStyleMd: initialsStyleMd ?? this.initialsStyleMd,
+    initialsStyleLg: initialsStyleLg ?? this.initialsStyleLg,
+    initialsStyleXl: initialsStyleXl ?? this.initialsStyleXl,
+    backgroundColour: backgroundColour ?? this.backgroundColour,
+    initialsColour: initialsColour ?? this.initialsColour,
+    placeholderColour: placeholderColour ?? this.placeholderColour,
+  );
 
   @override
   List<Object?> get props => [
@@ -80,8 +113,8 @@ final class DievasAvatarThemeData extends Equatable {
     initialsStyleMd,
     initialsStyleLg,
     initialsStyleXl,
-    backgroundColor,
-    initialsColor,
-    placeholderColor,
+    backgroundColour,
+    initialsColour,
+    placeholderColour,
   ];
 }

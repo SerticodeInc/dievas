@@ -9,9 +9,9 @@ final class DievasTabBarThemeData extends Equatable {
   const DievasTabBarThemeData({
     required this.labelStyle,
     required this.selectedLabelStyle,
-    required this.indicatorColor,
+    required this.indicatorColour,
     required this.indicatorHeight,
-    required this.dividerColor,
+    required this.dividerColour,
     required this.tabPadding,
     required this.animationDuration,
     required this.disabledOpacity,
@@ -26,13 +26,13 @@ final class DievasTabBarThemeData extends Equatable {
   final TextStyle selectedLabelStyle;
 
   /// Underline indicator colour for the active tab.
-  final Color indicatorColor;
+  final Color indicatorColour;
 
   /// Underline indicator height (dp).
   final double indicatorHeight;
 
   /// Bottom divider line colour.
-  final Color dividerColor;
+  final Color dividerColour;
 
   /// Internal padding for each tab.
   final EdgeInsets tabPadding;
@@ -53,9 +53,9 @@ final class DievasTabBarThemeData extends Equatable {
   List<Object?> get props => [
     labelStyle,
     selectedLabelStyle,
-    indicatorColor,
+    indicatorColour,
     indicatorHeight,
-    dividerColor,
+    dividerColour,
     tabPadding,
     animationDuration,
     disabledOpacity,

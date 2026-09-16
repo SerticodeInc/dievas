@@ -8,12 +8,13 @@ environment:
 
 workspace:
     - packages/dievas
+    - packages/dievas/example
     - packages/dievas_gallery
     - packages/dievas_tokens
 
 dev_dependencies:
     lints: ^6.1.0
-    melos: ^7.8.2
+    melos: ^8.7.0
 melos:
     packages:
         - packages/*
@@ -37,6 +38,10 @@ melos:
             packageFilters:
                 dirExists: test
             description: Run tests across all packages
+
+        ci:
+            run: melos run format:check && melos run analyze && melos run test
+            description: Full local CI — format check, analyse, and test. Must pass before committing.
 
         codegen:
             exec: dart run build_runner build --delete-conflicting-outputs

@@ -7,7 +7,7 @@ final class DievasEmptyStateThemeData extends Equatable {
     required this.titleStyle,
     required this.descriptionStyle,
     required this.iconSize,
-    required this.iconColor,
+    required this.iconColour,
     required this.titleSpacing,
     required this.descriptionSpacing,
     required this.actionSpacing,
@@ -24,7 +24,7 @@ final class DievasEmptyStateThemeData extends Equatable {
   final double iconSize;
 
   /// Colour of the optional illustration icon.
-  final Color iconColor;
+  final Color iconColour;
 
   /// Gap between the icon and the title.
   final double titleSpacing;
@@ -43,7 +43,7 @@ final class DievasEmptyStateThemeData extends Equatable {
     titleStyle,
     descriptionStyle,
     iconSize,
-    iconColor,
+    iconColour,
     titleSpacing,
     descriptionSpacing,
     actionSpacing,

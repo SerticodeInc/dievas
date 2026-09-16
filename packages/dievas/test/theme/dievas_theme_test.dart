@@ -10,12 +10,12 @@ void main() {
       expect(DievasLightThemeData(), isA<DievasThemeData>());
     });
 
-    test('colors have light brightness', () {
-      expect(DievasLightThemeData().colors.brightness, Brightness.light);
+    test('colours have light brightness', () {
+      expect(DievasLightThemeData().colours.brightness, Brightness.light);
     });
 
-    test('all color sets are non-null', () {
-      final t = DievasLightThemeData().colors;
+    test('all colour sets are non-null', () {
+      final t = DievasLightThemeData().colours;
       expect(t.core, isNotNull);
       expect(t.text, isNotNull);
       expect(t.icon, isNotNull);
@@ -136,10 +136,54 @@ void main() {
       expect(DievasLightThemeData().material, isNotNull);
     });
 
+    test('material bridge derives font family from typography', () {
+      final typography = _typographyWithFamily(DievasLightThemeData().typography, 'TestBrandFont');
+      final theme = DievasLightThemeData(typography: typography);
+
+      expect(theme.material.textTheme.bodyMedium?.fontFamily, 'TestBrandFont');
+      expect(theme.material.textTheme.labelMedium?.fontFamily, 'TestBrandFont');
+      expect(theme.material.textTheme.displaySmall?.fontFamily, 'TestBrandFont');
+    });
+
     test('copyWith returns different instance', () {
       final t1 = DievasLightThemeData();
       final t2 = t1.copyWith();
       expect(t2, isNot(same(t1)));
+    });
+  });
+
+  group('DievasScope', () {
+    testWidgets('DievasScope.of dependents rebuild when themeMode changes', (tester) async {
+      var buildCount = 0;
+      var currentMode = ThemeMode.system;
+
+      await tester.pumpWidget(
+        DievasScope(
+          lightTheme: DievasLightThemeData(),
+          darkTheme: DievasDarkThemeData(),
+          child: MaterialApp(
+            home: Builder(
+              builder: (context) {
+                buildCount++;
+                currentMode = DievasScope.of(context).themeMode;
+                return TextButton(
+                  onPressed: () => DievasScope.of(context).setThemeMode(ThemeMode.dark),
+                  child: const Text('toggle'),
+                );
+              },
+            ),
+          ),
+        ),
+      );
+
+      expect(currentMode, ThemeMode.system);
+      final buildsBeforeTap = buildCount;
+
+      await tester.tap(find.text('toggle'));
+      await tester.pump();
+
+      expect(currentMode, ThemeMode.dark);
+      expect(buildCount, greaterThan(buildsBeforeTap));
     });
   });
 
@@ -148,8 +192,8 @@ void main() {
       expect(DievasDarkThemeData(), isA<DievasThemeData>());
     });
 
-    test('colors have dark brightness', () {
-      expect(DievasDarkThemeData().colors.brightness, Brightness.dark);
+    test('colours have dark brightness', () {
+      expect(DievasDarkThemeData().colours.brightness, Brightness.dark);
     });
 
     test('material theme data is non-null', () {
@@ -159,7 +203,7 @@ void main() {
 
   group('DievasColourThemeData', () {
     test('copyWith preserves unset fields', () {
-      final t = DievasLightThemeData().colors;
+      final t = DievasLightThemeData().colours;
       final copy = t.copyWith();
       expect(copy.brightness, t.brightness);
       expect(copy.core, t.core);
@@ -167,15 +211,15 @@ void main() {
     });
 
     test('copyWith overrides specified field', () {
-      final t = DievasLightThemeData().colors;
+      final t = DievasLightThemeData().colours;
       final copy = t.copyWith(brightness: .dark);
       expect(copy.brightness, Brightness.dark);
       expect(copy.core, t.core);
     });
 
     test('lerp between light and dark', () {
-      final light = DievasLightThemeData().colors;
-      final dark = DievasDarkThemeData().colors;
+      final light = DievasLightThemeData().colours;
+      final dark = DievasDarkThemeData().colours;
       final mid = DievasColourThemeData.lerp(light, dark, 0.5);
       expect(mid, isA<DievasColourThemeData>());
     });
@@ -191,10 +235,10 @@ void main() {
       expect(theme, isA<DievasThemeData>());
     });
 
-    testWidgets('colorsOf returns colour theme', (tester) async {
+    testWidgets('coloursOf returns colour theme', (tester) async {
       await tester.pumpWidget(const Harness(child: SizedBox(key: childKey)));
       final ctx = tester.element(find.byKey(childKey));
-      expect(DievasTheme.colorsOf(ctx), isA<DievasColourThemeData>());
+      expect(DievasTheme.coloursOf(ctx), isA<DievasColourThemeData>());
     });
 
     testWidgets('spacingOf returns spacing theme', (tester) async {
@@ -207,6 +251,13 @@ void main() {
       await tester.pumpWidget(const Harness(child: SizedBox(key: childKey)));
       final ctx = tester.element(find.byKey(childKey));
       expect(DievasTheme.componentsOf(ctx), isA<DievasComponentThemeData>());
+    });
+
+    testWidgets('context.animation returns animation theme', (tester) async {
+      await tester.pumpWidget(const Harness(child: SizedBox(key: childKey)));
+      final ctx = tester.element(find.byKey(childKey));
+      expect(ctx.animation, isA<DievasAnimationThemeData>());
+      expect(ctx.animation, same(DievasTheme.animationOf(ctx)));
     });
 
     testWidgets('typographyOf returns typography theme', (tester) async {
@@ -224,7 +275,7 @@ void main() {
     testWidgets('updateShouldNotify returns true for different data', (tester) async {
       await tester.pumpWidget(const Harness(child: SizedBox(key: childKey)));
       final ctx = tester.element(find.byKey(childKey));
-      expect(DievasTheme.of(ctx).colors.brightness, anyOf(Brightness.light, Brightness.dark));
+      expect(DievasTheme.of(ctx).colours.brightness, anyOf(Brightness.light, Brightness.dark));
     });
   });
 
@@ -308,6 +359,7 @@ void main() {
       final menuItem = DievasLightThemeData().components.menuItem;
       final tabBar = DievasLightThemeData().components.tabBar;
       final popover = DievasLightThemeData().components.popover;
+      final divider = DievasLightThemeData().components.divider;
 
       expect(
         () => DievasComponentThemeData(
@@ -343,6 +395,7 @@ void main() {
           segmentedControl: segmentedControl,
           tabBar: tabBar,
           popover: popover,
+          divider: divider,
         ),
         returnsNormally,
       );
@@ -356,4 +409,33 @@ void main() {
       expect(modified, defaultComponents);
     });
   });
+}
+
+DievasTypographyThemeData _typographyWithFamily(DievasTypographyThemeData t, String family) {
+  TextStyle withFamily(TextStyle style) => style.copyWith(fontFamily: family);
+
+  return DievasTypographyThemeData(
+    displayLg: withFamily(t.displayLg),
+    displayMd: withFamily(t.displayMd),
+    displaySm: withFamily(t.displaySm),
+    headingXl: withFamily(t.headingXl),
+    headingLg: withFamily(t.headingLg),
+    headingMd: withFamily(t.headingMd),
+    headingSm: withFamily(t.headingSm),
+    headingXs: withFamily(t.headingXs),
+    titleLg: withFamily(t.titleLg),
+    titleMd: withFamily(t.titleMd),
+    titleSm: withFamily(t.titleSm),
+    titleXsm: withFamily(t.titleXsm),
+    bodyLg: withFamily(t.bodyLg),
+    bodyMd: withFamily(t.bodyMd),
+    bodySm: withFamily(t.bodySm),
+    bodyXs: withFamily(t.bodyXs),
+    labelLg: withFamily(t.labelLg),
+    labelMd: withFamily(t.labelMd),
+    labelSm: withFamily(t.labelSm),
+    labelXs: withFamily(t.labelXs),
+    codeMd: withFamily(t.codeMd),
+    codeSm: withFamily(t.codeSm),
+  );
 }

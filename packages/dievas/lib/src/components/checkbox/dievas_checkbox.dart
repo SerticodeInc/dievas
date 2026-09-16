@@ -117,14 +117,14 @@ class _BoxPainter extends CustomPainter {
 
     // Fill
     final fillPaint = Paint()
-      ..color = isActive ? theme.colorChecked : theme.colorUnchecked
+      ..color = isActive ? theme.colourChecked : theme.colourUnchecked
       ..style = .fill;
     canvas.drawRRect(rrect, fillPaint);
 
     // Border (only in unchecked state — active state uses fill colour)
     if (!isActive) {
       final borderPaint = Paint()
-        ..color = theme.borderColorUnchecked
+        ..color = theme.borderColourUnchecked
         ..style = .stroke
         ..strokeWidth = theme.strokeWidth;
       canvas.drawRRect(rrect, borderPaint);
@@ -140,7 +140,7 @@ class _BoxPainter extends CustomPainter {
 
   void _drawCheck(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = theme.checkColor
+      ..color = theme.checkColour
       ..style = .stroke
       ..strokeWidth = theme.strokeWidth
       ..strokeCap = .round
@@ -156,7 +156,7 @@ class _BoxPainter extends CustomPainter {
 
   void _drawDash(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = theme.checkColor
+      ..color = theme.checkColour
       ..style = .stroke
       ..strokeWidth = theme.strokeWidth
       ..strokeCap = .round;

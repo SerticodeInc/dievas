@@ -33,7 +33,7 @@ class DievasEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
     final theme = DievasTheme.componentsOf(context).emptyState;
     final l10n = DievasLocalizations.of(context);
 
@@ -50,7 +50,7 @@ class DievasEmptyState extends StatelessWidget {
               dimension: theme.iconSize,
               child: Center(
                 child: IconTheme(
-                  data: IconThemeData(color: theme.iconColor, size: theme.iconSize),
+                  data: IconThemeData(color: theme.iconColour, size: theme.iconSize),
                   child: widget,
                 ),
               ),
@@ -59,13 +59,13 @@ class DievasEmptyState extends StatelessWidget {
           ],
           Text(
             resolvedTitle,
-            style: theme.titleStyle.copyWith(color: colors.text.textPrimary),
+            style: theme.titleStyle.copyWith(color: colours.text.textPrimary),
             textAlign: .center,
           ),
           SizedBox(height: theme.descriptionSpacing),
           Text(
             resolvedDescription,
-            style: theme.descriptionStyle.copyWith(color: colors.text.textSecondary),
+            style: theme.descriptionStyle.copyWith(color: colours.text.textSecondary),
             textAlign: .center,
           ),
           if (action case final widget?) ...[SizedBox(height: theme.actionSpacing), widget],

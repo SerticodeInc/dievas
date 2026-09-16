@@ -88,7 +88,7 @@
   --dv-switch-on: rgba(99, 102, 241, 1);
   --dv-switch-off: rgba(226, 232, 240, 1);
   --dv-switch-thumb: rgba(255, 255, 255, 1);
-  --dv-switch-border: rgba(203, 213, 225, 1);
+  --dv-switch-border: rgba(226, 232, 240, 1);
   --dv-feedback-success-bg: rgba(240, 253, 244, 1);
   --dv-feedback-success-icon: rgba(22, 163, 74, 1);
   --dv-feedback-warning-bg: rgba(255, 251, 235, 1);
@@ -145,7 +145,7 @@
   --dv-switch-on: rgba(99, 102, 241, 1);
   --dv-switch-off: rgba(51, 65, 85, 1);
   --dv-switch-thumb: rgba(255, 255, 255, 1);
-  --dv-switch-border: rgba(71, 85, 105, 1);
+  --dv-switch-border: rgba(51, 65, 85, 1);
   --dv-feedback-success-bg: rgba(5, 46, 22, 1);
   --dv-feedback-success-icon: rgba(74, 222, 128, 1);
   --dv-feedback-warning-bg: rgba(69, 26, 3, 1);

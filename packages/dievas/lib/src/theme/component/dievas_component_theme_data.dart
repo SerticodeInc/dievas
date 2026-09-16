@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 import 'accordion/dievas_accordion_theme_data.dart';
+import 'divider/dievas_divider_theme_data.dart';
 import 'auth_code/dievas_auth_code_theme_data.dart';
 import 'alert/dievas_alert_theme_data.dart';
 import 'avatar/dievas_avatar_theme_data.dart';
@@ -76,6 +77,7 @@ final class DievasComponentThemeData extends Equatable {
     required this.segmentedControl,
     required this.tabBar,
     required this.popover,
+    required this.divider,
   });
 
   /// Theme data for [DievasAuthCode].
@@ -176,6 +178,9 @@ final class DievasComponentThemeData extends Equatable {
   /// Theme data for [DievasPopover].
   final DievasPopoverThemeData popover;
 
+  /// Theme data for [DievasDivider].
+  final DievasDividerThemeData divider;
+
   DievasComponentThemeData copyWith({
     DievasFilledButtonGroupThemeData? filledButton,
     DievasOutlinedButtonGroupThemeData? outlinedButton,
@@ -209,6 +214,7 @@ final class DievasComponentThemeData extends Equatable {
     DievasSegmentedControlThemeData? segmentedControl,
     DievasTabBarThemeData? tabBar,
     DievasPopoverThemeData? popover,
+    DievasDividerThemeData? divider,
   }) => DievasComponentThemeData(
     filledButton: filledButton ?? this.filledButton,
     outlinedButton: outlinedButton ?? this.outlinedButton,
@@ -242,6 +248,7 @@ final class DievasComponentThemeData extends Equatable {
     segmentedControl: segmentedControl ?? this.segmentedControl,
     tabBar: tabBar ?? this.tabBar,
     popover: popover ?? this.popover,
+    divider: divider ?? this.divider,
   );
 
   @override
@@ -278,5 +285,6 @@ final class DievasComponentThemeData extends Equatable {
     segmentedControl,
     tabBar,
     popover,
+    divider,
   ];
 }

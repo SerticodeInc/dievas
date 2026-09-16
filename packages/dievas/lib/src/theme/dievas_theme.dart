@@ -15,12 +15,12 @@ import 'typography/dievas_typography_theme_data.dart';
 /// Named aspects of the Dievas theme — used by [DievasTheme] (InheritedModel)
 /// to scope rebuilds to only the widgets that depend on a changed aspect.
 ///
-/// Example: a widget that reads only [DievasThemeAspect.colors] will not
+/// Example: a widget that reads only [DievasThemeAspect.colours] will not
 /// rebuild when [DievasThemeAspect.spacing] changes.
 enum DievasThemeAspect {
   animation,
   border,
-  colors,
+  colours,
   components,
   elevation,
   material,
@@ -38,8 +38,8 @@ enum DievasThemeAspect {
 ///
 /// Aspect-scoped reading — only the changed sub-system triggers a rebuild:
 /// ```dart
-/// Granular: rebuilds only when colors change
-/// DievasTheme.colorsOf(context);
+/// Granular: rebuilds only when colours change
+/// DievasTheme.coloursOf(context);
 ///
 /// Full theme (rare — prefer granular access)
 /// DievasTheme.of(context);
@@ -53,7 +53,7 @@ class DievasTheme extends InheritedModel<DievasThemeAspect> {
   /// Returns the full [DievasThemeData] from the nearest [DievasTheme] ancestor.
   ///
   /// Triggers a rebuild on any theme aspect change. Prefer the granular
-  /// accessors (e.g. [colorsOf]) when only one sub-system is needed.
+  /// accessors (e.g. [coloursOf]) when only one sub-system is needed.
   static DievasThemeData of(BuildContext context) {
     final theme = InheritedModel.inheritFrom<DievasTheme>(context);
     assert(theme != null, 'No DievasTheme found in the widget tree. Wrap your app in DievasScope.');
@@ -61,8 +61,8 @@ class DievasTheme extends InheritedModel<DievasThemeAspect> {
   }
 
   /// Returns only the [DievasColourThemeData]. Rebuilds when colours change.
-  static DievasColourThemeData colorsOf(BuildContext context) =>
-      InheritedModel.inheritFrom<DievasTheme>(context, aspect: DievasThemeAspect.colors)!.data.colors;
+  static DievasColourThemeData coloursOf(BuildContext context) =>
+      InheritedModel.inheritFrom<DievasTheme>(context, aspect: DievasThemeAspect.colours)!.data.colours;
 
   /// Returns only the [DievasTypographyThemeData]. Rebuilds when typography changes.
   static DievasTypographyThemeData typographyOf(BuildContext context) =>
@@ -112,7 +112,7 @@ class DievasTheme extends InheritedModel<DievasThemeAspect> {
     (aspect) => switch (aspect) {
       .animation => data.animation != oldWidget.data.animation,
       .border => data.border != oldWidget.data.border,
-      .colors => data.colors != oldWidget.data.colors,
+      .colours => data.colours != oldWidget.data.colours,
       .components => data.components != oldWidget.data.components,
       .elevation => data.elevation != oldWidget.data.elevation,
       .material => data.material != oldWidget.data.material,

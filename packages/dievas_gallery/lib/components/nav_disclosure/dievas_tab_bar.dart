@@ -72,7 +72,7 @@ class _DemoBlock extends StatelessWidget {
     children: [
       Padding(
         padding: .symmetric(horizontal: context.spacing.md),
-        child: Text(name, style: context.typography.labelXs.copyWith(color: context.colors.text.textTertiary)),
+        child: Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
       ),
       SizedBox(height: context.spacing.xs),
       ComponentBoundary(child: child),

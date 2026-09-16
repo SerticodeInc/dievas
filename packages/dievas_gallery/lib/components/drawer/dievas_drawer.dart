@@ -41,7 +41,7 @@ class _PlaygroundState extends State<_Playground> {
           ],
         ),
         child: Container(
-          color: DievasTheme.colorsOf(context).background.bgBase,
+          color: DievasTheme.coloursOf(context).background.bgBase,
           child: const Center(child: Text('Main content area')),
         ),
       ),
@@ -74,7 +74,7 @@ class _WithBackdropState extends State<_WithBackdrop> {
         ],
       ),
       child: Container(
-        color: DievasTheme.colorsOf(context).background.bgBase,
+        color: DievasTheme.coloursOf(context).background.bgBase,
         child: Center(
           child: ComponentBoundary(
             child: TextButton(onPressed: () => _drawerKey.currentState?.close(), child: const Text('Tap to close')),

@@ -4,7 +4,7 @@
 // Named aliases over DievasRadiusPrimitives for consistent corner rounding
 // across containers, buttons, inputs, and overlays.
 
-import '../primitives/radius_primitives.dart';
+import 'package:dievas_tokens/src/primitives/radius_primitives.dart';
 
 /// Semantic border radius tokens for the Dievas design system.
 ///

@@ -1,4 +1,5 @@
 import 'package:dievas/dievas.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../cross_cutting_concerns/harness.dart';
@@ -51,6 +52,31 @@ void main() {
       );
       await tester.tap(find.byType(DievasOutlinedButton));
       expect(tapped, isTrue);
+    });
+
+    testWidgets('renders with custom child instead of label', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: DievasOutlinedButton(child: const Text('Custom'), onPressed: () {}),
+        ),
+      );
+      expect(tester.takeException(), isNull);
+      expect(find.text('Custom'), findsOneWidget);
+    });
+
+    testWidgets('renders with colour overrides', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: DievasOutlinedButton(
+            label: 'Colourful',
+            backgroundColor: Colors.amber,
+            foregroundColor: Colors.black,
+            borderColor: Colors.purple,
+            onPressed: () {},
+          ),
+        ),
+      );
+      expect(tester.takeException(), isNull);
     });
   });
 }

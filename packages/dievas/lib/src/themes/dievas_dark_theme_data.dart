@@ -6,9 +6,9 @@ part of '../themes.dart';
 /// [DievasColourSemanticDark] token values. Consumer apps do not subclass this —
 /// they subclass [DievasGlobalThemeData] with their own brand tokens.
 final class DievasDarkThemeData extends DievasGlobalThemeData {
-  DievasDarkThemeData({super.components, super.typography}) : super(colors: _darkColors);
+  DievasDarkThemeData({super.components, super.typography}) : super(colours: _darkColours);
 
-  static final DievasColourThemeData _darkColors = DievasColourThemeData(
+  static final DievasColourThemeData _darkColours = DievasColourThemeData(
     brightness: .dark,
     core: const CoreColours(
       brand: Color(DievasColourSemanticDark.brand),
@@ -84,6 +84,7 @@ final class DievasDarkThemeData extends DievasGlobalThemeData {
       inputBorder: Color(DievasColourSemanticDark.inputBorder),
       inputBorderFocus: Color(DievasColourSemanticDark.inputBorderFocus),
       inputBorderError: Color(DievasColourSemanticDark.inputBorderError),
+      inputBorderWarning: Color(DievasColourSemanticDark.inputBorderWarning),
       inputText: Color(DievasColourSemanticDark.inputText),
       inputPlaceholder: Color(DievasColourSemanticDark.inputPlaceholder),
     ),
@@ -96,8 +97,8 @@ final class DievasDarkThemeData extends DievasGlobalThemeData {
     switchColours: const SwitchColours(
       switchTrackOn: Color(DievasColourSemanticDark.switchTrackOn),
       switchTrackOff: Color(DievasColourSemanticDark.switchTrackOff),
-      switchThumb: Color(DievasColourSemanticDark.switchThumb),
-      switchBorder: Color(DievasColourSemanticDark.switchBorder),
+      switchThumbOn: Color(DievasColourSemanticDark.switchThumbOn),
+      switchThumbOff: Color(DievasColourSemanticDark.switchThumbOff),
     ),
     staticColours: const StaticColours(
       staticWhite: Color(DievasColourSemanticDark.staticWhite),

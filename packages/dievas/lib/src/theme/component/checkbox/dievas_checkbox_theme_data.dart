@@ -10,12 +10,12 @@ final class DievasCheckboxThemeData extends Equatable {
     required this.size,
     required this.borderRadius,
     required this.strokeWidth,
-    required this.colorChecked,
-    required this.colorUnchecked,
-    required this.colorDisabled,
-    required this.borderColorUnchecked,
-    required this.borderColorDisabled,
-    required this.checkColor,
+    required this.colourChecked,
+    required this.colourUnchecked,
+    required this.colourDisabled,
+    required this.borderColourUnchecked,
+    required this.borderColourDisabled,
+    required this.checkColour,
     required this.disabledOpacity,
     required this.labelStyle,
     required this.labelSpacing,
@@ -31,22 +31,22 @@ final class DievasCheckboxThemeData extends Equatable {
   final double strokeWidth;
 
   /// Fill colour when checked or indeterminate.
-  final Color colorChecked;
+  final Color colourChecked;
 
   /// Fill colour when unchecked (transparent — border-only).
-  final Color colorUnchecked;
+  final Color colourUnchecked;
 
   /// Fill colour when disabled.
-  final Color colorDisabled;
+  final Color colourDisabled;
 
   /// Border colour when unchecked.
-  final Color borderColorUnchecked;
+  final Color borderColourUnchecked;
 
   /// Border colour when disabled.
-  final Color borderColorDisabled;
+  final Color borderColourDisabled;
 
   /// Check-mark / indeterminate dash colour.
-  final Color checkColor;
+  final Color checkColour;
 
   /// Opacity multiplier applied to the whole widget when disabled.
   final double disabledOpacity;
@@ -62,12 +62,12 @@ final class DievasCheckboxThemeData extends Equatable {
     size,
     borderRadius,
     strokeWidth,
-    colorChecked,
-    colorUnchecked,
-    colorDisabled,
-    borderColorUnchecked,
-    borderColorDisabled,
-    checkColor,
+    colourChecked,
+    colourUnchecked,
+    colourDisabled,
+    borderColourUnchecked,
+    borderColourDisabled,
+    checkColour,
     disabledOpacity,
     labelStyle,
     labelSpacing,

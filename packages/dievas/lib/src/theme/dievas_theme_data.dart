@@ -28,7 +28,7 @@ abstract interface class DievasThemeData {
   static const String packageName = 'dievas';
 
   /// Complete colour sub-system — colour sets for all semantic domains.
-  DievasColourThemeData get colors;
+  DievasColourThemeData get colours;
 
   /// Complete typography sub-system — the full type ramp as [TextStyle] objects.
   DievasTypographyThemeData get typography;

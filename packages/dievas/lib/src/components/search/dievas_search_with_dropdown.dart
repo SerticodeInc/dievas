@@ -143,11 +143,11 @@ class _DievasSearchWithDropdownState<T> extends State<DievasSearchWithDropdown<T
             hintStyle: theme.placeholderStyle,
             contentPadding: theme.contentPadding,
             filled: true,
-            fillColor: theme.bgColor,
+            fillColor: theme.bgColour,
             prefixIcon: Padding(
               padding: EdgeInsetsDirectional.only(start: theme.dividerIndent, end: theme.iconSize / 4),
               child: IconTheme(
-                data: IconThemeData(color: theme.iconColor, size: theme.iconSize),
+                data: IconThemeData(color: theme.iconColour, size: theme.iconSize),
                 child: const Icon(Icons.search),
               ),
             ),
@@ -156,7 +156,7 @@ class _DievasSearchWithDropdownState<T> extends State<DievasSearchWithDropdown<T
                 ? Padding(
                     padding: EdgeInsetsDirectional.only(end: theme.iconSize / 4, start: theme.iconSize / 4),
                     child: IconTheme(
-                      data: IconThemeData(color: theme.iconColor, size: theme.iconSize * 0.8),
+                      data: IconThemeData(color: theme.iconColour, size: theme.iconSize * 0.8),
                       child: GestureDetector(
                         onTap: () {
                           _controller.clear();
@@ -170,15 +170,15 @@ class _DievasSearchWithDropdownState<T> extends State<DievasSearchWithDropdown<T
             suffixIconConstraints: const BoxConstraints(minWidth: 32, minHeight: 0),
             border: OutlineInputBorder(
               borderRadius: theme.borderRadius,
-              borderSide: BorderSide(color: theme.borderColor),
+              borderSide: BorderSide(color: theme.borderColour),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: theme.borderRadius,
-              borderSide: BorderSide(color: theme.borderColor),
+              borderSide: BorderSide(color: theme.borderColour),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: theme.borderRadius,
-              borderSide: BorderSide(color: theme.borderColorFocused),
+              borderSide: BorderSide(color: theme.borderColourFocused),
             ),
             isDense: true,
           ),
@@ -221,17 +221,17 @@ class _DropdownResults<T> extends StatelessWidget {
           followerAnchor: .topLeft,
           child: Material(
             elevation: 0,
-            color: theme.bgColor,
+            color: theme.bgColour,
             borderRadius: BorderRadius.vertical(bottom: theme.borderRadius.topLeft),
             child: Container(
               constraints: BoxConstraints(maxHeight: maxHeight),
               decoration: BoxDecoration(
-                color: theme.bgColor,
+                color: theme.bgColour,
                 borderRadius: BorderRadius.vertical(bottom: theme.borderRadius.topLeft),
-                border: Border.all(color: theme.borderColorFocused),
+                border: Border.all(color: theme.borderColourFocused),
                 boxShadow: [
                   BoxShadow(
-                    color: theme.borderColorFocused.withValues(alpha: 0.15),
+                    color: theme.borderColourFocused.withValues(alpha: 0.15),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
@@ -244,7 +244,7 @@ class _DropdownResults<T> extends StatelessWidget {
                 separatorBuilder: (_, _) => Divider(
                   height: 1,
                   thickness: 1,
-                  color: theme.dividerColor,
+                  color: theme.dividerColour,
                   indent: theme.dividerIndent,
                   endIndent: theme.dividerIndent,
                 ),

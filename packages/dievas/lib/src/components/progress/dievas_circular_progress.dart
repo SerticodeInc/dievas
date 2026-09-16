@@ -54,8 +54,8 @@ class DievasCircularProgress extends StatelessWidget {
     };
 
     final color = switch (style) {
-      .primary => theme.colorPrimary,
-      .onBrand => theme.colorOnBrand,
+      .primary => theme.colourPrimary,
+      .onBrand => theme.colourOnBrand,
     };
 
     return SizedBox.square(
@@ -64,7 +64,7 @@ class DievasCircularProgress extends StatelessWidget {
         value: value,
         strokeWidth: theme.strokeWidth,
         color: color,
-        backgroundColor: theme.trackColor,
+        backgroundColor: theme.trackColour,
         strokeCap: .round,
       ),
     );

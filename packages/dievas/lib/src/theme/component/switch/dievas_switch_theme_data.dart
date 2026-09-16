@@ -14,10 +14,10 @@ final class DievasSwitchThemeData extends Equatable {
     required this.thumbSize,
     required this.thumbRadius,
     required this.thumbPadding,
-    required this.trackColorOn,
-    required this.trackColorOff,
-    required this.thumbColor,
-    required this.borderColorOff,
+    required this.trackColourOn,
+    required this.trackColourOff,
+    required this.thumbColourOn,
+    required this.thumbColourOff,
     required this.disabledOpacity,
     required this.animationDuration,
     required this.labelStyle,
@@ -43,16 +43,16 @@ final class DievasSwitchThemeData extends Equatable {
   final double thumbPadding;
 
   /// Track background when ON.
-  final Color trackColorOn;
+  final Color trackColourOn;
 
   /// Track background when OFF.
-  final Color trackColorOff;
+  final Color trackColourOff;
 
-  /// Thumb fill in both states.
-  final Color thumbColor;
+  /// Thumb fill when ON.
+  final Color thumbColourOn;
 
-  /// Track border when OFF (1 dp stroke, transparent when ON).
-  final Color borderColorOff;
+  /// Thumb fill when OFF.
+  final Color thumbColourOff;
 
   /// Opacity multiplier applied to the whole widget when disabled.
   final double disabledOpacity;
@@ -66,6 +66,38 @@ final class DievasSwitchThemeData extends Equatable {
   /// Gap between the track and the label (dp).
   final double labelSpacing;
 
+  DievasSwitchThemeData copyWith({
+    double? trackWidth,
+    double? trackHeight,
+    BorderRadius? trackRadius,
+    double? thumbSize,
+    BorderRadius? thumbRadius,
+    double? thumbPadding,
+    Color? trackColourOn,
+    Color? trackColourOff,
+    Color? thumbColourOn,
+    Color? thumbColourOff,
+    double? disabledOpacity,
+    Duration? animationDuration,
+    TextStyle? labelStyle,
+    double? labelSpacing,
+  }) => DievasSwitchThemeData(
+    trackWidth: trackWidth ?? this.trackWidth,
+    trackHeight: trackHeight ?? this.trackHeight,
+    trackRadius: trackRadius ?? this.trackRadius,
+    thumbSize: thumbSize ?? this.thumbSize,
+    thumbRadius: thumbRadius ?? this.thumbRadius,
+    thumbPadding: thumbPadding ?? this.thumbPadding,
+    trackColourOn: trackColourOn ?? this.trackColourOn,
+    trackColourOff: trackColourOff ?? this.trackColourOff,
+    thumbColourOn: thumbColourOn ?? this.thumbColourOn,
+    thumbColourOff: thumbColourOff ?? this.thumbColourOff,
+    disabledOpacity: disabledOpacity ?? this.disabledOpacity,
+    animationDuration: animationDuration ?? this.animationDuration,
+    labelStyle: labelStyle ?? this.labelStyle,
+    labelSpacing: labelSpacing ?? this.labelSpacing,
+  );
+
   @override
   List<Object?> get props => [
     trackWidth,
@@ -74,10 +106,10 @@ final class DievasSwitchThemeData extends Equatable {
     thumbSize,
     thumbRadius,
     thumbPadding,
-    trackColorOn,
-    trackColorOff,
-    thumbColor,
-    borderColorOff,
+    trackColourOn,
+    trackColourOff,
+    thumbColourOn,
+    thumbColourOff,
     disabledOpacity,
     animationDuration,
     labelStyle,

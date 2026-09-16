@@ -4,7 +4,7 @@
 // Named aliases over DievasOpacityPrimitives for consistent transparency
 // across disabled states, overlays, hover effects, and ghost elements.
 
-import '../primitives/opacity_primitives.dart';
+import 'package:dievas_tokens/src/primitives/opacity_primitives.dart';
 
 /// Semantic opacity tokens for the Dievas design system.
 ///
@@ -23,7 +23,7 @@ abstract final class DievasOpacitySemantic {
   static const double focusRing = DievasOpacityPrimitives.o10;
 
   /// 56% — modal / bottom sheet scrim overlay.
-  static const double overlay = DievasOpacityPrimitives.overlay;
+  static const double overlay = DievasOpacityPrimitives.o56;
 
   /// 0% — fully transparent. Animation start states.
   static const double transparent = DievasOpacityPrimitives.o0;

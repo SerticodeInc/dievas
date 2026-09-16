@@ -10,12 +10,12 @@ final class DievasRadioThemeData extends Equatable {
     required this.size,
     required this.strokeWidth,
     required this.dotSize,
-    required this.colorSelected,
-    required this.colorUnselected,
-    required this.colorDisabled,
-    required this.borderColorUnselected,
-    required this.borderColorDisabled,
-    required this.dotColor,
+    required this.colourSelected,
+    required this.colourUnselected,
+    required this.colourDisabled,
+    required this.borderColourUnselected,
+    required this.borderColourDisabled,
+    required this.dotColour,
     required this.disabledOpacity,
     required this.labelStyle,
     required this.labelSpacing,
@@ -31,22 +31,22 @@ final class DievasRadioThemeData extends Equatable {
   final double dotSize;
 
   /// Outer ring fill / border colour when selected.
-  final Color colorSelected;
+  final Color colourSelected;
 
   /// Outer ring border colour when unselected (transparent fill).
-  final Color colorUnselected;
+  final Color colourUnselected;
 
   /// Outer ring colour when disabled.
-  final Color colorDisabled;
+  final Color colourDisabled;
 
   /// Border colour when unselected.
-  final Color borderColorUnselected;
+  final Color borderColourUnselected;
 
   /// Border colour when disabled.
-  final Color borderColorDisabled;
+  final Color borderColourDisabled;
 
   /// Inner dot fill colour when selected.
-  final Color dotColor;
+  final Color dotColour;
 
   /// Opacity multiplier applied to the whole widget when disabled.
   final double disabledOpacity;
@@ -62,12 +62,12 @@ final class DievasRadioThemeData extends Equatable {
     size,
     strokeWidth,
     dotSize,
-    colorSelected,
-    colorUnselected,
-    colorDisabled,
-    borderColorUnselected,
-    borderColorDisabled,
-    dotColor,
+    colourSelected,
+    colourUnselected,
+    colourDisabled,
+    borderColourUnselected,
+    borderColourDisabled,
+    dotColour,
     disabledOpacity,
     labelStyle,
     labelSpacing,

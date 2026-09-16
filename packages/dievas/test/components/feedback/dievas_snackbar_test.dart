@@ -57,7 +57,7 @@ void main() {
     testWidgets('renders with custom background color', (tester) async {
       await tester.pumpWidget(
         Harness(
-          child: const DievasSnackbar(message: 'Message', backgroundColor: Colors.red),
+          child: const DievasSnackbar(message: 'Message', backgroundColour: Colors.red),
         ),
       );
       expect(tester.takeException(), isNull);

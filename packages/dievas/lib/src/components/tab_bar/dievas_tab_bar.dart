@@ -54,7 +54,7 @@ class DievasTabBar extends StatelessWidget {
                         minTabWidth: theme.minTabWidth,
                         labelStyle: theme.labelStyle,
                         selectedLabelStyle: theme.selectedLabelStyle,
-                        indicatorColor: theme.indicatorColor,
+                        indicatorColour: theme.indicatorColour,
                         indicatorHeight: theme.indicatorHeight,
                         animationDuration: theme.animationDuration,
                         onTap: (enabled && onChanged != null) ? () => onChanged!(i) : null,
@@ -63,7 +63,7 @@ class DievasTabBar extends StatelessWidget {
                 ),
               ),
             ),
-            Container(height: 1, color: theme.dividerColor),
+            Container(height: 1, color: theme.dividerColour),
           ],
         ),
       ),
@@ -80,7 +80,7 @@ class _Tab extends StatelessWidget {
     required this.minTabWidth,
     required this.labelStyle,
     required this.selectedLabelStyle,
-    required this.indicatorColor,
+    required this.indicatorColour,
     required this.indicatorHeight,
     required this.animationDuration,
     required this.onTap,
@@ -92,7 +92,7 @@ class _Tab extends StatelessWidget {
   final double minTabWidth;
   final TextStyle labelStyle;
   final TextStyle selectedLabelStyle;
-  final Color indicatorColor;
+  final Color indicatorColour;
   final double indicatorHeight;
   final Duration animationDuration;
   final VoidCallback? onTap;
@@ -107,7 +107,7 @@ class _Tab extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         border: Border(
-          bottom: isSelected ? BorderSide(color: indicatorColor, width: indicatorHeight) : BorderSide.none,
+          bottom: isSelected ? BorderSide(color: indicatorColour, width: indicatorHeight) : BorderSide.none,
         ),
       ),
       alignment: .center,

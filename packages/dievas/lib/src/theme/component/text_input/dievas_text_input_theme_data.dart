@@ -20,11 +20,12 @@ final class DievasTextInputThemeData extends Equatable {
     required this.borderRadius,
     required this.strokeWidth,
     required this.strokeWidthFocused,
-    required this.bgColor,
-    required this.borderColor,
-    required this.borderColorFocused,
-    required this.borderColorError,
-    required this.iconColor,
+    required this.bgColour,
+    required this.borderColour,
+    required this.borderColourFocused,
+    required this.borderColourError,
+    required this.borderColourWarning,
+    required this.iconColour,
     required this.iconSize,
     required this.iconSpacing,
     required this.labelSpacing,
@@ -63,19 +64,22 @@ final class DievasTextInputThemeData extends Equatable {
   final double strokeWidthFocused;
 
   /// Input surface background colour.
-  final Color bgColor;
+  final Color bgColour;
 
   /// Default border colour (resting state).
-  final Color borderColor;
+  final Color borderColour;
 
   /// Border colour when focused.
-  final Color borderColorFocused;
+  final Color borderColourFocused;
 
   /// Border colour in error state.
-  final Color borderColorError;
+  final Color borderColourError;
+
+  /// Border colour in warning state.
+  final Color borderColourWarning;
 
   /// Leading / trailing icon colour.
-  final Color iconColor;
+  final Color iconColour;
 
   /// Leading / trailing icon size (dp).
   final double iconSize;
@@ -92,6 +96,53 @@ final class DievasTextInputThemeData extends Equatable {
   /// Opacity multiplier applied when disabled.
   final double disabledOpacity;
 
+  /// Creates a copy of this [DievasTextInputThemeData] with the given fields replaced.
+  DievasTextInputThemeData copyWith({
+    DievasInputThemeValue<TextStyle>? inputStyle,
+    TextStyle? labelStyle,
+    TextStyle? helperStyle,
+    TextStyle? errorStyle,
+    DievasInputThemeValue<TextStyle>? placeholderStyle,
+    DievasInputThemeValue<double>? height,
+    DievasInputThemeValue<EdgeInsets>? contentPadding,
+    BorderRadius? borderRadius,
+    double? strokeWidth,
+    double? strokeWidthFocused,
+    Color? bgColour,
+    Color? borderColour,
+    Color? borderColourFocused,
+    Color? borderColourError,
+    Color? borderColourWarning,
+    Color? iconColour,
+    double? iconSize,
+    double? iconSpacing,
+    double? labelSpacing,
+    double? helperSpacing,
+    double? disabledOpacity,
+  }) => DievasTextInputThemeData(
+    inputStyle: inputStyle ?? this.inputStyle,
+    labelStyle: labelStyle ?? this.labelStyle,
+    helperStyle: helperStyle ?? this.helperStyle,
+    errorStyle: errorStyle ?? this.errorStyle,
+    placeholderStyle: placeholderStyle ?? this.placeholderStyle,
+    height: height ?? this.height,
+    contentPadding: contentPadding ?? this.contentPadding,
+    borderRadius: borderRadius ?? this.borderRadius,
+    strokeWidth: strokeWidth ?? this.strokeWidth,
+    strokeWidthFocused: strokeWidthFocused ?? this.strokeWidthFocused,
+    bgColour: bgColour ?? this.bgColour,
+    borderColour: borderColour ?? this.borderColour,
+    borderColourFocused: borderColourFocused ?? this.borderColourFocused,
+    borderColourError: borderColourError ?? this.borderColourError,
+    borderColourWarning: borderColourWarning ?? this.borderColourWarning,
+    iconColour: iconColour ?? this.iconColour,
+    iconSize: iconSize ?? this.iconSize,
+    iconSpacing: iconSpacing ?? this.iconSpacing,
+    labelSpacing: labelSpacing ?? this.labelSpacing,
+    helperSpacing: helperSpacing ?? this.helperSpacing,
+    disabledOpacity: disabledOpacity ?? this.disabledOpacity,
+  );
+
   @override
   List<Object?> get props => [
     inputStyle,
@@ -104,11 +155,12 @@ final class DievasTextInputThemeData extends Equatable {
     borderRadius,
     strokeWidth,
     strokeWidthFocused,
-    bgColor,
-    borderColor,
-    borderColorFocused,
-    borderColorError,
-    iconColor,
+    bgColour,
+    borderColour,
+    borderColourFocused,
+    borderColourError,
+    borderColourWarning,
+    iconColour,
     iconSize,
     iconSpacing,
     labelSpacing,

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:dievas_tokens/dievas_tokens.dart';
 
 void main() {

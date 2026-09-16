@@ -7,7 +7,7 @@
 // Each named style is a record: ({double fontSize, int fontWeight, double lineHeight,
 // double letterSpacing, String fontFamily}).
 
-import '../primitives/typography_primitives.dart';
+import 'package:dievas_tokens/src/primitives/typography_primitives.dart';
 
 /// A lightweight record describing a single named text style.
 ///

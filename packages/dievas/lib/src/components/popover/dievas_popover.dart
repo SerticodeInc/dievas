@@ -57,7 +57,7 @@ class _DievasPopoverState extends State<DievasPopover> {
               child: GestureDetector(
                 onTap: _removeEntry,
                 behavior: .opaque,
-                child: Container(color: theme.barrierColor),
+                child: Container(color: theme.barrierColour),
               ),
             ),
             CompositedTransformFollower(
@@ -68,7 +68,7 @@ class _DievasPopoverState extends State<DievasPopover> {
                 constraints: BoxConstraints(maxWidth: theme.maxWidth),
                 padding: theme.padding,
                 decoration: BoxDecoration(
-                  color: theme.backgroundColor,
+                  color: theme.backgroundColour,
                   borderRadius: theme.borderRadius,
                   boxShadow: elevation,
                 ),

@@ -2,7 +2,7 @@ import 'package:dievas/dievas.dart';
 import 'package:flutter/widgets.dart';
 import 'package:widgetbook/widgetbook.dart';
 
-final colorTokensComponent = WidgetbookComponent(
+final colourTokensComponent = WidgetbookComponent(
   name: 'Colour Tokens',
   useCases: [
     WidgetbookUseCase(name: 'All Colour Sets', builder: (ctx) => const _AllSets()),
@@ -15,7 +15,7 @@ class _AllSets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
 
     return SingleChildScrollView(
       padding: EdgeInsets.all(context.spacing.lg),
@@ -25,69 +25,69 @@ class _AllSets extends StatelessWidget {
           _Section(
             label: 'Core',
             swatches: [
-              _Swatch('brand', colors.core.brand),
-              _Swatch('brandSubtle', colors.core.brandSubtle),
-              _Swatch('onBrand', colors.core.onBrand, dark: true),
+              _Swatch('brand', colours.core.brand),
+              _Swatch('brandSubtle', colours.core.brandSubtle),
+              _Swatch('onBrand', colours.core.onBrand, dark: true),
             ],
           ),
           _Section(
             label: 'Text',
             swatches: [
-              _Swatch('textPrimary', colors.text.textPrimary),
-              _Swatch('textSecondary', colors.text.textSecondary),
-              _Swatch('textTertiary', colors.text.textTertiary),
-              _Swatch('textDisabled', colors.text.textDisabled),
-              _Swatch('textInverse', colors.text.textInverse, dark: true),
-              _Swatch('textOnBrand', colors.text.textOnBrand, dark: true),
+              _Swatch('textPrimary', colours.text.textPrimary),
+              _Swatch('textSecondary', colours.text.textSecondary),
+              _Swatch('textTertiary', colours.text.textTertiary),
+              _Swatch('textDisabled', colours.text.textDisabled),
+              _Swatch('textInverse', colours.text.textInverse, dark: true),
+              _Swatch('textOnBrand', colours.text.textOnBrand, dark: true),
             ],
           ),
           _Section(
             label: 'Background',
             swatches: [
-              _Swatch('bgBase', colors.background.bgBase),
-              _Swatch('bgSubtle', colors.background.bgSubtle),
-              _Swatch('bgElevated', colors.background.bgElevated),
-              _Swatch('bgOverlay', colors.background.bgOverlay, dark: true),
+              _Swatch('bgBase', colours.background.bgBase),
+              _Swatch('bgSubtle', colours.background.bgSubtle),
+              _Swatch('bgElevated', colours.background.bgElevated),
+              _Swatch('bgOverlay', colours.background.bgOverlay, dark: true),
             ],
           ),
           _Section(
             label: 'Border',
             swatches: [
-              _Swatch('borderDefault', colors.border.borderDefault),
-              _Swatch('borderStrong', colors.border.borderStrong),
-              _Swatch('borderDisabled', colors.border.borderDisabled),
-              _Swatch('borderFocus', colors.border.borderFocus),
-              _Swatch('borderBrand', colors.border.borderBrand),
+              _Swatch('borderDefault', colours.border.borderDefault),
+              _Swatch('borderStrong', colours.border.borderStrong),
+              _Swatch('borderDisabled', colours.border.borderDisabled),
+              _Swatch('borderFocus', colours.border.borderFocus),
+              _Swatch('borderBrand', colours.border.borderBrand),
             ],
           ),
           _Section(
             label: 'Action',
             swatches: [
-              _Swatch('actionPrimary', colors.action.actionPrimary, dark: true),
-              _Swatch('actionPrimaryHover', colors.action.actionPrimaryHover, dark: true),
-              _Swatch('actionPrimaryActive', colors.action.actionPrimaryActive, dark: true),
-              _Swatch('actionPrimaryDisabled', colors.action.actionPrimaryDisabled),
-              _Swatch('actionSecondary', colors.action.actionSecondary),
-              _Swatch('actionSecondaryHover', colors.action.actionSecondaryHover),
-              _Swatch('actionError', colors.action.actionError, dark: true),
-              _Swatch('actionErrorHover', colors.action.actionErrorHover, dark: true),
-              _Swatch('actionSuccess', colors.action.actionSuccess, dark: true),
+              _Swatch('actionPrimary', colours.action.actionPrimary, dark: true),
+              _Swatch('actionPrimaryHover', colours.action.actionPrimaryHover, dark: true),
+              _Swatch('actionPrimaryActive', colours.action.actionPrimaryActive, dark: true),
+              _Swatch('actionPrimaryDisabled', colours.action.actionPrimaryDisabled),
+              _Swatch('actionSecondary', colours.action.actionSecondary),
+              _Swatch('actionSecondaryHover', colours.action.actionSecondaryHover),
+              _Swatch('actionError', colours.action.actionError, dark: true),
+              _Swatch('actionErrorHover', colours.action.actionErrorHover, dark: true),
+              _Swatch('actionSuccess', colours.action.actionSuccess, dark: true),
             ],
           ),
           _Section(
             label: 'Icon',
             swatches: [
-              _Swatch('iconPrimary', colors.icon.iconPrimary),
-              _Swatch('iconSecondary', colors.icon.iconSecondary),
-              _Swatch('iconDisabled', colors.icon.iconDisabled),
-              _Swatch('iconOnBrand', colors.icon.iconOnBrand, dark: true),
+              _Swatch('iconPrimary', colours.icon.iconPrimary),
+              _Swatch('iconSecondary', colours.icon.iconSecondary),
+              _Swatch('iconDisabled', colours.icon.iconDisabled),
+              _Swatch('iconOnBrand', colours.icon.iconOnBrand, dark: true),
             ],
           ),
           _Section(
             label: 'Static',
             swatches: [
-              _Swatch('staticWhite', colors.staticColours.staticWhite),
-              _Swatch('staticBlack', colors.staticColours.staticBlack, dark: true),
+              _Swatch('staticWhite', colours.staticColours.staticWhite),
+              _Swatch('staticBlack', colours.staticColours.staticBlack, dark: true),
             ],
           ),
         ],
@@ -101,13 +101,13 @@ class _FeedbackColours extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
 
     final tones = [
-      ('Success', colors.feedback.feedbackSuccess),
-      ('Warning', colors.feedback.feedbackWarning),
-      ('Error', colors.feedback.feedbackError),
-      ('Info', colors.feedback.feedbackInfo),
+      ('Success', colours.feedback.feedbackSuccess),
+      ('Warning', colours.feedback.feedbackWarning),
+      ('Error', colours.feedback.feedbackError),
+      ('Info', colours.feedback.feedbackInfo),
     ];
 
     return SingleChildScrollView(
@@ -140,7 +140,7 @@ class _Section extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final typography = DievasTheme.typographyOf(context);
-    final colors = DievasTheme.colorsOf(context);
+    final colours = DievasTheme.coloursOf(context);
 
     return Padding(
       padding: EdgeInsets.only(bottom: context.spacing.xl),
@@ -149,7 +149,7 @@ class _Section extends StatelessWidget {
         children: [
           Text(
             label.toUpperCase(),
-            style: typography.labelXs.copyWith(letterSpacing: 2, color: colors.text.textTertiary),
+            style: typography.labelXs.copyWith(letterSpacing: 2, color: colours.text.textTertiary),
           ),
           SizedBox(height: context.spacing.smPlus),
           Wrap(spacing: context.spacing.smPlus, runSpacing: context.spacing.smPlus, children: swatches),
@@ -178,7 +178,7 @@ class _Swatch extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             borderRadius: context.border.md,
-            border: Border.all(color: context.colors.border.borderDefault.withAlpha(50)),
+            border: Border.all(color: context.colours.border.borderDefault.withAlpha(50)),
           ),
         ),
         SizedBox(height: context.spacing.sm),

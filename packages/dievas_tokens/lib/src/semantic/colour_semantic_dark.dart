@@ -7,7 +7,7 @@
 // Naming: grouped descriptive names matching DievasColourSemanticLight.
 // Every role defined in the light file has a counterpart here.
 
-import '../primitives/colour_primitives.dart';
+import 'package:dievas_tokens/src/primitives/colour_primitives.dart';
 
 /// Dark-theme semantic colour tokens for the Dievas design system.
 ///
@@ -71,6 +71,11 @@ abstract final class DievasColourSemanticDark {
   static const int bgElevated = DievasColourPrimitives.slate800;
 
   /// Scrim / overlay behind modals and bottom sheets.
+  ///
+  /// Expressed as a raw hex value rather than composed from
+  /// [DievasColourPrimitives.black] + alpha because const composition
+  /// across two primitives isn't possible without a runtime helper.
+  /// 0x80 = 50% opacity intentionally chosen for scrims.
   static const int bgOverlay = 0x80000000;
 
   //Surface
@@ -207,6 +212,9 @@ abstract final class DievasColourSemanticDark {
   /// Input border in error state.
   static const int inputBorderError = DievasColourPrimitives.red500;
 
+  /// Input border in warning state.
+  static const int inputBorderWarning = DievasColourPrimitives.amber500;
+
   /// Input text colour (typed value).
   static const int inputText = DievasColourPrimitives.slate50;
 
@@ -221,11 +229,11 @@ abstract final class DievasColourSemanticDark {
   /// Track colour when the switch is OFF.
   static const int switchTrackOff = DievasColourPrimitives.slate700;
 
-  /// Thumb (knob) colour in both states.
-  static const int switchThumb = DievasColourPrimitives.white;
+  /// Thumb (knob) colour when the switch is ON.
+  static const int switchThumbOn = DievasColourPrimitives.white;
 
-  /// Switch track border (outlined switch variant).
-  static const int switchBorder = DievasColourPrimitives.slate600;
+  /// Thumb (knob) colour when the switch is OFF.
+  static const int switchThumbOff = DievasColourPrimitives.slate500;
 
   // Static
 

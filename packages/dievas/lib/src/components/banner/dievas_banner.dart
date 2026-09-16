@@ -39,7 +39,7 @@ class DievasBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final alertTheme = DievasTheme.componentsOf(context).alert;
-    final palette = _palette(tone, _BannerPalette(DievasTheme.colorsOf(context)));
+    final palette = _palette(tone, _BannerPalette(DievasTheme.coloursOf(context)));
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -107,19 +107,19 @@ class _CloseIcon extends StatelessWidget {
 typedef _BannerAppearance = ({Color background, Color border, Color text});
 
 final class _BannerPalette {
-  _BannerPalette(DievasColourThemeData colors)
-    : successBg = colors.feedback.feedbackSuccess.background,
-      successBorder = colors.feedback.feedbackSuccess.border,
-      successText = colors.feedback.feedbackSuccess.text,
-      warningBg = colors.feedback.feedbackWarning.background,
-      warningBorder = colors.feedback.feedbackWarning.border,
-      warningText = colors.feedback.feedbackWarning.text,
-      errorBg = colors.feedback.feedbackError.background,
-      errorBorder = colors.feedback.feedbackError.border,
-      errorText = colors.feedback.feedbackError.text,
-      infoBg = colors.feedback.feedbackInfo.background,
-      infoBorder = colors.feedback.feedbackInfo.border,
-      infoText = colors.feedback.feedbackInfo.text;
+  _BannerPalette(DievasColourThemeData colours)
+    : successBg = colours.feedback.feedbackSuccess.background,
+      successBorder = colours.feedback.feedbackSuccess.border,
+      successText = colours.feedback.feedbackSuccess.text,
+      warningBg = colours.feedback.feedbackWarning.background,
+      warningBorder = colours.feedback.feedbackWarning.border,
+      warningText = colours.feedback.feedbackWarning.text,
+      errorBg = colours.feedback.feedbackError.background,
+      errorBorder = colours.feedback.feedbackError.border,
+      errorText = colours.feedback.feedbackError.text,
+      infoBg = colours.feedback.feedbackInfo.background,
+      infoBorder = colours.feedback.feedbackInfo.border,
+      infoText = colours.feedback.feedbackInfo.text;
 
   final Color successBg, successBorder, successText;
   final Color warningBg, warningBorder, warningText;

@@ -8,7 +8,7 @@
 /// - [DievasLightThemeData] / [DievasDarkThemeData] — default themes
 /// - All ThemeData sub-systems (colours, typography, spacing, etc.)
 /// - [DievasGrid] / [DievasGridBreakpoint] — responsive grid
-/// - Context extensions (`context.colors`, `context.typography`, ...)
+/// - Context extensions (`context.colours`, `context.typography`, ...)
 /// - [DievasLocalizations] — l10n delegate and context extension
 /// - Button components: [DievasFilledButton], [DievasOutlinedButton],
 ///   [DievasTextButton], [DievasIconButton]
@@ -38,7 +38,6 @@ export 'src/components/buttons/dievas_icon_button.dart';
 export 'src/components/buttons/dievas_outlined_button.dart';
 export 'src/components/buttons/dievas_text_button.dart';
 export 'src/components/buttons/button_types/dievas_button_icon_style_behavior.dart';
-export 'src/components/buttons/button_types/dievas_button_shape.dart';
 export 'src/components/buttons/button_types/dievas_button_size.dart';
 export 'src/components/buttons/button_types/dievas_button_state.dart';
 export 'src/components/buttons/button_types/dievas_button_style.dart';

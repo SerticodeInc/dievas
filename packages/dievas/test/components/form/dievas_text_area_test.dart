@@ -34,6 +34,49 @@ void main() {
       expect(find.text('Required'), findsOneWidget);
     });
 
+    testWidgets('renders warning text', (tester) async {
+      await tester.pumpWidget(Harness(child: const DievasTextArea(warningText: 'Bio is very short')));
+      expect(tester.takeException(), isNull);
+      expect(find.text('Bio is very short'), findsOneWidget);
+    });
+
+    testWidgets('warning takes precedence over helper text', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: const DievasTextArea(helperText: 'Optional', warningText: 'Bio is very short'),
+        ),
+      );
+      expect(find.text('Bio is very short'), findsOneWidget);
+      expect(find.text('Optional'), findsNothing);
+    });
+
+    testWidgets('error takes precedence over warning', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: const DievasTextArea(errorText: 'Required', warningText: 'Bio is very short'),
+        ),
+      );
+      expect(find.text('Required'), findsOneWidget);
+      expect(find.text('Bio is very short'), findsNothing);
+    });
+
+    testWidgets('uses warning border colour when warningText is set', (tester) async {
+      const warningColour = Color(0xFF00FF00);
+      await tester.pumpWidget(
+        Harness(
+          child: const DievasTextArea(warningText: 'Watch out'),
+          themeOverrides: (theme) => theme.copyWith(
+            components: theme.components.copyWith(
+              textInput: theme.components.textInput.copyWith(borderColourWarning: warningColour),
+            ),
+          ),
+        ),
+      );
+      final decoration = tester.widget<TextField>(find.byType(TextField)).decoration!;
+      final border = decoration.enabledBorder! as OutlineInputBorder;
+      expect(border.borderSide.color, warningColour);
+    });
+
     testWidgets('renders with custom min/max lines', (tester) async {
       await tester.pumpWidget(Harness(child: const DievasTextArea(minLines: 2, maxLines: 8)));
       expect(tester.takeException(), isNull);

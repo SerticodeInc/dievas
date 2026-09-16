@@ -9,7 +9,7 @@ final class DievasLoaderThemeData extends Equatable {
     required this.spinnerSizeLg,
     required this.strokeWidth,
     required this.color,
-    required this.trackColor,
+    required this.trackColour,
     required this.labelStyle,
     required this.labelSpacing,
     required this.animationDuration,
@@ -31,7 +31,7 @@ final class DievasLoaderThemeData extends Equatable {
   final Color color;
 
   /// Colour of the background track arc.
-  final Color trackColor;
+  final Color trackColour;
 
   /// Text style for the optional label shown below the spinner.
   final TextStyle labelStyle;
@@ -49,7 +49,7 @@ final class DievasLoaderThemeData extends Equatable {
     spinnerSizeLg,
     strokeWidth,
     color,
-    trackColor,
+    trackColour,
     labelStyle,
     labelSpacing,
     animationDuration,

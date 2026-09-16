@@ -7,9 +7,9 @@
 // BoxShadow construction (which needs Flutter's Color and Offset) happens
 // in the dievas Flutter package's elevation theme data.
 
-import '../primitives/elevation_primitives.dart';
-import 'opacity_semantic.dart';
-import 'offset_semantic.dart';
+import 'package:dievas_tokens/src/primitives/elevation_primitives.dart';
+import 'package:dievas_tokens/src/semantic/offset_semantic.dart';
+import 'package:dievas_tokens/src/semantic/opacity_semantic.dart';
 
 /// Semantic elevation tokens for the Dievas design system.
 ///

@@ -1,55 +1,20 @@
 import 'package:jaspr/server.dart';
 import 'package:jaspr/dom.dart';
 
-import 'components/architecture_section.dart';
-import 'components/components_section.dart';
+import 'components/chapters.dart';
+import 'components/closing.dart';
+import 'components/craft_section.dart';
 import 'components/footer.dart';
 import 'components/hero.dart';
-import 'components/manifesto_section.dart';
 import 'components/nav.dart';
+import 'components/theme_section.dart';
 
-// Shared animation CSS inlined into <head> so scroll-reveal and reduced-motion
-// rules fire regardless of whether hero.css / output.css have loaded.
-// Hero-specific entry animations (word-in, chip-fall, gradient-mesh) live in
-// hero.css — this block owns only cross-section concerns.
-const _inlineAnimationStyles = '''<style>
-/* Scroll-triggered reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-group > * {
-  opacity: 0;
-  transform: translateY(20px);
-}
-.reveal-group.is-visible > * {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.reveal-group.is-visible > *:nth-child(2) { transition-delay: 0.06s; }
-.reveal-group.is-visible > *:nth-child(3) { transition-delay: 0.12s; }
-.reveal-group.is-visible > *:nth-child(4) { transition-delay: 0.18s; }
-.reveal-group.is-visible > *:nth-child(5) { transition-delay: 0.24s; }
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal-group > * { opacity: 1; transform: none; }
-  .reveal.is-visible, .reveal-group.is-visible > * { transition: none; }
-}
-</style>''';
-
-/// Root document component. Renders the complete HTML page.
+/// Root document. Renders the complete v1 landing page.
 ///
-/// Jaspr server renders this on every request. The client JS bundle hydrates
-/// any components annotated with [@client].
+/// Theming: an inline head script applies `data-theme` (light default,
+/// persisted) before paint — no FOUC. All interaction on the page is
+/// driven by the vanilla JS bundle at the end of [body]; no @client
+/// hydration exists anywhere on the site.
 class App extends StatelessComponent {
   const App({super.key});
 
@@ -59,11 +24,13 @@ class App extends StatelessComponent {
     lang: 'en',
     meta: const {
       'description':
-          'Dievas. A token driven Flutter design system. '
-          'InheritedModel first. Multi brand. Zero hardcoded values. '
-          'Production ready components built from the token layer up.',
+          'Dievas. The Flutter design system that ships tokens, components, '
+          'and themes from one layer. InheritedModel-first, multi-brand, '
+          'zero hardcoded values. Production components built from the token '
+          'layer up.',
     },
     head: [
+      meta(name: 'theme-color', content: '#f8fafc', attributes: const {'id': 'theme-color'}),
       link(rel: 'preconnect', href: 'https://fonts.googleapis.com'),
       link(rel: 'preconnect', href: 'https://fonts.gstatic.com', attributes: const {'crossorigin': ''}),
       link(rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap'),
@@ -71,20 +38,34 @@ class App extends StatelessComponent {
       link(rel: 'stylesheet', href: '/base.css'),
       link(rel: 'stylesheet', href: '/nav.css'),
       link(rel: 'stylesheet', href: '/hero.css'),
-      link(rel: 'stylesheet', href: '/manifesto.css'),
-      link(rel: 'stylesheet', href: '/architecture.css'),
-      link(rel: 'stylesheet', href: '/components.css'),
+      link(rel: 'stylesheet', href: '/stage.css'),
+      link(rel: 'stylesheet', href: '/chapters.css'),
+      link(rel: 'stylesheet', href: '/theme_section.css'),
+      link(rel: 'stylesheet', href: '/craft.css'),
+      link(rel: 'stylesheet', href: '/closing.css'),
       link(rel: 'stylesheet', href: '/footer.css'),
       link(rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg'),
-      RawText(_inlineAnimationStyles),
+      RawText(_themeInitScript),
     ],
     body: const _AppBody(),
   );
 }
 
-// Single rAF triggers .js-loaded on body after the browser has painted its
-// first frame — guarantees CSS animations start from their invisible initial
-// state and are actually perceived by the user (fixes SSR animation timing).
+/// Runs in the document head, before paint: applies the saved theme
+/// (or the light default), and flags JS availability so reveal styles
+/// only hide content when scripts can restore it.
+const _themeInitScript = '''<script>
+(function(){
+  var root = document.documentElement;
+  var saved = null;
+  try { saved = localStorage.getItem('dievas-theme'); } catch (e) {}
+  root.dataset.theme = (saved === 'dark' || saved === 'light') ? saved : 'light';
+  root.classList.add('js-on');
+})();
+</script>''';
+
+// First paint gate — CSS entrance animations begin from their hidden
+// initial state only once the browser has painted frame one.
 const _jsLoadedScript = '''<script>
 (function(){
   requestAnimationFrame(function(){
@@ -93,107 +74,218 @@ const _jsLoadedScript = '''<script>
 })();
 </script>''';
 
-// Scroll-reveal IntersectionObserver — fires `.is-visible` on `.reveal`,
-// `.reveal-group`, and directional reveal elements as they enter the viewport.
-// A 350ms delay ensures the user has settled into the section before motion fires.
-const _scrollRevealScript = '''<script>
+/// The landing's single interaction layer.
+///
+/// Order matters: scroll reveals and press states wire up first so no
+/// content can remain hidden if a later module throws. Each module is
+/// scoped to its own selector.
+const _interactionsScript = '''<script>
 (function(){
-  var REVEAL_DELAY = 350;
-  var selectors = '.reveal,.reveal-group,.reveal-left,.reveal-right,.reveal-scale,.reveal-stagger';
-  var timers = new WeakMap();
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+  var SHEETS = { light: '#f8fafc', dark: '#020617' };
+
+  /* ── Shared resolvers ────────────────────────────────────── */
+  // Resolve a --dv-* variable from the nearest data-theme scope so
+  // scoped surfaces (stage window, theme-wall cards) read their own sheet.
+  function themeContext(el) {
+    var c = el;
+    while (c && c.parentElement) {
+      if (c.hasAttribute('data-theme')) return c;
+      c = c.parentElement;
+    }
+    return document.documentElement;
+  }
+  function resolveVar(el, prop) {
+    var v = getComputedStyle(themeContext(el)).getPropertyValue(prop);
+    return v ? v.trim() : '';
+  }
+  function refreshVarReadouts() {
+    document.querySelectorAll('[data-di-prop]').forEach(function(el){
+      var v = resolveVar(el, el.dataset.diProp);
+      if (v) el.textContent = v;
+    });
+  }
+
+  /* ── 1 · Scroll reveals ──────────────────────────────────── */
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
-      if(e.isIntersecting){
-        var target = e.target;
-        var timer = setTimeout(function(){
-          target.classList.add('is-visible');
-          io.unobserve(target);
-          timers.delete(target);
-        }, REVEAL_DELAY);
-        timers.set(target, timer);
-      } else {
-        var pending = timers.get(e.target);
-        if (pending) {
-          clearTimeout(pending);
-          timers.delete(e.target);
+      if (e.isIntersecting) {
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.sr').forEach(function(el){ io.observe(el); });
+
+  /* ── 2 · Press states (guarded by reduced-motion) ────────── */
+  if (!reduce) {
+    document.addEventListener('pointerdown', function(e){
+      var p = e.target.closest && e.target.closest('.press');
+      if (!p) return;
+      p.classList.add('is-pressing');
+      var done = function(){ p.classList.remove('is-pressing'); };
+      p.addEventListener('pointerup', done, { once: true });
+      p.addEventListener('pointercancel', done, { once: true });
+      p.addEventListener('pointerleave', done, { once: true });
+    });
+  }
+
+  /* ── 3 · Theme (site-wide) ───────────────────────────────── */
+  function applyTheme(theme) {
+    root.dataset.theme = theme;
+    var meta = document.getElementById('theme-color');
+    if (meta) meta.setAttribute('content', SHEETS[theme] || SHEETS.light);
+    try { localStorage.setItem('dievas-theme', theme); } catch (e) {}
+    refreshVarReadouts();
+    document.dispatchEvent(new CustomEvent('dievas:theme', { detail: theme }));
+  }
+  document.querySelectorAll('[data-theme-toggle]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+    });
+  });
+
+  /* ── 4 · Stage — scoped theme + tabs + switches ──────────── */
+  var stage = document.querySelector('[data-stage]');
+  var stageLabel = null;
+  function setStageLabel(text) {
+    var el = document.querySelector('[data-stage-label]');
+    if (el) el.textContent = text;
+  }
+  if (stage) {
+    document.querySelectorAll('[data-stage-theme]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        stage.dataset.theme = stage.dataset.theme === 'dark' ? 'light' : 'dark';
+        refreshVarReadouts();
+        setStageLabel('scoped sheet: ' + stage.dataset.theme);
+      });
+    });
+  }
+  document.querySelectorAll('[data-stage-tab]').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var name = tab.dataset.stageTab;
+      document.querySelectorAll('[data-stage-tab]').forEach(function(t){
+        t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+      });
+      document.querySelectorAll('[data-stage-panel]').forEach(function(panel){
+        if (panel.dataset.stagePanel === name) {
+          panel.removeAttribute('hidden');
+        } else {
+          panel.setAttribute('hidden', '');
+        }
+      });
+      setStageLabel(name);
+    });
+  });
+  var rebuildCounter = 0;
+  document.querySelectorAll('[data-di-switch]').forEach(function(sw){
+    sw.addEventListener('click', function(){
+      var on = sw.getAttribute('aria-pressed') === 'true';
+      sw.setAttribute('aria-pressed', on ? 'false' : 'true');
+      sw.classList.toggle('is-on', !on);
+      rebuildCounter += 1;
+      setStageLabel('scoped rebuild → switch · ' + rebuildCounter);
+    });
+  });
+
+  /* ── 5 · Nav compact + hide + scroll progress ────────────── */
+  var nav = document.getElementById('site-nav');
+  var navInner = nav && nav.querySelector('.nav-pill');
+  var progress = document.createElement('div');
+  progress.className = 'scroll-progress';
+  document.body.appendChild(progress);
+  var lastY = window.scrollY, ticking = false, wasHiding = false;
+  var HEAD = 80, HIDE_DELTA = 56;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var y = window.scrollY;
+      var h = document.documentElement;
+      progress.style.width = (h.scrollHeight > h.clientHeight)
+        ? ((h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100) + '%' : '0%';
+      if (nav) {
+        if (y <= HEAD) {
+          nav.classList.remove('is-hidden');
+          nav.classList.remove('is-compact');
+          wasHiding = false;
+        } else {
+          if (navInner) navInner.classList.toggle('is-scrolled', y > HEAD);
+          if (y - lastY > HIDE_DELTA) {
+            nav.classList.add('is-hidden');
+            wasHiding = true;
+          } else if (lastY - y > HIDE_DELTA) {
+            nav.classList.remove('is-hidden');
+          }
         }
       }
+      lastY = y;
+      ticking = false;
     });
-  },{threshold:0.25});
-  document.querySelectorAll(selectors).forEach(function(el){
-    io.observe(el);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ── 6 · Chapter 02 · aspect touch ───────────────────────── */
+  document.querySelectorAll('[data-di-touch]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var row = btn.closest('.rebuild-well').querySelector('.rebuild-item');
+      row.classList.add('is-touched');
+      var count = row.querySelector('[data-rebuild-count]');
+      count.textContent = String(parseInt(count.textContent, 10) + 1);
+    });
   });
-})();
-</script>''';
 
-const _navScrollScript = '''<script>
-(function(){
-  var nav=document.getElementById('site-nav');
-  if(!nav)return;
-  var lastY=window.scrollY,ticking=false,deadZone=16,topZone=80;
-  var navInner=nav.querySelector('nav');
-  window.addEventListener('scroll',function(){
-    if(ticking)return;
-    ticking=true;
-    requestAnimationFrame(function(){
-      var y=window.scrollY;
-      if(y<topZone){
-        nav.style.transform='translateY(0)';
-        navInner&&navInner.classList.remove('nav-scrolled');
-      }else if(y-lastY>deadZone){
-        nav.style.transform='translateY(-130%)';
-        navInner&&navInner.classList.add('nav-scrolled');
-      }else if(lastY-y>deadZone){
-        nav.style.transform='translateY(0)';
-        navInner&&navInner.classList.add('nav-scrolled');
+  /* ── 7 · Chapter 04 · brand switcher ─────────────────────── */
+  var brandDemo = document.querySelector('[data-brand-demo]');
+  document.querySelectorAll('[data-brand-trigger]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('[data-brand-trigger]').forEach(function(b){
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+      if (brandDemo) brandDemo.dataset.brand = btn.dataset.brandTrigger;
+    });
+  });
+
+  /* ── 8 · Copy chips ──────────────────────────────────────── */
+  document.querySelectorAll('[data-di-copy]').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var prop = chip.dataset.diCopy;
+      var value = resolveVar(chip, prop);
+      if (navigator.clipboard && value) {
+        navigator.clipboard.writeText(value)['catch'](function(){});
       }
-      lastY=y;
-      ticking=false;
+      chip.classList.add('is-copied');
+      setTimeout(function(){ chip.classList.remove('is-copied'); }, 1200);
     });
-  },{passive:true});
+  });
+
+  /* ── 9 · Initial sync ────────────────────────────────────── */
+  refreshVarReadouts();
 })();
 </script>''';
 
-const _scrollProgressScript = '''<script>
-(function(){
-  var bar=document.createElement('div');
-  bar.className='scroll-progress';
-  document.body.appendChild(bar);
-  var ticking=false;
-  window.addEventListener('scroll',function(){
-    if(ticking)return;
-    ticking=true;
-    requestAnimationFrame(function(){
-      var h=document.documentElement;
-      var p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
-      bar.style.width=p+'%';
-      ticking=false;
-    });
-  },{passive:true});
-})();
-</script>''';
-
-/// Body content — rendered inside [Document]'s [body].
-///
-/// Page flow:
-///   1. Hero — above-the-fold, gradient mesh, glassmorphism
-///   2. ManifestoSection — the problem, before/after code (dark)
-///   3. ArchitectureSection — three-layer code pipeline (white)
-///   4. ComponentsSection — categorized catalog + CTA (light/indigo gradient)
-///   5. Footer
+/// Body — page flow:
+///   1. Hero — display claim + Component Stage
+///   2. Chapters — five evidence chapters
+///   3. ThemeSection — light/dark twin sheets
+///   4. CraftSection — four craft rows
+///   5. Closing — the install island
+///   6. Footer — ghost wordmark
 class _AppBody extends StatelessComponent {
   const _AppBody();
 
   @override
-  Component build(BuildContext context) => div(id: 'main', classes: 'bg-bg-base text-text-hi antialiased', [
+  Component build(BuildContext context) => div(id: 'main', [
     RawText(_jsLoadedScript),
-    RawText(_scrollProgressScript),
     const Nav(),
     const Hero(),
-    const ManifestoSection(),
-    const ArchitectureSection(),
-    div(attributes: const {'style': 'background: #FFFFFF;'}, [const ComponentsSection(), const FooterComponent()]),
-    RawText(_scrollRevealScript),
-    RawText(_navScrollScript),
+    const Chapters(),
+    const ThemeSection(),
+    const CraftSection(),
+    const Closing(),
+    const FooterComponent(),
+    RawText(_interactionsScript),
   ]);
 }

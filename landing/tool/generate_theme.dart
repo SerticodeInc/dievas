@@ -18,6 +18,15 @@ String toRgba(int argb) {
 /// Converts a [double] token to a `px` CSS string.
 String toPx(double value) => '${value}px';
 
+/// A colour role sourced from both semantic sheets, keyed by CSS var suffix
+/// (the part after `--dv-`).
+class _ColourRole {
+  _ColourRole(this.css, this.light, this.dark);
+  final String css;
+  final int Function() light;
+  final int Function() dark;
+}
+
 void main() {
   final buf = StringBuffer();
 
@@ -27,32 +36,38 @@ void main() {
   buf.writeln(' * DO NOT EDIT MANUALLY.');
   buf.writeln(' * Regenerate: dart run tool/generate_theme.dart');
   buf.writeln(' *');
+  buf.writeln(' * Theming model');
+  buf.writeln(' *   - :root / [data-theme="light"]  → light semantic sheet (default)');
+  buf.writeln(' *   - [data-theme="dark"]           → dark semantic sheet');
+  buf.writeln(' *   - scoped sheets: any element may carry data-theme itself');
+  buf.writeln(' *     (e.g. the theme wall cards) — the vars cascade locally.');
+  buf.writeln(' *   - @theme inline maps --color-* → var(--dv-*) so Tailwind');
+  buf.writeln(' *     utilities resolve through runtime CSS variables.');
+  buf.writeln(' *');
   buf.writeln(' * Section-specific styles live in their own files:');
-  buf.writeln(' *   base.css         — shared keyframes, utilities, reveals');
+  buf.writeln(' *   base.css         — sheet, type, focus, reveal, reduced-motion');
   buf.writeln(' *   nav.css          — navigation');
-  buf.writeln(' *   hero.css         — hero section');
-  buf.writeln(' *   manifesto.css    — manifesto section');
-  buf.writeln(' *   architecture.css — architecture section');
-  buf.writeln(' *   components.css   — components section');
-  buf.writeln(' *   footer.css       — footer');
+  buf.writeln(' *   hero.css         — hero headline + stage shell');
+  buf.writeln(' *   stage.css        — component stage window');
+  buf.writeln(' *   chapters.css     — 01-05 evidence chapters');
+  buf.writeln(' *   theme_section.css— theme wall twin cards');
+  buf.writeln(' *   craft.css        — native-to-the-last-token rows');
+  buf.writeln(' *   closing.css      — closing island');
+  buf.writeln(' *   footer.css       — ghost wordmark');
   buf.writeln(' * ───────────────────────────────────────────────────────────── */');
   buf.writeln();
 
-  // ── Note: Section-specific CSS partials (base.css, nav.css, hero.css,
-  //    manifesto.css, architecture.css, components.css, footer.css) are loaded
-  //    via <link> tags in app.dart — NOT via CSS @import — so the Tailwind CLI
-  //    can process this file without resolving external imports.
-
   // ── @imports FIRST (CSS spec requirement) ───────────────────────────────
-  // Cascadia Code via Google Fonts CDN.
-  buf.writeln('@import url("https://fonts.googleapis.com/css2?family=Cascadia+Code&display=swap");');
+  buf.writeln('@import "tailwindcss";');
   buf.writeln();
 
-  buf.writeln('@import "tailwindcss";');
+  // ── Tailwind v4: enable `dark:` utilities keyed on data-theme ──────────
+  buf.writeln('@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));');
   buf.writeln();
 
   // ── Self-hosted fonts ────────────────────────────────────────────────────
   // Maison Neue is not on Google Fonts — we self-host the WOFF2.
+  // DM Mono is loaded from Google Fonts via <link> in app.dart.
   buf.writeln('@font-face {');
   buf.writeln('  font-family: "MaisonNeueExtended";');
   buf.writeln('  src: url("/assets/fonts/maison-neue-extended-medium.woff2") format("woff2");');
@@ -69,66 +84,154 @@ void main() {
   buf.writeln('  font-display: swap;');
   buf.writeln('}');
   buf.writeln();
-  // Tell Tailwind v4 to scan Dart files for class names in addition to
-  // the default sources. The path is relative to this styles.css file.
-  buf.writeln('@source "../lib/**/*.dart";');
-  buf.writeln();
-  buf.writeln('@theme {');
 
-  // ── Colours (dark semantic — landing has fixed dark aesthetic) ──────────
+  // ── Semantic colour sheets (CSS custom properties) ──────────────────────
+  // Both sheets define the SAME roles; only values differ. Scoped `data-theme`
+  // on a wrapper re-applies that sheet locally (used by the theme wall cards).
+
+  final roles = <_ColourRole>[
+    // Brand
+    _ColourRole('brand', () => DievasColourSemanticLight.brand, () => DievasColourSemanticDark.brand),
+    _ColourRole('brand-subtle', () => DievasColourSemanticLight.brandSubtle, () => DievasColourSemanticDark.brandSubtle),
+    _ColourRole('on-brand', () => DievasColourSemanticLight.onBrand, () => DievasColourSemanticDark.onBrand),
+    // Text
+    _ColourRole('text-hi', () => DievasColourSemanticLight.textPrimary, () => DievasColourSemanticDark.textPrimary),
+    _ColourRole('text-mid', () => DievasColourSemanticLight.textSecondary, () => DievasColourSemanticDark.textSecondary),
+    _ColourRole('text-lo', () => DievasColourSemanticLight.textTertiary, () => DievasColourSemanticDark.textTertiary),
+    _ColourRole('text-off', () => DievasColourSemanticLight.textDisabled, () => DievasColourSemanticDark.textDisabled),
+    _ColourRole('text-inverse', () => DievasColourSemanticLight.textInverse, () => DievasColourSemanticDark.textInverse),
+    // Icon
+    _ColourRole('icon-primary', () => DievasColourSemanticLight.iconPrimary, () => DievasColourSemanticDark.iconPrimary),
+    _ColourRole('icon-secondary', () => DievasColourSemanticLight.iconSecondary, () => DievasColourSemanticDark.iconSecondary),
+    _ColourRole('icon-disabled', () => DievasColourSemanticLight.iconDisabled, () => DievasColourSemanticDark.iconDisabled),
+    _ColourRole('icon-on-brand', () => DievasColourSemanticLight.iconOnBrand, () => DievasColourSemanticDark.iconOnBrand),
+    // Backgrounds
+    _ColourRole('bg-base', () => DievasColourSemanticLight.bgBase, () => DievasColourSemanticDark.bgBase),
+    _ColourRole('bg-subtle', () => DievasColourSemanticLight.bgSubtle, () => DievasColourSemanticDark.bgSubtle),
+    _ColourRole('bg-elevated', () => DievasColourSemanticLight.bgElevated, () => DievasColourSemanticDark.bgElevated),
+    _ColourRole('bg-overlay', () => DievasColourSemanticLight.bgOverlay, () => DievasColourSemanticDark.bgOverlay),
+    // Surfaces
+    _ColourRole('surface-canvas', () => DievasColourSemanticLight.surfaceCanvas, () => DievasColourSemanticDark.surfaceCanvas),
+    _ColourRole('surface-code', () => DievasColourSemanticLight.surfaceCode, () => DievasColourSemanticDark.surfaceCode),
+    _ColourRole('surface-sidebar', () => DievasColourSemanticLight.surfaceSidebar, () => DievasColourSemanticDark.surfaceSidebar),
+    // Borders
+    _ColourRole('border', () => DievasColourSemanticLight.borderDefault, () => DievasColourSemanticDark.borderDefault),
+    _ColourRole('border-hi', () => DievasColourSemanticLight.borderStrong, () => DievasColourSemanticDark.borderStrong),
+    _ColourRole('border-focus', () => DievasColourSemanticLight.borderFocus, () => DievasColourSemanticDark.borderFocus),
+    _ColourRole('border-brand', () => DievasColourSemanticLight.borderBrand, () => DievasColourSemanticDark.borderBrand),
+    // Actions
+    _ColourRole('action', () => DievasColourSemanticLight.actionPrimary, () => DievasColourSemanticDark.actionPrimary),
+    _ColourRole('action-hover', () => DievasColourSemanticLight.actionPrimaryHover, () => DievasColourSemanticDark.actionPrimaryHover),
+    _ColourRole('action-active', () => DievasColourSemanticLight.actionPrimaryActive, () => DievasColourSemanticDark.actionPrimaryActive),
+    _ColourRole('action-disabled', () => DievasColourSemanticLight.actionPrimaryDisabled, () => DievasColourSemanticDark.actionPrimaryDisabled),
+    _ColourRole('action-sec', () => DievasColourSemanticLight.actionSecondary, () => DievasColourSemanticDark.actionSecondary),
+    _ColourRole('action-sec-hover', () => DievasColourSemanticLight.actionSecondaryHover, () => DievasColourSemanticDark.actionSecondaryHover),
+    _ColourRole('action-error', () => DievasColourSemanticLight.actionError, () => DievasColourSemanticDark.actionError),
+    _ColourRole('action-error-hover', () => DievasColourSemanticLight.actionErrorHover, () => DievasColourSemanticDark.actionErrorHover),
+    _ColourRole('action-success', () => DievasColourSemanticLight.actionSuccess, () => DievasColourSemanticDark.actionSuccess),
+    // Inputs
+    _ColourRole('input-bg', () => DievasColourSemanticLight.inputBg, () => DievasColourSemanticDark.inputBg),
+    _ColourRole('input-border', () => DievasColourSemanticLight.inputBorder, () => DievasColourSemanticDark.inputBorder),
+    _ColourRole('input-focus', () => DievasColourSemanticLight.inputBorderFocus, () => DievasColourSemanticDark.inputBorderFocus),
+    _ColourRole('input-error', () => DievasColourSemanticLight.inputBorderError, () => DievasColourSemanticDark.inputBorderError),
+    _ColourRole('input-text', () => DievasColourSemanticLight.inputText, () => DievasColourSemanticDark.inputText),
+    _ColourRole('input-placeholder', () => DievasColourSemanticLight.inputPlaceholder, () => DievasColourSemanticDark.inputPlaceholder),
+    // Switch
+    _ColourRole('switch-on', () => DievasColourSemanticLight.switchTrackOn, () => DievasColourSemanticDark.switchTrackOn),
+    _ColourRole('switch-off', () => DievasColourSemanticLight.switchTrackOff, () => DievasColourSemanticDark.switchTrackOff),
+    _ColourRole('switch-thumb', () => DievasColourSemanticLight.switchThumb, () => DievasColourSemanticDark.switchThumb),
+    _ColourRole('switch-border', () => DievasColourSemanticLight.switchBorder, () => DievasColourSemanticDark.switchBorder),
+    // Feedback
+    _ColourRole('feedback-success-bg', () => DievasColourSemanticLight.feedbackSuccessBackground, () => DievasColourSemanticDark.feedbackSuccessBackground),
+    _ColourRole('feedback-success-icon', () => DievasColourSemanticLight.feedbackSuccessIcon, () => DievasColourSemanticDark.feedbackSuccessIcon),
+    _ColourRole('feedback-warning-bg', () => DievasColourSemanticLight.feedbackWarningBackground, () => DievasColourSemanticDark.feedbackWarningBackground),
+    _ColourRole('feedback-warning-icon', () => DievasColourSemanticLight.feedbackWarningIcon, () => DievasColourSemanticDark.feedbackWarningIcon),
+    _ColourRole('feedback-error-bg', () => DievasColourSemanticLight.feedbackErrorBackground, () => DievasColourSemanticDark.feedbackErrorBackground),
+    _ColourRole('feedback-error-icon', () => DievasColourSemanticLight.feedbackErrorIcon, () => DievasColourSemanticDark.feedbackErrorIcon),
+    _ColourRole('feedback-info-bg', () => DievasColourSemanticLight.feedbackInfoBackground, () => DievasColourSemanticDark.feedbackInfoBackground),
+    _ColourRole('feedback-info-icon', () => DievasColourSemanticLight.feedbackInfoIcon, () => DievasColourSemanticDark.feedbackInfoIcon),
+    // Static (theme-invariant)
+    _ColourRole('static-white', () => DievasColourSemanticLight.staticWhite, () => DievasColourSemanticDark.staticWhite),
+    _ColourRole('static-black', () => DievasColourSemanticLight.staticBlack, () => DievasColourSemanticDark.staticBlack),
+  ];
+
+  // Light sheet — also the bare `:root` default.
+  buf.writeln(':root, [data-theme="light"] {');
+  buf.writeln('  color-scheme: light;');
+  buf.writeln('  /* ── Colours — DievasColourSemanticLight ─────────────────── */');
+  for (final role in roles) {
+    buf.writeln('  --dv-${role.css}: ${toRgba(role.light())};');
+  }
+  buf.writeln('}');
+  buf.writeln();
+
+  // Dark sheet — must come AFTER the light block so equal-specificity
+  // selectors resolve dark last.
+  buf.writeln('[data-theme="dark"] {');
+  buf.writeln('  color-scheme: dark;');
   buf.writeln('  /* ── Colours — DievasColourSemanticDark ──────────────────── */');
+  for (final role in roles) {
+    buf.writeln('  --dv-${role.css}: ${toRgba(role.dark())};');
+  }
+  buf.writeln('}');
   buf.writeln();
 
-  buf.writeln('  /* Brand */');
-  buf.writeln('  --color-brand:        ${toRgba(DievasColourSemanticDark.brand)};');
-  buf.writeln('  --color-brand-subtle: ${toRgba(DievasColourSemanticDark.brandSubtle)};');
-  buf.writeln('  --color-on-brand:     ${toRgba(DievasColourSemanticDark.onBrand)};');
+  // ── Tailwind theme bridge ────────────────────────────────────────────────
+  // `@theme inline` inlines var() references into generated utilities so the
+  // colours resolve at runtime through the sheets above (light + dark).
+  buf.writeln('@theme inline {');
+  buf.writeln('  /* ── Colour utilities → --dv-* runtime vars ──────────────── */');
+  buf.writeln('  --color-brand:        var(--dv-brand);');
+  buf.writeln('  --color-brand-subtle: var(--dv-brand-subtle);');
+  buf.writeln('  --color-on-brand:     var(--dv-on-brand);');
+  buf.writeln('  --color-text-hi:      var(--dv-text-hi);');
+  buf.writeln('  --color-text-mid:     var(--dv-text-mid);');
+  buf.writeln('  --color-text-lo:      var(--dv-text-lo);');
+  buf.writeln('  --color-text-off:     var(--dv-text-off);');
+  buf.writeln('  --color-bg-base:      var(--dv-bg-base);');
+  buf.writeln('  --color-bg-subtle:    var(--dv-bg-subtle);');
+  buf.writeln('  --color-bg-elevated:  var(--dv-bg-elevated);');
+  buf.writeln('  --color-bg-overlay:   var(--dv-bg-overlay);');
+  buf.writeln('  --color-surface-canvas:var(--dv-surface-canvas);');
+  buf.writeln('  --color-surface-code: var(--dv-surface-code);');
+  buf.writeln('  --color-border:       var(--dv-border);');
+  buf.writeln('  --color-border-hi:    var(--dv-border-hi);');
+  buf.writeln('  --color-border-focus: var(--dv-border-focus);');
+  buf.writeln('  --color-border-brand: var(--dv-border-brand);');
+  buf.writeln('  --color-action:       var(--dv-action);');
+  buf.writeln('  --color-action-hover: var(--dv-action-hover);');
+  buf.writeln('  --color-action-active:var(--dv-action-active);');
+  buf.writeln('  --color-action-disabled:var(--dv-action-disabled);');
+  buf.writeln('  --color-action-sec:   var(--dv-action-sec);');
+  buf.writeln('  --color-action-sec-hover:var(--dv-action-sec-hover);');
+  buf.writeln('  --color-action-error: var(--dv-action-error);');
+  buf.writeln('  --color-action-error-hover:var(--dv-action-error-hover);');
+  buf.writeln('  --color-action-success:var(--dv-action-success);');
+  buf.writeln('  --color-input-bg:     var(--dv-input-bg);');
+  buf.writeln('  --color-input-border: var(--dv-input-border);');
+  buf.writeln('  --color-input-focus:  var(--dv-input-focus);');
+  buf.writeln('  --color-input-error:  var(--dv-input-error);');
+  buf.writeln('  --color-input-text:   var(--dv-input-text);');
+  buf.writeln('  --color-input-placeholder:var(--dv-input-placeholder);');
+  buf.writeln('  --color-switch-on:    var(--dv-switch-on);');
+  buf.writeln('  --color-switch-off:   var(--dv-switch-off);');
+  buf.writeln('  --color-switch-thumb: var(--dv-switch-thumb);');
+  buf.writeln('  --color-switch-border:var(--dv-switch-border);');
+  buf.writeln('  --color-static-white: var(--dv-static-white);');
+  buf.writeln('  --color-static-black: var(--dv-static-black);');
+  buf.writeln('}');
   buf.writeln();
 
-  buf.writeln('  /* Text */');
-  buf.writeln('  --color-text-hi:  ${toRgba(DievasColourSemanticDark.textPrimary)};');
-  buf.writeln('  --color-text-mid: ${toRgba(DievasColourSemanticDark.textSecondary)};');
-  buf.writeln('  --color-text-lo:  ${toRgba(DievasColourSemanticDark.textTertiary)};');
-  buf.writeln('  --color-text-off: ${toRgba(DievasColourSemanticDark.textDisabled)};');
-  buf.writeln();
-
-  buf.writeln('  /* Background */');
-  buf.writeln('  --color-bg-base:     ${toRgba(DievasColourSemanticDark.bgBase)};');
-  buf.writeln('  --color-bg-subtle:   ${toRgba(DievasColourSemanticDark.bgSubtle)};');
-  buf.writeln('  --color-bg-elevated: ${toRgba(DievasColourSemanticDark.bgElevated)};');
-  buf.writeln('  --color-bg-overlay:  ${toRgba(DievasColourSemanticDark.bgOverlay)};');
-  buf.writeln();
-
-  buf.writeln('  /* Border */');
-  buf.writeln('  --color-border:       ${toRgba(DievasColourSemanticDark.borderDefault)};');
-  buf.writeln('  --color-border-hi:    ${toRgba(DievasColourSemanticDark.borderStrong)};');
-  buf.writeln('  --color-border-brand: ${toRgba(DievasColourSemanticDark.borderBrand)};');
-  buf.writeln('  --color-border-focus: ${toRgba(DievasColourSemanticDark.borderFocus)};');
-  buf.writeln();
-
-  buf.writeln('  /* Action */');
-  buf.writeln('  --color-action:          ${toRgba(DievasColourSemanticDark.actionPrimary)};');
-  buf.writeln('  --color-action-hover:    ${toRgba(DievasColourSemanticDark.actionPrimaryHover)};');
-  buf.writeln('  --color-action-active:   ${toRgba(DievasColourSemanticDark.actionPrimaryActive)};');
-  buf.writeln('  --color-action-disabled: ${toRgba(DievasColourSemanticDark.actionPrimaryDisabled)};');
-  buf.writeln('  --color-action-sec:      ${toRgba(DievasColourSemanticDark.actionSecondary)};');
-  buf.writeln('  --color-action-sec-hover:${toRgba(DievasColourSemanticDark.actionSecondaryHover)};');
-  buf.writeln();
-
-  buf.writeln('  /* Static */');
-  buf.writeln('  --color-static-white: ${toRgba(DievasColourSemanticDark.staticWhite)};');
-  buf.writeln('  --color-static-black: ${toRgba(DievasColourSemanticDark.staticBlack)};');
-  buf.writeln();
-
-  // ── Typography ─────────────────────────────────────────────────────────
-  buf.writeln('  /* ── Typography ─────────────────────────────────────────────── */');
+  // ── Static theme tokens (font, spacing, radius, easing) ─────────────────
+  // Non-inline: Tailwind emits these as :root vars and generates utilities.
+  buf.writeln('@theme {');
+  buf.writeln('  /* ── Typography ─────────────────────────────────────────── */');
   buf.writeln('  --font-display: "MaisonNeueExtended", system-ui, sans-serif;');
   buf.writeln('  --font-body:    "MaisonNeue", system-ui, sans-serif;');
-  buf.writeln('  --font-mono:    "Cascadia Code", ui-monospace, monospace;');
+  buf.writeln('  --font-mono:    "DM Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;');
+  buf.writeln('  --ease-standard: cubic-bezier(0.22, 0.8, 0.2, 1);');
   buf.writeln();
-
-  // ── Spacing ────────────────────────────────────────────────────────────
-  buf.writeln('  /* ── Spacing — DievasSpacingSemantic ─────────────────────── */');
+  buf.writeln('  /* ── Spacing — DievasSpacingSemantic ────────────────────── */');
   buf.writeln('  --spacing-xs:   ${toPx(DievasSpacingSemantic.xs)};');
   buf.writeln('  --spacing-sm:   ${toPx(DievasSpacingSemantic.sm)};');
   buf.writeln('  --spacing-md:   ${toPx(DievasSpacingSemantic.md)};');
@@ -139,9 +242,7 @@ void main() {
   buf.writeln('  --spacing-4xl:  ${toPx(DievasSpacingSemantic.x4l)};');
   buf.writeln('  --spacing-5xl:  ${toPx(DievasSpacingSemantic.x5l)};');
   buf.writeln();
-
-  // ── Radius ─────────────────────────────────────────────────────────────
-  buf.writeln('  /* ── Radius — DievasRadiusSemantic ───────────────────────── */');
+  buf.writeln('  /* ── Radius — DievasRadiusSemantic ──────────────────────── */');
   buf.writeln('  --radius-xs:   ${toPx(DievasRadiusSemantic.xs)};');
   buf.writeln('  --radius-sm:   ${toPx(DievasRadiusSemantic.sm)};');
   buf.writeln('  --radius-md:   ${toPx(DievasRadiusSemantic.md)};');
@@ -150,17 +251,16 @@ void main() {
   buf.writeln('  --radius-2xl:  ${toPx(DievasRadiusSemantic.x2l)};');
   buf.writeln('  --radius-3xl:  ${toPx(DievasRadiusSemantic.x3l)};');
   buf.writeln('  --radius-full: ${toPx(DievasRadiusSemantic.full)};');
+  buf.writeln('}');
   buf.writeln();
-
+  buf.writeln('/* ── Global easing token (consumed directly by partials) ──── */');
+  buf.writeln(':root {');
+  buf.writeln('  --ease: cubic-bezier(0.22, 0.8, 0.2, 1);');
   buf.writeln('}');
   buf.writeln();
 
-  // ── Note: shared keyframes (fade-up, float, float-slow, eyebrow-shimmer),
-  //    .section-eyebrow, and @layer utilities now live in web/base.css to keep
-  //    this generated file focused on Tailwind theme tokens.
-
   final outputFile = File('web/styles.css');
   outputFile.writeAsStringSync(buf.toString());
-  print('✓ web/styles.css generated from dievas_tokens');
+  print('✓ web/styles.css generated from dievas_tokens (light + dark sheets)');
   print('  Next: npm run build:css → regenerate web/output.css');
 }

@@ -1,0 +1,115 @@
+/* ─────────────────────────────────────────────────────────────
+ * Theme wall — light + dark twin sheets, side by side
+ * ───────────────────────────────────────────────────────────── */
+
+.theme-wall {
+  overflow: clip;
+}
+
+.theme-head {
+  text-align: center;
+  margin-bottom: clamp(48px, 7vh, 72px);
+}
+
+.theme-title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.8vw, 46px);
+  letter-spacing: -0.04em;
+  line-height: 1.06;
+  color: var(--dv-text-hi);
+  margin-top: 20px;
+}
+
+.theme-lede {
+  max-width: 52ch;
+  margin: 16px auto 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--dv-text-mid);
+}
+
+.sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.sheet-card {
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--dv-border);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sheet-card[data-theme="light"] {
+  background: var(--dv-bg-base);
+  color: var(--dv-text-hi);
+}
+.sheet-card[data-theme="dark"] {
+  background: var(--dv-bg-base);
+  color: var(--dv-text-hi);
+}
+
+.sheet-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dv-text-mid);
+}
+
+.sheet-roles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.role-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--dv-border);
+  background: color-mix(in srgb, var(--dv-bg-subtle) 70%, transparent);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--dv-text-mid);
+  cursor: copy;
+  transition: border-color 200ms var(--ease);
+}
+.role-chip:hover {
+  border-color: var(--dv-border-hi);
+}
+.role-chip .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--chip);
+  border: 1px solid rgba(15,23,42,0.1);
+  flex: none;
+}
+.role-chip.is-copied {
+  color: var(--dv-brand);
+  border-color: var(--dv-border-brand);
+}
+
+.sheet-note {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--dv-text-lo);
+  border-top: 1px solid var(--dv-border);
+  padding-top: 14px;
+}
+
+@media (max-width: 760px) {
+  .sheet-grid { grid-template-columns: 1fr; }
+  .sheet-roles { grid-template-columns: repeat(2, 1fr); }
+}

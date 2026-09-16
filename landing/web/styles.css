@@ -4,19 +4,29 @@
  * DO NOT EDIT MANUALLY.
  * Regenerate: dart run tool/generate_theme.dart
  *
+ * Theming model
+ *   - :root / [data-theme="light"]  → light semantic sheet (default)
+ *   - [data-theme="dark"]           → dark semantic sheet
+ *   - scoped sheets: any element may carry data-theme itself
+ *     (e.g. the theme wall cards) — the vars cascade locally.
+ *   - @theme inline maps --color-* → var(--dv-*) so Tailwind
+ *     utilities resolve through runtime CSS variables.
+ *
  * Section-specific styles live in their own files:
- *   base.css         — shared keyframes, utilities, reveals
+ *   base.css         — sheet, type, focus, reveal, reduced-motion
  *   nav.css          — navigation
- *   hero.css         — hero section
- *   manifesto.css    — manifesto section
- *   architecture.css — architecture section
- *   components.css   — components section
- *   footer.css       — footer
+ *   hero.css         — hero headline + stage shell
+ *   stage.css        — component stage window
+ *   chapters.css     — 01-05 evidence chapters
+ *   theme_section.css— theme wall twin cards
+ *   craft.css        — native-to-the-last-token rows
+ *   closing.css      — closing island
+ *   footer.css       — ghost wordmark
  * ───────────────────────────────────────────────────────────── */
 
-@import url("https://fonts.googleapis.com/css2?family=Cascadia+Code&display=swap");
-
 @import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @font-face {
   font-family: "MaisonNeueExtended";
@@ -34,52 +44,170 @@
   font-display: swap;
 }
 
-@source "../lib/**/*.dart";
+:root, [data-theme="light"] {
+  color-scheme: light;
+  /* ── Colours — DievasColourSemanticLight ─────────────────── */
+  --dv-brand: rgba(99, 102, 241, 1);
+  --dv-brand-subtle: rgba(199, 210, 254, 1);
+  --dv-on-brand: rgba(255, 255, 255, 1);
+  --dv-text-hi: rgba(15, 23, 42, 1);
+  --dv-text-mid: rgba(100, 116, 139, 1);
+  --dv-text-lo: rgba(148, 163, 184, 1);
+  --dv-text-off: rgba(203, 213, 225, 1);
+  --dv-text-inverse: rgba(255, 255, 255, 1);
+  --dv-icon-primary: rgba(15, 23, 42, 1);
+  --dv-icon-secondary: rgba(100, 116, 139, 1);
+  --dv-icon-disabled: rgba(203, 213, 225, 1);
+  --dv-icon-on-brand: rgba(255, 255, 255, 1);
+  --dv-bg-base: rgba(248, 250, 252, 1);
+  --dv-bg-subtle: rgba(255, 255, 255, 1);
+  --dv-bg-elevated: rgba(255, 255, 255, 1);
+  --dv-bg-overlay: rgba(0, 0, 0, 0.502);
+  --dv-surface-canvas: rgba(255, 255, 255, 1);
+  --dv-surface-code: rgba(241, 245, 249, 1);
+  --dv-surface-sidebar: rgba(255, 255, 255, 1);
+  --dv-border: rgba(226, 232, 240, 1);
+  --dv-border-hi: rgba(15, 23, 42, 1);
+  --dv-border-focus: rgba(99, 102, 241, 1);
+  --dv-border-brand: rgba(99, 102, 241, 1);
+  --dv-action: rgba(99, 102, 241, 1);
+  --dv-action-hover: rgba(79, 70, 229, 1);
+  --dv-action-active: rgba(67, 56, 202, 1);
+  --dv-action-disabled: rgba(226, 232, 240, 1);
+  --dv-action-sec: rgba(238, 242, 255, 1);
+  --dv-action-sec-hover: rgba(224, 231, 255, 1);
+  --dv-action-error: rgba(239, 68, 68, 1);
+  --dv-action-error-hover: rgba(220, 38, 38, 1);
+  --dv-action-success: rgba(34, 197, 94, 1);
+  --dv-input-bg: rgba(255, 255, 255, 1);
+  --dv-input-border: rgba(203, 213, 225, 1);
+  --dv-input-focus: rgba(99, 102, 241, 1);
+  --dv-input-error: rgba(239, 68, 68, 1);
+  --dv-input-text: rgba(15, 23, 42, 1);
+  --dv-input-placeholder: rgba(148, 163, 184, 1);
+  --dv-switch-on: rgba(99, 102, 241, 1);
+  --dv-switch-off: rgba(226, 232, 240, 1);
+  --dv-switch-thumb: rgba(255, 255, 255, 1);
+  --dv-switch-border: rgba(203, 213, 225, 1);
+  --dv-feedback-success-bg: rgba(240, 253, 244, 1);
+  --dv-feedback-success-icon: rgba(22, 163, 74, 1);
+  --dv-feedback-warning-bg: rgba(255, 251, 235, 1);
+  --dv-feedback-warning-icon: rgba(217, 119, 6, 1);
+  --dv-feedback-error-bg: rgba(254, 242, 242, 1);
+  --dv-feedback-error-icon: rgba(220, 38, 38, 1);
+  --dv-feedback-info-bg: rgba(240, 249, 255, 1);
+  --dv-feedback-info-icon: rgba(2, 132, 199, 1);
+  --dv-static-white: rgba(255, 255, 255, 1);
+  --dv-static-black: rgba(0, 0, 0, 1);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  /* ── Colours — DievasColourSemanticDark ──────────────────── */
+  --dv-brand: rgba(129, 140, 248, 1);
+  --dv-brand-subtle: rgba(30, 27, 75, 1);
+  --dv-on-brand: rgba(255, 255, 255, 1);
+  --dv-text-hi: rgba(248, 250, 252, 1);
+  --dv-text-mid: rgba(148, 163, 184, 1);
+  --dv-text-lo: rgba(100, 116, 139, 1);
+  --dv-text-off: rgba(71, 85, 105, 1);
+  --dv-text-inverse: rgba(15, 23, 42, 1);
+  --dv-icon-primary: rgba(248, 250, 252, 1);
+  --dv-icon-secondary: rgba(148, 163, 184, 1);
+  --dv-icon-disabled: rgba(71, 85, 105, 1);
+  --dv-icon-on-brand: rgba(255, 255, 255, 1);
+  --dv-bg-base: rgba(2, 6, 23, 1);
+  --dv-bg-subtle: rgba(15, 23, 42, 1);
+  --dv-bg-elevated: rgba(30, 41, 59, 1);
+  --dv-bg-overlay: rgba(0, 0, 0, 0.502);
+  --dv-surface-canvas: rgba(2, 6, 23, 1);
+  --dv-surface-code: rgba(15, 23, 42, 1);
+  --dv-surface-sidebar: rgba(15, 23, 42, 1);
+  --dv-border: rgba(51, 65, 85, 1);
+  --dv-border-hi: rgba(148, 163, 184, 1);
+  --dv-border-focus: rgba(129, 140, 248, 1);
+  --dv-border-brand: rgba(129, 140, 248, 1);
+  --dv-action: rgba(99, 102, 241, 1);
+  --dv-action-hover: rgba(129, 140, 248, 1);
+  --dv-action-active: rgba(165, 180, 252, 1);
+  --dv-action-disabled: rgba(51, 65, 85, 1);
+  --dv-action-sec: rgba(30, 27, 75, 1);
+  --dv-action-sec-hover: rgba(49, 46, 129, 1);
+  --dv-action-error: rgba(239, 68, 68, 1);
+  --dv-action-error-hover: rgba(248, 113, 113, 1);
+  --dv-action-success: rgba(34, 197, 94, 1);
+  --dv-input-bg: rgba(30, 41, 59, 1);
+  --dv-input-border: rgba(71, 85, 105, 1);
+  --dv-input-focus: rgba(129, 140, 248, 1);
+  --dv-input-error: rgba(239, 68, 68, 1);
+  --dv-input-text: rgba(248, 250, 252, 1);
+  --dv-input-placeholder: rgba(100, 116, 139, 1);
+  --dv-switch-on: rgba(99, 102, 241, 1);
+  --dv-switch-off: rgba(51, 65, 85, 1);
+  --dv-switch-thumb: rgba(255, 255, 255, 1);
+  --dv-switch-border: rgba(71, 85, 105, 1);
+  --dv-feedback-success-bg: rgba(5, 46, 22, 1);
+  --dv-feedback-success-icon: rgba(74, 222, 128, 1);
+  --dv-feedback-warning-bg: rgba(69, 26, 3, 1);
+  --dv-feedback-warning-icon: rgba(251, 191, 36, 1);
+  --dv-feedback-error-bg: rgba(69, 10, 10, 1);
+  --dv-feedback-error-icon: rgba(248, 113, 113, 1);
+  --dv-feedback-info-bg: rgba(8, 47, 73, 1);
+  --dv-feedback-info-icon: rgba(56, 189, 248, 1);
+  --dv-static-white: rgba(255, 255, 255, 1);
+  --dv-static-black: rgba(0, 0, 0, 1);
+}
+
+@theme inline {
+  /* ── Colour utilities → --dv-* runtime vars ──────────────── */
+  --color-brand:        var(--dv-brand);
+  --color-brand-subtle: var(--dv-brand-subtle);
+  --color-on-brand:     var(--dv-on-brand);
+  --color-text-hi:      var(--dv-text-hi);
+  --color-text-mid:     var(--dv-text-mid);
+  --color-text-lo:      var(--dv-text-lo);
+  --color-text-off:     var(--dv-text-off);
+  --color-bg-base:      var(--dv-bg-base);
+  --color-bg-subtle:    var(--dv-bg-subtle);
+  --color-bg-elevated:  var(--dv-bg-elevated);
+  --color-bg-overlay:   var(--dv-bg-overlay);
+  --color-surface-canvas:var(--dv-surface-canvas);
+  --color-surface-code: var(--dv-surface-code);
+  --color-border:       var(--dv-border);
+  --color-border-hi:    var(--dv-border-hi);
+  --color-border-focus: var(--dv-border-focus);
+  --color-border-brand: var(--dv-border-brand);
+  --color-action:       var(--dv-action);
+  --color-action-hover: var(--dv-action-hover);
+  --color-action-active:var(--dv-action-active);
+  --color-action-disabled:var(--dv-action-disabled);
+  --color-action-sec:   var(--dv-action-sec);
+  --color-action-sec-hover:var(--dv-action-sec-hover);
+  --color-action-error: var(--dv-action-error);
+  --color-action-error-hover:var(--dv-action-error-hover);
+  --color-action-success:var(--dv-action-success);
+  --color-input-bg:     var(--dv-input-bg);
+  --color-input-border: var(--dv-input-border);
+  --color-input-focus:  var(--dv-input-focus);
+  --color-input-error:  var(--dv-input-error);
+  --color-input-text:   var(--dv-input-text);
+  --color-input-placeholder:var(--dv-input-placeholder);
+  --color-switch-on:    var(--dv-switch-on);
+  --color-switch-off:   var(--dv-switch-off);
+  --color-switch-thumb: var(--dv-switch-thumb);
+  --color-switch-border:var(--dv-switch-border);
+  --color-static-white: var(--dv-static-white);
+  --color-static-black: var(--dv-static-black);
+}
 
 @theme {
-  /* ── Colours — DievasColourSemanticDark ──────────────────── */
-
-  /* Brand */
-  --color-brand:        rgba(129, 140, 248, 1);
-  --color-brand-subtle: rgba(30, 27, 75, 1);
-  --color-on-brand:     rgba(255, 255, 255, 1);
-
-  /* Text */
-  --color-text-hi:  rgba(248, 250, 252, 1);
-  --color-text-mid: rgba(148, 163, 184, 1);
-  --color-text-lo:  rgba(100, 116, 139, 1);
-  --color-text-off: rgba(71, 85, 105, 1);
-
-  /* Background */
-  --color-bg-base:     rgba(2, 6, 23, 1);
-  --color-bg-subtle:   rgba(15, 23, 42, 1);
-  --color-bg-elevated: rgba(30, 41, 59, 1);
-  --color-bg-overlay:  rgba(0, 0, 0, 1);
-
-  /* Border */
-  --color-border:       rgba(51, 65, 85, 1);
-  --color-border-hi:    rgba(148, 163, 184, 1);
-  --color-border-brand: rgba(129, 140, 248, 1);
-  --color-border-focus: rgba(129, 140, 248, 1);
-
-  /* Action */
-  --color-action:          rgba(99, 102, 241, 1);
-  --color-action-hover:    rgba(129, 140, 248, 1);
-  --color-action-active:   rgba(165, 180, 252, 1);
-  --color-action-disabled: rgba(51, 65, 85, 1);
-  --color-action-sec:      rgba(30, 27, 75, 1);
-  --color-action-sec-hover:rgba(49, 46, 129, 1);
-
-  /* Static */
-  --color-static-white: rgba(255, 255, 255, 1);
-  --color-static-black: rgba(0, 0, 0, 1);
-
-  /* ── Typography ─────────────────────────────────────────────── */
+  /* ── Typography ─────────────────────────────────────────── */
   --font-display: "MaisonNeueExtended", system-ui, sans-serif;
   --font-body:    "MaisonNeue", system-ui, sans-serif;
-  --font-mono:    "Cascadia Code", ui-monospace, monospace;
+  --font-mono:    "DM Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+  --ease-standard: cubic-bezier(0.22, 0.8, 0.2, 1);
 
-  /* ── Spacing — DievasSpacingSemantic ─────────────────────── */
+  /* ── Spacing — DievasSpacingSemantic ────────────────────── */
   --spacing-xs:   4.0px;
   --spacing-sm:   8.0px;
   --spacing-md:   16.0px;
@@ -90,7 +218,7 @@
   --spacing-4xl:  80.0px;
   --spacing-5xl:  96.0px;
 
-  /* ── Radius — DievasRadiusSemantic ───────────────────────── */
+  /* ── Radius — DievasRadiusSemantic ──────────────────────── */
   --radius-xs:   2.0px;
   --radius-sm:   4.0px;
   --radius-md:   8.0px;
@@ -99,6 +227,10 @@
   --radius-2xl:  20.0px;
   --radius-3xl:  24.0px;
   --radius-full: 9999.0px;
+}
 
+/* ── Global easing token (consumed directly by partials) ──── */
+:root {
+  --ease: cubic-bezier(0.22, 0.8, 0.2, 1);
 }
 

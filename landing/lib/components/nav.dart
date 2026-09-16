@@ -3,111 +3,75 @@ import 'package:jaspr/dom.dart';
 
 import '../constants.dart';
 
-/// Fixed top navigation — glass pill.
+/// Fixed glass pill navigation.
 ///
-/// Centered pill, `min(860px, calc(100% - 20vw))` wide.
-/// Glass: rgba(12,12,12,0.55) + backdrop-filter blur(20px) saturate(180%).
-/// Maison Neue Extended for the logo mark, Maison Neue for links.
-/// Server-rendered; all motion is CSS-only.
-///
-/// Three-section layout:
-///   Left:  dievas logo
-///   Center: nav links (hidden on mobile)
-///   Right:  pub.dev CTA pill
+/// Left: wordmark · Center: links (hidden below md) · Right: theme
+/// toggle + pub.dev CTA. The pill is the site's sole glass artifact
+/// (float rule). Server-rendered; scroll compactness + hide-on-scroll
+/// handled by `app.dart` scripts via `is-scrolled` / `is-hidden`.
 class Nav extends StatelessComponent {
   const Nav({super.key});
 
   @override
-  Component build(BuildContext context) {
-    return header(
-      id: 'site-nav',
-      classes: 'fixed top-5 left-0 right-0 z-50 flex justify-center pointer-events-none',
-      attributes: const {'style': 'transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);'},
-      [
-        nav(
-          classes:
-              'pointer-events-auto '
-              'flex items-center justify-between '
-              'px-4 md:px-7 py-3 '
-              'rounded-full',
-          attributes: const {
-            'style':
-                'width: min(860px, calc(100% - 20vw)); '
-                'background: rgba(12, 12, 12, 0.55); '
-                'backdrop-filter: blur(20px) saturate(180%); '
-                '-webkit-backdrop-filter: blur(20px) saturate(180%); '
-                'border: 1px solid rgba(255, 255, 255, 0.1); '
-                'box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);',
-          },
+  Component build(BuildContext context) => header(
+    id: 'site-nav',
+    classes: 'site-nav',
+    [
+      nav(classes: 'nav-pill', [
+        // ── Wordmark ────────────────────────────────────────────────
+        a(
+          href: '/',
+          classes: 'logo-mark',
+          attributes: const {'aria-label': 'Dievas — home'},
           [
-            // ── Left: Logo ──────────────────────────────────────────────────
-            a(
-              href: '/',
-              classes:
-                  'logo-mark no-underline flex items-center gap-px '
-                  'font-display font-medium text-lg md:text-xl '
-                  'tracking-[0.02em] text-text-hi',
-              [
-                Component.text('die'),
-                span(classes: 'text-brand', [Component.text('v')]),
-                Component.text('as'),
-              ],
-            ),
-
-            // ── Center: Nav links — hidden on mobile ─────────────────────────
-            div(classes: 'hidden md:flex items-center gap-6', [
-              for (final lnk in _links)
-                a(
-                  href: lnk.$2,
-                  classes:
-                      'nav-link font-body font-medium text-xs tracking-[0.08em] uppercase '
-                      'text-text-mid no-underline '
-                      'transition-colors duration-200 '
-                      'hover:text-white',
-                  attributes: {if (lnk.$3) 'target': '_blank', if (lnk.$3) 'rel': 'noopener'},
-                  [
-                    span(classes: 'flex items-center gap-2', [
-                      span(
-                        classes: 'nav-dot inline-block w-1 h-1 rounded-full bg-text-mid',
-                        attributes: const {'style': 'transition: all 0.3s cubic-bezier(0.22,1,0.36,1);'},
-                        [],
-                      ),
-                      Component.text(lnk.$1),
-                    ]),
-                  ],
-                ),
-            ]),
-
-            // ── Right: CTA pill ─────────────────────────────────────────────
-            a(
-              href: DievasUrls.dievasPubDevURL,
-              attributes: const {'target': '_blank', 'rel': 'noopener'},
-              classes:
-                  'inline-flex items-center gap-1.5 '
-                  'px-3.5 md:px-4 py-1.5 md:py-2 '
-                  'rounded-full '
-                  'bg-action text-on-brand '
-                  'font-mono text-xs font-medium tracking-wide '
-                  'no-underline '
-                  'transition-all duration-200 '
-                  'hover:bg-action-hover hover:-translate-y-px '
-                  'hover:shadow-[0_4px_16px_rgba(99,102,241,0.35)]',
-              [
-                span(classes: 'hidden md:inline', [Component.text('pub.dev')]),
-                span(classes: 'md:hidden', [Component.text('pub')]),
-                Component.text(' →'),
-              ],
-            ),
+            Component.text('die'),
+            span(classes: 'lg-v', [Component.text('v')]),
+            Component.text('as'),
           ],
         ),
-      ],
-    );
-  }
+
+        // ── Center links (desktop) ───────────────────────────────────
+        div(classes: 'nav-links', [
+          for (final it in _links)
+            a(
+              href: it.$2,
+              classes: 'nav-link',
+              attributes: {if (it.$3) 'target': '_blank', if (it.$3) 'rel': 'noopener'},
+              [Component.text(it.$1)],
+            ),
+        ]),
+
+        // ── Right cluster ────────────────────────────────────────────
+        div(classes: 'nav-cluster', [
+          button(
+            type: ButtonType.button,
+            classes: 'theme-toggle press',
+            attributes: const {'data-theme-toggle': '', 'aria-label': 'Switch colour theme'},
+            [
+              span(classes: 'ti ti-sun', [RawText(_sunSvg)]),
+              span(classes: 'ti ti-moon', [RawText(_moonSvg)]),
+            ],
+          ),
+          a(
+            href: DievasUrls.dievasPubDevURL,
+            classes: 'nav-cta press',
+            attributes: const {'target': '_blank', 'rel': 'noopener'},
+            [Component.text('pub.dev'), Component.text(' →')],
+          ),
+        ]),
+      ]),
+    ],
+  );
 
   static const _links = [
-    ('Components', '#components', false),
-    ('Architecture', '#architecture', false),
+    ('Experience', '#experience', false),
+    ('How it\'s built', '#chapters', false),
     ('Gallery', DievasUrls.gallery, true),
-    ('GitHub', DievasUrls.github, true),
   ];
+
+  static const _sunSvg =
+      '''<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg>''';
+
+  static const _moonSvg =
+      '''<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13.5A8 8 0 0 1 10.5 4 8 8 0 1 0 20 13.5Z"/></svg>''';
 }

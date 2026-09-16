@@ -73,14 +73,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.1"
-  build_modules:
-    dependency: transitive
-    description:
-      name: build_modules
-      sha256: "63c56d2663da4bba51c56825169a5356dd8401240241217c8eba711b2e12be5c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.1.12"
   build_runner:
     dependency: "direct dev"
     description:
@@ -93,10 +85,10 @@ packages:
     dependency: "direct dev"
     description:
       name: build_web_compilers
-      sha256: "8a8a3d18b6b341df6dc61a65beaabc89fcd7c68dc10b02777fc31a35ffb6efa4"
+      sha256: ef4bc35e0e335f8520692a333b872446697adce0618cf23c3084715ace641721
       url: "https://pub.dev"
     source: hosted
-    version: "4.4.19"
+    version: "4.8.5"
   built_collection:
     dependency: transitive
     description:
@@ -167,7 +159,7 @@ packages:
       path: "../packages/dievas_tokens"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.3"
   dio:
     dependency: "direct main"
     description:
@@ -404,10 +396,10 @@ packages:
     dependency: transitive
     description:
       name: scratch_space
-      sha256: "3417e014d20b12cebc5bfb1c0b1f63806054177158596cc31cc4d9aaca767a60"
+      sha256: "55f141cf286eca871f739518b689af61cb994d671f3fd8efabd63aba7578c309"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.2"
   shelf:
     dependency: transitive
     description:
@@ -585,4 +577,4 @@ packages:
     source: hosted
     version: "3.1.3"
 sdks:
-  dart: ">=3.11.4 <3.13.0-z"
+  dart: ">=3.13.0-107.0.dev <3.14.0-z"

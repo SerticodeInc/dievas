@@ -1,25 +1,90 @@
 /* ─────────────────────────────────────────────────────────────
- * Footer — link underline animation
+ * Footer — ghost wordmark + utility row
  * ───────────────────────────────────────────────────────────── */
 
-.footer-link {
+.footer {
   position: relative;
-  text-decoration: none;
-}
-.footer-link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 0;
-  height: 1px;
-  background: currentColor;
-  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.footer-link:hover::after {
-  width: 100%;
+  overflow: clip;
+  padding-top: clamp(48px, 8vh, 80px);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .footer-link::after { display: none; }
+.footer-util {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-block: 28px;
+  border-top: 1px solid var(--dv-border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--dv-text-lo);
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  color: var(--dv-text-mid);
+  text-decoration: none;
+  transition: color 200ms var(--ease);
+}
+.footer-link:hover {
+  color: var(--dv-text-hi);
+}
+
+.footer-copy {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* Ghost wordmark */
+.footer-wordmark {
+  position: relative;
+  text-align: center;
+  user-select: none;
+  padding-top: 10px;
+}
+
+.ghost-word {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(88px, 22vw, 320px);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  background: linear-gradient(180deg,
+    var(--dv-border) 0%,
+    color-mix(in srgb, var(--dv-border) 55%, transparent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  white-space: nowrap;
+}
+[data-theme="dark"] .ghost-word {
+  background: linear-gradient(180deg,
+    var(--dv-border) 0%,
+    color-mix(in srgb, var(--dv-border) 30%, transparent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.ghost-tag {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dv-text-lo);
+}
+
+@media (max-width: 760px) {
+  .footer-copy { width: 100%; justify-content: space-between; }
 }

@@ -1,0 +1,78 @@
+/* ─────────────────────────────────────────────────────────────
+ * Craft — "Native to the last token" rows
+ * ───────────────────────────────────────────────────────────── */
+
+.craft { overflow: clip; }
+
+.craft-head {
+  max-width: 600px;
+}
+
+.craft-title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.8vw, 46px);
+  letter-spacing: -0.04em;
+  line-height: 1.06;
+  color: var(--dv-text-hi);
+  margin-top: 20px;
+}
+
+.craft-lede {
+  max-width: 48ch;
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--dv-text-mid);
+}
+
+.craft-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 48px;
+}
+
+.craft-card {
+  padding: 26px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--dv-border);
+  background: var(--dv-bg-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 300ms var(--ease), border-color 300ms var(--ease),
+              box-shadow 300ms var(--ease);
+}
+.craft-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--dv-border-hi);
+  box-shadow: 0 16px 40px -24px rgba(15, 23, 42, 0.16);
+}
+
+.craft-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: grid;
+  place-items: center;
+  background: var(--dv-brand-subtle);
+  color: var(--dv-brand);
+}
+
+.craft-card h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: var(--dv-text-hi);
+}
+
+.craft-card p {
+  max-width: 44ch;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--dv-text-mid);
+}
+
+@media (max-width: 760px) {
+  .craft-grid { grid-template-columns: 1fr; }
+}

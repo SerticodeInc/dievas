@@ -1,254 +1,286 @@
 /* ─────────────────────────────────────────────────────────────
- * Base — shared keyframes, utilities, micro-interactions
- * Used across multiple sections. Section-specific overrides
- * belong in the respective section .css file.
+ * Base — sheet, type, focus, reveal, micro-interactions
+ *
+ * Loaded via <link> (not Tailwind-processed). All colours resolve
+ * through --dv-* runtime custom properties (see styles.css).
  * ───────────────────────────────────────────────────────────── */
 
-/* ── Shared keyframes ─────────────────────────────────────── */
+/* ── Sheet ─────────────────────────────────────────────────── */
 
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-12px); }
+body {
+  background: var(--dv-bg-base);
+  color: var(--dv-text-hi);
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern", "liga";
+  overflow-x: clip;
 }
 
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-8px); }
+#main {
+  min-height: 100svh;
 }
 
-@keyframes eyebrow-shimmer {
-  0%   { background-position:  200% center; }
-  100% { background-position: -200% center; }
+::selection {
+  background: var(--dv-brand-subtle);
+  color: var(--dv-text-hi);
 }
 
-.section-eyebrow {
-  background: linear-gradient(
-    90deg,
-    rgba(100,116,139,1) 0%,
-    rgba(100,116,139,1) 25%,
-    rgba(129,140,248,1) 50%,
-    rgba(100,116,139,1) 75%,
-    rgba(100,116,139,1) 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  animation: eyebrow-shimmer 5s linear infinite;
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--dv-border) transparent;
 }
 
-/* ── Utility layer ─────────────────────────────────────────── */
+/* ── Typography defaults ───────────────────────────────────── */
 
-@layer utilities {
-  .max-w-5xl { max-width: 64rem; }
-  .max-w-lg  { max-width: 32rem; }
-  .max-w-sm  { max-width: 24rem; }
+h1, h2, h3, h4 {
+  margin: 0;
+  font-weight: 500;
+  text-wrap: balance;
 }
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+:where(pre, code, .font-display, .font-mono) {
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* ── Focus ─────────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--dv-border-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Layout primitives ─────────────────────────────────────── */
+
+.shell {
+  width: min(1152px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.shell-narrow {
+  width: min(1000px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.section {
+  position: relative;
+  padding-block: clamp(72px, 12vh, 120px);
+}
+
+/* ── Section header pattern ────────────────────────────────── */
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dv-text-mid);
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 10px;
+  border-radius: 999px;
+  background: var(--dv-brand);
+  vertical-align: 1px;
+}
+
+/* ── Hairlines (plates) ────────────────────────────────────── */
+
+.hairline {
+  border: 1px solid var(--dv-border);
+}
+
+/* ── Cards / wells ─────────────────────────────────────────── */
+
+.plate {
+  background: var(--dv-bg-subtle);
+  border: 1px solid var(--dv-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03),
+              0 8px 24px -12px rgba(15, 23, 42, 0.08);
+}
+
+/* ── Scroll-reveal system ──────────────────────────────────── */
+/* Hidden only when JS is available (.js-on) — no-JS stays visible. */
+
+.js-on .sr {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.sr.is-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s var(--ease),
+              transform 0.6s var(--ease);
+}
+
+.js-on .sr-s { transition-delay: 0.06s; }
+.js-on .sr-m { transition-delay: 0.14s; }
+.js-on .sr-l { transition-delay: 0.22s; }
 
 /* ── Micro-interactions ────────────────────────────────────── */
 
-/* Shared press-scale — Emil: buttons must feel responsive, 100-160ms */
-.btn-press:active,
-.pill-press:active {
+.press {
+  transition: transform 110ms var(--ease);
+  will-change: transform;
+}
+.press.is-pressing {
+  transform: scale(0.96);
+}
+
+/* Primary CTA — the single "install-like" action affordance */
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: var(--radius-full);
+  background: var(--dv-action);
+  color: var(--dv-on-brand);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(15,23,42,0.06),
+              0 10px 24px -12px color-mix(in srgb, var(--dv-action) 45%, transparent);
+  transition: background 180ms var(--ease),
+              box-shadow 180ms var(--ease),
+              transform 110ms var(--ease);
+}
+.cta-primary:hover {
+  background: var(--dv-action-hover);
+  box-shadow: 0 2px 4px rgba(15,23,42,0.08),
+              0 14px 32px -12px color-mix(in srgb, var(--dv-action) 60%, transparent);
+}
+.cta-primary:active {
   transform: scale(0.97);
-  transition: transform 100ms ease-out;
 }
 
-/* Hover lift — subtle card elevation */
-.hover-lift {
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+.cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: var(--radius-full);
+  background: var(--dv-action-sec);
+  color: var(--dv-text-hi);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: background 180ms var(--ease), transform 110ms var(--ease);
 }
-.hover-lift:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+.cta-ghost:hover {
+  background: var(--dv-action-sec-hover);
 }
-.hover-lift:active {
-  transform: translateY(-1px) scale(0.98);
-  transition: transform 100ms ease-out;
-}
-
-/* CTA glow pulse */
-@keyframes cta-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.2); }
-  50%      { box-shadow: 0 0 32px rgba(99, 102, 241, 0.4); }
-}
-.cta-glow {
-  animation: cta-glow 3s ease-in-out infinite;
-}
-.cta-glow:hover {
-  animation-duration: 1.5s;
+.cta-ghost:active {
+  transform: scale(0.97);
 }
 
-/* Arrow slide — for CTA arrows */
-@keyframes arrow-slide {
-  0%   { transform: translateX(0); opacity: 1; }
-  50%  { transform: translateX(4px); opacity: 0; }
-  51%  { transform: translateX(-4px); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
-}
-.arrow-slide {
+.cta-arrow {
   display: inline-block;
+  transition: transform 200ms var(--ease);
 }
-.group:hover .arrow-slide {
-  animation: arrow-slide 0.4s ease;
-}
-
-/* Shipped pill arrow — slide + fade on hover */
-.arrow-span {
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity 150ms ease, transform 200ms ease;
-}
-a.group:hover .arrow-span {
-  opacity: 1 !important;
-  transform: translateX(2px);
+.cta-primary:hover .cta-arrow,
+.cta-ghost:hover .cta-arrow {
+  transform: translateX(3px);
 }
 
-/* Badge shine — corner accent sweep on hover */
-@keyframes badge-shine {
-  0%   { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-.badge-shine {
-  background: linear-gradient(
-    120deg,
-    transparent 0%,
-    transparent 30%,
-    rgba(255,255,255,0.08) 45%,
-    rgba(255,255,255,0.15) 50%,
-    rgba(255,255,255,0.08) 55%,
-    transparent 70%,
-    transparent 100%
-  );
-  background-size: 200% auto;
-  background-repeat: no-repeat;
-}
-.badge-shine:hover {
-  animation: badge-shine 0.8s ease forwards;
-}
+/* ── Code strip (shared) ───────────────────────────────────── */
 
-/* Shimmer on CTA button hover */
-@keyframes btn-shimmer {
-  from { background-position: 200% center; }
-  to   { background-position: -200% center; }
+.codestrip {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--dv-text-mid);
+  background: var(--dv-surface-code);
+  border: 1px solid var(--dv-border);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  overflow-x: auto;
+  white-space: pre;
 }
+.codestrip .tok-k { color: var(--dv-brand); }
+.codestrip .tok-v { color: var(--dv-text-hi); }
+.codestrip .tok-c { color: var(--dv-text-lo); }
 
-/* ── Scroll-triggered reveals ──────────────────────────────── */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-group > * {
-  opacity: 0;
-  transform: translateY(20px);
-}
-.reveal-group.is-visible > * {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.reveal-group.is-visible > *:nth-child(2) { transition-delay: 0.06s; }
-.reveal-group.is-visible > *:nth-child(3) { transition-delay: 0.12s; }
-.reveal-group.is-visible > *:nth-child(4) { transition-delay: 0.18s; }
-.reveal-group.is-visible > *:nth-child(5) { transition-delay: 0.24s; }
-
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-.reveal-left.is-visible {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-right {
-  opacity: 0;
-  transform: translateX(30px);
-}
-.reveal-right.is-visible {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-scale {
-  opacity: 0;
-  transform: scale(0.95);
-}
-.reveal-scale.is-visible {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal-stagger {
-  opacity: 0;
-  transform: translateY(20px);
-}
-.reveal-stagger.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* ── Scroll progress bar ──────────────────────────────────── */
+/* ── Scroll progress bar ───────────────────────────────────── */
 
 .scroll-progress {
   position: fixed;
   top: 0;
   left: 0;
-  width: 0%;
+  width: 0;
   height: 2px;
-  background: linear-gradient(90deg, rgba(129,140,248,0.6), rgba(129,140,248,1));
-  z-index: 100;
+  background: linear-gradient(90deg, var(--dv-brand), var(--dv-brand-subtle));
+  z-index: 120;
   pointer-events: none;
-  transition: width 0.1s linear;
 }
 
-/* ── Misc globals ──────────────────────────────────────────── */
+/* ── Applied just under the nav: page glow — the "desk light" ── */
 
-html {
-  scroll-behavior: smooth;
+.page-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(52% 42% at 50% 4%, color-mix(in srgb, var(--dv-brand) 10%, transparent), transparent 70%),
+    radial-gradient(36% 30% at 78% 8%, color-mix(in srgb, var(--dv-brand) 7%, transparent), transparent 72%);
 }
 
-/* ── Reduced motion — base overrides ──────────────────────── */
+/* ── Reduced motion — collapse to opacity-only ─────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  .hover-lift:hover { transform: none; box-shadow: none; }
-  .cta-glow { animation: none; }
-  .badge-shine:hover { animation: none; }
-  .group:hover .arrow-slide { animation: none; }
-  .reveal, .reveal-group > *,
-  .reveal-left, .reveal-right, .reveal-scale, .reveal-stagger {
-    opacity: 1; transform: none;
-  }
-  .reveal.is-visible, .reveal-group.is-visible > *,
-  .reveal-left.is-visible, .reveal-right.is-visible,
-  .reveal-scale.is-visible, .reveal-stagger.is-visible {
-    transition: none;
-  }
-  .scroll-progress { display: none; }
   html { scroll-behavior: auto; }
-  .section-eyebrow { animation: none; }
+  .js-on .sr { opacity: 1; transform: none; transition: none; }
+  .sr.is-in { transition: none; }
+  .press { transition: none; }
+  .press.is-pressing { transform: none; }
+  .scroll-progress { display: none; }
+  .cta-primary:hover .cta-arrow,
+  .cta-ghost:hover .cta-arrow { transform: none; }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

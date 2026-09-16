@@ -1,0 +1,314 @@
+/* ─────────────────────────────────────────────────────────────
+ * Chapters — "How it's built": 01-05 evidence chapters
+ * ───────────────────────────────────────────────────────────── */
+
+.chapters {
+  padding-top: clamp(96px, 14vh, 160px);
+}
+
+.chapters-intro {
+  text-align: center;
+  margin-bottom: clamp(56px, 8vh, 88px);
+}
+
+.chapters-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.6vw, 56px);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  color: var(--dv-text-hi);
+  margin-top: 20px;
+}
+
+.chapters-lede {
+  max-width: 52ch;
+  margin: 18px auto 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--dv-text-mid);
+}
+
+/* ── Chapter row ───────────────────────────────────────────── */
+
+.chapter {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: clamp(20px, 4vw, 56px);
+  padding-block: clamp(40px, 6vh, 64px);
+  border-top: 1px solid var(--dv-border);
+  position: relative;
+}
+
+.chapter-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.chapter-num {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 5.4vw, 72px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--dv-text-lo);
+  opacity: 0.45;
+  user-select: none;
+}
+
+.chapter-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dv-text-lo);
+}
+
+.chapter-main {
+  min-width: 0;
+}
+
+.chapter-heading {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.8vw, 34px);
+  letter-spacing: -0.03em;
+  color: var(--dv-text-hi);
+}
+
+.chapter-body {
+  max-width: 46ch;
+  margin-top: 14px;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--dv-text-mid);
+}
+
+.chapter-demo {
+  margin-top: 28px;
+  padding: clamp(18px, 3vw, 26px);
+  border: 1px solid var(--dv-border);
+  border-radius: var(--radius-2xl);
+  background: var(--dv-bg-subtle);
+  box-shadow: 0 1px 2px rgba(15,23,42,0.03),
+              0 12px 32px -20px rgba(15,23,42,0.10);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── 01 · token chain ──────────────────────────────────────── */
+
+.chain {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.chain-step {
+  padding: 8px 14px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--dv-border);
+  background: var(--dv-bg-base);
+  color: var(--dv-text-mid);
+  letter-spacing: 0.04em;
+}
+.chain-step b {
+  color: var(--dv-brand);
+  font-weight: 500;
+}
+
+/* the pivot — the hop the whole system exists for */
+.chain-step.sr-step {
+  border-color: var(--dv-border-brand);
+  background: color-mix(in srgb, var(--dv-brand) 7%, var(--dv-bg-base));
+  color: var(--dv-text-hi);
+}
+.chain-step.sr-step b {
+  color: var(--dv-brand);
+  font-weight: 500;
+}
+
+.chain-arrow {
+  color: var(--dv-text-lo);
+}
+
+/* ── 02 · rebuild readout ──────────────────────────────────── */
+
+.rebuild-well {
+  width: 100%;
+  max-width: 520px;
+}
+
+.rebuild-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.rebuild-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--dv-border);
+  background: var(--dv-bg-base);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--dv-text-mid);
+  margin-bottom: 8px;
+  transition: border-color 200ms var(--ease), opacity 200ms var(--ease);
+}
+.rebuild-item:last-child {
+  margin-bottom: 0;
+}
+.rebuild-item .liv {
+  color: var(--dv-text-lo);
+  opacity: 0;
+  transition: opacity 250ms var(--ease);
+}
+.rebuild-item.is-touched {
+  border-color: var(--dv-border-brand);
+}
+.rebuild-item.is-touched .liv {
+  opacity: 1;
+  color: var(--dv-brand);
+}
+
+.touch-control {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ── 04 · brand switcher ───────────────────────────────────── */
+
+.brand-picker {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.brand-btn {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--dv-border);
+  background: var(--dv-bg-base);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--dv-text-mid);
+  transition: border-color 200ms var(--ease), color 200ms var(--ease);
+}
+.brand-btn[aria-pressed="true"] {
+  color: var(--dv-text-hi);
+  border-color: var(--demo-accent, var(--dv-border-hi));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--demo-accent, var(--dv-border-hi)) 18%, transparent);
+}
+
+.brand-demo {
+  --demo-accent: var(--dv-brand);
+  --demo-bg: var(--dv-surface-canvas);
+  --demo-fg: var(--dv-text-hi);
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+.brand-demo .bd-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-demo .bd-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--demo-accent);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 500;
+}
+.brand-demo .bd-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+.brand-demo .bd-card {
+  border-radius: var(--radius-xl);
+  background: var(--demo-bg);
+  border: 1px solid var(--demo-accent);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--demo-fg);
+  transition: background 260ms var(--ease), border-color 260ms var(--ease);
+}
+.brand-demo .bd-btn {
+  padding: 9px 16px;
+  border-radius: var(--radius-md);
+  background: var(--demo-accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  transition: transform 110ms var(--ease), filter 160ms var(--ease);
+}
+.brand-demo .bd-btn:active { transform: scale(0.97); }
+.brand-demo .bd-btn:hover { filter: brightness(1.06); }
+
+.brand-demo[data-brand="timber"] { --demo-accent: #2f7d5f; --demo-bg: #0f2a20; --demo-fg: #eef7f2; }
+.brand-demo[data-brand="ember"]  { --demo-accent: #d4552f; --demo-bg: #331409; --demo-fg: #fdf0ea; }
+
+/* ── 05 · gallery handoff ──────────────────────────────────── */
+
+.gallery-strip {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gal-tile {
+  width: 104px;
+  height: 72px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--dv-border);
+  background: var(--dv-bg-base);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dv-text-lo);
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+  .chapter {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .chapter-side {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .chapter-num { font-size: 44px; }
+}

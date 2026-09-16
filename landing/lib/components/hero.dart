@@ -16,9 +16,6 @@ class Hero extends StatelessComponent {
   Component build(BuildContext context) => section(id: 'experience', classes: 'hero', [
     div(classes: 'page-glow', []),
     div(classes: 'hero-head', [
-      div(classes: 'eyebrow hero-eyebrow sr hr-e', [
-        Component.text('Open-source · Apache-2.0'),
-      ]),
       h1(
         classes: 'hero-display hero-anim hr-h',
         [

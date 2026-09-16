@@ -137,6 +137,7 @@ class Stage extends StatelessComponent {
       'id': 'stage-panel-components',
       'aria-label': 'Live components',
       'data-stage-panel': 'components',
+      'hidden': '',
     },
     [
       div(classes: 'comp-demo', [

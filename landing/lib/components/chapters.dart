@@ -27,7 +27,7 @@ class Chapters extends StatelessComponent {
         num: '01',
         meta: 'Tokens · dievas_tokens',
         heading: 'One source of truth.',
-        body: 'Primitives become semantic roles become context. The page you\'re reading is themed by the same three-hop chain your app will use. No landing-only colours, no special cases.',
+        body: 'Primitives become semantic roles become context. The page you\'re reading is themed by the same chain your app will use, from raw int to runtime colour. No special cases.',
         demo: _tokenChainDemo(),
       ),
 
@@ -43,7 +43,7 @@ class Chapters extends StatelessComponent {
         num: '03',
         meta: 'Components · Moon catalogue',
         heading: 'One catalogue, fifty states, today.',
-        body: 'Buttons, switches, inputs and more behave identically from first commit. Focus, disabled, and reduced-motion handling are baked into the component, not bolted on by you.',
+        body: 'Buttons, switches, inputs and more behave identically from first commit. Focus, disabled, and motion handling are baked into the component, not bolted on by you.',
         demo: _componentsDemo(),
       ),
 
@@ -51,7 +51,7 @@ class Chapters extends StatelessComponent {
         num: '04',
         meta: 'Multi-brand · DievasScope',
         heading: 'One app, every brand.',
-        body: 'DievasScope re-themes a running tree with zero code paths and zero restarts. Tap a brand, and the card that follows rebinds to its tokens on the spot.',
+        body: 'DievasScope retimes and recolours a running tree with zero code paths and zero restarts. Tap a brand, and the card that follows rebinds to its tokens on the spot.',
         demo: _brandDemo(),
       ),
 

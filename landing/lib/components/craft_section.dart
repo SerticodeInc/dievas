@@ -24,7 +24,7 @@ class CraftSection extends StatelessComponent {
       ),
       _card(
         'Accessible from first frame',
-        'Focus, semantics, and reduced-motion handling are built into the components, not layered on by you at integration time.',
+        'Focus, semantics, and motion handling are built into the components, not layered on by you at integration time.',
         _a11ySvg,
       ),
       _card(

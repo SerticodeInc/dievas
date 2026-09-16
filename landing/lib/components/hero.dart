@@ -20,9 +20,8 @@ class Hero extends StatelessComponent {
         classes: 'hero-display hero-anim hr-h',
         [
           Component.text('Every brand.'),
-          Component.text('\n'),
-          Component.text('Zero '),
-          span(classes: 'accent', [Component.text('hardcoded values.')]),
+          br(),
+          span(classes: 'accent', [Component.text('Zero hardcoded values.')]),
         ],
       ),
       p(

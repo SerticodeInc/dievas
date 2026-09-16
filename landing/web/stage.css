@@ -113,8 +113,8 @@
 /* ── Body ──────────────────────────────────────────────────── */
 
 .stage-body {
-  padding: clamp(20px, 3vw, 32px);
-  min-height: 320px;
+  padding: clamp(24px, 3vw, 40px);
+  min-height: 400px;
   display: grid;
   place-content: center;
 }

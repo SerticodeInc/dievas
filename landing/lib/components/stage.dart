@@ -112,7 +112,7 @@ class Stage extends StatelessComponent {
   Component _swatchCard(String name, String prop, int lightValue) => div(
     classes: 'swatch-card',
     [
-      div(classes: 'swatch', attributes: {'style': 'background: $prop;'}, []),
+      div(classes: 'swatch', attributes: {'style': 'background: var($prop);'}, []),
       div(classes: 'swatch-label', [
         b([Component.text(name)]),
         span(

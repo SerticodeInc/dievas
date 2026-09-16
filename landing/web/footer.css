@@ -51,6 +51,7 @@
   text-align: center;
   user-select: none;
   padding-top: 10px;
+  padding-bottom: clamp(48px, 8vh, 88px);
 }
 
 .ghost-word {

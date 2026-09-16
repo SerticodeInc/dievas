@@ -6,9 +6,12 @@ import '../token_css.dart';
 
 /// The Component Stage — the hero's self-themed app window.
 ///
-/// A live, DOM-rendered Dievas preview. The window carries its own
-/// scoped `data-theme` through the stage toggle (proves token scoping);
-/// the site-level toggle re-themes everything, stage included.
+/// A live, DOM-rendered Dievas preview. Three tabs walk the same chain
+/// the package ships: primitives (raw values), semantics (named aliases),
+/// components (widgets that read those aliases off context). The window
+/// carries its own scoped `data-theme` through the stage toggle, which
+/// proves token scoping; the site-level toggle re-themes everything,
+/// stage included.
 ///
 /// All interaction is driven by `app.dart`'s vanilla JS layer via
 /// `data-*` hooks; no @client hydration.
@@ -28,8 +31,8 @@ class Stage extends StatelessComponent {
       _tablist(),
       div(classes: 'stage-body', [
         _primitivesPanel(),
+        _semanticsPanel(),
         _componentsPanel(),
-        _tokensPanel(),
       ]),
       _foot(),
     ],
@@ -74,7 +77,7 @@ class Stage extends StatelessComponent {
     ],
   );
 
-  static const _tabs = ['primitives', 'components', 'tokens'];
+  static const _tabs = ['primitives', 'semantics', 'components'];
 
   // ── Panel · Primitives ──────────────────────────────────────
 
@@ -87,43 +90,102 @@ class Stage extends StatelessComponent {
       'data-stage-panel': 'primitives',
     },
     [
-      div(classes: 'rail', [
-        _swatchCard('brand', '--dv-brand', DievasColourSemanticLight.brand),
-        _swatchCard('text-hi', '--dv-text-hi', DievasColourSemanticLight.textPrimary),
-        _swatchCard('bg-base', '--dv-bg-base', DievasColourSemanticLight.bgBase),
-        _swatchCard('action', '--dv-action', DievasColourSemanticLight.actionPrimary),
+      div(classes: 'token-rows', [
+        _tokenFamily('colour', [
+          _colourCard('indigo500', DievasColourPrimitives.indigo500),
+          _colourCard('slate900', DievasColourPrimitives.slate900),
+          _colourCard('slate50', DievasColourPrimitives.slate50),
+        ]),
+        _tokenFamily('elevation', [
+          _elevationCard('e2', DievasElevationPrimitives.e2),
+          _elevationCard('e3', DievasElevationPrimitives.e3),
+          _elevationCard('e5', DievasElevationPrimitives.e5),
+        ]),
+        _tokenFamily('radius', [
+          _radiusCard('sm', DievasRadiusPrimitives.sm),
+          _radiusCard('md', DievasRadiusPrimitives.md),
+          _radiusCard('x3l', DievasRadiusPrimitives.x3l),
+        ]),
+        _tokenFamily('spacing', [
+          _spacingCard('s2', DievasSpacingPrimitives.s2),
+          _spacingCard('s4', DievasSpacingPrimitives.s4),
+          _spacingCard('s8', DievasSpacingPrimitives.s8),
+        ]),
       ]),
-      div(
-        classes: 'rail-code',
-        [
-          pre(classes: 'codestrip', [
-            span(classes: 'tok-c', [Component.text('// one token, read at the leaf\n')]),
-            Component.text('final brand = '),
-            span(classes: 'tok-k', [Component.text('context.colours.core.brand')]),
-            Component.text(';\n\n'),
-            Component.text('DievasButton(\n  style: '),
-            span(classes: 'tok-k', [Component.text('.filledPrimary')]),
-            Component.text(',\n  size: '),
-            span(classes: 'tok-k', [Component.text('.lg')]),
-            Component.text(',\n  label: '),
-            span(classes: 'tok-s', [Component.text('\'Continue\'')]),
-            Component.text(',\n  foregroundColour: brand,\n  onPressed: () {},\n)'),
-          ]),
-        ],
-      ),
+      div(classes: 'rail-code', [
+        pre(classes: 'codestrip', [
+          span(classes: 'tok-c', [Component.text('// primitives · raw values, no Flutter dependency\n')]),
+          Component.text('DievasColourPrimitives.indigo500   '),
+          span(classes: 'tok-c', [Component.text('// 0xFF6366F1\n')]),
+          Component.text('DievasRadiusPrimitives.md          '),
+          span(classes: 'tok-c', [Component.text('// 8.0\n')]),
+          Component.text('DievasSpacingPrimitives.s4         '),
+          span(classes: 'tok-c', [Component.text('// 16.0')]),
+        ]),
+      ]),
     ],
   );
 
-  Component _swatchCard(String name, String prop, int lightValue) => div(
-    classes: 'swatch-card',
+  // ── Panel · Semantics ───────────────────────────────────────
+
+  Component _semanticsPanel() => section(
+    classes: 'stage-panel',
+    attributes: const {
+      'role': 'tabpanel',
+      'id': 'stage-panel-semantics',
+      'aria-label': 'Semantic aliases',
+      'data-stage-panel': 'semantics',
+      'hidden': '',
+    },
     [
-      div(classes: 'swatch', attributes: {'style': 'background: var($prop);'}, []),
-      div(classes: 'swatch-label', [
-        b([Component.text(name)]),
-        span(
-          attributes: {'data-di-prop': prop},
-          [Component.text(tokenRgba(lightValue))],
-        ),
+      div(classes: 'token-rows', [
+        _tokenFamily('colour', [
+          _aliasChip('brand', 'context.colours.core.brand', tokenRgba(DievasColourSemanticLight.brand), 'indigo500'),
+          _aliasChip(
+            'textPrimary',
+            'context.colours.text.textPrimary',
+            tokenRgba(DievasColourSemanticLight.textPrimary),
+            'slate900',
+          ),
+          _aliasChip(
+            'bgBase',
+            'context.colours.background.bgBase',
+            tokenRgba(DievasColourSemanticLight.bgBase),
+            'slate50',
+          ),
+        ]),
+        _tokenFamily('elevation', [
+          _aliasChip('sm', 'context.elevation.sm', '4.0', 'e2'),
+          _aliasChip('md', 'context.elevation.md', '8.0', 'e3'),
+          _aliasChip('xl', 'context.elevation.xl', '24.0', 'e5'),
+        ]),
+        _tokenFamily('radius', [
+          _aliasChip('sm', 'context.border.sm', '4.0', 'sm'),
+          _aliasChip('md', 'context.border.md', '8.0', 'md'),
+          _aliasChip('x3l', 'context.border.x3l', '24.0', 'x3l'),
+        ]),
+        _tokenFamily('spacing', [
+          _aliasChip('sm', 'context.spacing.sm', '8.0', 's2'),
+          _aliasChip('md', 'context.spacing.md', '16.0', 's4'),
+          _aliasChip('xl', 'context.spacing.xl', '32.0', 's8'),
+        ]),
+      ]),
+      div(classes: 'rail-code', [
+        pre(classes: 'codestrip', [
+          span(classes: 'tok-c', [Component.text('// read the alias at the leaf, never a hex\n')]),
+          Component.text('final brand = '),
+          span(classes: 'tok-k', [Component.text('context.colours.core.brand')]),
+          Component.text(';   '),
+          span(classes: 'tok-c', [Component.text('// indigo500\n')]),
+          Component.text('final radii = '),
+          span(classes: 'tok-k', [Component.text('context.border.md')]),
+          Component.text(';          '),
+          span(classes: 'tok-c', [Component.text('// 8.0\n')]),
+          Component.text('final pad   = '),
+          span(classes: 'tok-k', [Component.text('context.spacing.md')]),
+          Component.text(';          '),
+          span(classes: 'tok-c', [Component.text('// 16.0')]),
+        ]),
       ]),
     ],
   );
@@ -141,20 +203,123 @@ class Stage extends StatelessComponent {
     },
     [
       div(classes: 'comp-demo', [
-        div(classes: 'comp-row', [
-          button(type: ButtonType.button, classes: 'dbtn dbtn-primary press', [Component.text('Primary')]),
-          button(type: ButtonType.button, classes: 'dbtn dbtn-secondary press', [Component.text('Secondary')]),
-          button(type: ButtonType.button, classes: 'dbtn dbtn-text press', [Component.text('Text action')]),
-          button(type: ButtonType.button, classes: 'dbtn dbtn-ghost press', [Component.text('Ghost')]),
-          span(classes: 'dbtn dbtn-disabled', [Component.text('Disabled')]),
-        ]),
-        div(classes: 'toggle-cluster', [
+        _compCluster('DievasFilledButton', div(classes: 'comp-row', [
+          button(type: ButtonType.button, classes: 'dbtn dbtn-primary press', [Component.text('Filled')]),
+          button(type: ButtonType.button, classes: 'dbtn dbtn-outlined press', [Component.text('Outlined')]),
+          button(type: ButtonType.button, classes: 'dbtn dbtn-text press', [Component.text('Text')]),
+        ])),
+        _compCluster('DievasSwitch', div(classes: 'toggle-cluster', [
           _switch('Wi-Fi', true),
           _switch('Bluetooth', false),
+        ])),
+        _compCluster('DievasAccordion', _accordion()),
+        _compCluster('DievasBreadcrumb', _breadcrumb()),
+        _compCluster('DievasDotIndicator', _dotIndicator()),
+      ]),
+      div(classes: 'rail-code', [
+        pre(classes: 'codestrip', [
+          span(classes: 'tok-c', [Component.text('// the button reads the alias, you pass nothing\n')]),
+          Component.text('DievasFilledButton(\n  style: '),
+          span(classes: 'tok-k', [Component.text('.primary')]),
+          Component.text(',\n  size: '),
+          span(classes: 'tok-k', [Component.text('.lg')]),
+          Component.text(',\n  label: '),
+          span(classes: 'tok-s', [Component.text('\'Continue\'')]),
+          Component.text(',\n  foregroundColor: '),
+          span(classes: 'tok-k', [Component.text('context.colours.core.brand')]),
+          Component.text(',\n  onPressed: () {},\n)'),
         ]),
       ]),
     ],
   );
+
+  // ── Shared token rows ───────────────────────────────────────
+
+  Component _tokenFamily(String name, List<Component> items) => div(classes: 'token-family', [
+    span(classes: 'token-family-name', [Component.text(name)]),
+    div(classes: 'token-family-items', items),
+  ]);
+
+  Component _colourCard(String name, int argb) => div(
+    classes: 'swatch-card',
+    [
+      div(classes: 'swatch', attributes: {'style': 'background: ${tokenRgba(argb)};'}, []),
+      div(classes: 'swatch-label', [
+        b([Component.text(name)]),
+        span([Component.text(_hex(argb))]),
+      ]),
+    ],
+  );
+
+  /// Renders the elevation primitive as the shadow itself: offset is half
+  /// the blur, matching how the package builds its BoxShadow layers.
+  Component _elevationCard(String name, double blur) => div(
+    classes: 'shape-card',
+    [
+      div(
+        classes: 'shape-sample elev-sample',
+        attributes: {
+          'style': 'box-shadow: 0 ${_px(blur / 2)} ${_px(blur)} rgba(15, 23, 42, 0.20);',
+        },
+        [],
+      ),
+      div(classes: 'swatch-label', [
+        b([Component.text(name)]),
+        span([Component.text(_px(blur))]),
+      ]),
+    ],
+  );
+
+  /// Renders the radius primitive as the corner curve on the sample.
+  Component _radiusCard(String name, double radius) => div(
+    classes: 'shape-card',
+    [
+      div(
+        classes: 'shape-sample',
+        attributes: {'style': 'border-radius: ${_px(radius)};'},
+        [],
+      ),
+      div(classes: 'swatch-label', [
+        b([Component.text(name)]),
+        span([Component.text(_px(radius))]),
+      ]),
+    ],
+  );
+
+  /// Renders the spacing primitive as a bar of that width on the 4pt grid.
+  Component _spacingCard(String name, double width) => div(
+    classes: 'shape-card',
+    [
+      div(classes: 'shape-sample spacing-track', [
+        span(classes: 'spacing-bar', attributes: {'style': 'width: ${_px(width)};'}, []),
+      ]),
+      div(classes: 'swatch-label', [
+        b([Component.text(name)]),
+        span([Component.text(_px(width))]),
+      ]),
+    ],
+  );
+
+  Component _aliasChip(String name, String accessor, String resolved, String from) => button(
+    type: ButtonType.button,
+    classes: 'alias-chip',
+    attributes: {
+      'data-di-copy': accessor,
+      'title': 'Copy resolved value',
+    },
+    [
+      span(classes: 'alias-name', [Component.text(name)]),
+      span(classes: 'alias-accessor', [Component.text(accessor)]),
+      span(classes: 'alias-value', [Component.text('$resolved · from $from')]),
+    ],
+  );
+
+  // ── Component samples ───────────────────────────────────────
+
+  Component _compCluster(String name, Component preview) => div(classes: 'comp-cluster', [
+    span(classes: 'comp-name', [Component.text(name)]),
+    div(classes: 'comp-preview', [preview]),
+  ]);
 
   Component _switch(String label, bool on) => button(
     type: ButtonType.button,
@@ -170,60 +335,68 @@ class Stage extends StatelessComponent {
     ],
   );
 
-  // ── Panel · Tokens ──────────────────────────────────────────
+  Component _accordion() => div(classes: 'acc', [
+    button(
+      type: ButtonType.button,
+      classes: 'acc-head press',
+      attributes: const {'data-acc-head': '', 'aria-expanded': 'true'},
+      [
+        span([Component.text('What is a semantic token?')]),
+        span(classes: 'acc-arrow', [Component.text('⌄')]),
+      ],
+    ),
+    div(classes: 'acc-body', [
+      Component.text('A named alias over a primitive. Move the primitive and every alias, and every widget reading it, moves with it.'),
+    ]),
+  ]);
 
-  Component _tokensPanel() => section(
-    classes: 'stage-panel',
-    attributes: const {
-      'role': 'tabpanel',
-      'id': 'stage-panel-tokens',
-      'aria-label': 'Semantic tokens',
-      'data-stage-panel': 'tokens',
-      'hidden': '',
-    },
+  Component _breadcrumb() => nav(
+    classes: 'crumbs',
+    attributes: const {'aria-label': 'Breadcrumb'},
     [
-      div(classes: 'token-grid', [
-        for (final prop in _tokenChips) _tokenChip(prop),
-      ]),
+      button(type: ButtonType.button, classes: 'crumb press', [Component.text('Home')]),
+      span(classes: 'crumb-sep', [Component.text('/')]),
+      button(type: ButtonType.button, classes: 'crumb press', [Component.text('Library')]),
+      span(classes: 'crumb-sep', [Component.text('/')]),
+      span(classes: 'crumb is-current', attributes: const {'aria-current': 'page'}, [Component.text('Components')]),
     ],
   );
 
-  static const _tokenChips = [
-    '--dv-text-hi',
-    '--dv-text-mid',
-    '--dv-bg-base',
-    '--dv-bg-subtle',
-    '--dv-surface-code',
-    '--dv-border',
-    '--dv-border-brand',
-    '--dv-brand',
-    '--dv-on-brand',
-    '--dv-action',
-    '--dv-switch-on',
-    '--dv-feedback-success-icon',
-  ];
-
-  Component _tokenChip(String prop) => button(
-    type: ButtonType.button,
-    classes: 'token-chip',
-    attributes: {
-      'data-di-copy': prop,
-      'title': 'Copy resolved value',
-    },
+  Component _dotIndicator() => div(
+    classes: 'dots',
+    attributes: const {'role': 'tablist', 'aria-label': 'Onboarding step'},
     [
-      span(classes: 'dot', attributes: {'style': '--chip: var($prop);'}, []),
-      Component.text(prop),
+      for (var i = 0; i < _dotCount; i++)
+        button(
+          type: ButtonType.button,
+          classes: 'dot press${i == 0 ? ' is-active' : ''}',
+          attributes: {
+            'data-di-dot': '',
+            'aria-current': i == 0 ? 'true' : 'false',
+            'aria-label': 'Step ${i + 1}',
+          },
+          [],
+        ),
     ],
   );
+
+  static const _dotCount = 4;
 
   // ── Footer readout ──────────────────────────────────────────
 
   Component _foot() => div(classes: 'stage-foot', [
-    Component.text('InheritedModel · 9 typed aspects'),
+    Component.text('InheritedModel · 10 typed aspects'),
     span(classes: 'readout', attributes: const {'data-stage-label': ''}, [
       Component.text('idle, nothing rebuilt'),
     ]),
   ]);
+
+  // ── Helpers ─────────────────────────────────────────────────
+
+  static String _px(double v) => v.truncateToDouble() == v ? '${v.toInt()}px' : '${v}px';
+
+  static String _hex(int argb) =>
+      '#${argb.toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';
 }
 
 const _themeIconSvg =

@@ -101,12 +101,6 @@ const _interactionsScript = '''<script>
     var v = getComputedStyle(themeContext(el)).getPropertyValue(prop);
     return v ? v.trim() : '';
   }
-  function refreshVarReadouts() {
-    document.querySelectorAll('[data-di-prop]').forEach(function(el){
-      var v = resolveVar(el, el.dataset.diProp);
-      if (v) el.textContent = v;
-    });
-  }
 
   /* ── 1 · Scroll reveals ──────────────────────────────────── */
   var io = new IntersectionObserver(function(entries){
@@ -138,7 +132,6 @@ const _interactionsScript = '''<script>
     var meta = document.getElementById('theme-color');
     if (meta) meta.setAttribute('content', SHEETS[theme] || SHEETS.light);
     try { localStorage.setItem('dievas-theme', theme); } catch (e) {}
-    refreshVarReadouts();
     document.dispatchEvent(new CustomEvent('dievas:theme', { detail: theme }));
   }
   document.querySelectorAll('[data-theme-toggle]').forEach(function(btn){
@@ -158,7 +151,6 @@ const _interactionsScript = '''<script>
     document.querySelectorAll('[data-stage-theme]').forEach(function(btn){
       btn.addEventListener('click', function(){
         stage.dataset.theme = stage.dataset.theme === 'dark' ? 'light' : 'dark';
-        refreshVarReadouts();
         setStageLabel('scoped sheet: ' + stage.dataset.theme);
       });
     });
@@ -189,6 +181,28 @@ const _interactionsScript = '''<script>
         rebuildCounter += 1;
         setStageLabel('scoped rebuild → switch · ' + rebuildCounter);
       }
+    });
+  });
+  document.querySelectorAll('[data-acc-head]').forEach(function(head){
+    head.addEventListener('click', function(){
+      var open = head.getAttribute('aria-expanded') === 'true';
+      head.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (stage && stage.contains(head)) {
+        setStageLabel('accordion · ' + (open ? 'collapsed' : 'expanded'));
+      }
+    });
+  });
+  document.querySelectorAll('.dots').forEach(function(dots){
+    dots.querySelectorAll('[data-di-dot]').forEach(function(dot, i){
+      dot.addEventListener('click', function(){
+        dots.querySelectorAll('[data-di-dot]').forEach(function(d){
+          d.classList.toggle('is-active', d === dot);
+          d.setAttribute('aria-current', d === dot ? 'true' : 'false');
+        });
+        if (stage && stage.contains(dots)) {
+          setStageLabel('dot indicator · step ' + (i + 1));
+        }
+      });
     });
   });
 
@@ -274,10 +288,12 @@ const _interactionsScript = '''<script>
   });
 
   /* ── 9 · Copy chips ──────────────────────────────────────── */
+  /* A `--dv-*` custom property resolves to its computed value; any other
+   * string is a Dart symbol, so it copies verbatim. */
   document.querySelectorAll('[data-di-copy]').forEach(function(chip){
     chip.addEventListener('click', function(){
       var prop = chip.dataset.diCopy;
-      var value = resolveVar(chip, prop);
+      var value = prop.charAt(1) === '-' ? resolveVar(chip, prop) : prop;
       if (navigator.clipboard && value) {
         navigator.clipboard.writeText(value)['catch'](function(){});
       }
@@ -285,9 +301,6 @@ const _interactionsScript = '''<script>
       setTimeout(function(){ chip.classList.remove('is-copied'); }, 1200);
     });
   });
-
-  /* ── 10 · Initial sync ───────────────────────────────────── */
-  refreshVarReadouts();
 })();
 </script>''';
 

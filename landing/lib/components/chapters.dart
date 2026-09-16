@@ -90,11 +90,20 @@ class Chapters extends StatelessComponent {
   // ── 01 · Token chain ────────────────────────────────────────
 
   Component _tokenChainDemo() => div(classes: 'chain', [
-    div(classes: 'chain-step', [b([Component.text('primitive')]), Component.text(' · indigo500')]),
+    div(classes: 'chain-step', [
+      b([Component.text('primitive')]),
+      Component.text(' · 0xFF6366F1'),
+    ]),
     span(classes: 'chain-arrow', [Component.text('→')]),
-    div(classes: 'chain-step sr-step', [b([Component.text('semantic')]), Component.text(' · brand')]),
+    div(classes: 'chain-step sr-step', [
+      b([Component.text('semantic')]),
+      Component.text(' · CoreColours.brand'),
+    ]),
     span(classes: 'chain-arrow', [Component.text('→')]),
-    div(classes: 'chain-step', [b([Component.text('context')]), Component.text(' · DievasScope')]),
+    div(classes: 'chain-step', [
+      b([Component.text('context')]),
+      Component.text(' · colours.core.brand'),
+    ]),
   ]);
 
   // ── 02 · Aspect rebuild readout ─────────────────────────────

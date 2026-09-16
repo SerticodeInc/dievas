@@ -200,6 +200,7 @@ button {
   white-space: pre;
 }
 .codestrip .tok-k { color: var(--dv-brand); }
+.codestrip .tok-s { color: var(--dv-feedback-success-text); }
 .codestrip .tok-c { color: var(--dv-text-lo); }
 
 /* ── Scroll progress bar ───────────────────────────────────── */

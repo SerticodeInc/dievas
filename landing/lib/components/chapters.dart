@@ -35,7 +35,7 @@ class Chapters extends StatelessComponent {
         num: '02',
         meta: 'Aspects · InheritedModel',
         heading: 'Rebuild what changed, nothing more.',
-        body: 'Nine typed aspects ride an InheritedModel. A single text change rebuilds only the dependents that read text, never the layout and never the whole tree.',
+        body: 'Ten typed aspects ride an InheritedModel. A single text change rebuilds only the dependents that read text, never the layout and never the whole tree.',
         demo: _aspectDemo(),
       ),
 

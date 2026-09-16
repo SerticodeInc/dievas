@@ -10,7 +10,7 @@ class Closing extends StatelessComponent {
   @override
   Component build(BuildContext context) => section(classes: 'closing', [
     div(classes: 'closing-island', [
-      h2(classes: 'closing-title sr', [Component.text('Ship a system, not a widget pack.')]),
+      h2(classes: 'closing-title sr', [Component.text('One layer between your tokens and a shipped app.')]),
       p(
         classes: 'closing-body sr sr-s',
         [
@@ -40,7 +40,6 @@ class Closing extends StatelessComponent {
           [Component.text('GitHub')],
         ),
       ]),
-      div(classes: 'closing-eps', [Component.text('pub.dev · no signup · no trackers')]),
     ]),
   ]);
 }

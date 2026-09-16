@@ -59,13 +59,3 @@
   gap: 12px;
   margin-top: 36px;
 }
-
-.closing-eps {
-  position: relative;
-  margin-top: 28px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--dv-text-lo);
-}

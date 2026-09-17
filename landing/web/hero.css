@@ -8,7 +8,7 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  padding-top: calc(120px + env(safe-area-inset-top));
+  padding-top: calc(176px + env(safe-area-inset-top));
 }
 
 .hero-head {
@@ -93,7 +93,7 @@
 }
 
 @media (max-width: 760px) {
-  .hero { padding-top: calc(108px + env(safe-area-inset-top)); }
+  .hero { padding-top: calc(156px + env(safe-area-inset-top)); }
   .hero-display { font-size: clamp(44px, 13vw, 64px); line-height: 1.05; }
   .hero-sub { font-size: 15px; }
 }

@@ -49,7 +49,17 @@ class Nav extends StatelessComponent {
             href: DievasUrls.dievasPubDevURL,
             classes: 'nav-cta press',
             attributes: const {'target': '_blank', 'rel': 'noopener'},
-            [Component.text('pub.dev'), Component.text(' →')],
+            [
+              img(
+                src: '/assets/pubdev.png',
+                alt: '',
+                width: 14,
+                height: 14,
+                attributes: const {'aria-hidden': 'true'},
+              ),
+              Component.text('pub.dev'),
+              Component.text(' →'),
+            ],
           ),
         ]),
       ]),

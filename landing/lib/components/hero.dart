@@ -38,6 +38,13 @@ class Hero extends StatelessComponent {
           classes: 'cta-primary press',
           attributes: const {'target': '_blank', 'rel': 'noopener'},
           [
+            img(
+              src: '/assets/pubdev.png',
+              alt: '',
+              width: 14,
+              height: 14,
+              attributes: const {'aria-hidden': 'true'},
+            ),
             Component.text('Install on pub.dev'),
             span(classes: 'cta-arrow', [Component.text('→')]),
           ],
@@ -46,7 +53,17 @@ class Hero extends StatelessComponent {
           href: DievasUrls.gallery,
           classes: 'cta-ghost press',
           attributes: const {'target': '_blank', 'rel': 'noopener'},
-          [Component.text('See it running'), RawText(_arrowUpRightSvg)],
+          [
+            img(
+              src: '/favicon.svg',
+              alt: '',
+              width: 14,
+              height: 14,
+              attributes: const {'aria-hidden': 'true'},
+            ),
+            Component.text('Browse the gallery'),
+            RawText(_arrowUpRightSvg),
+          ],
         ),
       ]),
     ]),

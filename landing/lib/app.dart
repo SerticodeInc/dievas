@@ -409,7 +409,7 @@ const _interactionsScript = '''<script>
 ///   2. Chapters — five evidence chapters
 ///   3. ThemeSection — light/dark twin sheets
 ///   4. CraftSection — four craft rows
-///   5. Closing — the install island
+///   5. Closing — brand glow easing into the footer
 ///   6. Footer — ghost wordmark
 class _AppBody extends StatelessComponent {
   const _AppBody();

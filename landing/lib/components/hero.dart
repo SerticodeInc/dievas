@@ -14,43 +14,37 @@ class Hero extends StatelessComponent {
 
   @override
   Component build(BuildContext context) => section(id: 'experience', classes: 'hero', [
-    div(classes: 'page-glow', []),
     div(classes: 'hero-head', [
-      div(classes: 'eyebrow hero-eyebrow sr hr-e', [
-        Component.text('Open-source · Apache-2.0'),
+      h1(classes: 'hero-display hero-anim hr-h', [
+        Component.text('Every brand.'),
+        br(),
+        span(classes: 'accent', [Component.text('Zero hardcoded values.')]),
       ]),
-      h1(
-        classes: 'hero-display hero-anim hr-h',
-        [
-          Component.text('Every brand.'),
-          Component.text('\n'),
-          Component.text('Zero '),
-          span(classes: 'accent', [Component.text('hardcoded values.')]),
-        ],
-      ),
-      p(
-        classes: 'hero-sub hero-anim hr-s',
-        [
-          Component.text('The Flutter design system that ships '),
-          Component.text('tokens, components, and themes'),
-          Component.text(' from one layer — rebuild only what changed, theme everything else.'),
-        ],
-      ),
+      p(classes: 'hero-sub hero-anim hr-s', [
+        Component.text('The Flutter design system that ships '),
+        Component.text('tokens, components, and themes'),
+        Component.text(' from one layer. Rebuild only what changed, theme everything else.'),
+      ]),
       div(classes: 'hero-ctas hero-anim hr-c', [
         a(
           href: DievasUrls.dievasPubDevURL,
           classes: 'cta-primary press',
           attributes: const {'target': '_blank', 'rel': 'noopener'},
           [
-            Component.text('Install on pub.dev'),
+            img(src: '/assets/pubdev.png', alt: '', width: 14, height: 14, attributes: const {'aria-hidden': 'true'}),
+            Component.text('Install from pub.dev'),
             span(classes: 'cta-arrow', [Component.text('→')]),
           ],
         ),
         a(
           href: DievasUrls.gallery,
-          classes: 'cta-ghost press',
+          classes: 'cta-dark press',
           attributes: const {'target': '_blank', 'rel': 'noopener'},
-          [Component.text('See it running'), RawText(_arrowUpRightSvg)],
+          [
+            img(src: '/favicon.svg', alt: '', width: 14, height: 14, attributes: const {'aria-hidden': 'true'}),
+            Component.text('Browse the gallery'),
+            RawText(_arrowUpRightSvg),
+          ],
         ),
       ]),
     ]),

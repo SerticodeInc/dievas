@@ -2,24 +2,34 @@
  * Craft — "Native to the last token" rows
  * ───────────────────────────────────────────────────────────── */
 
-.craft { overflow: clip; }
+.craft {
+  overflow: clip;
+  border-top: 1px solid var(--dv-border);
+}
 
 .craft-head {
-  max-width: 600px;
+  text-align: center;
 }
 
 .craft-title {
   font-family: var(--font-display);
-  font-size: clamp(30px, 3.8vw, 46px);
-  letter-spacing: -0.04em;
-  line-height: 1.06;
+  font-size: clamp(34px, 4.6vw, 56px);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
   color: var(--dv-text-hi);
-  margin-top: 20px;
+}
+
+/* "Verified" pick a lime — the section's factual accent. */
+.craft-title-accent {
+  color: #65a30d;
+}
+[data-theme="dark"] .craft-title-accent {
+  color: #7cbd2e;
 }
 
 .craft-lede {
-  max-width: 48ch;
-  margin-top: 16px;
+  max-width: 52ch;
+  margin: 18px auto 0;
   font-size: 16px;
   line-height: 1.7;
   color: var(--dv-text-mid);
@@ -31,6 +41,17 @@
   gap: 14px;
   margin-top: 48px;
 }
+
+/* ── accent chips ───────────────────────────────────────────── */
+
+.craft-card--brand { --chip: var(--dv-brand); --chip-bg: var(--dv-brand-subtle); --chip-border: var(--dv-brand); }
+.craft-card--lime  { --chip: #65A30D;        --chip-bg: #EEF7DF;        --chip-border: #65A30D; }
+.craft-card--peach { --chip: #E86F3F;        --chip-bg: #FCEDE4;        --chip-border: #E86F3F; }
+.craft-card--black { --chip: #FFFFFF;        --chip-bg: #171717;        --chip-border: #171717; }
+
+[data-theme="dark"] .craft-card--lime  { --chip: #7CBD2E; --chip-bg: rgba(124, 189, 46, 0.16); --chip-border: #7CBD2E; }
+[data-theme="dark"] .craft-card--peach { --chip: #F0885B; --chip-bg: rgba(240, 136, 91, 0.16); --chip-border: #F0885B; }
+[data-theme="dark"] .craft-card--black { --chip: #FFFFFF; --chip-bg: #171717; --chip-border: #E8E8E8; }
 
 .craft-card {
   padding: 26px;
@@ -45,8 +66,9 @@
 }
 .craft-card:hover {
   transform: translateY(-3px);
-  border-color: var(--dv-border-hi);
-  box-shadow: 0 16px 40px -24px rgba(15, 23, 42, 0.16);
+  border-color: color-mix(in srgb, var(--chip-border, var(--chip, var(--dv-brand))) 42%, var(--dv-border));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--chip-border, var(--chip, var(--dv-brand))) 42%, var(--dv-border)),
+              0 16px 40px -24px rgba(15, 23, 42, 0.16);
 }
 
 .craft-icon {
@@ -55,9 +77,86 @@
   border-radius: var(--radius-md);
   display: grid;
   place-items: center;
-  background: var(--dv-brand-subtle);
-  color: var(--dv-brand);
+  color: var(--chip, var(--dv-brand));
+  background: var(--chip-bg, var(--dv-brand-subtle));
+  transition: transform 300ms var(--ease);
 }
+
+.craft-icon svg {
+  display: block;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ── icon micro-animation on enter (scroll-in hello) ─────────── */
+
+/* Equal specificity + placed before the hover rules below, so a
+   subsequent hover still re-plays its own animation. */
+
+.craft-card--brand.is-in .craft-icon svg {
+  animation: craft-spin 800ms var(--ease);
+}
+.craft-card--lime.is-in .craft-icon svg {
+  animation: craft-pulse 700ms var(--ease);
+}
+.craft-card--peach.is-in .craft-icon svg {
+  animation: craft-zing 600ms var(--ease);
+}
+.craft-card--black.is-in .cv-l {
+  animation: craft-fan-l 500ms var(--ease);
+}
+.craft-card--black.is-in .cv-r {
+  animation: craft-fan-r 500ms var(--ease);
+}
+@keyframes craft-fan-l {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-3px); }
+}
+@keyframes craft-fan-r {
+  from { transform: translateX(0); }
+  to   { transform: translateX(3px); }
+}
+
+/* ── icon micro-animation on hover ──────────────────────────── */
+
+/* globe — one slow turn */
+.craft-card--brand:hover .craft-icon svg {
+  animation: craft-spin-hover 560ms var(--ease);
+}
+@keyframes craft-spin-hover {
+  to { transform: rotate(360deg); }
+}
+
+/* a11y — focus pulse */
+.craft-card--lime:hover .craft-icon svg {
+  animation: craft-pulse-hover 480ms var(--ease);
+}
+@keyframes craft-pulse-hover {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.22); }
+  100% { transform: scale(1); }
+}
+
+/* bolt — zing shake */
+.craft-card--peach:hover .craft-icon svg {
+  animation: craft-zing-hover 400ms var(--ease);
+}
+@keyframes craft-zing-hover {
+  0%   { transform: translateX(0); }
+  35%  { transform: translateX(-3px); }
+  70%  { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+/* open — chevrons fan apart */
+.craft-card--black .cv-l,
+.craft-card--black .cv-r {
+  transition: transform 220ms var(--ease);
+}
+.craft-card--black:hover .cv-l { transform: translateX(-3px); }
+.craft-card--black:hover .cv-r { transform: translateX(3px); }
+
+/* ── card type ──────────────────────────────────────────────── */
 
 .craft-card h3 {
   font-family: var(--font-display);
@@ -71,6 +170,38 @@
   font-size: 14.5px;
   line-height: 1.65;
   color: var(--dv-text-mid);
+}
+
+.craft-card p .craft-line {
+  display: block;
+}
+
+.craft-inline-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  color: var(--chip-border, var(--dv-brand));
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--chip-border, var(--dv-brand)) 45%, transparent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  font-weight: 500;
+  transition: text-decoration-color 200ms var(--ease);
+}
+.craft-inline-link:hover {
+  text-decoration-color: var(--chip-border, var(--dv-brand));
+}
+.craft-inline-link svg {
+  width: 11px;
+  height: 11px;
+}
+
+.craft .credit-link {
+  color: var(--chip-border, var(--dv-brand));
+  text-decoration-color: color-mix(in srgb, var(--chip-border, var(--dv-brand)) 45%, transparent);
+}
+.craft .credit-link:hover {
+  text-decoration-color: var(--chip-border, var(--dv-brand));
 }
 
 @media (max-width: 760px) {

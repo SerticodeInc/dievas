@@ -8,7 +8,7 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  padding-top: calc(120px + env(safe-area-inset-top));
+  padding-top: calc(176px + env(safe-area-inset-top));
 }
 
 .hero-head {
@@ -19,12 +19,6 @@
   padding-inline: 24px;
 }
 
-.hero-eyebrow {
-  margin-bottom: 28px;
-  justify-content: center;
-  display: inline-flex;
-}
-
 .hero-display {
   font-family: var(--font-display);
   font-size: clamp(52px, 8.2vw, 112px);
@@ -32,6 +26,10 @@
   letter-spacing: -0.065em;
   color: var(--dv-text-hi);
   font-weight: 500;
+  /* The pill black is a flat #171717 fill; large medium-weight
+     glyphs antialias toward the sheet and read a touch lighter.
+     A hair of stroke firms the ink to the same solidity. */
+  -webkit-text-stroke: 0.4px currentColor;
 }
 
 .hero-display .accent {
@@ -67,7 +65,6 @@
 .js-on .js-loaded .hero-anim {
   animation: hero-rise 0.8s var(--ease) forwards;
 }
-.js-on .js-loaded .hero-anim.hr-e { animation-delay: 0.05s; }
 .js-on .js-loaded .hero-anim.hr-h { animation-delay: 0.18s; }
 .js-on .js-loaded .hero-anim.hr-s { animation-delay: 0.30s; }
 .js-on .js-loaded .hero-anim.hr-c { animation-delay: 0.44s; }
@@ -81,26 +78,12 @@
 .hero-stage {
   flex: 1 0 auto;
   width: min(1080px, calc(100% - 32px));
-  margin: clamp(44px, 7vh, 84px) auto 0;
+  margin: clamp(44px, 7vh, 84px) auto clamp(64px, 9vh, 116px);
   position: relative;
 }
 
-/* Desk-light wash behind the window */
-.hero-stage::before {
-  content: "";
-  position: absolute;
-  inset: -8% -6% -2%;
-  z-index: -1;
-  border-radius: 48px;
-  background:
-    radial-gradient(46% 60% at 50% 38%,
-      color-mix(in srgb, var(--dv-brand) 12%, transparent),
-      transparent 72%);
-  pointer-events: none;
-}
-
 @media (max-width: 760px) {
-  .hero { padding-top: calc(108px + env(safe-area-inset-top)); }
+  .hero { padding-top: calc(156px + env(safe-area-inset-top)); }
   .hero-display { font-size: clamp(44px, 13vw, 64px); line-height: 1.05; }
   .hero-sub { font-size: 15px; }
 }

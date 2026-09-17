@@ -5,6 +5,31 @@
  * through --dv-* runtime custom properties (see styles.css).
  * ───────────────────────────────────────────────────────────── */
 
+/* ── Our black ─────────────────────────────────────────────── */
+/* Dievas black is #171717 (neutral-900), not slate-900. The token
+   package ships slate ink; the landing pins every black-family
+   value to #171717 so nothing reads navy. `:not([data-theme="dark"])`
+   keeps dark-mode text light instead of clobbering it via :root. */
+:root:not([data-theme="dark"]),
+[data-theme="light"] {
+  --dv-text-hi: #171717;
+  --dv-icon-primary: #171717;
+  --dv-border-hi: #171717;
+  --dv-input-text: #171717;
+  --dv-static-black: #171717;
+}
+
+/* The dark sheet's near-black planes become the same #171717, with
+   neutral greys one step up so cards still lift off the page. */
+[data-theme="dark"] {
+  --dv-bg-base: #171717;
+  --dv-surface-canvas: #171717;
+  --dv-surface-sidebar: #171717;
+  --dv-bg-subtle: #1f1f1f;
+  --dv-surface-code: #1f1f1f;
+  --dv-bg-elevated: #262626;
+}
+
 /* ── Sheet ─────────────────────────────────────────────────── */
 
 html {
@@ -97,44 +122,6 @@ button {
   padding-block: clamp(72px, 12vh, 120px);
 }
 
-/* ── Section header pattern ────────────────────────────────── */
-
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--dv-text-mid);
-}
-
-.eyebrow::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin-right: 10px;
-  border-radius: 999px;
-  background: var(--dv-brand);
-  vertical-align: 1px;
-}
-
-/* ── Hairlines (plates) ────────────────────────────────────── */
-
-.hairline {
-  border: 1px solid var(--dv-border);
-}
-
-/* ── Cards / wells ─────────────────────────────────────────── */
-
-.plate {
-  background: var(--dv-bg-subtle);
-  border: 1px solid var(--dv-border);
-  border-radius: var(--radius-2xl);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03),
-              0 8px 24px -12px rgba(15, 23, 42, 0.08);
-}
-
 /* ── Scroll-reveal system ──────────────────────────────────── */
 /* Hidden only when JS is available (.js-on) — no-JS stays visible. */
 
@@ -146,13 +133,20 @@ button {
 .sr.is-in {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.6s var(--ease),
-              transform 0.6s var(--ease);
+  transition: opacity 0.9s var(--ease),
+              transform 0.9s var(--ease);
 }
 
-.js-on .sr-s { transition-delay: 0.06s; }
-.js-on .sr-m { transition-delay: 0.14s; }
-.js-on .sr-l { transition-delay: 0.22s; }
+.js-on .sr-s { transition-delay: 0.08s; }
+.js-on .sr-l { transition-delay: 0.24s; }
+
+/* Cascade grids — children reveal one after another, not all at once. */
+.js-on .sr-stagger > .sr { transition-delay: 0.06s; }
+.js-on .sr-stagger > .sr:nth-child(2) { transition-delay: 0.16s; }
+.js-on .sr-stagger > .sr:nth-child(3) { transition-delay: 0.26s; }
+.js-on .sr-stagger > .sr:nth-child(4) { transition-delay: 0.36s; }
+.js-on .sr-stagger > .sr:nth-child(5) { transition-delay: 0.46s; }
+.js-on .sr-stagger > .sr:nth-child(6) { transition-delay: 0.56s; }
 
 /* ── Micro-interactions ────────────────────────────────────── */
 
@@ -215,6 +209,36 @@ button {
   transform: scale(0.97);
 }
 
+/* Dark CTA — the GitHub-pill colour pattern (black, white text).
+   Used for the hero gallery link; the arrow nudges like the pill's. */
+.cta-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: var(--radius-full);
+  background: #171717;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: background 180ms var(--ease), transform 110ms var(--ease);
+}
+.cta-dark:hover {
+  background: #0b0b0b;
+}
+.cta-dark:active {
+  transform: scale(0.97);
+}
+.cta-dark svg {
+  transition: transform 200ms var(--ease);
+}
+.cta-dark:hover svg {
+  transform: translate(2px, -2px);
+}
+
 .cta-arrow {
   display: inline-block;
   transition: transform 200ms var(--ease);
@@ -239,7 +263,7 @@ button {
   white-space: pre;
 }
 .codestrip .tok-k { color: var(--dv-brand); }
-.codestrip .tok-v { color: var(--dv-text-hi); }
+.codestrip .tok-s { color: var(--dv-feedback-success-text); }
 .codestrip .tok-c { color: var(--dv-text-lo); }
 
 /* ── Scroll progress bar ───────────────────────────────────── */
@@ -253,18 +277,6 @@ button {
   background: linear-gradient(90deg, var(--dv-brand), var(--dv-brand-subtle));
   z-index: 120;
   pointer-events: none;
-}
-
-/* ── Applied just under the nav: page glow — the "desk light" ── */
-
-.page-glow {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(52% 42% at 50% 4%, color-mix(in srgb, var(--dv-brand) 10%, transparent), transparent 70%),
-    radial-gradient(36% 30% at 78% 8%, color-mix(in srgb, var(--dv-brand) 7%, transparent), transparent 72%);
 }
 
 /* ── Reduced motion — collapse to opacity-only ─────────────── */

@@ -5,7 +5,7 @@
 .footer {
   position: relative;
   overflow: clip;
-  padding-top: clamp(48px, 8vh, 80px);
+  padding-top: clamp(32px, 5vh, 48px);
 }
 
 .footer-util {
@@ -14,28 +14,82 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 18px;
-  padding-block: 32px;
+  padding-block: 20px;
   border-top: 1px solid var(--dv-border);
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   color: var(--dv-text-mid);
 }
 
-.footer-links {
-  display: flex;
+/* GitHub pill — 171717 black, white mark, glass star count */
+.footer-github {
+  display: inline-flex;
   align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
+  gap: 10px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #171717;
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 180ms var(--ease), transform 110ms var(--ease);
+}
+.footer-github:hover {
+  background: #0B0B0B;
+}
+.footer-github:active {
+  transform: scale(0.96);
 }
 
-.footer-link {
-  color: var(--dv-text-mid);
-  text-decoration: none;
-  transition: color 200ms var(--ease);
+.footer-github .star-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-variant-numeric: tabular-nums;
+  transition: opacity 320ms var(--ease), transform 320ms var(--ease),
+              background 200ms var(--ease), border-color 200ms var(--ease);
 }
-.footer-link:hover {
-  color: var(--dv-text-hi);
+.js-on .footer-github .star-pill { opacity: 0; transform: translateY(4px); }
+.js-on .footer-github .star-pill.is-loaded { opacity: 1; transform: none; }
+
+.footer-github:hover .star-pill {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.26);
+  transform: translateY(-1px);
+}
+/* Star bloom — a one-shot kick; collapsed by the reduced-motion guard. */
+.footer-github:hover .star-pill svg {
+  animation: star-bloom 520ms var(--ease);
+}
+@keyframes star-bloom {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.35) rotate(-10deg); }
+  100% { transform: scale(1); }
+}
+
+.footer-github-arrow {
+  display: inline-flex;
+  transition: transform 200ms var(--ease);
+}
+.footer-github:hover .footer-github-arrow {
+  transform: translate(2px, -2px);
+}
+
+.footer-github .star-count {
+  font-size: 11px;
+  letter-spacing: 0.01em;
+  color: #E8E8E8;
 }
 
 .footer-copy {
@@ -45,19 +99,41 @@
   flex-wrap: wrap;
 }
 
+.footer-built {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--dv-brand);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--dv-brand) 45%, transparent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+  font-weight: 500;
+  transition: text-decoration-color 200ms var(--ease);
+}
+.footer-credit:hover {
+  text-decoration-color: var(--dv-brand);
+}
+
 /* Ghost wordmark */
 .footer-wordmark {
   position: relative;
   text-align: center;
   user-select: none;
   padding-top: 10px;
-  padding-bottom: clamp(48px, 8vh, 88px);
+  padding-bottom: clamp(28px, 5vh, 40px);
 }
 
 .ghost-word {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(88px, 22vw, 320px);
+  font-size: clamp(56px, 14vw, 192px);
   line-height: 0.9;
   letter-spacing: -0.05em;
   background: linear-gradient(180deg,
@@ -84,8 +160,4 @@
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--dv-text-lo);
-}
-
-@media (max-width: 760px) {
-  .footer-copy { width: 100%; justify-content: space-between; }
 }

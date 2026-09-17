@@ -314,7 +314,23 @@ const _interactionsScript = '''<script>
     });
   });
 
-  /* ── 10 · Chapters backdrop · reactive dot matrix ────────── */
+  /* ── 10 · Footer GitHub star count ───────────────────────── */
+  /* The repo is public, so the API needs no token. Fill the glass
+   * pill client-side; on any failure it stays at the ghost "…". */
+  var starCount = document.querySelector('.star-count');
+  if (starCount) {
+    var pill = starCount.parentElement;
+    fetch('https://api.github.com/repos/SerticodeInc/dievas')
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){
+        if (d && typeof d.stargazers_count === 'number') {
+          starCount.textContent = d.stargazers_count.toLocaleString('en-US');
+        }
+      })['catch'](function(){})
+      .then(function(){ pill.classList.add('is-loaded'); });
+  }
+
+  /* ── 11 · Chapters backdrop · reactive dot matrix ────────── */
   /* A grid of dots on canvas. The far field shimmers idly; dots within
    * RADIUS of the pointer bloom brand-coloured. Colours are resolved from
    * the page sheet at build time — canvas cannot consume var(). RAF only

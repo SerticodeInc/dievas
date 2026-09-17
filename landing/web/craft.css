@@ -113,7 +113,7 @@
 
 /* globe — one slow turn */
 .craft-card--brand:hover .craft-icon svg {
-  animation: craft-spin 800ms var(--ease);
+  animation: craft-spin 560ms var(--ease);
 }
 @keyframes craft-spin {
   to { transform: rotate(360deg); }
@@ -121,7 +121,7 @@
 
 /* a11y — focus pulse */
 .craft-card--lime:hover .craft-icon svg {
-  animation: craft-pulse 700ms var(--ease);
+  animation: craft-pulse 480ms var(--ease);
 }
 @keyframes craft-pulse {
   0%   { transform: scale(1); }
@@ -131,7 +131,7 @@
 
 /* bolt — zing shake */
 .craft-card--peach:hover .craft-icon svg {
-  animation: craft-zing 600ms var(--ease);
+  animation: craft-zing 400ms var(--ease);
 }
 @keyframes craft-zing {
   0%   { transform: translateX(0); }

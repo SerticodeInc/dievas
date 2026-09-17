@@ -5,6 +5,31 @@
  * through --dv-* runtime custom properties (see styles.css).
  * ───────────────────────────────────────────────────────────── */
 
+/* ── Our black ─────────────────────────────────────────────── */
+/* Dievas black is #171717 (neutral-900), not slate-900. The token
+   package ships slate ink; the landing pins every black-family
+   value to #171717 so nothing reads navy. `:not([data-theme="dark"])`
+   keeps dark-mode text light instead of clobbering it via :root. */
+:root:not([data-theme="dark"]),
+[data-theme="light"] {
+  --dv-text-hi: #171717;
+  --dv-icon-primary: #171717;
+  --dv-border-hi: #171717;
+  --dv-input-text: #171717;
+  --dv-static-black: #171717;
+}
+
+/* The dark sheet's near-black planes become the same #171717, with
+   neutral greys one step up so cards still lift off the page. */
+[data-theme="dark"] {
+  --dv-bg-base: #171717;
+  --dv-surface-canvas: #171717;
+  --dv-surface-sidebar: #171717;
+  --dv-bg-subtle: #1f1f1f;
+  --dv-surface-code: #1f1f1f;
+  --dv-bg-elevated: #262626;
+}
+
 /* ── Sheet ─────────────────────────────────────────────────── */
 
 html {
@@ -182,6 +207,36 @@ button {
 }
 .cta-ghost:active {
   transform: scale(0.97);
+}
+
+/* Dark CTA — the GitHub-pill colour pattern (black, white text).
+   Used for the hero gallery link; the arrow nudges like the pill's. */
+.cta-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: var(--radius-full);
+  background: #171717;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: background 180ms var(--ease), transform 110ms var(--ease);
+}
+.cta-dark:hover {
+  background: #0b0b0b;
+}
+.cta-dark:active {
+  transform: scale(0.97);
+}
+.cta-dark svg {
+  transition: transform 200ms var(--ease);
+}
+.cta-dark:hover svg {
+  transform: translate(2px, -2px);
 }
 
 .cta-arrow {

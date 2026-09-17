@@ -38,7 +38,7 @@ class Hero extends StatelessComponent {
         ),
         a(
           href: DievasUrls.gallery,
-          classes: 'cta-ghost press',
+          classes: 'cta-dark press',
           attributes: const {'target': '_blank', 'rel': 'noopener'},
           [
             img(src: '/favicon.svg', alt: '', width: 14, height: 14, attributes: const {'aria-hidden': 'true'}),

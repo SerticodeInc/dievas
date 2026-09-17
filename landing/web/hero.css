@@ -26,6 +26,10 @@
   letter-spacing: -0.065em;
   color: var(--dv-text-hi);
   font-weight: 500;
+  /* The pill black is a flat #171717 fill; large medium-weight
+     glyphs antialias toward the sheet and read a touch lighter.
+     A hair of stroke firms the ink to the same solidity. */
+  -webkit-text-stroke: 0.4px currentColor;
 }
 
 .hero-display .accent {

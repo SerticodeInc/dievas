@@ -96,7 +96,7 @@ const _interactionsScript = '''<script>
   'use strict';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var root = document.documentElement;
-  var SHEETS = { light: '#f8fafc', dark: '#020617' };
+  var SHEETS = { light: '#f8fafc', dark: '#171717' };
 
   /* ── Shared resolvers ────────────────────────────────────── */
   // Resolve a --dv-* variable from the nearest data-theme scope so

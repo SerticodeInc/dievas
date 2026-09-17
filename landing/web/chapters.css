@@ -402,10 +402,13 @@
   pointer-events: none;
 }
 
+/* Indigo is the resting brand, so its trio is both the default and the
+ * explicit [data-brand] case — all three brands now read as the same kind
+ * of card instead of Indigo falling back to the page surface. */
 .brand-demo {
-  --demo-accent: var(--dv-brand);
-  --demo-bg: var(--dv-surface-canvas);
-  --demo-fg: var(--dv-text-hi);
+  --demo-accent: #6366f1;
+  --demo-bg: #1e1b4b;
+  --demo-fg: #eef2ff;
   width: 100%;
   max-width: 520px;
   display: flex;
@@ -461,27 +464,47 @@
 .brand-demo .bd-btn:active { transform: scale(0.97); }
 .brand-demo .bd-btn:hover { filter: brightness(1.06); }
 
+.brand-demo[data-brand="indigo"] { --demo-accent: #6366f1; --demo-bg: #1e1b4b; --demo-fg: #eef2ff; }
 .brand-demo[data-brand="timber"] { --demo-accent: #2f7d5f; --demo-bg: #0f2a20; --demo-fg: #eef7f2; }
 .brand-demo[data-brand="ember"]  { --demo-accent: #d4552f; --demo-bg: #331409; --demo-fg: #fdf0ea; }
 
+/* The pill for each brand wears that brand's colour once it is the
+ * pressed one — previously all three fell back to the neutral hairline. */
+.brand-btn[data-brand-trigger="indigo"] { --demo-accent: #6366f1; }
+.brand-btn[data-brand-trigger="timber"] { --demo-accent: #2f7d5f; }
+.brand-btn[data-brand-trigger="ember"]  { --demo-accent: #d4552f; }
+
+/* The well around the demo takes the same hairline. */
+.chapter-demo:has(.brand-demo[data-brand="indigo"]) { --well-accent: #6366f1; }
+.chapter-demo:has(.brand-demo[data-brand="timber"]) { --well-accent: #2f7d5f; }
+.chapter-demo:has(.brand-demo[data-brand="ember"])  { --well-accent: #d4552f; }
+.chapter-demo:has(.brand-demo[data-brand]) {
+  border-color: color-mix(in srgb, var(--well-accent) 40%, var(--dv-border));
+  transition: border-color 260ms var(--ease);
+}
+
 /* ── 05 · gallery handoff ──────────────────────────────────── */
 
+/* Six previews, three across. The strip is the whole handoff now — the
+ * hand-rolled "view the gallery" pill that used to sit seventh in the row
+ * is gone, so the tiles carry the chapter on their own. */
 .gallery-strip {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
+  width: 100%;
+  max-width: 520px;
 }
 
 .gal-tile {
-  width: 132px;
+  width: 100%;
   border-radius: var(--radius-lg);
   border: 1px solid var(--dv-border);
   background: var(--dv-bg-base);
-  padding: 16px 12px 12px;
+  padding: 16px 14px 12px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 14px;
   transition: border-color 200ms var(--ease), transform 200ms var(--ease);
 }
@@ -493,7 +516,7 @@
 .gal-preview {
   height: 34px;
   display: grid;
-  place-items: center;
+  place-items: center start;
 }
 
 .gal-name {
@@ -593,4 +616,6 @@
     gap: 14px;
   }
   .chapter-num { font-size: 44px; }
+  /* Three across is too tight for the 92px field preview. */
+  .gallery-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

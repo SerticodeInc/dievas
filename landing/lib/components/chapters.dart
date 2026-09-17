@@ -1,8 +1,6 @@
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr/dom.dart';
 
-import '../constants.dart';
-
 /// "How it's built" — five numbered evidence chapters, each ending
 /// in a live demonstrator (running control or an honest code strip).
 class Chapters extends StatelessComponent {
@@ -355,7 +353,7 @@ class Chapters extends StatelessComponent {
     ]),
     div(
       classes: 'brand-demo',
-      attributes: const {'data-brand-demo': ''},
+      attributes: const {'data-brand-demo': '', 'data-brand': 'indigo'},
       [
         div(classes: 'bd-head', [
           div(classes: 'bd-logo', [Component.text('D')]),
@@ -386,15 +384,6 @@ class Chapters extends StatelessComponent {
     _galTile('Badge', _galBadge()),
     _galTile('Chip', _galChip()),
     _galTile('Tabs', _galTabs()),
-    a(
-      href: DievasUrls.gallery,
-      classes: 'cta-ghost press',
-      attributes: const {'target': '_blank', 'rel': 'noopener'},
-      [
-        Component.text('View the gallery'),
-        span(classes: 'cta-arrow', [Component.text('↗')]),
-      ],
-    ),
   ]);
 
   Component _galTile(String name, Component preview) =>

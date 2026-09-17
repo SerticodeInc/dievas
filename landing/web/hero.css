@@ -74,7 +74,7 @@
 .hero-stage {
   flex: 1 0 auto;
   width: min(1080px, calc(100% - 32px));
-  margin: clamp(44px, 7vh, 84px) auto 0;
+  margin: clamp(44px, 7vh, 84px) auto clamp(64px, 9vh, 116px);
   position: relative;
 }
 

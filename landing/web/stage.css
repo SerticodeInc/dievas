@@ -12,11 +12,24 @@
   background: var(--dv-bg-subtle);
   border: 1px solid var(--dv-border);
   box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.04),
-    0 24px 48px -24px rgba(15, 23, 42, 0.16),
-    0 60px 120px -40px rgba(15, 23, 42, 0.12);
+    0 1px 2px rgba(15, 23, 42, 0.05),
+    0 2px 5px rgba(15, 23, 42, 0.05),
+    0 10px 20px -10px rgba(15, 23, 42, 0.12),
+    0 28px 56px -24px rgba(15, 23, 42, 0.16),
+    0 64px 128px -40px rgba(15, 23, 42, 0.13);
   overflow: hidden;
   transition: background 260ms var(--ease), border-color 260ms var(--ease);
+}
+
+/* On the dark sheet the slate shadows read as nothing, so the ambient
+ * layer carries a brand tint and the contact layers go near-black. */
+[data-theme="dark"] .stage-window {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.60),
+    0 2px 5px rgba(0, 0, 0, 0.50),
+    0 12px 24px -10px rgba(0, 0, 0, 0.60),
+    0 32px 64px -24px rgba(0, 0, 0, 0.65),
+    0 64px 128px -40px color-mix(in srgb, var(--dv-brand) 24%, transparent);
 }
 
 /* ── Title bar ─────────────────────────────────────────────── */

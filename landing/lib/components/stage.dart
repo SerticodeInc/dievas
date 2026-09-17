@@ -382,10 +382,23 @@ class Stage extends StatelessComponent {
 
   static const _dotCount = 4;
 
+  static const _flutterInheritedModel =
+      'https://api.flutter.dev/flutter/widgets/InheritedModel-class.html';
+
   // ── Footer readout ──────────────────────────────────────────
 
+  /// Mirrors the `craft-inline-link` treatment from CraftSection, so the
+  /// stage copy matches the page's other anchored symbols.
   Component _foot() => div(classes: 'stage-foot', [
-    Component.text('InheritedModel · 10 typed aspects'),
+    a(
+      href: _flutterInheritedModel,
+      classes: 'craft-inline-link stage-foot-link',
+      attributes: const {'target': '_blank', 'rel': 'noopener'},
+      [
+        Component.text('InheritedModel · 10 typed aspects'),
+        RawText(_arrowUpRightSvg),
+      ],
+    ),
     span(classes: 'readout', attributes: const {'data-stage-label': ''}, [
       Component.text('idle, nothing rebuilt'),
     ]),
@@ -397,6 +410,9 @@ class Stage extends StatelessComponent {
 
   static String _hex(int argb) =>
       '#${argb.toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';
+
+  static const _arrowUpRightSvg =
+      '''<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>''';
 }
 
 const _themeIconSvg =

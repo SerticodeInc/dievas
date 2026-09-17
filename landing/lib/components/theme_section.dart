@@ -3,6 +3,7 @@ import 'package:jaspr/jaspr.dart';
 import 'package:jaspr/dom.dart';
 
 import '../token_css.dart';
+import 'theme_toggle.dart';
 
 /// Theme wall — light and dark sheets, side by side, rendered from
 /// the same semantic roles. Each card carries a scoped `data-theme`
@@ -14,15 +15,21 @@ class ThemeSection extends StatelessComponent {
   Component build(BuildContext context) => section(classes: 'theme-wall section', [
     div(classes: 'shell', [
       div(classes: 'theme-head', [
-        h2(classes: 'theme-title sr sr-s', [Component.text('Two sheets, one token model.')]),
-        p(
-          classes: 'theme-lede sr sr-l',
-          [
-            Component.text('Flip the toggle up top. The stage, the chapters, and the page all rebind to the same semantic layer. Nothing is themed twice.'),
-          ],
-        ),
+        h2(classes: 'theme-title sr sr-s', [Component.text('Two sheets, One token model.')]),
+        p(classes: 'theme-lede sr sr-l', [
+          span(classes: 'theme-line', [
+            Component.text('The stage, the chapters, and the page you\'re reading all rebind to the same semantic layer. Nothing is themed twice.'),
+          ]),
+          span(classes: 'theme-line theme-flip', [
+            span(classes: 'theme-pill', [
+              span(classes: 'theme-pill-label', [Component.text('Flip the toggle')]),
+              const ThemeToggle(),
+            ]),
+            Component.text('.'),
+          ]),
+        ]),
       ]),
-      div(classes: 'sheet-grid', [
+      div(classes: 'sheet-grid sr-stagger', [
         _sheetCard(values: _sheetValues['light']!),
         _sheetCard(values: _sheetValues['dark']!),
       ]),
@@ -33,10 +40,7 @@ class ThemeSection extends StatelessComponent {
     classes: 'sheet-card sr',
     attributes: {'data-theme': values.theme},
     [
-      div(classes: 'sheet-meta', [
-        Component.text(values.name),
-        Component.text(values.meta),
-      ]),
+      div(classes: 'sheet-meta', [Component.text(values.name), Component.text(values.meta)]),
       div(classes: 'sheet-roles', [
         _roleChip('brand', '--dv-brand', values.brand),
         _roleChip('textPrimary', '--dv-text-hi', values.textHi),
@@ -55,10 +59,10 @@ class ThemeSection extends StatelessComponent {
     attributes: {'data-di-copy': prop, 'title': 'Copy resolved value'},
     [
       span(classes: 'dot', attributes: {'style': '--chip: var($prop);'}, []),
-      span(attributes: const {'style': 'display:flex;flex-direction:column;gap:2px;'}, [
-        Component.text(name),
-        Component.text(value),
-      ]),
+      span(
+        attributes: const {'style': 'display:flex;flex-direction:column;gap:2px;'},
+        [Component.text(name), Component.text(value)],
+      ),
     ],
   );
 }

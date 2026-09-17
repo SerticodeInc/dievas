@@ -78,20 +78,6 @@
   position: relative;
 }
 
-/* Desk-light wash behind the window */
-.hero-stage::before {
-  content: "";
-  position: absolute;
-  inset: -8% -6% -2%;
-  z-index: -1;
-  border-radius: 48px;
-  background:
-    radial-gradient(46% 60% at 50% 38%,
-      color-mix(in srgb, var(--dv-brand) 12%, transparent),
-      transparent 72%);
-  pointer-events: none;
-}
-
 @media (max-width: 760px) {
   .hero { padding-top: calc(156px + env(safe-area-inset-top)); }
   .hero-display { font-size: clamp(44px, 13vw, 64px); line-height: 1.05; }

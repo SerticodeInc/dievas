@@ -8,20 +8,20 @@
 }
 
 .craft-head {
-  max-width: 600px;
+  text-align: center;
 }
 
 .craft-title {
   font-family: var(--font-display);
-  font-size: clamp(30px, 3.8vw, 46px);
-  letter-spacing: -0.04em;
-  line-height: 1.06;
+  font-size: clamp(34px, 4.6vw, 56px);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
   color: var(--dv-text-hi);
 }
 
 .craft-lede {
-  max-width: 48ch;
-  margin-top: 16px;
+  max-width: 52ch;
+  margin: 18px auto 0;
   font-size: 16px;
   line-height: 1.7;
   color: var(--dv-text-mid);
@@ -78,6 +78,35 @@
   display: block;
   transform-box: fill-box;
   transform-origin: center;
+}
+
+/* ── icon micro-animation on enter (scroll-in hello) ─────────── */
+
+/* Equal specificity + placed before the hover rules below, so a
+   subsequent hover still re-plays its own animation. */
+
+.craft-card--brand.is-in .craft-icon svg {
+  animation: craft-spin 800ms var(--ease);
+}
+.craft-card--lime.is-in .craft-icon svg {
+  animation: craft-pulse 700ms var(--ease);
+}
+.craft-card--peach.is-in .craft-icon svg {
+  animation: craft-zing 600ms var(--ease);
+}
+.craft-card--black.is-in .cv-l {
+  animation: craft-fan-l 500ms var(--ease);
+}
+.craft-card--black.is-in .cv-r {
+  animation: craft-fan-r 500ms var(--ease);
+}
+@keyframes craft-fan-l {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-3px); }
+}
+@keyframes craft-fan-r {
+  from { transform: translateX(0); }
+  to   { transform: translateX(3px); }
 }
 
 /* ── icon micro-animation on hover ──────────────────────────── */

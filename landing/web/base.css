@@ -108,12 +108,20 @@ button {
 .sr.is-in {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.6s var(--ease),
-              transform 0.6s var(--ease);
+  transition: opacity 0.9s var(--ease),
+              transform 0.9s var(--ease);
 }
 
-.js-on .sr-s { transition-delay: 0.06s; }
-.js-on .sr-l { transition-delay: 0.22s; }
+.js-on .sr-s { transition-delay: 0.08s; }
+.js-on .sr-l { transition-delay: 0.24s; }
+
+/* Cascade grids — children reveal one after another, not all at once. */
+.js-on .sr-stagger > .sr { transition-delay: 0.06s; }
+.js-on .sr-stagger > .sr:nth-child(2) { transition-delay: 0.16s; }
+.js-on .sr-stagger > .sr:nth-child(3) { transition-delay: 0.26s; }
+.js-on .sr-stagger > .sr:nth-child(4) { transition-delay: 0.36s; }
+.js-on .sr-stagger > .sr:nth-child(5) { transition-delay: 0.46s; }
+.js-on .sr-stagger > .sr:nth-child(6) { transition-delay: 0.56s; }
 
 /* ── Micro-interactions ────────────────────────────────────── */
 
@@ -214,18 +222,6 @@ button {
   background: linear-gradient(90deg, var(--dv-brand), var(--dv-brand-subtle));
   z-index: 120;
   pointer-events: none;
-}
-
-/* ── Applied just under the nav: page glow — the "desk light" ── */
-
-.page-glow {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(52% 42% at 50% 4%, color-mix(in srgb, var(--dv-brand) 10%, transparent), transparent 70%),
-    radial-gradient(36% 30% at 78% 8%, color-mix(in srgb, var(--dv-brand) 7%, transparent), transparent 72%);
 }
 
 /* ── Reduced motion — collapse to opacity-only ─────────────── */

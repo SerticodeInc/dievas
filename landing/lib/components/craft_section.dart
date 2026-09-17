@@ -18,7 +18,7 @@ class CraftSection extends StatelessComponent {
           Component.text(' and shown on this page.'),
         ]),
       ]),
-      div(classes: 'craft-grid', [
+      div(classes: 'craft-grid sr-stagger', [
         _card(
           title: 'Semantic by construction',
           accent: 'brand',

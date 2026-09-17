@@ -32,7 +32,7 @@
   gap: 12px;
   height: 46px;
   padding-inline: 18px;
-  border-bottom: 1px solid var(--dv-border);
+  border-bottom: 1px solid #171717;
   background: color-mix(in srgb, var(--dv-bg-base) 55%, transparent);
 }
 
@@ -53,8 +53,10 @@
 .stage-title {
   flex: 1;
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--dv-text-mid);
   text-align: center;
   user-select: none;
@@ -118,10 +120,15 @@
 /* ── Body ──────────────────────────────────────────────────── */
 
 .stage-body {
+  position: relative;
   padding: clamp(24px, 3vw, 40px);
   min-height: 400px;
   display: grid;
   place-content: center;
+  /* Height is pinned to the tallest panel by the stage module in
+   * app.dart, so the window keeps one height across tabs. Any
+   * residual change (accordion expanding) eases rather than jumps. */
+  transition: height 320ms var(--ease);
 }
 
 .stage-panel {
@@ -526,11 +533,12 @@
   justify-content: space-between;
   gap: 12px;
   padding: 10px 20px;
-  border-top: 1px solid var(--dv-border);
+  border-top: 1px solid #171717;
   background: color-mix(in srgb, var(--dv-bg-base) 30%, transparent);
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--dv-text-lo);
 }
@@ -542,6 +550,16 @@
 .stage-foot .readout b {
   color: var(--dv-brand);
   font-weight: 500;
+}
+
+/* Reuses .craft-inline-link (craft.css) for the underline + arrow
+ * treatment; scoped overrides keep it on the foot's baseline. */
+.stage-foot .stage-foot-link {
+  color: var(--dv-text-lo);
+  font-weight: 500;
+}
+.stage-foot .stage-foot-link:hover {
+  color: var(--dv-brand);
 }
 
 @media (max-width: 640px) {

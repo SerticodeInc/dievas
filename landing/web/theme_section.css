@@ -29,6 +29,69 @@
   color: var(--dv-text-mid);
 }
 
+.theme-lede .theme-line {
+  display: block;
+  margin-top: 10px;
+}
+.theme-lede .theme-line:first-child {
+  margin-top: 0;
+}
+.theme-lede .theme-flip {
+  margin-top: 16px;
+}
+
+/* Inline pill — "Flip the toggle" + working toggle, like the GitHub pill. */
+.theme-flip {
+  display: inline-block;
+}
+
+.theme-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 7px 6px 16px;
+  border-radius: 999px;
+  background: #171717;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  box-shadow: 0 10px 24px -14px rgba(15, 23, 42, 0.5);
+  vertical-align: middle;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.theme-pill .theme-toggle {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  transition: transform 110ms var(--ease),
+              background 200ms var(--ease),
+              border-color 200ms var(--ease);
+}
+.theme-pill .theme-toggle:hover {
+  transform: rotate(-6deg);
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.14);
+}
+.theme-pill .theme-toggle:active {
+  transform: rotate(-14deg) scale(0.92);
+}
+
+/* One playful settle when the lede scrolls into view. */
+.js-on .theme-lede.is-in .theme-pill .theme-toggle {
+  animation: theme-wiggle 720ms var(--ease) 0.3s both;
+}
+@keyframes theme-wiggle {
+  0%   { transform: rotate(0deg) scale(1); }
+  25%  { transform: rotate(-11deg) scale(1.06); }
+  50%  { transform: rotate(8deg) scale(1.02); }
+  75%  { transform: rotate(-4deg) scale(1); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
 .sheet-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

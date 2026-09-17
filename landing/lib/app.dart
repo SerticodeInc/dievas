@@ -122,7 +122,7 @@ const _interactionsScript = '''<script>
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
   document.querySelectorAll('.sr').forEach(function(el){ io.observe(el); });
 
   /* ── 2 · Press states (guarded by reduced-motion) ────────── */
@@ -180,9 +180,43 @@ const _interactionsScript = '''<script>
           panel.setAttribute('hidden', '');
         }
       });
+      sizeStageBody();
       setStageLabel(name);
     });
   });
+
+  /* Pin the stage body to the tallest panel so the window holds one
+   * height across tabs and the swap is a crossfade, not a jump. All
+   * panels are measured at the current width, so the heights match
+   * what a panel will occupy when shown. */
+  var stageBody = stage && stage.querySelector('.stage-body');
+  function stageActivePanel() {
+    var panels = stageBody ? stageBody.querySelectorAll('[data-stage-panel]') : [];
+    for (var i = 0; i < panels.length; i++) {
+      if (!panels[i].hasAttribute('hidden')) return panels[i];
+    }
+    return panels[0];
+  }
+  function sizeStageBody() {
+    if (!stageBody) return;
+    var active = stageActivePanel();
+    stageBody.querySelectorAll('[data-stage-panel]').forEach(function(panel){
+      if (panel.hidden) panel.hidden = false;
+      var h = panel.offsetHeight;
+      if (h > stageBody._maxH) stageBody._maxH = h;
+      panel._h = h;
+    });
+    stageBody.style.minHeight = Math.max(stageBody._maxH || 0, 400) + 'px';
+    stageBody.querySelectorAll('[data-stage-panel]').forEach(function(panel){
+      if (panel !== active) panel.hidden = true;
+    });
+  }
+  if (stageBody) {
+    stageBody._maxH = 0;
+    if (!reduce) sizeStageBody();
+    window.addEventListener('resize', function(){ stageBody._maxH = 0; sizeStageBody(); });
+    document.addEventListener('dievas:theme', function(){ stageBody._maxH = 0; sizeStageBody(); });
+  }
   var rebuildCounter = 0;
   document.querySelectorAll('[data-di-switch]').forEach(function(sw){
     sw.addEventListener('click', function(){

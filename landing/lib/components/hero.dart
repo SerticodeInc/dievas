@@ -14,7 +14,6 @@ class Hero extends StatelessComponent {
 
   @override
   Component build(BuildContext context) => section(id: 'experience', classes: 'hero', [
-    div(classes: 'page-glow', []),
     div(classes: 'hero-head', [
       h1(
         classes: 'hero-display hero-anim hr-h',

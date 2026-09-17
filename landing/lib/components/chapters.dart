@@ -14,7 +14,8 @@ class Chapters extends StatelessComponent {
     div(classes: 'shell-narrow', [
       div(classes: 'chapters-intro', [
         h2(classes: 'chapters-title sr sr-s', [
-          Component.text('Compiled, not composed.'),
+          span(classes: 'chapters-title-accent', [Component.text('Compiled')]),
+          Component.text(', not composed.'),
         ]),
         p(classes: 'chapters-lede sr sr-l', [
           Component.text(

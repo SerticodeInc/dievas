@@ -7,9 +7,15 @@
   overflow: hidden;
   isolation: isolate;
   padding-top: clamp(96px, 14vh, 160px);
+  /* Section signature. Stage runs indigo (239°) and the theme wall turns
+   * coral peach (10°); orchid at 271° sits in the gap between them, so the
+   * page's warm turn reads as deliberate rather than accidental.
+   * Chrome is orchid; anything depicting the product keeps brand indigo. */
+  --chapter-accent: #a855f7;
+  --chapter-accent-subtle: #f3e8ff;
   background:
-    radial-gradient(115% 65% at 50% -22%, color-mix(in srgb, var(--dv-brand) 8%, transparent), transparent 64%),
-    radial-gradient(85% 55% at 112% 42%, color-mix(in srgb, var(--dv-brand) 5%, transparent), transparent 70%),
+    radial-gradient(115% 65% at 50% -22%, color-mix(in srgb, var(--chapter-accent) 8%, transparent), transparent 64%),
+    radial-gradient(85% 55% at 112% 42%, color-mix(in srgb, var(--chapter-accent) 5%, transparent), transparent 70%),
     linear-gradient(
       180deg,
       var(--dv-bg-subtle),
@@ -17,12 +23,17 @@
     );
 }
 
-/* The light sheet names bg-subtle pure white, so the same 8%/5% brand
- * wash that reads on the dark sheet disappears here. Give it more paint. */
+[data-theme="dark"] .chapters {
+  --chapter-accent: #c084fc;
+  --chapter-accent-subtle: color-mix(in srgb, var(--chapter-accent) 18%, transparent);
+}
+
+/* The light sheet names bg-subtle pure white, so the same 8%/5% wash
+ * that reads on the dark sheet disappears here. Give it more paint. */
 :root:not([data-theme="dark"]) .chapters {
   background:
-    radial-gradient(115% 65% at 50% -22%, color-mix(in srgb, var(--dv-brand) 13%, transparent), transparent 64%),
-    radial-gradient(85% 55% at 112% 42%, color-mix(in srgb, var(--dv-brand) 8%, transparent), transparent 70%),
+    radial-gradient(115% 65% at 50% -22%, color-mix(in srgb, var(--chapter-accent) 13%, transparent), transparent 64%),
+    radial-gradient(85% 55% at 112% 42%, color-mix(in srgb, var(--chapter-accent) 8%, transparent), transparent 70%),
     linear-gradient(
       180deg,
       var(--dv-bg-subtle),
@@ -32,6 +43,10 @@
 
 /* ── Backdrop — matrix, mini components, sparkles ─────────── */
 
+
+/* The canvas resolves --dv-brand off its own element, so the dot field
+ * retints with the section, no JS change. */
+[data-chapter-matrix] { --dv-brand: var(--chapter-accent); }
 
 .chapters-backdrop {
   position: absolute;
@@ -54,8 +69,8 @@
   width: 64px;
   height: 22px;
   border-radius: 999px;
-  background: var(--dv-brand);
-  box-shadow: 0 6px 14px -8px color-mix(in srgb, var(--dv-brand) 70%, transparent);
+  background: var(--chapter-accent);
+  box-shadow: 0 6px 14px -8px color-mix(in srgb, var(--chapter-accent) 70%, transparent);
 }
 
 .mini-switch {
@@ -91,7 +106,7 @@
   border-radius: 3px;
   background: var(--dv-border-hi);
 }
-.mini-tabs .mtab.on { background: var(--dv-brand); }
+.mini-tabs .mtab.on { background: var(--chapter-accent); }
 
 .mini-dots {
   display: flex;
@@ -106,14 +121,14 @@
 }
 .mini-dots .mdot.on {
   width: 18px;
-  background: var(--dv-brand);
+  background: var(--chapter-accent);
 }
 
 .mini-badge {
   width: 56px;
   height: 18px;
   border-radius: 999px;
-  background: var(--dv-brand-subtle);
+  background: var(--chapter-accent-subtle);
 }
 
 .mini-field {
@@ -146,7 +161,7 @@
   user-select: none;
   animation: sparkle-twinkle 6s var(--ease) infinite;
 }
-.sparkle.is-brand { color: var(--dv-brand); }
+.sparkle.is-brand { color: var(--chapter-accent); }
 
 @keyframes sparkle-twinkle {
   0%, 100% { opacity: 0.1; transform: scale(0.8); }
@@ -179,6 +194,10 @@
   letter-spacing: -0.045em;
   line-height: 1.05;
   color: var(--dv-text-hi);
+}
+
+.chapters-title-accent {
+  color: var(--chapter-accent);
 }
 
 .chapters-lede {

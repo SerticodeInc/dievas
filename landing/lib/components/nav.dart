@@ -57,7 +57,6 @@ class Nav extends StatelessComponent {
   );
 
   static const _links = [
-    ('Experience', '#experience', false),
     ('How it\'s built', '#chapters', false),
     ('Gallery', DievasUrls.gallery, true),
   ];

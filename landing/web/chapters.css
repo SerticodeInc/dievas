@@ -10,7 +10,11 @@
   background:
     radial-gradient(115% 65% at 50% -22%, color-mix(in srgb, var(--dv-brand) 8%, transparent), transparent 64%),
     radial-gradient(85% 55% at 112% 42%, color-mix(in srgb, var(--dv-brand) 5%, transparent), transparent 70%),
-    linear-gradient(180deg, var(--dv-bg-subtle), var(--dv-bg-base) 42%);
+    linear-gradient(
+      180deg,
+      var(--dv-bg-subtle),
+      color-mix(in srgb, var(--dv-bg-base) 55%, var(--dv-bg-subtle)) 42%
+    );
 }
 
 /* ── Backdrop — matrix, mini components, sparkles ─────────── */

@@ -5,7 +5,12 @@
 .closing {
   position: relative;
   padding-block: clamp(56px, 9vh, 112px);
+  /* The glow is an ellipse anchored above the box: a taller vertical
+     radius (130%) and a longer falloff let it drop deep into the
+     footer instead of pooling at the seam. */
   background:
-    radial-gradient(60% 60% at 50% 0%,
-      color-mix(in srgb, var(--dv-brand) 14%, transparent), transparent 72%);
+    radial-gradient(72% 130% at 50% -12%,
+      color-mix(in srgb, var(--dv-brand) 15%, transparent) 0%,
+      color-mix(in srgb, var(--dv-brand) 6%, transparent) 44%,
+      transparent 80%);
 }

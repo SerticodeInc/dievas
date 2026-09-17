@@ -6,6 +6,8 @@
   overflow: clip;
   background: var(--dv-bg-subtle);
   border-top: 1px solid var(--dv-border);
+  /* Light-sheet signature: coral peach, redder than plain amber. */
+  --sheet-light-accent: #EB6B52;
 }
 
 .theme-head {
@@ -93,12 +95,28 @@
 }
 
 .sheet-grid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
+/* Token-grid canvas — faint dotted texture peeking around the sheets. */
+.sheet-grid::before {
+  content: "";
+  position: absolute;
+  inset: -46px -20px -20px;
+  z-index: -1;
+  background-image: radial-gradient(circle,
+    color-mix(in srgb, var(--dv-border) 70%, transparent) 1px,
+    transparent 1.5px);
+  background-size: 26px 26px;
+  pointer-events: none;
+}
+
 .sheet-card {
+  position: relative;
+  overflow: hidden;
   border-radius: var(--radius-2xl);
   border: 1px solid var(--dv-border);
   padding: 22px;
@@ -107,6 +125,8 @@
   gap: 18px;
 }
 
+/* Accent bar now lives above the code note (see .sheet-note) — the
+   card's top edge stays clean. */
 .sheet-card[data-theme="light"] {
   background: var(--dv-bg-base);
   color: var(--dv-text-hi);
@@ -120,11 +140,91 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--dv-text-mid);
+}
+
+/* Identity tag — sun on coral peach, moon on indigo. */
+.sheet-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+}
+.sheet-tag svg {
+  display: block;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.sheet-tag--light { background: var(--sheet-light-accent); }
+.sheet-tag--dark { background: #6366F1; }
+
+/* ── sun / moon micro-animations ───────────────────────────── */
+
+/* Entrance: placed before the hover rules and sharing their
+   specificity, so a later hover still re-plays its own animation. */
+.sheet-card.is-in .sheet-tag--light svg {
+  animation: sun-rise 700ms var(--ease) 0.2s both;
+}
+.sheet-card.is-in .sheet-tag--dark svg {
+  animation: moon-rock 700ms var(--ease) 0.32s both;
+}
+@keyframes sun-rise {
+  0%   { transform: translateY(5px) scale(0.7); opacity: 0; }
+  55%  { transform: translateY(-2px) scale(1.08); opacity: 1; }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes moon-rock {
+  0%   { transform: rotate(-16deg); opacity: 0; }
+  45%  { transform: rotate(9deg); opacity: 1; }
+  70%  { transform: rotate(-4deg); }
+  100% { transform: rotate(0); }
+}
+
+/* Hover: sun makes one slow full turn, moon nudges aside. Triggered
+   from the whole card (equal specificity to the entrance rules above
+   + placed after them, so hover wins once the card is in view).
+   Full 360° keeps the handoff back to the resting state seamless. */
+.sheet-card:hover .sheet-tag--light svg {
+  animation: sun-turn 900ms var(--ease);
+}
+@keyframes sun-turn {
+  from { transform: rotate(0); }
+  to   { transform: rotate(360deg); }
+}
+.sheet-card:hover .sheet-tag--dark svg {
+  animation: moon-nudge 420ms var(--ease);
+}
+@keyframes moon-nudge {
+  0%   { transform: rotate(0) translateY(0); }
+  40%  { transform: rotate(14deg) translateY(-2px); }
+  100% { transform: rotate(0) translateY(0); }
+}
+
+/* The flip-the-toggle pill gets the same spin + nudge, fired from
+   the whole pill — hover anywhere on the label or the toggle and the
+   icon plays. Icons have an SVG centre pivot like the sheet tags, so
+   the play stays on the glyph while the button's own crossfade/rotate
+   live on their own elements. */
+.theme-toggle svg {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.theme-pill:hover .ti-sun svg {
+  animation: sun-turn 900ms var(--ease);
+}
+.theme-pill:hover .ti-moon svg {
+  animation: moon-nudge 420ms var(--ease);
 }
 
 .sheet-roles {
@@ -146,10 +246,19 @@
   letter-spacing: 0.06em;
   color: var(--dv-text-mid);
   cursor: copy;
-  transition: border-color 200ms var(--ease);
+  transition: border-color 200ms var(--ease), transform 200ms var(--ease);
 }
 .role-chip:hover {
-  border-color: var(--dv-border-hi);
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--chip, var(--dv-border)) 45%, var(--dv-border));
+}
+.role-chip:hover .dot {
+  animation: role-dot-pop 320ms var(--ease);
+}
+@keyframes role-dot-pop {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.32); }
+  100% { transform: scale(1); }
 }
 .role-chip .dot {
   width: 12px;
@@ -163,14 +272,26 @@
   color: var(--dv-brand);
   border-color: var(--dv-border-brand);
 }
+.role-chip.is-copied .dot {
+  background: var(--dv-brand);
+  animation: role-dot-kick 420ms var(--ease);
+}
+@keyframes role-dot-kick {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.5) rotate(14deg); }
+  100% { transform: scale(1); }
+}
 
 .sheet-note {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.04em;
   color: var(--dv-text-lo);
-  border-top: 1px solid var(--dv-border);
+  border-top: 3px solid #6366F1;
   padding-top: 14px;
+}
+.sheet-card[data-theme="light"] .sheet-note {
+  border-top-color: var(--sheet-light-accent);
 }
 
 @media (max-width: 760px) {

@@ -40,7 +40,13 @@ class ThemeSection extends StatelessComponent {
     classes: 'sheet-card sr',
     attributes: {'data-theme': values.theme},
     [
-      div(classes: 'sheet-meta', [Component.text(values.name), Component.text(values.meta)]),
+      div(classes: 'sheet-meta', [
+        span(classes: 'sheet-tag sheet-tag--${values.theme}', [
+          RawText(values.theme == 'light' ? _sunSvg : _moonSvg),
+          Component.text(values.name),
+        ]),
+        Component.text(values.meta),
+      ]),
       div(classes: 'sheet-roles', [
         _roleChip('brand', '--dv-brand', values.brand),
         _roleChip('textPrimary', '--dv-text-hi', values.textHi),
@@ -65,6 +71,12 @@ class ThemeSection extends StatelessComponent {
       ),
     ],
   );
+
+  static const _sunSvg =
+      '''<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.6"/><path d="M12 2.5v2M12 19.5v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2.5 12h2M19.5 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>''';
+
+  static const _moonSvg =
+      '''<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13.5A8 8 0 0 1 10.5 4 8 8 0 1 0 20 13.5Z"/></svg>''';
 }
 
 /// Light + dark SSR values for the two wall cards (honest: computed

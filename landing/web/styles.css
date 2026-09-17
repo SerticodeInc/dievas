@@ -200,7 +200,7 @@
   --color-static-black: var(--dv-static-black);
 }
 
-@theme {
+@theme static {
   /* ── Typography ─────────────────────────────────────────── */
   --font-display: "MaisonNeueExtended", system-ui, sans-serif;
   --font-body:    "MaisonNeue", system-ui, sans-serif;

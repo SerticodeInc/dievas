@@ -11,7 +11,10 @@ class CraftSection extends StatelessComponent {
   Component build(BuildContext context) => section(classes: 'craft section', [
     div(classes: 'shell', [
       div(classes: 'craft-head', [
-        h2(classes: 'craft-title sr sr-s', [Component.text('Verified in the code.')]),
+        h2(classes: 'craft-title sr sr-s', [
+          span(classes: 'craft-title-accent', [Component.text('Verified,')]),
+          Component.text(' in the code.'),
+        ]),
         p(classes: 'craft-lede sr sr-l', [
           Component.text('Four things Dievas holds true at every layer, verified '),
           _anchor('in the code', DievasUrls.github),

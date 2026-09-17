@@ -19,6 +19,14 @@
   color: var(--dv-text-hi);
 }
 
+/* "Verified" pick a lime — the section's factual accent. */
+.craft-title-accent {
+  color: #65a30d;
+}
+[data-theme="dark"] .craft-title-accent {
+  color: #7cbd2e;
+}
+
 .craft-lede {
   max-width: 52ch;
   margin: 18px auto 0;
@@ -113,17 +121,17 @@
 
 /* globe — one slow turn */
 .craft-card--brand:hover .craft-icon svg {
-  animation: craft-spin 560ms var(--ease);
+  animation: craft-spin-hover 560ms var(--ease);
 }
-@keyframes craft-spin {
+@keyframes craft-spin-hover {
   to { transform: rotate(360deg); }
 }
 
 /* a11y — focus pulse */
 .craft-card--lime:hover .craft-icon svg {
-  animation: craft-pulse 480ms var(--ease);
+  animation: craft-pulse-hover 480ms var(--ease);
 }
-@keyframes craft-pulse {
+@keyframes craft-pulse-hover {
   0%   { transform: scale(1); }
   45%  { transform: scale(1.22); }
   100% { transform: scale(1); }
@@ -131,9 +139,9 @@
 
 /* bolt — zing shake */
 .craft-card--peach:hover .craft-icon svg {
-  animation: craft-zing 400ms var(--ease);
+  animation: craft-zing-hover 400ms var(--ease);
 }
-@keyframes craft-zing {
+@keyframes craft-zing-hover {
   0%   { transform: translateX(0); }
   35%  { transform: translateX(-3px); }
   70%  { transform: translateX(3px); }

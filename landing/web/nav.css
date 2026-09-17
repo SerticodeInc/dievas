@@ -54,7 +54,19 @@
   white-space: nowrap;
 }
 .logo-mark .lg-v {
+  display: inline-block;
   color: var(--dv-brand);
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+.logo-mark:hover .lg-v {
+  animation: lg-v-swing 520ms var(--ease);
+}
+@keyframes lg-v-swing {
+  0%   { transform: rotate(0deg) scale(1); }
+  30%  { transform: rotate(-15deg) scaleY(1.06); }
+  60%  { transform: rotate(9deg) scaleY(0.97); }
+  100% { transform: rotate(0deg) scale(1); }
 }
 
 /* Center links */

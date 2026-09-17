@@ -8,45 +8,40 @@
   isolation: isolate;
   padding-top: clamp(96px, 14vh, 160px);
   /* Section signature. Stage runs indigo (239°) and the theme wall turns
-   * coral peach (10°); fuchsia at 292° sits in the gap between them, so the
-   * page's warm turn reads as deliberate rather than accidental.
-   * Chrome is fuchsia; anything depicting the product keeps brand indigo. */
-  --chapter-accent: #d946ef;
-  --chapter-accent-subtle: #fae8ff;
-  background:
-    radial-gradient(115% 65% at 50% -22%, color-mix(in srgb, var(--chapter-accent) 8%, transparent), transparent 64%),
-    radial-gradient(85% 55% at 112% 42%, color-mix(in srgb, var(--chapter-accent) 5%, transparent), transparent 70%),
-    linear-gradient(
-      180deg,
-      var(--dv-bg-subtle),
-      color-mix(in srgb, var(--dv-bg-base) 55%, var(--dv-bg-subtle)) 42%
-    );
+   * coral peach (10°); rose at 350° is the boldest of the candidates and
+   * sits ~20° off that peach, so the two warm sections meet warm-on-warm.
+   * Chrome is rose; anything depicting the product keeps brand indigo. */
+  --chapter-accent: #f43f5e;
+  --chapter-accent-subtle: #ffe4e6;
+  /* A hairline plus a one-step-recessed plane, so the section reads as a
+   * different surface from the hero/stage sheet it follows. */
+  border-top: 2px solid var(--chapter-accent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--dv-surface-code) 80%, var(--dv-bg-subtle)) 0%,
+    var(--dv-bg-subtle) 22%,
+    color-mix(in srgb, var(--dv-bg-base) 55%, var(--dv-bg-subtle)) 100%
+  );
 }
 
 [data-theme="dark"] .chapters {
-  --chapter-accent: #e879f9;
+  --chapter-accent: #fb7185;
   --chapter-accent-subtle: color-mix(in srgb, var(--chapter-accent) 18%, transparent);
 }
 
-/* The light sheet names bg-subtle pure white, so the same 8%/5% wash
+/* The light sheet names bg-subtle pure white, so the recessed top stop
  * that reads on the dark sheet disappears here. Give it more paint. */
 :root:not([data-theme="dark"]) .chapters {
-  background:
-    radial-gradient(115% 65% at 50% -22%, color-mix(in srgb, var(--chapter-accent) 13%, transparent), transparent 64%),
-    radial-gradient(85% 55% at 112% 42%, color-mix(in srgb, var(--chapter-accent) 8%, transparent), transparent 70%),
-    linear-gradient(
-      180deg,
-      var(--dv-bg-subtle),
-      color-mix(in srgb, var(--dv-bg-base) 55%, var(--dv-bg-subtle)) 42%
-    );
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--dv-surface-code) 90%, var(--dv-bg-subtle)) 0%,
+    var(--dv-bg-subtle) 22%,
+    color-mix(in srgb, var(--dv-bg-base) 55%, var(--dv-bg-subtle)) 100%
+  );
 }
 
 /* ── Backdrop — matrix, mini components, sparkles ─────────── */
 
-
-/* The canvas resolves --dv-brand off its own element, so the dot field
- * retints with the section, no JS change. */
-[data-chapter-matrix] { --dv-brand: var(--chapter-accent); }
 
 .chapters-backdrop {
   position: absolute;
@@ -253,6 +248,13 @@
   font-size: clamp(24px, 2.8vw, 34px);
   letter-spacing: -0.03em;
   color: var(--dv-text-hi);
+  transition: color 260ms var(--ease);
+}
+
+/* 03 lets the demo drive the whole chapter: choose Disabled and the
+ * heading goes disabled with it. */
+.chapter:has(.state-demo[data-state="disabled"]) .chapter-heading {
+  color: var(--dv-text-off);
 }
 
 .chapter-body {
@@ -539,13 +541,20 @@
 .brand-btn[data-brand-trigger="timber"] { --demo-accent: #2f7d5f; }
 .brand-btn[data-brand-trigger="ember"]  { --demo-accent: #d4552f; }
 
-/* The well around the demo takes the same hairline. */
-.chapter-demo:has(.brand-demo[data-brand="indigo"]) { --well-accent: #6366f1; }
-.chapter-demo:has(.brand-demo[data-brand="timber"]) { --well-accent: #2f7d5f; }
-.chapter-demo:has(.brand-demo[data-brand="ember"])  { --well-accent: #d4552f; }
-.chapter-demo:has(.brand-demo[data-brand]) {
+/* The well around the demo takes the same edge, and so does the 04: the
+ * accent is set on the chapter row so both can read it. */
+.chapter:has(.brand-demo[data-brand="indigo"]) { --well-accent: #6366f1; }
+.chapter:has(.brand-demo[data-brand="timber"]) { --well-accent: #2f7d5f; }
+.chapter:has(.brand-demo[data-brand="ember"])  { --well-accent: #d4552f; }
+.chapter:has(.brand-demo[data-brand]) .chapter-demo {
+  border-width: 2px;
   border-color: color-mix(in srgb, var(--well-accent) 40%, var(--dv-border));
   transition: border-color 260ms var(--ease);
+}
+.chapter:has(.brand-demo[data-brand]) .chapter-num {
+  color: var(--well-accent);
+  opacity: 1;
+  transition: color 260ms var(--ease), opacity 260ms var(--ease);
 }
 
 /* ── 05 · gallery handoff ──────────────────────────────────── */

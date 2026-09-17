@@ -4,7 +4,13 @@
 
 .craft {
   overflow: clip;
-  border-top: 1px solid var(--dv-border);
+  /* Divider takes the section's own accent — the lime of "Verified,". */
+  --craft-accent: #65a30d;
+  border-top: 2px solid var(--craft-accent);
+}
+
+[data-theme="dark"] .craft {
+  --craft-accent: #7cbd2e;
 }
 
 .craft-head {
@@ -19,12 +25,10 @@
   color: var(--dv-text-hi);
 }
 
-/* "Verified" pick a lime — the section's factual accent. */
+/* "Verified" takes the section accent — the lime that also runs the
+ * divider above the section. */
 .craft-title-accent {
-  color: #65a30d;
-}
-[data-theme="dark"] .craft-title-accent {
-  color: #7cbd2e;
+  color: var(--craft-accent);
 }
 
 .craft-lede {

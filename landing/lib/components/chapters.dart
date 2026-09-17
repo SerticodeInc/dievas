@@ -260,29 +260,37 @@ class Chapters extends StatelessComponent {
     span(classes: 'chain-arrow', [Component.text('→')]),
     div(classes: 'chain-step sr-step', [
       b([Component.text('semantic')]),
+      Component.text(' · DievasColourSemanticLight.brand'),
+    ]),
+    span(classes: 'chain-arrow', [Component.text('→')]),
+    div(classes: 'chain-step', [
+      b([Component.text('component')]),
       Component.text(' · CoreColours.brand'),
     ]),
     span(classes: 'chain-arrow', [Component.text('→')]),
     div(classes: 'chain-step', [
       b([Component.text('context')]),
-      Component.text(' · colours.core.brand'),
+      Component.text('.colours.core.brand'),
     ]),
   ]);
 
   // ── 02 · Aspect rebuild readout ─────────────────────────────
 
   Component _aspectDemo() => div(classes: 'rebuild-well', [
-    div(classes: 'aspect-picker', [
-      for (final aspect in _aspectRows)
-        button(
-          type: ButtonType.button,
-          classes: 'aspect-btn press',
-          attributes: {
-            'data-aspect-trigger': aspect.$1,
-            'aria-pressed': aspect.$1 == 'text' ? 'true' : 'false',
-          },
-          [Component.text(aspect.$1)],
-        ),
+    div(classes: 'picker-block', [
+      p(classes: 'picker-cue', [Component.text('Pick an aspect →')]),
+      div(classes: 'aspect-picker', [
+        for (final aspect in _aspectRows)
+          button(
+            type: ButtonType.button,
+            classes: 'aspect-btn press',
+            attributes: {
+              'data-aspect-trigger': aspect.$1,
+              'aria-pressed': aspect.$1 == 'text' ? 'true' : 'false',
+            },
+            [Component.text(aspect.$1)],
+          ),
+      ]),
     ]),
     for (final row in _aspectRows)
       div(
@@ -307,7 +315,7 @@ class Chapters extends StatelessComponent {
         type: ButtonType.button,
         classes: 'dbtn dbtn-secondary press',
         attributes: const {'data-di-touch': ''},
-        [Component.text('Touch the theme →')],
+        [Component.text('Press me →')],
       ),
     ]),
   ]);
@@ -384,17 +392,20 @@ class Chapters extends StatelessComponent {
   // ── 04 · Brand switcher ─────────────────────────────────────
 
   Component _brandDemo() => Component.fragment([
-    div(classes: 'brand-picker', [
-      for (final b in _brands)
-        button(
-          type: ButtonType.button,
-          classes: 'brand-btn press',
-          attributes: {
-            'data-brand-trigger': b.$1,
-            'aria-pressed': b.$1 == 'indigo' ? 'true' : 'false',
-          },
-          [Component.text(b.$2)],
-        ),
+    div(classes: 'picker-block', [
+      p(classes: 'picker-cue', [Component.text('Pick a colour →')]),
+      div(classes: 'brand-picker', [
+        for (final b in _brands)
+          button(
+            type: ButtonType.button,
+            classes: 'brand-btn press',
+            attributes: {
+              'data-brand-trigger': b.$1,
+              'aria-pressed': b.$1 == 'indigo' ? 'true' : 'false',
+            },
+            [Component.text(b.$2)],
+          ),
+      ]),
     ]),
     div(
       classes: 'brand-demo',

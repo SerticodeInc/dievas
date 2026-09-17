@@ -2,7 +2,6 @@ import 'package:jaspr/server.dart';
 import 'package:jaspr/dom.dart';
 
 import 'components/chapters.dart';
-import 'components/closing.dart';
 import 'components/craft_section.dart';
 import 'components/footer.dart';
 import 'components/hero.dart';
@@ -20,7 +19,7 @@ class App extends StatelessComponent {
 
   @override
   Component build(BuildContext context) => Document(
-    title: 'Dievas | Flutter Design System',
+    title: 'Dievas | Tokens. Semantics. Theme.',
     lang: 'en',
     meta: const {
       'description':
@@ -30,22 +29,10 @@ class App extends StatelessComponent {
           'layer up.',
     },
     head: [
-      meta(
-        name: 'theme-color',
-        content: '#f8fafc',
-        attributes: const {'id': 'theme-color'},
-      ),
+      meta(name: 'theme-color', content: '#f8fafc', attributes: const {'id': 'theme-color'}),
       link(rel: 'preconnect', href: 'https://fonts.googleapis.com'),
-      link(
-        rel: 'preconnect',
-        href: 'https://fonts.gstatic.com',
-        attributes: const {'crossorigin': ''},
-      ),
-      link(
-        rel: 'stylesheet',
-        href:
-            'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap',
-      ),
+      link(rel: 'preconnect', href: 'https://fonts.gstatic.com', attributes: const {'crossorigin': ''}),
+      link(rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap'),
       link(rel: 'stylesheet', href: '/output.css'),
       link(rel: 'stylesheet', href: '/base.css'),
       link(rel: 'stylesheet', href: '/nav.css'),
@@ -54,7 +41,6 @@ class App extends StatelessComponent {
       link(rel: 'stylesheet', href: '/chapters.css'),
       link(rel: 'stylesheet', href: '/theme_section.css'),
       link(rel: 'stylesheet', href: '/craft.css'),
-      link(rel: 'stylesheet', href: '/closing.css'),
       link(rel: 'stylesheet', href: '/footer.css'),
       link(rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg'),
       RawText(_themeInitScript),
@@ -111,6 +97,12 @@ const _interactionsScript = '''<script>
   }
   function resolveVar(el, prop) {
     var v = getComputedStyle(themeContext(el)).getPropertyValue(prop);
+    return v ? v.trim() : '';
+  }
+  // A section signature (the chapters' accent) is declared on the section
+  // itself, not on a theme sheet, so read it without the scope walk.
+  function resolveLocal(el, prop) {
+    var v = getComputedStyle(el).getPropertyValue(prop);
     return v ? v.trim() : '';
   }
 
@@ -406,7 +398,7 @@ const _interactionsScript = '''<script>
       if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       col = {
         base: resolveVar(matrix, '--dv-border-hi'),
-        brand: resolveVar(matrix, '--dv-brand'),
+        brand: resolveLocal(matrix, '--chapter-accent') || resolveVar(matrix, '--dv-brand'),
       };
       /* border-hi is near-black on the light sheet, so the same 9-20%
        * dots sink into the white section; lean on them a little harder
@@ -481,8 +473,7 @@ const _interactionsScript = '''<script>
 ///   2. Chapters — five evidence chapters
 ///   3. ThemeSection — light/dark twin sheets
 ///   4. CraftSection — four craft rows
-///   5. Closing — brand glow easing into the footer
-///   6. Footer — ghost wordmark
+///   5. Footer — ghost wordmark
 class _AppBody extends StatelessComponent {
   const _AppBody();
 
@@ -494,7 +485,6 @@ class _AppBody extends StatelessComponent {
     const Chapters(),
     const ThemeSection(),
     const CraftSection(),
-    const Closing(),
     const FooterComponent(),
     RawText(_interactionsScript),
   ]);

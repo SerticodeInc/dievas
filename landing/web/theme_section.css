@@ -5,9 +5,10 @@
 .theme-wall {
 	overflow: clip;
 	background: var(--dv-bg-subtle);
-	border-top: 1px solid var(--dv-border);
 	/* Light-sheet signature: coral peach, redder than plain amber. */
 	--sheet-light-accent: #eb6b52;
+	/* Divider takes the section's own accent. */
+	border-top: 2px solid var(--sheet-light-accent);
 }
 
 .theme-head {

@@ -392,7 +392,7 @@ const _interactionsScript = '''<script>
     var GRID = 46;
     var RADIUS = 190;
     var ctx = matrix.getContext('2d');
-    var dots = [], w = 0, h = 0, col = { base: '', brand: '' };
+    var dots = [], w = 0, h = 0, col = { base: '', brand: '' }, alphaScale = 1;
     var px = -9999, py = -9999;
     var visible = false, raf = null;
 
@@ -408,6 +408,10 @@ const _interactionsScript = '''<script>
         base: resolveVar(matrix, '--dv-border-hi'),
         brand: resolveVar(matrix, '--dv-brand'),
       };
+      /* border-hi is near-black on the light sheet, so the same 9-20%
+       * dots sink into the white section; lean on them a little harder
+       * there and leave the dark sheet's alphas alone. */
+      alphaScale = document.documentElement.dataset.theme === 'dark' ? 1 : 1.7;
       dots = [];
       for (var y = GRID / 2; y < h; y += GRID) {
         for (var x = GRID / 2; x < w; x += GRID) {
@@ -429,7 +433,7 @@ const _interactionsScript = '''<script>
         d.near = dist < RADIUS ? 1 - dist / RADIUS : 0;
         if (d.near > 0.05) continue;
         var idle = (Math.sin(now * 1.6 + d.ph) + 1) / 2;
-        ctx.globalAlpha = 0.09 + idle * 0.11;
+        ctx.globalAlpha = Math.min(1, (0.09 + idle * 0.11) * alphaScale);
         ctx.beginPath();
         ctx.arc(d.x, d.y, 1, 0, Math.PI * 2);
         ctx.fill();
@@ -439,7 +443,7 @@ const _interactionsScript = '''<script>
         var e = dots[j];
         if (e.near <= 0.05) continue;
         var idle2 = (Math.sin(now * 1.6 + e.ph) + 1) / 2;
-        ctx.globalAlpha = 0.18 + e.near * 0.62 + idle2 * 0.06;
+        ctx.globalAlpha = Math.min(1, (0.18 + e.near * 0.62 + idle2 * 0.06) * alphaScale);
         ctx.beginPath();
         ctx.arc(e.x, e.y, 1 + e.near * 2.4, 0, Math.PI * 2);
         ctx.fill();

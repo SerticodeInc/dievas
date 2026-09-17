@@ -119,6 +119,11 @@ class Chapters extends StatelessComponent {
     _Mini(kind: 'badge', pos: 'top:55%;left:6%', dur: '23s', delay: '-12s'),
     _Mini(kind: 'field', pos: 'top:63%;right:2%', dur: '20s', delay: '-7s'),
     _Mini(kind: 'chip', pos: 'top:81%;left:4%', dur: '25s', delay: '-15s'),
+    _Mini(kind: 'dots', pos: 'top:21%;left:9%', dur: '20s', delay: '-8s'),
+    _Mini(kind: 'chip', pos: 'top:44%;right:12%', dur: '22s', delay: '-17s'),
+    _Mini(kind: 'switch', pos: 'top:71%;left:3%', dur: '23s', delay: '-10s'),
+    _Mini(kind: 'tabs', pos: 'top:88%;right:7%', dur: '21s', delay: '-19s'),
+    _Mini(kind: 'field', pos: 'top:97%;left:11%', dur: '24s', delay: '-13s'),
   ];
 
   static const _sparks = <_Spark>[
@@ -187,6 +192,42 @@ class Chapters extends StatelessComponent {
       size: '18px',
       dur: '8s',
       delay: '-1.5s',
+    ),
+    _Spark(
+      char: '✦',
+      pos: 'top:11%;right:4%',
+      size: '19px',
+      dur: '6.8s',
+      delay: '-3.5s',
+    ),
+    _Spark(
+      char: '◇',
+      pos: 'top:34%;right:17%',
+      size: '22px',
+      dur: '5.8s',
+      delay: '-2s',
+      brand: true,
+    ),
+    _Spark(
+      char: '○',
+      pos: 'top:59%;left:13%',
+      size: '14px',
+      dur: '7.2s',
+      delay: '-4.5s',
+    ),
+    _Spark(
+      char: '+',
+      pos: 'top:79%;right:21%',
+      size: '21px',
+      dur: '6.2s',
+      delay: '-1.2s',
+    ),
+    _Spark(
+      char: '·',
+      pos: 'top:96%;right:29%',
+      size: '26px',
+      dur: '5.4s',
+      delay: '-3.2s',
     ),
   ];
 

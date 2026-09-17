@@ -17,6 +17,19 @@
     );
 }
 
+/* The light sheet names bg-subtle pure white, so the same 8%/5% brand
+ * wash that reads on the dark sheet disappears here. Give it more paint. */
+:root:not([data-theme="dark"]) .chapters {
+  background:
+    radial-gradient(115% 65% at 50% -22%, color-mix(in srgb, var(--dv-brand) 13%, transparent), transparent 64%),
+    radial-gradient(85% 55% at 112% 42%, color-mix(in srgb, var(--dv-brand) 8%, transparent), transparent 70%),
+    linear-gradient(
+      180deg,
+      var(--dv-bg-subtle),
+      color-mix(in srgb, var(--dv-bg-base) 55%, var(--dv-bg-subtle)) 42%
+    );
+}
+
 /* ── Backdrop — matrix, mini components, sparkles ─────────── */
 
 
@@ -64,11 +77,13 @@
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.25);
 }
 
+/* Backdrop hairlines use border-hi, not border: on the light sheet
+ * border is #e2e8f0 against a white section, so these shapes vanished. */
 .mini-tabs {
   display: flex;
   gap: 4px;
   padding-bottom: 6px;
-  border-bottom: 1px solid var(--dv-border);
+  border-bottom: 1px solid var(--dv-border-hi);
 }
 .mini-tabs .mtab {
   width: 18px;
@@ -105,7 +120,7 @@
   width: 88px;
   height: 22px;
   border-radius: var(--radius-md);
-  border: 1px solid var(--dv-border);
+  border: 1px solid var(--dv-border-hi);
   background: var(--dv-bg-base);
 }
 
@@ -113,7 +128,7 @@
   width: 60px;
   height: 20px;
   border-radius: 999px;
-  border: 1px solid var(--dv-border);
+  border: 1px solid var(--dv-border-hi);
 }
 
 @keyframes mini-drift {

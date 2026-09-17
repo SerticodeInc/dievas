@@ -395,7 +395,7 @@ class Stage extends StatelessComponent {
       classes: 'craft-inline-link stage-foot-link',
       attributes: const {'target': '_blank', 'rel': 'noopener'},
       [
-        Component.text('InheritedModel · 10 typed aspects'),
+        Component.text('InheritedModel'),
         RawText(_arrowUpRightSvg),
       ],
     ),

@@ -16,7 +16,7 @@
 }
 
 .site-nav.is-hidden {
-  transform: translateY(-130%);
+  transform: translateY(calc(-100% - 48px));
 }
 
 .nav-pill {

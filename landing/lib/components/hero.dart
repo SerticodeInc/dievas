@@ -15,36 +15,24 @@ class Hero extends StatelessComponent {
   @override
   Component build(BuildContext context) => section(id: 'experience', classes: 'hero', [
     div(classes: 'hero-head', [
-      h1(
-        classes: 'hero-display hero-anim hr-h',
-        [
-          Component.text('Every brand.'),
-          br(),
-          span(classes: 'accent', [Component.text('Zero hardcoded values.')]),
-        ],
-      ),
-      p(
-        classes: 'hero-sub hero-anim hr-s',
-        [
-          Component.text('The Flutter design system that ships '),
-          Component.text('tokens, components, and themes'),
-          Component.text(' from one layer. Rebuild only what changed, theme everything else.'),
-        ],
-      ),
+      h1(classes: 'hero-display hero-anim hr-h', [
+        Component.text('Every brand.'),
+        br(),
+        span(classes: 'accent', [Component.text('Zero hardcoded values.')]),
+      ]),
+      p(classes: 'hero-sub hero-anim hr-s', [
+        Component.text('The Flutter design system that ships '),
+        Component.text('tokens, components, and themes'),
+        Component.text(' from one layer. Rebuild only what changed, theme everything else.'),
+      ]),
       div(classes: 'hero-ctas hero-anim hr-c', [
         a(
           href: DievasUrls.dievasPubDevURL,
           classes: 'cta-primary press',
           attributes: const {'target': '_blank', 'rel': 'noopener'},
           [
-            img(
-              src: '/assets/pubdev.png',
-              alt: '',
-              width: 14,
-              height: 14,
-              attributes: const {'aria-hidden': 'true'},
-            ),
-            Component.text('Install on pub.dev'),
+            img(src: '/assets/pubdev.png', alt: '', width: 14, height: 14, attributes: const {'aria-hidden': 'true'}),
+            Component.text('Install from pub.dev'),
             span(classes: 'cta-arrow', [Component.text('→')]),
           ],
         ),
@@ -53,13 +41,7 @@ class Hero extends StatelessComponent {
           classes: 'cta-ghost press',
           attributes: const {'target': '_blank', 'rel': 'noopener'},
           [
-            img(
-              src: '/favicon.svg',
-              alt: '',
-              width: 14,
-              height: 14,
-              attributes: const {'aria-hidden': 'true'},
-            ),
+            img(src: '/favicon.svg', alt: '', width: 14, height: 14, attributes: const {'aria-hidden': 'true'}),
             Component.text('Browse the gallery'),
             RawText(_arrowUpRightSvg),
           ],

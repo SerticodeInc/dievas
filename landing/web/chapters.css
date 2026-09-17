@@ -8,11 +8,11 @@
   isolation: isolate;
   padding-top: clamp(96px, 14vh, 160px);
   /* Section signature. Stage runs indigo (239°) and the theme wall turns
-   * coral peach (10°); orchid at 271° sits in the gap between them, so the
+   * coral peach (10°); fuchsia at 292° sits in the gap between them, so the
    * page's warm turn reads as deliberate rather than accidental.
-   * Chrome is orchid; anything depicting the product keeps brand indigo. */
-  --chapter-accent: #a855f7;
-  --chapter-accent-subtle: #f3e8ff;
+   * Chrome is fuchsia; anything depicting the product keeps brand indigo. */
+  --chapter-accent: #d946ef;
+  --chapter-accent-subtle: #fae8ff;
   background:
     radial-gradient(115% 65% at 50% -22%, color-mix(in srgb, var(--chapter-accent) 8%, transparent), transparent 64%),
     radial-gradient(85% 55% at 112% 42%, color-mix(in srgb, var(--chapter-accent) 5%, transparent), transparent 70%),
@@ -24,7 +24,7 @@
 }
 
 [data-theme="dark"] .chapters {
-  --chapter-accent: #c084fc;
+  --chapter-accent: #e879f9;
   --chapter-accent-subtle: color-mix(in srgb, var(--chapter-accent) 18%, transparent);
 }
 

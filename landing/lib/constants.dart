@@ -19,4 +19,7 @@ abstract final class DievasUrls {
 
   /// Dievas GitHub repo.
   static const String github = 'https://github.com/SerticodeInc/dievas';
+
+  /// Dievas docs. Placeholder — real docs URL to be supplied.
+  static const String docs = 'https://docs.dievas.dev';
 }

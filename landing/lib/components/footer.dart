@@ -19,7 +19,7 @@ class FooterComponent extends StatelessComponent {
           Component.text('Built by '),
           a(
             href: DievasUrls.portfolio,
-            classes: 'footer-credit press',
+            classes: 'credit-link press',
             attributes: const {'target': '_blank', 'rel': 'noopener'},
             [
               Component.text('Serticode Inc.'),

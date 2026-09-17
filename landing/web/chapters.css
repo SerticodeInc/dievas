@@ -13,7 +13,7 @@
     linear-gradient(180deg, var(--dv-bg-subtle), var(--dv-bg-base) 42%);
 }
 
-/* ── Backdrop — matrix, mini components, sparkles, grain ──── */
+/* ── Backdrop — matrix, mini components, sparkles ─────────── */
 
 
 .chapters-backdrop {
@@ -22,17 +22,6 @@
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
-}
-
-/* Film grain — desaturated fractal noise, tiled. Overlay blend keeps it
- * present in the highlights and shadows of both sheets without tinting. */
-.chapters-grain {
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  opacity: 0.7;
-  mix-blend-mode: overlay;
 }
 
 /* ── Mini UI confetti — tiny Dievas components, drifting ──── */

@@ -72,11 +72,10 @@ class Chapters extends StatelessComponent {
     ]),
   ]);
 
-  /// Section backdrop — a brand-tinted gradient, a film-grain noise tile,
-  /// a reactive dot matrix on canvas, a handful of miniature Dievas
-  /// components adrift, and some twinkling geometry. Decorative only:
-  /// `aria-hidden`, and pointer events are off in CSS so it never eats
-  /// a click.
+  /// Section backdrop — a brand-tinted gradient, a reactive dot matrix on
+  /// canvas, a handful of miniature Dievas components adrift, and some
+  /// twinkling geometry. Decorative only: `aria-hidden`, and pointer events
+  /// are off in CSS so it never eats a click.
   Component _backdrop() => div(
     classes: 'chapters-backdrop',
     attributes: const {'aria-hidden': 'true'},
@@ -84,7 +83,6 @@ class Chapters extends StatelessComponent {
       RawText('<canvas class="chapters-matrix" data-chapter-matrix></canvas>'),
       for (final m in _minis) _mini(m),
       for (final s in _sparks) _sparkle(s),
-      div(classes: 'chapters-grain', []),
     ],
   );
 

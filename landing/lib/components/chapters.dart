@@ -316,17 +316,20 @@ class Chapters extends StatelessComponent {
   // ── 03 · Component states ───────────────────────────────────
 
   Component _componentsDemo() => div(classes: 'comp-demo', [
-    div(classes: 'state-picker', [
-      for (final state in _states)
-        button(
-          type: ButtonType.button,
-          classes: 'state-btn press',
-          attributes: {
-            'data-state-trigger': state.$1,
-            'aria-pressed': state.$1 == 'default' ? 'true' : 'false',
-          },
-          [Component.text(state.$2)],
-        ),
+    div(classes: 'picker-block', [
+      p(classes: 'picker-cue', [Component.text('Pick a state →')]),
+      div(classes: 'state-picker', [
+        for (final state in _states)
+          button(
+            type: ButtonType.button,
+            classes: 'state-btn press',
+            attributes: {
+              'data-state-trigger': state.$1,
+              'aria-pressed': state.$1 == 'default' ? 'true' : 'false',
+            },
+            [Component.text(state.$2)],
+          ),
+      ]),
     ]),
     div(
       classes: 'state-demo',

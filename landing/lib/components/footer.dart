@@ -4,7 +4,8 @@ import 'package:jaspr/dom.dart';
 import '../constants.dart';
 import 'theme_toggle.dart';
 
-/// Footer — ghost wordmark settle + a single utility row.
+/// Footer — a single centered column: theme toggle, GitHub pill,
+/// ghost wordmark, then the build credit at the base.
 ///
 /// The last thing the eye lands on is the giant background-clip
 /// wordmark (deskmodes register), staying ghostly on both sheets.
@@ -13,22 +14,8 @@ class FooterComponent extends StatelessComponent {
 
   @override
   Component build(BuildContext context) => footer(classes: 'footer', [
-    div(classes: 'shell footer-util', [
-      div(classes: 'footer-copy', [
-        span(classes: 'footer-built', [
-          Component.text('Built by '),
-          a(
-            href: DievasUrls.portfolio,
-            classes: 'credit-link press',
-            attributes: const {'target': '_blank', 'rel': 'noopener'},
-            [
-              Component.text('Serticode Inc.'),
-              RawText(_arrowUpRightSvg),
-            ],
-          ),
-        ]),
-        const ThemeToggle(),
-      ]),
+    div(classes: 'shell footer-stack', [
+      const ThemeToggle(),
       a(
         href: DievasUrls.github,
         classes: 'footer-github press',
@@ -42,10 +29,80 @@ class FooterComponent extends StatelessComponent {
           span(classes: 'footer-github-arrow', [RawText(_arrowUpRightSvg)]),
         ],
       ),
-    ]),
-    div(classes: 'footer-wordmark', [
-      span(classes: 'ghost-word', [Component.text('dievas')]),
-      div(classes: 'ghost-tag', [Component.text('design system for flutter')]),
+      div(classes: 'footer-ctas', [
+        a(
+          href: DievasUrls.gallery,
+          classes: 'cta-dark press',
+          attributes: const {'target': '_blank', 'rel': 'noopener'},
+          [
+            img(src: '/favicon.svg', alt: '', width: 14, height: 14, attributes: const {'aria-hidden': 'true'}),
+            Component.text('Visit Gallery'),
+            RawText(_arrowUpRightSvg),
+          ],
+        ),
+        a(
+          href: DievasUrls.dievasPubDevURL,
+          classes: 'cta-primary press',
+          attributes: const {'target': '_blank', 'rel': 'noopener'},
+          [
+            img(src: '/assets/pubdev.png', alt: '', width: 14, height: 14, attributes: const {'aria-hidden': 'true'}),
+            Component.text('Install from pub.dev'),
+            span(classes: 'cta-arrow', [Component.text('→')]),
+          ],
+        ),
+      ]),
+      div(classes: 'footer-wordmark', [
+        a(
+          href: '/',
+          classes: 'ghost-word',
+          attributes: const {'aria-label': 'Dievas, home'},
+          [
+            Component.text('die'),
+            span(classes: 'lg-v', [Component.text('v')]),
+            Component.text('as'),
+          ],
+        ),
+        div(classes: 'ghost-tag', [
+          Component.text('design system for '),
+          a(
+            href: DievasUrls.flutter,
+            classes: 'credit-link flutter-link',
+            attributes: const {'target': '_blank', 'rel': 'noopener'},
+            [
+              img(src: '/assets/flutter.png', alt: '', width: 12, height: 12, attributes: const {'aria-hidden': 'true'}),
+              Component.text('flutter'),
+              RawText(_arrowUpRightSvg),
+            ],
+          ),
+        ]),
+      ]),
+      div(classes: 'footer-built', [
+        span(classes: 'footer-built-row', [
+          Component.text('Built by '),
+          a(
+            href: DievasUrls.portfolio,
+            classes: 'credit-link press',
+            attributes: const {'target': '_blank', 'rel': 'noopener'},
+            [
+              Component.text('Serticode Inc.'),
+              RawText(_arrowUpRightSvg),
+            ],
+          ),
+        ]),
+        span(classes: 'footer-built-row', [
+          Component.text('Built with '),
+          a(
+            href: DievasUrls.jaspr,
+            classes: 'credit-link jaspr-link press',
+            attributes: const {'target': '_blank', 'rel': 'noopener'},
+            [
+              img(src: '/assets/jaspr.png', alt: '', width: 12, height: 12, attributes: const {'aria-hidden': 'true'}),
+              Component.text('Jaspr'),
+              RawText(_arrowUpRightSvg),
+            ],
+          ),
+        ]),
+      ]),
     ]),
   ]);
 

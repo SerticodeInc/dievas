@@ -1,20 +1,23 @@
 /* ─────────────────────────────────────────────────────────────
- * Footer — ghost word mark + utility row
+ * Footer — centered closing column: toggle, GitHub pill,
+ * ghost wordmark, build credit
  * ───────────────────────────────────────────────────────────── */
 
 .footer {
 	position: relative;
 	overflow: clip;
-	padding-block: clamp(40px, 6vh, 56px);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-block: clamp(44px, 6.5vh, 68px);
 }
 
-.footer-util {
+.footer-stack {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	gap: 18px;
-	padding-block: 20px;
+	justify-content: center;
+	gap: 20px;
 	font-family: var(--font-mono);
 	font-size: 12px;
 	letter-spacing: 0.04em;
@@ -108,14 +111,44 @@
 	color: #e8e8e8;
 }
 
-.footer-copy {
+/* Hero CTAs, cloned — stacked vertically under the GitHub pill. */
+.footer-ctas {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	gap: 22px;
-	flex-wrap: wrap;
+	gap: 10px;
+}
+
+/* Footer CTA micro-interactions — the leading icons kick on hover
+   (black pill favicon tilts, primary pill pub.dev mark lifts) while
+   the existing arrows + bg-change still deliver. */
+.footer-ctas .cta-dark:hover img {
+	animation: footer-kick 480ms var(--ease);
+}
+.footer-ctas .cta-primary:hover img {
+	animation: footer-lift 480ms var(--ease);
+}
+@keyframes footer-kick {
+	0%   { transform: rotate(0deg) scale(1); }
+	40%  { transform: rotate(-12deg) scale(1.18); }
+	70%  { transform: rotate(5deg) scale(1.05); }
+	100% { transform: rotate(0deg) scale(1); }
+}
+@keyframes footer-lift {
+	0%   { transform: translateY(0) scale(1); }
+	40%  { transform: translateY(-3px) scale(1.12); }
+	100% { transform: translateY(0) scale(1); }
 }
 
 .footer-built {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 14px;
+	margin-top: 10px;
+}
+
+.footer-built-row {
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
@@ -137,45 +170,70 @@
 	text-decoration-color: var(--dv-brand);
 }
 
+/* The Flutter node wears Flutter's own blue (#0468D7), not the
+   site's indigo — underline ink fades the same way. */
+.credit-link.flutter-link {
+	color: #0468d7;
+	text-decoration-color: color-mix(in srgb, #0468d7 45%, transparent);
+}
+.credit-link.flutter-link:hover {
+	text-decoration-color: #0468d7;
+}
+
+/* Every 3 s the framework logos nod — same cadence as the V,
+   quiet for the first ~0.42 s, one soft rock mid-cycle. Delays
+   stagger the trio (V → Flutter → Jaspr, one second apart) so
+   the footer never nods in lockstep. */
+.ghost-tag .credit-link img {
+	animation: brand-nod 3s var(--ease) 1s infinite;
+}
+.footer-built .jaspr-link img {
+	animation: brand-nod 3s var(--ease) 2s infinite;
+}
+@keyframes brand-nod {
+	0%, 14%   { transform: rotate(0deg) scale(1); }
+	20%  { transform: rotate(-9deg) scale(1.12) translateY(-1px); }
+	26%  { transform: rotate(6deg) scale(1.02) translateY(1px); }
+	32%, 100% { transform: rotate(0deg) scale(1); }
+}
+
 /* Ghost wordmark */
 .footer-wordmark {
 	position: relative;
 	text-align: center;
 	user-select: none;
-	padding-top: 14px;
 }
 
 .ghost-word {
-	display: block;
+	display: inline-flex;
+	align-items: baseline;
 	font-family: var(--font-display);
-	font-size: clamp(56px, 14vw, 192px);
+	font-size: clamp(50px, 12.5vw, 170px);
 	line-height: 0.9;
 	letter-spacing: -0.05em;
-	background: linear-gradient(
-		180deg,
-		var(--dv-border) 0%,
-		color-mix(in srgb, var(--dv-border) 55%, transparent) 100%
-	);
-	-webkit-background-clip: text;
-	background-clip: text;
-	-webkit-text-fill-color: transparent;
-	color: transparent;
+	color: color-mix(in srgb, var(--dv-text-hi) 36%, transparent);
+	text-decoration: none;
 	white-space: nowrap;
 }
-[data-theme="dark"] .ghost-word {
-	background: linear-gradient(
-		180deg,
-		var(--dv-border) 0%,
-		color-mix(in srgb, var(--dv-border) 30%, transparent) 100%
-	);
-	-webkit-background-clip: text;
-	background-clip: text;
+.ghost-word .lg-v {
+	color: color-mix(in srgb, var(--dv-brand) 62%, transparent);
+	transform-origin: 50% 100%;
+	will-change: transform;
+	animation: lg-v-loop 3s var(--ease) 0s infinite;
+}
+/* The V rocks on its own every 3 s — the swing (starts at ~0.42 s)
+   fills the first third of the loop, the rest is a quiet pause. */
+@keyframes lg-v-loop {
+	0%, 14%   { transform: rotate(0deg) scale(1); }
+	20%  { transform: rotate(-15deg) scaleY(1.06); }
+	26%  { transform: rotate(9deg) scaleY(0.97); }
+	32%, 100% { transform: rotate(0deg) scale(1); }
 }
 
 .ghost-tag {
 	margin-top: 6px;
 	font-family: var(--font-mono);
-	font-size: 10px;
+	font-size: 13px;
 	letter-spacing: 0.3em;
 	text-transform: uppercase;
 	color: var(--dv-text-lo);

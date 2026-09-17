@@ -5,6 +5,12 @@ abstract final class DievasUrls {
   /// Live Widgetbook gallery (Cloudflare Pages, master branch).
   static const String gallery = 'https://master.dievas-gallery.pages.dev';
 
+  /// Flutter landing page.
+  static const String flutter = 'https://flutter.dev';
+
+  /// Jaspr — the Dart web framework this site is built with.
+  static const String jaspr = 'https://jaspr.site';
+
   /// Serticode publisher page on pub.dev.
   static const String pubDev = 'https://pub.dev/publishers/serticode.com/packages';
 

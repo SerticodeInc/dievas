@@ -3,7 +3,7 @@ import 'package:jaspr/dom.dart';
 
 /// The shared sun/moon theme toggle.
 ///
-/// One markup, two homes (nav pill + footer utility row). Both
+/// One markup, two homes (nav pill + footer closing column). Both
 /// `data-theme-toggle` buttons drive the same handler in
 /// `app.dart`, which flips `data-theme` on the document root.
 class ThemeToggle extends StatelessComponent {

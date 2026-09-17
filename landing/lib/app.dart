@@ -361,7 +361,7 @@ const _interactionsScript = '''<script>
         d.near = dist < RADIUS ? 1 - dist / RADIUS : 0;
         if (d.near > 0.05) continue;
         var idle = (Math.sin(now * 1.6 + d.ph) + 1) / 2;
-        ctx.globalAlpha = 0.05 + idle * 0.07;
+        ctx.globalAlpha = 0.09 + idle * 0.11;
         ctx.beginPath();
         ctx.arc(d.x, d.y, 1, 0, Math.PI * 2);
         ctx.fill();
@@ -371,7 +371,7 @@ const _interactionsScript = '''<script>
         var e = dots[j];
         if (e.near <= 0.05) continue;
         var idle2 = (Math.sin(now * 1.6 + e.ph) + 1) / 2;
-        ctx.globalAlpha = 0.12 + e.near * 0.6 + idle2 * 0.05;
+        ctx.globalAlpha = 0.18 + e.near * 0.62 + idle2 * 0.06;
         ctx.beginPath();
         ctx.arc(e.x, e.y, 1 + e.near * 2.4, 0, Math.PI * 2);
         ctx.fill();

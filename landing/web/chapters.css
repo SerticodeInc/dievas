@@ -28,7 +28,7 @@
 
 .mini {
   position: absolute;
-  opacity: 0.1;
+  opacity: 0.2;
   user-select: none;
   animation: mini-drift 22s var(--ease) infinite;
 }
@@ -130,8 +130,8 @@
 .sparkle.is-brand { color: var(--dv-brand); }
 
 @keyframes sparkle-twinkle {
-  0%, 100% { opacity: 0.05; transform: scale(0.8); }
-  50%      { opacity: 0.24; transform: scale(1.15); }
+  0%, 100% { opacity: 0.1; transform: scale(0.8); }
+  50%      { opacity: 0.4; transform: scale(1.15); }
 }
 
 /* ── Reactive dot matrix ──────────────────────────────────── */
@@ -145,7 +145,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .mini, .sparkle { animation: none; }
-  .sparkle { opacity: 0.12; }
+  .mini { opacity: 0.14; }
+  .sparkle { opacity: 0.22; }
 }
 
 .chapters-intro {

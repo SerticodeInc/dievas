@@ -74,6 +74,7 @@ class Stage extends StatelessComponent {
           },
           [Component.text(tab)],
         ),
+      span(classes: 'stage-tab-indicator', attributes: const {'data-stage-indicator': ''}, []),
     ],
   );
 
@@ -97,9 +98,27 @@ class Stage extends StatelessComponent {
           _colourCard('slate50', DievasColourPrimitives.slate50),
         ]),
         _tokenFamily('elevation', [
-          _elevationCard('e2', DievasElevationPrimitives.e2),
-          _elevationCard('e3', DievasElevationPrimitives.e3),
-          _elevationCard('e5', DievasElevationPrimitives.e5),
+          _elevationCard(
+            'e2',
+            DievasElevationShadowLayer.smUpper,
+            DievasOpacitySemantic.shadow2Upper,
+            DievasElevationShadowLayer.smLower,
+            DievasOpacitySemantic.shadow2Lower,
+          ),
+          _elevationCard(
+            'e3',
+            DievasElevationShadowLayer.mdUpper,
+            DievasOpacitySemantic.shadow2Upper,
+            DievasElevationShadowLayer.mdLower,
+            DievasOpacitySemantic.shadow2,
+          ),
+          _elevationCard(
+            'e4',
+            DievasElevationShadowLayer.lgUpper,
+            DievasOpacitySemantic.shadow1Light,
+            DievasElevationShadowLayer.lgLower,
+            DievasOpacitySemantic.shadow2,
+          ),
         ]),
         _tokenFamily('radius', [
           _radiusCard('sm', DievasRadiusPrimitives.sm),
@@ -251,21 +270,36 @@ class Stage extends StatelessComponent {
     ],
   );
 
-  /// Renders the elevation primitive as the shadow itself: offset is half
-  /// the blur, matching how the package builds its BoxShadow layers.
-  Component _elevationCard(String name, double blur) => div(
+  /// Renders an elevation tier exactly as the package ships it: two
+  /// stacked layers — a tight ambient layer plus a diffuse lower one —
+  /// with blur, offset and opacity taken straight from
+  /// [DievasElevationShadowLayer] and [DievasOpacitySemantic]. This is
+  /// [DievasElevationThemeData.sm/md/lg] translated to CSS; each card is
+  /// the tier whose dominant blur is the named primitive (e2 → sm,
+  /// e3 → md, e4 → lg), so the label's value is the lower layer's blur.
+  Component _elevationCard(
+    String name,
+    DievasElevationShadow upper,
+    double upperOpacity,
+    DievasElevationShadow lower,
+    double lowerOpacity,
+  ) => div(
     classes: 'shape-card',
     [
-      div(
-        classes: 'shape-sample elev-sample',
-        attributes: {
-          'style': 'box-shadow: 0 ${_px(blur / 2)} ${_px(blur)} rgba(15, 23, 42, 0.20);',
-        },
-        [],
-      ),
+      div(classes: 'shape-sample elev-sample', [
+        div(
+          classes: 'elev-tile',
+          attributes: {
+            'style': 'box-shadow: 0 ${_px(upper.offsetY)} ${_px(upper.blur)} '
+                '${_shadowAlpha(upperOpacity)}, 0 ${_px(lower.offsetY)} '
+                '${_px(lower.blur)} ${_shadowAlpha(lowerOpacity)};',
+          },
+          [],
+        ),
+      ]),
       div(classes: 'swatch-label', [
         b([Component.text(name)]),
-        span([Component.text(_px(blur))]),
+        span([Component.text(_px(lower.blur))]),
       ]),
     ],
   );
@@ -407,6 +441,12 @@ class Stage extends StatelessComponent {
   // ── Helpers ─────────────────────────────────────────────────
 
   static String _px(double v) => v.truncateToDouble() == v ? '${v.toInt()}px' : '${v}px';
+
+  /// Shadow ink at a token opacity — the CSS equivalent of the package's
+  /// `staticBlack.withAlpha(opacity)`. Resolves in the stage's scoped
+  /// sheet like every other surface colour.
+  static String _shadowAlpha(double opacity) =>
+      'color-mix(in srgb, var(--dv-static-black) ${(opacity * 100).round()}%, transparent)';
 
   static String _hex(int argb) =>
       '#${argb.toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';

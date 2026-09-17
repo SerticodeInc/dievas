@@ -167,12 +167,47 @@ const _interactionsScript = '''<script>
       });
     });
   }
+  /* Sliding tab indicator — one bar under the row, sized and moved to
+   * the selected tab. Measured against the tab row's own box so the
+   * fit survives a resize or a theme swap. The bar only gains its
+   * transition once placed, so the first position and the web-font
+   * swap correction land instantly rather than sliding in. */
+  var stageTabs = stage && stage.querySelector('.stage-tabs');
+  var indicator = stageTabs && stageTabs.querySelector('[data-stage-indicator]');
+  function moveStageIndicator(tab) {
+    if (!indicator || !tab) return;
+    indicator.style.width = tab.offsetWidth + 'px';
+    indicator.style.transform = 'translateX(' + tab.offsetLeft + 'px)';
+  }
+  function syncStageIndicator() {
+    var active = null;
+    document.querySelectorAll('[data-stage-tab]').forEach(function(t){
+      if (t.getAttribute('aria-selected') === 'true') active = t;
+    });
+    moveStageIndicator(active);
+  }
+  if (stageTabs) {
+    syncStageIndicator();
+    var armIndicator = function(){
+      if (reduce) return;
+      requestAnimationFrame(function(){ stageTabs.classList.add('is-ready'); });
+    };
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function(){ syncStageIndicator(); armIndicator(); });
+    } else {
+      armIndicator();
+    }
+    window.addEventListener('resize', syncStageIndicator);
+    document.addEventListener('dievas:theme', syncStageIndicator);
+  }
+
   document.querySelectorAll('[data-stage-tab]').forEach(function(tab){
     tab.addEventListener('click', function(){
       var name = tab.dataset.stageTab;
       document.querySelectorAll('[data-stage-tab]').forEach(function(t){
         t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
       });
+      moveStageIndicator(tab);
       document.querySelectorAll('[data-stage-panel]').forEach(function(panel){
         if (panel.dataset.stagePanel === name) {
           panel.removeAttribute('hidden');

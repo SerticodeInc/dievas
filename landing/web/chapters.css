@@ -7,14 +7,37 @@
   overflow: hidden;
   isolation: isolate;
   padding-top: clamp(96px, 14vh, 160px);
-  background:
-    radial-gradient(115% 65% at 50% -22%, color-mix(in srgb, var(--dv-brand) 8%, transparent), transparent 64%),
-    radial-gradient(85% 55% at 112% 42%, color-mix(in srgb, var(--dv-brand) 5%, transparent), transparent 70%),
-    linear-gradient(
-      180deg,
-      var(--dv-bg-subtle),
-      color-mix(in srgb, var(--dv-bg-base) 55%, var(--dv-bg-subtle)) 42%
-    );
+  /* Section signature. Stage runs indigo (239°) and the theme wall turns
+   * coral peach (10°); rose at 350° is the boldest of the candidates and
+   * sits ~20° off that peach, so the two warm sections meet warm-on-warm.
+   * Chrome is rose; anything depicting the product keeps brand indigo. */
+  --chapter-accent: #f43f5e;
+  --chapter-accent-subtle: #ffe4e6;
+  /* A hairline plus a one-step-recessed plane, so the section reads as a
+   * different surface from the hero/stage sheet it follows. */
+  border-top: 2px solid var(--chapter-accent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--dv-surface-code) 80%, var(--dv-bg-subtle)) 0%,
+    var(--dv-bg-subtle) 22%,
+    color-mix(in srgb, var(--dv-bg-base) 55%, var(--dv-bg-subtle)) 100%
+  );
+}
+
+[data-theme="dark"] .chapters {
+  --chapter-accent: #fb7185;
+  --chapter-accent-subtle: color-mix(in srgb, var(--chapter-accent) 18%, transparent);
+}
+
+/* The light sheet names bg-subtle pure white, so the recessed top stop
+ * that reads on the dark sheet disappears here. Give it more paint. */
+:root:not([data-theme="dark"]) .chapters {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--dv-surface-code) 90%, var(--dv-bg-subtle)) 0%,
+    var(--dv-bg-subtle) 22%,
+    color-mix(in srgb, var(--dv-bg-base) 55%, var(--dv-bg-subtle)) 100%
+  );
 }
 
 /* ── Backdrop — matrix, mini components, sparkles ─────────── */
@@ -41,8 +64,8 @@
   width: 64px;
   height: 22px;
   border-radius: 999px;
-  background: var(--dv-brand);
-  box-shadow: 0 6px 14px -8px color-mix(in srgb, var(--dv-brand) 70%, transparent);
+  background: var(--chapter-accent);
+  box-shadow: 0 6px 14px -8px color-mix(in srgb, var(--chapter-accent) 70%, transparent);
 }
 
 .mini-switch {
@@ -64,11 +87,13 @@
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.25);
 }
 
+/* Backdrop hairlines use border-hi, not border: on the light sheet
+ * border is #e2e8f0 against a white section, so these shapes vanished. */
 .mini-tabs {
   display: flex;
   gap: 4px;
   padding-bottom: 6px;
-  border-bottom: 1px solid var(--dv-border);
+  border-bottom: 1px solid var(--dv-border-hi);
 }
 .mini-tabs .mtab {
   width: 18px;
@@ -76,7 +101,7 @@
   border-radius: 3px;
   background: var(--dv-border-hi);
 }
-.mini-tabs .mtab.on { background: var(--dv-brand); }
+.mini-tabs .mtab.on { background: var(--chapter-accent); }
 
 .mini-dots {
   display: flex;
@@ -91,21 +116,21 @@
 }
 .mini-dots .mdot.on {
   width: 18px;
-  background: var(--dv-brand);
+  background: var(--chapter-accent);
 }
 
 .mini-badge {
   width: 56px;
   height: 18px;
   border-radius: 999px;
-  background: var(--dv-brand-subtle);
+  background: var(--chapter-accent-subtle);
 }
 
 .mini-field {
   width: 88px;
   height: 22px;
   border-radius: var(--radius-md);
-  border: 1px solid var(--dv-border);
+  border: 1px solid var(--dv-border-hi);
   background: var(--dv-bg-base);
 }
 
@@ -113,7 +138,7 @@
   width: 60px;
   height: 20px;
   border-radius: 999px;
-  border: 1px solid var(--dv-border);
+  border: 1px solid var(--dv-border-hi);
 }
 
 @keyframes mini-drift {
@@ -131,7 +156,7 @@
   user-select: none;
   animation: sparkle-twinkle 6s var(--ease) infinite;
 }
-.sparkle.is-brand { color: var(--dv-brand); }
+.sparkle.is-brand { color: var(--chapter-accent); }
 
 @keyframes sparkle-twinkle {
   0%, 100% { opacity: 0.1; transform: scale(0.8); }
@@ -164,6 +189,10 @@
   letter-spacing: -0.045em;
   line-height: 1.05;
   color: var(--dv-text-hi);
+}
+
+.chapters-title-accent {
+  color: var(--chapter-accent);
 }
 
 .chapters-lede {
@@ -219,6 +248,13 @@
   font-size: clamp(24px, 2.8vw, 34px);
   letter-spacing: -0.03em;
   color: var(--dv-text-hi);
+  transition: color 260ms var(--ease);
+}
+
+/* 03 lets the demo drive the whole chapter: choose Disabled and the
+ * heading goes disabled with it. */
+.chapter:has(.state-demo[data-state="disabled"]) .chapter-heading {
+  color: var(--dv-text-off);
 }
 
 .chapter-body {
@@ -348,7 +384,22 @@
   font-size: 11px;
   letter-spacing: 0.06em;
   color: var(--dv-text-mid);
-  transition: border-color 200ms var(--ease), color 200ms var(--ease);
+  transition: border-color 200ms var(--ease), color 200ms var(--ease),
+    transform 110ms var(--ease), background 200ms var(--ease);
+}
+/* The pills are controls, but with no hover of their own they read as
+ * chips. Answer the cursor here; the pressed ring below still wins. */
+.brand-btn:hover,
+.state-btn:hover,
+.aspect-btn:hover {
+  border-color: var(--dv-border-hi);
+  background: var(--dv-bg-subtle);
+  color: var(--dv-text-hi);
+}
+.brand-btn:active,
+.state-btn:active,
+.aspect-btn:active {
+  transform: scale(0.96);
 }
 .brand-btn[aria-pressed="true"],
 .state-btn[aria-pressed="true"],
@@ -359,6 +410,22 @@
 }
 
 /* ── 03 · component state switcher ─────────────────────────── */
+
+/* A hint, because a row of pills on its own does not say "pick one". */
+.picker-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.picker-cue {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dv-text-lo);
+}
 
 .state-demo {
   width: 100%;
@@ -402,10 +469,13 @@
   pointer-events: none;
 }
 
+/* Indigo is the resting brand, so its trio is both the default and the
+ * explicit [data-brand] case — all three brands now read as the same kind
+ * of card instead of Indigo falling back to the page surface. */
 .brand-demo {
-  --demo-accent: var(--dv-brand);
-  --demo-bg: var(--dv-surface-canvas);
-  --demo-fg: var(--dv-text-hi);
+  --demo-accent: #6366f1;
+  --demo-bg: #1e1b4b;
+  --demo-fg: #eef2ff;
   width: 100%;
   max-width: 520px;
   display: flex;
@@ -461,27 +531,54 @@
 .brand-demo .bd-btn:active { transform: scale(0.97); }
 .brand-demo .bd-btn:hover { filter: brightness(1.06); }
 
+.brand-demo[data-brand="indigo"] { --demo-accent: #6366f1; --demo-bg: #1e1b4b; --demo-fg: #eef2ff; }
 .brand-demo[data-brand="timber"] { --demo-accent: #2f7d5f; --demo-bg: #0f2a20; --demo-fg: #eef7f2; }
 .brand-demo[data-brand="ember"]  { --demo-accent: #d4552f; --demo-bg: #331409; --demo-fg: #fdf0ea; }
 
+/* The pill for each brand wears that brand's colour once it is the
+ * pressed one — previously all three fell back to the neutral hairline. */
+.brand-btn[data-brand-trigger="indigo"] { --demo-accent: #6366f1; }
+.brand-btn[data-brand-trigger="timber"] { --demo-accent: #2f7d5f; }
+.brand-btn[data-brand-trigger="ember"]  { --demo-accent: #d4552f; }
+
+/* The well around the demo takes the same edge, and so does the 04: the
+ * accent is set on the chapter row so both can read it. */
+.chapter:has(.brand-demo[data-brand="indigo"]) { --well-accent: #6366f1; }
+.chapter:has(.brand-demo[data-brand="timber"]) { --well-accent: #2f7d5f; }
+.chapter:has(.brand-demo[data-brand="ember"])  { --well-accent: #d4552f; }
+.chapter:has(.brand-demo[data-brand]) .chapter-demo {
+  border-width: 2px;
+  border-color: color-mix(in srgb, var(--well-accent) 40%, var(--dv-border));
+  transition: border-color 260ms var(--ease);
+}
+.chapter:has(.brand-demo[data-brand]) .chapter-num {
+  color: var(--well-accent);
+  opacity: 1;
+  transition: color 260ms var(--ease), opacity 260ms var(--ease);
+}
+
 /* ── 05 · gallery handoff ──────────────────────────────────── */
 
+/* Six previews, three across. The strip is the whole handoff now — the
+ * hand-rolled "view the gallery" pill that used to sit seventh in the row
+ * is gone, so the tiles carry the chapter on their own. */
 .gallery-strip {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
+  width: 100%;
+  max-width: 520px;
 }
 
 .gal-tile {
-  width: 132px;
+  width: 100%;
   border-radius: var(--radius-lg);
   border: 1px solid var(--dv-border);
   background: var(--dv-bg-base);
-  padding: 16px 12px 12px;
+  padding: 16px 14px 12px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 14px;
   transition: border-color 200ms var(--ease), transform 200ms var(--ease);
 }
@@ -493,7 +590,7 @@
 .gal-preview {
   height: 34px;
   display: grid;
-  place-items: center;
+  place-items: center start;
 }
 
 .gal-name {
@@ -593,4 +690,10 @@
     gap: 14px;
   }
   .chapter-num { font-size: 44px; }
+  /* Three across is too tight for the 92px field preview. */
+  .gallery-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* Centred pickers leave a ragged left edge once they wrap. */
+  .state-picker,
+  .aspect-picker { justify-content: flex-start; }
+  .state-demo { align-items: flex-start; }
 }

@@ -9,7 +9,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding-block: clamp(44px, 6.5vh, 68px);
+	padding-block: clamp(64px, 10vh, 116px);
 }
 
 .footer-stack {

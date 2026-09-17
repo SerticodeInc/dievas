@@ -187,28 +187,6 @@ button {
   transform: scale(0.97);
 }
 
-.cta-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 22px;
-  border-radius: var(--radius-full);
-  background: var(--dv-action-sec);
-  color: var(--dv-text-hi);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  transition: background 180ms var(--ease), transform 110ms var(--ease);
-}
-.cta-ghost:hover {
-  background: var(--dv-action-sec-hover);
-}
-.cta-ghost:active {
-  transform: scale(0.97);
-}
-
 /* Dark CTA — the GitHub-pill colour pattern (black, white text).
    Used for the hero gallery link; the arrow nudges like the pill's. */
 .cta-dark {
@@ -243,8 +221,7 @@ button {
   display: inline-block;
   transition: transform 200ms var(--ease);
 }
-.cta-primary:hover .cta-arrow,
-.cta-ghost:hover .cta-arrow {
+.cta-primary:hover .cta-arrow {
   transform: translateX(3px);
 }
 
@@ -288,8 +265,7 @@ button {
   .press { transition: none; }
   .press.is-pressing { transform: none; }
   .scroll-progress { display: none; }
-  .cta-primary:hover .cta-arrow,
-  .cta-ghost:hover .cta-arrow { transform: none; }
+  .cta-primary:hover .cta-arrow { transform: none; }
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

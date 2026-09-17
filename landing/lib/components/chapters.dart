@@ -1,8 +1,6 @@
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr/dom.dart';
 
-import '../constants.dart';
-
 /// "How it's built" — five numbered evidence chapters, each ending
 /// in a live demonstrator (running control or an honest code strip).
 class Chapters extends StatelessComponent {
@@ -16,7 +14,8 @@ class Chapters extends StatelessComponent {
     div(classes: 'shell-narrow', [
       div(classes: 'chapters-intro', [
         h2(classes: 'chapters-title sr sr-s', [
-          Component.text('Compiled, not composed.'),
+          span(classes: 'chapters-title-accent', [Component.text('Compiled')]),
+          Component.text(', not composed.'),
         ]),
         p(classes: 'chapters-lede sr sr-l', [
           Component.text(
@@ -121,6 +120,11 @@ class Chapters extends StatelessComponent {
     _Mini(kind: 'badge', pos: 'top:55%;left:6%', dur: '23s', delay: '-12s'),
     _Mini(kind: 'field', pos: 'top:63%;right:2%', dur: '20s', delay: '-7s'),
     _Mini(kind: 'chip', pos: 'top:81%;left:4%', dur: '25s', delay: '-15s'),
+    _Mini(kind: 'dots', pos: 'top:21%;left:9%', dur: '20s', delay: '-8s'),
+    _Mini(kind: 'chip', pos: 'top:44%;right:12%', dur: '22s', delay: '-17s'),
+    _Mini(kind: 'switch', pos: 'top:71%;left:3%', dur: '23s', delay: '-10s'),
+    _Mini(kind: 'tabs', pos: 'top:88%;right:7%', dur: '21s', delay: '-19s'),
+    _Mini(kind: 'field', pos: 'top:97%;left:11%', dur: '24s', delay: '-13s'),
   ];
 
   static const _sparks = <_Spark>[
@@ -190,6 +194,42 @@ class Chapters extends StatelessComponent {
       dur: '8s',
       delay: '-1.5s',
     ),
+    _Spark(
+      char: '✦',
+      pos: 'top:11%;right:4%',
+      size: '19px',
+      dur: '6.8s',
+      delay: '-3.5s',
+    ),
+    _Spark(
+      char: '◇',
+      pos: 'top:34%;right:17%',
+      size: '22px',
+      dur: '5.8s',
+      delay: '-2s',
+      brand: true,
+    ),
+    _Spark(
+      char: '○',
+      pos: 'top:59%;left:13%',
+      size: '14px',
+      dur: '7.2s',
+      delay: '-4.5s',
+    ),
+    _Spark(
+      char: '+',
+      pos: 'top:79%;right:21%',
+      size: '21px',
+      dur: '6.2s',
+      delay: '-1.2s',
+    ),
+    _Spark(
+      char: '·',
+      pos: 'top:96%;right:29%',
+      size: '26px',
+      dur: '5.4s',
+      delay: '-3.2s',
+    ),
   ];
 
   Component _chapter({
@@ -220,29 +260,37 @@ class Chapters extends StatelessComponent {
     span(classes: 'chain-arrow', [Component.text('→')]),
     div(classes: 'chain-step sr-step', [
       b([Component.text('semantic')]),
+      Component.text(' · DievasColourSemanticLight.brand'),
+    ]),
+    span(classes: 'chain-arrow', [Component.text('→')]),
+    div(classes: 'chain-step', [
+      b([Component.text('component')]),
       Component.text(' · CoreColours.brand'),
     ]),
     span(classes: 'chain-arrow', [Component.text('→')]),
     div(classes: 'chain-step', [
       b([Component.text('context')]),
-      Component.text(' · colours.core.brand'),
+      Component.text('.colours.core.brand'),
     ]),
   ]);
 
   // ── 02 · Aspect rebuild readout ─────────────────────────────
 
   Component _aspectDemo() => div(classes: 'rebuild-well', [
-    div(classes: 'aspect-picker', [
-      for (final aspect in _aspectRows)
-        button(
-          type: ButtonType.button,
-          classes: 'aspect-btn press',
-          attributes: {
-            'data-aspect-trigger': aspect.$1,
-            'aria-pressed': aspect.$1 == 'text' ? 'true' : 'false',
-          },
-          [Component.text(aspect.$1)],
-        ),
+    div(classes: 'picker-block', [
+      p(classes: 'picker-cue', [Component.text('Pick an aspect →')]),
+      div(classes: 'aspect-picker', [
+        for (final aspect in _aspectRows)
+          button(
+            type: ButtonType.button,
+            classes: 'aspect-btn press',
+            attributes: {
+              'data-aspect-trigger': aspect.$1,
+              'aria-pressed': aspect.$1 == 'text' ? 'true' : 'false',
+            },
+            [Component.text(aspect.$1)],
+          ),
+      ]),
     ]),
     for (final row in _aspectRows)
       div(
@@ -267,7 +315,7 @@ class Chapters extends StatelessComponent {
         type: ButtonType.button,
         classes: 'dbtn dbtn-secondary press',
         attributes: const {'data-di-touch': ''},
-        [Component.text('Touch the theme →')],
+        [Component.text('Press me →')],
       ),
     ]),
   ]);
@@ -277,17 +325,20 @@ class Chapters extends StatelessComponent {
   // ── 03 · Component states ───────────────────────────────────
 
   Component _componentsDemo() => div(classes: 'comp-demo', [
-    div(classes: 'state-picker', [
-      for (final state in _states)
-        button(
-          type: ButtonType.button,
-          classes: 'state-btn press',
-          attributes: {
-            'data-state-trigger': state.$1,
-            'aria-pressed': state.$1 == 'default' ? 'true' : 'false',
-          },
-          [Component.text(state.$2)],
-        ),
+    div(classes: 'picker-block', [
+      p(classes: 'picker-cue', [Component.text('Pick a state →')]),
+      div(classes: 'state-picker', [
+        for (final state in _states)
+          button(
+            type: ButtonType.button,
+            classes: 'state-btn press',
+            attributes: {
+              'data-state-trigger': state.$1,
+              'aria-pressed': state.$1 == 'default' ? 'true' : 'false',
+            },
+            [Component.text(state.$2)],
+          ),
+      ]),
     ]),
     div(
       classes: 'state-demo',
@@ -341,21 +392,24 @@ class Chapters extends StatelessComponent {
   // ── 04 · Brand switcher ─────────────────────────────────────
 
   Component _brandDemo() => Component.fragment([
-    div(classes: 'brand-picker', [
-      for (final b in _brands)
-        button(
-          type: ButtonType.button,
-          classes: 'brand-btn press',
-          attributes: {
-            'data-brand-trigger': b.$1,
-            'aria-pressed': b.$1 == 'indigo' ? 'true' : 'false',
-          },
-          [Component.text(b.$2)],
-        ),
+    div(classes: 'picker-block', [
+      p(classes: 'picker-cue', [Component.text('Pick a colour →')]),
+      div(classes: 'brand-picker', [
+        for (final b in _brands)
+          button(
+            type: ButtonType.button,
+            classes: 'brand-btn press',
+            attributes: {
+              'data-brand-trigger': b.$1,
+              'aria-pressed': b.$1 == 'indigo' ? 'true' : 'false',
+            },
+            [Component.text(b.$2)],
+          ),
+      ]),
     ]),
     div(
       classes: 'brand-demo',
-      attributes: const {'data-brand-demo': ''},
+      attributes: const {'data-brand-demo': '', 'data-brand': 'indigo'},
       [
         div(classes: 'bd-head', [
           div(classes: 'bd-logo', [Component.text('D')]),
@@ -386,15 +440,6 @@ class Chapters extends StatelessComponent {
     _galTile('Badge', _galBadge()),
     _galTile('Chip', _galChip()),
     _galTile('Tabs', _galTabs()),
-    a(
-      href: DievasUrls.gallery,
-      classes: 'cta-ghost press',
-      attributes: const {'target': '_blank', 'rel': 'noopener'},
-      [
-        Component.text('View the gallery'),
-        span(classes: 'cta-arrow', [Component.text('↗')]),
-      ],
-    ),
   ]);
 
   Component _galTile(String name, Component preview) =>

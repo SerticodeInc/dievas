@@ -224,7 +224,10 @@ void main() {
 
   // ── Static theme tokens (font, spacing, radius, easing) ─────────────────
   // Non-inline: Tailwind emits these as :root vars and generates utilities.
-  buf.writeln('@theme {');
+  // `static` is required because partials consume these vars directly
+  // (var(--radius-2xl), var(--font-body), …) and nothing in lib/ references
+  // them — without it Tailwind tree-shakes them out of the build.
+  buf.writeln('@theme static {');
   buf.writeln('  /* ── Typography ─────────────────────────────────────────── */');
   buf.writeln('  --font-display: "MaisonNeueExtended", system-ui, sans-serif;');
   buf.writeln('  --font-body:    "MaisonNeue", system-ui, sans-serif;');

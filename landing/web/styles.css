@@ -20,7 +20,6 @@
  *   chapters.css     — 01-05 evidence chapters
  *   theme_section.css— theme wall twin cards
  *   craft.css        — native-to-the-last-token rows
- *   closing.css      — closing island
  *   footer.css       — ghost wordmark
  * ───────────────────────────────────────────────────────────── */
 
@@ -200,7 +199,7 @@
   --color-static-black: var(--dv-static-black);
 }
 
-@theme {
+@theme static {
   /* ── Typography ─────────────────────────────────────────── */
   --font-display: "MaisonNeueExtended", system-ui, sans-serif;
   --font-body:    "MaisonNeue", system-ui, sans-serif;

@@ -30,9 +30,11 @@ class Stage extends StatelessComponent {
       _titlebar(),
       _tablist(),
       div(classes: 'stage-body', [
-        _primitivesPanel(),
-        _semanticsPanel(),
-        _componentsPanel(),
+        div(classes: 'stage-track', attributes: const {'data-stage-track': ''}, [
+          _primitivesPanel(),
+          _semanticsPanel(),
+          _componentsPanel(),
+        ]),
       ]),
       _foot(),
     ],
@@ -154,7 +156,8 @@ class Stage extends StatelessComponent {
       'id': 'stage-panel-semantics',
       'aria-label': 'Semantic aliases',
       'data-stage-panel': 'semantics',
-      'hidden': '',
+      'aria-hidden': 'true',
+      'inert': '',
     },
     [
       div(classes: 'token-rows', [
@@ -218,7 +221,8 @@ class Stage extends StatelessComponent {
       'id': 'stage-panel-components',
       'aria-label': 'Live components',
       'data-stage-panel': 'components',
-      'hidden': '',
+      'aria-hidden': 'true',
+      'inert': '',
     },
     [
       div(classes: 'comp-demo', [

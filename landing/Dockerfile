@@ -15,12 +15,15 @@ WORKDIR /build/landing
 COPY landing/package*.json ./
 RUN npm ci
 
-# Copy Dart source so Tailwind can scan for class names
-COPY landing/web/styles.css ./web/styles.css
+# Copy all web sources so Tailwind scans the same inputs it sees in dev.
+# The CSS partials are the only consumers of the font/spacing/radius/easing
+# theme vars, so omitting them makes Tailwind tree-shake those vars away.
+COPY landing/web/ ./web/
 COPY landing/lib/ ./lib/
 
-# Generate minified output.css
-RUN npx @tailwindcss/cli -i web/styles.css -o web/output.css --minify
+# Generate minified output.css. Drop the committed artifact first so it is
+# never scanned as a content source.
+RUN rm -f web/output.css && npx @tailwindcss/cli -i web/styles.css -o web/output.css --minify
 
 # ── Stage 2: Build Jaspr Dart server ─────────────────────────────────────────
 FROM dart:stable AS dart-builder

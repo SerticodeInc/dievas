@@ -2,7 +2,6 @@ import 'package:jaspr/server.dart';
 import 'package:jaspr/dom.dart';
 
 import 'components/chapters.dart';
-import 'components/closing.dart';
 import 'components/craft_section.dart';
 import 'components/footer.dart';
 import 'components/hero.dart';
@@ -20,7 +19,7 @@ class App extends StatelessComponent {
 
   @override
   Component build(BuildContext context) => Document(
-    title: 'Dievas | Flutter Design System',
+    title: 'Dievas | Tokens. Semantics. Theme.',
     lang: 'en',
     meta: const {
       'description':
@@ -30,22 +29,10 @@ class App extends StatelessComponent {
           'layer up.',
     },
     head: [
-      meta(
-        name: 'theme-color',
-        content: '#f8fafc',
-        attributes: const {'id': 'theme-color'},
-      ),
+      meta(name: 'theme-color', content: '#f8fafc', attributes: const {'id': 'theme-color'}),
       link(rel: 'preconnect', href: 'https://fonts.googleapis.com'),
-      link(
-        rel: 'preconnect',
-        href: 'https://fonts.gstatic.com',
-        attributes: const {'crossorigin': ''},
-      ),
-      link(
-        rel: 'stylesheet',
-        href:
-            'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap',
-      ),
+      link(rel: 'preconnect', href: 'https://fonts.gstatic.com', attributes: const {'crossorigin': ''}),
+      link(rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap'),
       link(rel: 'stylesheet', href: '/output.css'),
       link(rel: 'stylesheet', href: '/base.css'),
       link(rel: 'stylesheet', href: '/nav.css'),
@@ -54,7 +41,6 @@ class App extends StatelessComponent {
       link(rel: 'stylesheet', href: '/chapters.css'),
       link(rel: 'stylesheet', href: '/theme_section.css'),
       link(rel: 'stylesheet', href: '/craft.css'),
-      link(rel: 'stylesheet', href: '/closing.css'),
       link(rel: 'stylesheet', href: '/footer.css'),
       link(rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg'),
       RawText(_themeInitScript),
@@ -111,6 +97,12 @@ const _interactionsScript = '''<script>
   }
   function resolveVar(el, prop) {
     var v = getComputedStyle(themeContext(el)).getPropertyValue(prop);
+    return v ? v.trim() : '';
+  }
+  // A section signature (the chapters' accent) is declared on the section
+  // itself, not on a theme sheet, so read it without the scope walk.
+  function resolveLocal(el, prop) {
+    var v = getComputedStyle(el).getPropertyValue(prop);
     return v ? v.trim() : '';
   }
 
@@ -201,6 +193,29 @@ const _interactionsScript = '''<script>
     document.addEventListener('dievas:theme', syncStageIndicator);
   }
 
+  /* The three panels ride a horizontal track, so a tab change slides the
+   * page across like the indicator does instead of crossfading in place.
+   * The inactive panels keep `inert` so their controls leave the tab
+   * order. The flex row's tallest panel sets the window height, so there
+   * is no measuring pass. */
+  var stageTrack = stage && stage.querySelector('[data-stage-track]');
+  var stagePanels = stage ? stage.querySelectorAll('[data-stage-panel]') : [];
+  function showStagePanel(name) {
+    var index = 0;
+    stagePanels.forEach(function(panel, i){
+      var active = panel.dataset.stagePanel === name;
+      if (active) {
+        index = i;
+        panel.removeAttribute('inert');
+        panel.setAttribute('aria-hidden', 'false');
+      } else {
+        panel.setAttribute('inert', '');
+        panel.setAttribute('aria-hidden', 'true');
+      }
+    });
+    if (stageTrack) stageTrack.style.transform = 'translateX(' + (-index * 100) + '%)';
+  }
+
   document.querySelectorAll('[data-stage-tab]').forEach(function(tab){
     tab.addEventListener('click', function(){
       var name = tab.dataset.stageTab;
@@ -208,50 +223,10 @@ const _interactionsScript = '''<script>
         t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
       });
       moveStageIndicator(tab);
-      document.querySelectorAll('[data-stage-panel]').forEach(function(panel){
-        if (panel.dataset.stagePanel === name) {
-          panel.removeAttribute('hidden');
-        } else {
-          panel.setAttribute('hidden', '');
-        }
-      });
-      sizeStageBody();
+      showStagePanel(name);
       setStageLabel(name);
     });
   });
-
-  /* Pin the stage body to the tallest panel so the window holds one
-   * height across tabs and the swap is a crossfade, not a jump. All
-   * panels are measured at the current width, so the heights match
-   * what a panel will occupy when shown. */
-  var stageBody = stage && stage.querySelector('.stage-body');
-  function stageActivePanel() {
-    var panels = stageBody ? stageBody.querySelectorAll('[data-stage-panel]') : [];
-    for (var i = 0; i < panels.length; i++) {
-      if (!panels[i].hasAttribute('hidden')) return panels[i];
-    }
-    return panels[0];
-  }
-  function sizeStageBody() {
-    if (!stageBody) return;
-    var active = stageActivePanel();
-    stageBody.querySelectorAll('[data-stage-panel]').forEach(function(panel){
-      if (panel.hidden) panel.hidden = false;
-      var h = panel.offsetHeight;
-      if (h > stageBody._maxH) stageBody._maxH = h;
-      panel._h = h;
-    });
-    stageBody.style.minHeight = Math.max(stageBody._maxH || 0, 400) + 'px';
-    stageBody.querySelectorAll('[data-stage-panel]').forEach(function(panel){
-      if (panel !== active) panel.hidden = true;
-    });
-  }
-  if (stageBody) {
-    stageBody._maxH = 0;
-    if (!reduce) sizeStageBody();
-    window.addEventListener('resize', function(){ stageBody._maxH = 0; sizeStageBody(); });
-    document.addEventListener('dievas:theme', function(){ stageBody._maxH = 0; sizeStageBody(); });
-  }
   var rebuildCounter = 0;
   document.querySelectorAll('[data-di-switch]').forEach(function(sw){
     sw.addEventListener('click', function(){
@@ -409,7 +384,7 @@ const _interactionsScript = '''<script>
     var GRID = 46;
     var RADIUS = 190;
     var ctx = matrix.getContext('2d');
-    var dots = [], w = 0, h = 0, col = { base: '', brand: '' };
+    var dots = [], w = 0, h = 0, col = { base: '', brand: '' }, alphaScale = 1;
     var px = -9999, py = -9999;
     var visible = false, raf = null;
 
@@ -423,8 +398,12 @@ const _interactionsScript = '''<script>
       if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       col = {
         base: resolveVar(matrix, '--dv-border-hi'),
-        brand: resolveVar(matrix, '--dv-brand'),
+        brand: resolveLocal(matrix, '--chapter-accent') || resolveVar(matrix, '--dv-brand'),
       };
+      /* border-hi is near-black on the light sheet, so the same 9-20%
+       * dots sink into the white section; lean on them a little harder
+       * there and leave the dark sheet's alphas alone. */
+      alphaScale = document.documentElement.dataset.theme === 'dark' ? 1 : 1.7;
       dots = [];
       for (var y = GRID / 2; y < h; y += GRID) {
         for (var x = GRID / 2; x < w; x += GRID) {
@@ -446,7 +425,7 @@ const _interactionsScript = '''<script>
         d.near = dist < RADIUS ? 1 - dist / RADIUS : 0;
         if (d.near > 0.05) continue;
         var idle = (Math.sin(now * 1.6 + d.ph) + 1) / 2;
-        ctx.globalAlpha = 0.09 + idle * 0.11;
+        ctx.globalAlpha = Math.min(1, (0.09 + idle * 0.11) * alphaScale);
         ctx.beginPath();
         ctx.arc(d.x, d.y, 1, 0, Math.PI * 2);
         ctx.fill();
@@ -456,7 +435,7 @@ const _interactionsScript = '''<script>
         var e = dots[j];
         if (e.near <= 0.05) continue;
         var idle2 = (Math.sin(now * 1.6 + e.ph) + 1) / 2;
-        ctx.globalAlpha = 0.18 + e.near * 0.62 + idle2 * 0.06;
+        ctx.globalAlpha = Math.min(1, (0.18 + e.near * 0.62 + idle2 * 0.06) * alphaScale);
         ctx.beginPath();
         ctx.arc(e.x, e.y, 1 + e.near * 2.4, 0, Math.PI * 2);
         ctx.fill();
@@ -494,8 +473,7 @@ const _interactionsScript = '''<script>
 ///   2. Chapters — five evidence chapters
 ///   3. ThemeSection — light/dark twin sheets
 ///   4. CraftSection — four craft rows
-///   5. Closing — brand glow easing into the footer
-///   6. Footer — ghost wordmark
+///   5. Footer — ghost wordmark
 class _AppBody extends StatelessComponent {
   const _AppBody();
 
@@ -507,7 +485,6 @@ class _AppBody extends StatelessComponent {
     const Chapters(),
     const ThemeSection(),
     const CraftSection(),
-    const Closing(),
     const FooterComponent(),
     RawText(_interactionsScript),
   ]);

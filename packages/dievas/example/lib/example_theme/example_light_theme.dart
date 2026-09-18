@@ -16,108 +16,108 @@ final class ExampleLightThemeData extends DievasGlobalThemeData {
         typography: typography ?? buildExampleTypography(textColor: _lightColours.text.textPrimary),
       );
 
-  static final DievasColourThemeData _lightColours = DievasColourThemeData(
+  static const DievasColourThemeData _lightColours = DievasColourThemeData(
     brightness: .light,
-    core: const CoreColours(
+    core: CoreColours(
       brand: Color(ExampleColours.brand),
       brandSubtle: Color(ExampleColours.brandSubtle),
-      // Text on action surfaces. This brand's primary action is ink
-      // (ExampleColours.actionPrimary), so onBrand must be a light colour —
-      // lavender mirrors the brand's real ink-button + light-label look.
-      onBrand: Color(ExampleColours.textLight),
+      // Espresso over peach — see ExampleColours.onBrand. White would only
+      // reach ~3.1:1 here, which is fine for a tag but not a button label.
+      onBrand: Color(ExampleColours.onBrand),
     ),
-    text: const TextColours(
-      textPrimary: Color(ExampleColours.textDark),
-      textSecondary: Color(DievasColourSemanticLight.textSecondary),
-      textTertiary: Color(DievasColourSemanticLight.textTertiary),
-      textDisabled: Color(DievasColourSemanticLight.textDisabled),
+    text: TextColours(
+      textPrimary: Color(ExampleColours.warm900),
+      textSecondary: Color(ExampleColours.warm600),
+      textTertiary: Color(ExampleColours.warm500),
+      textDisabled: Color(ExampleColours.warm300),
       // textInverse colours text on elevated surfaces (e.g. tooltips). In light
-      // mode those surfaces are white, so the inverse text must be dark.
-      textInverse: Color(ExampleColours.textDark),
+      // mode those surfaces are dark, so the inverse text must be light.
+      textInverse: Color(ExampleColours.warm50),
       textOnBrand: Color(ExampleColours.onBrand),
     ),
-    icon: const IconColours(
-      iconPrimary: Color(DievasColourSemanticLight.iconPrimary),
-      iconSecondary: Color(DievasColourSemanticLight.iconSecondary),
-      iconDisabled: Color(DievasColourSemanticLight.iconDisabled),
+    icon: IconColours(
+      iconPrimary: Color(ExampleColours.warm900),
+      iconSecondary: Color(ExampleColours.warm600),
+      iconDisabled: Color(ExampleColours.warm300),
       iconOnBrand: Color(ExampleColours.onBrand),
     ),
-    background: const BackgroundColours(
-      // Brand scaffold: the warm off-white this product surfaces on.
-      bgBase: Color(ExampleColours.scaffoldBG),
-      bgSubtle: Color(DievasColourSemanticLight.bgSubtle),
-      bgElevated: Color(DievasColourSemanticLight.bgElevated),
-      bgOverlay: Color(DievasColourSemanticLight.bgOverlay),
+    background: BackgroundColours(
+      // Warm paper scaffold with clean white cards on top.
+      bgBase: Color(ExampleColours.warm50),
+      bgSubtle: Color(ExampleColours.actualWhite),
+      bgElevated: Color(ExampleColours.actualWhite),
+      bgOverlay: Color(ExampleColours.overlay),
     ),
-    border: const BorderColours(
-      borderDefault: Color(DievasColourSemanticLight.borderDefault),
-      borderStrong: Color(DievasColourSemanticLight.borderStrong),
-      borderDisabled: Color(DievasColourSemanticLight.borderDisabled),
-      borderFocus: Color(DievasColourSemanticLight.borderFocus),
-      borderBrand: Color(ExampleColours.borderBrand),
+    border: BorderColours(
+      borderDefault: Color(ExampleColours.warm200),
+      borderStrong: Color(ExampleColours.warm900),
+      borderDisabled: Color(ExampleColours.warm200),
+      borderFocus: Color(ExampleColours.peach500),
+      borderBrand: Color(ExampleColours.peach500),
     ),
-    action: const ActionColours(
-      actionPrimary: Color(ExampleColours.actionPrimary),
-      actionPrimaryHover: Color(ExampleColours.actionPrimaryHover),
-      actionPrimaryActive: Color(ExampleColours.actionPrimaryActive),
-      actionPrimaryDisabled: Color(DievasColourSemanticLight.actionPrimaryDisabled),
-      actionSecondary: Color(ExampleColours.actionSecondary),
-      actionSecondaryHover: Color(ExampleColours.actionSecondaryHover),
-      actionError: Color(DievasColourSemanticLight.actionError),
-      actionErrorHover: Color(DievasColourSemanticLight.actionErrorHover),
-      actionSuccess: Color(DievasColourSemanticLight.actionSuccess),
+    action: ActionColours(
+      actionPrimary: Color(ExampleColours.peach500),
+      actionPrimaryHover: Color(ExampleColours.peach600),
+      actionPrimaryActive: Color(ExampleColours.peach700),
+      actionPrimaryDisabled: Color(ExampleColours.warm200),
+      // The theme wall's dark-sheet indigo, surfaced as a whisper-quiet tint.
+      actionSecondary: Color(ExampleColours.indigo50),
+      actionSecondaryHover: Color(ExampleColours.indigo100),
+      actionError: Color(ExampleColours.error),
+      actionErrorHover: Color(ExampleColours.errorHover),
+      actionSuccess: Color(ExampleColours.success),
     ),
-    feedback: const FeedbackColours(
+    feedback: FeedbackColours(
       feedbackSuccess: FeedbackColour(
-        background: Color(DievasColourSemanticLight.feedbackSuccessBackground),
-        border: Color(DievasColourSemanticLight.feedbackSuccessBorder),
-        icon: Color(DievasColourSemanticLight.feedbackSuccessIcon),
-        text: Color(DievasColourSemanticLight.feedbackSuccessText),
+        background: Color(ExampleColours.successBg),
+        border: Color(ExampleColours.successBorder),
+        icon: Color(ExampleColours.successIcon),
+        text: Color(ExampleColours.successText),
       ),
       feedbackWarning: FeedbackColour(
-        background: Color(DievasColourSemanticLight.feedbackWarningBackground),
-        border: Color(DievasColourSemanticLight.feedbackWarningBorder),
-        icon: Color(DievasColourSemanticLight.feedbackWarningIcon),
-        text: Color(DievasColourSemanticLight.feedbackWarningText),
+        background: Color(ExampleColours.warningBg),
+        border: Color(ExampleColours.warningBorder),
+        icon: Color(ExampleColours.warningIcon),
+        text: Color(ExampleColours.warningText),
       ),
       feedbackError: FeedbackColour(
-        background: Color(DievasColourSemanticLight.feedbackErrorBackground),
-        border: Color(DievasColourSemanticLight.feedbackErrorBorder),
-        icon: Color(DievasColourSemanticLight.feedbackErrorIcon),
-        text: Color(DievasColourSemanticLight.feedbackErrorText),
+        background: Color(ExampleColours.errorBg),
+        border: Color(ExampleColours.errorBorder),
+        icon: Color(ExampleColours.errorIcon),
+        text: Color(ExampleColours.errorText),
       ),
       feedbackInfo: FeedbackColour(
-        background: Color(DievasColourSemanticLight.feedbackInfoBackground),
-        border: Color(DievasColourSemanticLight.feedbackInfoBorder),
-        icon: Color(DievasColourSemanticLight.feedbackInfoIcon),
-        text: Color(DievasColourSemanticLight.feedbackInfoText),
+        background: Color(ExampleColours.infoBg),
+        border: Color(ExampleColours.infoBorder),
+        icon: Color(ExampleColours.infoIcon),
+        text: Color(ExampleColours.infoText),
       ),
     ),
-    input: const InputColours(
-      inputBg: Color(DievasColourSemanticLight.inputBg),
-      inputBorder: Color(DievasColourSemanticLight.inputBorder),
-      inputBorderFocus: Color(DievasColourSemanticLight.inputBorderFocus),
-      inputBorderError: Color(DievasColourSemanticLight.inputBorderError),
-      inputBorderWarning: Color(DievasColourSemanticLight.inputBorderWarning),
-      inputText: Color(DievasColourSemanticLight.inputText),
-      inputPlaceholder: Color(DievasColourSemanticLight.inputPlaceholder),
+    input: InputColours(
+      inputBg: Color(ExampleColours.actualWhite),
+      inputBorder: Color(ExampleColours.warm300),
+      inputBorderFocus: Color(ExampleColours.peach500),
+      inputBorderError: Color(ExampleColours.inputBorderError),
+      inputBorderWarning: Color(ExampleColours.inputBorderWarning),
+      inputText: Color(ExampleColours.warm900),
+      inputPlaceholder: Color(ExampleColours.warm500),
     ),
-    surface: const SurfaceColours(
-      surfaceCanvas: Color(DievasColourSemanticLight.surfaceCanvas),
-      surfaceCode: Color(DievasColourSemanticLight.surfaceCode),
-      surfaceSidebar: Color(DievasColourSemanticLight.surfaceSidebar),
-      surfaceTableStriped: Color(DievasColourSemanticLight.surfaceTableStriped),
+    surface: SurfaceColours(
+      surfaceCanvas: Color(ExampleColours.actualWhite),
+      surfaceCode: Color(ExampleColours.warm100),
+      surfaceSidebar: Color(ExampleColours.warm100),
+      surfaceTableStriped: Color(ExampleColours.warm100),
     ),
-    switchColours: const SwitchColours(
-      switchTrackOn: Color(DievasColourSemanticLight.switchTrackOn),
-      switchTrackOff: Color(DievasColourSemanticLight.switchTrackOff),
-      switchThumbOn: Color(DievasColourSemanticLight.switchThumbOn),
-      switchThumbOff: Color(DievasColourSemanticLight.switchThumbOff),
+    switchColours: SwitchColours(
+      switchTrackOn: Color(ExampleColours.peach500),
+      switchTrackOff: Color(ExampleColours.warm200),
+      switchThumbOn: Color(ExampleColours.actualWhite),
+      switchThumbOff: Color(ExampleColours.warm300),
     ),
-    staticColours: const StaticColours(
-      staticWhite: Color(ExampleColours.staticWhite),
+    staticColours: StaticColours(
+      staticWhite: Color(ExampleColours.actualWhite),
       staticBlack: Color(ExampleColours.staticBlack),
-      staticTransparent: Color(DievasColourSemanticLight.staticTransparent),
+      staticTransparent: Color(ExampleColours.transparent),
     ),
   );
 

@@ -63,7 +63,7 @@ class _DievasAccordionState extends State<DievasAccordion> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: widget.items.length,
-      separatorBuilder: (_, _) => SizedBox(height: spacing.sm),
+      separatorBuilder: (_, _) => SizedBox(height: spacing.SM),
       itemBuilder: (context, index) => _AccordionCard(
         item: widget.items[index],
         index: index,

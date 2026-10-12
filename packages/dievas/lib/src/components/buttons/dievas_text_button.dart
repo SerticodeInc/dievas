@@ -33,7 +33,7 @@ class DievasTextButton extends StatefulWidget with DievasButtonStateAnimatedLoad
   const DievasTextButton({
     super.key,
     this.style = .primary,
-    this.size = .md,
+    this.size = .MD,
     this.state = .idle,
     this.label,
     this.child,
@@ -84,21 +84,21 @@ class _DievasTextButtonState extends State<DievasTextButton>
     };
 
     final textStyle = switch (widget.size) {
-      .sm => buttonTheme.textStyle.sm,
-      .md => buttonTheme.textStyle.md,
-      .lg => buttonTheme.textStyle.lg,
+      .SM => buttonTheme.textStyle.SM,
+      .MD => buttonTheme.textStyle.MD,
+      .LG => buttonTheme.textStyle.LG,
     };
 
     final iconSize = switch (widget.size) {
-      .sm => buttonTheme.iconSize.sm,
-      .md => buttonTheme.iconSize.md,
-      .lg => buttonTheme.iconSize.lg,
+      .SM => buttonTheme.iconSize.SM,
+      .MD => buttonTheme.iconSize.MD,
+      .LG => buttonTheme.iconSize.LG,
     };
 
     final iconSpacing = switch (widget.size) {
-      .sm => buttonTheme.iconSpacing.sm,
-      .md => buttonTheme.iconSpacing.md,
-      .lg => buttonTheme.iconSpacing.lg,
+      .SM => buttonTheme.iconSpacing.SM,
+      .MD => buttonTheme.iconSpacing.MD,
+      .LG => buttonTheme.iconSpacing.LG,
     };
 
     final apple = isApplePlatform;

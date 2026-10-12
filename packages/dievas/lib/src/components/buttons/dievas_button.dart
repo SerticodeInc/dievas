@@ -72,29 +72,29 @@ class DievasButton extends StatelessWidget {
 
     // Unpack the size-keyed layout values in one switch.
     final (textStyle, height, iconSize, iconSpacing, radius, padding) = switch (size) {
-      .sm => (
-        themeData.textStyle.sm,
-        themeData.height.sm,
-        themeData.iconSize.sm,
-        themeData.iconSpacing.sm,
-        themeData.radius.sm,
-        themeData.padding.sm,
+      .SM => (
+        themeData.textStyle.SM,
+        themeData.height.SM,
+        themeData.iconSize.SM,
+        themeData.iconSpacing.SM,
+        themeData.radius.SM,
+        themeData.padding.SM,
       ),
-      .md => (
-        themeData.textStyle.md,
-        themeData.height.md,
-        themeData.iconSize.md,
-        themeData.iconSpacing.md,
-        themeData.radius.md,
-        themeData.padding.md,
+      .MD => (
+        themeData.textStyle.MD,
+        themeData.height.MD,
+        themeData.iconSize.MD,
+        themeData.iconSpacing.MD,
+        themeData.radius.MD,
+        themeData.padding.MD,
       ),
-      .lg => (
-        themeData.textStyle.lg,
-        themeData.height.lg,
-        themeData.iconSize.lg,
-        themeData.iconSpacing.lg,
-        themeData.radius.lg,
-        themeData.padding.lg,
+      .LG => (
+        themeData.textStyle.LG,
+        themeData.height.LG,
+        themeData.iconSize.LG,
+        themeData.iconSpacing.LG,
+        themeData.radius.LG,
+        themeData.padding.LG,
       ),
     };
 
@@ -127,8 +127,8 @@ class DievasButton extends StatelessWidget {
 
         final child = Center(
           child: switch (size) {
-            .sm || .md => UnconstrainedBox(constrainedAxis: .vertical, child: props.child),
-            .lg => props.child,
+            .SM || .MD => UnconstrainedBox(constrainedAxis: .vertical, child: props.child),
+            .LG => props.child,
           },
         );
 

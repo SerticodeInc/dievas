@@ -160,59 +160,59 @@ base class DievasGlobalThemeData implements DievasThemeData {
         BoxShadow(color: shadow.withAlpha((opacity * 255).round()), blurRadius: blur, offset: Offset(0, offsetY));
 
     return DievasElevationThemeData(
-      none: const [],
-      xs: [
+      NONE: const [],
+      XS: [
         layer(
-          blur: DievasElevationShadowLayer.xs.blur,
-          offsetY: DievasElevationShadowLayer.xs.offsetY,
+          blur: DievasElevationShadowLayer.XS.blur,
+          offsetY: DievasElevationShadowLayer.XS.offsetY,
           opacity: DievasOpacitySemantic.shadow1,
         ),
       ],
-      sm: [
+      SM: [
         layer(
-          blur: DievasElevationShadowLayer.smUpper.blur,
-          offsetY: DievasElevationShadowLayer.smUpper.offsetY,
+          blur: DievasElevationShadowLayer.upperSM.blur,
+          offsetY: DievasElevationShadowLayer.upperSM.offsetY,
           opacity: DievasOpacitySemantic.shadow2Upper,
         ),
         layer(
-          blur: DievasElevationShadowLayer.smLower.blur,
-          offsetY: DievasElevationShadowLayer.smLower.offsetY,
+          blur: DievasElevationShadowLayer.lowerSM.blur,
+          offsetY: DievasElevationShadowLayer.lowerSM.offsetY,
           opacity: DievasOpacitySemantic.shadow2Lower,
         ),
       ],
-      md: [
+      MD: [
         layer(
-          blur: DievasElevationShadowLayer.mdUpper.blur,
-          offsetY: DievasElevationShadowLayer.mdUpper.offsetY,
+          blur: DievasElevationShadowLayer.upperMD.blur,
+          offsetY: DievasElevationShadowLayer.upperMD.offsetY,
           opacity: DievasOpacitySemantic.shadow2Upper,
         ),
         layer(
-          blur: DievasElevationShadowLayer.mdLower.blur,
-          offsetY: DievasElevationShadowLayer.mdLower.offsetY,
+          blur: DievasElevationShadowLayer.lowerMD.blur,
+          offsetY: DievasElevationShadowLayer.lowerMD.offsetY,
           opacity: DievasOpacitySemantic.shadow2,
         ),
       ],
-      lg: [
+      LG: [
         layer(
-          blur: DievasElevationShadowLayer.lgUpper.blur,
-          offsetY: DievasElevationShadowLayer.lgUpper.offsetY,
+          blur: DievasElevationShadowLayer.upperLG.blur,
+          offsetY: DievasElevationShadowLayer.upperLG.offsetY,
           opacity: DievasOpacitySemantic.shadow1Light,
         ),
         layer(
-          blur: DievasElevationShadowLayer.lgLower.blur,
-          offsetY: DievasElevationShadowLayer.lgLower.offsetY,
+          blur: DievasElevationShadowLayer.lowerLG.blur,
+          offsetY: DievasElevationShadowLayer.lowerLG.offsetY,
           opacity: DievasOpacitySemantic.shadow2,
         ),
       ],
-      xl: [
+      XL: [
         layer(
-          blur: DievasElevationShadowLayer.xlUpper.blur,
-          offsetY: DievasElevationShadowLayer.xlUpper.offsetY,
+          blur: DievasElevationShadowLayer.upperXL.blur,
+          offsetY: DievasElevationShadowLayer.upperXL.offsetY,
           opacity: DievasOpacitySemantic.shadow1Light,
         ),
         layer(
-          blur: DievasElevationShadowLayer.xlLower.blur,
-          offsetY: DievasElevationShadowLayer.xlLower.offsetY,
+          blur: DievasElevationShadowLayer.lowerXL.blur,
+          offsetY: DievasElevationShadowLayer.lowerXL.offsetY,
           opacity: DievasOpacitySemantic.shadow2Heavy,
         ),
       ],
@@ -224,8 +224,8 @@ base class DievasGlobalThemeData implements DievasThemeData {
     final seedColour = colours.action.actionPrimary;
     final scaffoldBg = colours.background.bgBase;
     final textColour = colours.text.textPrimary;
-    final baseFont = typography.bodyMd.fontFamily ?? DievasFontFamilyPrimitives.sans;
-    final displayFont = typography.displaySm.fontFamily ?? DievasFontFamilyPrimitives.sansExtended;
+    final baseFont = typography.bodyMD.fontFamily ?? DievasFontFamilyPrimitives.sans;
+    final displayFont = typography.displaySM.fontFamily ?? DievasFontFamilyPrimitives.sansExtended;
 
     final base = ThemeData(
       brightness: brightness,

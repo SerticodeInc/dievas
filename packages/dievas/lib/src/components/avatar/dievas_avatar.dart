@@ -5,19 +5,19 @@ import 'package:dievas/src/theme/dievas_theme.dart';
 /// Size variants for [DievasAvatar].
 enum DievasAvatarSize {
   /// 24 × 24 dp — inline / compact contexts.
-  xs,
+  XS,
 
   /// 32 × 32 dp — default list row size.
-  sm,
+  SM,
 
   /// 40 × 40 dp — standard card/header size.
-  md,
+  MD,
 
   /// 48 × 48 dp — profile hero.
-  lg,
+  LG,
 
   /// 64 × 64 dp — full-page profile.
-  xl,
+  XL,
 }
 
 /// Visual style of the avatar container.
@@ -41,8 +41,8 @@ enum DievasAvatarShape {
 ///   imageProvider: NetworkImage(user.avatarUrl),
 ///   semanticLabel: user.displayName,
 /// )
-/// DievasAvatar(initials: 'AB', size: .lg)
-/// DievasAvatar(size: .sm, shape: .square)
+/// DievasAvatar(initials: 'AB', size: .LG)
+/// DievasAvatar(size: .SM, shape: .square)
 /// DievasAvatar(
 ///   initials: 'AB',
 ///   backgroundColour: Colors.blue,
@@ -57,7 +57,7 @@ class DievasAvatar extends StatelessWidget {
     super.key,
     this.imageProvider,
     this.initials,
-    this.size = .md,
+    this.size = .MD,
     this.shape = .circle,
     this.semanticLabel,
     this.backgroundColour,
@@ -98,19 +98,19 @@ class DievasAvatar extends StatelessWidget {
     final theme = DievasTheme.componentsOf(context).avatar;
 
     final dimension = switch (size) {
-      .xs => theme.sizeXs,
-      .sm => theme.sizeSm,
-      .md => theme.sizeMd,
-      .lg => theme.sizeLg,
-      .xl => theme.sizeXl,
+      .XS => theme.sizeXS,
+      .SM => theme.sizeSM,
+      .MD => theme.sizeMD,
+      .LG => theme.sizeLG,
+      .XL => theme.sizeXL,
     };
 
     final initialsStyle = switch (size) {
-      .xs => theme.initialsStyleXs,
-      .sm => theme.initialsStyleSm,
-      .md => theme.initialsStyleMd,
-      .lg => theme.initialsStyleLg,
-      .xl => theme.initialsStyleXl,
+      .XS => theme.initialsStyleXS,
+      .SM => theme.initialsStyleSM,
+      .MD => theme.initialsStyleMD,
+      .LG => theme.initialsStyleLG,
+      .XL => theme.initialsStyleXL,
     };
 
     final borderRadius = switch (shape) {

@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 /// `double`, `EdgeInsets` — indexed by [DievasButtonSize].
 ///
 /// ```dart
-/// final DievasButtonThemeValue<double> height = (sm: 32, md: 40, lg: 48);
+/// final DievasButtonThemeValue<double> height = (SM: 32, MD: 40, LG: 48);
 /// ```
 @internal
-typedef DievasButtonThemeValue<T> = ({T sm, T md, T lg});
+typedef DievasButtonThemeValue<T> = ({T SM, T MD, T LG});

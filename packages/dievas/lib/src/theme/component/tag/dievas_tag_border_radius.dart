@@ -16,7 +16,7 @@ sealed class DievasTagBorderRadius {
 
   /// Resolves to a concrete [BorderRadius].
   BorderRadius resolve() => switch (this) {
-    _PillTagBorderRadius() => BorderRadius.circular(DievasRadiusSemantic.full),
+    _PillTagBorderRadius() => BorderRadius.circular(DievasRadiusSemantic.FULL),
     _RoundedTagBorderRadius(:final radius) => radius,
   };
 

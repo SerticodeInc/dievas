@@ -16,7 +16,7 @@ final class DievasBadgeThemeData extends Equatable {
     required this.iconSpacing,
   });
 
-  /// Label text style — typically [DievasTypographyThemeData.labelXs].
+  /// Label text style — typically [DievasTypographyThemeData.labelXS].
   final TextStyle textStyle;
 
   /// Container corner radius — pill shape for badges.

@@ -64,29 +64,29 @@ void main() {
 
     test('spacing defaults match 4px grid', () {
       final s = DievasLightThemeData().spacing;
-      expect(s.none, 0);
-      expect(s.xs, 4);
-      expect(s.sm, 8);
-      expect(s.smPlus, 12);
-      expect(s.md, 16);
-      expect(s.mdPlus, 20);
-      expect(s.lg, 24);
-      expect(s.lgPlus, 28);
-      expect(s.xl, 32);
+      expect(s.NONE, 0);
+      expect(s.XS, 4);
+      expect(s.SM, 8);
+      expect(s.SMPlus, 12);
+      expect(s.MD, 16);
+      expect(s.MDPlus, 20);
+      expect(s.LG, 24);
+      expect(s.LGPlus, 28);
+      expect(s.XL, 32);
     });
 
     test('sizing defaults are non-zero', () {
       final s = DievasLightThemeData().sizing;
-      expect(s.buttonHeightSm, greaterThan(0));
-      expect(s.inputHeightMd, greaterThan(0));
-      expect(s.avatarLg, greaterThan(0));
+      expect(s.buttonHeightSM, greaterThan(0));
+      expect(s.inputHeightMD, greaterThan(0));
+      expect(s.avatarLG, greaterThan(0));
     });
 
     test('border defaults are non-negative', () {
       final b = DievasLightThemeData().border;
-      expect(b.sm, isNotNull);
-      expect(b.md, isNotNull);
-      expect(b.lg, isNotNull);
+      expect(b.SM, isNotNull);
+      expect(b.MD, isNotNull);
+      expect(b.LG, isNotNull);
       expect(b.strokeDefault, greaterThan(0));
     });
 
@@ -105,31 +105,31 @@ void main() {
 
     test('elevation defaults have non-null shadow lists', () {
       final e = DievasLightThemeData().elevation;
-      expect(e.none, isEmpty);
-      expect(e.xs, isNotEmpty);
-      expect(e.sm, isNotEmpty);
-      expect(e.md, isNotEmpty);
-      expect(e.lg, isNotEmpty);
-      expect(e.xl, isNotEmpty);
+      expect(e.NONE, isEmpty);
+      expect(e.XS, isNotEmpty);
+      expect(e.SM, isNotEmpty);
+      expect(e.MD, isNotEmpty);
+      expect(e.LG, isNotEmpty);
+      expect(e.XL, isNotEmpty);
     });
 
     test('typography defaults are non-null', () {
       final t = DievasLightThemeData().typography;
-      expect(t.displayLg, isNotNull);
-      expect(t.displayMd, isNotNull);
-      expect(t.displaySm, isNotNull);
-      expect(t.headingXl, isNotNull);
-      expect(t.headingLg, isNotNull);
-      expect(t.headingMd, isNotNull);
-      expect(t.titleLg, isNotNull);
-      expect(t.titleMd, isNotNull);
-      expect(t.titleSm, isNotNull);
-      expect(t.bodyLg, isNotNull);
-      expect(t.bodyMd, isNotNull);
-      expect(t.bodySm, isNotNull);
-      expect(t.labelLg, isNotNull);
-      expect(t.labelMd, isNotNull);
-      expect(t.labelSm, isNotNull);
+      expect(t.displayLG, isNotNull);
+      expect(t.displayMD, isNotNull);
+      expect(t.displaySM, isNotNull);
+      expect(t.headingXL, isNotNull);
+      expect(t.headingLG, isNotNull);
+      expect(t.headingMD, isNotNull);
+      expect(t.titleLG, isNotNull);
+      expect(t.titleMD, isNotNull);
+      expect(t.titleSM, isNotNull);
+      expect(t.bodyLG, isNotNull);
+      expect(t.bodyMD, isNotNull);
+      expect(t.bodySM, isNotNull);
+      expect(t.labelLG, isNotNull);
+      expect(t.labelMD, isNotNull);
+      expect(t.labelSM, isNotNull);
     });
 
     test('material theme data is non-null', () {
@@ -282,24 +282,24 @@ void main() {
   group('DievasSpacingThemeData', () {
     test('default constructor values match 4px grid', () {
       const s = DievasSpacingThemeData();
-      expect(s.none, 0);
-      expect(s.xs, 4);
-      expect(s.sm, 8);
-      expect(s.smPlus, 12);
-      expect(s.md, 16);
-      expect(s.mdPlus, 20);
-      expect(s.lg, 24);
-      expect(s.lgPlus, 28);
-      expect(s.xl, 32);
-      expect(s.xlPlus, 40);
-      expect(s.x2l, 48);
+      expect(s.NONE, 0);
+      expect(s.XS, 4);
+      expect(s.SM, 8);
+      expect(s.SMPlus, 12);
+      expect(s.MD, 16);
+      expect(s.MDPlus, 20);
+      expect(s.LG, 24);
+      expect(s.LGPlus, 28);
+      expect(s.XL, 32);
+      expect(s.XLPlus, 40);
+      expect(s.XL2, 48);
     });
 
     test('copyWith overrides', () {
       const s = DievasSpacingThemeData();
-      final c = s.copyWith(md: 32);
-      expect(c.md, 32);
-      expect(c.sm, 8); // unchanged
+      final c = s.copyWith(MD: 32);
+      expect(c.MD, 32);
+      expect(c.SM, 8); // unchanged
     });
   });
 
@@ -316,12 +316,12 @@ void main() {
   group('DievasElevationThemeData', () {
     test('defaults have shadow lists for each level', () {
       final e = DievasLightThemeData().elevation;
-      expect(e.none, isEmpty);
-      expect(e.xs, isNotEmpty);
-      expect(e.sm, isNotEmpty);
-      expect(e.md, isNotEmpty);
-      expect(e.lg, isNotEmpty);
-      expect(e.xl, isNotEmpty);
+      expect(e.NONE, isEmpty);
+      expect(e.XS, isNotEmpty);
+      expect(e.SM, isNotEmpty);
+      expect(e.MD, isNotEmpty);
+      expect(e.LG, isNotEmpty);
+      expect(e.XL, isNotEmpty);
     });
   });
 
@@ -415,27 +415,27 @@ DievasTypographyThemeData _typographyWithFamily(DievasTypographyThemeData t, Str
   TextStyle withFamily(TextStyle style) => style.copyWith(fontFamily: family);
 
   return DievasTypographyThemeData(
-    displayLg: withFamily(t.displayLg),
-    displayMd: withFamily(t.displayMd),
-    displaySm: withFamily(t.displaySm),
-    headingXl: withFamily(t.headingXl),
-    headingLg: withFamily(t.headingLg),
-    headingMd: withFamily(t.headingMd),
-    headingSm: withFamily(t.headingSm),
-    headingXs: withFamily(t.headingXs),
-    titleLg: withFamily(t.titleLg),
-    titleMd: withFamily(t.titleMd),
-    titleSm: withFamily(t.titleSm),
-    titleXsm: withFamily(t.titleXsm),
-    bodyLg: withFamily(t.bodyLg),
-    bodyMd: withFamily(t.bodyMd),
-    bodySm: withFamily(t.bodySm),
-    bodyXs: withFamily(t.bodyXs),
-    labelLg: withFamily(t.labelLg),
-    labelMd: withFamily(t.labelMd),
-    labelSm: withFamily(t.labelSm),
-    labelXs: withFamily(t.labelXs),
-    codeMd: withFamily(t.codeMd),
-    codeSm: withFamily(t.codeSm),
+    displayLG: withFamily(t.displayLG),
+    displayMD: withFamily(t.displayMD),
+    displaySM: withFamily(t.displaySM),
+    headingXL: withFamily(t.headingXL),
+    headingLG: withFamily(t.headingLG),
+    headingMD: withFamily(t.headingMD),
+    headingSM: withFamily(t.headingSM),
+    headingXS: withFamily(t.headingXS),
+    titleLG: withFamily(t.titleLG),
+    titleMD: withFamily(t.titleMD),
+    titleSM: withFamily(t.titleSM),
+    titleXS: withFamily(t.titleXS),
+    bodyLG: withFamily(t.bodyLG),
+    bodyMD: withFamily(t.bodyMD),
+    bodySM: withFamily(t.bodySM),
+    bodyXS: withFamily(t.bodyXS),
+    labelLG: withFamily(t.labelLG),
+    labelMD: withFamily(t.labelMD),
+    labelSM: withFamily(t.labelSM),
+    labelXS: withFamily(t.labelXS),
+    codeMD: withFamily(t.codeMD),
+    codeSM: withFamily(t.codeSM),
   );
 }

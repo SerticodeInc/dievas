@@ -6,13 +6,13 @@ import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// Size variants for [DievasTextInput].
 enum DievasTextInputSize {
-  /// 40 dp container height — compact contexts.
+  /// 52 dp container height — compact contexts.
   sm,
 
-  /// 48 dp container height — default.
+  /// 56 dp container height — default.
   md,
 
-  /// 52 dp container height — prominent / hero inputs.
+  /// 60 dp container height — prominent / hero inputs.
   lg,
 }
 
@@ -143,6 +143,18 @@ class _DievasTextInputState extends State<DievasTextInput> {
       .lg => theme.placeholderStyle.lg,
     };
 
+    final cursorWidth = switch (widget.size) {
+      .sm => theme.cursorWidth.sm,
+      .md => theme.cursorWidth.md,
+      .lg => theme.cursorWidth.lg,
+    };
+
+    final cursorHeight = switch (widget.size) {
+      .sm => theme.cursorHeight.sm,
+      .md => theme.cursorHeight.md,
+      .lg => theme.cursorHeight.lg,
+    };
+
     final (borderColour, focusedBorderColour) = switch ((hasError, hasWarning)) {
       (true, _) => (theme.borderColourError, theme.borderColourError),
       (false, true) => (theme.borderColourWarning, theme.borderColourWarning),
@@ -191,6 +203,8 @@ class _DievasTextInputState extends State<DievasTextInput> {
           enabled: widget.enabled,
           maxLines: 1,
           cursorColor: theme.borderColourFocused,
+          cursorWidth: cursorWidth,
+          cursorHeight: cursorHeight,
           decoration: InputDecoration(
             hintText: widget.hint,
             hintStyle: placeholderStyle,

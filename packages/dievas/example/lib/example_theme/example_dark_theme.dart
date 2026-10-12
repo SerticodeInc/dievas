@@ -6,7 +6,7 @@ part of 'example_theme.dart';
 /// subclass [DievasGlobalThemeData] directly (as done here) rather than the
 /// built-in [DievasDarkThemeData], so both modes carry the same brand.
 ///
-/// The dark sheet is a clean neutral black — #171717 and its variants — with
+/// The dark sheet is a clean neutral black (#171717 and its variants) with
 /// the peach lifted a step so it still glows against the ink.
 final class ExampleDarkThemeData extends DievasGlobalThemeData {
   ExampleDarkThemeData({super.components, DievasTypographyThemeData? typography})
@@ -20,7 +20,9 @@ final class ExampleDarkThemeData extends DievasGlobalThemeData {
     core: CoreColours(
       brand: Color(ExampleColours.brandDark),
       brandSubtle: Color(ExampleColours.brandSubtleDark),
-      onBrand: Color(ExampleColours.onBrand),
+      // White over the lifted dark peach, matching light mode so the filled CTA
+      // reads the same either way.
+      onBrand: Color(ExampleColours.actualWhite),
     ),
     text: TextColours(
       textPrimary: Color(ExampleColours.warm50),
@@ -30,13 +32,13 @@ final class ExampleDarkThemeData extends DievasGlobalThemeData {
       // textInverse colours text on elevated surfaces (e.g. tooltips). In dark
       // mode those surfaces are light, so the inverse text must be dark.
       textInverse: Color(ExampleColours.warm900),
-      textOnBrand: Color(ExampleColours.onBrand),
+      textOnBrand: Color(ExampleColours.actualWhite),
     ),
     icon: IconColours(
       iconPrimary: Color(ExampleColours.warm50),
       iconSecondary: Color(ExampleColours.warm400),
       iconDisabled: Color(ExampleColours.warm600),
-      iconOnBrand: Color(ExampleColours.onBrand),
+      iconOnBrand: Color(ExampleColours.actualWhite),
     ),
     background: BackgroundColours(
       // Neutral #171717 scaffold, one step lighter per surface tier.
@@ -53,7 +55,7 @@ final class ExampleDarkThemeData extends DievasGlobalThemeData {
       borderBrand: Color(ExampleColours.brandDark),
     ),
     action: ActionColours(
-      // Lighter peach on the way down the hover/press ramp — dark-mode
+      // Lighter peach on the way down the hover/press ramp: dark-mode
       // interaction brightens rather than darkens.
       actionPrimary: Color(ExampleColours.brandDark),
       actionPrimaryHover: Color(ExampleColours.peachDarkHover),

@@ -11,10 +11,11 @@ import 'dievas_button_theme_data.dart';
 final class DievasIconButtonGroupThemeData extends Equatable with Diagnosticable {
   const DievasIconButtonGroupThemeData({required this.ghost, required this.tinted});
 
-  /// No background — icon only. Default style.
+  /// Transparent background — icon only. Default style.
   final DievasIconButtonThemeData ghost;
 
-  /// Tinted background matching the action primary surface.
+  /// Subtle surface fill behind the icon. The variants differ only by container;
+  /// the icon colour is shared between them.
   final DievasIconButtonThemeData tinted;
 
   @override

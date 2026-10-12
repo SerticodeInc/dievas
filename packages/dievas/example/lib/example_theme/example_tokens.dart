@@ -2,7 +2,7 @@ part of 'example_theme.dart';
 
 /// Raw brand token values for the Example App.
 ///
-/// The brand is **Coral Peach**, led by [brand] — the exact `#EB6B52` the
+/// The brand is **Coral Peach**, led by [brand]: the exact `#EB6B52` the
 /// landing's theme wall uses for its light-sheet signature ("coral peach,
 /// redder than plain amber"). Two decisions shape everything else:
 ///
@@ -12,20 +12,20 @@ part of 'example_theme.dart';
 /// - **The neutrals are warm.** Peach lives around 8° on the hue wheel; a cool
 ///   slate neutral beside it reads as an accident. The light-mode ramp is a
 ///   stone tone pushed slightly red and yellow, so paper, text, and borders all
-///   meet warm-on-warm — the same effect the landing's chapters section chases.
+///   meet warm-on-warm: the same effect the landing's chapters section chases.
 ///   Dark-mode surfaces step out of that: see the ink set below.
 ///
-/// Pure `int` ARGB values — no [Color] wrapping here. Wrapping happens in the
+/// Pure `int` ARGB values: no [Color] wrapping here. Wrapping happens in the
 /// colour sets of [ExampleLightThemeData] / [ExampleDarkThemeData].
 ///
-/// This is the single source of colour for the Example App — both theme files
+/// This is the single source of colour for the Example App: both theme files
 /// resolve every role through here and define nothing of their own.
 abstract final class ExampleColours {
   ExampleColours._();
 
   // ── Brand: coral peach ───────────────────────────────────────────────
   // #EB6B52, the theme_section light-sheet signature. Dark mode lifts it to
-  // #F0885B — the peach the landing uses on its dark craft card — so the brand
+  // #F0885B: the peach the landing uses on its dark craft card: so the brand
   // still glows against ink instead of muddying out.
 
   /// Primary brand, light mode. The theme_section signature peach.
@@ -34,21 +34,13 @@ abstract final class ExampleColours {
   /// Primary brand, dark mode.
   static const int brandDark = 0xFFF0885B;
 
-  /// Subtle brand tint, light mode — the landing's peach chip background.
+  /// Subtle brand tint, light mode: the landing's peach chip background.
   static const int brandSubtle = 0xFFFCEDE4;
 
-  /// Subtle brand tint, dark mode — a deep peach-stained ink.
+  /// Subtle brand tint, dark mode: a deep peach-stained ink.
   static const int brandSubtleDark = 0xFF3A2A20;
 
-  /// Text and icons on any brand surface.
-  ///
-  /// Deep espresso rather than white. White only reaches ~3.1:1 over the peach
-  /// (fine for a tag, not for a button label); espresso clears AA in both modes
-  /// — 5.2:1 over [brand], 6.4:1 over [brandDark] — and it keeps the brand
-  /// warm end to end.
-  static const int onBrand = 0xFF3B1A11;
-
-  // Peach ramp — tints and shades of [brand], for hover, press, and disabled.
+  // Peach ramp: tints and shades of [brand], for hover, press, and disabled.
 
   static const int peach500 = brand;
   static const int peach600 = 0xFFD8543A;
@@ -60,7 +52,7 @@ abstract final class ExampleColours {
 
   // ── Secondary: indigo ─────────────────────────────────────────────────
   // #6366F1, the theme wall's dark-sheet signature. Only its tints and shades
-  // are surfaced — the secondary action is a support role, not a co-brand.
+  // are surfaced: the secondary action is a support role, not a co-brand.
 
   static const int indigo50 = 0xFFEEF2FF;
   static const int indigo100 = 0xFFE0E7FF;
@@ -86,12 +78,12 @@ abstract final class ExampleColours {
   static const int warm900 = 0xFF1E1813;
 
   // ── Ink: dark-mode surfaces ───────────────────────────────────────────
-  // A neutral black ramp led by #171717 — every dark surface is a step up the
+  // A neutral black ramp led by #171717: every dark surface is a step up the
   // same gray ladder, so the dark sheet reads as one clean black rather than a
   // peach-stained charcoal. Brand warmth in dark mode comes from the peach
   // accents and the warm text, not from the ground it sits on.
 
-  /// The dark scaffold — the primary black.
+  /// The dark scaffold: the primary black.
   static const int inkBase = 0xFF171717;
 
   /// One step up: sidebars, code blocks.
@@ -120,7 +112,7 @@ abstract final class ExampleColours {
   static const int successDark = 0xFF4ADE80;
 
   // ── Functional: feedback surfaces ─────────────────────────────────────
-  // Alert backgrounds, borders, icons, and text — the Example App's own set,
+  // Alert backgrounds, borders, icons, and text: the Example App's own set,
   // not the Dievas defaults. Three rules shaped it:
   //
   // - Info is indigo, the brand's own secondary. A generic sky-blue alert
@@ -128,12 +120,12 @@ abstract final class ExampleColours {
   // - Warning is amber, which shares the peach's warm hemisphere and sits on
   //   the warm paper without a seam.
   // - Error is pushed a full step redder and deeper than the peach so a
-  //   failure never reads as a brand element — the same logic as [error].
+  //   failure never reads as a brand element: the same logic as [error].
   //
   // Light tints sit on warm paper; dark sets are deep jewelled tones that hold
   // their own against the #171717 scaffold without glowing.
 
-  // Success — green.
+  // Success: green.
   static const int successBg = 0xFFEAF9EE;
   static const int successBorder = 0xFFBCE5C6;
   static const int successIcon = 0xFF16A34A;
@@ -143,7 +135,7 @@ abstract final class ExampleColours {
   static const int successIconDark = successDark;
   static const int successTextDark = 0xFFB6F0C9;
 
-  // Warning — amber.
+  // Warning: amber.
   static const int warningBg = 0xFFFBF3E2;
   static const int warningBorder = 0xFFEED5A8;
   static const int warningIcon = 0xFFD97706;
@@ -153,7 +145,7 @@ abstract final class ExampleColours {
   static const int warningIconDark = 0xFFFBBF24;
   static const int warningTextDark = 0xFFF2CE82;
 
-  // Error — crimson, deeper than the peach.
+  // Error: crimson, deeper than the peach.
   static const int errorBg = 0xFFFBE4E4;
   static const int errorBorder = 0xFFF3B8B8;
   static const int errorIcon = error;
@@ -163,7 +155,7 @@ abstract final class ExampleColours {
   static const int errorIconDark = errorDark;
   static const int errorTextDark = 0xFFF6B8B8;
 
-  // Info — indigo, the brand secondary.
+  // Info: indigo, the brand secondary.
   static const int infoBg = indigo50;
   static const int infoBorder = indigo200;
   static const int infoIcon = indigo600;
@@ -183,7 +175,7 @@ abstract final class ExampleColours {
 
   static const int actualWhite = 0xFFFFFFFF;
 
-  /// The same neutral black as [inkBase] — also the elevation shadow colour.
+  /// The same neutral black as [inkBase]: also the elevation shadow colour.
   static const int staticBlack = inkBase;
 
   static const int transparent = 0x00000000;
@@ -200,13 +192,12 @@ abstract final class ExampleFonts {
   static String? _grotesk;
   static String? _mono;
 
-  /// Hanken Grotesk — display and body. A warm humanist grotesque that stands
+  /// Hanken Grotesk: display and body. A warm humanist grotesque that stands
   /// in for the landing's MaisonNeue: both carry that slightly extended,
   /// medium-weight warmth that makes a peach palette feel editorial rather
   /// than bubbly.
-  static String get hankenGrotesk =>
-      _grotesk ??= GoogleFonts.hankenGrotesk().fontFamily ?? 'Hanken Grotesk';
+  static String get hankenGrotesk => _grotesk ??= GoogleFonts.hankenGrotesk().fontFamily ?? 'Hanken Grotesk';
 
-  /// DM Mono — code. The same face the landing loads for `--font-mono`.
+  /// DM Mono: code. The same face the landing loads for `--font-mono`.
   static String get dmMono => _mono ??= GoogleFonts.dmMono().fontFamily ?? 'DM Mono';
 }

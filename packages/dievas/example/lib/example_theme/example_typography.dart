@@ -45,11 +45,13 @@ DievasTypographyThemeData buildExampleTypography({
     bodyMd: _exampleStyle(DievasTypographySemantic.bodyMd, resolvedBody, textColor),
     bodySm: _exampleStyle(DievasTypographySemantic.bodySm, resolvedBody, textColor),
     bodyXs: _exampleStyle(DievasTypographySemantic.bodyXs, resolvedBody, textColor),
-    // Label
-    labelLg: _exampleStyle(DievasTypographySemantic.labelLg, resolvedBody, textColor),
-    labelMd: _exampleStyle(DievasTypographySemantic.labelMd, resolvedBody, textColor),
-    labelSm: _exampleStyle(DievasTypographySemantic.labelSm, resolvedBody, textColor),
-    labelXs: _exampleStyle(DievasTypographySemantic.labelXs, resolvedBody, textColor),
+    // Label: the brand pushes labels to semibold. Dievas ships them at medium;
+    // the extra weight is what makes a peach button label read as deliberate
+    // rather than washed out.
+    labelLg: _exampleLabelStyle(DievasTypographySemantic.labelLg, resolvedBody, textColor),
+    labelMd: _exampleLabelStyle(DievasTypographySemantic.labelMd, resolvedBody, textColor),
+    labelSm: _exampleLabelStyle(DievasTypographySemantic.labelSm, resolvedBody, textColor),
+    labelXs: _exampleLabelStyle(DievasTypographySemantic.labelXs, resolvedBody, textColor),
     // Code
     codeMd: _exampleStyle(DievasTypographySemantic.codeMd, resolvedCode, textColor),
     codeSm: _exampleStyle(DievasTypographySemantic.codeSm, resolvedCode, textColor),
@@ -57,15 +59,15 @@ DievasTypographyThemeData buildExampleTypography({
 }
 
 FontWeight _exampleWeight(int w) => switch (w) {
-  100 => .w100,
-  200 => .w200,
-  300 => .w300,
-  400 => .w400,
-  500 => .w500,
-  600 => .w600,
-  700 => .w700,
-  800 => .w800,
-  900 => .w900,
+  DievasFontWeightPrimitives.thin => .w100,
+  DievasFontWeightPrimitives.extraLight => .w200,
+  DievasFontWeightPrimitives.light => .w300,
+  DievasFontWeightPrimitives.regular => .w400,
+  DievasFontWeightPrimitives.medium => .w500,
+  DievasFontWeightPrimitives.semiBold => .w600,
+  DievasFontWeightPrimitives.bold => .w700,
+  DievasFontWeightPrimitives.extraBold => .w800,
+  DievasFontWeightPrimitives.black => .w900,
   _ => .w400,
 };
 
@@ -77,3 +79,6 @@ TextStyle _exampleStyle(DievasTextStyleToken token, String fontFamily, Color col
   fontFamily: fontFamily,
   color: color,
 );
+
+TextStyle _exampleLabelStyle(DievasTextStyleToken token, String fontFamily, Color color) =>
+    _exampleStyle(token, fontFamily, color).copyWith(fontWeight: .w600);

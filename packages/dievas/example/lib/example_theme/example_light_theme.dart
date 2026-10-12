@@ -3,8 +3,8 @@ part of 'example_theme.dart';
 /// Example App light brand theme.
 ///
 /// Extends [DievasGlobalThemeData] and supplies the light colour set plus a
-/// brand typography built over the Dievas type ramp. Everything else —
-/// component theme data, elevation, Material bridge — is derived automatically
+/// brand typography built over the Dievas type ramp. Everything else ,
+/// component theme data, elevation, Material bridge, is derived automatically
 /// inside the constructor.
 ///
 /// Copy this file to create your own brand's light theme: swap
@@ -21,9 +21,9 @@ final class ExampleLightThemeData extends DievasGlobalThemeData {
     core: CoreColours(
       brand: Color(ExampleColours.brand),
       brandSubtle: Color(ExampleColours.brandSubtle),
-      // Espresso over peach — see ExampleColours.onBrand. White would only
-      // reach ~3.1:1 here, which is fine for a tag but not a button label.
-      onBrand: Color(ExampleColours.onBrand),
+      // White over the peach: the filled CTA is the brightest object on the
+      // sheet. Dark mode matches this rather than inverting.
+      onBrand: Color(ExampleColours.actualWhite),
     ),
     text: TextColours(
       textPrimary: Color(ExampleColours.warm900),
@@ -33,13 +33,13 @@ final class ExampleLightThemeData extends DievasGlobalThemeData {
       // textInverse colours text on elevated surfaces (e.g. tooltips). In light
       // mode those surfaces are dark, so the inverse text must be light.
       textInverse: Color(ExampleColours.warm50),
-      textOnBrand: Color(ExampleColours.onBrand),
+      textOnBrand: Color(ExampleColours.actualWhite),
     ),
     icon: IconColours(
       iconPrimary: Color(ExampleColours.warm900),
       iconSecondary: Color(ExampleColours.warm600),
       iconDisabled: Color(ExampleColours.warm300),
-      iconOnBrand: Color(ExampleColours.onBrand),
+      iconOnBrand: Color(ExampleColours.actualWhite),
     ),
     background: BackgroundColours(
       // Warm paper scaffold with clean white cards on top.

@@ -6,11 +6,14 @@ import 'dievas_button_color_utils.dart';
 import 'button_types/dievas_button_size.dart';
 
 /// Visual style variants for [DievasIconButton].
+///
+/// The variants differ only by container: [ghost] is transparent, [tinted] sits
+/// on a subtle surface fill. Both share the same icon colour.
 enum DievasIconButtonStyle {
-  /// Transparent background, icon only — ghost behaviour.
+  /// Transparent background — icon only.
   ghost,
 
-  /// Tinted background matching the action primary fill.
+  /// Subtle surface fill behind the icon.
   tinted,
 }
 

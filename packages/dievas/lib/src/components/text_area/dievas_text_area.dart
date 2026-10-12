@@ -143,6 +143,8 @@ class DievasTextArea extends StatelessWidget {
         minLines: minLines,
         maxLines: maxLines,
         cursorColor: theme.borderColourFocused,
+        cursorWidth: theme.cursorWidth.md,
+        cursorHeight: theme.cursorHeight.md,
         decoration: InputDecoration(
           hintText: hint,
           hintStyle: theme.placeholderStyle.md,

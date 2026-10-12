@@ -22,13 +22,13 @@ abstract final class DievasSizingSemantic {
   static const double buttonHeightLg = DievasSizingPrimitives.s52;
 
   /// Small input height.
-  static const double inputHeightSm = DievasSizingPrimitives.s40;
+  static const double inputHeightSm = DievasSizingPrimitives.s52;
 
   /// Medium input height.
-  static const double inputHeightMd = DievasSizingPrimitives.s48;
+  static const double inputHeightMd = DievasSizingPrimitives.s56;
 
   /// Large input height.
-  static const double inputHeightLg = DievasSizingPrimitives.s52;
+  static const double inputHeightLg = DievasSizingPrimitives.s60;
 
   /// Extra-small icon size.
   static const double iconXs = DievasSizingPrimitives.s12;

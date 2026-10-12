@@ -59,6 +59,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
 const double _kStrokeProgress = 2.5; // circular progress arc
 const double _kStrokeLoader = 3.0; // loader spinner
 const double _kSwitchThumbPadding = 3.0; // inset between thumb and track edge
+const DievasInputThemeValue<double> _kCursorWidth = (sm: 1.5, md: 2.0, lg: 2.5);
 const double _kSnackbarMinWidth = 280.0;
 const double _kSnackbarMaxWidth = 480.0;
 const double _kModalMinWidth = 320.0;
@@ -241,7 +242,6 @@ DievasIconButtonGroupThemeData _createIconButtonGroup(
   DievasBorderThemeData border,
 ) {
   final iconColour = colours.icon.iconPrimary;
-  final actionPrimary = colours.action.actionPrimary;
   final transparent = colours.staticColours.staticTransparent;
 
   DievasIconButtonThemeData makeThemeData(DievasIconButtonThemeStateStyle style) => DievasIconButtonThemeData(
@@ -253,22 +253,18 @@ DievasIconButtonGroupThemeData _createIconButtonGroup(
     style: style,
   );
 
+  // The variants differ only by container — transparent versus a surface fill —
+  // and share one icon colour, so the names describe the background and nothing
+  // else. State feedback is the opacity dim, never a hue flip: the brand colour
+  // on a bare sheet falls under the 3:1 icon-contrast floor.
   return DievasIconButtonGroupThemeData(
     ghost: makeThemeData((
-      idle: DievasIconButtonThemeStyle(icon: iconColour, foreground: iconColour, background: transparent),
-      focused: DievasIconButtonThemeStyle(icon: actionPrimary, foreground: actionPrimary, background: transparent),
+      idle: DievasIconButtonThemeStyle(icon: iconColour, background: transparent),
+      focused: DievasIconButtonThemeStyle(icon: iconColour, background: transparent),
     )),
     tinted: makeThemeData((
-      idle: DievasIconButtonThemeStyle(
-        icon: actionPrimary,
-        foreground: actionPrimary,
-        background: colours.background.bgSubtle,
-      ),
-      focused: DievasIconButtonThemeStyle(
-        icon: actionPrimary,
-        foreground: actionPrimary,
-        background: colours.background.bgElevated,
-      ),
+      idle: DievasIconButtonThemeStyle(icon: iconColour, background: colours.background.bgSubtle),
+      focused: DievasIconButtonThemeStyle(icon: iconColour, background: colours.background.bgElevated),
     )),
   );
 }
@@ -491,6 +487,8 @@ DievasTextInputThemeData _createTextInputTheme(
   iconColour: colours.icon.iconSecondary,
   iconSize: DievasSizingPrimitives.s20,
   iconSpacing: spacing.sm,
+  cursorWidth: _kCursorWidth,
+  cursorHeight: (sm: typography.bodySm.fontSize!, md: typography.bodyMd.fontSize!, lg: typography.bodyLg.fontSize!),
   labelSpacing: spacing.sm,
   helperSpacing: spacing.sm,
   disabledOpacity: DievasOpacitySemantic.disabled,

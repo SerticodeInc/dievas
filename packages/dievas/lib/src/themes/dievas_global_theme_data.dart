@@ -165,55 +165,55 @@ base class DievasGlobalThemeData implements DievasThemeData {
         layer(
           blur: DievasElevationShadowLayer.XS.blur,
           offsetY: DievasElevationShadowLayer.XS.offsetY,
-          opacity: DievasOpacitySemantic.shadow1,
+          opacity: DievasElevationSemantic.SHADOW_TINT_SOFT,
         ),
       ],
       SM: [
         layer(
           blur: DievasElevationShadowLayer.upperSM.blur,
           offsetY: DievasElevationShadowLayer.upperSM.offsetY,
-          opacity: DievasOpacitySemantic.shadow2Upper,
+          opacity: DievasElevationSemantic.SHADOW_TINT_SUBTLE,
         ),
         layer(
           blur: DievasElevationShadowLayer.lowerSM.blur,
           offsetY: DievasElevationShadowLayer.lowerSM.offsetY,
-          opacity: DievasOpacitySemantic.shadow2Lower,
+          opacity: DievasElevationSemantic.SHADOW_TINT_SOFT,
         ),
       ],
       MD: [
         layer(
           blur: DievasElevationShadowLayer.upperMD.blur,
           offsetY: DievasElevationShadowLayer.upperMD.offsetY,
-          opacity: DievasOpacitySemantic.shadow2Upper,
+          opacity: DievasElevationSemantic.SHADOW_TINT_SUBTLE,
         ),
         layer(
           blur: DievasElevationShadowLayer.lowerMD.blur,
           offsetY: DievasElevationShadowLayer.lowerMD.offsetY,
-          opacity: DievasOpacitySemantic.shadow2,
+          opacity: DievasElevationSemantic.SHADOW_TINT_MEDIUM,
         ),
       ],
       LG: [
         layer(
           blur: DievasElevationShadowLayer.upperLG.blur,
           offsetY: DievasElevationShadowLayer.upperLG.offsetY,
-          opacity: DievasOpacitySemantic.shadow1Light,
+          opacity: DievasElevationSemantic.SHADOW_TINT_SUBTLE,
         ),
         layer(
           blur: DievasElevationShadowLayer.lowerLG.blur,
           offsetY: DievasElevationShadowLayer.lowerLG.offsetY,
-          opacity: DievasOpacitySemantic.shadow2,
+          opacity: DievasElevationSemantic.SHADOW_TINT_MEDIUM,
         ),
       ],
       XL: [
         layer(
           blur: DievasElevationShadowLayer.upperXL.blur,
           offsetY: DievasElevationShadowLayer.upperXL.offsetY,
-          opacity: DievasOpacitySemantic.shadow1Light,
+          opacity: DievasElevationSemantic.SHADOW_TINT_SUBTLE,
         ),
         layer(
           blur: DievasElevationShadowLayer.lowerXL.blur,
           offsetY: DievasElevationShadowLayer.lowerXL.offsetY,
-          opacity: DievasOpacitySemantic.shadow2Heavy,
+          opacity: DievasElevationSemantic.SHADOW_TINT_STRONG,
         ),
       ],
     );

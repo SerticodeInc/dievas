@@ -19,9 +19,6 @@ abstract final class DievasEasingPrimitives {
   /// Matches `Curves.fastOutSlowIn`.
   static const DievasEasingCurve standard = (x1: 0.2, y1: 0.0, x2: 0.0, y2: 1.0);
 
-  /// Emphasized ease. Slightly more dramatic arc for hero animations.
-  static const DievasEasingCurve emphasize = standard;
-
   /// Deceleration curve (ease-out). Fast start, slow end.
   /// Best for elements entering the screen.
   static const DievasEasingCurve decelerate = (x1: 0.0, y1: 0.0, x2: 0.2, y2: 1.0);

@@ -8,6 +8,7 @@
 // in the dievas Flutter package's elevation theme data.
 
 import 'package:dievas_tokens/src/primitives/elevation_primitives.dart';
+import 'package:dievas_tokens/src/primitives/opacity_primitives.dart';
 import 'package:dievas_tokens/src/semantic/offset_semantic.dart';
 
 /// Semantic elevation tokens for the Dievas design system.
@@ -32,6 +33,18 @@ abstract final class DievasElevationSemantic {
 
   /// Extra-large shadow. Modal, bottom sheet, popover.
   static const double XL = DievasElevationPrimitives.e5;
+
+  /// 8% — subtle shadow tint. Ambient layer beneath raised surfaces.
+  static const double SHADOW_TINT_SUBTLE = DievasOpacityPrimitives.o8;
+
+  /// 13% — soft shadow tint. Close layer on cards and chips.
+  static const double SHADOW_TINT_SOFT = DievasOpacityPrimitives.o13;
+
+  /// 20% — medium shadow tint. Dominant layer on floating surfaces.
+  static const double SHADOW_TINT_MEDIUM = DievasOpacityPrimitives.o20;
+
+  /// 25% — strong shadow tint. Heavy layer on modals and sheets.
+  static const double SHADOW_TINT_STRONG = DievasOpacityPrimitives.o25;
 }
 
 /// A single shadow layer consisting of a blur radius and Y-offset.

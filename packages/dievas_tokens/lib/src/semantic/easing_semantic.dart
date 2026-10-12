@@ -19,7 +19,4 @@ abstract final class DievasEasingSemantic {
 
   /// Elements leaving the screen — dismissals, removals.
   static const DievasEasingCurve exit = DievasEasingPrimitives.accelerate;
-
-  /// Hero animations and emphatic transitions.
-  static const DievasEasingCurve emphasize = DievasEasingPrimitives.emphasize;
 }

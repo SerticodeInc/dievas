@@ -8,8 +8,8 @@ class _OverlayControls extends StatelessWidget {
     final scope = DievasScope.of(context);
 
     return Wrap(
-      spacing: context.spacing.md,
-      runSpacing: context.spacing.md,
+      spacing: context.spacing.MD,
+      runSpacing: context.spacing.MD,
       children: [
         DievasFilledButton(
           label: 'Show banner',

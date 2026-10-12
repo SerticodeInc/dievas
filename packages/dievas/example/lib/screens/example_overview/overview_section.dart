@@ -14,19 +14,19 @@ class _SectionCard extends StatelessWidget {
 
     return Container(
       width: .infinity,
-      padding: .all(spacing.lg),
+      padding: .all(spacing.LG),
       decoration: BoxDecoration(
         color: colours.background.bgSubtle,
         border: .all(color: colours.border.borderDefault),
-        borderRadius: context.border.lg,
+        borderRadius: context.border.LG,
       ),
       child: Column(
         crossAxisAlignment: .start,
         children: [
-          Text(title, style: context.typography.titleLg),
-          SizedBox(height: spacing.xs),
-          Text(description, style: context.typography.bodySm.copyWith(color: colours.text.textSecondary)),
-          SizedBox(height: spacing.lg),
+          Text(title, style: context.typography.titleLG),
+          SizedBox(height: spacing.XS),
+          Text(description, style: context.typography.bodySM.copyWith(color: colours.text.textSecondary)),
+          SizedBox(height: spacing.LG),
           child,
         ],
       ),

@@ -27,13 +27,13 @@ class ExampleOverviewScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: .start,
           children: [
-            Text('Dievas Example App', style: context.typography.displaySm),
-            SizedBox(height: spacing.sm),
+            Text('Dievas Example App', style: context.typography.displaySM),
+            SizedBox(height: spacing.SM),
             Text(
               'Theme setup · overlays · grid · l10n',
-              style: context.typography.bodyMd.copyWith(color: context.colours.text.textSecondary),
+              style: context.typography.bodyMD.copyWith(color: context.colours.text.textSecondary),
             ),
-            SizedBox(height: spacing.x2l),
+            SizedBox(height: spacing.XL2),
 
             const _SectionCard(
               title: 'Theme mode',
@@ -42,7 +42,7 @@ class ExampleOverviewScreen extends StatelessWidget {
                   'Try switching; every widget below updates instantly.',
               child: _ThemeModeControl(),
             ),
-            SizedBox(height: spacing.lg),
+            SizedBox(height: spacing.LG),
 
             const _SectionCard(
               title: 'Overlays',
@@ -52,7 +52,7 @@ class ExampleOverviewScreen extends StatelessWidget {
                   'Both auto-dismiss on their own. Pass Duration.zero to showBanner/showSnackbar for a sticky overlay.',
               child: _OverlayControls(),
             ),
-            SizedBox(height: spacing.lg),
+            SizedBox(height: spacing.LG),
 
             const _SectionCard(
               title: 'Responsive grid',
@@ -61,7 +61,7 @@ class ExampleOverviewScreen extends StatelessWidget {
                   'via context.grid. Columns, margin and gutter change with width.',
               child: _GridReadout(),
             ),
-            SizedBox(height: spacing.lg),
+            SizedBox(height: spacing.LG),
 
             const _SectionCard(
               title: 'Localizations',
@@ -70,7 +70,7 @@ class ExampleOverviewScreen extends StatelessWidget {
                   'Register DievasLocalizations delegates on MaterialApp to use it.',
               child: _L10nReadout(),
             ),
-            SizedBox(height: spacing.x3l),
+            SizedBox(height: spacing.XL3),
           ],
         ),
       ),

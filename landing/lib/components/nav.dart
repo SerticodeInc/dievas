@@ -6,7 +6,7 @@ import 'theme_toggle.dart';
 
 /// Fixed glass pill navigation.
 ///
-/// Left: wordmark · Center: links (hidden below md) · Right: theme
+/// Left: wordmark · Center: links (hidden below MD) · Right: theme
 /// toggle + pub.dev CTA. The pill is the site's sole glass artifact
 /// (float rule). Server-rendered; scroll compactness + hide-on-scroll
 /// handled by `app.dart` scripts via `is-scrolled` / `is-hidden`.

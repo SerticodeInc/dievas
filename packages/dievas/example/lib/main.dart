@@ -82,7 +82,7 @@ class _ExampleShellState extends State<_ExampleShell> {
       extendBody: true,
       body: IndexedStack(index: _index, children: _screens),
       bottomNavigationBar: SafeArea(
-        minimum: EdgeInsets.only(left: context.spacing.md, right: context.spacing.md, bottom: context.spacing.md),
+        minimum: EdgeInsets.only(left: context.spacing.MD, right: context.spacing.MD, bottom: context.spacing.MD),
         child: Align(
           heightFactor: navigationHeightFactor,
           alignment: .bottomCenter,
@@ -91,7 +91,7 @@ class _ExampleShellState extends State<_ExampleShell> {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(navigationPillRadius),
-                boxShadow: context.elevation.md,
+                boxShadow: context.elevation.MD,
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(navigationPillRadius),

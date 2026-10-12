@@ -17,34 +17,34 @@ class _MotionPreviewState extends State<_MotionPreview> {
     return Column(
       crossAxisAlignment: .start,
       children: [
-        Text('Standard motion', style: context.typography.titleMd),
-        SizedBox(height: context.spacing.sm),
+        Text('Standard motion', style: context.typography.titleMD),
+        SizedBox(height: context.spacing.SM),
         Text(
           '${context.animation.standard.inMilliseconds} ms with standard easing',
-          style: context.typography.codeSm.copyWith(color: context.colours.text.textSecondary),
+          style: context.typography.codeSM.copyWith(color: context.colours.text.textSecondary),
         ),
-        SizedBox(height: context.spacing.md),
+        SizedBox(height: context.spacing.MD),
         Container(
-          height: context.sizing.buttonHeightLg + context.spacing.md,
-          padding: EdgeInsets.all(context.spacing.sm),
-          decoration: BoxDecoration(color: context.colours.background.bgSubtle, borderRadius: context.border.lg),
+          height: context.sizing.buttonHeightLG + context.spacing.MD,
+          padding: EdgeInsets.all(context.spacing.SM),
+          decoration: BoxDecoration(color: context.colours.background.bgSubtle, borderRadius: context.border.LG),
           child: AnimatedAlign(
             alignment: _atEnd ? Alignment.centerRight : Alignment.centerLeft,
             duration: MediaQuery.disableAnimationsOf(context) ? Duration.zero : context.animation.standard,
             curve: context.animation.easingStandard,
             child: ExcludeSemantics(
               child: CircleAvatar(
-                radius: context.sizing.avatarSm * avatarRadiusFactor,
+                radius: context.sizing.avatarSM * avatarRadiusFactor,
                 backgroundColor: context.colours.core.brand,
               ),
             ),
           ),
         ),
-        SizedBox(height: context.spacing.md),
+        SizedBox(height: context.spacing.MD),
         DievasOutlinedButton(label: 'Replay motion', onPressed: () => setState(() => _atEnd = !_atEnd)),
         if (MediaQuery.disableAnimationsOf(context)) ...[
-          SizedBox(height: context.spacing.sm),
-          Text('Reduced motion is enabled. The position changes instantly.', style: context.typography.bodySm),
+          SizedBox(height: context.spacing.SM),
+          Text('Reduced motion is enabled. The position changes instantly.', style: context.typography.bodySM),
         ],
       ],
     );

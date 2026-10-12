@@ -7,10 +7,10 @@ class _GroupLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: .only(bottom: context.spacing.md),
+    padding: .only(bottom: context.spacing.MD),
     child: Text(
       text.toUpperCase(),
-      style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary),
+      style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary),
     ),
   );
 }
@@ -20,8 +20,8 @@ class _ButtonRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Wrap(
-    spacing: context.spacing.md,
-    runSpacing: context.spacing.md,
+    spacing: context.spacing.MD,
+    runSpacing: context.spacing.MD,
     crossAxisAlignment: .center,
     children: [
       DievasFilledButton(label: 'Filled', onPressed: () {}),

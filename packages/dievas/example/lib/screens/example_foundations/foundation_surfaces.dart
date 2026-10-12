@@ -8,28 +8,28 @@ class _SurfacePreviews extends StatelessWidget {
     const wholeNumberPrecision = 0;
 
     return Wrap(
-      spacing: context.spacing.lg,
-      runSpacing: context.spacing.lg,
+      spacing: context.spacing.LG,
+      runSpacing: context.spacing.LG,
       children: [
         _TokenPreview(
           label: 'Large radius',
-          value: '${context.border.lg.topLeft.x.toStringAsFixed(wholeNumberPrecision)} px radius',
-          child: _SurfaceSample(borderRadius: context.border.lg),
+          value: '${context.border.LG.topLeft.x.toStringAsFixed(wholeNumberPrecision)} px radius',
+          child: _SurfaceSample(borderRadius: context.border.LG),
         ),
         _TokenPreview(
           label: 'Thin stroke',
           value: '${context.border.strokeThin} px stroke',
           child: _SurfaceSample(
-            borderRadius: context.border.none,
+            borderRadius: context.border.NONE,
             border: Border.all(color: context.colours.text.textPrimary, width: context.border.strokeThin),
           ),
         ),
         _TokenPreview(
           label: 'Medium elevation',
-          value: 'elevation.md',
+          value: 'elevation.MD',
           child: Padding(
-            padding: EdgeInsets.all(context.spacing.md),
-            child: _SurfaceSample(borderRadius: context.border.md, shadows: context.elevation.md),
+            padding: EdgeInsets.all(context.spacing.MD),
+            child: _SurfaceSample(borderRadius: context.border.MD, shadows: context.elevation.MD),
           ),
         ),
       ],
@@ -49,8 +49,8 @@ class _SurfaceSample extends StatelessWidget {
     const surfaceWidthInControlHeights = 2.0;
 
     return Container(
-      width: context.sizing.buttonHeightMd * surfaceWidthInControlHeights,
-      height: context.sizing.buttonHeightMd,
+      width: context.sizing.buttonHeightMD * surfaceWidthInControlHeights,
+      height: context.sizing.buttonHeightMD,
       decoration: BoxDecoration(
         color: context.colours.background.bgElevated,
         borderRadius: borderRadius,
@@ -71,11 +71,11 @@ class _DisabledPreview extends StatelessWidget {
     return Column(
       crossAxisAlignment: .start,
       children: [
-        Text('Disabled opacity', style: context.typography.titleMd),
-        SizedBox(height: context.spacing.md),
+        Text('Disabled opacity', style: context.typography.titleMD),
+        SizedBox(height: context.spacing.MD),
         Wrap(
-          spacing: context.spacing.lg,
-          runSpacing: context.spacing.md,
+          spacing: context.spacing.LG,
+          runSpacing: context.spacing.MD,
           children: [
             _TokenPreview(
               label: 'Enabled',

@@ -16,9 +16,9 @@ class ExamplePage extends StatelessWidget {
       bottom: false,
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(
-          context.spacing.lg,
-          context.spacing.x2l,
-          context.spacing.lg,
+          context.spacing.LG,
+          context.spacing.XL2,
+          context.spacing.LG,
           floatingNavigationClearance + MediaQuery.paddingOf(context).bottom,
         ),
         child: Align(

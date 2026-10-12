@@ -5,8 +5,8 @@ class _DisplayRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Wrap(
-    spacing: context.spacing.md,
-    runSpacing: context.spacing.md,
+    spacing: context.spacing.MD,
+    runSpacing: context.spacing.MD,
     crossAxisAlignment: .center,
     children: [
       // Per instance colour overrides (added for per component customization).
@@ -20,7 +20,7 @@ class _DisplayRow extends StatelessWidget {
       const DievasBadge(label: 'Shipped', tone: .success),
       const DievasTag(label: 'Flutter'),
       DievasTag(label: 'Removable', onRemove: () {}, backgroundColor: context.colours.action.actionSecondary),
-      const DievasIcon(Icons.bolt, size: .lg, semanticLabel: 'Bolt'),
+      const DievasIcon(Icons.bolt, size: .LG, semanticLabel: 'Bolt'),
       const DievasDivider(),
     ],
   );
@@ -35,8 +35,8 @@ class _ProgressRow extends StatelessWidget {
     const sampleProgress = 0.65;
 
     return Wrap(
-      spacing: context.spacing.md,
-      runSpacing: context.spacing.md,
+      spacing: context.spacing.MD,
+      runSpacing: context.spacing.MD,
       crossAxisAlignment: .center,
       children: [
         const SizedBox(

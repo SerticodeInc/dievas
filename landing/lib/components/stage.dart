@@ -102,30 +102,30 @@ class Stage extends StatelessComponent {
         _tokenFamily('elevation', [
           _elevationCard(
             'e2',
-            DievasElevationShadowLayer.smUpper,
+            DievasElevationShadowLayer.upperSM,
             DievasOpacitySemantic.shadow2Upper,
-            DievasElevationShadowLayer.smLower,
+            DievasElevationShadowLayer.lowerSM,
             DievasOpacitySemantic.shadow2Lower,
           ),
           _elevationCard(
             'e3',
-            DievasElevationShadowLayer.mdUpper,
+            DievasElevationShadowLayer.upperMD,
             DievasOpacitySemantic.shadow2Upper,
-            DievasElevationShadowLayer.mdLower,
+            DievasElevationShadowLayer.lowerMD,
             DievasOpacitySemantic.shadow2,
           ),
           _elevationCard(
             'e4',
-            DievasElevationShadowLayer.lgUpper,
+            DievasElevationShadowLayer.upperLG,
             DievasOpacitySemantic.shadow1Light,
-            DievasElevationShadowLayer.lgLower,
+            DievasElevationShadowLayer.lowerLG,
             DievasOpacitySemantic.shadow2,
           ),
         ]),
         _tokenFamily('radius', [
-          _radiusCard('sm', DievasRadiusPrimitives.sm),
-          _radiusCard('md', DievasRadiusPrimitives.md),
-          _radiusCard('x3l', DievasRadiusPrimitives.x3l),
+          _radiusCard('SM', DievasRadiusPrimitives.SM),
+          _radiusCard('MD', DievasRadiusPrimitives.MD),
+          _radiusCard('XL3', DievasRadiusPrimitives.XL3),
         ]),
         _tokenFamily('spacing', [
           _spacingCard('s2', DievasSpacingPrimitives.s2),
@@ -138,7 +138,7 @@ class Stage extends StatelessComponent {
           span(classes: 'tok-c', [Component.text('// primitives · raw values, no Flutter dependency\n')]),
           Component.text('DievasColourPrimitives.indigo500   '),
           span(classes: 'tok-c', [Component.text('// 0xFF6366F1\n')]),
-          Component.text('DievasRadiusPrimitives.md          '),
+          Component.text('DievasRadiusPrimitives.MD          '),
           span(classes: 'tok-c', [Component.text('// 8.0\n')]),
           Component.text('DievasSpacingPrimitives.s4         '),
           span(classes: 'tok-c', [Component.text('// 16.0')]),
@@ -177,19 +177,19 @@ class Stage extends StatelessComponent {
           ),
         ]),
         _tokenFamily('elevation', [
-          _aliasChip('sm', 'context.elevation.sm', '4.0', 'e2'),
-          _aliasChip('md', 'context.elevation.md', '8.0', 'e3'),
-          _aliasChip('xl', 'context.elevation.xl', '24.0', 'e5'),
+          _aliasChip('SM', 'context.elevation.SM', '4.0', 'e2'),
+          _aliasChip('MD', 'context.elevation.MD', '8.0', 'e3'),
+          _aliasChip('XL', 'context.elevation.XL', '24.0', 'e5'),
         ]),
         _tokenFamily('radius', [
-          _aliasChip('sm', 'context.border.sm', '4.0', 'sm'),
-          _aliasChip('md', 'context.border.md', '8.0', 'md'),
-          _aliasChip('x3l', 'context.border.x3l', '24.0', 'x3l'),
+          _aliasChip('SM', 'context.border.SM', '4.0', 'SM'),
+          _aliasChip('MD', 'context.border.MD', '8.0', 'MD'),
+          _aliasChip('XL3', 'context.border.XL3', '24.0', 'XL3'),
         ]),
         _tokenFamily('spacing', [
-          _aliasChip('sm', 'context.spacing.sm', '8.0', 's2'),
-          _aliasChip('md', 'context.spacing.md', '16.0', 's4'),
-          _aliasChip('xl', 'context.spacing.xl', '32.0', 's8'),
+          _aliasChip('SM', 'context.spacing.SM', '8.0', 's2'),
+          _aliasChip('MD', 'context.spacing.MD', '16.0', 's4'),
+          _aliasChip('XL', 'context.spacing.XL', '32.0', 's8'),
         ]),
       ]),
       div(classes: 'rail-code', [
@@ -200,11 +200,11 @@ class Stage extends StatelessComponent {
           Component.text(';   '),
           span(classes: 'tok-c', [Component.text('// indigo500\n')]),
           Component.text('final radii = '),
-          span(classes: 'tok-k', [Component.text('context.border.md')]),
+          span(classes: 'tok-k', [Component.text('context.border.MD')]),
           Component.text(';          '),
           span(classes: 'tok-c', [Component.text('// 8.0\n')]),
           Component.text('final pad   = '),
-          span(classes: 'tok-k', [Component.text('context.spacing.md')]),
+          span(classes: 'tok-k', [Component.text('context.spacing.MD')]),
           Component.text(';          '),
           span(classes: 'tok-c', [Component.text('// 16.0')]),
         ]),
@@ -245,7 +245,7 @@ class Stage extends StatelessComponent {
           Component.text('DievasFilledButton(\n  style: '),
           span(classes: 'tok-k', [Component.text('.primary')]),
           Component.text(',\n  size: '),
-          span(classes: 'tok-k', [Component.text('.lg')]),
+          span(classes: 'tok-k', [Component.text('.LG')]),
           Component.text(',\n  label: '),
           span(classes: 'tok-s', [Component.text('\'Continue\'')]),
           Component.text(',\n  foregroundColor: '),
@@ -278,9 +278,9 @@ class Stage extends StatelessComponent {
   /// stacked layers — a tight ambient layer plus a diffuse lower one —
   /// with blur, offset and opacity taken straight from
   /// [DievasElevationShadowLayer] and [DievasOpacitySemantic]. This is
-  /// [DievasElevationThemeData.sm/md/lg] translated to CSS; each card is
-  /// the tier whose dominant blur is the named primitive (e2 → sm,
-  /// e3 → md, e4 → lg), so the label's value is the lower layer's blur.
+  /// [DievasElevationThemeData.SM/MD/LG] translated to CSS; each card is
+  /// the tier whose dominant blur is the named primitive (e2 → SM,
+  /// e3 → MD, e4 → LG), so the label's value is the lower layer's blur.
   Component _elevationCard(
     String name,
     DievasElevationShadow upper,

@@ -25,34 +25,34 @@ class ExampleFoundationsScreen extends StatelessWidget {
     child: Column(
       crossAxisAlignment: .start,
       children: [
-        Text('Foundations', style: context.typography.displaySm),
-        SizedBox(height: context.spacing.sm),
+        Text('Foundations', style: context.typography.displaySM),
+        SizedBox(height: context.spacing.SM),
         Text(
           'Colour, type, space and motion. The decisions behind every component.',
-          style: context.typography.bodyMd.copyWith(color: context.colours.text.textSecondary),
+          style: context.typography.bodyMD.copyWith(color: context.colours.text.textSecondary),
         ),
-        SizedBox(height: context.spacing.x2l),
+        SizedBox(height: context.spacing.XL2),
 
         const _FoundationSection(
           title: 'Colour',
           description: 'Semantic roles for surfaces, content and actions. • context.colours',
           child: _ColourSwatches(),
         ),
-        SizedBox(height: context.spacing.lg),
+        SizedBox(height: context.spacing.LG),
 
         const _FoundationSection(
           title: 'Typography',
           description: 'A clear hierarchy from display to detail. • context.typography',
           child: _TypographyScale(),
         ),
-        SizedBox(height: context.spacing.lg),
+        SizedBox(height: context.spacing.LG),
 
         const _FoundationSection(
           title: 'Spacing',
           description: 'A consistent rhythm on a 4pt grid. • context.spacing',
           child: _SpacingReadout(),
         ),
-        SizedBox(height: context.spacing.lg),
+        SizedBox(height: context.spacing.LG),
 
         const _FoundationSection(
           title: 'Shape & motion',
@@ -60,16 +60,16 @@ class ExampleFoundationsScreen extends StatelessWidget {
               'Compare real control heights, surface treatments and motion. Each preview uses the active tokens.',
           child: _ValueReadouts(),
         ),
-        SizedBox(height: context.spacing.lg),
+        SizedBox(height: context.spacing.LG),
 
-        Text('Working with the theme', style: context.typography.headingMd),
-        SizedBox(height: context.spacing.lg),
+        Text('Working with the theme', style: context.typography.headingMD),
+        SizedBox(height: context.spacing.LG),
         const _FoundationSection(
           title: 'Theme access',
           description: 'These examples read the active theme. Switch appearance in Overview to see them update.',
           child: _ThemeStatics(),
         ),
-        SizedBox(height: context.spacing.lg),
+        SizedBox(height: context.spacing.LG),
 
         const _FoundationSection(
           title: 'Local customization',
@@ -78,7 +78,7 @@ class ExampleFoundationsScreen extends StatelessWidget {
               'Its override stays inside this subtree; the default avatar keeps the original theme.',
           child: _ComponentOverride(),
         ),
-        SizedBox(height: context.spacing.x3l),
+        SizedBox(height: context.spacing.XL3),
       ],
     ),
   );

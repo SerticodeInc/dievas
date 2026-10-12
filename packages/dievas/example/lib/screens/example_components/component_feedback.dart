@@ -5,8 +5,8 @@ class _FeedbackRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Wrap(
-    spacing: context.spacing.md,
-    runSpacing: context.spacing.md,
+    spacing: context.spacing.MD,
+    runSpacing: context.spacing.MD,
     children: [
       const DievasAlert(tone: .info, title: 'Heads up', description: 'The system will update at 2am.'),
       const DievasAlert(tone: .success, title: 'Saved', description: 'Your changes are live.'),
@@ -18,8 +18,8 @@ class _FeedbackRow extends StatelessWidget {
           context: context,
           builder: (context) => DievasBottomSheet(
             child: Padding(
-              padding: .all(context.spacing.lg),
-              child: Text('Bottom sheet content', style: context.typography.bodyMd),
+              padding: .all(context.spacing.LG),
+              child: Text('Bottom sheet content', style: context.typography.bodyMD),
             ),
           ),
         ),

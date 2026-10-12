@@ -10,17 +10,17 @@ class _TypographyScale extends StatelessWidget {
     return Column(
       crossAxisAlignment: .start,
       children: [
-        Text('displaySm: Display', style: typography.displaySm),
-        SizedBox(height: context.spacing.md),
-        Text('headingMd: Heading', style: typography.headingMd),
-        SizedBox(height: context.spacing.md),
-        Text('titleLg: Title', style: typography.titleLg),
-        SizedBox(height: context.spacing.md),
-        Text('bodyMd: Body copy', style: typography.bodyMd),
-        SizedBox(height: context.spacing.md),
-        Text('labelMd: Label', style: typography.labelMd),
-        SizedBox(height: context.spacing.md),
-        Text('codeMd: Inline code', style: typography.codeMd),
+        Text('displaySM: Display', style: typography.displaySM),
+        SizedBox(height: context.spacing.MD),
+        Text('headingMD: Heading', style: typography.headingMD),
+        SizedBox(height: context.spacing.MD),
+        Text('titleLG: Title', style: typography.titleLG),
+        SizedBox(height: context.spacing.MD),
+        Text('bodyMD: Body copy', style: typography.bodyMD),
+        SizedBox(height: context.spacing.MD),
+        Text('labelMD: Label', style: typography.labelMD),
+        SizedBox(height: context.spacing.MD),
+        Text('codeMD: Inline code', style: typography.codeMD),
       ],
     );
   }

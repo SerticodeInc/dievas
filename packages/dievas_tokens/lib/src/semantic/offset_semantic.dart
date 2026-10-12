@@ -10,17 +10,17 @@ import 'package:dievas_tokens/src/primitives/offset_primitives.dart';
 /// References [DievasOffsetPrimitives] exclusively.
 abstract final class DievasOffsetSemantic {
   /// Subtle drop shadow — 1px vertical.
-  static const double xs = DievasOffsetPrimitives.y1;
+  static const double XS = DievasOffsetPrimitives.y1;
 
   /// Small elevation — 2px vertical.
-  static const double sm = DievasOffsetPrimitives.y2;
+  static const double SM = DievasOffsetPrimitives.y2;
 
   /// Medium elevation — 4px vertical.
-  static const double md = DievasOffsetPrimitives.y4;
+  static const double MD = DievasOffsetPrimitives.y4;
 
   /// Large elevation — 8px vertical.
-  static const double lg = DievasOffsetPrimitives.y8;
+  static const double LG = DievasOffsetPrimitives.y8;
 
   /// Extra-large elevation — 16px vertical.
-  static const double xl = DievasOffsetPrimitives.y16;
+  static const double XL = DievasOffsetPrimitives.y16;
 }

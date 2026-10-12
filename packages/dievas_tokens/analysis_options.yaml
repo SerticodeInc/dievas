@@ -16,6 +16,8 @@ analyzer:
         unused_element: error
         unused_field: error
         avoid_dynamic_calls: error
+        constant_identifier_names: ignore
+        non_constant_identifier_names: ignore
 
 linter:
     rules:

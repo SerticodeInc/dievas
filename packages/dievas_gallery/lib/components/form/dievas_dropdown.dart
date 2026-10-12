@@ -62,7 +62,7 @@ class _Configurations extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: context.spacing.lg),
+        SizedBox(height: context.spacing.LG),
         const _DemoBlock(
           'With label',
           child: SizedBox(
@@ -75,7 +75,7 @@ class _Configurations extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: context.spacing.lg),
+        SizedBox(height: context.spacing.LG),
         const _DemoBlock(
           'Disabled',
           child: SizedBox(
@@ -103,8 +103,8 @@ class _DemoBlock extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisSize: MainAxisSize.min,
     children: [
-      Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
-      SizedBox(height: context.spacing.xs),
+      Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
+      SizedBox(height: context.spacing.XS),
       ComponentBoundary(child: child),
     ],
   );

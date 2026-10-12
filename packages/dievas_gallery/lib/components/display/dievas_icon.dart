@@ -19,7 +19,7 @@ class _Playground extends StatelessWidget {
       label: 'Size',
       options: DievasIconSize.values,
       labelBuilder: (v) => v.name,
-      initialOption: DievasIconSize.md,
+      initialOption: DievasIconSize.MD,
     );
 
     return Center(
@@ -34,9 +34,9 @@ class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Wrap(
-        spacing: context.spacing.lg,
+        spacing: context.spacing.LG,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           for (final size in DievasIconSize.values)
@@ -44,8 +44,8 @@ class _AllSizes extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ComponentBoundary(child: DievasIcon(Icons.star_rounded, size: size)),
-                SizedBox(height: context.spacing.sm),
-                Text(size.name, style: context.typography.labelXs),
+                SizedBox(height: context.spacing.SM),
+                Text(size.name, style: context.typography.labelXS),
               ],
             ),
         ],

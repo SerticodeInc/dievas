@@ -24,22 +24,22 @@ class _Playground extends StatelessWidget {
           showDragHandle: showHandle,
           child: Padding(
             padding: EdgeInsets.fromLTRB(
-              context.spacing.lg,
-              context.spacing.md,
-              context.spacing.lg,
-              context.spacing.xl,
+              context.spacing.LG,
+              context.spacing.MD,
+              context.spacing.LG,
+              context.spacing.XL,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Sheet title', style: DievasTheme.typographyOf(context).titleMd),
-                SizedBox(height: context.spacing.sm),
+                Text('Sheet title', style: DievasTheme.typographyOf(context).titleMD),
+                SizedBox(height: context.spacing.SM),
                 Text(
                   'This is a Dievas bottom sheet. Content goes here.',
-                  style: DievasTheme.typographyOf(context).bodyMd,
+                  style: DievasTheme.typographyOf(context).bodyMD,
                 ),
-                SizedBox(height: context.spacing.lg),
+                SizedBox(height: context.spacing.LG),
                 DievasFilledButton(label: 'Confirm', onPressed: () {}),
               ],
             ),
@@ -56,8 +56,8 @@ class _WithHandle extends StatelessWidget {
     child: ComponentBoundary(
       child: DievasBottomSheet(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(context.spacing.lg, context.spacing.md, context.spacing.lg, context.spacing.xl),
-          child: Text('Content with drag handle', style: DievasTheme.typographyOf(context).bodyMd),
+          padding: EdgeInsets.fromLTRB(context.spacing.LG, context.spacing.MD, context.spacing.LG, context.spacing.XL),
+          child: Text('Content with drag handle', style: DievasTheme.typographyOf(context).bodyMD),
         ),
       ),
     ),
@@ -71,8 +71,8 @@ class _NoHandle extends StatelessWidget {
       child: DievasBottomSheet(
         showDragHandle: false,
         child: Padding(
-          padding: EdgeInsets.all(context.spacing.lg),
-          child: Text('Content without drag handle', style: DievasTheme.typographyOf(context).bodyMd),
+          padding: EdgeInsets.all(context.spacing.LG),
+          child: Text('Content without drag handle', style: DievasTheme.typographyOf(context).bodyMD),
         ),
       ),
     ),

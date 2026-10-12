@@ -41,7 +41,7 @@ class _Playground extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: .all(context.spacing.lg),
+        padding: .all(context.spacing.LG),
         child: ComponentBoundary(
           child: SizedBox(
             width: orientation == .horizontal ? 280 : 3,
@@ -66,38 +66,38 @@ class _BothOrientations extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: .all(context.spacing.lg),
+      padding: .all(context.spacing.LG),
       child: Column(
         mainAxisSize: .min,
         crossAxisAlignment: .start,
         children: [
           Text(
             'Horizontal',
-            style: context.typography.labelXs.copyWith(fontWeight: .w600, color: context.colours.text.textPrimary),
+            style: context.typography.labelXS.copyWith(fontWeight: .w600, color: context.colours.text.textPrimary),
           ),
-          SizedBox(height: context.spacing.sm),
+          SizedBox(height: context.spacing.SM),
           const ComponentBoundary(child: SizedBox(width: 280, child: DievasDivider())),
-          SizedBox(height: context.spacing.lg),
+          SizedBox(height: context.spacing.LG),
           Text(
             'Horizontal with indent',
-            style: context.typography.labelXs.copyWith(fontWeight: .w600, color: context.colours.text.textPrimary),
+            style: context.typography.labelXS.copyWith(fontWeight: .w600, color: context.colours.text.textPrimary),
           ),
-          SizedBox(height: context.spacing.sm),
+          SizedBox(height: context.spacing.SM),
           const ComponentBoundary(
             child: SizedBox(
               width: 280,
-              child: DievasDivider(indent: DievasDividerIndent.md, endIndent: DievasDividerIndent.md),
+              child: DievasDivider(indent: DievasDividerIndent.MD, endIndent: DievasDividerIndent.MD),
             ),
           ),
-          SizedBox(height: context.spacing.lg),
+          SizedBox(height: context.spacing.LG),
           Text(
             'Vertical',
-            style: context.typography.labelXs.copyWith(fontWeight: .w600, color: context.colours.text.textPrimary),
+            style: context.typography.labelXS.copyWith(fontWeight: .w600, color: context.colours.text.textPrimary),
           ),
-          SizedBox(height: context.spacing.sm),
+          SizedBox(height: context.spacing.SM),
           ComponentBoundary(
             child: SizedBox(
-              height: context.spacing.x2l,
+              height: context.spacing.XL2,
               child: const DievasDivider(orientation: .vertical),
             ),
           ),

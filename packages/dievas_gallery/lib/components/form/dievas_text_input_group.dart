@@ -22,7 +22,7 @@ class _Playground extends StatelessWidget {
       label: 'Size',
       options: DievasTextInputGroupSize.values,
       labelBuilder: (v) => v.name,
-      initialOption: .md,
+      initialOption: .MD,
     );
     final segmentCount = context.knobs.double.slider(label: 'Segments', initialValue: 3, min: 2, max: 4).round();
     final hint = context.knobs.string(label: 'Hint', initialValue: 'Value');
@@ -30,7 +30,7 @@ class _Playground extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.spacing.xl),
+        padding: EdgeInsets.symmetric(horizontal: context.spacing.XL),
         child: ComponentBoundary(
           child: DievasTextInputGroup(
             size: size,
@@ -49,7 +49,7 @@ class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
+      padding: EdgeInsets.symmetric(horizontal: context.spacing.XL, vertical: context.spacing.LG),
       child: Column(
         mainAxisSize: .min,
         children: [
@@ -60,10 +60,10 @@ class _AllSizes extends StatelessWidget {
                   width: 40,
                   child: Text(
                     size.name,
-                    style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary),
+                    style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary),
                   ),
                 ),
-                SizedBox(width: context.spacing.md),
+                SizedBox(width: context.spacing.MD),
                 Expanded(
                   child: ComponentBoundary(
                     child: DievasTextInputGroup(
@@ -77,7 +77,7 @@ class _AllSizes extends StatelessWidget {
                 ),
               ],
             ),
-            if (size != DievasTextInputGroupSize.lg) SizedBox(height: context.spacing.md),
+            if (size != DievasTextInputGroupSize.LG) SizedBox(height: context.spacing.MD),
           ],
         ],
       ),
@@ -91,7 +91,7 @@ class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
+      padding: EdgeInsets.symmetric(horizontal: context.spacing.XL, vertical: context.spacing.LG),
       child: Column(
         mainAxisSize: .min,
         children: [
@@ -104,7 +104,7 @@ class _AllStates extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: context.spacing.mdPlus),
+          SizedBox(height: context.spacing.MDPlus),
           const _StateBlock(
             'Three Segments',
             child: DievasTextInputGroup(
@@ -115,7 +115,7 @@ class _AllStates extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: context.spacing.mdPlus),
+          SizedBox(height: context.spacing.MDPlus),
           const _StateBlock(
             'Four Segments',
             child: DievasTextInputGroup(
@@ -127,7 +127,7 @@ class _AllStates extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: context.spacing.mdPlus),
+          SizedBox(height: context.spacing.MDPlus),
           _StateBlock(
             'Disabled',
             child: DievasTextInputGroup(
@@ -154,8 +154,8 @@ class _StateBlock extends StatelessWidget {
     crossAxisAlignment: .start,
     mainAxisSize: .min,
     children: [
-      Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
-      SizedBox(height: context.spacing.sm),
+      Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
+      SizedBox(height: context.spacing.SM),
       ComponentBoundary(child: child),
     ],
   );

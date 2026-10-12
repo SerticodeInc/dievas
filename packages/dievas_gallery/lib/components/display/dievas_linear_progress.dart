@@ -28,7 +28,7 @@ class _Playground extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.spacing.xl),
+        padding: EdgeInsets.symmetric(horizontal: context.spacing.XL),
         child: ComponentBoundary(
           child: DievasLinearProgress(value: isIndeterminate ? null : value, style: style),
         ),
@@ -43,20 +43,20 @@ class _AllStyles extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.xl),
+      padding: EdgeInsets.all(context.spacing.XL),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           for (final style in DievasLinearProgressStyle.values) ...[
             Row(
               children: [
-                SizedBox(width: 64, child: Text(style.name, style: context.typography.labelXs)),
+                SizedBox(width: 64, child: Text(style.name, style: context.typography.labelXS)),
                 Expanded(
                   child: ComponentBoundary(child: DievasLinearProgress(value: 0.65, style: style)),
                 ),
               ],
             ),
-            SizedBox(height: context.spacing.md),
+            SizedBox(height: context.spacing.MD),
           ],
         ],
       ),
@@ -70,7 +70,7 @@ class _Indeterminate extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.xl),
+      padding: EdgeInsets.symmetric(horizontal: context.spacing.XL),
       child: const ComponentBoundary(child: DievasLinearProgress()),
     ),
   );

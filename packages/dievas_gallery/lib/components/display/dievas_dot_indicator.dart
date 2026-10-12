@@ -40,11 +40,11 @@ class _Configurations extends StatelessWidget {
       mainAxisSize: .min,
       children: [
         const _DemoBlock('3 dots — first active', child: DievasDotIndicator(count: 3, activeIndex: 0)),
-        SizedBox(height: context.spacing.md),
+        SizedBox(height: context.spacing.MD),
         const _DemoBlock('4 dots — middle active', child: DievasDotIndicator(count: 4, activeIndex: 1)),
-        SizedBox(height: context.spacing.md),
+        SizedBox(height: context.spacing.MD),
         const _DemoBlock('5 dots — last active', child: DievasDotIndicator(count: 5, activeIndex: 4)),
-        SizedBox(height: context.spacing.md),
+        SizedBox(height: context.spacing.MD),
         _DemoBlock('Disabled', child: DievasDotIndicator(count: 4, activeIndex: 1, enabled: false)),
       ],
     ),
@@ -61,8 +61,8 @@ class _DemoBlock extends StatelessWidget {
     crossAxisAlignment: .start,
     mainAxisSize: .min,
     children: [
-      Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
-      SizedBox(height: context.spacing.sm),
+      Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
+      SizedBox(height: context.spacing.SM),
       ComponentBoundary(child: child),
     ],
   );

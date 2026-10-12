@@ -38,7 +38,7 @@ class _Playground extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(context.spacing.md),
+        padding: EdgeInsets.all(context.spacing.MD),
         child: SizedBox(
           width: .infinity,
           child: ComponentBoundary(
@@ -56,7 +56,7 @@ class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.md),
+      padding: EdgeInsets.all(context.spacing.MD),
       child: SizedBox(
         width: 400,
         child: ComponentBoundary(
@@ -85,7 +85,7 @@ class _WithIcons extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.md),
+      padding: EdgeInsets.all(context.spacing.MD),
       child: SizedBox(
         width: 400,
         child: ComponentBoundary(

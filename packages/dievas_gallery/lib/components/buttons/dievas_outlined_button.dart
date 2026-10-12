@@ -29,7 +29,7 @@ class _Playground extends StatelessWidget {
       label: 'Size',
       options: DievasButtonSize.values,
       labelBuilder: (v) => v.name,
-      initialOption: DievasButtonSize.md,
+      initialOption: DievasButtonSize.MD,
     );
 
     final state = context.knobs.object.dropdown<DievasButtonState>(
@@ -84,10 +84,10 @@ class _AllStyles extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
+        spacing: context.spacing.SMPlus,
+        runSpacing: context.spacing.SMPlus,
         alignment: WrapAlignment.center,
         children: [
           for (final style in DievasOutlinedButtonStyle.values)
@@ -106,10 +106,10 @@ class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
+        spacing: context.spacing.SMPlus,
+        runSpacing: context.spacing.SMPlus,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           for (final size in DievasButtonSize.values)
@@ -128,10 +128,10 @@ class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
+        spacing: context.spacing.SMPlus,
+        runSpacing: context.spacing.SMPlus,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           for (final state in DievasButtonState.values)

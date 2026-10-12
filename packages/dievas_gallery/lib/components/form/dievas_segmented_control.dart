@@ -43,17 +43,17 @@ class _Configurations extends StatelessWidget {
           '2 segments',
           child: DievasSegmentedControl(options: ['On', 'Off'], value: 'On', onChanged: null),
         ),
-        SizedBox(height: context.spacing.lg),
+        SizedBox(height: context.spacing.LG),
         const _DemoBlock(
           '3 segments',
           child: DievasSegmentedControl(options: ['Day', 'Week', 'Month'], value: 'Week', onChanged: null),
         ),
-        SizedBox(height: context.spacing.lg),
+        SizedBox(height: context.spacing.LG),
         const _DemoBlock(
           '4 segments',
           child: DievasSegmentedControl(options: ['Day', 'Week', 'Month', 'Year'], value: 'Month', onChanged: null),
         ),
-        SizedBox(height: context.spacing.lg),
+        SizedBox(height: context.spacing.LG),
         const _DemoBlock(
           'Disabled',
           child: DievasSegmentedControl(
@@ -78,8 +78,8 @@ class _DemoBlock extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisSize: MainAxisSize.min,
     children: [
-      Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
-      SizedBox(height: context.spacing.xs),
+      Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
+      SizedBox(height: context.spacing.XS),
       ComponentBoundary(child: child),
     ],
   );

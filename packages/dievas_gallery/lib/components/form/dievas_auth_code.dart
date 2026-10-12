@@ -35,19 +35,19 @@ class _Configurations extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
+      padding: EdgeInsets.symmetric(horizontal: context.spacing.XL, vertical: context.spacing.LG),
       child: Column(
         mainAxisSize: .min,
         children: [
           _DemoBlock('4-digit — plain', child: DievasAuthCode(codeLength: 4, onCompleted: (_) {})),
-          SizedBox(height: context.spacing.lg),
+          SizedBox(height: context.spacing.LG),
           _DemoBlock('6-digit — plain', child: DievasAuthCode(codeLength: 6, onCompleted: (_) {})),
-          SizedBox(height: context.spacing.lg),
+          SizedBox(height: context.spacing.LG),
           _DemoBlock(
             '6-digit — obscured',
             child: DievasAuthCode(codeLength: 6, obscureText: true, onCompleted: (_) {}),
           ),
-          SizedBox(height: context.spacing.lg),
+          SizedBox(height: context.spacing.LG),
           _DemoBlock('4-digit — disabled', child: DievasAuthCode(codeLength: 4, enabled: false, onCompleted: (_) {})),
         ],
       ),
@@ -65,8 +65,8 @@ class _DemoBlock extends StatelessWidget {
     crossAxisAlignment: .start,
     mainAxisSize: .min,
     children: [
-      Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
-      SizedBox(height: context.spacing.sm),
+      Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
+      SizedBox(height: context.spacing.SM),
       ComponentBoundary(child: child),
     ],
   );

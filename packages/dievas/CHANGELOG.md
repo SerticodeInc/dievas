@@ -1,5 +1,43 @@
 # Change Log
 
+## 1.0.0
+
+The naming unification release. Every size-axis token, enum value, and theme-value field now follows one law — `<base><UPPERCASE SIZE>` — and brand expression is driven by a single selectable palette.
+
+### Breaking — size-token naming
+
+All size-axis identifiers were renamed to `<base><SIZE>` (lowercase base, **UPPERCASE** size suffix, multiplier trailing):
+
+- Suffixes: `XS`, `SM`, `MD`, `LG`, `XL`, `XL2`…`XL8`; half-steps `SMPlus`, `MDPlus`, `LGPlus`, `XLPlus`.
+- Examples: `spacingMD`, `radiusLG`, `fontSizeXL`, `sizeXL2`, `breakpointSM`, `shadowLayer.upperMD`.
+- Enum values follow the same law (`DievasButtonSize.MD`, `DievasGridBreakpoint.XL`).
+- Component theme-value record fields follow the same law (`heightLG`, `paddingMD`).
+- **Not** renamed (not size axes): opacity roles, z-index, easing, animation intents, `touchMin`.
+
+### Breaking — removed duplicate easing
+
+- `DievasAnimationThemeData.easingEmphasize` was an exact duplicate of `easingStandard` and has been removed.
+
+### Breaking — shadow opacities moved to the elevation domain
+
+The six shadow-opacity aliases leaked into the opacity API. They are removed from `DievasOpacityThemeData`:
+
+- Removed: `shadow1`, `shadow1Light`, `shadow2`, `shadow2Upper`, `shadow2Lower`, `shadow2Heavy`.
+- Added to `DievasElevationSemantic`: `SHADOW_TINT_SUBTLE` (`o8`), `SHADOW_TINT_SOFT` (`o13`), `SHADOW_TINT_MEDIUM` (`o20`), `SHADOW_TINT_STRONG` (`o25`).
+- Default shadow layers now read their tint from the elevation domain.
+
+### New — brand palette selection
+
+- **New:** `applyBrandPalette(DievasColourThemeData, DievasBrandPalette)` re-resolves every brand-derived colour role (brand, brand-subtle, on-brand text/icon, primary and secondary actions, brand/focus borders, focus input border, switch-on track) while leaving neutral, text, surface, and feedback roles fixed.
+- **New:** `DievasGlobalThemeData` accepts an optional `brandPalette` — the single brand selection point for consumer apps.
+- The default `DievasBrandPalettes.indigo` reproduces the built-in light and dark reference themes exactly (guarded by a parity test).
+
+### Docs
+
+- Documented the size-token naming law and the 4pt / 8pt grid law.
+- Corrected the colour taxonomy (`switchThumbOn` / `switchThumbOff`, added `SurfaceColours`).
+- Documented brand palettes.
+
 ## 0.0.5
 
 - **New:** `DievasTag` — pill/rounded shape via `DievasTagBorderRadius` sealed class, per instance colour overrides (`backgroundColor`, `foregroundColor`, `borderColor`), and border width stable sizing across all styles.

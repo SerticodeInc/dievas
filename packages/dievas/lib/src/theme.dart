@@ -5,6 +5,7 @@ export 'extensions/dievas_theme_context_extension.dart';
 export 'theme/animation/dievas_animation_theme_data.dart';
 export 'theme/border/dievas_border_theme_data.dart';
 export 'theme/color/dievas_colour_theme_data.dart';
+export 'theme/color/brand_palette_application.dart';
 export 'theme/color/sets/action_colours.dart';
 export 'theme/color/sets/background_colours.dart';
 export 'theme/color/sets/border_colours.dart';

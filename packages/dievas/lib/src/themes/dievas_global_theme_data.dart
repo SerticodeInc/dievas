@@ -5,6 +5,9 @@ part of '../themes.dart';
 /// Sub classing [DievasGlobalThemeData] is the contract for both the built-in
 /// default themes and consumer app brand themes. Subclasses provide:
 /// - [colours] — the full colour token set for their brand / mode
+/// - [brandPalette] — optional brand palette; when supplied, every
+///   brand-derived colour role is re-resolved from it (see
+///   [applyBrandPalette]) on top of [colours]
 /// - [border] — optional border radius overrides (defaults work for most brands)
 ///
 /// Everything else — typography, component theme data, Material bridge — is
@@ -27,6 +30,7 @@ part of '../themes.dart';
 base class DievasGlobalThemeData implements DievasThemeData {
   DievasGlobalThemeData({
     required DievasColourThemeData colours,
+    DievasBrandPalette? brandPalette,
     DievasAnimationThemeData animation = const DievasAnimationThemeData(),
     DievasBorderThemeData border = const DievasBorderThemeData(),
     DievasSpacingThemeData spacing = const DievasSpacingThemeData(),
@@ -36,15 +40,15 @@ base class DievasGlobalThemeData implements DievasThemeData {
     DievasComponentThemeData? components,
     DievasTypographyThemeData? typography,
   }) : _animation = animation,
-       _colours = colours,
+       _colours = brandPalette == null ? colours : applyBrandPalette(colours, brandPalette),
        _border = border,
        _spacing = spacing,
        _sizing = sizing,
        _opacity = opacity {
-    _typography = typography ?? _createTypographyData(colours.text.textPrimary);
-    _elevation = elevation ?? _buildDefaultElevation(colours);
+    _typography = typography ?? _createTypographyData(_colours.text.textPrimary);
+    _elevation = elevation ?? _buildDefaultElevation(_colours);
     _components = _deriveDievasComponentThemeData(
-      colours,
+      _colours,
       _typography,
       spacing,
       sizing,
@@ -53,7 +57,7 @@ base class DievasGlobalThemeData implements DievasThemeData {
       _elevation,
       components,
     );
-    _material = _buildMaterial(colours, _typography);
+    _material = _buildMaterial(_colours, _typography);
   }
 
   DievasGlobalThemeData._raw({

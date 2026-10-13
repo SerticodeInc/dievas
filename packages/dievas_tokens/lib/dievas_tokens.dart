@@ -17,6 +17,7 @@ export 'src/primitives/spacing_primitives.dart';
 export 'src/primitives/typography_primitives.dart';
 
 export 'src/semantic/animation_semantic.dart';
+export 'src/semantic/brand_palette.dart';
 export 'src/semantic/breakpoint_semantic.dart';
 export 'src/semantic/colour_semantic_dark.dart';
 export 'src/semantic/colour_semantic_light.dart';

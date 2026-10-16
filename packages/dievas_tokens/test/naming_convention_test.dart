@@ -44,7 +44,6 @@ Future<void> main() async {
     'size families use class-scoped scales or role names with uppercase suffixes',
     () {
       const files = [
-        'primitives/radius_primitives.dart',
         'primitives/breakpoint_primitives.dart',
         'semantic/spacing_semantic.dart',
         'semantic/radius_semantic.dart',

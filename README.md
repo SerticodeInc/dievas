@@ -237,7 +237,7 @@ No legacy pre null safety patterns.
 | --------------------------------------------- | ------------------------------------ |
 | [Moon Design System](https://flutter.moon.io) | Component catalogue, visual language |
 
-The landing page uses Jaspr static generation and Tailwind v4. See [Deploy the landing page to Cloudflare Pages](landing/DEPLOYMENT.md) for build, deployment, and domain migration steps.
+The landing page uses Jaspr static generation and Tailwind v4. See [Deploy the landing page to Cloudflare](landing/DEPLOYMENT.md) for build, deployment, and domain migration steps.
 
 Token bridge: `landing/tool/generate_theme.dart` reads `dievas_tokens` constants and emits Tailwind `@theme {}` CSS; the same token values power both the Flutter widgets and the server rendered landing page.
 

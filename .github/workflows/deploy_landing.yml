@@ -1,8 +1,8 @@
 name: Deploy — Landing
 
-# Build the Jaspr static site and upload it to Cloudflare Pages.
-# Manual trigger only. Create the Pages project named dievas first.
-# Required secrets: CLOUDFLARE_API_TOKEN (Cloudflare Pages: Edit),
+# Build the Jaspr static site and upload it to Cloudflare Workers.
+# Manual fallback only. Cloudflare Git integration deploys master automatically.
+# Required secrets: CLOUDFLARE_API_TOKEN (Workers Scripts: Edit),
 # CLOUDFLARE_ACCOUNT_ID. Optional: DISCORD_HERMODR_WEBHOOK.
 
 on:
@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
     deploy:
-        name: Deploy to Cloudflare Pages
+        name: Deploy to Cloudflare Workers
         runs-on: ubuntu-latest
         timeout-minutes: 20
         permissions:
@@ -38,24 +38,11 @@ jobs:
                   cache: npm
                   cache-dependency-path: landing/package-lock.json
 
-            - name: Install landing dependencies
-              working-directory: landing
-              run: |
-                  dart pub get
-                  npm ci
-                  dart pub global activate jaspr_cli 0.23.4
-
             - name: Build static landing page
-              working-directory: landing
-              run: |
-                  rm -f web/output.css
-                  npm run build:css
-                  dart pub global run jaspr_cli:jaspr build
-                  test -f build/jaspr/index.html
-                  test -f build/jaspr/favicon.svg
+              run: bash landing/tool/build_cloudflare.sh
 
             - name: Deploy landing
-              run: npx wrangler@4 pages deploy --project-name=dievas --branch="${{ github.ref_name }}"
+              run: npx wrangler@4 deploy
               env:
                   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -86,7 +73,7 @@ jobs:
                             { name: "👤 Author", value: $author, inline: true },
                             { name: "🔗 Run", value: "[View](\($run_url))", inline: true }
                           ],
-                          footer: { text: "Dievas CI/CD • Cloudflare Pages • dievas.serticode.com" },
+                          footer: { text: "Dievas CI/CD • Cloudflare Workers • dievas.serticode.com" },
                           timestamp: $timestamp
                         }]
                       }' > payload.json
@@ -114,7 +101,7 @@ jobs:
                           fields: [
                             { name: "🔗 Run", value: "[View](\($run_url))" }
                           ],
-                          footer: { text: "Dievas CI/CD • Cloudflare Pages" },
+                          footer: { text: "Dievas CI/CD • Cloudflare Workers" },
                           timestamp: $timestamp
                         }]
                       }' > payload.json

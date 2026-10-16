@@ -11,7 +11,9 @@ final RegExp _legacyAxis = RegExp(
 );
 final RegExp _sizeName = RegExp(
   r'^(?:[a-z][a-zA-Z]*)?(?:XS|SM|MD|LG|XL|XL[2-8]|SMPlus|MDPlus|LGPlus|XLPlus|XL2Plus)$'
-  r'|^(?:NONE|FULL|BASE)$',
+  r'|^(?:NONE|FULL|BASE)$'
+  r'|^(?:height|width)\d+$'
+  r'|^R\d+$',
 );
 
 Future<void> main() async {

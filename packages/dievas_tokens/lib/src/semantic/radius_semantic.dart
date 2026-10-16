@@ -31,6 +31,27 @@ abstract final class DievasRadiusSemantic {
   /// 24px: hero cards.
   static const double XL3 = DievasRadiusPrimitives.r24;
 
+  /// 28px: large hero surfaces.
+  static const double R28 = DievasRadiusPrimitives.r28;
+
+  /// 32px: feature panels.
+  static const double R32 = DievasRadiusPrimitives.r32;
+
+  /// 36px: oversized feature surfaces.
+  static const double R36 = DievasRadiusPrimitives.r36;
+
+  /// 40px: prominent sheets and panels.
+  static const double R40 = DievasRadiusPrimitives.r40;
+
+  /// 48px: large decorative surfaces.
+  static const double R48 = DievasRadiusPrimitives.r48;
+
+  /// 56px: very large surfaces.
+  static const double R56 = DievasRadiusPrimitives.r56;
+
+  /// 64px: extra large surfaces.
+  static const double R64 = DievasRadiusPrimitives.r64;
+
   /// 9999px: pill shape. Badges, chips, fully rounded buttons, avatars.
   static const double FULL = DievasRadiusPrimitives.full;
 }

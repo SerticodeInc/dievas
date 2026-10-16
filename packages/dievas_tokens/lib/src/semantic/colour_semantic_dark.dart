@@ -1,21 +1,12 @@
-// Semantic colour tokens — dark theme.
-//
-// Pure Dart. No Flutter dependency.
-// Every constant is an ARGB int aliased from DievasColourPrimitives.
-// The Color() wrapper is applied in the dievas Flutter package.
-//
-// Naming: grouped descriptive names matching DievasColourSemanticLight.
-// Every role defined in the light file has a counterpart here.
+// Dark theme semantic colour tokens for the Dievas design system. Every
+// constant is an ARGB int aliased from DievasColourPrimitives; the Color()
+// wrapper is applied in the dievas Flutter package.
 
 import 'package:dievas_tokens/src/primitives/colour_primitives.dart';
 
-/// Dark-theme semantic colour tokens for the Dievas design system.
-///
-/// Neutral reference roles match the recorded Moon token values.
-/// Brand, feedback, and component states retain the existing Dievas mappings.
-///
-/// References [DievasColourPrimitives] exclusively — no raw hex values
-/// are permitted in this file.
+/// Dark theme semantic colour tokens. Neutral reference roles match the
+/// recorded Moon token values; brand, feedback, and component states retain
+/// the existing Dievas mappings. Values reference [DievasColourPrimitives].
 abstract final class DievasColourSemanticDark {
   //  Core / Brand
 
@@ -30,13 +21,13 @@ abstract final class DievasColourSemanticDark {
 
   // Text
 
-  /// Highest-contrast body text on dark backgrounds.
+  /// Highest contrast body text on dark backgrounds.
   static const int textPrimary = DievasColourPrimitives.white;
 
   /// Secondary / supporting copy.
   static const int textSecondary = DievasColourPrimitives.steelGreyLight;
 
-  /// Tertiary / placeholder-level text.
+  /// Tertiary / placeholder level text.
   static const int textTertiary = DievasColourPrimitives.slate500;
 
   /// Text on disabled interactive elements.
@@ -100,7 +91,7 @@ abstract final class DievasColourSemanticDark {
   /// Default dividers and container strokes.
   static const int borderDefault = DievasColourPrimitives.charcoal;
 
-  /// High-emphasis borders. Active input outlines, selected containers.
+  /// High emphasis borders. Active input outlines, selected containers.
   static const int borderStrong = DievasColourPrimitives.slate400;
 
   /// Borders on disabled inputs and containers.
@@ -109,7 +100,7 @@ abstract final class DievasColourSemanticDark {
   /// Focus ring. Applied on keyboard focus.
   static const int borderFocus = DievasColourPrimitives.indigo400;
 
-  /// Brand-coloured border. Selected states, brand highlights.
+  /// Brand coloured border. Selected states, brand highlights.
   static const int borderBrand = DievasColourPrimitives.indigo400;
 
   // Action
@@ -141,7 +132,7 @@ abstract final class DievasColourSemanticDark {
   /// Success / constructive action surface.
   static const int actionSuccess = DievasColourPrimitives.green500;
 
-  // Feedback — Success
+  // Feedback: Success
 
   /// Success alert background on dark surfaces.
   static const int feedbackSuccessBackground = DievasColourPrimitives.green950;
@@ -155,7 +146,7 @@ abstract final class DievasColourSemanticDark {
   /// Success body text.
   static const int feedbackSuccessText = DievasColourPrimitives.green200;
 
-  // Feedback — Warning
+  // Feedback: Warning
 
   /// Warning alert background.
   static const int feedbackWarningBackground = DievasColourPrimitives.amber950;
@@ -169,7 +160,7 @@ abstract final class DievasColourSemanticDark {
   /// Warning body text.
   static const int feedbackWarningText = DievasColourPrimitives.amber200;
 
-  // Feedback — Error
+  // Feedback: Error
 
   /// Error alert background.
   static const int feedbackErrorBackground = DievasColourPrimitives.red950;
@@ -183,7 +174,7 @@ abstract final class DievasColourSemanticDark {
   /// Error body text.
   static const int feedbackErrorText = DievasColourPrimitives.red200;
 
-  // Feedback — Info
+  // Feedback: Info
 
   /// Informational alert background.
   static const int feedbackInfoBackground = DievasColourPrimitives.sky950;
@@ -236,10 +227,10 @@ abstract final class DievasColourSemanticDark {
 
   // Static
 
-  /// Pure white. Theme-invariant. Never flips.
+  /// Pure white. Theme invariant. Never flips.
   static const int staticWhite = DievasColourPrimitives.white;
 
-  /// Pure black. Theme-invariant.
+  /// Pure black. Theme invariant.
   static const int staticBlack = DievasColourPrimitives.black;
 
   /// Fully transparent. Useful for animation start/end states.

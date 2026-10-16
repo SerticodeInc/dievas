@@ -1,8 +1,6 @@
-// Semantic opacity tokens.
-//
-// Pure Dart. No Flutter dependency.
-// Named aliases over DievasOpacityPrimitives for consistent transparency
-// across disabled states, overlays, hover effects, and ghost elements.
+// Semantic opacity tokens: named aliases over DievasOpacityPrimitives for
+// consistent transparency across disabled states, overlays, hover effects,
+// and ghost elements.
 
 import 'package:dievas_tokens/src/primitives/opacity_primitives.dart';
 
@@ -10,24 +8,24 @@ import 'package:dievas_tokens/src/primitives/opacity_primitives.dart';
 ///
 /// References [DievasOpacityPrimitives] exclusively.
 abstract final class DievasOpacitySemantic {
-  /// 40% — disabled interactive elements (buttons, inputs, icons).
+  /// 40%: disabled interactive elements (buttons, inputs, icons).
   static const double disabled = DievasOpacityPrimitives.o40;
 
-  /// 8% — ghost hover surface tint (icon buttons, list tiles).
+  /// 8%: ghost hover surface tint (icon buttons, list tiles).
   static const double hoverGhost = DievasOpacityPrimitives.o8;
 
-  /// 16% — pressed / active surface tint.
+  /// 16%: pressed / active surface tint.
   static const double pressedGhost = DievasOpacityPrimitives.o16;
 
-  /// 12% — focus ring fill (keyboard focus highlight).
+  /// 12%: focus ring fill (keyboard focus highlight).
   static const double focusRing = DievasOpacityPrimitives.o12;
 
-  /// 56% — modal / bottom sheet scrim overlay.
+  /// 56%: modal / bottom sheet scrim overlay.
   static const double overlay = DievasOpacityPrimitives.o56;
 
-  /// 0% — fully transparent. Animation start states.
+  /// 0%: fully transparent. Animation start states.
   static const double transparent = DievasOpacityPrimitives.o0;
 
-  /// 100% — fully opaque. Animation end states and solid surfaces.
+  /// 100%: fully opaque. Animation end states and solid surfaces.
   static const double opaque = DievasOpacityPrimitives.o100;
 }

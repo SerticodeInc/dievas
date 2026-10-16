@@ -1,15 +1,9 @@
-// Semantic z-index tokens.
-//
-// Pure Dart. No Flutter dependency.
-// Centralized stacking order to prevent z-index conflicts across the
-// design system. Every overlay, popover, and floating element must
-// reference these constants — never raw integers.
+// Semantic z index tokens: pure Dart stacking order for the design system.
+// Every floating element references these constants, never raw integers.
 
-/// Semantic z-index tokens for the Dievas design system.
-///
-/// Each token occupies a dedicated band of the stacking spectrum.
-/// Bands are spaced 100 units apart to leave room for intermediate
-/// layers within each band (e.g., a modal's backdrop vs its content).
+/// Semantic z index tokens for the Dievas design system. Each token occupies a
+/// dedicated band, spaced 100 apart to leave room for intermediate layers (for
+/// example a modal backdrop versus its content).
 abstract final class DievasZIndexSemantic {
   /// Dropdown menus and select popups.
   static const int dropdown = 100;
@@ -35,6 +29,6 @@ abstract final class DievasZIndexSemantic {
   /// Toast notifications and snack bars.
   static const int toast = 800;
 
-  /// Full-screen loaders and spinners.
+  /// Full screen loaders and spinners.
   static const int loader = 900;
 }

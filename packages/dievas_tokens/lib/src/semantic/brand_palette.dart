@@ -1,18 +1,10 @@
-// Brand palette selection.
-//
-// Pure Dart. No Flutter dependency.
-// A palette is a full 11-tint colour family ramp plus a contrast colour.
-// Every brand-derived semantic role (brand, actions, borders, focus rings,
-// on-brand text and icons) is resolved from the selected palette, so an app
-// can re-skin its entire brand expression by choosing one family — no
-// per-role token sprawl.
-//
-// The default palette is [DievasBrandPalettes.indigo], which reproduces the
-// built-in light and dark reference themes exactly.
+// Brand palette selection for the Dievas design system. A palette is a full
+// 11 tint colour ramp plus a contrast colour, so an app can reskin its entire
+// brand by picking one family. Defaults to [DievasBrandPalettes.indigo].
 
 import 'package:dievas_tokens/src/primitives/colour_primitives.dart';
 
-/// The concrete brand-derived colour roles produced by a palette at a given
+/// The concrete brand derived colour roles produced by a palette at a given
 /// brightness. Values are ARGB ints; the `dievas` Flutter package wraps them
 /// in `Color` objects.
 typedef DievasBrandRoleColours = ({
@@ -30,11 +22,9 @@ typedef DievasBrandRoleColours = ({
   int switchTrackOn,
 });
 
-/// A selectable brand palette.
-///
-/// Carries the full tint ramp for one colour family. Role selection differs by
-/// brightness because light surfaces want mid/deep tints for contrast while
-/// dark surfaces want lighter tints — see [rolesForLight] and [rolesForDark].
+/// A selectable brand palette: the full tint ramp for one colour family. Light
+/// surfaces want mid or deep tints for contrast; dark surfaces want lighter
+/// tints (see [rolesForLight] and [rolesForDark]).
 final class DievasBrandPalette {
   const DievasBrandPalette({
     required this.name,
@@ -52,7 +42,7 @@ final class DievasBrandPalette {
     this.onBrand = DievasColourPrimitives.white,
   });
 
-  /// Human-readable palette name (matches the source colour family).
+  /// Human readable palette name (matches the source colour family).
   final String name;
 
   final int s50;
@@ -67,10 +57,10 @@ final class DievasBrandPalette {
   final int s900;
   final int s950;
 
-  /// Text / icon colour placed on top of a [s500]-based brand surface.
+  /// Text / icon colour placed on top of a [s500] based brand surface.
   final int onBrand;
 
-  /// Brand-derived roles for light surfaces.
+  /// Brand derived roles for light surfaces.
   DievasBrandRoleColours rolesForLight() => (
     brand: s500,
     brandSubtle: s200,
@@ -86,7 +76,7 @@ final class DievasBrandPalette {
     switchTrackOn: s500,
   );
 
-  /// Brand-derived roles for dark surfaces.
+  /// Brand derived roles for dark surfaces.
   DievasBrandRoleColours rolesForDark() => (
     brand: s400,
     brandSubtle: s950,
@@ -103,12 +93,11 @@ final class DievasBrandPalette {
   );
 }
 
-/// The selectable brand palettes shipped with Dievas.
-///
-/// Each palette wraps an existing `DievasColourPrimitives` family. [indigo] is
-/// the default and reproduces the built-in reference themes exactly.
+/// The selectable brand palettes shipped with Dievas. Each wraps an existing
+/// `DievasColourPrimitives` family. [indigo] is the default and reproduces the
+/// built in reference themes exactly.
 abstract final class DievasBrandPalettes {
-  /// Default Dievas brand — the reference palette.
+  /// Default Dievas brand: the reference palette.
   static const DievasBrandPalette indigo = DievasBrandPalette(
     name: 'indigo',
     s50: DievasColourPrimitives.indigo50,
@@ -184,7 +173,7 @@ abstract final class DievasBrandPalettes {
     s950: DievasColourPrimitives.red950,
   );
 
-  /// Amber's `s500` is light, so on-brand text flips to a dark ink.
+  /// Amber's `s500` is light, so on brand text flips to a dark ink.
   static const DievasBrandPalette amber = DievasBrandPalette(
     name: 'amber',
     s50: DievasColourPrimitives.amber50,

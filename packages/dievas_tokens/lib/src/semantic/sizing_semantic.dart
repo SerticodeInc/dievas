@@ -1,7 +1,5 @@
-// Semantic sizing tokens.
-//
-// Pure Dart aliases over DievasSizingPrimitives for component heights,
-// icon sizes, avatar dimensions, and minimum touch targets.
+// Semantic sizing tokens: pure Dart aliases over DievasSizingPrimitives for
+// component heights, icon sizes, avatar dimensions, and minimum touch targets.
 
 import 'package:dievas_tokens/src/primitives/sizing_primitives.dart';
 
@@ -9,7 +7,7 @@ import 'package:dievas_tokens/src/primitives/sizing_primitives.dart';
 ///
 /// References [DievasSizingPrimitives] exclusively.
 abstract final class DievasSizingSemantic {
-  /// Extra-small button height.
+  /// Extra small button height.
   static const double buttonHeightXS = DievasSizingPrimitives.s40;
 
   /// Small button height.
@@ -30,7 +28,7 @@ abstract final class DievasSizingSemantic {
   /// Large input height.
   static const double inputHeightLG = DievasSizingPrimitives.s60;
 
-  /// Extra-small icon size.
+  /// Extra small icon size.
   static const double iconXS = DievasSizingPrimitives.s12;
 
   /// Small icon size.
@@ -42,10 +40,10 @@ abstract final class DievasSizingSemantic {
   /// Large icon size.
   static const double iconLG = DievasSizingPrimitives.s24;
 
-  /// Extra-large icon size.
+  /// Extra large icon size.
   static const double iconXL = DievasSizingPrimitives.s32;
 
-  /// Extra-small avatar size.
+  /// Extra small avatar size.
   static const double avatarXS = DievasSizingPrimitives.s24;
 
   /// Small avatar size.
@@ -57,7 +55,7 @@ abstract final class DievasSizingSemantic {
   /// Large avatar size.
   static const double avatarLG = DievasSizingPrimitives.s48;
 
-  /// Extra-large avatar size.
+  /// Extra large avatar size.
   static const double avatarXL = DievasSizingPrimitives.s64;
 
   /// Minimum touch target dimension.

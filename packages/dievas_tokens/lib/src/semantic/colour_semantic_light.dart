@@ -1,28 +1,19 @@
-// Semantic colour tokens — light theme.
-//
-// Pure Dart. No Flutter dependency.
-// Every constant is an ARGB int aliased from DievasColourPrimitives.
-// The Color() wrapper is applied in the dievas Flutter package.
-//
-// Naming: grouped descriptive names (textPrimary, bgBase, actionPrimary).
-// Moon DS role names are referenced in comments for cross-reference only.
+// Light theme semantic colour tokens for the Dievas design system. Every
+// constant is an ARGB int aliased from DievasColourPrimitives; the Color()
+// wrapper is applied in the dievas Flutter package.
 
 import 'package:dievas_tokens/src/primitives/colour_primitives.dart';
 
-/// Light theme semantic colour tokens for the Dievas design system.
-///
-/// Neutral reference roles match the recorded Moon token values.
-/// Brand, feedback, and component states retain the existing Dievas mappings.
-///
-/// References [DievasColourPrimitives] exclusively — no raw hex values
-/// are permitted in this file.
+/// Light theme semantic colour tokens. Neutral reference roles match the
+/// recorded Moon token values; brand, feedback, and component states retain
+/// the existing Dievas mappings. Values reference [DievasColourPrimitives].
 abstract final class DievasColourSemanticLight {
   //Brand
 
   /// Primary brand colour. Interactive elements, CTAs, selected states.
   static const int brand = DievasColourPrimitives.indigo500;
 
-  /// Subtle brand tint. Backgrounds behind brand-coloured icons or badges.
+  /// Subtle brand tint. Backgrounds behind brand coloured icons or badges.
   static const int brandSubtle = DievasColourPrimitives.indigo200;
 
   /// Text or icons placed on top of [brand] surfaces.
@@ -30,7 +21,7 @@ abstract final class DievasColourSemanticLight {
 
   //Text
 
-  /// Highest-contrast body text. Headlines, labels, primary copy.
+  /// Highest contrast body text. Headlines, labels, primary copy.
   /// Moon ref: bulma
   static const int textPrimary = DievasColourPrimitives.black;
 
@@ -38,7 +29,7 @@ abstract final class DievasColourSemanticLight {
   /// Moon ref: trunks
   static const int textSecondary = DievasColourPrimitives.steelGrey;
 
-  /// Tertiary / placeholder-level text. Hints, helper copy.
+  /// Tertiary / placeholder level text. Hints, helper copy.
   static const int textTertiary = DievasColourPrimitives.slate400;
 
   /// Text on disabled interactive elements.
@@ -105,7 +96,7 @@ abstract final class DievasColourSemanticLight {
   /// Moon ref: beerus
   static const int borderDefault = DievasColourPrimitives.coolGreyLight;
 
-  /// High-emphasis borders. Active input outlines, selected containers.
+  /// High emphasis borders. Active input outlines, selected containers.
   static const int borderStrong = DievasColourPrimitives.slate900;
 
   /// Borders on disabled inputs and containers.
@@ -114,7 +105,7 @@ abstract final class DievasColourSemanticLight {
   /// Focus ring. Applied on keyboard focus.
   static const int borderFocus = DievasColourPrimitives.indigo500;
 
-  /// Brand-coloured border. Selected states, brand highlights.
+  /// Brand coloured border. Selected states, brand highlights.
   static const int borderBrand = DievasColourPrimitives.indigo500;
 
   //Action
@@ -241,10 +232,10 @@ abstract final class DievasColourSemanticLight {
 
   //Static
 
-  /// Pure white. Theme-invariant. Never flips in dark mode.
+  /// Pure white. Theme invariant. Never flips in dark mode.
   static const int staticWhite = DievasColourPrimitives.white;
 
-  /// Pure black. Theme-invariant.
+  /// Pure black. Theme invariant.
   static const int staticBlack = DievasColourPrimitives.black;
 
   /// Fully transparent. Useful for animation start/end states.

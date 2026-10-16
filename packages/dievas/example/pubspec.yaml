@@ -15,9 +15,7 @@ dependencies:
         path: ../
     dievas_tokens:
         path: ../../dievas_tokens
-    flutter:
-        sdk: flutter
-    google_fonts: ^8.1.0
+    google_fonts: ^9.0.0
 
 dev_dependencies:
     flutter_test:

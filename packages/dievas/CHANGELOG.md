@@ -21,6 +21,7 @@ Every component that painted elevation through Flutter's `Material` / `Drawer` /
 ### Fixed
 
 - `DievasAlert` no longer stretches to fill a loosely constrained parent. Its text column is now shrink-wrapped on the main axis, so the surface sizes to its content instead of expanding to the full available height (visible as a page-filling alert in the widget book canvas).
+- `DievasTabBar` now uses a single underline indicator that slides between tabs instead of a per-tab bottom border that popped in and out, so changing the selected tab animates smoothly.
 
 ## 1.0.0
 

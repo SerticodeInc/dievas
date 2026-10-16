@@ -12,22 +12,41 @@ final tabBarComponent = WidgetbookComponent(
   ],
 );
 
-class _Playground extends StatelessWidget {
+class _Playground extends StatefulWidget {
   const _Playground();
+
+  @override
+  State<_Playground> createState() => _PlaygroundState();
+}
+
+class _PlaygroundState extends State<_Playground> {
+  int? _selected;
+  int? _knobValue;
 
   @override
   Widget build(BuildContext context) {
     final tabs = ['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4'];
-    final selected = context.knobs.object.dropdown<int>(
+    final knobSelected = context.knobs.object.dropdown<int>(
       label: 'Selected index',
       options: const [0, 1, 2, 3],
       initialOption: 0,
     );
     final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
 
+    // Adopt the knob when it changes, but let taps drive selection afterwards.
+    if (knobSelected != _knobValue) {
+      _knobValue = knobSelected;
+      _selected = knobSelected;
+    }
+
     return Center(
       child: ComponentBoundary(
-        child: DievasTabBar(tabs: tabs, selectedIndex: selected, onChanged: (_) {}, enabled: enabled),
+        child: DievasTabBar(
+          tabs: tabs,
+          selectedIndex: _selected ?? knobSelected,
+          onChanged: (index) => setState(() => _selected = index),
+          enabled: enabled,
+        ),
       ),
     );
   }

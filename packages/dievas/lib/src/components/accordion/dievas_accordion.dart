@@ -144,10 +144,7 @@ class _AccordionCardState extends State<_AccordionCard> with SingleTickerProvide
     final iconColour = widget.item.disabled ? colours.icon.iconDisabled : colours.icon.iconSecondary;
 
     return DecoratedBox(
-      decoration: BoxDecoration(
-        color: colours.background.bgSubtle,
-        borderRadius: theme.borderRadius,
-      ),
+      decoration: BoxDecoration(color: colours.background.bgSubtle, borderRadius: theme.borderRadius),
       child: ClipRRect(
         borderRadius: theme.borderRadius,
         child: Column(

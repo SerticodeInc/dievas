@@ -28,11 +28,7 @@ void main() {
       }
     }
 
-    expect(
-      offenders,
-      isEmpty,
-      reason: 'Legacy lowercase size-axis identifiers found:\n${offenders.join('\n')}',
-    );
+    expect(offenders, isEmpty, reason: 'Legacy lowercase size-axis identifiers found:\n${offenders.join('\n')}');
   });
 
   test('uppercase size-axis suffix convention is present', () {

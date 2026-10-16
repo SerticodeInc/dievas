@@ -33,10 +33,7 @@ DievasColourThemeData applyBrandPalette(DievasColourThemeData colours, DievasBra
       actionSecondary: Color(roles.actionSecondary),
       actionSecondaryHover: Color(roles.actionSecondaryHover),
     ),
-    border: colours.border.copyWith(
-      borderBrand: Color(roles.borderBrand),
-      borderFocus: Color(roles.borderFocus),
-    ),
+    border: colours.border.copyWith(borderBrand: Color(roles.borderBrand), borderFocus: Color(roles.borderFocus)),
     input: colours.input.copyWith(inputBorderFocus: Color(roles.inputBorderFocus)),
     switchColours: colours.switchColours.copyWith(switchTrackOn: Color(roles.switchTrackOn)),
   );

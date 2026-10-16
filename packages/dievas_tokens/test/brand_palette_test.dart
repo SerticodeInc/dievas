@@ -50,8 +50,16 @@ void main() {
     test('every palette carries a full 11-tint ramp', () {
       for (final palette in DievasBrandPalettes.all.values) {
         final ramp = [
-          palette.s50, palette.s100, palette.s200, palette.s300, palette.s400,
-          palette.s500, palette.s600, palette.s700, palette.s800, palette.s900,
+          palette.s50,
+          palette.s100,
+          palette.s200,
+          palette.s300,
+          palette.s400,
+          palette.s500,
+          palette.s600,
+          palette.s700,
+          palette.s800,
+          palette.s900,
           palette.s950,
         ];
         expect(ramp.every((shade) => shade != 0), isTrue, reason: '${palette.name} has a zero shade');

@@ -77,10 +77,7 @@ void main() {
       // A single indicator now sits under tab B rather than a per-tab border.
       expect(find.byKey(const ValueKey('dievas_tab_bar_indicator')), findsOneWidget);
       expect(tester.getTopLeft(indicator).dx, greaterThan(startLeft));
-      expect(
-        (tester.getRect(indicator).center.dx - tester.getRect(find.text('B')).center.dx).abs(),
-        lessThan(1.5),
-      );
+      expect((tester.getRect(indicator).center.dx - tester.getRect(find.text('B')).center.dx).abs(), lessThan(1.5));
     });
   });
 }

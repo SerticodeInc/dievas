@@ -8,7 +8,7 @@ Every component that painted elevation through Flutter's `Material` / `Drawer` /
 
 - Renamed and retyped `double elevation` → `List<BoxShadow> shadow` on `DievasModalThemeData`, `DievasDrawerThemeData`, `DievasBottomSheetThemeData`, and `DievasPopoverThemeData`.
 - Renamed `DievasDropdownThemeData.overlayElevation` → `shadow`.
-- Renamed `DievasAccordionThemeData.shadows` → `shadow`.
+- Removed the shadow from the accordion entirely — `DievasAccordionThemeData` no longer exposes a `shadow` field and the panel paints no elevation.
 - Added `DievasSearchThemeData.shadow`; the search field's coloured focus glow is now the standard token shadow.
 - `DievasPopoverThemeData.elevation` was previously ignored by the widget; the popover now reads `shadow` from its theme data.
 - `DievasDrawerThemeData.borderRadius` is now applied to the drawer's `shape` (it was previously unused).

@@ -147,7 +147,6 @@ class _AccordionCardState extends State<_AccordionCard> with SingleTickerProvide
       decoration: BoxDecoration(
         color: colours.background.bgSubtle,
         borderRadius: theme.borderRadius,
-        boxShadow: theme.shadow,
       ),
       child: ClipRRect(
         borderRadius: theme.borderRadius,

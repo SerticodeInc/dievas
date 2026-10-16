@@ -45,7 +45,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
     loader: override?.loader ?? _createLoaderTheme(colours, typography, spacing, animation),
     menuItem: override?.menuItem ?? _createMenuItemTheme(colours, typography, spacing, sizing, border),
     emptyState: override?.emptyState ?? _createEmptyStateTheme(colours, typography, spacing),
-    accordion: override?.accordion ?? _createAccordionTheme(typography, spacing, border, animation, elevation),
+    accordion: override?.accordion ?? _createAccordionTheme(typography, spacing, border, animation),
     drawer: override?.drawer ?? _createDrawerTheme(colours, border, animation, elevation),
     dropdown:
         override?.dropdown ?? _createDropdownTheme(colours, typography, spacing, sizing, border, elevation, animation),
@@ -710,7 +710,6 @@ DievasAccordionThemeData _createAccordionTheme(
   DievasSpacingThemeData spacing,
   DievasBorderThemeData border,
   DievasAnimationThemeData animation,
-  DievasElevationThemeData elevation,
 ) {
   return DievasAccordionThemeData(
     headerStyle: typography.titleXS,
@@ -723,7 +722,6 @@ DievasAccordionThemeData _createAccordionTheme(
     iconSpacing: spacing.SM,
     dividerIndent: spacing.MD,
     animationDuration: animation.standard,
-    shadow: elevation.XS,
   );
 }
 

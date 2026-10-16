@@ -13,8 +13,8 @@ import 'package:dievas_tokens/src/primitives/opacity_primitives.dart';
 
 /// Semantic elevation tokens for the Dievas design system.
 ///
-/// References [DievasElevationPrimitives] exclusively — no raw doubles
-/// are permitted in this file.
+/// Blur sizes reference [DievasElevationPrimitives], shadow ink references
+/// [DievasColourPrimitives], and layer tints reference [DievasOpacityPrimitives].
 abstract final class DievasElevationSemantic {
   /// No shadow. Flat surfaces flush with the page.
   static const double NONE = DievasElevationPrimitives.e0;

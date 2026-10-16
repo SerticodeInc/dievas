@@ -16,6 +16,9 @@ void main() {
   print('Dark primary: ${DievasColourSemanticDark.actionPrimary}');
 
   // Spacing
-  print('Spacing md: ${DievasSpacingPrimitives.s4}');
-  print('Spacing xl: ${DievasSpacingPrimitives.s8}');
+  print('Spacing MD: ${DievasSpacingSemantic.MD}');
+  print('Spacing XL: ${DievasSpacingSemantic.XL}');
+  final brand = DievasBrandPalettes.sky.rolesForLight();
+  print('Selected brand: ${brand.brand}');
+  print('Text on brand: ${brand.onBrand}');
 }

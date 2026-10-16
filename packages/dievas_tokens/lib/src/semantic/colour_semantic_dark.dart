@@ -11,6 +11,9 @@ import 'package:dievas_tokens/src/primitives/colour_primitives.dart';
 
 /// Dark-theme semantic colour tokens for the Dievas design system.
 ///
+/// Neutral reference roles match the recorded Moon token values.
+/// Brand, feedback, and component states retain the existing Dievas mappings.
+///
 /// References [DievasColourPrimitives] exclusively — no raw hex values
 /// are permitted in this file.
 abstract final class DievasColourSemanticDark {
@@ -28,10 +31,10 @@ abstract final class DievasColourSemanticDark {
   // Text
 
   /// Highest-contrast body text on dark backgrounds.
-  static const int textPrimary = DievasColourPrimitives.slate50;
+  static const int textPrimary = DievasColourPrimitives.white;
 
   /// Secondary / supporting copy.
-  static const int textSecondary = DievasColourPrimitives.slate400;
+  static const int textSecondary = DievasColourPrimitives.steelGreyLight;
 
   /// Tertiary / placeholder-level text.
   static const int textTertiary = DievasColourPrimitives.slate500;
@@ -40,7 +43,7 @@ abstract final class DievasColourSemanticDark {
   static const int textDisabled = DievasColourPrimitives.slate600;
 
   /// Text on light / inverted surfaces inside a dark UI.
-  static const int textInverse = DievasColourPrimitives.slate900;
+  static const int textInverse = DievasColourPrimitives.black;
 
   /// Text placed directly on a [brand]-coloured background.
   static const int textOnBrand = DievasColourPrimitives.white;
@@ -48,10 +51,10 @@ abstract final class DievasColourSemanticDark {
   // Icon
 
   /// Default icon fill on dark backgrounds.
-  static const int iconPrimary = DievasColourPrimitives.slate50;
+  static const int iconPrimary = DievasColourPrimitives.white;
 
   /// Muted / secondary icons.
-  static const int iconSecondary = DievasColourPrimitives.slate400;
+  static const int iconSecondary = DievasColourPrimitives.steelGreyLight;
 
   /// Icons on disabled controls.
   static const int iconDisabled = DievasColourPrimitives.slate600;
@@ -62,21 +65,17 @@ abstract final class DievasColourSemanticDark {
   // Background
 
   /// Page / scaffold background. The base dark layer.
-  static const int bgBase = DievasColourPrimitives.slate950;
+  static const int bgBase = DievasColourPrimitives.black;
 
   /// Card / surface background. One level above [bgBase].
-  static const int bgSubtle = DievasColourPrimitives.slate900;
+  static const int bgSubtle = DievasColourPrimitives.charcoalDeep;
 
   /// Elevated surfaces: modals, bottom sheets, popovers.
   static const int bgElevated = DievasColourPrimitives.slate800;
 
   /// Scrim / overlay behind modals and bottom sheets.
-  ///
-  /// Expressed as a raw hex value rather than composed from
-  /// [DievasColourPrimitives.black] + alpha because const composition
-  /// across two primitives isn't possible without a runtime helper.
-  /// 0x80 = 50% opacity intentionally chosen for scrims.
-  static const int bgOverlay = 0x80000000;
+  /// Moon ref: zeno. Alpha is exactly 0x8F.
+  static const int bgOverlay = DievasColourPrimitives.blackAlpha8F;
 
   //Surface
 
@@ -99,7 +98,7 @@ abstract final class DievasColourSemanticDark {
   // Border
 
   /// Default dividers and container strokes.
-  static const int borderDefault = DievasColourPrimitives.slate700;
+  static const int borderDefault = DievasColourPrimitives.charcoal;
 
   /// High-emphasis borders. Active input outlines, selected containers.
   static const int borderStrong = DievasColourPrimitives.slate400;
@@ -216,7 +215,7 @@ abstract final class DievasColourSemanticDark {
   static const int inputBorderWarning = DievasColourPrimitives.amber500;
 
   /// Input text colour (typed value).
-  static const int inputText = DievasColourPrimitives.slate50;
+  static const int inputText = DievasColourPrimitives.white;
 
   /// Input placeholder / hint text colour.
   static const int inputPlaceholder = DievasColourPrimitives.slate500;

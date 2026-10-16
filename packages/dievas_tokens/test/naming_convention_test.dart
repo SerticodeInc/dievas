@@ -1,43 +1,70 @@
-// Guard test for the Dievas token naming law.
-//
-// Size-axis tokens use `<base><SIZE>`: a lowercase base followed by an
-// UPPERCASE size suffix (XS, SM, MD, LG, XL, XL2..XL8) with half-steps
-// written as `<base>SMPlus`, `<base>XL2Plus`, etc. This test fails if any
-// source file under lib/ regresses to the pre-1.0 lowercase axis names.
-
+// Check size declarations, not comments or example prose.
 import 'dart:io';
+import 'dart:isolate';
 
 import 'package:test/test.dart';
 
+final RegExp _declaration = RegExp(r'static const\s+[\w<> ,]+\s+(\w+)\s*=');
 final RegExp _legacyAxis = RegExp(
-  r'\b(x2l|x3l|x4l|x5l|x6l|x7l|x8l|smPlus|mdPlus|lgPlus|xlPlus|x2lPlus|xs|sm|md|lg|xl)\b'
-  r'|\b[A-Za-z_]\w*(Xs|Sm|Md|Lg|Xl|Xsm)\b',
+  r'^(x[2-8]l|smPlus|mdPlus|lgPlus|xlPlus|x2lPlus|xs|sm|md|lg|xl)$'
+  r'|[A-Za-z_]\w*(Xs|Sm|Md|Lg|Xl|Xsm)$',
+);
+final RegExp _sizeName = RegExp(
+  r'^(?:[a-z][a-zA-Z]*)?(?:XS|SM|MD|LG|XL|XL[2-8]|SMPlus|MDPlus|LGPlus|XLPlus|XL2Plus)$'
+  r'|^(?:NONE|FULL|BASE)$',
 );
 
-final RegExp _uppercaseAxis = RegExp(
-  r'\b(NONE|FULL|BASE|XL2Plus|SMPlus|MDPlus|LGPlus|XLPlus|XL8|XL7|XL6|XL5|XL4|XL3|XL2|XS|SM|MD|LG|XL)\b',
-);
+Future<void> main() async {
+  final packageUri = switch (await Isolate.resolvePackageUri(
+    Uri.parse('package:dievas_tokens/dievas_tokens.dart'),
+  )) {
+    final Uri uri => uri,
+    null => throw StateError('Cannot resolve dievas_tokens package.'),
+  };
+  final sourceDirectory = Directory.fromUri(packageUri.resolve('.'));
 
-void main() {
-  test('no source file under lib/ uses legacy lowercase size-axis identifiers', () {
+  test('no constant declaration uses a legacy lowercase size name', () {
     final offenders = <String>[];
-    for (final entity in Directory('lib').listSync(recursive: true)) {
-      if (entity is! File || !entity.path.endsWith('.dart')) continue;
-      for (final match in _legacyAxis.allMatches(entity.readAsStringSync())) {
-        offenders.add('${entity.path}: ${match.group(0)}');
+    for (final entity in sourceDirectory.listSync(recursive: true)) {
+      if (entity case File() when entity.path.endsWith('.dart')) {
+        for (final match in _declaration.allMatches(
+          entity.readAsStringSync(),
+        )) {
+          if (match.group(1) case final String name
+              when _legacyAxis.hasMatch(name)) {
+            offenders.add('${entity.path}: $name');
+          }
+        }
       }
     }
-
-    expect(offenders, isEmpty, reason: 'Legacy lowercase size-axis identifiers found:\n${offenders.join('\n')}');
+    expect(offenders, isEmpty);
   });
 
-  test('uppercase size-axis suffix convention is present', () {
-    var matches = 0;
-    for (final entity in Directory('lib').listSync(recursive: true)) {
-      if (entity is! File || !entity.path.endsWith('.dart')) continue;
-      matches += _uppercaseAxis.allMatches(entity.readAsStringSync()).length;
-    }
-
-    expect(matches, greaterThan(0));
-  });
+  test(
+    'size families use class-scoped scales or role names with uppercase suffixes',
+    () {
+      const files = [
+        'primitives/radius_primitives.dart',
+        'primitives/breakpoint_primitives.dart',
+        'semantic/spacing_semantic.dart',
+        'semantic/radius_semantic.dart',
+        'semantic/sizing_semantic.dart',
+        'semantic/breakpoint_semantic.dart',
+        'semantic/elevation_semantic.dart',
+        'semantic/typography_semantic.dart',
+      ];
+      for (final path in files) {
+        final declarations = _declaration.allMatches(
+          File.fromUri(packageUri.resolve('src/$path')).readAsStringSync(),
+        );
+        expect(declarations, isNotEmpty, reason: path);
+        for (final declaration in declarations) {
+          final name = declaration.group(1);
+          // These describe a minimum target and an ink, not size scales.
+          if (name == 'touchMin' || name == 'shadowColour') continue;
+          expect(name, matches(_sizeName), reason: '$path: $name');
+        }
+      }
+    },
+  );
 }

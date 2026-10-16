@@ -1,24 +1,115 @@
-# Dievas Tokens
+<!-- meta.contentType: Reference -->
+# Dievas tokens
 
-Design token primitives and semantic layers for the [Dievas](https://dievas.serticode.com) design system.
+Use primitive values and semantic roles to build interfaces with the [Dievas design system](https://dievas.serticode.com). This package uses Dart only; Flutter adapters construct colours, text styles, and shadows from these tokens.
 
-Pure Dart. No Flutter dependency.
+## Primitives and semantic roles
 
-## Usage
+Primitives name fixed values. Semantic tokens name their purpose, such as primary text or card spacing. Prefer semantic roles when styling components.
+
+Import the public library to access both layers:
 
 ```dart
 import 'package:dievas_tokens/dievas_tokens.dart';
 
-void main() {
-  print(DievasColourPrimitives.blue500); // 0xFF3B82F6
-  print(DievasFontWeightPrimitives.medium); // 500
-}
+const purple = DievasColourPrimitives.royalPurple;
+const foreground = DievasColourSemanticLight.textPrimary;
+const background = DievasColourSemanticDark.bgBase;
+const padding = DievasSpacingSemantic.MD;
+const sectionGap = DievasSpacingSemantic.XL;
 ```
 
-## Structure
+Colours are integers in `0xAARRGGBB` format: alpha, red, green, then blue. Spacing, sizing, radius, and breakpoints use logical pixels. Primitive alpha suffixes contain exact hexadecimal bytes: `blackAlpha8F` has alpha `0x8F`, not 60%.
 
-- **Primitives** — raw values for colours, typography, spacing, sizing, radius, elevation, opacity, duration, easing, and breakpoints.
-- **Semantic tokens** — aliases for roles such as light and dark colour schemes, typography roles, and spacing scales.
+## Moon colour migration
+
+The recorded reference is the published `moon_tokens` 0.0.6 package. The [reference fixture](test/fixtures/moon_colours_reference.json) contains its archive checksum, repository commit, and all 43 colour entries for each theme.
+
+Primitives reproduce those recorded colours. The following semantic mappings now match the reference:
+
+| Dievas role | Moon reference | Light | Dark |
+| --- | --- | --- | --- |
+| `textPrimary`, `iconPrimary`, `inputText` | Primary foreground | `black` | `white` |
+| `textSecondary`, `iconSecondary` | Secondary foreground | `steelGrey` | `steelGreyLight` |
+| `bgBase` | `goku` | `white` | `black` |
+| `bgSubtle` | `gohan` | `nearWhite` | `charcoalDeep` |
+| `borderDefault` | `beerus` | `coolGreyLight` | `charcoal` |
+| `bgOverlay` | `zeno` | `blackAlpha8F` | `blackAlpha8F` |
+| `staticWhite` | `goten` | `white` | `white` |
+| `staticBlack` | `popo` | `black` | `black` |
+
+Inverse text uses the opposite theme’s primary foreground. Brand palettes, feedback colours, elevated surfaces, and interaction states retain their existing Dievas mappings. Full semantic parity, Flutter component rendering, and the deployed Moon playground remain unverified.
+
+These neutral changes alter rendered colours compared with 1.0.0. They are pending release; this checkout still declares version 1.0.0.
+
+## Brand palettes
+
+`DievasBrandPalette` contains an 11-tint ramp (`s50` through `s950`) and an `onBrand` contrast colour. Its methods return `DievasBrandRoleColours` records for light or dark surfaces.
+
+Select a palette and read its resolved roles:
+
+```dart
+final lightBrand = DievasBrandPalettes.sky.rolesForLight();
+final darkBrand = DievasBrandPalettes.sky.rolesForDark();
+final primaryAction = lightBrand.actionPrimary;
+final foregroundOnBrand = darkBrand.onBrand;
+```
+
+The default `indigo` palette matches the brand roles in the built-in semantic classes. Alternatives are `sky`, `green`, `violet`, `red`, `amber`, `ocean`, `forest`, `berry`, `dusk`, and `terracotta`. `DievasBrandPalettes.all` indexes them by name.
+
+Resolving a palette returns values; it does not mutate the static semantic classes. Apply those values through your theme adapter. These ramps preserve Dievas behaviour and have not yet migrated to Moon’s brand roles.
+
+## Typography and elevation
+
+Semantic values include records and lists as well as scalar aliases. Typography records contain `fontSize`, `fontWeight`, `lineHeight`, `letterSpacing`, and `fontFamily`.
+
+Read typography fields and ordered shadow layers:
+
+```dart
+const body = DievasTypographySemantic.bodyMD;
+const fontSize = body.fontSize;
+const lineHeight = body.lineHeight;
+const shadowInk = DievasElevationSemantic.shadowColour;
+const layers = DievasElevationShadowLayer.MD;
+```
+
+Line height is a multiplier; letter spacing uses logical pixels. Each shadow layer contains `blur` and `tint`. Paint layers in list order, centred with no positional offset. Blur, colour, and opacity come from their respective primitive families.
+
+## Motion and stacking order
+
+Animation roles return `Duration` values. Easing returns cubic Bézier control-point records with `x1`, `y1`, `x2`, and `y2`. Z-index roles return integer stacking levels.
+
+Use intent names for transitions and overlays:
+
+```dart
+const duration = DievasAnimationSemantic.standard;
+const easing = DievasEasingSemantic.standard;
+const modalLayer = DievasZIndexSemantic.modal;
+```
+
+## Naming contract
+
+Size names depend on their scope:
+
+- **Class-scoped scales**: `DievasSpacingSemantic.MD`, `DievasRadiusSemantic.SM`, and `DievasElevationShadowLayer.XL`
+- **Role names with size suffixes**: `buttonHeightMD`, `headingXL`, and `titleXS`
+- **Size vocabulary**: `XS`, `SM`, `MD`, `LG`, `XL`, and `XL2` through `XL8`, where supported
+- **Half steps**: `SMPlus`, `MDPlus`, `LGPlus`, `XLPlus`, and `XL2Plus`, where supported
+- **Special scale names**: `NONE`, `FULL`, and `BASE`, where supported
+
+Numeric primitives such as `s4`, opacity names such as `o13`, and intent names such as `touchMin`, `standard`, and `modal` are not size-axis names. Spacing uses a 4 logical pixel base grid; `MD` is 16 and `XL` is 32.
+
+## Verification
+
+Run checks from the repository root:
+
+```sh
+dart analyze packages/dievas_tokens
+dart test packages/dievas_tokens/test
+dart run packages/dievas_tokens/example/dievas_tokens_example.dart
+```
+
+You can also run `dart test` inside the package. Tests cover primitive reference values, migrated neutral semantic roles, palette consistency, and size naming.
 
 ## License
 

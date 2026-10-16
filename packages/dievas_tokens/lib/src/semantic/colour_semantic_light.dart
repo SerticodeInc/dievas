@@ -11,13 +11,15 @@ import 'package:dievas_tokens/src/primitives/colour_primitives.dart';
 
 /// Light-theme semantic colour tokens for the Dievas design system.
 ///
+/// Neutral reference roles match the recorded Moon token values.
+/// Brand, feedback, and component states retain the existing Dievas mappings.
+///
 /// References [DievasColourPrimitives] exclusively — no raw hex values
 /// are permitted in this file.
 abstract final class DievasColourSemanticLight {
   //Brand
 
   /// Primary brand colour. Interactive elements, CTAs, selected states.
-  /// Moon ref: piccolo
   static const int brand = DievasColourPrimitives.indigo500;
 
   /// Subtle brand tint. Backgrounds behind brand-coloured icons or badges.
@@ -30,11 +32,11 @@ abstract final class DievasColourSemanticLight {
 
   /// Highest-contrast body text. Headlines, labels, primary copy.
   /// Moon ref: bulma
-  static const int textPrimary = DievasColourPrimitives.slate900;
+  static const int textPrimary = DievasColourPrimitives.black;
 
   /// Secondary / supporting copy. Subtitles, captions, metadata.
   /// Moon ref: trunks
-  static const int textSecondary = DievasColourPrimitives.slate500;
+  static const int textSecondary = DievasColourPrimitives.steelGrey;
 
   /// Tertiary / placeholder-level text. Hints, helper copy.
   static const int textTertiary = DievasColourPrimitives.slate400;
@@ -51,10 +53,10 @@ abstract final class DievasColourSemanticLight {
   //Icon
 
   /// Default icon fill on light backgrounds.
-  static const int iconPrimary = DievasColourPrimitives.slate900;
+  static const int iconPrimary = DievasColourPrimitives.black;
 
   /// Muted / secondary icons.
-  static const int iconSecondary = DievasColourPrimitives.slate500;
+  static const int iconSecondary = DievasColourPrimitives.steelGrey;
 
   /// Icons on disabled controls.
   static const int iconDisabled = DievasColourPrimitives.slate300;
@@ -66,23 +68,18 @@ abstract final class DievasColourSemanticLight {
 
   /// Page / scaffold background. The base layer.
   /// Moon ref: goku
-  static const int bgBase = DievasColourPrimitives.slate50;
+  static const int bgBase = DievasColourPrimitives.white;
 
   /// Card / surface background. One level above [bgBase].
   /// Moon ref: gohan
-  static const int bgSubtle = DievasColourPrimitives.white;
+  static const int bgSubtle = DievasColourPrimitives.nearWhite;
 
   /// Elevated surfaces: modals, bottom sheets, popovers.
-  /// Moon ref: goten
   static const int bgElevated = DievasColourPrimitives.white;
 
   /// Scrim / overlay behind modals and bottom sheets.
-  ///
-  /// Expressed as a raw hex value rather than composed from
-  /// [DievasColourPrimitives.black] + alpha because const composition
-  /// across two primitives isn't possible without a runtime helper.
-  /// 0x80 = 50% opacity intentionally chosen for scrims.
-  static const int bgOverlay = 0x80000000;
+  /// Moon ref: zeno. Alpha is exactly 0x8F.
+  static const int bgOverlay = DievasColourPrimitives.blackAlpha8F;
 
   //Surface
 
@@ -106,7 +103,7 @@ abstract final class DievasColourSemanticLight {
 
   /// Default dividers and container strokes.
   /// Moon ref: beerus
-  static const int borderDefault = DievasColourPrimitives.slate200;
+  static const int borderDefault = DievasColourPrimitives.coolGreyLight;
 
   /// High-emphasis borders. Active input outlines, selected containers.
   static const int borderStrong = DievasColourPrimitives.slate900;
@@ -115,7 +112,6 @@ abstract final class DievasColourSemanticLight {
   static const int borderDisabled = DievasColourPrimitives.slate200;
 
   /// Focus ring. Applied on keyboard focus.
-  /// Moon ref: zeno
   static const int borderFocus = DievasColourPrimitives.indigo500;
 
   /// Brand-coloured border. Selected states, brand highlights.
@@ -124,7 +120,6 @@ abstract final class DievasColourSemanticLight {
   //Action
 
   /// Primary CTA background (filled button, active toggle).
-  /// Moon ref: piccolo
   static const int actionPrimary = DievasColourPrimitives.indigo500;
 
   /// Hover state of [actionPrimary].
@@ -137,21 +132,18 @@ abstract final class DievasColourSemanticLight {
   static const int actionPrimaryDisabled = DievasColourPrimitives.slate200;
 
   /// Secondary action background (outlined / ghost button resting surface).
-  /// Moon ref: hit
   static const int actionSecondary = DievasColourPrimitives.indigo50;
 
   /// Hover state of [actionSecondary].
   static const int actionSecondaryHover = DievasColourPrimitives.indigo100;
 
   /// Destructive / error action.
-  /// Moon ref: chichi
   static const int actionError = DievasColourPrimitives.red500;
 
   /// Hover state of [actionError].
   static const int actionErrorHover = DievasColourPrimitives.red600;
 
   /// Success / constructive action surface.
-  /// Moon ref: roshi
   static const int actionSuccess = DievasColourPrimitives.green500;
 
   //Success
@@ -171,7 +163,6 @@ abstract final class DievasColourSemanticLight {
   //Warning
 
   /// Warning alert background.
-  /// Moon ref: krillin
   static const int feedbackWarningBackground = DievasColourPrimitives.amber50;
 
   /// Warning border.
@@ -186,7 +177,6 @@ abstract final class DievasColourSemanticLight {
   //Error
 
   /// Error alert background.
-  /// Moon ref: chichi
   static const int feedbackErrorBackground = DievasColourPrimitives.red50;
 
   /// Error border.
@@ -201,7 +191,6 @@ abstract final class DievasColourSemanticLight {
   //Info
 
   /// Informational alert background.
-  /// Moon ref: whis
   static const int feedbackInfoBackground = DievasColourPrimitives.sky50;
 
   /// Info border.
@@ -231,7 +220,7 @@ abstract final class DievasColourSemanticLight {
   static const int inputBorderWarning = DievasColourPrimitives.amber500;
 
   /// Input text colour (typed value).
-  static const int inputText = DievasColourPrimitives.slate900;
+  static const int inputText = DievasColourPrimitives.black;
 
   /// Input placeholder / hint text colour.
   static const int inputPlaceholder = DievasColourPrimitives.slate400;

@@ -33,15 +33,15 @@ abstract final class DievasDurationPrimitives {
   /// 800ms — loader spinner rotation cycle.
   static const Duration d800 = Duration(milliseconds: 800);
 
-  /// 1000ms / 1s — noticeable delays and auto-dismiss timers.
+  /// 1000ms / 1s — noticeable delays and auto dismiss timers.
   static const Duration d1000 = Duration(milliseconds: 1000);
 
   /// 2000ms / 2s — tooltip show duration, longer feedback pauses.
   static const Duration d2000 = Duration(milliseconds: 2000);
 
-  /// 3000ms / 3s — snackbar auto-dismiss, temporary notifications.
+  /// 3000ms / 3s — snackbar auto dismiss, temporary notifications.
   static const Duration d3000 = Duration(milliseconds: 3000);
 
-  /// 5000ms / 5s — lengthy auto-dismiss timers.
+  /// 5000ms / 5s — lengthy auto dismiss timers.
   static const Duration d5000 = Duration(milliseconds: 5000);
 }

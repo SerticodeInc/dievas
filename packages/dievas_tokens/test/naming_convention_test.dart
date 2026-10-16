@@ -1,6 +1,5 @@
 // Check size declarations, not comments or example prose.
 import 'dart:io';
-import 'dart:isolate';
 
 import 'package:test/test.dart';
 
@@ -16,12 +15,8 @@ final RegExp _sizeName = RegExp(
   r'|^R\d+$',
 );
 
-Future<void> main() async {
-  final packageUri = switch (await Isolate.resolvePackageUri(Uri.parse('package:dievas_tokens/dievas_tokens.dart'))) {
-    final Uri uri => uri,
-    null => throw StateError('Cannot resolve dievas_tokens package.'),
-  };
-  final sourceDirectory = Directory.fromUri(packageUri.resolve('.'));
+void main() {
+  final sourceDirectory = Directory('${Directory.current.path}/lib');
 
   test('no constant declaration uses a legacy lowercase size name', () {
     final offenders = <String>[];
@@ -48,7 +43,7 @@ Future<void> main() async {
       'semantic/typography_semantic.dart',
     ];
     for (final path in files) {
-      final declarations = _declaration.allMatches(File.fromUri(packageUri.resolve('src/$path')).readAsStringSync());
+      final declarations = _declaration.allMatches(File('${Directory.current.path}/lib/src/$path').readAsStringSync());
       expect(declarations, isNotEmpty, reason: path);
       for (final declaration in declarations) {
         final name = declaration.group(1);

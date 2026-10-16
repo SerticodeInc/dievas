@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:isolate';
 
 import 'package:dievas_tokens/dievas_tokens.dart';
 import 'package:test/test.dart';
@@ -50,12 +49,8 @@ const _primitives = <String, int>{
 };
 
 Future<void> main() async {
-  final packageUri = switch (await Isolate.resolvePackageUri(Uri.parse('package:dievas_tokens/dievas_tokens.dart'))) {
-    final Uri uri => uri,
-    null => throw StateError('Cannot resolve dievas_tokens package.'),
-  };
   final reference =
-      jsonDecode(await File.fromUri(packageUri.resolve('../test/fixtures/moon_colours_reference.json')).readAsString())
+      jsonDecode(await File('${Directory.current.path}/test/fixtures/moon_colours_reference.json').readAsString())
           as Map<String, dynamic>;
   final themes = reference['default_themes'] as Map<String, dynamic>;
   final mappings = reference['primitive_mapping'] as Map<String, dynamic>;

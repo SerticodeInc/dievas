@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:isolate';
 
 import 'package:dievas_tokens/dievas_tokens.dart';
 import 'package:test/test.dart';
@@ -200,12 +199,8 @@ const _dark = <String, int>{
 };
 
 Future<void> main() async {
-  final uri = switch (await Isolate.resolvePackageUri(Uri.parse('package:dievas_tokens/dievas_tokens.dart'))) {
-    final Uri uri => uri,
-    null => throw StateError('Cannot resolve dievas_tokens package.'),
-  };
   final fixture =
-      jsonDecode(await File.fromUri(uri.resolve('../test/fixtures/colour_role_values.json')).readAsString())
+      jsonDecode(await File('${Directory.current.path}/test/fixtures/colour_role_values.json').readAsString())
           as Map<String, dynamic>;
   final themes = fixture['themes'] as Map<String, dynamic>;
   for (final theme in {'light': _light, 'dark': _dark}.entries) {
@@ -215,9 +210,9 @@ Future<void> main() async {
       for (final entry in theme.value.entries) {
         expect(entry.value, int.parse(expected[entry.key] as String), reason: entry.key);
       }
-      final declarations = RegExp(
-        r'static const int (\w+) =',
-      ).allMatches(File.fromUri(uri.resolve('src/semantic/colour_semantic_${theme.key}.dart')).readAsStringSync());
+      final declarations = RegExp(r'static const int (\w+) =').allMatches(
+        File('${Directory.current.path}/lib/src/semantic/colour_semantic_${theme.key}.dart').readAsStringSync(),
+      );
       expect(declarations.map((match) => match.group(1)).toSet(), expected.keys.toSet());
     });
   }

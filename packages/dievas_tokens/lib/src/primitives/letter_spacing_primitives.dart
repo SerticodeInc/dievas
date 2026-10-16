@@ -1,4 +1,4 @@
-/// Raw letter-spacing primitives for the Dievas typography system.
+/// Raw letter spacing primitives for the Dievas typography system.
 ///
 /// Values in logical pixels. Negative = tighter, positive = wider.
 abstract final class DievasLetterSpacingPrimitives {

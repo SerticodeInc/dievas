@@ -1,6 +1,6 @@
-// Opacity primitives — used for disabled states, overlays, and ghost effects.
-// Named by percentage: o0 = 0%, o100 = 100%.
-
+/// Raw opacity primitives for the Dievas design system, used for disabled
+/// states, overlays, and ghost effects. Named by percentage (o0 = 0%,
+/// o100 = 100%).
 abstract final class DievasOpacityPrimitives {
   static const double o0 = 0.00;
   static const double o5 = 0.05;

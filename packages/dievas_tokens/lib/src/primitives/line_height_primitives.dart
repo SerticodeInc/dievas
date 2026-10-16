@@ -1,4 +1,4 @@
-/// Raw line-height primitives for the Dievas typography system.
+/// Raw line height primitives for the Dievas typography system.
 ///
 /// Values are unitless multipliers (1.0 = 100% of font size).
 abstract final class DievasLineHeightPrimitives {

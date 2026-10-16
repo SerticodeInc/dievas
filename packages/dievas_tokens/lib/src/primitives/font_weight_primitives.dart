@@ -1,6 +1,5 @@
-/// Raw font-weight primitives for the Dievas typography system.
-///
-/// Values match the CSS font-weight scale (100–900).
+/// Raw font weight primitives for the Dievas typography system. Values match
+/// the CSS font weight scale (100 to 900).
 abstract final class DievasFontWeightPrimitives {
   static const int thin = 100;
   static const int extraLight = 200;

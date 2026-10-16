@@ -1,7 +1,5 @@
-// Spacing primitives — all values on a 4pt base grid.
-// Used for padding, margin, gap, and positional offsets.
-// Named by multiplier: s1 = 1×4pt = 4.0, s2 = 2×4pt = 8.0, etc.
-
+/// Raw spacing primitives on a 4pt base grid, used for padding, margin, gap,
+/// and positional offsets. Named by multiplier (s1 = 4.0, s2 = 8.0, and so on).
 abstract final class DievasSpacingPrimitives {
   /// NONE
   static const double s0 = 0.0;

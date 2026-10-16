@@ -1,4 +1,4 @@
-/// Raw font-size primitives for the Dievas typography system.
+/// Raw font size primitives for the Dievas typography system.
 abstract final class DievasFontSizePrimitives {
   static const double XS = 11.0;
   static const double SM = 12.0;

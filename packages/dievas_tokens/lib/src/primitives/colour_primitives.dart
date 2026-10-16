@@ -1,13 +1,6 @@
-// Raw colour values as ARGB integers with no Flutter dependency.
-//
-// These are the atomic building blocks of Dievas. They carry no semantic
-// meaning and should only be consumed by the semantic token layer.
-//
-// Scale convention: 50 (lightest) -> 950 (darkest).
-// Families are arranged as a practical colour ring, then nature/material
-// palettes for brand systems that need warmer, more organic colour.
-
-/// Raw Dievas colour primitives exposed as ARGB integer constants.
+/// Raw Dievas colour primitives exposed as ARGB integer constants. Scales run
+/// 50 (lightest) to 950 (darkest); families cover a practical colour ring plus
+/// nature and material palettes. Consume the semantic layer, not these directly.
 abstract final class DievasColourPrimitives {
   // Static.
   /// Moon goku (light), bulma (dark), and goten (both themes).

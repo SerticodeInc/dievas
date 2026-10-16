@@ -9,7 +9,7 @@
 
 import 'package:dievas_tokens/src/primitives/colour_primitives.dart';
 
-/// Light-theme semantic colour tokens for the Dievas design system.
+/// Light theme semantic colour tokens for the Dievas design system.
 ///
 /// Neutral reference roles match the recorded Moon token values.
 /// Brand, feedback, and component states retain the existing Dievas mappings.

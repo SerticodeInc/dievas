@@ -9,7 +9,7 @@ import 'package:dievas_tokens/src/primitives/duration_primitives.dart';
 ///
 /// References [DievasDurationPrimitives] exclusively.
 abstract final class DievasAnimationSemantic {
-  /// 50ms — micro-interactions, ripple, press feedback.
+  /// 50ms — micro interactions, ripple, press feedback.
   static const Duration instant = DievasDurationPrimitives.d50;
 
   /// 100ms — quick fades, very brief transitions.
@@ -39,6 +39,6 @@ abstract final class DievasAnimationSemantic {
   /// 2s — tooltip visible duration.
   static const Duration tooltipShow = DievasDurationPrimitives.d2000;
 
-  /// 3s — snackbar auto-dismiss.
+  /// 3s — snackbar auto dismiss.
   static const Duration snackbarDismiss = DievasDurationPrimitives.d3000;
 }

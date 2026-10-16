@@ -18,6 +18,10 @@ Every component that painted elevation through Flutter's `Material` / `Drawer` /
 - Default shadows now use the soft `DievasElevationSemantic.shadowColour` (`0xFF171717`) ink instead of pure `staticBlack`, and render centred (no vertical offset) so depth reads as a soft halo rather than a drop shadow underneath. Reverses the `offsetY` behaviour introduced in 0.0.3 — the offset tokens have since been removed entirely.
 - Shadow layers are built from the new ordered per-tier `DievasElevationShadowLayer` lists (`SM`, `MD`, `LG`, `XL`), replacing the `upper` / `lower` records and the separate `SHADOW_TINT_*` constants. See `dievas_tokens` for the breaking token details.
 
+### Fixed
+
+- `DievasAlert` no longer stretches to fill a loosely constrained parent. Its text column is now shrink-wrapped on the main axis, so the surface sizes to its content instead of expanding to the full available height (visible as a page-filling alert in the widget book canvas).
+
 ## 1.0.0
 
 The naming unification release. Every size-axis token, enum value, and theme-value field now follows one law — `<base><UPPERCASE SIZE>` — and brand expression is driven by a single selectable palette.

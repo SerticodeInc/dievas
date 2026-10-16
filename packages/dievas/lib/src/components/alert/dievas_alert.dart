@@ -83,6 +83,7 @@ class DievasAlert extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: .start,
+                  mainAxisSize: .min,
                   children: [
                     Text(title, style: theme.titleStyle.copyWith(color: palette.text)),
                     if (description case final text?) ...[

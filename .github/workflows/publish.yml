@@ -5,7 +5,7 @@ name: Publish to pub.dev
 #
 # Prerequisites — one-time setup on pub.dev (per package):
 #   Admin tab → Automated publishing → Enable publishing from GitHub Actions
-#     - Repository:  Serticode/dievas
+#     - Repository:  SerticodeInc/dievas
 #     - Tag pattern: dievas_tokens-v{{version}}  (for dievas_tokens)
 #     - Tag pattern: dievas-v{{version}}          (for dievas)
 #

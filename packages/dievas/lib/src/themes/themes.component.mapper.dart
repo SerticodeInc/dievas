@@ -309,7 +309,7 @@ DievasBadgeThemeData _createBadgeTheme(
   return DievasBadgeThemeData(
     textStyle: typography.labelXS,
     borderRadius: border.FULL,
-    padding: .symmetric(horizontal: spacing.SM, vertical: spacing.XS / 2),
+    padding: .symmetric(horizontal: spacing.SMPlus, vertical: spacing.XS),
     iconSize: DievasSizingPrimitives.s10,
     iconSpacing: spacing.XS,
   );

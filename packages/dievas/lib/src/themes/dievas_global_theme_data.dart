@@ -46,7 +46,7 @@ base class DievasGlobalThemeData implements DievasThemeData {
        _sizing = sizing,
        _opacity = opacity {
     _typography = typography ?? _createTypographyData(_colours.text.textPrimary);
-    _elevation = elevation ?? _buildDefaultElevation(_colours);
+    _elevation = elevation ?? _buildDefaultElevation();
     _components = _deriveDievasComponentThemeData(
       _colours,
       _typography,
@@ -155,71 +155,25 @@ base class DievasGlobalThemeData implements DievasThemeData {
     );
   }
 
-  static DievasElevationThemeData _buildDefaultElevation(DievasColourThemeData colours) {
-    // Shadow colour: always derived from the overlay base — not the brand colour.
-    final shadow = colours.staticColours.staticBlack;
+  static DievasElevationThemeData _buildDefaultElevation() {
+    // Shadow ink: a soft near-black, scoped to elevation. Deliberately not
+    // the pure staticBlack, which reads heavy on surfaces.
+    final shadow = Color(DievasElevationSemantic.shadowColour);
 
-    // Helper to construct BoxShadow from tokens.
-    BoxShadow layer({required double blur, required double offsetY, required double opacity}) =>
-        BoxShadow(color: shadow.withAlpha((opacity * 255).round()), blurRadius: blur, offset: Offset(0, offsetY));
+    // Layers are painted centred — no vertical offset — so depth reads as a
+    // soft halo around the surface rather than a drop shadow underneath it.
+    List<BoxShadow> stack(List<DievasElevationShadow> layers) => [
+      for (final layer in layers)
+        BoxShadow(color: shadow.withAlpha((layer.tint * 255).round()), blurRadius: layer.blur),
+    ];
 
     return DievasElevationThemeData(
       NONE: const [],
-      XS: [
-        layer(
-          blur: DievasElevationShadowLayer.XS.blur,
-          offsetY: DievasElevationShadowLayer.XS.offsetY,
-          opacity: DievasElevationSemantic.SHADOW_TINT_SOFT,
-        ),
-      ],
-      SM: [
-        layer(
-          blur: DievasElevationShadowLayer.upperSM.blur,
-          offsetY: DievasElevationShadowLayer.upperSM.offsetY,
-          opacity: DievasElevationSemantic.SHADOW_TINT_SUBTLE,
-        ),
-        layer(
-          blur: DievasElevationShadowLayer.lowerSM.blur,
-          offsetY: DievasElevationShadowLayer.lowerSM.offsetY,
-          opacity: DievasElevationSemantic.SHADOW_TINT_SOFT,
-        ),
-      ],
-      MD: [
-        layer(
-          blur: DievasElevationShadowLayer.upperMD.blur,
-          offsetY: DievasElevationShadowLayer.upperMD.offsetY,
-          opacity: DievasElevationSemantic.SHADOW_TINT_SUBTLE,
-        ),
-        layer(
-          blur: DievasElevationShadowLayer.lowerMD.blur,
-          offsetY: DievasElevationShadowLayer.lowerMD.offsetY,
-          opacity: DievasElevationSemantic.SHADOW_TINT_MEDIUM,
-        ),
-      ],
-      LG: [
-        layer(
-          blur: DievasElevationShadowLayer.upperLG.blur,
-          offsetY: DievasElevationShadowLayer.upperLG.offsetY,
-          opacity: DievasElevationSemantic.SHADOW_TINT_SUBTLE,
-        ),
-        layer(
-          blur: DievasElevationShadowLayer.lowerLG.blur,
-          offsetY: DievasElevationShadowLayer.lowerLG.offsetY,
-          opacity: DievasElevationSemantic.SHADOW_TINT_MEDIUM,
-        ),
-      ],
-      XL: [
-        layer(
-          blur: DievasElevationShadowLayer.upperXL.blur,
-          offsetY: DievasElevationShadowLayer.upperXL.offsetY,
-          opacity: DievasElevationSemantic.SHADOW_TINT_SUBTLE,
-        ),
-        layer(
-          blur: DievasElevationShadowLayer.lowerXL.blur,
-          offsetY: DievasElevationShadowLayer.lowerXL.offsetY,
-          opacity: DievasElevationSemantic.SHADOW_TINT_STRONG,
-        ),
-      ],
+      XS: stack(DievasElevationShadowLayer.XS),
+      SM: stack(DievasElevationShadowLayer.SM),
+      MD: stack(DievasElevationShadowLayer.MD),
+      LG: stack(DievasElevationShadowLayer.LG),
+      XL: stack(DievasElevationShadowLayer.XL),
     );
   }
 

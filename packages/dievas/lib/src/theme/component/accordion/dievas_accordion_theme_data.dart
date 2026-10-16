@@ -13,7 +13,7 @@ final class DievasAccordionThemeData extends Equatable {
     required this.iconSpacing,
     required this.dividerIndent,
     required this.animationDuration,
-    required this.shadows,
+    required this.shadow,
   });
 
   final TextStyle headerStyle;
@@ -26,7 +26,9 @@ final class DievasAccordionThemeData extends Equatable {
   final double iconSpacing;
   final double dividerIndent;
   final Duration animationDuration;
-  final List<BoxShadow> shadows;
+
+  /// Shadow stack for the accordion panel, drawn from the elevation tokens.
+  final List<BoxShadow> shadow;
 
   @override
   List<Object?> get props => [
@@ -40,6 +42,6 @@ final class DievasAccordionThemeData extends Equatable {
     iconSpacing,
     dividerIndent,
     animationDuration,
-    shadows,
+    shadow,
   ];
 }

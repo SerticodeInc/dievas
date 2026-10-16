@@ -70,8 +70,8 @@ class _Playground extends StatelessWidget {
           borderColor: borderColor,
           leadingIcon: useChild ? null : (leadingIcon ? const Icon(Icons.add_rounded) : null),
           trailingIcon: useChild ? null : (trailingIcon ? const Icon(Icons.arrow_forward_rounded) : null),
-          child: useChild ? const Text('Custom child') : null,
           onPressed: enabled ? () {} : null,
+          child: useChild ? const Text('Custom child') : null,
         ),
       ),
     );

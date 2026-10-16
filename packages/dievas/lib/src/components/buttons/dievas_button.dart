@@ -103,7 +103,6 @@ class DievasButton extends StatelessWidget {
     return DievasButtonBuilder(
       state: state,
       label: label,
-      child: child,
       style: themeData.style,
       shape: effectiveShape,
       disabledOpacity: themeData.disabledOpacity,
@@ -119,6 +118,7 @@ class DievasButton extends StatelessWidget {
       foregroundColor: foregroundColor,
       borderColor: borderColor,
       onPressed: onPressed,
+      child: child,
       builder: (_, props) {
         final borderWidth = props.borderSide.width;
         final effectiveHeight = math.max(height, props.estimatedTextHeight + padding.vertical);

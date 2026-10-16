@@ -1,5 +1,24 @@
 # Change Log
 
+## Unreleased
+
+### Breaking — elevation shadow layers
+
+Shadow layers are now an ordered per-tier list, not named pairs. Depth is
+painted centred, so the old `upper` / `lower` paint-order names carried no
+meaning and the vertical offsets they referenced are gone.
+
+- `DievasElevationShadow` is now `({double blur, double tint})` — it carries the layer's own tint rather than a dead `offsetY`.
+- `DievasElevationShadowLayer.upperSM` / `lowerSM` / `upperMD` / `lowerMD` / `upperLG` / `lowerLG` / `upperXL` / `lowerXL` removed, replaced by ordered lists `SM`, `MD`, `LG`, `XL` (`XS` is now a single-layer list too).
+- Removed `SHADOW_TINT_SUBTLE`, `SHADOW_TINT_SOFT`, `SHADOW_TINT_MEDIUM`, `SHADOW_TINT_STRONG` — the tints now sit beside the blurs they belong to, in the layer records.
+- Added `DievasElevationSemantic.shadowColour` (`0xFF171717`, aliasing `DievasColourPrimitives.neutral900`) — the soft near-black base ink for every shadow layer.
+
+### Breaking — offset tokens removed
+
+Shadows are painted centred, so the offset family had no remaining consumers.
+
+- Removed `DievasOffsetSemantic` and `DievasOffsetPrimitives` and their exports. Only elevation ever used them.
+
 ## 1.0.0
 
 The naming unification release. Every size-axis token now follows one law — `<base><UPPERCASE SIZE>` — and brand palettes ship in the token layer.

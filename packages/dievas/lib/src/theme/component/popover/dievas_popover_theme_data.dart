@@ -12,7 +12,7 @@ final class DievasPopoverThemeData extends Equatable {
     required this.arrowSize,
     required this.barrierColour,
     required this.animationDuration,
-    required this.elevation,
+    required this.shadow,
     required this.maxWidth,
   });
 
@@ -25,7 +25,9 @@ final class DievasPopoverThemeData extends Equatable {
   final double arrowSize;
   final Color barrierColour;
   final Duration animationDuration;
-  final double elevation;
+
+  /// Shadow stack for the popover surface, drawn from the elevation tokens.
+  final List<BoxShadow> shadow;
 
   /// Maximum width constraint for the popover content area.
   final double maxWidth;
@@ -41,7 +43,7 @@ final class DievasPopoverThemeData extends Equatable {
     arrowSize,
     barrierColour,
     animationDuration,
-    elevation,
+    shadow,
     maxWidth,
   ];
 }

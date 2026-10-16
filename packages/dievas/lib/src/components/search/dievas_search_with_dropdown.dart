@@ -229,13 +229,7 @@ class _DropdownResults<T> extends StatelessWidget {
                 color: theme.bgColour,
                 borderRadius: BorderRadius.vertical(bottom: theme.borderRadius.topLeft),
                 border: Border.all(color: theme.borderColourFocused),
-                boxShadow: [
-                  BoxShadow(
-                    color: theme.borderColourFocused.withValues(alpha: 0.15),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
+                boxShadow: theme.shadow,
               ),
               child: ListView.separated(
                 padding: EdgeInsets.zero,

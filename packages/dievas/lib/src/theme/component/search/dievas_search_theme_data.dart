@@ -27,6 +27,7 @@ final class DievasSearchThemeData extends Equatable {
     required this.dividerColour,
     required this.dividerIndent,
     required this.disabledOpacity,
+    required this.shadow,
   });
 
   /// Input value text style.
@@ -83,6 +84,9 @@ final class DievasSearchThemeData extends Equatable {
   /// Opacity multiplier applied when disabled.
   final double disabledOpacity;
 
+  /// Shadow stack for the results surface, drawn from the elevation tokens.
+  final List<BoxShadow> shadow;
+
   @override
   List<Object?> get props => [
     inputStyle,
@@ -103,5 +107,6 @@ final class DievasSearchThemeData extends Equatable {
     dividerColour,
     dividerIndent,
     disabledOpacity,
+    shadow,
   ];
 }

@@ -1,5 +1,23 @@
 # Change Log
 
+## Unreleased
+
+### Breaking — component elevation fields are now shadow stacks
+
+Every component that painted elevation through Flutter's `Material` / `Drawer` / `showModalBottomSheet` numeric `elevation` now paints the Dievas token shadow list directly, so overlays read as the same soft halo as the rest of the system and no longer pick up the M3 `surfaceTintColor` wash.
+
+- Renamed and retyped `double elevation` → `List<BoxShadow> shadow` on `DievasModalThemeData`, `DievasDrawerThemeData`, `DievasBottomSheetThemeData`, and `DievasPopoverThemeData`.
+- Renamed `DievasDropdownThemeData.overlayElevation` → `shadow`.
+- Renamed `DievasAccordionThemeData.shadows` → `shadow`.
+- Added `DievasSearchThemeData.shadow`; the search field's coloured focus glow is now the standard token shadow.
+- `DievasPopoverThemeData.elevation` was previously ignored by the widget; the popover now reads `shadow` from its theme data.
+- `DievasDrawerThemeData.borderRadius` is now applied to the drawer's `shape` (it was previously unused).
+
+### Elevation
+
+- Default shadows now use the soft `DievasElevationSemantic.shadowColour` (`0xFF171717`) ink instead of pure `staticBlack`, and render centred (no vertical offset) so depth reads as a soft halo rather than a drop shadow underneath. Reverses the `offsetY` behaviour introduced in 0.0.3 — the offset tokens have since been removed entirely.
+- Shadow layers are built from the new ordered per-tier `DievasElevationShadowLayer` lists (`SM`, `MD`, `LG`, `XL`), replacing the `upper` / `lower` records and the separate `SHADOW_TINT_*` constants. See `dievas_tokens` for the breaking token details.
+
 ## 1.0.0
 
 The naming unification release. Every size-axis token, enum value, and theme-value field now follows one law — `<base><UPPERCASE SIZE>` — and brand expression is driven by a single selectable palette.

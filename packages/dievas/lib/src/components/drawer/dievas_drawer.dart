@@ -39,11 +39,15 @@ class DievasDrawerState extends State<DievasDrawer> {
           alignment: .start,
           drawerCallback: (isOpen) => setState(() => _isOpen = isOpen),
           scrimColor: theme.barrierColour,
-          child: Drawer(
-            width: drawerWidth,
-            elevation: theme.elevation,
-            backgroundColor: theme.backgroundColour,
-            child: widget.drawer,
+          child: Container(
+            decoration: BoxDecoration(borderRadius: theme.borderRadius, boxShadow: theme.shadow),
+            child: Drawer(
+              width: drawerWidth,
+              elevation: 0,
+              backgroundColor: theme.backgroundColour,
+              shape: RoundedRectangleBorder(borderRadius: theme.borderRadius),
+              child: widget.drawer,
+            ),
           ),
         ),
       ],

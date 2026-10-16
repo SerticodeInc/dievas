@@ -1,5 +1,5 @@
 name: dievas_landing
-description: Dievas design system — Jaspr server landing page.
+description: Dievas design system — Jaspr static landing page.
 
 publish_to: none
 version: 0.0.1
@@ -24,4 +24,4 @@ dev_dependencies:
     lints: ^6.1.0
 
 jaspr:
-    mode: server
+    mode: static

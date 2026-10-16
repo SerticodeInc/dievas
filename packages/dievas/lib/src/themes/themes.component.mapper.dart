@@ -33,24 +33,24 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
     textInput: override?.textInput ?? _createTextInputTheme(colours, typography, spacing, sizing, border),
     authCode: override?.authCode ?? _createAuthCodeTheme(colours, typography, sizing, spacing, border),
     textInputGroup: override?.textInputGroup ?? _createTextInputGroupTheme(colours, sizing, spacing, border),
-    search: override?.search ?? _createSearchTheme(colours, typography, sizing, spacing, border),
+    search: override?.search ?? _createSearchTheme(colours, typography, sizing, spacing, border, elevation),
     segmentedControl:
         override?.segmentedControl ??
         _createSegmentedControlTheme(colours, typography, spacing, sizing, border, animation),
     alert: override?.alert ?? _createAlertTheme(typography, spacing, border),
     snackbar: override?.snackbar ?? _createSnackbarTheme(colours, typography, spacing, border),
-    bottomSheet: override?.bottomSheet ?? _createBottomSheetTheme(colours, border),
-    modal: override?.modal ?? _createModalTheme(colours, typography, spacing, border),
+    bottomSheet: override?.bottomSheet ?? _createBottomSheetTheme(colours, border, elevation),
+    modal: override?.modal ?? _createModalTheme(colours, typography, spacing, border, elevation),
     tooltip: override?.tooltip ?? _createTooltipTheme(colours, typography, spacing, border, animation),
     loader: override?.loader ?? _createLoaderTheme(colours, typography, spacing, animation),
     menuItem: override?.menuItem ?? _createMenuItemTheme(colours, typography, spacing, sizing, border),
     emptyState: override?.emptyState ?? _createEmptyStateTheme(colours, typography, spacing),
     accordion: override?.accordion ?? _createAccordionTheme(typography, spacing, border, animation, elevation),
-    drawer: override?.drawer ?? _createDrawerTheme(colours, border, animation),
+    drawer: override?.drawer ?? _createDrawerTheme(colours, border, animation, elevation),
     dropdown:
         override?.dropdown ?? _createDropdownTheme(colours, typography, spacing, sizing, border, elevation, animation),
     tabBar: override?.tabBar ?? _createTabBarTheme(colours, typography, spacing, sizing, border, animation),
-    popover: override?.popover ?? _createPopoverTheme(colours, typography, spacing, border, animation),
+    popover: override?.popover ?? _createPopoverTheme(colours, typography, spacing, border, animation, elevation),
     divider: override?.divider ?? _createDividerTheme(colours, border),
   );
 }
@@ -550,6 +550,7 @@ DievasSearchThemeData _createSearchTheme(
   DievasSizingThemeData sizing,
   DievasSpacingThemeData spacing,
   DievasBorderThemeData border,
+  DievasElevationThemeData elevation,
 ) => DievasSearchThemeData(
   inputStyle: typography.bodyMD,
   placeholderStyle: typography.bodyMD.copyWith(color: colours.input.inputPlaceholder),
@@ -569,6 +570,7 @@ DievasSearchThemeData _createSearchTheme(
   dividerColour: colours.border.borderDefault,
   dividerIndent: spacing.MD,
   disabledOpacity: DievasOpacitySemantic.disabled,
+  shadow: elevation.MD,
 );
 
 // Alert
@@ -606,7 +608,11 @@ DievasSnackbarThemeData _createSnackbarTheme(
 );
 
 // BottomSheet
-DievasBottomSheetThemeData _createBottomSheetTheme(DievasColourThemeData colours, DievasBorderThemeData border) {
+DievasBottomSheetThemeData _createBottomSheetTheme(
+  DievasColourThemeData colours,
+  DievasBorderThemeData border,
+  DievasElevationThemeData elevation,
+) {
   return DievasBottomSheetThemeData(
     borderRadius: .only(topLeft: _extractRadius(border.XL), topRight: _extractRadius(border.XL)),
     handleWidth: DievasSizingPrimitives.s40,
@@ -615,7 +621,7 @@ DievasBottomSheetThemeData _createBottomSheetTheme(DievasColourThemeData colours
     handleTopInset: DievasSpacingPrimitives.s3,
     backgroundColour: colours.background.bgElevated,
     barrierColour: colours.background.bgOverlay,
-    elevation: DievasElevationSemantic.MD,
+    shadow: elevation.MD,
   );
 }
 
@@ -625,6 +631,7 @@ DievasModalThemeData _createModalTheme(
   DievasTypographyThemeData typography,
   DievasSpacingThemeData spacing,
   DievasBorderThemeData border,
+  DievasElevationThemeData elevation,
 ) {
   return DievasModalThemeData(
     titleStyle: typography.titleMD,
@@ -636,7 +643,7 @@ DievasModalThemeData _createModalTheme(
     minWidth: _kModalMinWidth,
     maxWidth: _kModalMaxWidth,
     closeIconSize: DievasSizingPrimitives.s20,
-    elevation: DievasElevationSemantic.LG,
+    shadow: elevation.LG,
   );
 }
 
@@ -716,7 +723,7 @@ DievasAccordionThemeData _createAccordionTheme(
     iconSpacing: spacing.SM,
     dividerIndent: spacing.MD,
     animationDuration: animation.standard,
-    shadows: elevation.XS,
+    shadow: elevation.XS,
   );
 }
 
@@ -725,6 +732,7 @@ DievasDrawerThemeData _createDrawerTheme(
   DievasColourThemeData colours,
   DievasBorderThemeData border,
   DievasAnimationThemeData animation,
+  DievasElevationThemeData elevation,
 ) {
   return DievasDrawerThemeData(
     backgroundColour: colours.background.bgElevated,
@@ -732,7 +740,7 @@ DievasDrawerThemeData _createDrawerTheme(
     borderRadius: .only(topRight: _extractRadius(border.XL), bottomRight: _extractRadius(border.XL)),
     barrierColour: colours.background.bgOverlay,
     animationDuration: animation.moderate,
-    elevation: DievasElevationSemantic.LG,
+    shadow: elevation.LG,
   );
 }
 
@@ -808,7 +816,7 @@ DievasDropdownThemeData _createDropdownTheme(
   overlayBgColour: colours.background.bgElevated,
   overlayBorderColour: colours.border.borderDefault,
   overlayBorderRadius: border.MD,
-  overlayElevation: elevation.MD,
+  shadow: elevation.MD,
   optionStyle: typography.bodyMD,
   optionSelectedColour: colours.background.bgSubtle,
   optionTextColour: colours.text.textPrimary,
@@ -851,6 +859,7 @@ DievasPopoverThemeData _createPopoverTheme(
   DievasSpacingThemeData spacing,
   DievasBorderThemeData border,
   DievasAnimationThemeData animation,
+  DievasElevationThemeData elevation,
 ) {
   return DievasPopoverThemeData(
     backgroundColour: colours.background.bgElevated,
@@ -862,7 +871,7 @@ DievasPopoverThemeData _createPopoverTheme(
     arrowSize: DievasSizingPrimitives.s8,
     barrierColour: colours.background.bgOverlay,
     animationDuration: animation.standard,
-    elevation: DievasElevationSemantic.MD,
+    shadow: elevation.MD,
     maxWidth: 280.0,
   );
 }

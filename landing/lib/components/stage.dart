@@ -21,20 +21,16 @@ class Stage extends StatelessComponent {
   @override
   Component build(BuildContext context) => div(
     classes: 'stage-window',
-    attributes: const {
-      'aria-label': 'Dievas component stage preview',
-      'role': 'group',
-      'data-stage': '',
-    },
+    attributes: const {'aria-label': 'Dievas component stage preview', 'role': 'group', 'data-stage': ''},
     [
       _titlebar(),
       _tablist(),
       div(classes: 'stage-body', [
-        div(classes: 'stage-track', attributes: const {'data-stage-track': ''}, [
-          _primitivesPanel(),
-          _semanticsPanel(),
-          _componentsPanel(),
-        ]),
+        div(
+          classes: 'stage-track',
+          attributes: const {'data-stage-track': ''},
+          [_primitivesPanel(), _semanticsPanel(), _componentsPanel()],
+        ),
       ]),
       _foot(),
     ],
@@ -53,10 +49,7 @@ class Stage extends StatelessComponent {
       type: ButtonType.button,
       classes: 'stage-theme press',
       attributes: const {'data-stage-theme': '', 'aria-label': 'Toggle stage colour theme'},
-      [
-        RawText(_themeIconSvg),
-        Component.text('theme'),
-      ],
+      [RawText(_themeIconSvg), Component.text('theme')],
     ),
   ]);
 
@@ -100,27 +93,9 @@ class Stage extends StatelessComponent {
           _colourCard('slate50', DievasColourPrimitives.slate50),
         ]),
         _tokenFamily('elevation', [
-          _elevationCard(
-            'e2',
-            DievasElevationShadowLayer.upperSM,
-            DievasElevationSemantic.SHADOW_TINT_SUBTLE,
-            DievasElevationShadowLayer.lowerSM,
-            DievasElevationSemantic.SHADOW_TINT_SOFT,
-          ),
-          _elevationCard(
-            'e3',
-            DievasElevationShadowLayer.upperMD,
-            DievasElevationSemantic.SHADOW_TINT_SUBTLE,
-            DievasElevationShadowLayer.lowerMD,
-            DievasElevationSemantic.SHADOW_TINT_MEDIUM,
-          ),
-          _elevationCard(
-            'e4',
-            DievasElevationShadowLayer.upperLG,
-            DievasElevationSemantic.SHADOW_TINT_SUBTLE,
-            DievasElevationShadowLayer.lowerLG,
-            DievasElevationSemantic.SHADOW_TINT_MEDIUM,
-          ),
+          _elevationCard('e2', DievasElevationShadowLayer.SM),
+          _elevationCard('e3', DievasElevationShadowLayer.MD),
+          _elevationCard('e4', DievasElevationShadowLayer.LG),
         ]),
         _tokenFamily('radius', [
           _radiusCard('SM', DievasRadiusPrimitives.SM),
@@ -226,15 +201,18 @@ class Stage extends StatelessComponent {
     },
     [
       div(classes: 'comp-demo', [
-        _compCluster('DievasFilledButton', div(classes: 'comp-row', [
-          button(type: ButtonType.button, classes: 'dbtn dbtn-primary press', [Component.text('Filled')]),
-          button(type: ButtonType.button, classes: 'dbtn dbtn-outlined press', [Component.text('Outlined')]),
-          button(type: ButtonType.button, classes: 'dbtn dbtn-text press', [Component.text('Text')]),
-        ])),
-        _compCluster('DievasSwitch', div(classes: 'toggle-cluster', [
-          _switch('Wi-Fi', true),
-          _switch('Bluetooth', false),
-        ])),
+        _compCluster(
+          'DievasFilledButton',
+          div(classes: 'comp-row', [
+            button(type: ButtonType.button, classes: 'dbtn dbtn-primary press', [Component.text('Filled')]),
+            button(type: ButtonType.button, classes: 'dbtn dbtn-outlined press', [Component.text('Outlined')]),
+            button(type: ButtonType.button, classes: 'dbtn dbtn-text press', [Component.text('Text')]),
+          ]),
+        ),
+        _compCluster(
+          'DievasSwitch',
+          div(classes: 'toggle-cluster', [_switch('Wi-Fi', true), _switch('Bluetooth', false)]),
+        ),
         _compCluster('DievasAccordion', _accordion()),
         _compCluster('DievasBreadcrumb', _breadcrumb()),
         _compCluster('DievasDotIndicator', _dotIndicator()),
@@ -263,88 +241,61 @@ class Stage extends StatelessComponent {
     div(classes: 'token-family-items', items),
   ]);
 
-  Component _colourCard(String name, int argb) => div(
-    classes: 'swatch-card',
-    [
-      div(classes: 'swatch', attributes: {'style': 'background: ${tokenRgba(argb)};'}, []),
-      div(classes: 'swatch-label', [
-        b([Component.text(name)]),
-        span([Component.text(_hex(argb))]),
-      ]),
-    ],
-  );
+  Component _colourCard(String name, int argb) => div(classes: 'swatch-card', [
+    div(classes: 'swatch', attributes: {'style': 'background: ${tokenRgba(argb)};'}, []),
+    div(classes: 'swatch-label', [
+      b([Component.text(name)]),
+      span([Component.text(_hex(argb))]),
+    ]),
+  ]);
 
-  /// Renders an elevation tier exactly as the package ships it: two
-  /// stacked layers — a tight ambient layer plus a diffuse lower one —
-  /// with blur, offset and opacity taken straight from
-  /// [DievasElevationShadowLayer] and [DievasOpacitySemantic]. This is
-  /// [DievasElevationThemeData.SM/MD/LG] translated to CSS; each card is
-  /// the tier whose dominant blur is the named primitive (e2 → SM,
-  /// e3 → MD, e4 → LG), so the label's value is the lower layer's blur.
-  Component _elevationCard(
-    String name,
-    DievasElevationShadow upper,
-    double upperOpacity,
-    DievasElevationShadow lower,
-    double lowerOpacity,
-  ) => div(
-    classes: 'shape-card',
-    [
-      div(classes: 'shape-sample elev-sample', [
-        div(
-          classes: 'elev-tile',
-          attributes: {
-            'style': 'box-shadow: 0 ${_px(upper.offsetY)} ${_px(upper.blur)} '
-                '${_shadowAlpha(upperOpacity)}, 0 ${_px(lower.offsetY)} '
-                '${_px(lower.blur)} ${_shadowAlpha(lowerOpacity)};',
-          },
-          [],
-        ),
-      ]),
-      div(classes: 'swatch-label', [
-        b([Component.text(name)]),
-        span([Component.text(_px(lower.blur))]),
-      ]),
-    ],
-  );
-
-  /// Renders the radius primitive as the corner curve on the sample.
-  Component _radiusCard(String name, double radius) => div(
-    classes: 'shape-card',
-    [
+  /// Renders an elevation tier exactly as the package ships it: the ordered
+  /// layer list from [DievasElevationShadowLayer], each layer's blur and tint
+  /// applied as a centred box-shadow (offset 0) so it reads as a soft halo
+  /// rather than a drop shadow. Each card is the tier whose dominant blur is
+  /// the named primitive (e2 → SM, e3 → MD, e4 → LG), so the label's value is
+  /// the last layer's blur.
+  Component _elevationCard(String name, List<DievasElevationShadow> layers) => div(classes: 'shape-card', [
+    div(classes: 'shape-sample elev-sample', [
       div(
-        classes: 'shape-sample',
-        attributes: {'style': 'border-radius: ${_px(radius)};'},
+        classes: 'elev-tile',
+        attributes: {
+          'style':
+              'box-shadow: ${[for (final layer in layers) '0 0 ${_px(layer.blur)} ${_shadowAlpha(layer.tint)}'].join(', ')};',
+        },
         [],
       ),
-      div(classes: 'swatch-label', [
-        b([Component.text(name)]),
-        span([Component.text(_px(radius))]),
-      ]),
-    ],
-  );
+    ]),
+    div(classes: 'swatch-label', [
+      b([Component.text(name)]),
+      span([Component.text(_px(layers.last.blur))]),
+    ]),
+  ]);
+
+  /// Renders the radius primitive as the corner curve on the sample.
+  Component _radiusCard(String name, double radius) => div(classes: 'shape-card', [
+    div(classes: 'shape-sample', attributes: {'style': 'border-radius: ${_px(radius)};'}, []),
+    div(classes: 'swatch-label', [
+      b([Component.text(name)]),
+      span([Component.text(_px(radius))]),
+    ]),
+  ]);
 
   /// Renders the spacing primitive as a bar of that width on the 4pt grid.
-  Component _spacingCard(String name, double width) => div(
-    classes: 'shape-card',
-    [
-      div(classes: 'shape-sample spacing-track', [
-        span(classes: 'spacing-bar', attributes: {'style': 'width: ${_px(width)};'}, []),
-      ]),
-      div(classes: 'swatch-label', [
-        b([Component.text(name)]),
-        span([Component.text(_px(width))]),
-      ]),
-    ],
-  );
+  Component _spacingCard(String name, double width) => div(classes: 'shape-card', [
+    div(classes: 'shape-sample spacing-track', [
+      span(classes: 'spacing-bar', attributes: {'style': 'width: ${_px(width)};'}, []),
+    ]),
+    div(classes: 'swatch-label', [
+      b([Component.text(name)]),
+      span([Component.text(_px(width))]),
+    ]),
+  ]);
 
   Component _aliasChip(String name, String accessor, String resolved, String from) => button(
     type: ButtonType.button,
     classes: 'alias-chip',
-    attributes: {
-      'data-di-copy': accessor,
-      'title': 'Copy resolved value',
-    },
+    attributes: {'data-di-copy': accessor, 'title': 'Copy resolved value'},
     [
       span(classes: 'alias-name', [Component.text(name)]),
       span(classes: 'alias-accessor', [Component.text(accessor)]),
@@ -362,11 +313,7 @@ class Stage extends StatelessComponent {
   Component _switch(String label, bool on) => button(
     type: ButtonType.button,
     classes: on ? 't-switch press is-on' : 't-switch press',
-    attributes: {
-      'data-di-switch': '',
-      'aria-pressed': on ? 'true' : 'false',
-      'aria-label': 'Toggle $label',
-    },
+    attributes: {'data-di-switch': '', 'aria-pressed': on ? 'true' : 'false', 'aria-label': 'Toggle $label'},
     [
       span(classes: 'track', [span(classes: 'knob', [])]),
       span(classes: 't-label', [Component.text(label)]),
@@ -384,7 +331,9 @@ class Stage extends StatelessComponent {
       ],
     ),
     div(classes: 'acc-body', [
-      Component.text('A named alias over a primitive. Move the primitive and every alias, and every widget reading it, moves with it.'),
+      Component.text(
+        'A named alias over a primitive. Move the primitive and every alias, and every widget reading it, moves with it.',
+      ),
     ]),
   ]);
 
@@ -408,11 +357,7 @@ class Stage extends StatelessComponent {
         button(
           type: ButtonType.button,
           classes: 'dot press${i == 0 ? ' is-active' : ''}',
-          attributes: {
-            'data-di-dot': '',
-            'aria-current': i == 0 ? 'true' : 'false',
-            'aria-label': 'Step ${i + 1}',
-          },
+          attributes: {'data-di-dot': '', 'aria-current': i == 0 ? 'true' : 'false', 'aria-label': 'Step ${i + 1}'},
           [],
         ),
     ],
@@ -420,8 +365,7 @@ class Stage extends StatelessComponent {
 
   static const _dotCount = 4;
 
-  static const _flutterInheritedModel =
-      'https://api.flutter.dev/flutter/widgets/InheritedModel-class.html';
+  static const _flutterInheritedModel = 'https://api.flutter.dev/flutter/widgets/InheritedModel-class.html';
 
   // ── Footer readout ──────────────────────────────────────────
 
@@ -432,14 +376,9 @@ class Stage extends StatelessComponent {
       href: _flutterInheritedModel,
       classes: 'craft-inline-link stage-foot-link',
       attributes: const {'target': '_blank', 'rel': 'noopener'},
-      [
-        Component.text('InheritedModel'),
-        RawText(_arrowUpRightSvg),
-      ],
+      [Component.text('InheritedModel'), RawText(_arrowUpRightSvg)],
     ),
-    span(classes: 'readout', attributes: const {'data-stage-label': ''}, [
-      Component.text('idle, nothing rebuilt'),
-    ]),
+    span(classes: 'readout', attributes: const {'data-stage-label': ''}, [Component.text('idle, nothing rebuilt')]),
   ]);
 
   // ── Helpers ─────────────────────────────────────────────────
@@ -452,8 +391,7 @@ class Stage extends StatelessComponent {
   static String _shadowAlpha(double opacity) =>
       'color-mix(in srgb, var(--dv-static-black) ${(opacity * 100).round()}%, transparent)';
 
-  static String _hex(int argb) =>
-      '#${argb.toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';
+  static String _hex(int argb) => '#${argb.toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';
 
   static const _arrowUpRightSvg =
       '''<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>''';

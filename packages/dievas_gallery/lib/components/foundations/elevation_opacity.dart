@@ -70,10 +70,11 @@ class _OpacityTokens extends StatelessWidget {
     final colours = DievasTheme.coloursOf(context);
 
     final entries = [
-      ('disabled', opacity.disabled),
+      ('transparent', opacity.transparent),
       ('hoverGhost', opacity.hoverGhost),
-      ('pressedGhost', opacity.pressedGhost),
       ('focusRing', opacity.focusRing),
+      ('pressedGhost', opacity.pressedGhost),
+      ('disabled', opacity.disabled),
       ('overlay', opacity.overlay),
       ('opaque', opacity.opaque),
     ];
@@ -89,7 +90,7 @@ class _OpacityTokens extends StatelessWidget {
               child: Row(
                 children: [
                   SizedBox(
-                    width: 80, // label column — gallery-only fixed width
+                    width: 112, // label column — gallery-only fixed width
                     child: Text(
                       name,
                       style: DievasTheme.typographyOf(
@@ -97,13 +98,17 @@ class _OpacityTokens extends StatelessWidget {
                       ).labelXS.copyWith(fontFamily: 'monospace', color: colours.text.textTertiary),
                     ),
                   ),
-                  Text(
-                    '${(value * 100).round()}%',
-                    style: DievasTheme.typographyOf(
-                      context,
-                    ).labelXS.copyWith(color: colours.text.textSecondary, fontFamily: 'monospace'),
+                  SizedBox(
+                    width: 40, // percentage column — gallery-only fixed width
+                    child: Text(
+                      '${(value * 100).round()}%',
+                      textAlign: TextAlign.end,
+                      style: DievasTheme.typographyOf(
+                        context,
+                      ).labelXS.copyWith(color: colours.text.textSecondary, fontFamily: 'monospace'),
+                    ),
                   ),
-                  SizedBox(width: context.spacing.LG),
+                  SizedBox(width: context.spacing.MD),
                   Opacity(
                     opacity: value,
                     child: Container(

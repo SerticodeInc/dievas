@@ -1,0 +1,6 @@
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "dievas",
+  "compatibility_date": "2026-10-01",
+  "pages_build_output_dir": "./landing/build/jaspr"
+}

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' show RoundedRectangleBorder, showModalBottomSheet;
+import 'package:flutter/material.dart' show Clip, Colors, RoundedRectangleBorder, showModalBottomSheet;
 import 'package:flutter/widgets.dart';
 import 'package:dievas/l10n/dievas_localizations.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
@@ -32,11 +32,19 @@ Future<T?> showDievasBottomSheet<T>({
     enableDrag: enableDrag,
     isScrollControlled: isScrollControlled,
     barrierColor: theme.barrierColour,
-    backgroundColor: theme.backgroundColour,
-    elevation: theme.elevation,
+    backgroundColor: Colors.transparent,
+    elevation: 0,
+    clipBehavior: Clip.none,
     shape: RoundedRectangleBorder(borderRadius: theme.borderRadius),
     routeSettings: routeSettings,
-    builder: builder,
+    builder: (context) => Container(
+      decoration: BoxDecoration(
+        color: theme.backgroundColour,
+        borderRadius: theme.borderRadius,
+        boxShadow: theme.shadow,
+      ),
+      child: builder(context),
+    ),
   );
 }
 

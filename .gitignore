@@ -8,6 +8,8 @@
 .ite/
 
 node_modules/
+.wrangler/
+!landing/DEPLOYMENT.md
 
 # jaspr_builder generated file — recreated by build_runner, not tracked
 jaspr_options.dart

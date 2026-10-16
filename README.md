@@ -24,7 +24,7 @@ dievas/
 │   ├── dievas_tokens/      # Pure Dart — primitive + semantic token layer
 │   ├── dievas/             # Flutter — theme stack + component library
 │   └── dievas_gallery/     # Flutter app — live component showcase (Widget book)
-├── landing/                # Jaspr SSR + Tailwind v4 landing page
+├── landing/                # Jaspr static + Tailwind v4 landing page
 ├── pubspec.yaml            # Melos workspace root
 └── analysis_options.yaml   # Shared lint rules (line length: 120)
 ```
@@ -69,7 +69,7 @@ Colour roles use **grouped semantic naming** — `textPrimary`, `bgBase`, `actio
 
 ### Size-token naming law
 
-Every **size-axis** token uses `<base><SIZE>` — a lowercase base followed by an **UPPERCASE** size suffix: `XS`, `SM`, `MD`, `LG`, `XL`, `XL2`…`XL8`, with half-steps `SMPlus`, `MDPlus`, `LGPlus`, `XLPlus`. Examples: `spacingMD`, `radiusLG`, `fontSizeXL`, `sizeXL2`, `shadowLayer.upperMD`. The suffix always trails the base (`upperSM`, not `SMUpper`). Non-size axes — opacity, z-index, easing, animation intents, `touchMin` — stay camelCase.
+Every **size-axis** token uses `<base><SIZE>` — a lowercase base followed by an **UPPERCASE** size suffix: `XS`, `SM`, `MD`, `LG`, `XL`, `XL2`…`XL8`, with half-steps `SMPlus`, `MDPlus`, `LGPlus`, `XLPlus`. Examples: `spacingMD`, `radiusLG`, `fontSizeXL`, `sizeXL2`, `breakpointSM`. The suffix always trails the base. Non-size axes — opacity, z-index, easing, animation intents, `touchMin` — stay camelCase.
 
 The size scale obeys the **4pt / 8pt grid law**: 4pt is the grid, 8pt is preferred, and half-steps are allowed only where optical weight or platform touch targets require them (and must carry a doc comment).
 
@@ -85,7 +85,6 @@ The size scale obeys the **4pt / 8pt grid law**: 4pt is the grid, 8pt is preferr
 | Elevation  | `elevation_primitives.dart`  | `elevation_semantic.dart`         |
 | Opacity    | `opacity_primitives.dart`    | `opacity_semantic.dart`           |
 | Duration   | `duration_primitives.dart`   | —                                 |
-| Offset     | `offset_primitives.dart`     | `offset_semantic.dart`            |
 | Animation  | `duration_primitives.dart`   | `animation_semantic.dart`         |
 | Breakpoint | `breakpoint_primitives.dart` | `breakpoint_semantic.dart`        |
 | Easing     | `easing_primitives.dart`     | `easing_semantic.dart`            |
@@ -238,7 +237,7 @@ No legacy pre null safety patterns.
 | --------------------------------------------- | ------------------------------------ |
 | [Moon Design System](https://flutter.moon.io) | Component catalogue, visual language |
 
-The landing page is a Jaspr SSR + Tailwind v4 site deployed on Railway at `dievas.serticode.com`.
+The landing page uses Jaspr static generation and Tailwind v4. See [Deploy the landing page to Cloudflare Pages](landing/DEPLOYMENT.md) for build, deployment, and domain migration steps.
 
 Token bridge: `landing/tool/generate_theme.dart` reads `dievas_tokens` constants and emits Tailwind `@theme {}` CSS; the same token values power both the Flutter widgets and the server rendered landing page.
 

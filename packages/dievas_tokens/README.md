@@ -1,4 +1,5 @@
 <!-- meta.contentType: Reference -->
+
 # Dievas tokens
 
 Use primitive values and semantic roles to build interfaces with the [Dievas design system](https://dievas.serticode.com). This package uses Dart only; Flutter adapters construct colours, text styles, and shadows from these tokens.
@@ -37,20 +38,20 @@ The recorded reference is the published `moon_tokens` 0.0.6 package. The [refere
 
 Primitives reproduce those recorded colours. The following semantic mappings now match the reference:
 
-| Dievas role | Moon reference | Light | Dark |
-| --- | --- | --- | --- |
-| `textPrimary`, `iconPrimary`, `inputText` | Primary foreground | `black` | `white` |
-| `textSecondary`, `iconSecondary` | Secondary foreground | `steelGrey` | `steelGreyLight` |
-| `pageBackground` | `goku` | `white` | `black` |
-| `cardBackground` | `gohan` | `nearWhite` | `charcoalDeep` |
-| `dividerColour` | `beerus` | `coolGreyLight` | `charcoal` |
-| `modalBarrierBackground` | `zeno` | `blackAlpha8F` | `blackAlpha8F` |
-| `staticWhite` | `goten` | `white` | `white` |
-| `staticBlack` | `popo` | `black` | `black` |
+| Dievas role                               | Moon reference       | Light           | Dark             |
+| ----------------------------------------- | -------------------- | --------------- | ---------------- |
+| `textPrimary`, `iconPrimary`, `inputText` | Primary foreground   | `black`         | `white`          |
+| `textSecondary`, `iconSecondary`          | Secondary foreground | `steelGrey`     | `steelGreyLight` |
+| `pageBackground`                          | `goku`               | `white`         | `black`          |
+| `cardBackground`                          | `gohan`              | `nearWhite`     | `charcoalDeep`   |
+| `dividerColour`                           | `beerus`             | `coolGreyLight` | `charcoal`       |
+| `modalBarrierBackground`                  | `zeno`               | `blackAlpha8F`  | `blackAlpha8F`   |
+| `staticWhite`                             | `goten`              | `white`         | `white`          |
+| `staticBlack`                             | `popo`               | `black`         | `black`          |
 
 Inverse text uses the opposite theme’s primary foreground. Brand palettes, feedback colours, elevated surfaces, and interaction states retain their existing Dievas mappings. Full semantic parity, Flutter component rendering, and the deployed Moon playground remain unverified.
 
-These neutral changes alter rendered colours compared with 1.0.0. They are pending release; this checkout still declares version 1.0.0.
+These neutral changes alter rendered colours compared with 1.0.0.
 
 ## Brand palettes
 
@@ -129,60 +130,60 @@ Colour roles now name the element, its variant or state, and the painted propert
 
 Use these names in semantic classes, theme fields, and palette role records where exposed. `primary` remains palette identity; use component roles when painting controls.
 
-| Previous name | Replacement |
-| --- | --- |
-| `brand` | `primary` |
-| `brandSubtle` | `badgePrimaryTintedBackground` |
-| `onBrand` | `buttonPrimaryText` |
-| `bgBase` | `pageBackground` |
-| `bgSubtle` | `cardBackground` |
-| `bgElevated` | `dialogBackground` |
-| `bgOverlay` | `modalBarrierBackground` |
-| `surfaceCanvas` | `canvasBackground` |
-| `surfaceCode` | `codeBlockBackground` |
-| `surfaceSidebar` | `sidebarBackground` |
-| `surfaceTableStriped` | `tableRowAlternateBackground` |
-| `actionPrimary` | `buttonPrimaryBackground` |
-| `actionPrimaryHover` | `buttonPrimaryHoveredBackground` |
-| `actionPrimaryActive` | `buttonPrimaryPressedBackground` |
-| `actionPrimaryDisabled` | `buttonPrimaryDisabledBackground` |
-| `actionSecondary` | `buttonSecondaryBackground` |
-| `actionSecondaryHover` | `buttonSecondaryHoveredBackground` |
-| `actionError` | `buttonDestructiveBackground` |
-| `actionErrorHover` | `buttonDestructiveHoveredBackground` |
-| `actionSuccess` | `buttonSuccessBackground` |
-| `inputBg` | `inputBackground` |
-| `inputBorderFocus` | `inputFocusedBorder` |
-| `inputBorderError` | `inputErrorBorder` |
-| `inputBorderWarning` | `inputWarningBorder` |
-| `inputPlaceholder` | `inputPlaceholderText` |
-| `switchTrackOn` | `switchOnTrack` |
-| `switchTrackOff` | `switchOffTrack` |
-| `switchThumbOn` | `switchOnThumb` |
-| `switchThumbOff` | `switchOffThumb` |
-| `borderDefault` | `dividerColour` |
-| `borderStrong` | `inputActiveBorder` |
-| `borderDisabled` | `inputDisabledBorder` |
-| `borderFocus` | `focusIndicatorColour` |
-| `borderBrand` | `selectionBorder` |
-| `iconOnBrand` | `buttonPrimaryIcon` |
-| `textOnBrand` | `buttonPrimaryText` |
-| `feedbackSuccessBackground` | `alertSuccessBackground` |
-| `feedbackSuccessBorder` | `alertSuccessBorder` |
-| `feedbackSuccessIcon` | `alertSuccessIcon` |
-| `feedbackSuccessText` | `alertSuccessText` |
-| `feedbackWarningBackground` | `alertWarningBackground` |
-| `feedbackWarningBorder` | `alertWarningBorder` |
-| `feedbackWarningIcon` | `alertWarningIcon` |
-| `feedbackWarningText` | `alertWarningText` |
-| `feedbackErrorBackground` | `alertErrorBackground` |
-| `feedbackErrorBorder` | `alertErrorBorder` |
-| `feedbackErrorIcon` | `alertErrorIcon` |
-| `feedbackErrorText` | `alertErrorText` |
-| `feedbackInfoBackground` | `alertInfoBackground` |
-| `feedbackInfoBorder` | `alertInfoBorder` |
-| `feedbackInfoIcon` | `alertInfoIcon` |
-| `feedbackInfoText` | `alertInfoText` |
+| Previous name               | Replacement                          |
+| --------------------------- | ------------------------------------ |
+| `brand`                     | `primary`                            |
+| `brandSubtle`               | `badgePrimaryTintedBackground`       |
+| `onBrand`                   | `buttonPrimaryText`                  |
+| `bgBase`                    | `pageBackground`                     |
+| `bgSubtle`                  | `cardBackground`                     |
+| `bgElevated`                | `dialogBackground`                   |
+| `bgOverlay`                 | `modalBarrierBackground`             |
+| `surfaceCanvas`             | `canvasBackground`                   |
+| `surfaceCode`               | `codeBlockBackground`                |
+| `surfaceSidebar`            | `sidebarBackground`                  |
+| `surfaceTableStriped`       | `tableRowAlternateBackground`        |
+| `actionPrimary`             | `buttonPrimaryBackground`            |
+| `actionPrimaryHover`        | `buttonPrimaryHoveredBackground`     |
+| `actionPrimaryActive`       | `buttonPrimaryPressedBackground`     |
+| `actionPrimaryDisabled`     | `buttonPrimaryDisabledBackground`    |
+| `actionSecondary`           | `buttonSecondaryBackground`          |
+| `actionSecondaryHover`      | `buttonSecondaryHoveredBackground`   |
+| `actionError`               | `buttonDestructiveBackground`        |
+| `actionErrorHover`          | `buttonDestructiveHoveredBackground` |
+| `actionSuccess`             | `buttonSuccessBackground`            |
+| `inputBg`                   | `inputBackground`                    |
+| `inputBorderFocus`          | `inputFocusedBorder`                 |
+| `inputBorderError`          | `inputErrorBorder`                   |
+| `inputBorderWarning`        | `inputWarningBorder`                 |
+| `inputPlaceholder`          | `inputPlaceholderText`               |
+| `switchTrackOn`             | `switchOnTrack`                      |
+| `switchTrackOff`            | `switchOffTrack`                     |
+| `switchThumbOn`             | `switchOnThumb`                      |
+| `switchThumbOff`            | `switchOffThumb`                     |
+| `borderDefault`             | `dividerColour`                      |
+| `borderStrong`              | `inputActiveBorder`                  |
+| `borderDisabled`            | `inputDisabledBorder`                |
+| `borderFocus`               | `focusIndicatorColour`               |
+| `borderBrand`               | `selectionBorder`                    |
+| `iconOnBrand`               | `buttonPrimaryIcon`                  |
+| `textOnBrand`               | `buttonPrimaryText`                  |
+| `feedbackSuccessBackground` | `alertSuccessBackground`             |
+| `feedbackSuccessBorder`     | `alertSuccessBorder`                 |
+| `feedbackSuccessIcon`       | `alertSuccessIcon`                   |
+| `feedbackSuccessText`       | `alertSuccessText`                   |
+| `feedbackWarningBackground` | `alertWarningBackground`             |
+| `feedbackWarningBorder`     | `alertWarningBorder`                 |
+| `feedbackWarningIcon`       | `alertWarningIcon`                   |
+| `feedbackWarningText`       | `alertWarningText`                   |
+| `feedbackErrorBackground`   | `alertErrorBackground`               |
+| `feedbackErrorBorder`       | `alertErrorBorder`                   |
+| `feedbackErrorIcon`         | `alertErrorIcon`                     |
+| `feedbackErrorText`         | `alertErrorText`                     |
+| `feedbackInfoBackground`    | `alertInfoBackground`                |
+| `feedbackInfoBorder`        | `alertInfoBorder`                    |
+| `feedbackInfoIcon`          | `alertInfoIcon`                      |
+| `feedbackInfoText`          | `alertInfoText`                      |
 
 `onBrand` and `textOnBrand` become one semantic token, `buttonPrimaryText`. In Flutter, read `colours.text.buttonPrimaryText`; the old `colours.core.onBrand` field is removed. The palette constructor’s `onBrand` argument is now `buttonPrimaryText`.
 
@@ -200,7 +201,7 @@ Checkboxes, radios, badges, progress indicators, sliders, input cursors, tab ind
 
 Custom `ActionColours` constructors must supply these additional component roles. The bundled example themes demonstrate complete constructors. `DievasCircularProgressStyle.onBrand` is renamed to `onPrimary` to describe its contrast against the selected palette.
 
-### Verification
+### Migration Verification
 
 The migration fixture freezes every semantic ARGB value from before the rename and assigns each split role its previous shared value. Tests check every declared colour token, independent dialog/menu overrides, and palette propagation to component fills and contrast colours.
 

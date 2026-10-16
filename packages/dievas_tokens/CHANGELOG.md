@@ -4,7 +4,7 @@
 
 Changes to the Dievas token package, newest first.
 
-## Unreleased
+## 1.0.1
 
 ### Breaking colour role names
 
@@ -18,7 +18,7 @@ Changes to the Dievas token package, newest first.
 
 - Add exact Moon colour primitives and hexadecimal alpha variants, backed by the recorded `moon_tokens` 0.0.6 reference.
 - Map neutral light/dark semantics to the Moon reference: primary and secondary text and icons, base and subtle backgrounds, default borders, and overlay. Input text follows primary text; inverse text follows the opposite theme’s primary foreground.
-- Change overlay alpha from `0x80` to `0x8F`. These semantic value changes alter rendered output and exceed the earlier documentation only patch scope.
+- Change overlay alpha from `0x80` to `0x8F`. These semantic value changes alter rendered output.
 - Keep existing brand palette, feedback, and component state mappings pending their own semantic migration. Full Moon parity is not yet established.
 - Retune the size primitives to the 4pt / 8pt grid: font size follows the Moon type scale (`xs` through `fs72`), radius uses lowercase role names with `r<px>` for larger stops, opacity uses `o<percent>` on 4% and 8% steps, and sizing extends to 256px.
 
@@ -39,8 +39,6 @@ Changes to the Dievas token package, newest first.
 - Add pixel value comments to the font weight, letter spacing, line height, and opacity primitives, and trim primitive docs to their shortest useful form.
 - Compress every semantic token comment to a three line maximum and remove em dashes and compound word hyphens.
 - Extend the naming convention check for the numeric `height`, `width`, and `R` size names.
-
-The package version remains 1.0.0 pending compatibility review and release selection.
 
 ## 1.0.0
 

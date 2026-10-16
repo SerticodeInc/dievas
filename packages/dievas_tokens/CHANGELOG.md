@@ -6,6 +6,14 @@ Changes to the Dievas token package, newest first.
 
 ## Unreleased
 
+### Breaking colour role names
+
+- Name colours by element, variant or state, and property: `pageBackground`, `buttonPrimaryHoveredBackground`, and `inputFocusedBorder`.
+- Replace ambiguous brand, background, surface, and action names; separate dialog, menu, tooltip, and other component backgrounds.
+- Preserve existing colour values and extend palette application to the new component roles.
+- Migrate Flutter themes, component consumers, examples, gallery labels, and tests together.
+- See the token package’s README colour naming migration section for the replacement table and custom-theme migration requirements.
+
 ### Changed
 
 - Add exact Moon colour primitives and hexadecimal alpha variants, backed by the recorded `moon_tokens` 0.0.6 reference.

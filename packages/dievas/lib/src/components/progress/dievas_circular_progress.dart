@@ -20,7 +20,7 @@ enum DievasCircularProgressStyle {
   primary,
 
   /// On-brand (inverted) stroke — use on filled brand surfaces.
-  onBrand,
+  onPrimary,
 }
 
 /// A circular spinner / progress ring.
@@ -55,7 +55,7 @@ class DievasCircularProgress extends StatelessWidget {
 
     final color = switch (style) {
       .primary => theme.colourPrimary,
-      .onBrand => theme.colourOnBrand,
+      .onPrimary => theme.colourOnBrand,
     };
 
     return SizedBox.square(

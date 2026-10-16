@@ -9,7 +9,7 @@ final class TextColours extends Equatable {
     required this.textTertiary,
     required this.textDisabled,
     required this.textInverse,
-    required this.textOnBrand,
+    required this.buttonPrimaryText,
   });
 
   /// Highest-contrast body text. Headlines, labels, primary copy.
@@ -28,7 +28,7 @@ final class TextColours extends Equatable {
   final Color textInverse;
 
   /// Text placed directly on a brand-coloured background.
-  final Color textOnBrand;
+  final Color buttonPrimaryText;
 
   TextColours copyWith({
     Color? textPrimary,
@@ -36,14 +36,14 @@ final class TextColours extends Equatable {
     Color? textTertiary,
     Color? textDisabled,
     Color? textInverse,
-    Color? textOnBrand,
+    Color? buttonPrimaryText,
   }) => TextColours(
     textPrimary: textPrimary ?? this.textPrimary,
     textSecondary: textSecondary ?? this.textSecondary,
     textTertiary: textTertiary ?? this.textTertiary,
     textDisabled: textDisabled ?? this.textDisabled,
     textInverse: textInverse ?? this.textInverse,
-    textOnBrand: textOnBrand ?? this.textOnBrand,
+    buttonPrimaryText: buttonPrimaryText ?? this.buttonPrimaryText,
   );
 
   static TextColours lerp(TextColours a, TextColours b, double t) => TextColours(
@@ -52,9 +52,9 @@ final class TextColours extends Equatable {
     textTertiary: Color.lerp(a.textTertiary, b.textTertiary, t)!,
     textDisabled: Color.lerp(a.textDisabled, b.textDisabled, t)!,
     textInverse: Color.lerp(a.textInverse, b.textInverse, t)!,
-    textOnBrand: Color.lerp(a.textOnBrand, b.textOnBrand, t)!,
+    buttonPrimaryText: Color.lerp(a.buttonPrimaryText, b.buttonPrimaryText, t)!,
   );
 
   @override
-  List<Object?> get props => [textPrimary, textSecondary, textTertiary, textDisabled, textInverse, textOnBrand];
+  List<Object?> get props => [textPrimary, textSecondary, textTertiary, textDisabled, textInverse, buttonPrimaryText];
 }

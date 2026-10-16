@@ -41,7 +41,7 @@ class _ElevationLevels extends StatelessWidget {
                   width: 96, // elevation card demo — gallery-only visual dimension
                   height: 64, // elevation card demo — gallery-only visual dimension
                   decoration: BoxDecoration(
-                    color: colours.background.bgElevated,
+                    color: colours.background.dialogBackground,
                     borderRadius: DievasTheme.borderOf(context).MD,
                     boxShadow: shadows,
                   ),
@@ -115,7 +115,7 @@ class _OpacityTokens extends StatelessWidget {
                       width: 80, // opacity chip demo — gallery-only visual dimension
                       height: 28, // opacity chip demo — gallery-only visual dimension
                       decoration: BoxDecoration(
-                        color: colours.action.actionPrimary,
+                        color: colours.action.buttonPrimaryBackground,
                         borderRadius: DievasTheme.borderOf(context).SM,
                       ),
                     ),

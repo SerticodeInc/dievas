@@ -14,12 +14,22 @@ import 'package:dievas_tokens/dievas_tokens.dart';
 
 const purple = DievasColourPrimitives.royalPurple;
 const foreground = DievasColourSemanticLight.textPrimary;
-const background = DievasColourSemanticDark.bgBase;
+const background = DievasColourSemanticDark.pageBackground;
 const padding = DievasSpacingSemantic.MD;
 const sectionGap = DievasSpacingSemantic.XL;
 ```
 
 Colours are integers in `0xAARRGGBB` format: alpha, red, green, then blue. Spacing, sizing, radius, and breakpoints use logical pixels. Primitive alpha suffixes contain exact hexadecimal bytes: `blackAlpha8F` has alpha `0x8F`, not 60%.
+
+## Colour role names
+
+Name component colours as **element → variant or state → property**. Use `pageBackground`, `cardBackground`, `buttonPrimaryBackground`, `buttonPrimaryHoveredBackground`, `inputFocusedBorder`, and `switchOnTrack` to identify their use directly.
+
+Dialogs, menus, bottom sheets, tooltips, drawers, and popovers have separate background tokens. Matching values do not make their purposes interchangeable. Each role can change independently through the Flutter theme.
+
+`primary` identifies the selected palette. It is not a component background. A secondary button is a button variant using that same palette; it does not imply an independent secondary identity colour.
+
+The [colour naming migration](#migrate-colour-names-to-explicit-component-roles) lists replacements for the former brand, background, surface, action, and feedback names. This is a breaking API change with unchanged colour values.
 
 ## Moon colour migration
 
@@ -31,10 +41,10 @@ Primitives reproduce those recorded colours. The following semantic mappings now
 | --- | --- | --- | --- |
 | `textPrimary`, `iconPrimary`, `inputText` | Primary foreground | `black` | `white` |
 | `textSecondary`, `iconSecondary` | Secondary foreground | `steelGrey` | `steelGreyLight` |
-| `bgBase` | `goku` | `white` | `black` |
-| `bgSubtle` | `gohan` | `nearWhite` | `charcoalDeep` |
-| `borderDefault` | `beerus` | `coolGreyLight` | `charcoal` |
-| `bgOverlay` | `zeno` | `blackAlpha8F` | `blackAlpha8F` |
+| `pageBackground` | `goku` | `white` | `black` |
+| `cardBackground` | `gohan` | `nearWhite` | `charcoalDeep` |
+| `dividerColour` | `beerus` | `coolGreyLight` | `charcoal` |
+| `modalBarrierBackground` | `zeno` | `blackAlpha8F` | `blackAlpha8F` |
 | `staticWhite` | `goten` | `white` | `white` |
 | `staticBlack` | `popo` | `black` | `black` |
 
@@ -44,15 +54,15 @@ These neutral changes alter rendered colours compared with 1.0.0. They are pendi
 
 ## Brand palettes
 
-`DievasBrandPalette` contains an 11-tint ramp (`s50` through `s950`) and an `onBrand` contrast colour. Its methods return `DievasBrandRoleColours` records for light or dark surfaces.
+`DievasBrandPalette` contains an 11-tint ramp (`s50` through `s950`) and a `buttonPrimaryText` contrast colour. Its methods return `DievasBrandRoleColours` records for light or dark surfaces.
 
 Select a palette and read its resolved roles:
 
 ```dart
 final lightBrand = DievasBrandPalettes.sky.rolesForLight();
 final darkBrand = DievasBrandPalettes.sky.rolesForDark();
-final primaryAction = lightBrand.actionPrimary;
-final foregroundOnBrand = darkBrand.onBrand;
+final primaryAction = lightBrand.buttonPrimaryBackground;
+final foregroundOnBrand = darkBrand.buttonPrimaryText;
 ```
 
 The default `indigo` palette matches the brand roles in the built-in semantic classes. Alternatives are `sky`, `green`, `violet`, `red`, `amber`, `ocean`, `forest`, `berry`, `dusk`, and `terracotta`. `DievasBrandPalettes.all` indexes them by name.
@@ -110,6 +120,89 @@ dart run packages/dievas_tokens/example/dievas_tokens_example.dart
 ```
 
 You can also run `dart test` inside the package. Tests cover primitive reference values, migrated neutral semantic roles, palette consistency, and size naming.
+
+## Migrate colour names to explicit component roles
+
+Colour roles now name the element, its variant or state, and the painted property. This API migration preserves the values from commit `94ea8cc`; it does not advance Moon colour parity or change sizing, spacing, radius, or opacity.
+
+### Rename existing roles
+
+Use these names in semantic classes, theme fields, and palette role records where exposed. `primary` remains palette identity; use component roles when painting controls.
+
+| Previous name | Replacement |
+| --- | --- |
+| `brand` | `primary` |
+| `brandSubtle` | `badgePrimaryTintedBackground` |
+| `onBrand` | `buttonPrimaryText` |
+| `bgBase` | `pageBackground` |
+| `bgSubtle` | `cardBackground` |
+| `bgElevated` | `dialogBackground` |
+| `bgOverlay` | `modalBarrierBackground` |
+| `surfaceCanvas` | `canvasBackground` |
+| `surfaceCode` | `codeBlockBackground` |
+| `surfaceSidebar` | `sidebarBackground` |
+| `surfaceTableStriped` | `tableRowAlternateBackground` |
+| `actionPrimary` | `buttonPrimaryBackground` |
+| `actionPrimaryHover` | `buttonPrimaryHoveredBackground` |
+| `actionPrimaryActive` | `buttonPrimaryPressedBackground` |
+| `actionPrimaryDisabled` | `buttonPrimaryDisabledBackground` |
+| `actionSecondary` | `buttonSecondaryBackground` |
+| `actionSecondaryHover` | `buttonSecondaryHoveredBackground` |
+| `actionError` | `buttonDestructiveBackground` |
+| `actionErrorHover` | `buttonDestructiveHoveredBackground` |
+| `actionSuccess` | `buttonSuccessBackground` |
+| `inputBg` | `inputBackground` |
+| `inputBorderFocus` | `inputFocusedBorder` |
+| `inputBorderError` | `inputErrorBorder` |
+| `inputBorderWarning` | `inputWarningBorder` |
+| `inputPlaceholder` | `inputPlaceholderText` |
+| `switchTrackOn` | `switchOnTrack` |
+| `switchTrackOff` | `switchOffTrack` |
+| `switchThumbOn` | `switchOnThumb` |
+| `switchThumbOff` | `switchOffThumb` |
+| `borderDefault` | `dividerColour` |
+| `borderStrong` | `inputActiveBorder` |
+| `borderDisabled` | `inputDisabledBorder` |
+| `borderFocus` | `focusIndicatorColour` |
+| `borderBrand` | `selectionBorder` |
+| `iconOnBrand` | `buttonPrimaryIcon` |
+| `textOnBrand` | `buttonPrimaryText` |
+| `feedbackSuccessBackground` | `alertSuccessBackground` |
+| `feedbackSuccessBorder` | `alertSuccessBorder` |
+| `feedbackSuccessIcon` | `alertSuccessIcon` |
+| `feedbackSuccessText` | `alertSuccessText` |
+| `feedbackWarningBackground` | `alertWarningBackground` |
+| `feedbackWarningBorder` | `alertWarningBorder` |
+| `feedbackWarningIcon` | `alertWarningIcon` |
+| `feedbackWarningText` | `alertWarningText` |
+| `feedbackErrorBackground` | `alertErrorBackground` |
+| `feedbackErrorBorder` | `alertErrorBorder` |
+| `feedbackErrorIcon` | `alertErrorIcon` |
+| `feedbackErrorText` | `alertErrorText` |
+| `feedbackInfoBackground` | `alertInfoBackground` |
+| `feedbackInfoBorder` | `alertInfoBorder` |
+| `feedbackInfoIcon` | `alertInfoIcon` |
+| `feedbackInfoText` | `alertInfoText` |
+
+`onBrand` and `textOnBrand` become one semantic token, `buttonPrimaryText`. In Flutter, read `colours.text.buttonPrimaryText`; the old `colours.core.onBrand` field is removed. The palette constructor’s `onBrand` argument is now `buttonPrimaryText`.
+
+### Split shared backgrounds by element
+
+The old `bgElevated` value initializes `dialogBackground`, `bottomSheetBackground`, `tooltipBackground`, `drawerBackground`, `menuBackground`, `popoverBackground`, `snackbarBackground`, `tagBackground`, `badgeNeutralFilledBackground`, and `iconButtonFocusedBackground`.
+
+The old `bgSubtle` value initializes `cardBackground`, `listItemSelectedBackground`, `badgeNeutralTintedBackground`, `iconButtonBackground`, `progressTrack`, and `segmentedControlBackground`.
+
+If you construct `BackgroundColours` directly, supply each required field. If you previously overrode a shared colour through `copyWith`, override each affected element explicitly to retain that custom appearance. Changing a dialog background now leaves menus and tooltips unchanged.
+
+### Split interactive colours by element
+
+Checkboxes, radios, badges, progress indicators, sliders, input cursors, tab indicators, and segmented controls have explicit roles instead of reading a button background. Their initial values match the former shared action roles. Palette application updates the new palette-dependent roles together.
+
+Custom `ActionColours` constructors must supply these additional component roles. The bundled example themes demonstrate complete constructors. `DievasCircularProgressStyle.onBrand` is renamed to `onPrimary` to describe its contrast against the selected palette.
+
+### Verification
+
+The migration fixture freezes every semantic ARGB value from before the rename and assigns each split role its previous shared value. Tests check every declared colour token, independent dialog/menu overrides, and palette propagation to component fills and contrast colours.
 
 ## License
 

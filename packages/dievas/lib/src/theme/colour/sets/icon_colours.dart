@@ -7,7 +7,7 @@ final class IconColours extends Equatable {
     required this.iconPrimary,
     required this.iconSecondary,
     required this.iconDisabled,
-    required this.iconOnBrand,
+    required this.buttonPrimaryIcon,
   });
 
   /// Default icon fill on the current surface.
@@ -20,23 +20,23 @@ final class IconColours extends Equatable {
   final Color iconDisabled;
 
   /// Icons placed on a brand-coloured surface.
-  final Color iconOnBrand;
+  final Color buttonPrimaryIcon;
 
-  IconColours copyWith({Color? iconPrimary, Color? iconSecondary, Color? iconDisabled, Color? iconOnBrand}) =>
+  IconColours copyWith({Color? iconPrimary, Color? iconSecondary, Color? iconDisabled, Color? buttonPrimaryIcon}) =>
       IconColours(
         iconPrimary: iconPrimary ?? this.iconPrimary,
         iconSecondary: iconSecondary ?? this.iconSecondary,
         iconDisabled: iconDisabled ?? this.iconDisabled,
-        iconOnBrand: iconOnBrand ?? this.iconOnBrand,
+        buttonPrimaryIcon: buttonPrimaryIcon ?? this.buttonPrimaryIcon,
       );
 
   static IconColours lerp(IconColours a, IconColours b, double t) => IconColours(
     iconPrimary: Color.lerp(a.iconPrimary, b.iconPrimary, t)!,
     iconSecondary: Color.lerp(a.iconSecondary, b.iconSecondary, t)!,
     iconDisabled: Color.lerp(a.iconDisabled, b.iconDisabled, t)!,
-    iconOnBrand: Color.lerp(a.iconOnBrand, b.iconOnBrand, t)!,
+    buttonPrimaryIcon: Color.lerp(a.buttonPrimaryIcon, b.buttonPrimaryIcon, t)!,
   );
 
   @override
-  List<Object?> get props => [iconPrimary, iconSecondary, iconDisabled, iconOnBrand];
+  List<Object?> get props => [iconPrimary, iconSecondary, iconDisabled, buttonPrimaryIcon];
 }

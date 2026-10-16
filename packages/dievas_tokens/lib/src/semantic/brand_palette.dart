@@ -8,18 +8,33 @@ import 'package:dievas_tokens/src/primitives/colour_primitives.dart';
 /// brightness. Values are ARGB ints; the `dievas` Flutter package wraps them
 /// in `Color` objects.
 typedef DievasBrandRoleColours = ({
-  int brand,
-  int brandSubtle,
-  int onBrand,
-  int actionPrimary,
-  int actionPrimaryHover,
-  int actionPrimaryActive,
-  int actionSecondary,
-  int actionSecondaryHover,
-  int borderBrand,
-  int borderFocus,
-  int inputBorderFocus,
-  int switchTrackOn,
+  int badgePrimaryBackground,
+  int badgePrimaryTintedText,
+  int checkboxCheckedBackground,
+  int radioSelectedBackground,
+  int progressIndicator,
+  int sliderActiveTrack,
+  int inputCursor,
+  int segmentedControlSelectedBackground,
+  int tabSelectedIndicator,
+  int badgePrimaryText,
+  int checkboxCheckmark,
+  int radioDot,
+  int progressOnPrimaryIndicator,
+  int segmentedControlSelectedText,
+
+  int primary,
+  int badgePrimaryTintedBackground,
+  int buttonPrimaryText,
+  int buttonPrimaryBackground,
+  int buttonPrimaryHoveredBackground,
+  int buttonPrimaryPressedBackground,
+  int buttonSecondaryBackground,
+  int buttonSecondaryHoveredBackground,
+  int selectionBorder,
+  int focusIndicatorColour,
+  int inputFocusedBorder,
+  int switchOnTrack,
 });
 
 /// A selectable brand palette: the full tint ramp for one colour family. Light
@@ -39,7 +54,7 @@ final class DievasBrandPalette {
     required this.s800,
     required this.s900,
     required this.s950,
-    this.onBrand = DievasColourPrimitives.white,
+    this.buttonPrimaryText = DievasColourPrimitives.white,
   });
 
   /// Human readable palette name (matches the source colour family).
@@ -58,38 +73,68 @@ final class DievasBrandPalette {
   final int s950;
 
   /// Text / icon colour placed on top of a [s500] based brand surface.
-  final int onBrand;
+  final int buttonPrimaryText;
 
   /// Brand derived roles for light surfaces.
   DievasBrandRoleColours rolesForLight() => (
-    brand: s500,
-    brandSubtle: s200,
-    onBrand: onBrand,
-    actionPrimary: s500,
-    actionPrimaryHover: s600,
-    actionPrimaryActive: s700,
-    actionSecondary: s50,
-    actionSecondaryHover: s100,
-    borderBrand: s500,
-    borderFocus: s500,
-    inputBorderFocus: s500,
-    switchTrackOn: s500,
+    badgePrimaryBackground: s500,
+    badgePrimaryTintedText: s500,
+    checkboxCheckedBackground: s500,
+    radioSelectedBackground: s500,
+    progressIndicator: s500,
+    sliderActiveTrack: s500,
+    inputCursor: s500,
+    segmentedControlSelectedBackground: s500,
+    tabSelectedIndicator: s500,
+    badgePrimaryText: buttonPrimaryText,
+    checkboxCheckmark: buttonPrimaryText,
+    radioDot: buttonPrimaryText,
+    progressOnPrimaryIndicator: buttonPrimaryText,
+    segmentedControlSelectedText: buttonPrimaryText,
+
+    primary: s500,
+    badgePrimaryTintedBackground: s200,
+    buttonPrimaryText: buttonPrimaryText,
+    buttonPrimaryBackground: s500,
+    buttonPrimaryHoveredBackground: s600,
+    buttonPrimaryPressedBackground: s700,
+    buttonSecondaryBackground: s50,
+    buttonSecondaryHoveredBackground: s100,
+    selectionBorder: s500,
+    focusIndicatorColour: s500,
+    inputFocusedBorder: s500,
+    switchOnTrack: s500,
   );
 
   /// Brand derived roles for dark surfaces.
   DievasBrandRoleColours rolesForDark() => (
-    brand: s400,
-    brandSubtle: s950,
-    onBrand: onBrand,
-    actionPrimary: s500,
-    actionPrimaryHover: s400,
-    actionPrimaryActive: s300,
-    actionSecondary: s950,
-    actionSecondaryHover: s900,
-    borderBrand: s400,
-    borderFocus: s400,
-    inputBorderFocus: s400,
-    switchTrackOn: s500,
+    badgePrimaryBackground: s500,
+    badgePrimaryTintedText: s500,
+    checkboxCheckedBackground: s500,
+    radioSelectedBackground: s500,
+    progressIndicator: s500,
+    sliderActiveTrack: s500,
+    inputCursor: s500,
+    segmentedControlSelectedBackground: s500,
+    tabSelectedIndicator: s500,
+    badgePrimaryText: buttonPrimaryText,
+    checkboxCheckmark: buttonPrimaryText,
+    radioDot: buttonPrimaryText,
+    progressOnPrimaryIndicator: buttonPrimaryText,
+    segmentedControlSelectedText: buttonPrimaryText,
+
+    primary: s400,
+    badgePrimaryTintedBackground: s950,
+    buttonPrimaryText: buttonPrimaryText,
+    buttonPrimaryBackground: s500,
+    buttonPrimaryHoveredBackground: s400,
+    buttonPrimaryPressedBackground: s300,
+    buttonSecondaryBackground: s950,
+    buttonSecondaryHoveredBackground: s900,
+    selectionBorder: s400,
+    focusIndicatorColour: s400,
+    inputFocusedBorder: s400,
+    switchOnTrack: s500,
   );
 }
 
@@ -187,7 +232,7 @@ abstract final class DievasBrandPalettes {
     s800: DievasColourPrimitives.amber800,
     s900: DievasColourPrimitives.amber900,
     s950: DievasColourPrimitives.amber950,
-    onBrand: DievasColourPrimitives.slate950,
+    buttonPrimaryText: DievasColourPrimitives.slate950,
   );
 
   static const DievasBrandPalette ocean = DievasBrandPalette(

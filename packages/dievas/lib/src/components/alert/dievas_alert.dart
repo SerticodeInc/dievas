@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dievas/l10n/dievas_localizations.dart';
 import 'package:dievas/src/extensions/dievas_theme_context_extension.dart';
-import 'package:dievas/src/theme/color/sets/feedback_colours.dart';
+import 'package:dievas/src/theme/colour/sets/feedback_colours.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// Semantic tone of a [DievasAlert].

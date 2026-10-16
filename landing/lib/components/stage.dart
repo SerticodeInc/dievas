@@ -137,7 +137,7 @@ class Stage extends StatelessComponent {
     [
       div(classes: 'token-rows', [
         _tokenFamily('colour', [
-          _aliasChip('brand', 'context.colours.core.brand', tokenRgba(DievasColourSemanticLight.brand), 'indigo500'),
+          _aliasChip('brand', 'context.colours.core.brand', tokenRgba(DievasColourSemanticLight.primary), 'indigo500'),
           _aliasChip(
             'textPrimary',
             'context.colours.text.textPrimary',
@@ -147,7 +147,7 @@ class Stage extends StatelessComponent {
           _aliasChip(
             'bgBase',
             'context.colours.background.bgBase',
-            tokenRgba(DievasColourSemanticLight.bgBase),
+            tokenRgba(DievasColourSemanticLight.pageBackground),
             'slate50',
           ),
         ]),

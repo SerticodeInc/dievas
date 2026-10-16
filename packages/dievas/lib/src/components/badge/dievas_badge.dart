@@ -1,8 +1,8 @@
-import 'package:dievas/src/theme/color/dievas_colour_theme_data.dart';
+import 'package:dievas/src/theme/colour/dievas_colour_theme_data.dart';
 import 'package:dievas/src/theme/component/badge/dievas_badge_theme_data.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dievas/src/theme/color/sets/feedback_colours.dart';
+import 'package:dievas/src/theme/colour/sets/feedback_colours.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// Visual style of [DievasBadge].
@@ -87,43 +87,43 @@ class DievasBadge extends StatelessWidget {
     return switch ((style, tone)) {
       // filled × neutral
       (.filled, .neutral) => (
-        background: badgeColours.bgElevated,
+        background: badgeColours.badgeNeutralFilledBackground,
         border: badgeColours.transparent,
         foreground: badgeColours.textPrimary,
       ),
       // filled × primary
       (.filled, .primary) => (
-        background: badgeColours.actionPrimary,
+        background: badgeColours.badgePrimaryBackground,
         border: badgeColours.transparent,
-        foreground: badgeColours.onBrand,
+        foreground: badgeColours.badgePrimaryText,
       ),
       // filled × feedback tones
       (.filled, _) => (background: feedback.background, border: badgeColours.transparent, foreground: feedback.text),
       // tinted × neutral
       (.tinted, .neutral) => (
-        background: badgeColours.bgSubtle,
+        background: badgeColours.badgeNeutralTintedBackground,
         border: badgeColours.transparent,
         foreground: badgeColours.textSecondary,
       ),
       // tinted × primary
       (.tinted, .primary) => (
-        background: badgeColours.brandSubtle,
+        background: badgeColours.badgePrimaryTintedBackground,
         border: badgeColours.transparent,
-        foreground: badgeColours.actionPrimary,
+        foreground: badgeColours.badgePrimaryTintedText,
       ),
       // tinted × feedback tones
       (.tinted, _) => (background: feedback.background, border: badgeColours.transparent, foreground: feedback.icon),
       // outlined × neutral
       (.outlined, .neutral) => (
         background: badgeColours.transparent,
-        border: badgeColours.borderDefault,
+        border: badgeColours.dividerColour,
         foreground: badgeColours.textSecondary,
       ),
       // outlined × primary
       (.outlined, .primary) => (
         background: badgeColours.transparent,
-        border: badgeColours.actionPrimary,
-        foreground: badgeColours.actionPrimary,
+        border: badgeColours.badgePrimaryBackground,
+        foreground: badgeColours.badgePrimaryBackground,
       ),
       // outlined × feedback tones
       (.outlined, _) => (background: badgeColours.transparent, border: feedback.border, foreground: feedback.icon),
@@ -169,28 +169,30 @@ typedef _BadgeAppearance = ({Color background, Color border, Color foreground});
 // deep chaining inside the switch expression.
 final class _BadgeColours {
   _BadgeColours(DievasColourThemeData c)
-    : actionPrimary = c.action.actionPrimary,
-      onBrand = c.core.onBrand,
-      brandSubtle = c.core.brandSubtle,
-      bgSubtle = c.background.bgSubtle,
-      bgElevated = c.background.bgElevated,
+    : badgePrimaryBackground = c.action.badgePrimaryBackground,
+      badgePrimaryTintedText = c.action.badgePrimaryTintedText,
+      badgePrimaryText = c.action.badgePrimaryText,
+      badgePrimaryTintedBackground = c.core.badgePrimaryTintedBackground,
+      badgeNeutralTintedBackground = c.background.badgeNeutralTintedBackground,
+      badgeNeutralFilledBackground = c.background.badgeNeutralFilledBackground,
       textPrimary = c.text.textPrimary,
       textSecondary = c.text.textSecondary,
-      borderDefault = c.border.borderDefault,
+      dividerColour = c.border.dividerColour,
       feedbackSuccess = c.feedback.feedbackSuccess,
       feedbackWarning = c.feedback.feedbackWarning,
       feedbackError = c.feedback.feedbackError,
       feedbackInfo = c.feedback.feedbackInfo,
       transparent = c.staticColours.staticTransparent;
 
-  final Color actionPrimary;
-  final Color onBrand;
-  final Color brandSubtle;
-  final Color bgSubtle;
-  final Color bgElevated;
+  final Color badgePrimaryBackground;
+  final Color badgePrimaryTintedText;
+  final Color badgePrimaryText;
+  final Color badgePrimaryTintedBackground;
+  final Color badgeNeutralTintedBackground;
+  final Color badgeNeutralFilledBackground;
   final Color textPrimary;
   final Color textSecondary;
-  final Color borderDefault;
+  final Color dividerColour;
   final FeedbackColour feedbackSuccess;
   final FeedbackColour feedbackWarning;
   final FeedbackColour feedbackError;

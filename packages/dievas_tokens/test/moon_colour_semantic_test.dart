@@ -11,10 +11,10 @@ const _referenceRoles = <String, String>{
   'textSecondary': 'textSecondary',
   'iconPrimary': 'iconPrimary',
   'iconSecondary': 'iconSecondary',
-  'bgBase': 'goku',
-  'bgSubtle': 'gohan',
-  'borderDefault': 'beerus',
-  'bgOverlay': 'zeno',
+  'pageBackground': 'goku',
+  'cardBackground': 'gohan',
+  'dividerColour': 'beerus',
+  'modalBarrierBackground': 'zeno',
   'staticWhite': 'goten',
   'staticBlack': 'popo',
   'inputText': 'textPrimary',
@@ -25,10 +25,10 @@ const _light = <String, int>{
   'textSecondary': DievasColourSemanticLight.textSecondary,
   'iconPrimary': DievasColourSemanticLight.iconPrimary,
   'iconSecondary': DievasColourSemanticLight.iconSecondary,
-  'bgBase': DievasColourSemanticLight.bgBase,
-  'bgSubtle': DievasColourSemanticLight.bgSubtle,
-  'borderDefault': DievasColourSemanticLight.borderDefault,
-  'bgOverlay': DievasColourSemanticLight.bgOverlay,
+  'pageBackground': DievasColourSemanticLight.pageBackground,
+  'cardBackground': DievasColourSemanticLight.cardBackground,
+  'dividerColour': DievasColourSemanticLight.dividerColour,
+  'modalBarrierBackground': DievasColourSemanticLight.modalBarrierBackground,
   'staticWhite': DievasColourSemanticLight.staticWhite,
   'staticBlack': DievasColourSemanticLight.staticBlack,
   'inputText': DievasColourSemanticLight.inputText,
@@ -39,30 +39,22 @@ const _dark = <String, int>{
   'textSecondary': DievasColourSemanticDark.textSecondary,
   'iconPrimary': DievasColourSemanticDark.iconPrimary,
   'iconSecondary': DievasColourSemanticDark.iconSecondary,
-  'bgBase': DievasColourSemanticDark.bgBase,
-  'bgSubtle': DievasColourSemanticDark.bgSubtle,
-  'borderDefault': DievasColourSemanticDark.borderDefault,
-  'bgOverlay': DievasColourSemanticDark.bgOverlay,
+  'pageBackground': DievasColourSemanticDark.pageBackground,
+  'cardBackground': DievasColourSemanticDark.cardBackground,
+  'dividerColour': DievasColourSemanticDark.dividerColour,
+  'modalBarrierBackground': DievasColourSemanticDark.modalBarrierBackground,
   'staticWhite': DievasColourSemanticDark.staticWhite,
   'staticBlack': DievasColourSemanticDark.staticBlack,
   'inputText': DievasColourSemanticDark.inputText,
 };
 
 Future<void> main() async {
-  final packageUri = switch (await Isolate.resolvePackageUri(
-    Uri.parse('package:dievas_tokens/dievas_tokens.dart'),
-  )) {
+  final packageUri = switch (await Isolate.resolvePackageUri(Uri.parse('package:dievas_tokens/dievas_tokens.dart'))) {
     final Uri uri => uri,
     null => throw StateError('Cannot resolve dievas_tokens package.'),
   };
   final reference =
-      jsonDecode(
-            await File.fromUri(
-              packageUri.resolve(
-                '../test/fixtures/moon_colours_reference.json',
-              ),
-            ).readAsString(),
-          )
+      jsonDecode(await File.fromUri(packageUri.resolve('../test/fixtures/moon_colours_reference.json')).readAsString())
           as Map<String, dynamic>;
   final themes = reference['default_themes'] as Map<String, dynamic>;
 
@@ -81,13 +73,7 @@ Future<void> main() async {
   }
 
   test('inverse text uses the opposite theme primary foreground', () {
-    expect(
-      DievasColourSemanticLight.textInverse,
-      DievasColourSemanticDark.textPrimary,
-    );
-    expect(
-      DievasColourSemanticDark.textInverse,
-      DievasColourSemanticLight.textPrimary,
-    );
+    expect(DievasColourSemanticLight.textInverse, DievasColourSemanticDark.textPrimary);
+    expect(DievasColourSemanticDark.textInverse, DievasColourSemanticLight.textPrimary);
   });
 }

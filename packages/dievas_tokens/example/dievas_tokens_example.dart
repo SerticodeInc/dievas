@@ -8,17 +8,17 @@ void main() {
   print('Font weight: ${DievasFontWeightPrimitives.medium}');
 
   // Semantics — light scheme
-  print('Light background: ${DievasColourSemanticLight.bgBase}');
-  print('Light primary: ${DievasColourSemanticLight.actionPrimary}');
+  print('Light background: ${DievasColourSemanticLight.pageBackground}');
+  print('Light primary: ${DievasColourSemanticLight.buttonPrimaryBackground}');
 
   // Semantics — dark scheme
-  print('Dark background: ${DievasColourSemanticDark.bgBase}');
-  print('Dark primary: ${DievasColourSemanticDark.actionPrimary}');
+  print('Dark background: ${DievasColourSemanticDark.pageBackground}');
+  print('Dark primary: ${DievasColourSemanticDark.buttonPrimaryBackground}');
 
   // Spacing
   print('Spacing MD: ${DievasSpacingSemantic.MD}');
   print('Spacing XL: ${DievasSpacingSemantic.XL}');
-  final brand = DievasBrandPalettes.sky.rolesForLight();
-  print('Selected brand: ${brand.brand}');
-  print('Text on brand: ${brand.onBrand}');
+  final primary = DievasBrandPalettes.sky.rolesForLight();
+  print('Selected primary: ${primary.primary}');
+  print('Text on primary: ${primary.buttonPrimaryText}');
 }

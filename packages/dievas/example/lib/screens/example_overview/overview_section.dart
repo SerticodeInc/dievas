@@ -16,8 +16,8 @@ class _SectionCard extends StatelessWidget {
       width: .infinity,
       padding: .all(spacing.LG),
       decoration: BoxDecoration(
-        color: colours.background.bgSubtle,
-        border: .all(color: colours.border.borderDefault),
+        color: colours.background.cardBackground,
+        border: .all(color: colours.border.dividerColour),
         borderRadius: context.border.LG,
       ),
       child: Column(

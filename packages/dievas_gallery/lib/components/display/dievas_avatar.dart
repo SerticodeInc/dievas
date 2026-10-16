@@ -48,7 +48,7 @@ class _Playground extends StatelessWidget {
         ? context.knobs.color(label: 'Placeholder', initialValue: avatarTheme.placeholderColour)
         : null;
     final border = customColours
-        ? context.knobs.color(label: 'Border', initialValue: colours.border.borderDefault)
+        ? context.knobs.color(label: 'Border', initialValue: colours.border.dividerColour)
         : null;
 
     return Center(

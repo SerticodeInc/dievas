@@ -84,7 +84,7 @@ class DievasBottomSheet extends StatelessWidget {
               width: theme.handleWidth,
               height: theme.handleHeight,
               decoration: BoxDecoration(
-                color: DievasTheme.coloursOf(context).border.borderDefault,
+                color: DievasTheme.coloursOf(context).border.dividerColour,
                 borderRadius: theme.handleRadius,
               ),
             ),

@@ -179,8 +179,8 @@ base class DievasGlobalThemeData implements DievasThemeData {
 
   static ThemeData _buildMaterial(DievasColourThemeData colours, DievasTypographyThemeData typography) {
     final brightness = colours.brightness;
-    final seedColour = colours.action.actionPrimary;
-    final scaffoldBg = colours.background.bgBase;
+    final seedColour = colours.action.buttonPrimaryBackground;
+    final scaffoldBg = colours.background.pageBackground;
     final textColour = colours.text.textPrimary;
     final baseFont = typography.bodyMD.fontFamily ?? DievasFontFamilyPrimitives.sans;
     final displayFont = typography.displaySM.fontFamily ?? DievasFontFamilyPrimitives.sansExtended;

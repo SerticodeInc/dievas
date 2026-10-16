@@ -27,37 +27,37 @@ void main() {
   group('applyBrandPalette boundary', () {
     final green = applyBrandPalette(lightColours, DievasBrandPalettes.green);
 
-    test('brand-derived roles follow the selected palette', () {
-      expect(green.core.brand, Color(DievasColourPrimitives.green500));
-      expect(green.core.brandSubtle, Color(DievasColourPrimitives.green200));
-      expect(green.action.actionPrimary, Color(DievasColourPrimitives.green500));
-      expect(green.action.actionPrimaryHover, Color(DievasColourPrimitives.green600));
-      expect(green.action.actionPrimaryActive, Color(DievasColourPrimitives.green700));
-      expect(green.action.actionSecondary, Color(DievasColourPrimitives.green50));
-      expect(green.action.actionSecondaryHover, Color(DievasColourPrimitives.green100));
-      expect(green.border.borderBrand, Color(DievasColourPrimitives.green500));
-      expect(green.border.borderFocus, Color(DievasColourPrimitives.green500));
-      expect(green.input.inputBorderFocus, Color(DievasColourPrimitives.green500));
-      expect(green.switchColours.switchTrackOn, Color(DievasColourPrimitives.green500));
+    test('primary-derived roles follow the selected palette', () {
+      expect(green.core.primary, Color(DievasColourPrimitives.green500));
+      expect(green.core.badgePrimaryTintedBackground, Color(DievasColourPrimitives.green200));
+      expect(green.action.buttonPrimaryBackground, Color(DievasColourPrimitives.green500));
+      expect(green.action.buttonPrimaryHoveredBackground, Color(DievasColourPrimitives.green600));
+      expect(green.action.buttonPrimaryPressedBackground, Color(DievasColourPrimitives.green700));
+      expect(green.action.buttonSecondaryBackground, Color(DievasColourPrimitives.green50));
+      expect(green.action.buttonSecondaryHoveredBackground, Color(DievasColourPrimitives.green100));
+      expect(green.border.selectionBorder, Color(DievasColourPrimitives.green500));
+      expect(green.border.focusIndicatorColour, Color(DievasColourPrimitives.green500));
+      expect(green.input.inputFocusedBorder, Color(DievasColourPrimitives.green500));
+      expect(green.switchColours.switchOnTrack, Color(DievasColourPrimitives.green500));
     });
 
     test('neutral and semantic roles are untouched', () {
       expect(green.text.textPrimary, lightColours.text.textPrimary);
-      expect(green.background.bgBase, lightColours.background.bgBase);
+      expect(green.background.pageBackground, lightColours.background.pageBackground);
       expect(green.feedback.feedbackError, lightColours.feedback.feedbackError);
       expect(green.staticColours.staticBlack, lightColours.staticColours.staticBlack);
-      expect(green.action.actionError, lightColours.action.actionError);
-      expect(green.action.actionPrimaryDisabled, lightColours.action.actionPrimaryDisabled);
+      expect(green.action.buttonDestructiveBackground, lightColours.action.buttonDestructiveBackground);
+      expect(green.action.buttonPrimaryDisabledBackground, lightColours.action.buttonPrimaryDisabledBackground);
       expect(green.brightness, lightColours.brightness);
     });
 
-    test('on-brand contrast roles follow the palette', () {
-      expect(green.text.textOnBrand, Color(DievasColourPrimitives.white));
-      expect(green.icon.iconOnBrand, Color(DievasColourPrimitives.white));
+    test('on-primary contrast roles follow the palette', () {
+      expect(green.text.buttonPrimaryText, Color(DievasColourPrimitives.white));
+      expect(green.icon.buttonPrimaryIcon, Color(DievasColourPrimitives.white));
 
       final amber = applyBrandPalette(lightColours, DievasBrandPalettes.amber);
-      expect(amber.core.onBrand, Color(DievasColourPrimitives.slate950));
-      expect(amber.text.textOnBrand, Color(DievasColourPrimitives.slate950));
+      expect(amber.text.buttonPrimaryText, Color(DievasColourPrimitives.slate950));
+      expect(amber.text.buttonPrimaryText, Color(DievasColourPrimitives.slate950));
     });
   });
 
@@ -69,7 +69,7 @@ void main() {
 
     test('a palette re-skins the resolved theme colours', () {
       final theme = DievasGlobalThemeData(colours: lightColours, brandPalette: DievasBrandPalettes.green);
-      expect(theme.colours.core.brand, Color(DievasColourPrimitives.green500));
+      expect(theme.colours.core.primary, Color(DievasColourPrimitives.green500));
       expect(theme.colours.text.textPrimary, lightColours.text.textPrimary);
     });
   });

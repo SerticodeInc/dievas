@@ -144,7 +144,7 @@ class _AccordionCardState extends State<_AccordionCard> with SingleTickerProvide
     final iconColour = widget.item.disabled ? colours.icon.iconDisabled : colours.icon.iconSecondary;
 
     return DecoratedBox(
-      decoration: BoxDecoration(color: colours.background.bgSubtle, borderRadius: theme.borderRadius),
+      decoration: BoxDecoration(color: colours.background.cardBackground, borderRadius: theme.borderRadius),
       child: ClipRRect(
         borderRadius: theme.borderRadius,
         child: Column(
@@ -180,7 +180,7 @@ class _AccordionCardState extends State<_AccordionCard> with SingleTickerProvide
                 true => Column(
                   mainAxisSize: .min,
                   children: [
-                    Divider(height: 1, thickness: theme.borderWidth, color: colours.border.borderDefault),
+                    Divider(height: 1, thickness: theme.borderWidth, color: colours.border.dividerColour),
                     Padding(
                       padding: theme.contentPadding,
                       child: DefaultTextStyle(style: theme.contentStyle, child: widget.item.content),

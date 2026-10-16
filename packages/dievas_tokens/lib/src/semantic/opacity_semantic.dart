@@ -19,8 +19,8 @@ abstract final class DievasOpacitySemantic {
   /// 16% — pressed / active surface tint.
   static const double pressedGhost = DievasOpacityPrimitives.o16;
 
-  /// 10% — focus ring fill (keyboard focus highlight).
-  static const double focusRing = DievasOpacityPrimitives.o10;
+  /// 12% — focus ring fill (keyboard focus highlight).
+  static const double focusRing = DievasOpacityPrimitives.o12;
 
   /// 56% — modal / bottom sheet scrim overlay.
   static const double overlay = DievasOpacityPrimitives.o56;

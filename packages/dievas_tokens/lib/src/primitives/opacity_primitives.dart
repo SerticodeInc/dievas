@@ -5,20 +5,14 @@ abstract final class DievasOpacityPrimitives {
   /// 0%.
   static const double o0 = 0.00;
 
-  /// 5%.
-  static const double o5 = 0.05;
+  /// 4%.
+  static const double o4 = 0.04;
 
   /// 8%.
   static const double o8 = 0.08;
 
-  /// 10%.
-  static const double o10 = 0.10;
-
-  /// 13%.
-  static const double o13 = 0.13;
-
-  /// 15%.
-  static const double o15 = 0.15;
+  /// 12%.
+  static const double o12 = 0.12;
 
   /// 16%.
   static const double o16 = 0.16;
@@ -29,8 +23,8 @@ abstract final class DievasOpacityPrimitives {
   /// 24%.
   static const double o24 = 0.24;
 
-  /// 25%.
-  static const double o25 = 0.25;
+  /// 28%.
+  static const double o28 = 0.28;
 
   /// 32%.
   static const double o32 = 0.32;

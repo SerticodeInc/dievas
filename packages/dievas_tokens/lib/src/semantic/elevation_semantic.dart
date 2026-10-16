@@ -51,13 +51,13 @@ typedef DievasElevationShadow = ({double blur, double tint});
 abstract final class DievasElevationShadowLayer {
   /// Elevation XS — single diffuse layer.
   static const List<DievasElevationShadow> XS = [
-    (blur: DievasElevationPrimitives.e1, tint: DievasOpacityPrimitives.o13),
+    (blur: DievasElevationPrimitives.e1, tint: DievasOpacityPrimitives.o12),
   ];
 
   /// Elevation SM — tight ambient layer then diffuse layer.
   static const List<DievasElevationShadow> SM = [
     (blur: DievasElevationPrimitives.e1, tint: DievasOpacityPrimitives.o8),
-    (blur: DievasElevationPrimitives.e2, tint: DievasOpacityPrimitives.o13),
+    (blur: DievasElevationPrimitives.e2, tint: DievasOpacityPrimitives.o12),
   ];
 
   /// Elevation MD — tight ambient layer then diffuse layer.
@@ -75,6 +75,6 @@ abstract final class DievasElevationShadowLayer {
   /// Elevation XL — tight ambient layer then diffuse layer.
   static const List<DievasElevationShadow> XL = [
     (blur: DievasElevationPrimitives.e4, tint: DievasOpacityPrimitives.o8),
-    (blur: DievasElevationPrimitives.e5, tint: DievasOpacityPrimitives.o25),
+    (blur: DievasElevationPrimitives.e5, tint: DievasOpacityPrimitives.o24),
   ];
 }

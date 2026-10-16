@@ -27,7 +27,7 @@ jobs:
         uses: ./.github/workflows/ci.yml
 
     publish-dievas-tokens:
-        name: Publish dievas_tokens
+        name: Publish Dievas Tokens
         needs: [analyze-format-test]
         if: startsWith(github.ref_name, 'dievas_tokens-v')
         permissions:
@@ -35,12 +35,16 @@ jobs:
         uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
         with:
             working-directory: packages/dievas_tokens
+            environment: pub.dev (Dievas Tokens)
 
     publish-dievas:
-        name: Publish dievas
+        name: Publish Dievas
         needs: [analyze-format-test]
         if: startsWith(github.ref_name, 'dievas-v')
         runs-on: ubuntu-latest
+        environment:
+            name: pub.dev (Dievas)
+            url: https://pub.dev/packages/dievas
         permissions:
             contents: read
             id-token: write

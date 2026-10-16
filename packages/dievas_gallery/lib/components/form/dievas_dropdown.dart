@@ -12,18 +12,30 @@ final dropdownComponent = WidgetbookComponent(
   ],
 );
 
-class _Playground extends StatelessWidget {
+class _Playground extends StatefulWidget {
   const _Playground();
+
+  @override
+  State<_Playground> createState() => _PlaygroundState();
+}
+
+class _PlaygroundState extends State<_Playground> {
+  String? _value;
+  String? _knobValue;
 
   @override
   Widget build(BuildContext context) {
     final options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
-    final selected = context.knobs.string(label: 'Selected', initialValue: '');
+    final knobSelected = context.knobs.string(label: 'Selected', initialValue: '');
     final hint = context.knobs.stringOrNull(label: 'Hint', initialValue: 'Select an option');
     final label = context.knobs.stringOrNull(label: 'Label', initialValue: 'Choose');
     final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
 
-    final value = selected.isNotEmpty && options.contains(selected) ? selected : null;
+    // Adopt the knob when it changes, but let taps drive the selection afterwards.
+    if (knobSelected != _knobValue) {
+      _knobValue = knobSelected;
+      _value = knobSelected.isNotEmpty && options.contains(knobSelected) ? knobSelected : null;
+    }
 
     return Center(
       child: ComponentBoundary(
@@ -31,8 +43,8 @@ class _Playground extends StatelessWidget {
           width: 240,
           child: DievasDropdown<String>(
             options: options,
-            value: value,
-            onChanged: (_) {},
+            value: _value,
+            onChanged: (value) => setState(() => _value = value),
             hint: hint,
             label: label,
             enabled: enabled,

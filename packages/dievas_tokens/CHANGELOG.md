@@ -12,15 +12,25 @@ Changes to the Dievas token package, newest first.
 - Map neutral light/dark semantics to the Moon reference: primary and secondary text and icons, base and subtle backgrounds, default borders, and overlay. Input text follows primary text; inverse text follows the opposite theme’s primary foreground.
 - Change overlay alpha from `0x80` to `0x8F`. These semantic value changes alter rendered output and exceed the earlier documentation only patch scope.
 - Keep existing brand palette, feedback, and component state mappings pending their own semantic migration. Full Moon parity is not yet established.
+- Retune the size primitives to the 4pt / 8pt grid: font size follows the Moon type scale (`xs` through `fs72`), radius uses lowercase role names with `r<px>` for larger stops, opacity uses `o<percent>` on 4% and 8% steps, and sizing extends to 256px.
+
+### Added
+
+- Expose the full sizing primitive scale as `DievasSizingSemantic.height<px>` and `width<px>` from 4px through 256px, for boxes, constraints, and arbitrary dimensions.
+- Expose the large radius stops `R28` through `R64` on `DievasRadiusSemantic`.
+- Expose the full opacity percentage scale `O0` through `O100` on `DievasOpacitySemantic`.
 
 ### Documentation and checks
 
 - Expand the README with token value shapes, palette selection, naming rules, and migration limits.
 - Repair historical changelog formatting and clarify class-scoped size names, role suffixes, and the `XL2Plus` half step.
 - Demonstrate semantic spacing and palette resolution in the example.
-- Correct elevation dependency comments and remove misleading Moon cross references from unmigrated colour roles.
+- Correct elevation dependency comments and remove misleading Moon cross references from none migrated colour roles.
 - Resolve naming test paths independently of the working directory and check constant declarations.
 - Add fixture tests for all 43 primitive colour references per theme and migrated neutral semantic roles.
+- Add pixel value comments to the font weight, letter spacing, line height, and opacity primitives, and trim primitive docs to their shortest useful form.
+- Compress every semantic token comment to a three line maximum and remove em dashes and compound word hyphens.
+- Extend the naming convention check for the numeric `height`, `width`, and `R` size names.
 
 The package version remains 1.0.0 pending compatibility review and release selection.
 

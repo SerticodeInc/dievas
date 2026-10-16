@@ -52,7 +52,7 @@ class _SurfaceSample extends StatelessWidget {
       width: context.sizing.buttonHeightMD * surfaceWidthInControlHeights,
       height: context.sizing.buttonHeightMD,
       decoration: BoxDecoration(
-        color: context.colours.background.bgElevated,
+        color: context.colours.background.dialogBackground,
         borderRadius: borderRadius,
         border: border,
         boxShadow: shadows,

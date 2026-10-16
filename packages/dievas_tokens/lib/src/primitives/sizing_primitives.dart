@@ -1,29 +1,25 @@
-// Sizing primitives.
-//
-// Raw component dimensions in logical pixels. These values have no semantic
-// meaning by themselves; semantic sizing tokens alias them into roles.
-
-/// Raw sizing primitives for component dimensions.
+/// Raw sizing primitives for component dimensions. Pixels with no semantic
+/// meaning on their own; semantic sizing tokens alias them into roles.
 abstract final class DievasSizingPrimitives {
-  /// 4px — progress track height, fine structural lines.
+  /// 4px progress track height, fine structural lines.
   static const double s4 = 4.0;
 
-  /// 8px — small dot indicators, radio inner dot.
+  /// 8px small dot indicators, radio inner dot.
   static const double s8 = 8.0;
 
-  /// 10px — badge icon, decorative dot indicators.
+  /// 10px badge icon, decorative dot indicators.
   static const double s10 = 10.0;
 
   /// 12px.
   static const double s12 = 12.0;
 
-  /// 14px — tag/chip icons, dismiss icons, small UI controls.
+  /// 14px tag/chip icons, dismiss icons, small UI controls.
   static const double s14 = 14.0;
 
   /// 16px.
   static const double s16 = 16.0;
 
-  /// 18px — snackbar icons, switch thumb, medium-small icons.
+  /// 18px snackbar icons, switch thumb, medium small icons.
   static const double s18 = 18.0;
 
   /// 20px.
@@ -61,4 +57,22 @@ abstract final class DievasSizingPrimitives {
 
   /// 64px.
   static const double s64 = 64.0;
+
+  /// 80px.
+  static const double s80 = 80.0;
+
+  /// 96px.
+  static const double s96 = 96.0;
+
+  /// 128px.
+  static const double s128 = 128.0;
+
+  /// 160px.
+  static const double s160 = 160.0;
+
+  /// 192px.
+  static const double s192 = 192.0;
+
+  /// 256px.
+  static const double s256 = 256.0;
 }

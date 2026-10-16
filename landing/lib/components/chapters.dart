@@ -260,7 +260,7 @@ class Chapters extends StatelessComponent {
     span(classes: 'chain-arrow', [Component.text('→')]),
     div(classes: 'chain-step sr-step', [
       b([Component.text('semantic')]),
-      Component.text(' · DievasColourSemanticLight.brand'),
+      Component.text(' · DievasColourSemanticLight.primary'),
     ]),
     span(classes: 'chain-arrow', [Component.text('→')]),
     div(classes: 'chain-step', [

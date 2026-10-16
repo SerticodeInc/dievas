@@ -98,9 +98,9 @@ class Stage extends StatelessComponent {
           _elevationCard('e4', DievasElevationShadowLayer.LG),
         ]),
         _tokenFamily('radius', [
-          _radiusCard('SM', DievasRadiusPrimitives.SM),
-          _radiusCard('MD', DievasRadiusPrimitives.MD),
-          _radiusCard('XL3', DievasRadiusPrimitives.XL3),
+          _radiusCard('SM', DievasRadiusPrimitives.sm),
+          _radiusCard('MD', DievasRadiusPrimitives.md),
+          _radiusCard('R24', DievasRadiusPrimitives.r24),
         ]),
         _tokenFamily('spacing', [
           _spacingCard('s2', DievasSpacingPrimitives.s2),
@@ -113,7 +113,7 @@ class Stage extends StatelessComponent {
           span(classes: 'tok-c', [Component.text('// primitives · raw values, no Flutter dependency\n')]),
           Component.text('DievasColourPrimitives.indigo500   '),
           span(classes: 'tok-c', [Component.text('// 0xFF6366F1\n')]),
-          Component.text('DievasRadiusPrimitives.MD          '),
+          Component.text('DievasRadiusPrimitives.md          '),
           span(classes: 'tok-c', [Component.text('// 8.0\n')]),
           Component.text('DievasSpacingPrimitives.s4         '),
           span(classes: 'tok-c', [Component.text('// 16.0')]),
@@ -137,7 +137,7 @@ class Stage extends StatelessComponent {
     [
       div(classes: 'token-rows', [
         _tokenFamily('colour', [
-          _aliasChip('brand', 'context.colours.core.brand', tokenRgba(DievasColourSemanticLight.brand), 'indigo500'),
+          _aliasChip('brand', 'context.colours.core.brand', tokenRgba(DievasColourSemanticLight.primary), 'indigo500'),
           _aliasChip(
             'textPrimary',
             'context.colours.text.textPrimary',
@@ -147,7 +147,7 @@ class Stage extends StatelessComponent {
           _aliasChip(
             'bgBase',
             'context.colours.background.bgBase',
-            tokenRgba(DievasColourSemanticLight.bgBase),
+            tokenRgba(DievasColourSemanticLight.pageBackground),
             'slate50',
           ),
         ]),

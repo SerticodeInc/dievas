@@ -32,7 +32,7 @@ final class DievasCircularProgressThemeData extends Equatable {
   /// Arc colour for the `primary` style variant.
   final Color colourPrimary;
 
-  /// Arc colour for the `onBrand` style variant — white on brand surfaces.
+  /// Arc colour for the `onPrimary` style variant — white on brand surfaces.
   final Color colourOnBrand;
 
   /// Background ring colour (the unfilled track).

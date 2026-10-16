@@ -98,7 +98,7 @@ class _ExampleShellState extends State<_ExampleShell> {
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: navigationBlurSigma, sigmaY: navigationBlurSigma),
                   child: NavigationBar(
-                    backgroundColor: context.colours.background.bgElevated.withValues(
+                    backgroundColor: context.colours.background.dialogBackground.withValues(
                       alpha: MediaQuery.highContrastOf(context) ? context.opacity.opaque : navigationBackgroundOpacity,
                     ),
                     elevation: navigationElevation,

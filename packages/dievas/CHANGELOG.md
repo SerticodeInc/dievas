@@ -1,5 +1,16 @@
 # Change Log
 
+## Unreleased
+
+### Breaking colour role names
+
+- Name colours by element, variant or state, and property: `pageBackground`, `buttonPrimaryHoveredBackground`, and `inputFocusedBorder`.
+- Replace ambiguous brand, background, surface, and action names; separate dialog, menu, tooltip, and other component backgrounds.
+- Preserve existing colour values and extend palette application to the new component roles.
+- Migrate Flutter themes, component consumers, examples, gallery labels, and tests together.
+- See the token package’s README colour naming migration section for the replacement table and custom-theme migration requirements.
+
+
 ## 1.0.0
 
 The naming unification release. Every size axis token, enum value, and theme value field now follows one law - `<base><UPPERCASE SIZE>` - brand expression is driven by a single selectable palette, and component elevation now paints the Dievas token shadow stacks directly.

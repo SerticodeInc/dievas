@@ -40,7 +40,7 @@ final class DievasColourThemeData extends Equatable {
   /// Whether this colour set is designed for a light or dark surface.
   final Brightness brightness;
 
-  /// Brand identity colours — brand, brandSubtle, onBrand.
+  /// Primary palette identity and tinted badge background.
   final CoreColours core;
 
   /// Text colour roles across all contrast levels.

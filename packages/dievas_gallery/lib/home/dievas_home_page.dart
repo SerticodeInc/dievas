@@ -23,7 +23,7 @@ class _WidgetBookContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: context.colours.background.bgSubtle,
+    backgroundColor: context.colours.background.cardBackground,
     body: SingleChildScrollView(
       padding: .symmetric(horizontal: context.spacing.XL, vertical: context.spacing.XL3),
       child: Center(
@@ -105,12 +105,12 @@ class _Eyebrow extends StatelessWidget {
         Container(
           width: spacing.SMPlus,
           height: spacing.SMPlus,
-          decoration: BoxDecoration(color: colours.brand, shape: .circle),
+          decoration: BoxDecoration(color: colours.primary, shape: .circle),
         ),
         SizedBox(width: spacing.SMPlus),
         Text(
           'FLUTTER DESIGN SYSTEM',
-          style: context.typography.codeMD.copyWith(letterSpacing: 2.8, color: colours.brand),
+          style: context.typography.codeMD.copyWith(letterSpacing: 2.8, color: colours.primary),
         ),
       ],
     );
@@ -126,7 +126,7 @@ class _Subtitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     "Ports Moon Design System's component catalogue.\n"
-    'Token driven. InheritedModel first. Multi brand.',
+    'Token driven. InheritedModel first. Multi primary.',
     style: context.typography.bodyMD.copyWith(height: 2.0, color: context.colours.text.textSecondary),
   );
 }
@@ -142,7 +142,7 @@ class _StatsRow extends StatelessWidget {
         _Divider(),
         _StatCell(value: '35', label: 'components'),
         _Divider(),
-        _StatCell(value: '∞', label: 'brand configs'),
+        _StatCell(value: '∞', label: 'primary configs'),
       ],
     ),
   );
@@ -175,7 +175,7 @@ class _Divider extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     width: context.spacing.SM - 6,
     margin: .symmetric(horizontal: context.spacing.LG),
-    color: context.colours.border.borderDefault,
+    color: context.colours.border.dividerColour,
   );
 }
 
@@ -204,8 +204,8 @@ class _ComponentCategory extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: colours.background.bgSubtle,
-        border: .all(color: context.colours.border.borderDefault),
+        color: colours.background.cardBackground,
+        border: .all(color: context.colours.border.dividerColour),
         borderRadius: context.border.LG,
       ),
       padding: .all(spacing.MD),
@@ -214,7 +214,7 @@ class _ComponentCategory extends StatelessWidget {
           Container(
             width: spacing.SM,
             height: spacing.SM,
-            decoration: BoxDecoration(color: colours.action.actionSuccess, shape: .circle),
+            decoration: BoxDecoration(color: colours.action.buttonSuccessBackground, shape: .circle),
           ),
           SizedBox(width: spacing.SMPlus),
           SizedBox(
@@ -234,9 +234,9 @@ class _ComponentCategory extends StatelessWidget {
                   Container(
                     padding: .all(spacing.SM),
                     decoration: BoxDecoration(
-                      color: colours.background.bgElevated,
+                      color: colours.background.dialogBackground,
                       borderRadius: context.border.MD,
-                      border: .all(color: context.colours.border.borderDefault),
+                      border: .all(color: context.colours.border.dividerColour),
                     ),
                     child: Text(
                       component,
@@ -263,8 +263,8 @@ class _HintBadge extends StatelessWidget {
     return Container(
       padding: .all(spacing.MD),
       decoration: BoxDecoration(
-        color: colours.background.bgSubtle,
-        border: .all(color: colours.core.brandSubtle),
+        color: colours.background.cardBackground,
+        border: .all(color: colours.core.badgePrimaryTintedBackground),
         borderRadius: context.border.LG,
       ),
       child: Row(
@@ -273,7 +273,7 @@ class _HintBadge extends StatelessWidget {
           Container(
             width: spacing.SM,
             height: spacing.SM,
-            decoration: BoxDecoration(color: colours.core.brand, shape: .circle),
+            decoration: BoxDecoration(color: colours.core.primary, shape: .circle),
           ),
           SizedBox(width: spacing.SMPlus),
           Flexible(

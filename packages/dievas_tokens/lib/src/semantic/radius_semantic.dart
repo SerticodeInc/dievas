@@ -1,8 +1,5 @@
-// Semantic border radius tokens.
-//
-// Pure Dart. No Flutter dependency.
-// Named aliases over DievasRadiusPrimitives for consistent corner rounding
-// across containers, buttons, inputs, and overlays.
+// Semantic border radius tokens: named aliases over DievasRadiusPrimitives for
+// consistent corner rounding across containers, buttons, inputs, and overlays.
 
 import 'package:dievas_tokens/src/primitives/radius_primitives.dart';
 
@@ -10,30 +7,51 @@ import 'package:dievas_tokens/src/primitives/radius_primitives.dart';
 ///
 /// References [DievasRadiusPrimitives] exclusively.
 abstract final class DievasRadiusSemantic {
-  /// 0px — sharp corners. Used for full-bleed banners and dividers.
-  static const double NONE = DievasRadiusPrimitives.NONE;
+  /// 0px: sharp corners. Used for full bleed banners and dividers.
+  static const double NONE = DievasRadiusPrimitives.none;
 
-  /// 2px — subtle rounding. Tags, small chips.
-  static const double XS = DievasRadiusPrimitives.XS;
+  /// 2px: subtle rounding. Tags, small chips.
+  static const double XS = DievasRadiusPrimitives.xs;
 
-  /// 4px — compact inputs, small buttons, tooltips.
-  static const double SM = DievasRadiusPrimitives.SM;
+  /// 4px: compact inputs, small buttons, tooltips.
+  static const double SM = DievasRadiusPrimitives.sm;
 
-  /// 8px — default rounding. Cards, modals, standard buttons, text fields.
-  static const double MD = DievasRadiusPrimitives.MD;
+  /// 8px: default rounding. Cards, modals, standard buttons, text fields.
+  static const double MD = DievasRadiusPrimitives.md;
 
-  /// 12px — large cards, elevated panels.
-  static const double LG = DievasRadiusPrimitives.LG;
+  /// 12px: large cards, elevated panels.
+  static const double LG = DievasRadiusPrimitives.lg;
 
-  /// 16px — prominent surfaces, bottom sheets.
-  static const double XL = DievasRadiusPrimitives.XL;
+  /// 16px: prominent surfaces, bottom sheets.
+  static const double XL = DievasRadiusPrimitives.xl;
 
-  /// 20px — extra-large overlays, feature cards.
-  static const double XL2 = DievasRadiusPrimitives.XL2;
+  /// 20px: extra large overlays, feature cards.
+  static const double XL2 = DievasRadiusPrimitives.xl2;
 
-  /// 24px — maximum before pill. Hero cards.
-  static const double XL3 = DievasRadiusPrimitives.XL3;
+  /// 24px: hero cards.
+  static const double XL3 = DievasRadiusPrimitives.r24;
 
-  /// 9999px — pill shape. Badges, chips, fully rounded buttons, avatars.
-  static const double FULL = DievasRadiusPrimitives.FULL;
+  /// 28px: large hero surfaces.
+  static const double R28 = DievasRadiusPrimitives.r28;
+
+  /// 32px: feature panels.
+  static const double R32 = DievasRadiusPrimitives.r32;
+
+  /// 36px: oversized feature surfaces.
+  static const double R36 = DievasRadiusPrimitives.r36;
+
+  /// 40px: prominent sheets and panels.
+  static const double R40 = DievasRadiusPrimitives.r40;
+
+  /// 48px: large decorative surfaces.
+  static const double R48 = DievasRadiusPrimitives.r48;
+
+  /// 56px: very large surfaces.
+  static const double R56 = DievasRadiusPrimitives.r56;
+
+  /// 64px: extra large surfaces.
+  static const double R64 = DievasRadiusPrimitives.r64;
+
+  /// 9999px: pill shape. Badges, chips, fully rounded buttons, avatars.
+  static const double FULL = DievasRadiusPrimitives.full;
 }

@@ -21,12 +21,12 @@ class _ThemeStatics extends StatelessWidget {
         SizedBox(height: context.spacing.LG),
         _ThemeValueRow(
           label: 'Brand colour',
-          accessor: 'DievasTheme.coloursOf(context).core.brand',
+          accessor: 'DievasTheme.coloursOf(context).core.primary',
           value: Semantics(
-            label: 'Active theme brand colour',
+            label: 'Active theme primary colour',
             child: CircleAvatar(
               radius: context.sizing.avatarSM * avatarRadiusFactor,
-              backgroundColor: DievasTheme.coloursOf(context).core.brand,
+              backgroundColor: DievasTheme.coloursOf(context).core.primary,
             ),
           ),
         ),
@@ -78,8 +78,8 @@ class _ComponentOverride extends StatelessWidget {
     final overridden = theme.copyWith(
       components: theme.components.copyWith(
         avatar: theme.components.avatar.copyWith(
-          backgroundColour: context.colours.action.actionPrimary,
-          initialsColour: context.colours.core.onBrand,
+          backgroundColour: context.colours.action.buttonPrimaryBackground,
+          initialsColour: context.colours.text.buttonPrimaryText,
         ),
       ),
     );
@@ -121,7 +121,7 @@ class _StatChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: .symmetric(horizontal: context.spacing.MD, vertical: context.spacing.SM),
-    decoration: BoxDecoration(color: context.colours.background.bgElevated, borderRadius: context.border.MD),
+    decoration: BoxDecoration(color: context.colours.background.dialogBackground, borderRadius: context.border.MD),
     child: Column(
       crossAxisAlignment: .start,
       children: [

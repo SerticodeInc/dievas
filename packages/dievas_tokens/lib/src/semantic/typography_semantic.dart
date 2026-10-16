@@ -1,18 +1,12 @@
-// Semantic typography tokens.
-//
-// Pure Dart. No Flutter dependency. No TextStyle — only raw doubles and ints.
-// TextStyle construction happens in the dievas Flutter package's typography
-// mapper using these values.
-//
-// Each named style is a record: ({double fontSize, int fontWeight, double lineHeight,
-// double letterSpacing, String fontFamily}).
+// Semantic typography tokens. Pure Dart, no Flutter dependency and no
+// TextStyle: each named style is a record of fontSize, fontWeight, lineHeight,
+// letterSpacing, and fontFamily.
 
 import 'package:dievas_tokens/src/primitives/typography_primitives.dart';
 
-/// A lightweight record describing a single named text style.
-///
-/// Consumed by the typography mapper in the `dievas` package to construct
-/// Flutter [TextStyle] objects.
+/// A lightweight record describing a single named text style, consumed by the
+/// typography mapper in the `dievas` package to construct Flutter [TextStyle]
+/// objects.
 typedef DievasTextStyleToken = ({
   double fontSize,
   int fontWeight,
@@ -21,17 +15,15 @@ typedef DievasTextStyleToken = ({
   String fontFamily,
 });
 
-/// Semantic typography tokens for the Dievas design system.
-///
-/// Scale groups mirror Moon Design System's type ramp. All values reference
-/// [DievasFontSizePrimitives], [DievasFontWeightPrimitives],
+/// Semantic typography tokens. Scale groups mirror the Moon type ramp, with
+/// values referencing [DievasFontSizePrimitives], [DievasFontWeightPrimitives],
 /// [DievasLineHeightPrimitives], and [DievasLetterSpacingPrimitives].
 abstract final class DievasTypographySemantic {
   // Display
 
   /// Display large. Hero headings, marketing splash copy.
   static const DievasTextStyleToken displayLG = (
-    fontSize: DievasFontSizePrimitives.XL8,
+    fontSize: DievasFontSizePrimitives.fs72,
     fontWeight: DievasFontWeightPrimitives.bold,
     lineHeight: DievasLineHeightPrimitives.tight,
     letterSpacing: DievasLetterSpacingPrimitives.tighter,
@@ -40,7 +32,7 @@ abstract final class DievasTypographySemantic {
 
   /// Display medium.
   static const DievasTextStyleToken displayMD = (
-    fontSize: DievasFontSizePrimitives.XL7,
+    fontSize: DievasFontSizePrimitives.fs60,
     fontWeight: DievasFontWeightPrimitives.bold,
     lineHeight: DievasLineHeightPrimitives.tight,
     letterSpacing: DievasLetterSpacingPrimitives.tighter,
@@ -49,7 +41,7 @@ abstract final class DievasTypographySemantic {
 
   /// Display small.
   static const DievasTextStyleToken displaySM = (
-    fontSize: DievasFontSizePrimitives.XL6,
+    fontSize: DievasFontSizePrimitives.fs48,
     fontWeight: DievasFontWeightPrimitives.bold,
     lineHeight: DievasLineHeightPrimitives.tight,
     letterSpacing: DievasLetterSpacingPrimitives.tight,
@@ -58,9 +50,9 @@ abstract final class DievasTypographySemantic {
 
   // Heading
 
-  /// Heading XL. Page-level section titles.
+  /// Heading XL. Page level section titles.
   static const DievasTextStyleToken headingXL = (
-    fontSize: DievasFontSizePrimitives.XL5,
+    fontSize: DievasFontSizePrimitives.fs36,
     fontWeight: DievasFontWeightPrimitives.semiBold,
     lineHeight: DievasLineHeightPrimitives.tight,
     letterSpacing: DievasLetterSpacingPrimitives.tight,
@@ -69,7 +61,7 @@ abstract final class DievasTypographySemantic {
 
   /// Heading large.
   static const DievasTextStyleToken headingLG = (
-    fontSize: DievasFontSizePrimitives.XL4,
+    fontSize: DievasFontSizePrimitives.fs32,
     fontWeight: DievasFontWeightPrimitives.semiBold,
     lineHeight: DievasLineHeightPrimitives.snug,
     letterSpacing: DievasLetterSpacingPrimitives.tight,
@@ -78,7 +70,7 @@ abstract final class DievasTypographySemantic {
 
   /// Heading medium. Card titles, modal headings.
   static const DievasTextStyleToken headingMD = (
-    fontSize: DievasFontSizePrimitives.XL3,
+    fontSize: DievasFontSizePrimitives.fs28,
     fontWeight: DievasFontWeightPrimitives.semiBold,
     lineHeight: DievasLineHeightPrimitives.snug,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
@@ -87,7 +79,7 @@ abstract final class DievasTypographySemantic {
 
   /// Heading small.
   static const DievasTextStyleToken headingSM = (
-    fontSize: DievasFontSizePrimitives.XL2,
+    fontSize: DievasFontSizePrimitives.xl2,
     fontWeight: DievasFontWeightPrimitives.semiBold,
     lineHeight: DievasLineHeightPrimitives.snug,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
@@ -96,7 +88,7 @@ abstract final class DievasTypographySemantic {
 
   /// Heading XS. Section dividers, list group labels.
   static const DievasTextStyleToken headingXS = (
-    fontSize: DievasFontSizePrimitives.XL,
+    fontSize: DievasFontSizePrimitives.xl,
     fontWeight: DievasFontWeightPrimitives.semiBold,
     lineHeight: DievasLineHeightPrimitives.snug,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
@@ -106,36 +98,36 @@ abstract final class DievasTypographySemantic {
   // Title
 
   /// Title large. Section headings inside cards, drawer titles, sheet headers.
-  /// Same size as [bodyLG] but semiBold — title vs body is a weight distinction.
+  /// Same size as [bodyLG] but semiBold: title vs body is a weight distinction.
   static const DievasTextStyleToken titleLG = (
-    fontSize: DievasFontSizePrimitives.LG,
+    fontSize: DievasFontSizePrimitives.lgPlus,
     fontWeight: DievasFontWeightPrimitives.semiBold,
     lineHeight: DievasLineHeightPrimitives.snug,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
     fontFamily: DievasFontFamilyPrimitives.sans,
   );
 
-  /// Title medium. List group headers, tab labels, sub-section titles.
+  /// Title medium. List group headers, tab labels, sub section titles.
   static const DievasTextStyleToken titleMD = (
-    fontSize: DievasFontSizePrimitives.BASE,
+    fontSize: DievasFontSizePrimitives.base,
     fontWeight: DievasFontWeightPrimitives.semiBold,
     lineHeight: DievasLineHeightPrimitives.snug,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
     fontFamily: DievasFontFamilyPrimitives.sans,
   );
 
-  /// Title small. Compact sub-headings, sidebar labels, dense list headers.
+  /// Title small. Compact sub headings, sidebar labels, dense list headers.
   static const DievasTextStyleToken titleSM = (
-    fontSize: DievasFontSizePrimitives.MD,
+    fontSize: DievasFontSizePrimitives.base,
     fontWeight: DievasFontWeightPrimitives.semiBold,
     lineHeight: DievasLineHeightPrimitives.snug,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
     fontFamily: DievasFontFamilyPrimitives.sans,
   );
 
-  /// Title extra-small. Micro sub-headings, dense metadata labels.
+  /// Title extra small. Micro sub headings, dense metadata labels.
   static const DievasTextStyleToken titleXS = (
-    fontSize: DievasFontSizePrimitives.SM,
+    fontSize: DievasFontSizePrimitives.mdPlus,
     fontWeight: DievasFontWeightPrimitives.semiBold,
     lineHeight: DievasLineHeightPrimitives.snug,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
@@ -144,9 +136,9 @@ abstract final class DievasTypographySemantic {
 
   // Body
 
-  /// Body large. Long-form reading content.
+  /// Body large. Long form reading content.
   static const DievasTextStyleToken bodyLG = (
-    fontSize: DievasFontSizePrimitives.LG,
+    fontSize: DievasFontSizePrimitives.lgPlus,
     fontWeight: DievasFontWeightPrimitives.regular,
     lineHeight: DievasLineHeightPrimitives.relaxed,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
@@ -155,7 +147,7 @@ abstract final class DievasTypographySemantic {
 
   /// Body medium. Default paragraph / list item text.
   static const DievasTextStyleToken bodyMD = (
-    fontSize: DievasFontSizePrimitives.BASE,
+    fontSize: DievasFontSizePrimitives.lg,
     fontWeight: DievasFontWeightPrimitives.regular,
     lineHeight: DievasLineHeightPrimitives.normal,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
@@ -164,7 +156,7 @@ abstract final class DievasTypographySemantic {
 
   /// Body small. Secondary descriptions, supporting copy.
   static const DievasTextStyleToken bodySM = (
-    fontSize: DievasFontSizePrimitives.MD,
+    fontSize: DievasFontSizePrimitives.base,
     fontWeight: DievasFontWeightPrimitives.regular,
     lineHeight: DievasLineHeightPrimitives.normal,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
@@ -173,7 +165,7 @@ abstract final class DievasTypographySemantic {
 
   /// Body XS. Fine print, timestamps, footnotes.
   static const DievasTextStyleToken bodyXS = (
-    fontSize: DievasFontSizePrimitives.SM,
+    fontSize: DievasFontSizePrimitives.mdPlus,
     fontWeight: DievasFontWeightPrimitives.regular,
     lineHeight: DievasLineHeightPrimitives.normal,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
@@ -184,7 +176,7 @@ abstract final class DievasTypographySemantic {
 
   /// Label large. Button text (large), prominent tags.
   static const DievasTextStyleToken labelLG = (
-    fontSize: DievasFontSizePrimitives.BASE,
+    fontSize: DievasFontSizePrimitives.lg,
     fontWeight: DievasFontWeightPrimitives.medium,
     lineHeight: DievasLineHeightPrimitives.none,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
@@ -193,7 +185,7 @@ abstract final class DievasTypographySemantic {
 
   /// Label medium. Default button text, input labels, nav labels.
   static const DievasTextStyleToken labelMD = (
-    fontSize: DievasFontSizePrimitives.MD,
+    fontSize: DievasFontSizePrimitives.base,
     fontWeight: DievasFontWeightPrimitives.medium,
     lineHeight: DievasLineHeightPrimitives.none,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
@@ -202,16 +194,16 @@ abstract final class DievasTypographySemantic {
 
   /// Label small. Small button text, chip labels, compact badges.
   static const DievasTextStyleToken labelSM = (
-    fontSize: DievasFontSizePrimitives.SM,
+    fontSize: DievasFontSizePrimitives.mdPlus,
     fontWeight: DievasFontWeightPrimitives.medium,
     lineHeight: DievasLineHeightPrimitives.none,
     letterSpacing: DievasLetterSpacingPrimitives.wide,
     fontFamily: DievasFontFamilyPrimitives.sans,
   );
 
-  /// Label XS. Overline, eyebrow text, micro-labels above inputs.
+  /// Label XS. Overline, eyebrow text, micro labels above inputs.
   static const DievasTextStyleToken labelXS = (
-    fontSize: DievasFontSizePrimitives.XS,
+    fontSize: DievasFontSizePrimitives.md,
     fontWeight: DievasFontWeightPrimitives.semiBold,
     lineHeight: DievasLineHeightPrimitives.none,
     letterSpacing: DievasLetterSpacingPrimitives.wider,
@@ -222,7 +214,7 @@ abstract final class DievasTypographySemantic {
 
   /// Code medium. Inline code blocks, code editors, shell output.
   static const DievasTextStyleToken codeMD = (
-    fontSize: DievasFontSizePrimitives.MD,
+    fontSize: DievasFontSizePrimitives.base,
     fontWeight: DievasFontWeightPrimitives.regular,
     lineHeight: DievasLineHeightPrimitives.relaxed,
     letterSpacing: DievasLetterSpacingPrimitives.normal,
@@ -231,7 +223,7 @@ abstract final class DievasTypographySemantic {
 
   /// Code small. Compact code snippets, token labels.
   static const DievasTextStyleToken codeSM = (
-    fontSize: DievasFontSizePrimitives.SM,
+    fontSize: DievasFontSizePrimitives.mdPlus,
     fontWeight: DievasFontWeightPrimitives.regular,
     lineHeight: DievasLineHeightPrimitives.relaxed,
     letterSpacing: DievasLetterSpacingPrimitives.normal,

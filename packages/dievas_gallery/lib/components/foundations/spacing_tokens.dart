@@ -64,9 +64,9 @@ class _SpacingScale extends StatelessWidget {
                     width: value,
                     height: 20,
                     decoration: BoxDecoration(
-                      color: colours.action.actionPrimary.withAlpha(80),
+                      color: colours.action.buttonPrimaryBackground.withAlpha(80),
                       borderRadius: context.border.XS, // tiny bar viz — closest token
-                      border: Border.all(color: colours.action.actionPrimary),
+                      border: Border.all(color: colours.action.buttonPrimaryBackground),
                     ),
                   ),
                 ],
@@ -110,8 +110,8 @@ class _BorderRadii extends StatelessWidget {
                   width: 64, // radius demo box — gallery-only visual dimension
                   height: 64, // radius demo box — gallery-only visual dimension
                   decoration: BoxDecoration(
-                    color: colours.action.actionPrimary.withAlpha(30),
-                    border: Border.all(color: colours.action.actionPrimary),
+                    color: colours.action.buttonPrimaryBackground.withAlpha(30),
+                    border: Border.all(color: colours.action.buttonPrimaryBackground),
                     borderRadius: radius,
                   ),
                 ),

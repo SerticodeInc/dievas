@@ -53,7 +53,7 @@ class _FullScale extends StatelessWidget {
             _TypeRow(name: name, style: style),
             Container(
               height: 1,
-              color: colours.border.borderDefault,
+              color: colours.border.dividerColour,
               margin: EdgeInsets.symmetric(vertical: context.spacing.SMPlus),
             ),
           ],
@@ -91,7 +91,7 @@ class _DisplayHeading extends StatelessWidget {
             _TypeRow(name: name, style: style),
             Container(
               height: 1,
-              color: colours.border.borderDefault,
+              color: colours.border.dividerColour,
               margin: EdgeInsets.symmetric(vertical: context.spacing.SMPlus),
             ),
           ],
@@ -132,7 +132,7 @@ class _BodyLabel extends StatelessWidget {
             _TypeRow(name: name, style: style),
             Container(
               height: 1,
-              color: colours.border.borderDefault,
+              color: colours.border.dividerColour,
               margin: EdgeInsets.symmetric(vertical: context.spacing.SMPlus),
             ),
           ],
@@ -158,7 +158,7 @@ class _Code extends StatelessWidget {
           _TypeRow(name: 'codeMD', style: t.codeMD, sample: 'final result = compute(value);'),
           Container(
             height: 1,
-            color: colours.border.borderDefault,
+            color: colours.border.dividerColour,
             margin: EdgeInsets.symmetric(vertical: context.spacing.SMPlus),
           ),
           _TypeRow(name: 'codeSM', style: t.codeSM, sample: 'final result = compute(value);'),

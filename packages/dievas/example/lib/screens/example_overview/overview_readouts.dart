@@ -30,7 +30,7 @@ class _StatChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: .symmetric(horizontal: context.spacing.MD, vertical: context.spacing.SM),
-    decoration: BoxDecoration(color: context.colours.background.bgElevated, borderRadius: context.border.MD),
+    decoration: BoxDecoration(color: context.colours.background.dialogBackground, borderRadius: context.border.MD),
     child: Column(
       crossAxisAlignment: .start,
       children: [

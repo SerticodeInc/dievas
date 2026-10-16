@@ -61,6 +61,6 @@ To make it your brand: rename `Example*` → `YourBrand*`, replace
 
 - **Granular rebuilds.** `DievasTheme` is an `InheritedModel`; reading `context.colours` rebuilds only when colours change, never when `spacing` changes.
 - **Nothing is hardcoded.** No component in the screens hardcodes a colour, size, or spacing; every value comes from `context.*`.
-- **Contrast is a contract.** Dievas draws text on action surfaces using `colours.core.onBrand`, so `onBrand` must contrast `actionPrimary`. This brand's light-mode primary action is ink, so `onBrand` is lavender here: read the notes in `example_light_theme.dart` / `example_dark_theme.dart` before remapping any role.
+- **Contrast is a contract.** Dievas draws text on action surfaces using `colours.text.buttonPrimaryText`, so `buttonPrimaryText` must contrast `buttonPrimaryBackground`. This brand's light-mode primary action is ink, so `buttonPrimaryText` is lavender here: read the notes in `example_light_theme.dart` / `example_dark_theme.dart` before remapping any role.
 - **Per instance overrides.** Wrap a subtree in `DievasTheme(data: copy)` to override a component for that subtree only (see the Foundations screen).
 - **Material bridge.** Standard Flutter widgets (`NavigationBar`, `Scaffold`, `MaterialApp`) work automatically through `theme.material`.

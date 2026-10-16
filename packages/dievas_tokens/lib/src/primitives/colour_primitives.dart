@@ -1,18 +1,209 @@
-// Raw colour values as ARGB integers with no Flutter dependency.
-//
-// These are the atomic building blocks of Dievas. They carry no semantic
-// meaning and should only be consumed by the semantic token layer.
-//
-// Scale convention: 50 (lightest) -> 950 (darkest).
-// Families are arranged as a practical colour ring, then nature/material
-// palettes for brand systems that need warmer, more organic colour.
-
-/// Raw Dievas colour primitives exposed as ARGB integer constants.
+/// Raw Dievas colour primitives exposed as ARGB integer constants. Scales run
+/// 50 (lightest) to 950 (darkest); families cover a practical colour ring plus
+/// nature and material palettes. Consume the semantic layer, not these directly.
 abstract final class DievasColourPrimitives {
   // Static.
+  /// Moon goku (light), bulma (dark), and goten (both themes).
+  /// Reference: https://flutter.moon.io/colors
   static const int white = 0xFFFFFFFF;
+
+  /// Moon bulma (light), goku (dark), and popo (both themes).
+  /// Reference: https://flutter.moon.io/colors
   static const int black = 0xFF000000;
   static const int transparent = 0x00000000;
+
+  // Exact Moon default colours. These are fixed values, not palette shade steps.
+  // Alpha suffixes preserve the source alpha byte (8F is about 56.1%).
+
+  /// Direct port of Moon light.piccolo, light.frieza, dark.piccolo, dark.frieza.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int royalPurple = 0xFF5C33CF;
+
+  /// Direct port of Moon light.hit, dark.hit.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int springMint = 0xFF1BD29A;
+
+  /// Direct port of Moon light.beerus.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int coolGreyLight = 0xFFDCDEE3;
+
+  /// Direct port of Moon light.gohan.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int nearWhite = 0xFFF6F7F9;
+
+  /// Direct port of Moon light.trunks, light.textSecondary, light.iconSecondary.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int steelGrey = 0xFF687083;
+
+  /// Direct port of Moon light.jiren, dark.jiren.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int royalPurpleAlpha1F = 0x1F5C33CF;
+
+  /// Direct port of Moon light.heles.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int blackAlpha0A = 0x0A000000;
+
+  /// Direct port of Moon light.zeno, dark.zeno.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int blackAlpha8F = 0x8F000000;
+
+  /// Direct port of Moon light.krillin, dark.krillin.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int amberGold = 0xFFFFB319;
+
+  /// Direct port of Moon light.chichi, dark.chichi.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int coralPink = 0xFFFF4E64;
+
+  /// Direct port of Moon light.roshi, dark.roshi.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int leafGreen = 0xFF49B356;
+
+  /// Direct port of Moon light.dodoria, dark.dodoria.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int crimsonRed = 0xFFD33030;
+
+  /// Direct port of Moon light.cell, dark.cell.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int paleMint = 0xFF95F1D5;
+
+  /// Direct port of Moon light.raditz, dark.raditz.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int warmTan = 0xFFB3804A;
+
+  /// Direct port of Moon light.whis, dark.whis.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int royalBlue = 0xFF3448F0;
+
+  /// Direct port of Moon light.nappa, dark.nappa.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int cocoaBrown = 0xFF725550;
+
+  /// Direct port of Moon light.krillin60, dark.krillin60.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int amberGoldAlpha8F = 0x8FFFB319;
+
+  /// Direct port of Moon light.krillin10, dark.krillin10.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int amberGoldAlpha14 = 0x14FFB319;
+
+  /// Direct port of Moon light.chichi60, dark.chichi60.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int coralPinkAlpha8F = 0x8FFF4E64;
+
+  /// Direct port of Moon light.chichi10, dark.chichi10.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int coralPinkAlpha14 = 0x14FF4E64;
+
+  /// Direct port of Moon light.roshi60, dark.roshi60.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int leafGreenAlpha8F = 0x8F49B356;
+
+  /// Direct port of Moon light.roshi10, dark.roshi10.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int leafGreenAlpha14 = 0x1449B356;
+
+  /// Direct port of Moon light.dodoria60, dark.dodoria60.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int crimsonRedAlpha8F = 0x8FD33030;
+
+  /// Direct port of Moon light.dodoria10, dark.dodoria10.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int crimsonRedAlpha14 = 0x14D33030;
+
+  /// Direct port of Moon light.cell60, dark.cell60.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int paleMintAlpha8F = 0x8F95F1D5;
+
+  /// Direct port of Moon light.cell10, dark.cell10.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int paleMintAlpha14 = 0x1495F1D5;
+
+  /// Direct port of Moon light.raditz60, dark.raditz60.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int warmTanAlpha8F = 0x8FB3804A;
+
+  /// Direct port of Moon light.raditz10, dark.raditz10.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int warmTanAlpha14 = 0x14B3804A;
+
+  /// Direct port of Moon light.whis60, dark.whis60.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int royalBlueAlpha8F = 0x8F3448F0;
+
+  /// Direct port of Moon light.whis10, dark.whis10.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int royalBlueAlpha14 = 0x143448F0;
+
+  /// Direct port of Moon light.frieza60, dark.frieza60.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int royalPurpleAlpha8F = 0x8F5C33CF;
+
+  /// Direct port of Moon light.frieza10, dark.frieza10.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int royalPurpleAlpha14 = 0x145C33CF;
+
+  /// Direct port of Moon light.nappa60, dark.nappa60.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int cocoaBrownAlpha8F = 0x8F725550;
+
+  /// Direct port of Moon light.nappa10, dark.nappa10.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int cocoaBrownAlpha14 = 0x14725550;
+
+  /// Direct port of Moon dark.beerus.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int charcoal = 0xFF292929;
+
+  /// Direct port of Moon dark.gohan.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int charcoalDeep = 0xFF1F1F1F;
+
+  /// Direct port of Moon dark.trunks, dark.textSecondary, dark.iconSecondary.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int steelGreyLight = 0xFF94989E;
+
+  /// Direct port of Moon dark.heles.
+  /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
+  /// Reference: https://flutter.moon.io/colors
+  static const int whiteAlpha14 = 0x14FFFFFF;
 
   // Neutral axis.
   static const int slate50 = 0xFFF8FAFC;

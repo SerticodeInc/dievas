@@ -1,4 +1,4 @@
-import 'package:dievas/src/theme/color/dievas_colour_theme_data.dart';
+import 'package:dievas/src/theme/colour/dievas_colour_theme_data.dart';
 import 'package:dievas/src/theme/component/tag/dievas_tag_border_radius.dart';
 import 'package:dievas/src/theme/component/tag/dievas_tag_theme_data.dart';
 import 'package:flutter/material.dart';
@@ -109,18 +109,18 @@ class DievasTag extends StatelessWidget {
     Color? instanceBorder,
   }) => switch (style) {
     .filled => (
-      background: instanceBackground ?? colours.bgElevated,
+      background: instanceBackground ?? colours.tagBackground,
       border: instanceBorder ?? colours.transparent,
       foreground: instanceForeground ?? colours.textPrimary,
     ),
     .tinted => (
-      background: instanceBackground ?? colours.bgSubtle,
+      background: instanceBackground ?? colours.cardBackground,
       border: instanceBorder ?? colours.transparent,
       foreground: instanceForeground ?? colours.textSecondary,
     ),
     .outlined => (
       background: instanceBackground ?? colours.transparent,
-      border: instanceBorder ?? colours.borderDefault,
+      border: instanceBorder ?? colours.dividerColour,
       foreground: instanceForeground ?? colours.textSecondary,
     ),
   };
@@ -221,17 +221,17 @@ typedef _DievasTagAppearance = ({Color background, Color border, Color foregroun
 // Private helper that bundles frequently needed colour lookups.
 final class _TagColors {
   _TagColors(DievasColourThemeData colourTheme)
-    : bgSubtle = colourTheme.background.bgSubtle,
-      bgElevated = colourTheme.background.bgElevated,
+    : cardBackground = colourTheme.background.cardBackground,
+      tagBackground = colourTheme.background.tagBackground,
       textPrimary = colourTheme.text.textPrimary,
       textSecondary = colourTheme.text.textSecondary,
-      borderDefault = colourTheme.border.borderDefault,
+      dividerColour = colourTheme.border.dividerColour,
       transparent = colourTheme.staticColours.staticTransparent;
 
-  final Color bgSubtle;
-  final Color bgElevated;
+  final Color cardBackground;
+  final Color tagBackground;
   final Color textPrimary;
   final Color textSecondary;
-  final Color borderDefault;
+  final Color dividerColour;
   final Color transparent;
 }

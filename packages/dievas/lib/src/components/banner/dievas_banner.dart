@@ -2,7 +2,7 @@ import 'package:dievas/l10n/dievas_localizations.dart';
 import 'package:dievas/src/extensions/dievas_theme_context_extension.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:dievas/src/theme/color/dievas_colour_theme_data.dart';
+import 'package:dievas/src/theme/colour/dievas_colour_theme_data.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
 import 'package:dievas/src/components/alert/dievas_alert.dart';
 

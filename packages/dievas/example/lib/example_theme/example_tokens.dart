@@ -2,7 +2,7 @@ part of 'example_theme.dart';
 
 /// Raw brand token values for the Example App.
 ///
-/// The brand is **Coral Peach**, led by [brand]: the exact `#EB6B52` the
+/// The brand is **Coral Peach**, led by [primary]: the exact `#EB6B52` the
 /// landing's theme wall uses for its light-sheet signature ("coral peach,
 /// redder than plain amber"). Two decisions shape everything else:
 ///
@@ -29,20 +29,20 @@ abstract final class ExampleColours {
   // still glows against ink instead of muddying out.
 
   /// Primary brand, light mode. The theme_section signature peach.
-  static const int brand = 0xFFEB6B52;
+  static const int primary = 0xFFEB6B52;
 
   /// Primary brand, dark mode.
   static const int brandDark = 0xFFF0885B;
 
   /// Subtle brand tint, light mode: the landing's peach chip background.
-  static const int brandSubtle = 0xFFFCEDE4;
+  static const int badgePrimaryTintedBackground = 0xFFFCEDE4;
 
   /// Subtle brand tint, dark mode: a deep peach-stained ink.
   static const int brandSubtleDark = 0xFF3A2A20;
 
-  // Peach ramp: tints and shades of [brand], for hover, press, and disabled.
+  // Peach ramp: tints and shades of [primary], for hover, press, and disabled.
 
-  static const int peach500 = brand;
+  static const int peach500 = primary;
   static const int peach600 = 0xFFD8543A;
   static const int peach700 = 0xFFB5402B;
 
@@ -166,8 +166,8 @@ abstract final class ExampleColours {
   static const int infoTextDark = indigo200;
 
   // Input validation outlines.
-  static const int inputBorderError = error;
-  static const int inputBorderWarning = warningIcon;
+  static const int inputErrorBorder = error;
+  static const int inputWarningBorder = warningIcon;
   static const int inputBorderErrorDark = errorDark;
   static const int inputBorderWarningDark = warningIconDark;
 

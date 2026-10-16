@@ -2,24 +2,12 @@ name: Publish Gallery
 
 # Deploys dievas_gallery (Widgetbook) to Cloudflare Pages.
 #
-# The landing page (dievas_landing Jaspr server) is deployed separately via
-# Railway — it auto-deploys on push through Railway's GitHub integration.
-# No CI step needed here for the landing.
+# The landing page is deployed separately to Cloudflare Workers (see
+# deploy_landing.yml). No CI step needed here for the landing.
 
 on:
     workflow_dispatch:
-        inputs:
-            keep_previews:
-                description: Keep existing preview deployments
-                required: true
-                type: boolean
-                default: true
     workflow_call:
-        inputs:
-            keep_previews:
-                description: Keep existing preview deployments
-                type: boolean
-                default: true
     push:
         branches:
             - master

@@ -27,7 +27,7 @@ class _MotionPreviewState extends State<_MotionPreview> {
         Container(
           height: context.sizing.buttonHeightLG + context.spacing.MD,
           padding: EdgeInsets.all(context.spacing.SM),
-          decoration: BoxDecoration(color: context.colours.background.bgSubtle, borderRadius: context.border.LG),
+          decoration: BoxDecoration(color: context.colours.background.cardBackground, borderRadius: context.border.LG),
           child: AnimatedAlign(
             alignment: _atEnd ? Alignment.centerRight : Alignment.centerLeft,
             duration: MediaQuery.disableAnimationsOf(context) ? Duration.zero : context.animation.standard,
@@ -35,7 +35,7 @@ class _MotionPreviewState extends State<_MotionPreview> {
             child: ExcludeSemantics(
               child: CircleAvatar(
                 radius: context.sizing.avatarSM * avatarRadiusFactor,
-                backgroundColor: context.colours.core.brand,
+                backgroundColor: context.colours.core.primary,
               ),
             ),
           ),

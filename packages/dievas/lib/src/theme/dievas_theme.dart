@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'animation/dievas_animation_theme_data.dart';
 import 'border/dievas_border_theme_data.dart';
-import 'color/dievas_colour_theme_data.dart';
+import 'colour/dievas_colour_theme_data.dart';
 import 'component/dievas_component_theme_data.dart';
 import 'dievas_theme_data.dart';
 import 'elevation/dievas_elevation_theme_data.dart';

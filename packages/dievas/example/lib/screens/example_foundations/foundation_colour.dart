@@ -11,13 +11,13 @@ class _ColourSwatches extends StatelessWidget {
       spacing: context.spacing.MD,
       runSpacing: context.spacing.MD,
       children: [
-        _Swatch(label: 'brand', colour: colours.core.brand),
+        _Swatch(label: 'primary', colour: colours.core.primary),
         _Swatch(label: 'textPrimary', colour: colours.text.textPrimary),
-        _Swatch(label: 'bgBase', colour: colours.background.bgBase),
-        _Swatch(label: 'bgSubtle', colour: colours.background.bgSubtle),
-        _Swatch(label: 'actionPrimary', colour: colours.action.actionPrimary),
-        _Swatch(label: 'actionError', colour: colours.action.actionError),
-        _Swatch(label: 'borderBrand', colour: colours.border.borderBrand),
+        _Swatch(label: 'pageBackground', colour: colours.background.pageBackground),
+        _Swatch(label: 'cardBackground', colour: colours.background.cardBackground),
+        _Swatch(label: 'buttonPrimaryBackground', colour: colours.action.buttonPrimaryBackground),
+        _Swatch(label: 'buttonDestructiveBackground', colour: colours.action.buttonDestructiveBackground),
+        _Swatch(label: 'selectionBorder', colour: colours.border.selectionBorder),
       ],
     );
   }
@@ -43,7 +43,7 @@ class _Swatch extends StatelessWidget {
             decoration: BoxDecoration(
               color: colour,
               borderRadius: context.border.MD,
-              border: .all(color: context.colours.border.borderDefault),
+              border: .all(color: context.colours.border.dividerColour),
             ),
           ),
           SizedBox(height: context.spacing.SM),

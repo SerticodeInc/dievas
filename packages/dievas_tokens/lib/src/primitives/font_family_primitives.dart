@@ -1,18 +1,15 @@
-/// Raw font-family primitives for the Dievas typography system.
+/// Raw font family primitives for the Dievas typography system.
 abstract final class DievasFontFamilyPrimitives {
-  /// Martian Mono — body, label, title, and UI copy.
-  /// Font files registered in packages/dievas/pubspec.yaml under flutter: fonts:.
+  /// Martian Mono, used for body, label, title, and UI copy.
+  /// Font files are registered in packages/dievas/pubspec.yaml under fonts:.
   static const String sans = 'MartianMono';
 
-  /// Martian Mono — display and heading styles.
-  /// Same family; weight selected via typography tokens.
+  /// Martian Mono, used for display and heading styles.
+  /// Same family as sans; weight is selected via typography tokens.
   static const String sansExtended = 'MartianMono';
 
-  /// Cascadia Code — code snippets, inline code, and monospaced output.
-  ///
-  /// For Flutter: download .ttf/.otf, drop in packages/dievas/assets/fonts/,
-  /// then register with family: "Cascadia Code" in packages/dievas/pubspec.yaml.
-  ///
-  /// For web: Google Fonts serves this family directly.
+  /// Cascadia Code, used for code snippets, inline code, and monospaced output.
+  /// For Flutter: drop .ttf/.otf in packages/dievas/assets/fonts/ and register
+  /// family: "Cascadia Code" in pubspec.yaml. For web: Google Fonts serves it.
   static const String mono = 'Cascadia Code';
 }

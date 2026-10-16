@@ -2,6 +2,9 @@
   "$schema": "https://unpkg.com/wrangler/config-schema.json",
   "name": "dievas",
   "compatibility_date": "2026-10-01",
+  "build": {
+    "command": "bash landing/tool/build_cloudflare.sh"
+  },
   "assets": {
     "directory": "./landing/build/jaspr"
   }

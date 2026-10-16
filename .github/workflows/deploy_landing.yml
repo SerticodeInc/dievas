@@ -38,9 +38,6 @@ jobs:
                   cache: npm
                   cache-dependency-path: landing/package-lock.json
 
-            - name: Build static landing page
-              run: bash landing/tool/build_cloudflare.sh
-
             - name: Deploy landing
               run: npx wrangler@4 deploy
               env:

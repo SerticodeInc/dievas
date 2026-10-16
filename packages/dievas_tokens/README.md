@@ -15,7 +15,10 @@ void main() {
 }
 ```
 
-## Structure - **Primitives** - raw values (colours, typography, spacing, sizing, radius, elevation, opacity, duration, offset) - **Semantic tokens** - role based aliases (light/dark colour schemes, typography roles, spacing scale, etc.)
+## Structure
+
+- **Primitives** — raw values for colours, typography, spacing, sizing, radius, elevation, opacity, duration, easing, and breakpoints.
+- **Semantic tokens** — aliases for roles such as light and dark colour schemes, typography roles, and spacing scales.
 
 ## License
 

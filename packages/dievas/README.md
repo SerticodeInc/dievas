@@ -6,7 +6,14 @@ Flutter theme and component layer.
 
 Built on [dievas_tokens](https://pub.dev/packages/dievas_tokens) for primitive and semantic design tokens.
 
-## Features - **Theme contract** - `DievasThemeData` interface with `DievasGlobalThemeData` sealed abstract base for brand themes - **Default themes** - `DievasLightThemeData` and `DievasDarkThemeData` - **35+ components** - buttons, form inputs, display, feedback, overlays, navigation, and utility widgets - **InheritedModel** - efficient sub system accessors (`context.colors`, `context.typography`, etc.) - **Responsive grid** - `DievasGrid` with breakpoint aware layout - **Localization** - `DievasLocalizations` delegate with context extension
+## Features
+
+- **Theme contract** — `DievasThemeData` interface with `DievasGlobalThemeData` as the base for brand themes.
+- **Default themes** — `DievasLightThemeData` and `DievasDarkThemeData`.
+- **Components** — buttons, form inputs, display, feedback, overlays, navigation, and utility widgets.
+- **InheritedModel** — access theme subsystems through `context.colours`, `context.typography`, and other context extensions.
+- **Responsive grid** — `DievasGrid` with layouts that adapt to breakpoints.
+- **Localization** — `DievasLocalizations` delegate with a context extension.
 
 ## Usage
 
@@ -28,12 +35,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.colors;
+    final colours = context.colours;
 
     return MaterialApp(
-      theme: context.theme.material,
+      theme: DievasTheme.materialOf(context),
       home: Scaffold(
-        backgroundColor: colors.background.bgBase,
+        backgroundColor: colours.background.bgBase,
         body: Center(
           child: DievasFilledButton(
             label: 'Hello Dievas',

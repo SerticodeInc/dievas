@@ -10,12 +10,12 @@ Use these settings under the Worker’s **Settings → Build**:
 | --- | --- |
 | Production branch | `master` |
 | Root directory | Repository root (`/`) |
-| Build command | `bash landing/tool/build_cloudflare.sh` |
+| Build command | Leave empty; Wrangler runs the configured build |
 | Deploy command | `npx wrangler@4 deploy` |
 | Preview command | `npx wrangler@4 versions upload` |
 | Build variable | `NODE_VERSION=22` |
 
-The build script installs Dart 3.13.2 on Cloudflare’s Linux build image, resolves the landing dependencies, compiles Tailwind CSS, and runs Jaspr static generation. The root `wrangler.jsonc` deploys `landing/build/jaspr` using Workers static assets.
+The build script installs Dart 3.13.2 on Cloudflare’s Linux build image, resolves the landing dependencies, compiles Tailwind CSS, and runs Jaspr static generation. The root `wrangler.jsonc` runs this script through `build.command` before deploying `landing/build/jaspr` using Workers static assets. This also builds the site when the Cloudflare dashboard’s build command is empty.
 
 Under **Build watch paths**, replace the default `*` include with:
 

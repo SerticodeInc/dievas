@@ -1,7 +1,7 @@
+import 'package:dievas_example/example_navigation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dievas/dievas.dart';
-import 'package:dievas_example/example_navigation.dart';
 import 'package:dievas_example/widgets/example_page.dart';
 
 part 'example_components/component_controls.dart';

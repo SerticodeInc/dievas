@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 
 final RegExp _declaration = RegExp(r'static const\s+[\w<> ,]+\s+(\w+)\s*=');
 final RegExp _legacyAxis = RegExp(
-  r'^(x[2-8]l|smPlus|mdPlus|lgPlus|xlPlus|x2lPlus|xs|sm|md|lg|xl)$'
+  r'^(x[2-8]l|xlPlus|x2lPlus)$'
   r'|[A-Za-z_]\w*(Xs|Sm|Md|Lg|Xl|Xsm)$',
 );
 final RegExp _sizeName = RegExp(

@@ -44,7 +44,7 @@ class _Configurations extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
+      padding: EdgeInsets.symmetric(horizontal: context.spacing.XL, vertical: context.spacing.LG),
       child: Column(
         mainAxisSize: .min,
         children: [
@@ -57,7 +57,7 @@ class _Configurations extends StatelessWidget {
               onItemTap: (_) {},
             ),
           ),
-          SizedBox(height: context.spacing.lg),
+          SizedBox(height: context.spacing.LG),
           _DemoBlock(
             'With Home Icon',
             child: DievasBreadcrumb<String>(
@@ -68,7 +68,7 @@ class _Configurations extends StatelessWidget {
               onItemTap: (_) {},
             ),
           ),
-          SizedBox(height: context.spacing.lg),
+          SizedBox(height: context.spacing.LG),
           _DemoBlock(
             'Last crumb selected',
             child: DievasBreadcrumb<String>(
@@ -78,7 +78,7 @@ class _Configurations extends StatelessWidget {
               onItemTap: (_) {},
             ),
           ),
-          SizedBox(height: context.spacing.lg),
+          SizedBox(height: context.spacing.LG),
           _DemoBlock(
             'Disabled',
             child: DievasBreadcrumb<String>(
@@ -105,8 +105,8 @@ class _DemoBlock extends StatelessWidget {
     crossAxisAlignment: .start,
     mainAxisSize: .min,
     children: [
-      Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
-      SizedBox(height: context.spacing.sm),
+      Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
+      SizedBox(height: context.spacing.SM),
       ComponentBoundary(child: child),
     ],
   );

@@ -11,7 +11,7 @@ final class DievasBottomSheetThemeData extends Equatable {
     required this.handleTopInset,
     required this.backgroundColour,
     required this.barrierColour,
-    required this.elevation,
+    required this.shadow,
   });
 
   /// Corner radius applied to the top edge of the sheet.
@@ -35,8 +35,8 @@ final class DievasBottomSheetThemeData extends Equatable {
   /// Colour of the modal barrier behind the sheet.
   final Color barrierColour;
 
-  /// Shadow elevation of the sheet.
-  final double elevation;
+  /// Shadow stack for the sheet surface, drawn from the elevation tokens.
+  final List<BoxShadow> shadow;
 
   @override
   List<Object?> get props => [
@@ -47,6 +47,6 @@ final class DievasBottomSheetThemeData extends Equatable {
     handleTopInset,
     backgroundColour,
     barrierColour,
-    elevation,
+    shadow,
   ];
 }

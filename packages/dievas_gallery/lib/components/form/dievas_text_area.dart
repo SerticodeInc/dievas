@@ -27,7 +27,7 @@ class _Playground extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.spacing.xl),
+        padding: EdgeInsets.symmetric(horizontal: context.spacing.XL),
         child: ComponentBoundary(
           child: DievasTextArea(
             label: label.isEmpty ? null : label,
@@ -49,12 +49,12 @@ class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
+      padding: EdgeInsets.symmetric(horizontal: context.spacing.XL, vertical: context.spacing.LG),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           _StateBlock('Default', child: const DievasTextArea(hint: 'Start typing...')),
-          SizedBox(height: context.spacing.mdPlus),
+          SizedBox(height: context.spacing.MDPlus),
           _StateBlock(
             'With Label + Helper',
             child: const DievasTextArea(
@@ -64,7 +64,7 @@ class _AllStates extends StatelessWidget {
               minLines: 4,
             ),
           ),
-          SizedBox(height: context.spacing.mdPlus),
+          SizedBox(height: context.spacing.MDPlus),
           _StateBlock(
             'Error',
             child: const DievasTextArea(
@@ -73,7 +73,7 @@ class _AllStates extends StatelessWidget {
               errorText: 'Bio cannot be empty.',
             ),
           ),
-          SizedBox(height: context.spacing.mdPlus),
+          SizedBox(height: context.spacing.MDPlus),
           _StateBlock(
             'Warning',
             child: const DievasTextArea(
@@ -82,7 +82,7 @@ class _AllStates extends StatelessWidget {
               warningText: 'Bio is very short — add a little more detail.',
             ),
           ),
-          SizedBox(height: context.spacing.mdPlus),
+          SizedBox(height: context.spacing.MDPlus),
           _StateBlock(
             'Disabled',
             child: const DievasTextArea(label: 'Notes', hint: 'No notes available.', enabled: false),
@@ -103,8 +103,8 @@ class _StateBlock extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisSize: MainAxisSize.min,
     children: [
-      Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
-      SizedBox(height: context.spacing.sm),
+      Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
+      SizedBox(height: context.spacing.SM),
       ComponentBoundary(child: child),
     ],
   );

@@ -39,7 +39,7 @@ class _Playground extends StatelessWidget {
 
     final DievasTagBorderRadius borderRadius = switch (shape) {
       'Pill' => .pill,
-      _ => .rounded(DievasTheme.borderOf(context).sm),
+      _ => .rounded(DievasTheme.borderOf(context).SM),
     };
 
     final showLeadingIcon = context.knobs.boolean(label: 'Leading Icon');
@@ -70,14 +70,14 @@ class _AllStyles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconSize = DievasTheme.componentsOf(context).tag.iconSize;
-    final borderSm = DievasTheme.borderOf(context).sm;
+    final borderSM = DievasTheme.borderOf(context).SM;
 
     return Center(
       child: Padding(
-        padding: .all(context.spacing.lg),
+        padding: .all(context.spacing.LG),
         child: Wrap(
-          spacing: context.spacing.sm,
-          runSpacing: context.spacing.smPlus,
+          spacing: context.spacing.SM,
+          runSpacing: context.spacing.SMPlus,
           alignment: .center,
           children: [
             for (final style in DievasTagStyle.values) ...[
@@ -96,14 +96,14 @@ class _AllStyles extends StatelessWidget {
                 child: DievasTag(
                   label: style.name,
                   style: style,
-                  borderRadius: DievasTagBorderRadius.rounded(borderSm),
+                  borderRadius: DievasTagBorderRadius.rounded(borderSM),
                 ),
               ),
               ComponentBoundary(
                 child: DievasTag(
                   label: style.name,
                   style: style,
-                  borderRadius: DievasTagBorderRadius.rounded(borderSm),
+                  borderRadius: DievasTagBorderRadius.rounded(borderSM),
                   leadingIcon: Icon(Icons.label_outline_rounded, size: iconSize),
                   onRemove: () {},
                 ),

@@ -223,7 +223,7 @@ typedef DievasButtonDecoratorBuilder =
 
 /// State-dependent props passed from [DievasButtonBuilder] to its decorator callback.
 @internal
-final class DievasButtonDecoratorStateProps with EquatableMixin {
+final class DievasButtonDecoratorStateProps with Equatable {
   const DievasButtonDecoratorStateProps({
     required this.borderSide,
     required this.estimatedTextHeight,
@@ -240,7 +240,7 @@ final class DievasButtonDecoratorStateProps with EquatableMixin {
 
 /// Resolved layout values returned by the decorator builder.
 @internal
-final class DievasButtonDecorator with EquatableMixin {
+final class DievasButtonDecorator with Equatable {
   const DievasButtonDecorator({required this.height, required this.padding, required this.child});
 
   final double height;

@@ -9,54 +9,54 @@ import 'package:flutter/painting.dart';
 /// initials are provided.
 final class DievasAvatarThemeData extends Equatable {
   const DievasAvatarThemeData({
-    required this.sizeXs,
-    required this.sizeSm,
-    required this.sizeMd,
-    required this.sizeLg,
-    required this.sizeXl,
+    required this.sizeXS,
+    required this.sizeSM,
+    required this.sizeMD,
+    required this.sizeLG,
+    required this.sizeXL,
     required this.borderRadiusSquare,
-    required this.initialsStyleXs,
-    required this.initialsStyleSm,
-    required this.initialsStyleMd,
-    required this.initialsStyleLg,
-    required this.initialsStyleXl,
+    required this.initialsStyleXS,
+    required this.initialsStyleSM,
+    required this.initialsStyleMD,
+    required this.initialsStyleLG,
+    required this.initialsStyleXL,
     required this.backgroundColour,
     required this.initialsColour,
     required this.placeholderColour,
   });
 
-  /// Container size for [DievasAvatarSize.xs] — 24 dp.
-  final double sizeXs;
+  /// Container size for [DievasAvatarSize.XS] — 24 dp.
+  final double sizeXS;
 
-  /// Container size for [DievasAvatarSize.sm] — 32 dp.
-  final double sizeSm;
+  /// Container size for [DievasAvatarSize.SM] — 32 dp.
+  final double sizeSM;
 
-  /// Container size for [DievasAvatarSize.md] — 40 dp.
-  final double sizeMd;
+  /// Container size for [DievasAvatarSize.MD] — 40 dp.
+  final double sizeMD;
 
-  /// Container size for [DievasAvatarSize.lg] — 48 dp.
-  final double sizeLg;
+  /// Container size for [DievasAvatarSize.LG] — 48 dp.
+  final double sizeLG;
 
-  /// Container size for [DievasAvatarSize.xl] — 64 dp.
-  final double sizeXl;
+  /// Container size for [DievasAvatarSize.XL] — 64 dp.
+  final double sizeXL;
 
   /// Corner radius used when [DievasAvatarShape.square] is selected.
   final BorderRadius borderRadiusSquare;
 
-  /// Initials text style at [DievasAvatarSize.xs].
-  final TextStyle initialsStyleXs;
+  /// Initials text style at [DievasAvatarSize.XS].
+  final TextStyle initialsStyleXS;
 
-  /// Initials text style at [DievasAvatarSize.sm].
-  final TextStyle initialsStyleSm;
+  /// Initials text style at [DievasAvatarSize.SM].
+  final TextStyle initialsStyleSM;
 
-  /// Initials text style at [DievasAvatarSize.md].
-  final TextStyle initialsStyleMd;
+  /// Initials text style at [DievasAvatarSize.MD].
+  final TextStyle initialsStyleMD;
 
-  /// Initials text style at [DievasAvatarSize.lg].
-  final TextStyle initialsStyleLg;
+  /// Initials text style at [DievasAvatarSize.LG].
+  final TextStyle initialsStyleLG;
 
-  /// Initials text style at [DievasAvatarSize.xl].
-  final TextStyle initialsStyleXl;
+  /// Initials text style at [DievasAvatarSize.XL].
+  final TextStyle initialsStyleXL;
 
   /// Fallback container background (used when no image is provided).
   final Color backgroundColour;
@@ -69,32 +69,32 @@ final class DievasAvatarThemeData extends Equatable {
 
   /// Creates a copy of this [DievasAvatarThemeData] with the given fields replaced.
   DievasAvatarThemeData copyWith({
-    double? sizeXs,
-    double? sizeSm,
-    double? sizeMd,
-    double? sizeLg,
-    double? sizeXl,
+    double? sizeXS,
+    double? sizeSM,
+    double? sizeMD,
+    double? sizeLG,
+    double? sizeXL,
     BorderRadius? borderRadiusSquare,
-    TextStyle? initialsStyleXs,
-    TextStyle? initialsStyleSm,
-    TextStyle? initialsStyleMd,
-    TextStyle? initialsStyleLg,
-    TextStyle? initialsStyleXl,
+    TextStyle? initialsStyleXS,
+    TextStyle? initialsStyleSM,
+    TextStyle? initialsStyleMD,
+    TextStyle? initialsStyleLG,
+    TextStyle? initialsStyleXL,
     Color? backgroundColour,
     Color? initialsColour,
     Color? placeholderColour,
   }) => DievasAvatarThemeData(
-    sizeXs: sizeXs ?? this.sizeXs,
-    sizeSm: sizeSm ?? this.sizeSm,
-    sizeMd: sizeMd ?? this.sizeMd,
-    sizeLg: sizeLg ?? this.sizeLg,
-    sizeXl: sizeXl ?? this.sizeXl,
+    sizeXS: sizeXS ?? this.sizeXS,
+    sizeSM: sizeSM ?? this.sizeSM,
+    sizeMD: sizeMD ?? this.sizeMD,
+    sizeLG: sizeLG ?? this.sizeLG,
+    sizeXL: sizeXL ?? this.sizeXL,
     borderRadiusSquare: borderRadiusSquare ?? this.borderRadiusSquare,
-    initialsStyleXs: initialsStyleXs ?? this.initialsStyleXs,
-    initialsStyleSm: initialsStyleSm ?? this.initialsStyleSm,
-    initialsStyleMd: initialsStyleMd ?? this.initialsStyleMd,
-    initialsStyleLg: initialsStyleLg ?? this.initialsStyleLg,
-    initialsStyleXl: initialsStyleXl ?? this.initialsStyleXl,
+    initialsStyleXS: initialsStyleXS ?? this.initialsStyleXS,
+    initialsStyleSM: initialsStyleSM ?? this.initialsStyleSM,
+    initialsStyleMD: initialsStyleMD ?? this.initialsStyleMD,
+    initialsStyleLG: initialsStyleLG ?? this.initialsStyleLG,
+    initialsStyleXL: initialsStyleXL ?? this.initialsStyleXL,
     backgroundColour: backgroundColour ?? this.backgroundColour,
     initialsColour: initialsColour ?? this.initialsColour,
     placeholderColour: placeholderColour ?? this.placeholderColour,
@@ -102,17 +102,17 @@ final class DievasAvatarThemeData extends Equatable {
 
   @override
   List<Object?> get props => [
-    sizeXs,
-    sizeSm,
-    sizeMd,
-    sizeLg,
-    sizeXl,
+    sizeXS,
+    sizeSM,
+    sizeMD,
+    sizeLG,
+    sizeXL,
     borderRadiusSquare,
-    initialsStyleXs,
-    initialsStyleSm,
-    initialsStyleMd,
-    initialsStyleLg,
-    initialsStyleXl,
+    initialsStyleXS,
+    initialsStyleSM,
+    initialsStyleMD,
+    initialsStyleLG,
+    initialsStyleXL,
     backgroundColour,
     initialsColour,
     placeholderColour,

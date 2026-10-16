@@ -203,7 +203,7 @@ class _DropdownOverlay<T> extends StatelessWidget {
                 color: theme.overlayBgColour,
                 borderRadius: theme.overlayBorderRadius,
                 border: .all(color: theme.overlayBorderColour),
-                boxShadow: theme.overlayElevation,
+                boxShadow: theme.shadow,
               ),
               constraints: const BoxConstraints(maxHeight: 240),
               child: ListView(

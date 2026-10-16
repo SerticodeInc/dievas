@@ -21,7 +21,7 @@ final class DievasDropdownThemeData extends Equatable {
     required this.overlayBgColour,
     required this.overlayBorderColour,
     required this.overlayBorderRadius,
-    required this.overlayElevation,
+    required this.shadow,
     required this.optionStyle,
     required this.optionSelectedColour,
     required this.optionTextColour,
@@ -74,8 +74,8 @@ final class DievasDropdownThemeData extends Equatable {
   /// Corner radius of the overlay.
   final BorderRadius overlayBorderRadius;
 
-  /// Shadow list for the overlay.
-  final List<BoxShadow> overlayElevation;
+  /// Shadow stack for the overlay, drawn from the elevation tokens.
+  final List<BoxShadow> shadow;
 
   /// Text style for option labels.
   final TextStyle optionStyle;
@@ -117,7 +117,7 @@ final class DievasDropdownThemeData extends Equatable {
     overlayBgColour,
     overlayBorderColour,
     overlayBorderRadius,
-    overlayElevation,
+    shadow,
     optionStyle,
     optionSelectedColour,
     optionTextColour,

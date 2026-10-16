@@ -83,10 +83,11 @@ class DievasAlert extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: .start,
+                  mainAxisSize: .min,
                   children: [
                     Text(title, style: theme.titleStyle.copyWith(color: palette.text)),
                     if (description case final text?) ...[
-                      SizedBox(height: context.spacing.xs),
+                      SizedBox(height: context.spacing.XS),
                       Text(text, style: theme.bodyStyle.copyWith(color: palette.text)),
                     ],
                   ],
@@ -101,7 +102,7 @@ class DievasAlert extends StatelessWidget {
                   child: GestureDetector(
                     onTap: onDismiss,
                     child: Padding(
-                      padding: EdgeInsets.only(left: context.spacing.sm),
+                      padding: EdgeInsets.only(left: context.spacing.SM),
                       child: SizedBox.square(
                         dimension: theme.dismissIconSize,
                         child: IconTheme(

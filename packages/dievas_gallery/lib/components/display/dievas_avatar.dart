@@ -22,7 +22,7 @@ class _Playground extends StatelessWidget {
       label: 'Size',
       options: DievasAvatarSize.values,
       labelBuilder: (v) => v.name,
-      initialOption: .md,
+      initialOption: .MD,
     );
 
     final shape = context.knobs.object.dropdown<DievasAvatarShape>(
@@ -76,20 +76,20 @@ class _AllSizes extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: .all(spacing.lg),
+        padding: .all(spacing.LG),
         child: Wrap(
-          spacing: spacing.md,
+          spacing: spacing.MD,
           crossAxisAlignment: .center,
           children: [
             for (final size in DievasAvatarSize.values)
               Column(
                 mainAxisSize: .min,
-                spacing: spacing.sm,
+                spacing: spacing.SM,
                 children: [
                   ComponentBoundary(
                     child: DievasAvatar(initials: 'AB', size: size),
                   ),
-                  Text(size.name, style: context.typography.labelXs),
+                  Text(size.name, style: context.typography.labelXS),
                 ],
               ),
           ],
@@ -108,20 +108,20 @@ class _AllShapes extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: .all(spacing.lg),
+        padding: .all(spacing.LG),
         child: Wrap(
-          spacing: spacing.lg,
+          spacing: spacing.LG,
           crossAxisAlignment: .center,
           children: [
             for (final shape in DievasAvatarShape.values)
               Column(
                 mainAxisSize: .min,
-                spacing: spacing.sm,
+                spacing: spacing.SM,
                 children: [
                   ComponentBoundary(
-                    child: DievasAvatar(initials: 'AB', size: DievasAvatarSize.lg, shape: shape),
+                    child: DievasAvatar(initials: 'AB', size: DievasAvatarSize.LG, shape: shape),
                   ),
-                  Text(shape.name, style: context.typography.labelXs),
+                  Text(shape.name, style: context.typography.labelXS),
                 ],
               ),
           ],

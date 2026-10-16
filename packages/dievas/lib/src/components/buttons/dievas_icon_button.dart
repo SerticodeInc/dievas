@@ -6,11 +6,14 @@ import 'dievas_button_color_utils.dart';
 import 'button_types/dievas_button_size.dart';
 
 /// Visual style variants for [DievasIconButton].
+///
+/// The variants differ only by container: [ghost] is transparent, [tinted] sits
+/// on a subtle surface fill. Both share the same icon colour.
 enum DievasIconButtonStyle {
-  /// Transparent background, icon only — ghost behaviour.
+  /// Transparent background — icon only.
   ghost,
 
-  /// Tinted background matching the action primary fill.
+  /// Subtle surface fill behind the icon.
   tinted,
 }
 
@@ -27,7 +30,7 @@ class DievasIconButton extends StatefulWidget {
     super.key,
     required this.icon,
     this.style = .ghost,
-    this.size = .md,
+    this.size = .MD,
     this.shape,
     this.backgroundColor,
     this.foregroundColor,
@@ -63,9 +66,9 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
     };
 
     final (containerSize, iconSize, radius) = switch (widget.size) {
-      .sm => (buttonTheme.size.sm, buttonTheme.iconSize.sm, buttonTheme.radius.sm),
-      .md => (buttonTheme.size.md, buttonTheme.iconSize.md, buttonTheme.radius.md),
-      .lg => (buttonTheme.size.lg, buttonTheme.iconSize.lg, buttonTheme.radius.lg),
+      .SM => (buttonTheme.size.SM, buttonTheme.iconSize.SM, buttonTheme.radius.SM),
+      .MD => (buttonTheme.size.MD, buttonTheme.iconSize.MD, buttonTheme.radius.MD),
+      .LG => (buttonTheme.size.LG, buttonTheme.iconSize.LG, buttonTheme.radius.LG),
     };
 
     final effectiveShape = widget.shape ?? RoundedRectangleBorder(borderRadius: BorderRadius.all(radius));

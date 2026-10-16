@@ -26,7 +26,7 @@ class _Playground extends StatelessWidget {
       label: 'Size',
       options: DievasButtonSize.values,
       labelBuilder: (v) => v.name,
-      initialOption: DievasButtonSize.md,
+      initialOption: DievasButtonSize.MD,
     );
 
     final borderRadiusOverride = context.knobs.double.slider(label: 'Border radius', initialValue: 0, min: 0, max: 24);
@@ -64,10 +64,10 @@ class _AllStyles extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
+        spacing: context.spacing.SMPlus,
+        runSpacing: context.spacing.SMPlus,
         alignment: WrapAlignment.center,
         children: [
           for (final style in DievasIconButtonStyle.values)
@@ -86,10 +86,10 @@ class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
+        spacing: context.spacing.SMPlus,
+        runSpacing: context.spacing.SMPlus,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           for (final size in DievasButtonSize.values)

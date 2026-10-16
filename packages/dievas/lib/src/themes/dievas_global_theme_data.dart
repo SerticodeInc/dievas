@@ -5,6 +5,9 @@ part of '../themes.dart';
 /// Sub classing [DievasGlobalThemeData] is the contract for both the built-in
 /// default themes and consumer app brand themes. Subclasses provide:
 /// - [colours] — the full colour token set for their brand / mode
+/// - [brandPalette] — optional brand palette; when supplied, every
+///   brand-derived colour role is re-resolved from it (see
+///   [applyBrandPalette]) on top of [colours]
 /// - [border] — optional border radius overrides (defaults work for most brands)
 ///
 /// Everything else — typography, component theme data, Material bridge — is
@@ -27,6 +30,7 @@ part of '../themes.dart';
 base class DievasGlobalThemeData implements DievasThemeData {
   DievasGlobalThemeData({
     required DievasColourThemeData colours,
+    DievasBrandPalette? brandPalette,
     DievasAnimationThemeData animation = const DievasAnimationThemeData(),
     DievasBorderThemeData border = const DievasBorderThemeData(),
     DievasSpacingThemeData spacing = const DievasSpacingThemeData(),
@@ -36,15 +40,15 @@ base class DievasGlobalThemeData implements DievasThemeData {
     DievasComponentThemeData? components,
     DievasTypographyThemeData? typography,
   }) : _animation = animation,
-       _colours = colours,
+       _colours = brandPalette == null ? colours : applyBrandPalette(colours, brandPalette),
        _border = border,
        _spacing = spacing,
        _sizing = sizing,
        _opacity = opacity {
-    _typography = typography ?? _createTypographyData(colours.text.textPrimary);
-    _elevation = elevation ?? _buildDefaultElevation(colours);
+    _typography = typography ?? _createTypographyData(_colours.text.textPrimary);
+    _elevation = elevation ?? _buildDefaultElevation();
     _components = _deriveDievasComponentThemeData(
-      colours,
+      _colours,
       _typography,
       spacing,
       sizing,
@@ -53,7 +57,7 @@ base class DievasGlobalThemeData implements DievasThemeData {
       _elevation,
       components,
     );
-    _material = _buildMaterial(colours, _typography);
+    _material = _buildMaterial(_colours, _typography);
   }
 
   DievasGlobalThemeData._raw({
@@ -151,71 +155,25 @@ base class DievasGlobalThemeData implements DievasThemeData {
     );
   }
 
-  static DievasElevationThemeData _buildDefaultElevation(DievasColourThemeData colours) {
-    // Shadow colour: always derived from the overlay base — not the brand colour.
-    final shadow = colours.staticColours.staticBlack;
+  static DievasElevationThemeData _buildDefaultElevation() {
+    // Shadow ink: a soft near-black, scoped to elevation. Deliberately not
+    // the pure staticBlack, which reads heavy on surfaces.
+    final shadow = Color(DievasElevationSemantic.shadowColour);
 
-    // Helper to construct BoxShadow from tokens.
-    BoxShadow layer({required double blur, required double offsetY, required double opacity}) =>
-        BoxShadow(color: shadow.withAlpha((opacity * 255).round()), blurRadius: blur, offset: Offset(0, offsetY));
+    // Layers are painted centred — no vertical offset — so depth reads as a
+    // soft halo around the surface rather than a drop shadow underneath it.
+    List<BoxShadow> stack(List<DievasElevationShadow> layers) => [
+      for (final layer in layers)
+        BoxShadow(color: shadow.withAlpha((layer.tint * 255).round()), blurRadius: layer.blur),
+    ];
 
     return DievasElevationThemeData(
-      none: const [],
-      xs: [
-        layer(
-          blur: DievasElevationShadowLayer.xs.blur,
-          offsetY: DievasElevationShadowLayer.xs.offsetY,
-          opacity: DievasOpacitySemantic.shadow1,
-        ),
-      ],
-      sm: [
-        layer(
-          blur: DievasElevationShadowLayer.smUpper.blur,
-          offsetY: DievasElevationShadowLayer.smUpper.offsetY,
-          opacity: DievasOpacitySemantic.shadow2Upper,
-        ),
-        layer(
-          blur: DievasElevationShadowLayer.smLower.blur,
-          offsetY: DievasElevationShadowLayer.smLower.offsetY,
-          opacity: DievasOpacitySemantic.shadow2Lower,
-        ),
-      ],
-      md: [
-        layer(
-          blur: DievasElevationShadowLayer.mdUpper.blur,
-          offsetY: DievasElevationShadowLayer.mdUpper.offsetY,
-          opacity: DievasOpacitySemantic.shadow2Upper,
-        ),
-        layer(
-          blur: DievasElevationShadowLayer.mdLower.blur,
-          offsetY: DievasElevationShadowLayer.mdLower.offsetY,
-          opacity: DievasOpacitySemantic.shadow2,
-        ),
-      ],
-      lg: [
-        layer(
-          blur: DievasElevationShadowLayer.lgUpper.blur,
-          offsetY: DievasElevationShadowLayer.lgUpper.offsetY,
-          opacity: DievasOpacitySemantic.shadow1Light,
-        ),
-        layer(
-          blur: DievasElevationShadowLayer.lgLower.blur,
-          offsetY: DievasElevationShadowLayer.lgLower.offsetY,
-          opacity: DievasOpacitySemantic.shadow2,
-        ),
-      ],
-      xl: [
-        layer(
-          blur: DievasElevationShadowLayer.xlUpper.blur,
-          offsetY: DievasElevationShadowLayer.xlUpper.offsetY,
-          opacity: DievasOpacitySemantic.shadow1Light,
-        ),
-        layer(
-          blur: DievasElevationShadowLayer.xlLower.blur,
-          offsetY: DievasElevationShadowLayer.xlLower.offsetY,
-          opacity: DievasOpacitySemantic.shadow2Heavy,
-        ),
-      ],
+      NONE: const [],
+      XS: stack(DievasElevationShadowLayer.XS),
+      SM: stack(DievasElevationShadowLayer.SM),
+      MD: stack(DievasElevationShadowLayer.MD),
+      LG: stack(DievasElevationShadowLayer.LG),
+      XL: stack(DievasElevationShadowLayer.XL),
     );
   }
 
@@ -224,8 +182,8 @@ base class DievasGlobalThemeData implements DievasThemeData {
     final seedColour = colours.action.actionPrimary;
     final scaffoldBg = colours.background.bgBase;
     final textColour = colours.text.textPrimary;
-    final baseFont = typography.bodyMd.fontFamily ?? DievasFontFamilyPrimitives.sans;
-    final displayFont = typography.displaySm.fontFamily ?? DievasFontFamilyPrimitives.sansExtended;
+    final baseFont = typography.bodyMD.fontFamily ?? DievasFontFamilyPrimitives.sans;
+    final displayFont = typography.displaySM.fontFamily ?? DievasFontFamilyPrimitives.sansExtended;
 
     final base = ThemeData(
       brightness: brightness,

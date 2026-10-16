@@ -4,9 +4,9 @@ import 'package:flutter/painting.dart';
 /// Theme data for [DievasLoader] — a standalone full-surface loading widget.
 final class DievasLoaderThemeData extends Equatable {
   const DievasLoaderThemeData({
-    required this.spinnerSizeSm,
-    required this.spinnerSizeMd,
-    required this.spinnerSizeLg,
+    required this.spinnerSizeSM,
+    required this.spinnerSizeMD,
+    required this.spinnerSizeLG,
     required this.strokeWidth,
     required this.color,
     required this.trackColour,
@@ -15,14 +15,14 @@ final class DievasLoaderThemeData extends Equatable {
     required this.animationDuration,
   });
 
-  /// Spinner diameter for [DievasLoaderSize.sm].
-  final double spinnerSizeSm;
+  /// Spinner diameter for [DievasLoaderSize.SM].
+  final double spinnerSizeSM;
 
-  /// Spinner diameter for [DievasLoaderSize.md].
-  final double spinnerSizeMd;
+  /// Spinner diameter for [DievasLoaderSize.MD].
+  final double spinnerSizeMD;
 
-  /// Spinner diameter for [DievasLoaderSize.lg].
-  final double spinnerSizeLg;
+  /// Spinner diameter for [DievasLoaderSize.LG].
+  final double spinnerSizeLG;
 
   /// Stroke width of the spinning arc.
   final double strokeWidth;
@@ -44,9 +44,9 @@ final class DievasLoaderThemeData extends Equatable {
 
   @override
   List<Object?> get props => [
-    spinnerSizeSm,
-    spinnerSizeMd,
-    spinnerSizeLg,
+    spinnerSizeSM,
+    spinnerSizeMD,
+    spinnerSizeLG,
     strokeWidth,
     color,
     trackColour,

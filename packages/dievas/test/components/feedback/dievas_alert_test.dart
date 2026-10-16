@@ -78,5 +78,23 @@ void main() {
         expect(tester.takeException(), isNull);
       }
     });
+
+    testWidgets('shrink-wraps vertically inside a loose bounded parent', (tester) async {
+      await tester.pumpWidget(
+        Harness(
+          child: Center(
+            child: SizedBox(
+              width: 400,
+              height: 400,
+              child: Center(
+                child: DievasAlert(tone: .info, title: 'Title', description: 'Description text'),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      expect(tester.getSize(find.byType(DievasAlert)).height, lessThan(200));
+    });
   });
 }

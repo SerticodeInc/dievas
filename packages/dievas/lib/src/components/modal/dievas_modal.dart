@@ -1,5 +1,5 @@
 import 'package:dievas/src/extensions/dievas_theme_context_extension.dart';
-import 'package:flutter/material.dart' show Material, showDialog;
+import 'package:flutter/material.dart' show showDialog;
 import 'package:flutter/widgets.dart';
 import 'package:dievas/l10n/dievas_localizations.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
@@ -77,10 +77,12 @@ class DievasModal extends StatelessWidget {
     return Center(
       child: ConstrainedBox(
         constraints: BoxConstraints(minWidth: theme.minWidth, maxWidth: theme.maxWidth),
-        child: Material(
-          color: theme.backgroundColour,
-          elevation: theme.elevation,
-          borderRadius: theme.borderRadius,
+        child: Container(
+          decoration: BoxDecoration(
+            color: theme.backgroundColour,
+            borderRadius: theme.borderRadius,
+            boxShadow: theme.shadow,
+          ),
           child: Padding(
             padding: theme.padding,
             child: Column(
@@ -114,20 +116,20 @@ class DievasModal extends StatelessWidget {
 
                 // Body
                 if (content case final content?) ...[
-                  SizedBox(height: spacing.smPlus),
+                  SizedBox(height: spacing.SMPlus),
                   content,
                 ] else if (body case final body?) ...[
-                  SizedBox(height: spacing.smPlus),
+                  SizedBox(height: spacing.SMPlus),
                   Text(body, style: theme.bodyStyle),
                 ],
 
                 // Actions
                 if (actions.isNotEmpty) ...[
-                  SizedBox(height: spacing.lg),
+                  SizedBox(height: spacing.LG),
                   Row(
                     mainAxisAlignment: .end,
                     children: [
-                      for (int i = 0; i < actions.length; i++) ...[if (i > 0) SizedBox(width: spacing.sm), actions[i]],
+                      for (int i = 0; i < actions.length; i++) ...[if (i > 0) SizedBox(width: spacing.SM), actions[i]],
                     ],
                   ),
                 ],

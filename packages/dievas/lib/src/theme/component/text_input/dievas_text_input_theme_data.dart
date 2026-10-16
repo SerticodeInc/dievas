@@ -28,6 +28,8 @@ final class DievasTextInputThemeData extends Equatable {
     required this.iconColour,
     required this.iconSize,
     required this.iconSpacing,
+    required this.cursorWidth,
+    required this.cursorHeight,
     required this.labelSpacing,
     required this.helperSpacing,
     required this.disabledOpacity,
@@ -87,6 +89,13 @@ final class DievasTextInputThemeData extends Equatable {
   /// Gap between icon and text (dp).
   final double iconSpacing;
 
+  /// Caret thickness per size variant (dp).
+  final DievasInputThemeValue<double> cursorWidth;
+
+  /// Caret height per size variant (dp). Matches the input font size so the
+  /// caret tracks the text area rather than the full line box.
+  final DievasInputThemeValue<double> cursorHeight;
+
   /// Gap between the label and the input container (dp).
   final double labelSpacing;
 
@@ -116,6 +125,8 @@ final class DievasTextInputThemeData extends Equatable {
     Color? iconColour,
     double? iconSize,
     double? iconSpacing,
+    DievasInputThemeValue<double>? cursorWidth,
+    DievasInputThemeValue<double>? cursorHeight,
     double? labelSpacing,
     double? helperSpacing,
     double? disabledOpacity,
@@ -138,6 +149,8 @@ final class DievasTextInputThemeData extends Equatable {
     iconColour: iconColour ?? this.iconColour,
     iconSize: iconSize ?? this.iconSize,
     iconSpacing: iconSpacing ?? this.iconSpacing,
+    cursorWidth: cursorWidth ?? this.cursorWidth,
+    cursorHeight: cursorHeight ?? this.cursorHeight,
     labelSpacing: labelSpacing ?? this.labelSpacing,
     helperSpacing: helperSpacing ?? this.helperSpacing,
     disabledOpacity: disabledOpacity ?? this.disabledOpacity,
@@ -163,6 +176,8 @@ final class DievasTextInputThemeData extends Equatable {
     iconColour,
     iconSize,
     iconSpacing,
+    cursorWidth,
+    cursorHeight,
     labelSpacing,
     helperSpacing,
     disabledOpacity,

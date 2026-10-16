@@ -17,7 +17,7 @@ import 'button_types/dievas_button_style.dart';
 /// DievasFilledButton(
 ///   label: 'Delete account',
 ///   style: DievasFilledButtonStyle.destructive,
-///   size: DievasButtonSize.sm,
+///   size: DievasButtonSize.SM,
 ///   state: _isDeleting ? DievasButtonState.loading : DievasButtonState.idle,
 ///   onPressed: _handleDelete,
 /// )
@@ -28,7 +28,7 @@ class DievasFilledButton extends DievasButton {
     super.label,
     super.child,
     DievasFilledButtonStyle super.style = .primary,
-    super.size = .md,
+    super.size = .MD,
     super.state = .idle,
     super.shape,
     super.backgroundColor,

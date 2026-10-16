@@ -20,7 +20,7 @@ class _Playground extends StatelessWidget {
       label: 'Size',
       options: DievasLoaderSize.values,
       labelBuilder: (v) => v.name,
-      initialOption: .md,
+      initialOption: .MD,
     );
     final label = context.knobs.string(label: 'Label', initialValue: '');
     final useCustomColours = context.knobs.boolean(label: 'Custom colours');
@@ -45,7 +45,7 @@ class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.xl),
+      padding: EdgeInsets.all(context.spacing.XL),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,7 +61,7 @@ class _WithLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.xl),
+      padding: EdgeInsets.all(context.spacing.XL),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -69,7 +69,7 @@ class _WithLabel extends StatelessWidget {
             ComponentBoundary(
               child: DievasLoader(size: size, label: 'Loading ${size.name}…'),
             ),
-            SizedBox(height: context.spacing.xl),
+            SizedBox(height: context.spacing.XL),
           ],
         ],
       ),

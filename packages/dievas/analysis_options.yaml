@@ -7,6 +7,9 @@ analyzer:
     - windows/**
     - macos/**
     - linux/**
+  errors:
+    constant_identifier_names: ignore
+    non_constant_identifier_names: ignore
 include: package:flutter_lints/flutter.yaml
 
 # Additional information about this file can be found at

@@ -48,19 +48,19 @@ class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _StateRow('Unchecked', DievasCheckboxValue.unchecked),
-          SizedBox(height: context.spacing.md),
+          SizedBox(height: context.spacing.MD),
           _StateRow('Checked', DievasCheckboxValue.checked),
-          SizedBox(height: context.spacing.md),
+          SizedBox(height: context.spacing.MD),
           _StateRow('Indeterminate', DievasCheckboxValue.indeterminate),
-          SizedBox(height: context.spacing.md),
+          SizedBox(height: context.spacing.MD),
           _StateRow('Disabled (unchecked)', DievasCheckboxValue.unchecked, disabled: true),
-          SizedBox(height: context.spacing.md),
+          SizedBox(height: context.spacing.MD),
           _StateRow('Disabled (checked)', DievasCheckboxValue.checked, disabled: true),
         ],
       ),
@@ -80,7 +80,7 @@ class _StateRow extends StatelessWidget {
     children: [
       SizedBox(
         width: 180,
-        child: Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
+        child: Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
       ),
       ComponentBoundary(
         child: DievasCheckbox(value: value, onChanged: disabled ? null : (_) {}),
@@ -93,7 +93,7 @@ class _WithLabels extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,11 +101,11 @@ class _WithLabels extends StatelessWidget {
           ComponentBoundary(
             child: DievasCheckbox(value: DievasCheckboxValue.unchecked, label: 'Unchecked label', onChanged: (_) {}),
           ),
-          SizedBox(height: context.spacing.md),
+          SizedBox(height: context.spacing.MD),
           ComponentBoundary(
             child: DievasCheckbox(value: DievasCheckboxValue.checked, label: 'Checked label', onChanged: (_) {}),
           ),
-          SizedBox(height: context.spacing.md),
+          SizedBox(height: context.spacing.MD),
           ComponentBoundary(
             child: DievasCheckbox(
               value: DievasCheckboxValue.indeterminate,
@@ -113,7 +113,7 @@ class _WithLabels extends StatelessWidget {
               onChanged: (_) {},
             ),
           ),
-          SizedBox(height: context.spacing.md),
+          SizedBox(height: context.spacing.MD),
           ComponentBoundary(
             child: DievasCheckbox(value: DievasCheckboxValue.unchecked, label: 'Disabled', onChanged: null),
           ),

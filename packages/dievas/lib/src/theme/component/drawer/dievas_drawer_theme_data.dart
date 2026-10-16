@@ -8,7 +8,7 @@ final class DievasDrawerThemeData extends Equatable {
     required this.borderRadius,
     required this.barrierColour,
     required this.animationDuration,
-    required this.elevation,
+    required this.shadow,
   });
 
   final Color backgroundColour;
@@ -16,8 +16,10 @@ final class DievasDrawerThemeData extends Equatable {
   final BorderRadius borderRadius;
   final Color barrierColour;
   final Duration animationDuration;
-  final double elevation;
+
+  /// Shadow stack for the drawer surface, drawn from the elevation tokens.
+  final List<BoxShadow> shadow;
 
   @override
-  List<Object?> get props => [backgroundColour, width, borderRadius, barrierColour, animationDuration, elevation];
+  List<Object?> get props => [backgroundColour, width, borderRadius, barrierColour, animationDuration, shadow];
 }

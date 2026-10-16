@@ -29,7 +29,7 @@ class _Playground extends StatelessWidget {
       label: 'Size',
       options: DievasButtonSize.values,
       labelBuilder: (v) => v.name,
-      initialOption: DievasButtonSize.md,
+      initialOption: DievasButtonSize.MD,
     );
 
     final state = context.knobs.object.dropdown<DievasButtonState>(
@@ -58,8 +58,8 @@ class _Playground extends StatelessWidget {
           foregroundColor: foregroundColor,
           leadingIcon: useChild ? null : (leadingIcon ? const Icon(Icons.info_outline_rounded) : null),
           trailingIcon: useChild ? null : (trailingIcon ? const Icon(Icons.chevron_right_rounded) : null),
-          child: useChild ? const Text('Custom child') : null,
           onPressed: enabled ? () {} : null,
+          child: useChild ? const Text('Custom child') : null,
         ),
       ),
     );
@@ -72,10 +72,10 @@ class _AllStyles extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
+        spacing: context.spacing.SMPlus,
+        runSpacing: context.spacing.SMPlus,
         alignment: WrapAlignment.center,
         children: [
           for (final style in DievasTextButtonStyle.values)
@@ -94,10 +94,10 @@ class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
+        spacing: context.spacing.SMPlus,
+        runSpacing: context.spacing.SMPlus,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           for (final size in DievasButtonSize.values)
@@ -116,10 +116,10 @@ class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
+        spacing: context.spacing.SMPlus,
+        runSpacing: context.spacing.SMPlus,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           for (final state in DievasButtonState.values)

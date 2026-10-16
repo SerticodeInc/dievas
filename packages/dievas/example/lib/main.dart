@@ -1,11 +1,13 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'package:dievas/dievas.dart';
 
-import 'example_theme/example_theme.dart';
-import 'screens/example_components_screen.dart';
-import 'screens/example_foundations_screen.dart';
-import 'screens/example_overview_screen.dart';
+import 'package:dievas_example/example_theme/example_theme.dart';
+import 'package:dievas_example/screens/example_components_screen.dart';
+import 'package:dievas_example/screens/example_foundations_screen.dart';
+import 'package:dievas_example/screens/example_overview_screen.dart';
 
 // 1. Entry point
 //
@@ -17,7 +19,7 @@ import 'screens/example_overview_screen.dart';
 //
 // This is the only place the app talks to Dievas directly.
 //
-// Everything below reads the theme through the context — no theme plumbing ever leaks again.
+// Everything below reads the theme through the context: no theme plumbing ever leaks again.
 void main() => runApp(const _DievasExampleApp());
 
 class _DievasExampleApp extends StatelessWidget {
@@ -29,7 +31,7 @@ class _DievasExampleApp extends StatelessWidget {
     //
     // The Example App defines its own light and dark themes in `example_theme/` (tokens → typography → theme data).
     // Swap these for your own brand and the whole design system re-skins itself.
-    themeMode: .system,
+    themeMode: .light,
     lightTheme: ExampleLightThemeData(),
     darkTheme: ExampleDarkThemeData(),
 
@@ -50,7 +52,7 @@ class _DievasExampleApp extends StatelessWidget {
 
 // 4. Shell
 //
-// A plain Material NavigationBar hosting the three demo screens.
+// A floating translucent tab bar hosting the three demo screens.
 //
 // Using the Material bridge here shows that standard Flutter widgets (NavigationBar,
 // Scaffold, AppBar) pick up the Dievas theme automatically via `theme.material`.
@@ -58,33 +60,77 @@ class _ExampleShell extends StatefulWidget {
   const _ExampleShell();
 
   @override
-  State<_ExampleShell> createState() => __ExampleShellState();
+  State<_ExampleShell> createState() => _ExampleShellState();
 }
 
-class __ExampleShellState extends State<_ExampleShell> {
-  int _index = 0;
+class _ExampleShellState extends State<_ExampleShell> {
+  static const _initialTabIndex = 0;
+  static const _screens = [ExampleOverviewScreen(), ExampleFoundationsScreen(), ExampleComponentsScreen()];
+
+  int _index = _initialTabIndex;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    body: IndexedStack(index: _index, children: _screens),
-    bottomNavigationBar: NavigationBar(
-      selectedIndex: _index,
-      onDestinationSelected: (i) => setState(() => _index = i),
-      destinations: const [
-        NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Overview'),
-        NavigationDestination(
-          icon: Icon(Icons.palette_outlined),
-          selectedIcon: Icon(Icons.palette),
-          label: 'Foundations',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.widgets_outlined),
-          selectedIcon: Icon(Icons.widgets),
-          label: 'Components',
-        ),
-      ],
-    ),
-  );
-}
+  Widget build(BuildContext context) {
+    const navigationMaxWidth = 440.0;
+    const navigationPillRadius = 48.0;
+    const navigationBlurSigma = 20.0;
+    const navigationBackgroundOpacity = 0.9;
+    const navigationHeightFactor = 1.0;
+    const navigationElevation = 0.0;
 
-const _screens = [ExampleOverviewScreen(), ExampleFoundationsScreen(), ExampleComponentsScreen()];
+    return Scaffold(
+      extendBody: true,
+      body: IndexedStack(index: _index, children: _screens),
+      bottomNavigationBar: SafeArea(
+        minimum: EdgeInsets.only(left: context.spacing.MD, right: context.spacing.MD, bottom: context.spacing.MD),
+        child: Align(
+          heightFactor: navigationHeightFactor,
+          alignment: .bottomCenter,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: navigationMaxWidth),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(navigationPillRadius),
+                boxShadow: context.elevation.MD,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(navigationPillRadius),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: navigationBlurSigma, sigmaY: navigationBlurSigma),
+                  child: NavigationBar(
+                    backgroundColor: context.colours.background.bgElevated.withValues(
+                      alpha: MediaQuery.highContrastOf(context) ? context.opacity.opaque : navigationBackgroundOpacity,
+                    ),
+                    elevation: navigationElevation,
+                    animationDuration: MediaQuery.disableAnimationsOf(context)
+                        ? Duration.zero
+                        : context.animation.standard,
+                    selectedIndex: _index,
+                    onDestinationSelected: (i) => setState(() => _index = i),
+                    destinations: const [
+                      NavigationDestination(
+                        icon: Icon(Icons.home_outlined),
+                        selectedIcon: Icon(Icons.home),
+                        label: 'Overview',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.palette_outlined),
+                        selectedIcon: Icon(Icons.palette),
+                        label: 'Foundations',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.widgets_outlined),
+                        selectedIcon: Icon(Icons.widgets),
+                        label: 'Components',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

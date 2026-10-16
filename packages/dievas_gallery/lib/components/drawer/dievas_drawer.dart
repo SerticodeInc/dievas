@@ -34,7 +34,7 @@ class _PlaygroundState extends State<_Playground> {
         width: width,
         drawer: ListView(
           children: [
-            DrawerHeader(child: Text('Menu', style: DievasTheme.typographyOf(context).titleMd)),
+            DrawerHeader(child: Text('Menu', style: DievasTheme.typographyOf(context).titleMD)),
             const ListTile(title: Text('Item 1')),
             const ListTile(title: Text('Item 2')),
             const ListTile(title: Text('Item 3')),
@@ -67,7 +67,7 @@ class _WithBackdropState extends State<_WithBackdrop> {
       key: _drawerKey,
       drawer: ListView(
         children: [
-          DrawerHeader(child: Text('Menu', style: DievasTheme.typographyOf(context).titleMd)),
+          DrawerHeader(child: Text('Menu', style: DievasTheme.typographyOf(context).titleMD)),
           ListTile(title: const Text('Item 1'), onTap: () => _drawerKey.currentState?.close()),
           ListTile(title: const Text('Item 2'), onTap: () => _drawerKey.currentState?.close()),
           ListTile(title: const Text('Item 3'), onTap: () => _drawerKey.currentState?.close()),

@@ -32,7 +32,6 @@ class _DievasPopoverState extends State<DievasPopover> {
     }
 
     final theme = DievasTheme.componentsOf(context).popover;
-    final elevation = DievasTheme.elevationOf(context).md;
 
     final followerAnchor = switch (widget.position) {
       .bottom => Alignment.topCenter,
@@ -70,7 +69,7 @@ class _DievasPopoverState extends State<DievasPopover> {
                 decoration: BoxDecoration(
                   color: theme.backgroundColour,
                   borderRadius: theme.borderRadius,
-                  boxShadow: elevation,
+                  boxShadow: theme.shadow,
                 ),
                 child: DefaultTextStyle(style: theme.textStyle, child: widget.content),
               ),

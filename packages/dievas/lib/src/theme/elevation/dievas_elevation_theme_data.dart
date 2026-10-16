@@ -8,48 +8,48 @@ import 'package:flutter/painting.dart';
 /// time so components never need to compute it.
 final class DievasElevationThemeData extends Equatable {
   const DievasElevationThemeData({
-    required this.none,
-    required this.xs,
-    required this.sm,
-    required this.md,
-    required this.lg,
-    required this.xl,
+    required this.NONE,
+    required this.XS,
+    required this.SM,
+    required this.MD,
+    required this.LG,
+    required this.XL,
   });
 
   /// No shadow — flat surface flush with the page.
-  final List<BoxShadow> none;
+  final List<BoxShadow> NONE;
 
   /// Hairline shadow — subtle card lift on a light background.
-  final List<BoxShadow> xs;
+  final List<BoxShadow> XS;
 
   /// Small shadow — default card, chip, badge.
-  final List<BoxShadow> sm;
+  final List<BoxShadow> SM;
 
   /// Medium shadow — hovered card, dropdown, tooltip.
-  final List<BoxShadow> md;
+  final List<BoxShadow> MD;
 
   /// Large shadow — floating action button, sticky header.
-  final List<BoxShadow> lg;
+  final List<BoxShadow> LG;
 
   /// Extra-large shadow — modal, bottom sheet, popover.
-  final List<BoxShadow> xl;
+  final List<BoxShadow> XL;
 
   DievasElevationThemeData copyWith({
-    List<BoxShadow>? none,
-    List<BoxShadow>? xs,
-    List<BoxShadow>? sm,
-    List<BoxShadow>? md,
-    List<BoxShadow>? lg,
-    List<BoxShadow>? xl,
+    List<BoxShadow>? NONE,
+    List<BoxShadow>? XS,
+    List<BoxShadow>? SM,
+    List<BoxShadow>? MD,
+    List<BoxShadow>? LG,
+    List<BoxShadow>? XL,
   }) => DievasElevationThemeData(
-    none: none ?? this.none,
-    xs: xs ?? this.xs,
-    sm: sm ?? this.sm,
-    md: md ?? this.md,
-    lg: lg ?? this.lg,
-    xl: xl ?? this.xl,
+    NONE: NONE ?? this.NONE,
+    XS: XS ?? this.XS,
+    SM: SM ?? this.SM,
+    MD: MD ?? this.MD,
+    LG: LG ?? this.LG,
+    XL: XL ?? this.XL,
   );
 
   @override
-  List<Object?> get props => [none, xs, sm, md, lg, xl];
+  List<Object?> get props => [NONE, XS, SM, MD, LG, XL];
 }

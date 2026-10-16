@@ -13,7 +13,7 @@ final class DievasModalThemeData extends Equatable {
     required this.minWidth,
     required this.maxWidth,
     required this.closeIconSize,
-    required this.elevation,
+    required this.shadow,
   });
 
   /// Text style for the modal title.
@@ -43,8 +43,8 @@ final class DievasModalThemeData extends Equatable {
   /// Size of the close icon button.
   final double closeIconSize;
 
-  /// Shadow elevation of the modal card.
-  final double elevation;
+  /// Shadow stack for the modal card, drawn from the elevation tokens.
+  final List<BoxShadow> shadow;
 
   @override
   List<Object?> get props => [
@@ -57,6 +57,6 @@ final class DievasModalThemeData extends Equatable {
     minWidth,
     maxWidth,
     closeIconSize,
-    elevation,
+    shadow,
   ];
 }

@@ -34,12 +34,12 @@ class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: .all(context.spacing.xl),
+      padding: .all(context.spacing.XL),
       child: Column(
         mainAxisSize: .min,
         children: [
           ComponentBoundary(child: SizedBox(width: 200, child: const DievasLinearProgress())),
-          SizedBox(height: context.spacing.lg),
+          SizedBox(height: context.spacing.LG),
           ComponentBoundary(child: SizedBox(width: 320, child: const DievasLinearProgress())),
         ],
       ),
@@ -53,7 +53,7 @@ class _WithLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: .all(context.spacing.xl),
+      padding: .all(context.spacing.XL),
       child: Column(
         mainAxisSize: .min,
         children: [ComponentBoundary(child: SizedBox(width: 240, child: const DievasLinearProgress()))],

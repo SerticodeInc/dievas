@@ -5,13 +5,13 @@ import 'package:dievas/src/theme/dievas_theme.dart';
 /// Size variants for [DievasTextInputGroup].
 enum DievasTextInputGroupSize {
   /// 40 dp segment height.
-  sm,
+  SM,
 
   /// 48 dp segment height — default.
-  md,
+  MD,
 
   /// 52 dp segment height.
-  lg,
+  LG,
 }
 
 /// A horizontally-grouped set of input segments with a shared border.
@@ -32,11 +32,11 @@ enum DievasTextInputGroupSize {
 ///     DievasTextInput(hint: 'Last name'),
 ///   ],
 /// )
-/// DievasTextInputGroup(size: .sm, children: [...])
+/// DievasTextInputGroup(size: .SM, children: [...])
 /// DievasTextInputGroup(enabled: false, children: [...])
 /// ```
 class DievasTextInputGroup extends StatefulWidget {
-  const DievasTextInputGroup({super.key, required this.children, this.size = .md, this.enabled = true});
+  const DievasTextInputGroup({super.key, required this.children, this.size = .MD, this.enabled = true});
 
   /// Segment widgets — typically [DievasTextInput] or adornment widgets.
   final List<Widget> children;
@@ -82,15 +82,15 @@ class _DievasTextInputGroupState extends State<DievasTextInputGroup> {
     final theme = DievasTheme.componentsOf(context).textInputGroup;
 
     final height = switch (widget.size) {
-      .sm => theme.height.sm,
-      .md => theme.height.md,
-      .lg => theme.height.lg,
+      .SM => theme.height.SM,
+      .MD => theme.height.MD,
+      .LG => theme.height.LG,
     };
 
     final contentPadding = switch (widget.size) {
-      .sm => theme.contentPadding.sm,
-      .md => theme.contentPadding.md,
-      .lg => theme.contentPadding.lg,
+      .SM => theme.contentPadding.SM,
+      .MD => theme.contentPadding.MD,
+      .LG => theme.contentPadding.LG,
     };
 
     final strokeColour = _isFocused ? theme.borderColourFocused : theme.borderColour;

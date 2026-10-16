@@ -1,5 +1,70 @@
 # Change Log
 
+## Unreleased
+
+### Breaking — component elevation fields are now shadow stacks
+
+Every component that painted elevation through Flutter's `Material` / `Drawer` / `showModalBottomSheet` numeric `elevation` now paints the Dievas token shadow list directly, so overlays read as the same soft halo as the rest of the system and no longer pick up the M3 `surfaceTintColor` wash.
+
+- Renamed and retyped `double elevation` → `List<BoxShadow> shadow` on `DievasModalThemeData`, `DievasDrawerThemeData`, `DievasBottomSheetThemeData`, and `DievasPopoverThemeData`.
+- Renamed `DievasDropdownThemeData.overlayElevation` → `shadow`.
+- Removed the shadow from the accordion entirely — `DievasAccordionThemeData` no longer exposes a `shadow` field and the panel paints no elevation.
+- Added `DievasSearchThemeData.shadow`; the search field's coloured focus glow is now the standard token shadow.
+- `DievasPopoverThemeData.elevation` was previously ignored by the widget; the popover now reads `shadow` from its theme data.
+- `DievasDrawerThemeData.borderRadius` is now applied to the drawer's `shape` (it was previously unused).
+
+### Elevation
+
+- Default shadows now use the soft `DievasElevationSemantic.shadowColour` (`0xFF171717`) ink instead of pure `staticBlack`, and render centred (no vertical offset) so depth reads as a soft halo rather than a drop shadow underneath. Reverses the `offsetY` behaviour introduced in 0.0.3 — the offset tokens have since been removed entirely.
+- Shadow layers are built from the new ordered per-tier `DievasElevationShadowLayer` lists (`SM`, `MD`, `LG`, `XL`), replacing the `upper` / `lower` records and the separate `SHADOW_TINT_*` constants. See `dievas_tokens` for the breaking token details.
+
+### Changed
+
+- `DievasBadge` uses roomier internal padding (`SMPlus` horizontal, `XS` vertical) so labels no longer sit cramped against the pill edge.
+
+### Fixed
+
+- `DievasAlert` no longer stretches to fill a loosely constrained parent. Its text column is now shrink-wrapped on the main axis, so the surface sizes to its content instead of expanding to the full available height (visible as a page-filling alert in the widget book canvas).
+- `DievasTabBar` now uses a single underline indicator that slides between tabs instead of a per-tab bottom border that popped in and out, so changing the selected tab animates smoothly.
+
+## 1.0.0
+
+The naming unification release. Every size-axis token, enum value, and theme-value field now follows one law — `<base><UPPERCASE SIZE>` — and brand expression is driven by a single selectable palette.
+
+### Breaking — size-token naming
+
+All size-axis identifiers were renamed to `<base><SIZE>` (lowercase base, **UPPERCASE** size suffix, multiplier trailing):
+
+- Suffixes: `XS`, `SM`, `MD`, `LG`, `XL`, `XL2`…`XL8`; half-steps `SMPlus`, `MDPlus`, `LGPlus`, `XLPlus`.
+- Examples: `spacingMD`, `radiusLG`, `fontSizeXL`, `sizeXL2`, `breakpointSM`, `shadowLayer.upperMD`.
+- Enum values follow the same law (`DievasButtonSize.MD`, `DievasGridBreakpoint.XL`).
+- Component theme-value record fields follow the same law (`heightLG`, `paddingMD`).
+- **Not** renamed (not size axes): opacity roles, z-index, easing, animation intents, `touchMin`.
+
+### Breaking — removed duplicate easing
+
+- `DievasAnimationThemeData.easingEmphasize` was an exact duplicate of `easingStandard` and has been removed.
+
+### Breaking — shadow opacities moved to the elevation domain
+
+The six shadow-opacity aliases leaked into the opacity API. They are removed from `DievasOpacityThemeData`:
+
+- Removed: `shadow1`, `shadow1Light`, `shadow2`, `shadow2Upper`, `shadow2Lower`, `shadow2Heavy`.
+- Added to `DievasElevationSemantic`: `SHADOW_TINT_SUBTLE` (`o8`), `SHADOW_TINT_SOFT` (`o13`), `SHADOW_TINT_MEDIUM` (`o20`), `SHADOW_TINT_STRONG` (`o25`).
+- Default shadow layers now read their tint from the elevation domain.
+
+### New — brand palette selection
+
+- **New:** `applyBrandPalette(DievasColourThemeData, DievasBrandPalette)` re-resolves every brand-derived colour role (brand, brand-subtle, on-brand text/icon, primary and secondary actions, brand/focus borders, focus input border, switch-on track) while leaving neutral, text, surface, and feedback roles fixed.
+- **New:** `DievasGlobalThemeData` accepts an optional `brandPalette` — the single brand selection point for consumer apps.
+- The default `DievasBrandPalettes.indigo` reproduces the built-in light and dark reference themes exactly (guarded by a parity test).
+
+### Docs
+
+- Documented the size-token naming law and the 4pt / 8pt grid law.
+- Corrected the colour taxonomy (`switchThumbOn` / `switchThumbOff`, added `SurfaceColours`).
+- Documented brand palettes.
+
 ## 0.0.5
 
 - **New:** `DievasTag` — pill/rounded shape via `DievasTagBorderRadius` sealed class, per instance colour overrides (`backgroundColor`, `foregroundColor`, `borderColor`), and border width stable sizing across all styles.

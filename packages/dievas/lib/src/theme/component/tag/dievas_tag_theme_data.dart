@@ -24,7 +24,7 @@ final class DievasTagThemeData extends Equatable {
     this.borderColor,
   });
 
-  /// Label text style — typically [DievasTypographyThemeData.labelSm].
+  /// Label text style — typically [DievasTypographyThemeData.labelSM].
   final TextStyle textStyle;
 
   /// Container corner radius — pill or custom.

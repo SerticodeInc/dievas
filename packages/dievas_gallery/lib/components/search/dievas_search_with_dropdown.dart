@@ -45,10 +45,10 @@ class _Playground extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.spacing.xl),
+        padding: EdgeInsets.symmetric(horizontal: context.spacing.XL),
         child: ComponentBoundary(
           child: SizedBox(
-            width: context.sizing.inputHeightMd * 8,
+            width: context.sizing.inputHeightMD * 8,
             child: DievasSearchWithDropdown<String>(
               items: countries,
               displayString: (s) => s,
@@ -69,7 +69,7 @@ class _StaticDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.xl),
+      padding: EdgeInsets.symmetric(horizontal: context.spacing.XL),
       child: Column(
         mainAxisSize: .min,
         children: [
@@ -86,7 +86,7 @@ class _StaticDemo extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: context.spacing.lg),
+          SizedBox(height: context.spacing.LG),
           _DemoBlock(
             'Disabled',
             child: SizedBox(
@@ -116,8 +116,8 @@ class _DemoBlock extends StatelessWidget {
     crossAxisAlignment: .start,
     mainAxisSize: .min,
     children: [
-      Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
-      SizedBox(height: context.spacing.sm),
+      Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
+      SizedBox(height: context.spacing.SM),
       ComponentBoundary(child: child),
     ],
   );

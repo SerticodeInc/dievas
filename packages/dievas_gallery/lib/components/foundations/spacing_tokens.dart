@@ -19,29 +19,29 @@ class _SpacingScale extends StatelessWidget {
     final colours = DievasTheme.coloursOf(context);
 
     final entries = [
-      ('none', spacing.none),
-      ('xs', spacing.xs),
-      ('sm', spacing.sm),
-      ('smPlus', spacing.smPlus),
-      ('md', spacing.md),
-      ('mdPlus', spacing.mdPlus),
-      ('lg', spacing.lg),
-      ('lgPlus', spacing.lgPlus),
-      ('xl', spacing.xl),
-      ('x2l', spacing.x2l),
-      ('x3l', spacing.x3l),
-      ('x4l', spacing.x4l),
-      ('x5l', spacing.x5l),
+      ('NONE', spacing.NONE),
+      ('XS', spacing.XS),
+      ('SM', spacing.SM),
+      ('SMPlus', spacing.SMPlus),
+      ('MD', spacing.MD),
+      ('MDPlus', spacing.MDPlus),
+      ('LG', spacing.LG),
+      ('LGPlus', spacing.LGPlus),
+      ('XL', spacing.XL),
+      ('XL2', spacing.XL2),
+      ('XL3', spacing.XL3),
+      ('XL4', spacing.XL4),
+      ('XL5', spacing.XL5),
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           for (final (name, value) in entries)
             Padding(
-              padding: EdgeInsets.only(bottom: context.spacing.smPlus),
+              padding: EdgeInsets.only(bottom: context.spacing.SMPlus),
               child: Row(
                 children: [
                   SizedBox(
@@ -50,22 +50,22 @@ class _SpacingScale extends StatelessWidget {
                       name,
                       style: DievasTheme.typographyOf(
                         context,
-                      ).labelXs.copyWith(fontFamily: 'monospace', color: colours.text.textTertiary),
+                      ).labelXS.copyWith(fontFamily: 'monospace', color: colours.text.textTertiary),
                     ),
                   ),
                   Text(
                     '${value.toStringAsFixed(0)}dp',
                     style: DievasTheme.typographyOf(
                       context,
-                    ).labelXs.copyWith(color: colours.text.textSecondary, fontFamily: 'monospace'),
+                    ).labelXS.copyWith(color: colours.text.textSecondary, fontFamily: 'monospace'),
                   ),
-                  SizedBox(width: context.spacing.md),
+                  SizedBox(width: context.spacing.MD),
                   Container(
                     width: value,
                     height: 20,
                     decoration: BoxDecoration(
                       color: colours.action.actionPrimary.withAlpha(80),
-                      borderRadius: context.border.xs, // tiny bar viz — closest token
+                      borderRadius: context.border.XS, // tiny bar viz — closest token
                       border: Border.all(color: colours.action.actionPrimary),
                     ),
                   ),
@@ -87,21 +87,21 @@ class _BorderRadii extends StatelessWidget {
     final colours = DievasTheme.coloursOf(context);
 
     final entries = [
-      ('xs', border.xs),
-      ('sm', border.sm),
-      ('md', border.md),
-      ('lg', border.lg),
-      ('xl', border.xl),
-      ('x2l', border.x2l),
-      ('x3l', border.x3l),
-      ('full', border.full),
+      ('XS', border.XS),
+      ('SM', border.SM),
+      ('MD', border.MD),
+      ('LG', border.LG),
+      ('XL', border.XL),
+      ('XL2', border.XL2),
+      ('XL3', border.XL3),
+      ('FULL', border.FULL),
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Wrap(
-        spacing: context.spacing.lg,
-        runSpacing: context.spacing.lg,
+        spacing: context.spacing.LG,
+        runSpacing: context.spacing.LG,
         children: [
           for (final (name, radius) in entries)
             Column(
@@ -115,12 +115,12 @@ class _BorderRadii extends StatelessWidget {
                     borderRadius: radius,
                   ),
                 ),
-                SizedBox(height: context.spacing.sm),
+                SizedBox(height: context.spacing.SM),
                 Text(
                   name,
                   style: DievasTheme.typographyOf(
                     context,
-                  ).labelXs.copyWith(fontFamily: 'monospace', color: colours.text.textTertiary),
+                  ).labelXS.copyWith(fontFamily: 'monospace', color: colours.text.textTertiary),
                 ),
               ],
             ),

@@ -52,10 +52,10 @@ class _AllStyles extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Wrap(
-        spacing: context.spacing.sm,
-        runSpacing: context.spacing.smPlus,
+        spacing: context.spacing.SM,
+        runSpacing: context.spacing.SMPlus,
         alignment: WrapAlignment.center,
         children: [
           for (final style in DievasBadgeStyle.values)
@@ -74,7 +74,7 @@ class _AllTones extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,15 +82,15 @@ class _AllTones extends StatelessWidget {
           for (final style in DievasBadgeStyle.values) ...[
             Text(
               style.name,
-              style: context.typography.labelXs.copyWith(
+              style: context.typography.labelXS.copyWith(
                 fontWeight: FontWeight.w600,
                 color: context.colours.text.textPrimary,
               ),
             ),
-            SizedBox(height: context.spacing.sm),
+            SizedBox(height: context.spacing.SM),
             Wrap(
-              spacing: context.spacing.sm,
-              runSpacing: context.spacing.sm,
+              spacing: context.spacing.SM,
+              runSpacing: context.spacing.SM,
               children: [
                 for (final tone in DievasBadgeTone.values)
                   ComponentBoundary(
@@ -98,7 +98,7 @@ class _AllTones extends StatelessWidget {
                   ),
               ],
             ),
-            SizedBox(height: context.spacing.md),
+            SizedBox(height: context.spacing.MD),
           ],
         ],
       ),

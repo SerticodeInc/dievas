@@ -55,5 +55,16 @@ void main() {
       );
       expect(tester.takeException(), isNull);
     });
+
+    testWidgets('has comfortable padding around the label', (tester) async {
+      final padding = DievasLightThemeData().components.badge.padding;
+      expect(padding.vertical, greaterThanOrEqualTo(4));
+      expect(padding.horizontal, greaterThanOrEqualTo(12));
+
+      await tester.pumpWidget(Harness(child: const DievasBadge(label: 'New')));
+      // Guard against the cramped 2px vertical padding the badge used to ship
+      // with, which produced a ~15px tall pill.
+      expect(tester.getSize(find.byType(DievasBadge)).height, greaterThanOrEqualTo(18));
+    });
   });
 }

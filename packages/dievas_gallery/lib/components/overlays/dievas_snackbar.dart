@@ -22,7 +22,7 @@ class _Playground extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(context.spacing.lg),
+        padding: EdgeInsets.all(context.spacing.LG),
         child: ComponentBoundary(
           child: DievasSnackbar(
             message: message.isEmpty ? 'Snackbar message' : message,
@@ -40,7 +40,7 @@ class _WithAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: ComponentBoundary(
         child: DievasSnackbar(
           message: 'Message deleted.',
@@ -55,7 +55,7 @@ class _MessageOnly extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: ComponentBoundary(child: DievasSnackbar(message: 'Your profile has been updated.')),
     ),
   );

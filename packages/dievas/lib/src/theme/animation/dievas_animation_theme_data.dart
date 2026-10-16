@@ -26,7 +26,6 @@ final class DievasAnimationThemeData extends Equatable {
     this.easingStandard = const Cubic(0.2, 0.0, 0.0, 1.0),
     this.easingEnter = const Cubic(0.0, 0.0, 0.2, 1.0),
     this.easingExit = const Cubic(0.4, 0.0, 1.0, 1.0),
-    this.easingEmphasize = const Cubic(0.2, 0.0, 0.0, 1.0),
   });
 
   /// 50ms — micro-interactions, ripple, press feedback.
@@ -74,10 +73,6 @@ final class DievasAnimationThemeData extends Equatable {
   /// Derived from [DievasEasingSemantic.exit] (accelerate curve).
   final Curve easingExit;
 
-  /// Hero animations and emphatic transitions.
-  /// Derived from [DievasEasingSemantic.emphasize].
-  final Curve easingEmphasize;
-
   DievasAnimationThemeData copyWith({
     Duration? instant,
     Duration? quick,
@@ -93,7 +88,6 @@ final class DievasAnimationThemeData extends Equatable {
     Curve? easingStandard,
     Curve? easingEnter,
     Curve? easingExit,
-    Curve? easingEmphasize,
   }) => DievasAnimationThemeData(
     instant: instant ?? this.instant,
     quick: quick ?? this.quick,
@@ -109,7 +103,6 @@ final class DievasAnimationThemeData extends Equatable {
     easingStandard: easingStandard ?? this.easingStandard,
     easingEnter: easingEnter ?? this.easingEnter,
     easingExit: easingExit ?? this.easingExit,
-    easingEmphasize: easingEmphasize ?? this.easingEmphasize,
   );
 
   @override
@@ -128,6 +121,5 @@ final class DievasAnimationThemeData extends Equatable {
     easingStandard,
     easingEnter,
     easingExit,
-    easingEmphasize,
   ];
 }

@@ -61,9 +61,11 @@ final class DievasTextButtonThemeStyle extends DievasButtonThemeStyle {
 }
 
 /// Style tokens for [DievasIconButton].
+///
+/// An icon-only button has no label, so its foreground is its icon colour.
 @immutable
 @internal
 final class DievasIconButtonThemeStyle extends DievasButtonThemeStyle {
-  const DievasIconButtonThemeStyle({required super.icon, required super.foreground, super.background})
-    : super._(borderSide: null);
+  const DievasIconButtonThemeStyle({required super.icon, super.background})
+    : super._(foreground: icon, borderSide: null);
 }

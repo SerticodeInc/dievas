@@ -1,6 +1,6 @@
 name: dievas_example
 description: >-
-  Example usage of the Dievas design system — brand theme setup and component
+  Example usage of the Dievas design system: brand theme setup and component
   consumption. This is the reference app every consumer should study before
   wiring Dievas into their own Flutter app.
 publish_to: none
@@ -11,13 +11,15 @@ environment:
     flutter: ">=3.22.0"
 
 dependencies:
-    flutter:
-        sdk: flutter
     dievas:
         path: ../
     dievas_tokens:
         path: ../../dievas_tokens
     google_fonts: ^9.0.0
+
+dev_dependencies:
+    flutter_test:
+        sdk: flutter
 
 flutter:
     uses-material-design: true

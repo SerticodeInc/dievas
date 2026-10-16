@@ -24,7 +24,7 @@ dievas/
 │   ├── dievas_tokens/      # Pure Dart — primitive + semantic token layer
 │   ├── dievas/             # Flutter — theme stack + component library
 │   └── dievas_gallery/     # Flutter app — live component showcase (Widget book)
-├── landing/                # Jaspr SSR + Tailwind v4 landing page
+├── landing/                # Jaspr static + Tailwind v4 landing page
 ├── pubspec.yaml            # Melos workspace root
 └── analysis_options.yaml   # Shared lint rules (line length: 120)
 ```
@@ -67,6 +67,12 @@ static const Color textPrimary = Color(DievasColourSemanticLight.textPrimary);
 
 Colour roles use **grouped semantic naming** — `textPrimary`, `bgBase`, `actionPrimary`, `borderDefault` — not Moon character names. Primitive scales follow the Tailwind convention: `50` → `950`.
 
+### Size-token naming law
+
+Every **size-axis** token uses `<base><SIZE>` — a lowercase base followed by an **UPPERCASE** size suffix: `XS`, `SM`, `MD`, `LG`, `XL`, `XL2`…`XL8`, with half-steps `SMPlus`, `MDPlus`, `LGPlus`, `XLPlus`. Examples: `spacingMD`, `radiusLG`, `fontSizeXL`, `sizeXL2`, `breakpointSM`. The suffix always trails the base. Non-size axes — opacity, z-index, easing, animation intents, `touchMin` — stay camelCase.
+
+The size scale obeys the **4pt / 8pt grid law**: 4pt is the grid, 8pt is preferred, and half-steps are allowed only where optical weight or platform touch targets require them (and must carry a doc comment).
+
 ### Token families
 
 | Family     | Primitives file              | Semantic file                     |
@@ -79,7 +85,6 @@ Colour roles use **grouped semantic naming** — `textPrimary`, `bgBase`, `actio
 | Elevation  | `elevation_primitives.dart`  | `elevation_semantic.dart`         |
 | Opacity    | `opacity_primitives.dart`    | `opacity_semantic.dart`           |
 | Duration   | `duration_primitives.dart`   | —                                 |
-| Offset     | `offset_primitives.dart`     | `offset_semantic.dart`            |
 | Animation  | `duration_primitives.dart`   | `animation_semantic.dart`         |
 | Breakpoint | `breakpoint_primitives.dart` | `breakpoint_semantic.dart`        |
 | Easing     | `easing_primitives.dart`     | `easing_semantic.dart`            |
@@ -93,7 +98,7 @@ Typography uses **MartianMono** (body, label, title, display, heading) with **Ca
 
 ```text
 DievasThemeData               ← abstract interface (the contract)
-  └── DievasGlobalThemeData   ← sealed abstract (shared construction logic)
+  └── DievasGlobalThemeData   ← base class (shared construction logic)
        ├── DievasLightThemeData   ← default brand, light
        ├── DievasDarkThemeData    ← default brand, dark
        └── [AppThemeData]         ← consumer app's brand (lives in the app, not here)
@@ -106,25 +111,26 @@ DievasThemeData               ← abstract interface (the contract)
 ```dart
 // Inside any widget's build method
 final color = context.colours.action.actionPrimary;
-final style = context.typography.labelMd;
-final gap   = context.spacing.md;
+final style = context.typography.labelMD;
+final gap   = context.spacing.MD;
 final cols  = context.grid.columns;   // inside a DievasGrid
 ```
 
+### Brand palettes
+
+Every brand-derived colour role is resolved from a selectable `DievasBrandPalette` — one full 11-tint colour-family ramp plus an `onBrand` contrast colour. `DievasBrandPalettes` ships the default `indigo` plus ten alternates (`sky`, `green`, `violet`, `red`, `amber`, `ocean`, `forest`, `berry`, `dusk`, `terracotta`). Roles resolve by brightness (`rolesForLight` / `rolesForDark`), and the default `indigo` reproduces the built-in themes exactly.
+
 ### Plugging in a brand theme
 
-Consumer apps never touch `DievasLightThemeData` directly. They extend `DievasGlobalThemeData` with their own brand tokens:
+Consumer apps never touch `DievasLightThemeData` directly. They extend `DievasGlobalThemeData` with their own brand tokens — either by selecting a shipped palette or by supplying a full `DievasColourThemeData`:
 
 ```dart
 // In an Example app — not in this repo
 class ExampleLightThemeData extends DievasGlobalThemeData {
   ExampleLightThemeData({super.components})
     : super(
-        colours: DievasColourThemeData(
-          brightness: Brightness.light,
-          action: ActionColours(actionPrimary: Color(0xFF7C3AED)),
-        ),
-        border: const DievasBorderThemeData(...),
+        brandPalette: DievasBrandPalettes.violet,
+        colours: DievasLightThemeData().colours,
       );
 }
 ```
@@ -186,11 +192,11 @@ Rules components always follow:
 
 | Breakpoint | Min width | Columns | Margin | Gutter |
 | ---------- | --------- | ------- | ------ | ------ |
-| `xSmall`   | 0px       | 4       | 16     | 16     |
-| `small`    | 360px     | 4       | 16     | 16     |
-| `medium`   | 700px     | 8       | 32     | 24     |
-| `large`    | 1000px    | 12      | 32     | 24     |
-| `xLarge`   | 1348px    | 12      | 32     | 24     |
+| `XS`       | 0px       | 4       | 16     | 16     |
+| `SM`       | 360px     | 4       | 16     | 16     |
+| `MD`       | 700px     | 8       | 32     | 24     |
+| `LG`       | 1000px    | 12      | 32     | 24     |
+| `XL`       | 1348px    | 12      | 32     | 24     |
 
 ## Running Locally
 
@@ -231,7 +237,7 @@ No legacy pre null safety patterns.
 | --------------------------------------------- | ------------------------------------ |
 | [Moon Design System](https://flutter.moon.io) | Component catalogue, visual language |
 
-The landing page is a Jaspr SSR + Tailwind v4 site deployed on Railway at `dievas.serticode.com`.
+The landing page uses Jaspr static generation and Tailwind v4. See [Deploy the landing page to Cloudflare Pages](landing/DEPLOYMENT.md) for build, deployment, and domain migration steps.
 
 Token bridge: `landing/tool/generate_theme.dart` reads `dievas_tokens` constants and emits Tailwind `@theme {}` CSS; the same token values power both the Flutter widgets and the server rendered landing page.
 

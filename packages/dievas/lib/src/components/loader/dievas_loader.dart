@@ -5,13 +5,13 @@ import 'package:dievas/src/theme/dievas_theme.dart';
 /// Size variants for [DievasLoader].
 enum DievasLoaderSize {
   /// Small — 20 dp spinner.
-  sm,
+  SM,
 
   /// Medium — 32 dp spinner (default).
-  md,
+  MD,
 
   /// Large — 48 dp spinner.
-  lg,
+  LG,
 }
 
 /// A standalone loading indicator — distinct from the inline button loading state.
@@ -20,15 +20,15 @@ enum DievasLoaderSize {
 /// [DievasFilledButton] / [DievasTextButton] `state` parameter instead.
 ///
 /// ```dart
-/// DievasLoader(size: .md, label: 'Loading…')
-/// DievasLoader(size: .lg, colour: DievasTheme.of(context).colours.action.actionError)
+/// DievasLoader(size: .MD, label: 'Loading…')
+/// DievasLoader(size: .LG, colour: DievasTheme.of(context).colours.action.actionError)
 /// ```
 ///
 /// Moon reference: Loader
 class DievasLoader extends StatefulWidget {
-  const DievasLoader({super.key, this.size = .md, this.label, this.colour, this.trackColour});
+  const DievasLoader({super.key, this.size = .MD, this.label, this.colour, this.trackColour});
 
-  /// Controls spinner diameter (sm / md / lg).
+  /// Controls spinner diameter (SM / MD / LG).
   final DievasLoaderSize size;
 
   /// Optional label shown below the spinner.
@@ -74,9 +74,9 @@ class _DievasLoaderState extends State<DievasLoader> with SingleTickerProviderSt
     final theme = DievasTheme.componentsOf(context).loader;
 
     final diameter = switch (widget.size) {
-      .sm => theme.spinnerSizeSm,
-      .md => theme.spinnerSizeMd,
-      .lg => theme.spinnerSizeLg,
+      .SM => theme.spinnerSizeSM,
+      .MD => theme.spinnerSizeMD,
+      .LG => theme.spinnerSizeLG,
     };
 
     return Column(

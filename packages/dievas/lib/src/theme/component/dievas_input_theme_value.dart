@@ -1,4 +1,4 @@
 /// Size-keyed record for input-family component theme properties.
 ///
-/// Covers the three input sizes: sm (40 dp), md (48 dp), lg (52 dp).
-typedef DievasInputThemeValue<T> = ({T sm, T md, T lg});
+/// Covers the three input sizes: SM (52 dp), MD (56 dp), LG (60 dp).
+typedef DievasInputThemeValue<T> = ({T SM, T MD, T LG});

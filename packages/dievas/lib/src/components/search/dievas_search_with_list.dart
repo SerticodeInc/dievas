@@ -180,13 +180,7 @@ class _ResultsList<T> extends StatelessWidget {
           right: BorderSide(color: theme.borderColourFocused),
           bottom: BorderSide(color: theme.borderColourFocused),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: theme.borderColourFocused.withValues(alpha: 0.15),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        boxShadow: theme.shadow,
       ),
       child: ListView.separated(
         padding: EdgeInsets.zero,

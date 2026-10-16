@@ -8,23 +8,23 @@ import 'package:flutter/painting.dart';
 /// constructed directly in widget code.
 final class DievasCircularProgressThemeData extends Equatable {
   const DievasCircularProgressThemeData({
-    required this.sizeSm,
-    required this.sizeMd,
-    required this.sizeLg,
+    required this.sizeSM,
+    required this.sizeMD,
+    required this.sizeLG,
     required this.strokeWidth,
     required this.colourPrimary,
     required this.colourOnBrand,
     required this.trackColour,
   });
 
-  /// Diameter for [DievasCircularProgressSize.sm] (dp).
-  final double sizeSm;
+  /// Diameter for [DievasCircularProgressSize.SM] (dp).
+  final double sizeSM;
 
-  /// Diameter for [DievasCircularProgressSize.md] (dp).
-  final double sizeMd;
+  /// Diameter for [DievasCircularProgressSize.MD] (dp).
+  final double sizeMD;
 
-  /// Diameter for [DievasCircularProgressSize.lg] (dp).
-  final double sizeLg;
+  /// Diameter for [DievasCircularProgressSize.LG] (dp).
+  final double sizeLG;
 
   /// Arc stroke width (dp).
   final double strokeWidth;
@@ -39,5 +39,5 @@ final class DievasCircularProgressThemeData extends Equatable {
   final Color trackColour;
 
   @override
-  List<Object?> get props => [sizeSm, sizeMd, sizeLg, strokeWidth, colourPrimary, colourOnBrand, trackColour];
+  List<Object?> get props => [sizeSM, sizeMD, sizeLG, strokeWidth, colourPrimary, colourOnBrand, trackColour];
 }

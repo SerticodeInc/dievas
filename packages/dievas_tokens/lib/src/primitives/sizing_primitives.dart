@@ -53,6 +53,12 @@ abstract final class DievasSizingPrimitives {
   /// 52px.
   static const double s52 = 52.0;
 
+  /// 56px.
+  static const double s56 = 56.0;
+
+  /// 60px.
+  static const double s60 = 60.0;
+
   /// 64px.
   static const double s64 = 64.0;
 }

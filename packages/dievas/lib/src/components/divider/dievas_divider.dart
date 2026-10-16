@@ -19,7 +19,7 @@ enum DievasDividerOrientation {
 ///
 /// Use [DievasDividerIndent] named constants for token-aligned spacing:
 /// ```dart
-/// DievasDivider(indent: DievasDividerIndent.md)
+/// DievasDivider(indent: DievasDividerIndent.MD)
 /// ```
 ///
 /// Moon reference: Divider
@@ -27,15 +27,15 @@ enum DievasDividerOrientation {
 /// ```dart
 /// const DievasDivider()
 /// const DievasDivider(orientation: DievasDividerOrientation.vertical)
-/// const DievasDivider(indent: DievasDividerIndent.md, endIndent: DievasDividerIndent.md)
+/// const DievasDivider(indent: DievasDividerIndent.MD, endIndent: DievasDividerIndent.MD)
 /// const DievasDivider(colour: myColour, thickness: 1)
 /// ```
 class DievasDivider extends StatelessWidget {
   const DievasDivider({
     super.key,
     this.orientation = .horizontal,
-    this.indent = .none,
-    this.endIndent = .none,
+    this.indent = .NONE,
+    this.endIndent = .NONE,
     this.colour,
     this.thickness,
   });

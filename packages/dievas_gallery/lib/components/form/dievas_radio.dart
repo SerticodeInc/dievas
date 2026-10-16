@@ -45,7 +45,7 @@ class _Playground extends StatelessWidget {
                     label: showLabels ? option : null,
                     onChanged: disabled ? null : (v) => setState(() => selected = v),
                   ),
-                  if (option != options.last) SizedBox(height: context.spacing.smPlus),
+                  if (option != options.last) SizedBox(height: context.spacing.SMPlus),
                 ],
               ],
             ),
@@ -60,7 +60,7 @@ class _Group extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: StatefulBuilder(
         builder: (context, setState) {
           var selected = 'Standard';
@@ -71,8 +71,8 @@ class _Group extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Shipping method', style: context.typography.titleSm),
-                SizedBox(height: context.spacing.smPlus),
+                Text('Shipping method', style: context.typography.titleSM),
+                SizedBox(height: context.spacing.SMPlus),
                 for (final option in options) ...[
                   DievasRadio<String>(
                     value: option,
@@ -80,7 +80,7 @@ class _Group extends StatelessWidget {
                     label: option,
                     onChanged: (v) => setState(() => selected = v),
                   ),
-                  if (option != options.last) SizedBox(height: context.spacing.smPlus),
+                  if (option != options.last) SizedBox(height: context.spacing.SMPlus),
                 ],
               ],
             ),
@@ -95,17 +95,17 @@ class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
+      padding: EdgeInsets.all(context.spacing.LG),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _StateRow('Unselected', isSelected: false),
-          SizedBox(height: context.spacing.md),
+          SizedBox(height: context.spacing.MD),
           _StateRow('Selected', isSelected: true),
-          SizedBox(height: context.spacing.md),
+          SizedBox(height: context.spacing.MD),
           _StateRow('Disabled (unselected)', isSelected: false, disabled: true),
-          SizedBox(height: context.spacing.md),
+          SizedBox(height: context.spacing.MD),
           _StateRow('Disabled (selected)', isSelected: true, disabled: true),
         ],
       ),
@@ -125,7 +125,7 @@ class _StateRow extends StatelessWidget {
     children: [
       SizedBox(
         width: 180,
-        child: Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
+        child: Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
       ),
       ComponentBoundary(
         child: DievasRadio<bool>(value: true, groupValue: isSelected, onChanged: disabled ? null : (_) {}),

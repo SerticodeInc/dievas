@@ -1,47 +1,58 @@
 # Dievas identity
 
-Use the SVG masters for Dievas branding. The mark abstracts the landing footer into a sun circle, three progressively wider pills, and a moon circle. Keep exports in SVG format; create the social preview separately when its design is agreed.
+Use these SVG masters for Dievas branding. The approved mark abstracts the landing footer into a sun circle, three progressively wider pills, and a moon circle. Keep exports in SVG format. Create the social preview separately when its design is agreed.
 
-## Colours and treatments
+## Colours and lighting
 
-- Light grey `#DCDEE3`: outline of the sun circle.
-- Chi-Chi `#FF4E64`: outline of the smallest pill.
-- Hit `#1BD29A`: outline of the middle pill.
-- Dievas black `#171717`: sun icon, all three pill fills, and moon circle outline.
-- Piccolo purple `#5C33CF`: widest pill outline and moon circle fill.
-- White `#FFFFFF`: sun circle fill, moon icon, and logo tile.
-- All three pills are solid black so their silhouette remains visible at small sizes.
+The palette uses the checked Moon reference in `packages/dievas_tokens/test/fixtures/moon_colours_reference.json`, with Dievas black for the icons and shadows:
+
+- Piccolo `#5C33CF`: rounded logo background
+- Goten `#FFFFFF`: top circle and all three bars, including outlines
+- Krillin `#FFB319`: bottom circle and outline
+- Dievas black `#171717`: sun/moon strokes and translucent shadows
+
+Light falls from the upper right (315° azimuth). Each circle and bar has a raised-edge highlight and a soft shadow cast toward the lower left. Sun and moon strokes remain unfiltered for clarity. Keep the same restrained palette and directional lighting across exports.
 
 ## Master geometry
 
-Use `dievas-logo.svg` as the source of truth. Scale the complete mark uniformly.
+Use `dievas-logo.svg` as the source of truth. Scale the complete mark uniformly:
 
-- Canvas: 1024 × 1024, with a white tile and 205-unit corner radius. Exterior corners are transparent.
-- Visible mark bounds: x = 256–768, y = 182–842. The mark occupies 50% of the canvas width and is centered vertically.
+- Canvas: 1024 × 1024, with a Piccolo tile and 205-unit corner radius. Exterior corners are transparent.
+- Shape bounds before shadows: x = 256–768, y = 182–842.
 - Alignment: every element shares the x = 512 centerline.
-- Circles: both have an outer diameter of 160 units and a 5 unit outline, centered at (512, 262) and (512, 762).
-- Pills, top to bottom: outer widths of 266, 389, and 512 units. All have an outer thickness of 64 units, 5 unit outlines, and fully rounded ends.
-- Spacing: 44 units between the visible pill edges; 30 units between each circle and its adjacent pill.
-- Sun and moon: retain the landing’s paths in centered 84 × 84 viewports. Keep the smaller icon scale agreed in the final draft.
-- Use flat colours, without gradients, shadows, or textures.
+- Circles: outer diameter 160 units, 5-unit outlines, centered at (512, 262) and (512, 762).
+- Pills from top to bottom: outer widths 266, 389, and 512 units. All have outer thickness 64 units, 5-unit outlines, and fully rounded ends.
+- Spacing: 44 units between pill edges; 30 units between each circle and its adjacent pill.
+- Sun and moon: retain their paths in centered 84 × 84 viewports.
 
-`dievas-symbol.svg` contains the identical mark on a transparent canvas. Its top circle remains white. Use it on light surfaces that preserve the black and grey outlines.
+`dievas-symbol.svg` contains the same mark and lighting on a transparent canvas. Place it on Piccolo or a contrasting dark surface so the white shapes stay visible.
 
 ## Typography
 
-Use the landing’s Maison Neue Extended Medium for the `dievas` wordmark and Maison Neue Medium for supporting text.
+Use the landing’s Maison Neue Extended Medium for the `dievas` wordmark and Maison Neue Medium for supporting text. The landing navbar retains its text wordmark.
 
 ## Assets
 
-| Asset               | Use                                     |
-| ------------------- | --------------------------------------- |
-| `dievas-logo.svg`   | Master mark on a rounded white tile.    |
-| `dievas-symbol.svg` | Identical mark on a transparent canvas. |
+| Asset | Use |
+| --- | --- |
+| `dievas-logo.svg` | Master mark on a rounded Piccolo tile |
+| `dievas-symbol.svg` | Same mark on a transparent canvas |
+| `dievas-favicon.svg` | Rounded tile with the mark enlarged 1.25× for browser tabs |
 
-Keep alternate treatments separate from these masters until reviewed. PNG logo assets and the previous social preview are removed.
+The favicon treatment is approved and promoted to the logo masters. No PNG logo exports or social-preview asset are part of this identity.
 
 ## Website and gallery assets
 
-The landing uses the mark in its favicon, gallery links, and brand demonstration. Its navbar retains the text wordmark. The gallery uses the SVG on its home page, browser favicon, and web manifest. Manifest icons include an opaque white maskable version; no PNG logo exports are used.
+Keep these deployed copies synchronized with the masters:
 
-When the master changes, synchronize `landing/web/assets/dievas-logo.svg`, both `web/favicon.svg` files, `packages/dievas_gallery/assets/branding/dievas-logo.svg`, and the gallery’s `web/icons/Icon.svg` and `Icon-maskable.svg`. Favicons retain the complete rounded tile and enlarge the mark by 1.25× around the canvas center for small sizes; the maskable icon uses an opaque square background. Keep the mark’s geometry identical in every copy.
+- `landing/web/assets/dievas-logo.svg`: full-size logo
+- `landing/web/favicon.svg`: favicon
+- `packages/dievas_gallery/assets/branding/dievas-logo.svg`: Flutter-compatible full-size logo
+- `packages/dievas_gallery/web/favicon.svg`: favicon
+- `packages/dievas_gallery/web/icons/Icon.svg`: installation icon at the original scale
+- `packages/dievas_gallery/web/icons/Icon-maskable.svg`: installation icon on an opaque square Piccolo background
+- `packages/dievas/example/web/favicon.svg`: example app favicon
+
+Browser assets use SVG specular lighting and drop-shadow filters. Flutter’s SVG renderer does not support those filters, so the gallery asset uses layered vector shadow silhouettes and upper-right edge highlights. Its shape, base colours, and lighting direction match the master without requiring raster exports.
+
+The root README references the logo master directly. Gallery home uses its bundled logo copy; the component navigation stays unbranded. Update the favicon and landing logo cache versions when the artwork changes.

@@ -1,8 +1,23 @@
-# Dievas Design System
+# Dievas design system
 
-> A Flutter design system inspired by the visual language of [Moon Design System](https://flutter.moon.io). Multi brand from day one.
+<p align="center"> <img src="branding/dievas-logo.svg" width="160" height="160" alt="Dievas logo">
+</p>
 
-## What It Is
+Use this README to explore the workspace and run the gallery. For application setup and a first widget, see the [Flutter package guide](packages/dievas/README.md).
+
+[Website](https://dievas.serticode.com) · [Component gallery](https://master.dievas-gallery.pages.dev) · [Flutter package](https://pub.dev/packages/dievas) · [Design tokens](https://pub.dev/packages/dievas_tokens)
+
+## Start here
+
+Choose the guide for your task:
+
+- [Use Dievas in a Flutter app](packages/dievas/README.md)
+- [Use pure Dart design tokens](packages/dievas_tokens/README.md)
+- [Run the workspace and gallery](#run-locally)
+- [Use the logo and brand assets](branding/README.md)
+- [Read component changes](packages/dievas/CHANGELOG.md)
+
+## What Dievas includes
 
 Dievas is a Melos monorepo that houses a token layer, a full theme architecture, a Flutter component library, and a live gallery app.
 
@@ -16,15 +31,16 @@ Dievas Design Pattern  →   architectural blueprint                   (how we s
 Dievas                  →   the output                                (our system, our API)
 ```
 
-## Monorepo Structure
+## Workspace structure
 
 ```text
 dievas/
 ├── packages/
 │   ├── dievas_tokens/      # Pure Dart — primitive + semantic token layer
 │   ├── dievas/             # Flutter — theme stack + component library
-│   └── dievas_gallery/     # Flutter app — live component showcase (Widget book)
-├── landing/                # Jaspr static + Tailwind v4 landing page
+│   └── dievas_gallery/     # Flutter app — live component showcase (Widgetbook)
+├── branding/               # SVG logo masters and identity guidelines
+├── landing/               # Jaspr static + Tailwind v4 landing page
 ├── pubspec.yaml            # Melos workspace root
 └── analysis_options.yaml   # Shared lint rules (line length: 120)
 ```
@@ -39,7 +55,7 @@ dievas_gallery  →  dievas  →  dievas_tokens (pure Dart, zero Flutter depende
 
 A Flutter import in that package is a bug.
 
-## Token Architecture
+## Token architecture
 
 ### Two tier model
 
@@ -48,7 +64,7 @@ A Flutter import in that package is a bug.
 ```dart
 abstract final class DievasColourPrimitives {
   static const int royalPurple = 0xFF5C33CF;
-  static const int slate900  = 0xFF0F172A;
+  static const int black = 0xFF000000;
 }
 ```
 
@@ -57,7 +73,7 @@ abstract final class DievasColourPrimitives {
 ```dart
 // dievas_tokens — pure Dart, no Flutter import
 abstract final class DievasColourSemanticLight {
-  static const int textPrimary   = DievasColourPrimitives.slate900;
+  static const int textPrimary = DievasColourPrimitives.black;
   static const int buttonPrimaryBackground = DievasColourPrimitives.royalPurple;
 }
 
@@ -92,7 +108,7 @@ The size scale obeys the **4pt / 8pt grid law**: 4pt is the grid, 8pt is preferr
 
 Typography uses **MartianMono** (body, label, title, display, heading) with **Cascadia Code** for inline code and code blocks.
 
-## Theme Architecture
+## Theme architecture
 
 ### Inheritance chain
 
@@ -120,13 +136,13 @@ final cols  = context.grid.columns;   // inside a DievasGrid
 
 Custom brand colours resolve from a selectable `DievasBrandPalette` — one full 11 tint colour family ramp plus an `onBrand` contrast colour. `DievasBrandPalettes` ships eleven optional palettes: `indigo` plus ten alternatives (`sky`, `green`, `violet`, `red`, `amber`, `ocean`, `forest`, `berry`, `dusk`, `terracotta`). Roles resolve by brightness (`rolesForLight` / `rolesForDark`), while the built in themes use Moon Design’s Piccolo purple (`#5C33CF`) in both light and dark mode.
 
-### Plugging in a brand theme
+### Create a brand theme
 
-Consumer apps never touch `DievasLightThemeData` directly. They extend `DievasGlobalThemeData` with their own brand tokens — either by selecting a shipped palette or by supplying a full `DievasColourThemeData`:
+Use `DievasLightThemeData` and `DievasDarkThemeData` for the default brand. To create a custom brand, extend `DievasGlobalThemeData` with your own brand tokens — either by selecting a shipped palette or by supplying a full `DievasColourThemeData`:
 
 ```dart
 // In an Example app — not in this repo
-class ExampleLightThemeData extends DievasGlobalThemeData {
+final class ExampleLightThemeData extends DievasGlobalThemeData {
   ExampleLightThemeData({super.components})
     : super(
         brandPalette: DievasBrandPalettes.violet,
@@ -135,7 +151,7 @@ class ExampleLightThemeData extends DievasGlobalThemeData {
 }
 ```
 
-Then at the app root:
+Create the corresponding dark theme with `DievasDarkThemeData().colours`, then provide both themes at the app root. The following fragment assumes `ExampleDarkThemeData` is defined:
 
 ```dart
 DievasScope(
@@ -147,9 +163,9 @@ DievasScope(
 
 The design system never knows which brand is running. Brand is resolved at `DievasScope` instantiation.
 
-## Component Anatomy
+## Component anatomy
 
-Every component follows a strict four layer pattern. No exceptions.
+Buttons demonstrate the widget, builder, type, and theme layers used to structure components:
 
 ```text
 Widget side                          Theme side
@@ -186,7 +202,7 @@ Rules components always follow:
 | **Nav / Disclosure** | 5     | `DievasAccordion`, `DievasBreadcrumb`, `DievasDrawer`, `DievasPopover`, `DievasTabBar`                                                                                |
 | **Utility**          | 1     | `DievasLoader`                                                                                                                                                        |
 
-## Grid System
+## Grid system
 
 `DievasGrid` gives any widget breakpoint aware layout via `LayoutBuilder`.
 
@@ -198,40 +214,49 @@ Rules components always follow:
 | `LG`       | 1000px    | 12      | 32     | 24     |
 | `XL`       | 1348px    | 12      | 32     | 24     |
 
-## Running Locally
+## Run locally
 
-Requires Flutter SDK and [Melos](https://melos.invertase.dev/).
+Use a Flutter SDK that includes Dart `>=3.11.4 <4.0.0`. Melos is declared in the root `pubspec.yaml`.
+
+From the repository root, resolve dependencies and bootstrap the workspace:
 
 ```bash
-dart pub global activate melos
-melos bootstrap
+flutter pub get
+dart run melos bootstrap
 ```
 
+Run workspace checks from the repository root:
+
 ```bash
-melos run analyze          # dart analyze across all packages
-melos run format           # dart format (line length: 120)
-melos run test             # dart test (packages with a test/ dir)
-melos run codegen          # build_runner build
+dart run melos run analyze          # dart analyze across all packages
+dart run melos run format           # dart format (line length: 120)
+dart run melos run test             # flutter test across test packages
+dart run melos run codegen          # build_runner build
 ```
 
 To run the gallery:
 
 ```bash
 cd packages/dievas_gallery
-flutter run
+flutter run -d chrome
 ```
 
-## Dart / Flutter Version
+Confirm that Widgetbook loads and that you can select a component. The landing page has separate Dart and Node.js dependencies; its setup and build commands are declared under `landing:*` in the root [workspace configuration](pubspec.yaml).
+
+## Dart and Flutter versions
 
 ```text
-SDK: >=3.11.4 <4.0.0
+Dart: >=3.11.4 <4.0.0
+Flutter package constraint: >=3.22.0
 ```
+
+The Dart constraint also applies when choosing a Flutter SDK; the Flutter lower bound alone is insufficient.
 
 Dart 3 idioms throughout: pattern matching with `switch` expressions, sealed classes, records, exhaustive matching.
 
 No legacy pre null safety patterns.
 
-## Reference Systems
+## Reference systems
 
 | Reference                                     | Role in Dievas                       |
 | --------------------------------------------- | ------------------------------------ |

@@ -413,7 +413,7 @@ class Chapters extends StatelessComponent {
       [
         div(classes: 'bd-head', [
           img(
-            src: '/assets/dievas-logo.svg',
+            src: '/assets/dievas-logo.svg?v=piccolo-lit-ink',
             alt: 'Dievas',
             classes: 'bd-logo',
             width: 34,

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/animation.dart' show Curve;
 
 /// Theme data for [DievasBottomSheet].
 final class DievasBottomSheetThemeData extends Equatable {
@@ -11,8 +12,49 @@ final class DievasBottomSheetThemeData extends Equatable {
     required this.handleTopInset,
     required this.backgroundColour,
     required this.barrierColour,
-    required this.shadow,
-  });
+    this.closeProgressThreshold = 0.6,
+    this.transitionDuration,
+    this.transitionCurve,
+    this.handleColour,
+  }) : assert(closeProgressThreshold > 0 && closeProgressThreshold < 1);
+
+  /// Remaining visible fraction below which a released drag closes the sheet.
+  final double closeProgressThreshold;
+
+  /// Null uses the active Dievas standard animation duration.
+  final Duration? transitionDuration;
+
+  /// Null uses the active Dievas entrance curve.
+  final Curve? transitionCurve;
+
+  /// Null uses the active divider colour.
+  final Color? handleColour;
+
+  DievasBottomSheetThemeData copyWith({
+    BorderRadius? borderRadius,
+    double? handleWidth,
+    double? handleHeight,
+    BorderRadius? handleRadius,
+    double? handleTopInset,
+    Color? backgroundColour,
+    Color? barrierColour,
+    double? closeProgressThreshold,
+    Duration? transitionDuration,
+    Curve? transitionCurve,
+    Color? handleColour,
+  }) => DievasBottomSheetThemeData(
+    borderRadius: borderRadius ?? this.borderRadius,
+    handleWidth: handleWidth ?? this.handleWidth,
+    handleHeight: handleHeight ?? this.handleHeight,
+    handleRadius: handleRadius ?? this.handleRadius,
+    handleTopInset: handleTopInset ?? this.handleTopInset,
+    backgroundColour: backgroundColour ?? this.backgroundColour,
+    barrierColour: barrierColour ?? this.barrierColour,
+    closeProgressThreshold: closeProgressThreshold ?? this.closeProgressThreshold,
+    transitionDuration: transitionDuration ?? this.transitionDuration,
+    transitionCurve: transitionCurve ?? this.transitionCurve,
+    handleColour: handleColour ?? this.handleColour,
+  );
 
   /// Corner radius applied to the top edge of the sheet.
   final BorderRadius borderRadius;
@@ -35,11 +77,12 @@ final class DievasBottomSheetThemeData extends Equatable {
   /// Colour of the modal barrier behind the sheet.
   final Color barrierColour;
 
-  /// Shadow stack for the sheet surface, drawn from the elevation tokens.
-  final List<BoxShadow> shadow;
-
   @override
   List<Object?> get props => [
+    closeProgressThreshold,
+    transitionDuration,
+    transitionCurve,
+    handleColour,
     borderRadius,
     handleWidth,
     handleHeight,
@@ -47,6 +90,5 @@ final class DievasBottomSheetThemeData extends Equatable {
     handleTopInset,
     backgroundColour,
     barrierColour,
-    shadow,
   ];
 }

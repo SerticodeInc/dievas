@@ -20,6 +20,18 @@ abstract final class DievasColourPrimitives {
   /// Reference: https://flutter.moon.io/colors
   static const int royalPurple = 0xFF5C33CF;
 
+  /// Piccolo mixed with 8% black for light-theme hover states.
+  static const int royalPurpleShade8 = 0xFF552FBE;
+
+  /// Piccolo mixed with 16% black for light-theme pressed states.
+  static const int royalPurpleShade16 = 0xFF4D2BAE;
+
+  /// Piccolo mixed with 8% white for dark-theme hover states.
+  static const int royalPurpleTint8 = 0xFF6943D3;
+
+  /// Piccolo mixed with 16% white for dark-theme pressed states.
+  static const int royalPurpleTint16 = 0xFF7654D7;
+
   /// Direct port of Moon light.hit, dark.hit.
   /// Source: moon_tokens 0.0.6, lib/src/colors.dart.
   /// Reference: https://flutter.moon.io/colors

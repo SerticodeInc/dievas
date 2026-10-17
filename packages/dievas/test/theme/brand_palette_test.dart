@@ -1,8 +1,7 @@
 // Brand palette application — parity and boundary tests.
 //
-// Parity: applying the default indigo palette to the built-in reference
-// themes must be a no-op (identical colour data).
-// Boundary: a non-indigo palette must re-resolve every brand-derived role
+// The default theme uses Moon Piccolo; indigo remains an optional palette.
+// Boundary: a selected palette must re-resolve every brand-derived role
 // while leaving neutral, text, surface, and feedback roles untouched.
 
 import 'package:dievas/dievas.dart';
@@ -14,13 +13,35 @@ void main() {
   final lightColours = DievasLightThemeData().colours;
   final darkColours = DievasDarkThemeData().colours;
 
+  group('Moon default branding', () {
+    for (final theme in [DievasLightThemeData(), DievasDarkThemeData()]) {
+      test('${theme.colours.brightness.name} propagates Piccolo through component and Material themes', () {
+        const piccolo = Color(0xFF5C33CF);
+        expect(theme.colours.core.primary, piccolo);
+        expect(theme.colours.action.buttonPrimaryBackground, piccolo);
+        expect(theme.colours.input.inputFocusedBorder, piccolo);
+        expect(theme.colours.action.inputCursor, piccolo);
+        expect(theme.components.authCode.borderColourFocused, piccolo);
+        expect(theme.components.authCode.cursorColour, piccolo);
+        expect(theme.material.colorScheme.primary, piccolo);
+        expect(theme.colours.core.badgePrimaryTintedBackground, const Color(0x1F5C33CF));
+      });
+    }
+  });
+
   group('applyBrandPalette parity', () {
-    test('indigo palette reproduces the light reference theme exactly', () {
-      expect(applyBrandPalette(lightColours, DievasBrandPalettes.indigo), equals(lightColours));
+    test('indigo can replace the light Moon brand', () {
+      expect(
+        applyBrandPalette(lightColours, DievasBrandPalettes.indigo).core.primary,
+        const Color(DievasColourPrimitives.indigo500),
+      );
     });
 
-    test('indigo palette reproduces the dark reference theme exactly', () {
-      expect(applyBrandPalette(darkColours, DievasBrandPalettes.indigo), equals(darkColours));
+    test('indigo can replace the dark Moon brand', () {
+      expect(
+        applyBrandPalette(darkColours, DievasBrandPalettes.indigo).core.primary,
+        const Color(DievasColourPrimitives.indigo400),
+      );
     });
   });
 

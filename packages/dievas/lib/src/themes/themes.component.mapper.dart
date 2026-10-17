@@ -39,7 +39,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
         _createSegmentedControlTheme(colours, typography, spacing, sizing, border, animation),
     alert: override?.alert ?? _createAlertTheme(typography, spacing, border),
     snackbar: override?.snackbar ?? _createSnackbarTheme(colours, typography, spacing, border),
-    bottomSheet: override?.bottomSheet ?? _createBottomSheetTheme(colours, border, elevation),
+    bottomSheet: override?.bottomSheet ?? _createBottomSheetTheme(colours, border),
     modal: override?.modal ?? _createModalTheme(colours, typography, spacing, border, elevation),
     tooltip: override?.tooltip ?? _createTooltipTheme(colours, typography, spacing, border, animation),
     loader: override?.loader ?? _createLoaderTheme(colours, typography, spacing, animation),
@@ -350,15 +350,18 @@ DievasAvatarThemeData _createAvatarTheme(
     sizeMD: sizing.avatarMD,
     sizeLG: sizing.avatarLG,
     sizeXL: sizing.avatarXL,
+    sizeXL2: sizing.height80,
     borderRadiusSquare: border.MD,
     initialsStyleXS: typography.labelXS,
     initialsStyleSM: typography.labelSM,
     initialsStyleMD: typography.labelMD,
     initialsStyleLG: typography.labelLG,
     initialsStyleXL: typography.titleSM,
-    backgroundColour: colours.background.cardBackground,
-    initialsColour: colours.text.textSecondary,
-    placeholderColour: colours.icon.iconSecondary,
+    initialsStyleXL2: typography.titleMD,
+    badgeColour: colours.feedback.feedbackSuccess.icon,
+    backgroundColour: colours.background.pageBackground,
+    initialsColour: colours.text.textPrimary,
+    placeholderColour: colours.icon.iconPrimary,
   );
 }
 
@@ -630,11 +633,7 @@ DievasSnackbarThemeData _createSnackbarTheme(
 );
 
 // BottomSheet
-DievasBottomSheetThemeData _createBottomSheetTheme(
-  DievasColourThemeData colours,
-  DievasBorderThemeData border,
-  DievasElevationThemeData elevation,
-) {
+DievasBottomSheetThemeData _createBottomSheetTheme(DievasColourThemeData colours, DievasBorderThemeData border) {
   return DievasBottomSheetThemeData(
     borderRadius: .only(topLeft: _extractRadius(border.XL), topRight: _extractRadius(border.XL)),
     handleWidth: DievasSizingPrimitives.s40,
@@ -643,7 +642,6 @@ DievasBottomSheetThemeData _createBottomSheetTheme(
     handleTopInset: DievasSpacingPrimitives.s3,
     backgroundColour: colours.background.bottomSheetBackground,
     barrierColour: colours.background.modalBarrierBackground,
-    shadow: elevation.MD,
   );
 }
 

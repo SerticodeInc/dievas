@@ -4,17 +4,17 @@
 
 import 'package:dievas_tokens/src/primitives/colour_primitives.dart';
 
-/// Light theme semantic colour tokens. Neutral reference roles match the
-/// recorded Moon token values; brand, feedback, and component states retain
-/// the existing Dievas mappings. Values reference [DievasColourPrimitives].
+/// Light theme semantic colour tokens. Brand and neutral reference roles use Moon colours.
+/// Interactive brand shades derive from Piccolo; feedback roles retain
+/// their Dievas mappings. Values reference [DievasColourPrimitives].
 abstract final class DievasColourSemanticLight {
   //Brand
 
   /// Primary palette identity. Component roles below name each usage.
-  static const int primary = DievasColourPrimitives.indigo500;
+  static const int primary = DievasColourPrimitives.royalPurple;
 
   /// Background of a tinted badge using the primary palette.
-  static const int badgePrimaryTintedBackground = DievasColourPrimitives.indigo200;
+  static const int badgePrimaryTintedBackground = DievasColourPrimitives.royalPurpleAlpha1F;
 
   /// Text on a filled primary button.
   static const int buttonPrimaryText = DievasColourPrimitives.white;
@@ -100,30 +100,30 @@ abstract final class DievasColourSemanticLight {
   static const int inputDisabledBorder = DievasColourPrimitives.slate200;
 
   /// Focus ring. Applied on keyboard focus.
-  static const int focusIndicatorColour = DievasColourPrimitives.indigo500;
+  static const int focusIndicatorColour = DievasColourPrimitives.royalPurple;
 
   /// Brand coloured border. Selected states, brand highlights.
-  static const int selectionBorder = DievasColourPrimitives.indigo500;
+  static const int selectionBorder = DievasColourPrimitives.royalPurple;
 
   //Action
 
   /// Primary CTA background (filled button, active toggle).
-  static const int buttonPrimaryBackground = DievasColourPrimitives.indigo500;
+  static const int buttonPrimaryBackground = DievasColourPrimitives.royalPurple;
 
   /// Hover state of [buttonPrimaryBackground].
-  static const int buttonPrimaryHoveredBackground = DievasColourPrimitives.indigo600;
+  static const int buttonPrimaryHoveredBackground = DievasColourPrimitives.royalPurpleShade8;
 
   /// Pressed / active state of [buttonPrimaryBackground].
-  static const int buttonPrimaryPressedBackground = DievasColourPrimitives.indigo700;
+  static const int buttonPrimaryPressedBackground = DievasColourPrimitives.royalPurpleShade16;
 
   /// Disabled primary action surface.
   static const int buttonPrimaryDisabledBackground = DievasColourPrimitives.slate200;
 
   /// Secondary action background (outlined / ghost button resting surface).
-  static const int buttonSecondaryBackground = DievasColourPrimitives.indigo50;
+  static const int buttonSecondaryBackground = DievasColourPrimitives.royalPurpleAlpha14;
 
   /// Hover state of [buttonSecondaryBackground].
-  static const int buttonSecondaryHoveredBackground = DievasColourPrimitives.indigo100;
+  static const int buttonSecondaryHoveredBackground = DievasColourPrimitives.royalPurpleAlpha1F;
 
   /// Destructive / error action.
   static const int buttonDestructiveBackground = DievasColourPrimitives.red500;
@@ -199,7 +199,7 @@ abstract final class DievasColourSemanticLight {
   static const int inputBorder = DievasColourPrimitives.slate300;
 
   /// Input border when focused.
-  static const int inputFocusedBorder = DievasColourPrimitives.indigo500;
+  static const int inputFocusedBorder = DievasColourPrimitives.royalPurple;
 
   /// Input border in error state.
   static const int inputErrorBorder = DievasColourPrimitives.red500;
@@ -216,7 +216,7 @@ abstract final class DievasColourSemanticLight {
   //Switch
 
   /// Track colour when the switch is ON.
-  static const int switchOnTrack = DievasColourPrimitives.indigo500;
+  static const int switchOnTrack = DievasColourPrimitives.royalPurple;
 
   /// Track colour when the switch is OFF.
   static const int switchOffTrack = DievasColourPrimitives.slate200;
@@ -282,31 +282,31 @@ abstract final class DievasColourSemanticLight {
   static const int segmentedControlBackground = DievasColourPrimitives.nearWhite;
 
   /// badge primary background.
-  static const int badgePrimaryBackground = DievasColourPrimitives.indigo500;
+  static const int badgePrimaryBackground = DievasColourPrimitives.royalPurple;
 
   /// badge primary tinted text.
-  static const int badgePrimaryTintedText = DievasColourPrimitives.indigo500;
+  static const int badgePrimaryTintedText = DievasColourPrimitives.royalPurple;
 
   /// checkbox checked background.
-  static const int checkboxCheckedBackground = DievasColourPrimitives.indigo500;
+  static const int checkboxCheckedBackground = DievasColourPrimitives.royalPurple;
 
   /// radio selected background.
-  static const int radioSelectedBackground = DievasColourPrimitives.indigo500;
+  static const int radioSelectedBackground = DievasColourPrimitives.royalPurple;
 
   /// progress indicator.
-  static const int progressIndicator = DievasColourPrimitives.indigo500;
+  static const int progressIndicator = DievasColourPrimitives.royalPurple;
 
   /// slider active track.
-  static const int sliderActiveTrack = DievasColourPrimitives.indigo500;
+  static const int sliderActiveTrack = DievasColourPrimitives.royalPurple;
 
   /// input cursor.
-  static const int inputCursor = DievasColourPrimitives.indigo500;
+  static const int inputCursor = DievasColourPrimitives.royalPurple;
 
   /// segmented control selected background.
-  static const int segmentedControlSelectedBackground = DievasColourPrimitives.indigo500;
+  static const int segmentedControlSelectedBackground = DievasColourPrimitives.royalPurple;
 
   /// tab selected indicator.
-  static const int tabSelectedIndicator = DievasColourPrimitives.indigo500;
+  static const int tabSelectedIndicator = DievasColourPrimitives.royalPurple;
 
   /// checkbox disabled background.
   static const int checkboxDisabledBackground = DievasColourPrimitives.slate200;

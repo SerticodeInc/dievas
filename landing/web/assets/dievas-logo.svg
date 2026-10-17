@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Dievas">
+<title>Dievas</title>
+<defs>
+  <!-- Raised edges catch light from the upper right; shadows fall lower left. -->
+  <filter id="raised-element" x="-35%" y="-65%" width="170%" height="240%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="bevel"/>
+    <feSpecularLighting in="bevel" surfaceScale="5" specularConstant="0.45" specularExponent="18" lighting-color="#FFFFFF" result="light">
+      <feDistantLight azimuth="315" elevation="50"/>
+    </feSpecularLighting>
+    <feComposite in="light" in2="SourceAlpha" operator="in" result="clipped-light"/>
+    <feComposite in="SourceGraphic" in2="clipped-light" operator="arithmetic" k1="0" k2="1" k3="0.55" k4="0" result="lit-surface"/>
+    <feDropShadow in="lit-surface" dx="-10" dy="14" stdDeviation="8" flood-color="#171717" flood-opacity="0.30"/>
+  </filter>
+</defs>
+
+<rect width="1024" height="1024" rx="205" fill="#5C33CF"/>
+<g id="dievas-mark">
+  <circle filter="url(#raised-element)" cx="512" cy="262" r="77.5" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="5"/>
+  <g transform="translate(470 220) scale(3.5)" fill="none" stroke="#171717" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="4.2"/>
+    <path d="M12 2.5v2.2M12 19.3v2.2M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/>
+  </g>
+  <g stroke-width="5">
+    <rect filter="url(#raised-element)" x="381.5" y="374.5" width="261" height="59" rx="29.5" fill="#FFFFFF" stroke="#FFFFFF"/>
+    <rect filter="url(#raised-element)" x="320" y="482.5" width="384" height="59" rx="29.5" fill="#FFFFFF" stroke="#FFFFFF"/>
+    <rect filter="url(#raised-element)" x="258.5" y="590.5" width="507" height="59" rx="29.5" fill="#FFFFFF" stroke="#FFFFFF"/>
+  </g>
+  <circle filter="url(#raised-element)" cx="512" cy="762" r="77.5" fill="#FFB319" stroke="#FFB319" stroke-width="5"/>
+  <g transform="translate(470 720) scale(3.5)" fill="none" stroke="#171717" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 13.5A8 8 0 0 1 10.5 4 8 8 0 1 0 20 13.5Z"/>
+  </g>
+</g>
+</svg>

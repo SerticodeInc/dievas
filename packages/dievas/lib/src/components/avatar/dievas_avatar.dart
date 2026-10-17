@@ -1,161 +1,259 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import 'package:dievas/src/theme/dievas_theme.dart';
 
-/// Size variants for [DievasAvatar].
-enum DievasAvatarSize {
-  /// 24 × 24 dp — inline / compact contexts.
-  XS,
+/// Avatar sizes. Existing XS - XL dimensions are retained; XL2 adds 80 dp.
+enum DievasAvatarSize { XS, SM, MD, LG, XL, XL2 }
 
-  /// 32 × 32 dp — default list row size.
-  SM,
+/// Circle or rounded square avatar surface.
+enum DievasAvatarShape { circle, square }
 
-  /// 40 × 40 dp — standard card/header size.
-  MD,
+/// Badge corners mirror in right-to-left layouts, following reading direction.
+enum DievasAvatarBadgeAlignment { topLeft, topRight, bottomLeft, bottomRight }
 
-  /// 48 × 48 dp — profile hero.
-  LG,
-
-  /// 64 × 64 dp — full-page profile.
-  XL,
-}
-
-/// Visual style of the avatar container.
-enum DievasAvatarShape {
-  /// Fully circular container.
-  circle,
-
-  /// Rounded-square container — uses [DievasAvatarThemeData.borderRadiusSquare].
-  square,
-}
-
-/// A circular or square container that displays a user's image, initials, or
-/// a placeholder icon.
+/// An image backed avatar with optional foreground content and a status badge.
 ///
-/// Content priority: [imageProvider] → [initials] → placeholder person icon.
+/// [content] overlays an image. Without custom content, the image takes
+/// precedence over [initials], with initials/person shown while loading or on
+/// failure. Initials use at most two complete grapheme clusters.
 ///
-/// Moon reference: Avatar
-///
-/// ```dart
-/// DievasAvatar(
-///   imageProvider: NetworkImage(user.avatarUrl),
-///   semanticLabel: user.displayName,
-/// )
-/// DievasAvatar(initials: 'AB', size: .LG)
-/// DievasAvatar(size: .SM, shape: .square)
-/// DievasAvatar(
-///   initials: 'AB',
-///   backgroundColour: Colors.blue,
-///   initialsColour: Colors.white,
-///   borderColour: Colors.blueGrey,
-/// )
-/// ```
-///
-/// All colour parameters are optional; when `null` the theme values are used.
+/// The default shape is rounded square. Use [shape] to request a circle.
 class DievasAvatar extends StatelessWidget {
   const DievasAvatar({
     super.key,
     this.imageProvider,
     this.initials,
+    this.content,
     this.size = .MD,
-    this.shape = .circle,
+    this.shape = .square,
     this.semanticLabel,
     this.backgroundColour,
     this.initialsColour,
     this.placeholderColour,
     this.borderColour,
-  });
+    this.borderWidth = 1,
+    this.borderRadius,
+    this.width,
+    this.height,
+    this.textStyle,
+    this.showBadge = false,
+    this.badgeColour,
+    this.badgeSize,
+    this.badgeMarginValue,
+    this.badgeAlignment = .bottomRight,
+    this.badgeSemanticLabel,
+  }) : assert(width == null || width > 0),
+       assert(height == null || height > 0),
+       assert(borderWidth >= 0),
+       assert(badgeSize == null || badgeSize > 0),
+       assert(badgeMarginValue == null || badgeMarginValue >= 0);
 
-  /// Image to display. Takes precedence over [initials] and the placeholder.
   final ImageProvider? imageProvider;
-
-  /// Up to two characters shown when no [imageProvider] is provided.
   final String? initials;
 
-  /// Container size variant.
+  /// Optional foreground widget, including over [imageProvider].
+  final Widget? content;
   final DievasAvatarSize size;
-
-  /// Container shape — circle or rounded square.
   final DievasAvatarShape shape;
-
-  /// Screen-reader description of this avatar.
   final String? semanticLabel;
-
-  /// Container background colour — overrides the theme's default when provided.
   final Color? backgroundColour;
-
-  /// Initials text colour — overrides the theme's default when provided.
   final Color? initialsColour;
-
-  /// Placeholder icon colour — overrides the theme's default when provided.
   final Color? placeholderColour;
 
-  /// Optional ring colour around the avatar. When `null`, no border is drawn.
+  /// Optional border painted above the image and content.
   final Color? borderColour;
+  final double borderWidth;
+
+  /// Explicit radius takes precedence over [shape]. Resolves directional radii.
+  final BorderRadiusGeometry? borderRadius;
+  final double? width;
+  final double? height;
+  final TextStyle? textStyle;
+  final bool showBadge;
+  final Color? badgeColour;
+  final double? badgeSize;
+
+  /// Transparent separation cut out around the badge, including over images.
+  final double? badgeMarginValue;
+  final DievasAvatarBadgeAlignment badgeAlignment;
+  final String? badgeSemanticLabel;
 
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).avatar;
-
     final dimension = switch (size) {
       .XS => theme.sizeXS,
       .SM => theme.sizeSM,
       .MD => theme.sizeMD,
       .LG => theme.sizeLG,
       .XL => theme.sizeXL,
+      .XL2 => theme.sizeXL2,
     };
-
-    final initialsStyle = switch (size) {
+    final style = switch (size) {
       .XS => theme.initialsStyleXS,
       .SM => theme.initialsStyleSM,
       .MD => theme.initialsStyleMD,
       .LG => theme.initialsStyleLG,
       .XL => theme.initialsStyleXL,
+      .XL2 => theme.initialsStyleXL2 ?? theme.initialsStyleXL,
+    };
+    final foreground = switch (content) {
+      null => _AvatarFallback(initials: initials, iconColour: placeholderColour ?? theme.placeholderColour),
+      _ => const SizedBox.shrink(),
     };
 
-    final borderRadius = switch (shape) {
-      .circle => BorderRadius.circular(dimension / 2),
-      .square => theme.borderRadiusSquare,
-    };
+    return SizedBox(
+      width: width ?? dimension,
+      height: height ?? dimension,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final bounds = constraints.biggest;
+          final radius = switch ((borderRadius, shape)) {
+            (final override?, _) => override.resolve(Directionality.of(context)),
+            (_, .circle) => BorderRadius.circular(bounds.shortestSide / 2),
+            (_, .square) => theme.borderRadiusSquare,
+          };
+          final diameter = math.min(badgeSize ?? bounds.shortestSide * theme.badgeSizeFactor, bounds.shortestSide);
+          final badgeCentre = switch (badgeAlignment) {
+            .topLeft => AlignmentDirectional.topStart,
+            .topRight => AlignmentDirectional.topEnd,
+            .bottomLeft => AlignmentDirectional.bottomStart,
+            .bottomRight => AlignmentDirectional.bottomEnd,
+          }.resolve(Directionality.of(context)).inscribe(Size.square(diameter), Offset.zero & bounds).center;
+          final gap = badgeMarginValue ?? bounds.shortestSide * theme.badgeMarginFactor;
 
-    final background = backgroundColour ?? theme.backgroundColour;
-
-    final border = switch (borderColour) {
-      final colour? => Border.all(color: colour),
-      null => null,
-    };
-
-    final content = switch ((imageProvider, initials)) {
-      (final provider?, _) => Image(image: provider, fit: .cover, width: dimension, height: dimension),
-      (_, final text?) when text.isNotEmpty => Center(
-        child: Text(
-          (text.length > 2 ? text.substring(0, 2) : text).toUpperCase(),
-          style: initialsStyle.copyWith(color: initialsColour ?? theme.initialsColour),
-          maxLines: 1,
-          overflow: .clip,
-        ),
+          return Stack(
+            children: [
+              Positioned.fill(
+                child: Semantics(
+                  label: semanticLabel,
+                  image: imageProvider != null,
+                  excludeSemantics: semanticLabel != null,
+                  child: ClipPath(
+                    clipper: _AvatarClipper(
+                      radius: radius,
+                      badgeCentre: badgeCentre,
+                      cutoutRadius: showBadge ? diameter / 2 + gap : 0,
+                    ),
+                    child: DefaultTextStyle(
+                      style: style
+                          .merge(textStyle)
+                          .copyWith(
+                            color: switch ((initialsColour, textStyle?.color)) {
+                              (final colour?, _) || (_, final colour?) => colour,
+                              _ => theme.initialsColour,
+                            },
+                          ),
+                      child: IconTheme(
+                        data: IconThemeData(
+                          color: placeholderColour ?? theme.placeholderColour,
+                          size: bounds.shortestSide * 0.55,
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: backgroundColour ?? theme.backgroundColour,
+                            borderRadius: radius,
+                          ),
+                          foregroundDecoration: switch (borderColour) {
+                            final colour? => BoxDecoration(
+                              borderRadius: radius,
+                              border: .all(color: colour, width: borderWidth),
+                            ),
+                            _ => null,
+                          },
+                          child: Stack(
+                            fit: .expand,
+                            children: [
+                              switch (imageProvider) {
+                                final provider? => Image(
+                                  image: provider,
+                                  fit: .cover,
+                                  excludeFromSemantics: true,
+                                  frameBuilder: (context, child, frame, synchronous) =>
+                                      synchronous || frame != null ? child : foreground,
+                                  errorBuilder: (context, error, stackTrace) => foreground,
+                                ),
+                                _ => content == null ? foreground : const SizedBox.shrink(),
+                              },
+                              if (content case final child?) Center(child: child),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              if (showBadge)
+                Positioned(
+                  left: badgeCentre.dx - diameter / 2,
+                  top: badgeCentre.dy - diameter / 2,
+                  width: diameter,
+                  height: diameter,
+                  child: Semantics(
+                    label: badgeSemanticLabel,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        shape: .circle,
+                        color: switch ((badgeColour, theme.badgeColour)) {
+                          (final colour?, _) || (_, final colour?) => colour,
+                          _ => DievasTheme.coloursOf(context).feedback.feedbackSuccess.icon,
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          );
+        },
       ),
-      // Placeholder — person outline icon via Unicode glyph or custom paint. We use a proportional icon size (60% of container) so it scales naturally.
-      _ => Center(
-        child: Icon(Icons.person, size: dimension * 0.55, color: placeholderColour ?? theme.placeholderColour),
-      ),
-    };
-
-    final container = Container(
-      width: dimension,
-      height: dimension,
-      decoration: BoxDecoration(color: background, borderRadius: borderRadius, border: border),
-      clipBehavior: .antiAlias,
-      child: content,
     );
+  }
+}
 
-    return switch (semanticLabel) {
-      final label? => Semantics(
-        label: label,
-        image: imageProvider != null,
-        child: ExcludeSemantics(child: container),
+class _AvatarFallback extends StatelessWidget {
+  const _AvatarFallback({required this.initials, required this.iconColour});
+
+  final String? initials;
+  final Color iconColour;
+
+  @override
+  Widget build(BuildContext context) => Center(
+    child: switch (initials) {
+      final text? when text.isNotEmpty => Text(
+        text.toUpperCase().characters.take(2).toString(),
+        style: DefaultTextStyle.of(context).style,
+        maxLines: 1,
+        overflow: .clip,
       ),
-      _ => container,
+      _ => Icon(Icons.person, color: iconColour),
+    },
+  );
+}
+
+class _AvatarClipper extends CustomClipper<Path> {
+  const _AvatarClipper({required this.radius, required this.badgeCentre, required this.cutoutRadius});
+
+  final BorderRadius radius;
+  final Offset badgeCentre;
+  final double cutoutRadius;
+
+  @override
+  Path getClip(Size size) {
+    final surface = Path()..addRRect(radius.toRRect(Offset.zero & size));
+    return switch (cutoutRadius) {
+      final radius when radius > 0 => Path.combine(
+        .difference,
+        surface,
+        Path()..addOval(Rect.fromCircle(center: badgeCentre, radius: radius)),
+      ),
+      _ => surface,
     };
   }
+
+  @override
+  bool shouldReclip(_AvatarClipper oldClipper) =>
+      radius != oldClipper.radius || badgeCentre != oldClipper.badgeCentre || cutoutRadius != oldClipper.cutoutRadius;
 }

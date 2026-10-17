@@ -42,3 +42,6 @@ design.md
 .sample_images
 **/.metadata
 docs/
+
+# Keep the exported identity guidelines with the branding assets.
+!/branding/README.md

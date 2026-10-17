@@ -1,5 +1,49 @@
 # Change Log
 
+## Unreleased
+
+- Use Moon Design Piccolo purple (`#5C33CF`) for the default primary brand in both themes. Update focus, selection, active controls, cursors, and tinted brand surfaces together; derive hover and pressed shades from Piccolo. Explicit palette overrides remain available.
+
+### Avatar
+
+- Add a foreground content slot over image backgrounds; show initials or the placeholder while images load or fail. Preserve complete Unicode graphemes when shortening initials.
+- Add a status badge with colour, size, transparent margin, semantic label, and four corners that mirror in RTL layouts.
+- Add XL2 (80 dp), custom width/height, radius, text style, and border width. Existing XS–XL dimensions remain unchanged; avatar theme additions are optional for existing custom constructors.
+- Change the default shape to rounded square and default text/icon colours to primary foregrounds on the page surface. Pass `shape: .circle` to retain the previous default shape.
+- Paint borders above images and content. Expand Widgetbook with grouped token overrides, image/failure examples, content overlays, and badge controls.
+
+### AuthCode
+
+- Add box, circle, and underline shapes, horizontal alignment, radius and gap overrides, and independent selected, filled, inactive, error, text, and cursor colours.
+- Add an explicit error state and optional shake animation, including when shake is enabled during an existing error. Respect reduced motion.
+- Add optional timed peeking of the newest typed digit; keep multi digit pasted codes masked.
+- Add `onChanged`, distinct completed edit callbacks, OTP autofill, accessible input labels, and safe truncation when code length changes. Adapt fields and gaps to narrow layouts.
+- Limit code length to 7 digits. Replace the Widgetbook decimal slider with 4, 5, 6, and 7 digit presets.
+- Expand Widgetbook with grouped semantic colour overrides, disabled/active/error examples, and an error shake replay button.
+
+### Bottom sheet
+
+- Use a circular, tinted `DievasIconButton` at MD size for the close action, inheriting Dievas button and icon sizing.
+
+- Remove bottom-sheet shadows and the `shadow` option from the modal helper and bottom-sheet theme. The animated barrier provides separation.
+
+- Disable automatic scrollbars inside bottom sheets while preserving scrolling and drag-to-resize.
+
+- Center header titles independently of the trailing action; accept a custom `trailing` widget in place of the close button.
+- Align Widgetbook header and item insets with the component default, and remove item hover highlights. Add a custom trailing-action control.
+
+- Header separators use `DievasDivider` so divider colour and thickness follow the active Dievas theme.
+
+- Give the close action a filled circular background. Share horizontal padding between header, body tiles, and footer; expose the padding and close background in Widgetbook.
+- Add upward resizing from the initial height to a configurable safe-viewport cap (90% by default), shrink back toward the initial height before dismissal, and hand scrolling to the list at the cap. Resizing can be disabled independently.
+- Add `fitContent` to wrap short content instead of reserving a fixed initial height; use shrink-wrapped lazy lists for content measurement. Widgetbook includes a short-content use case and item-count control.
+
+- Replace the static Widgetbook sample with a real modal launcher, selectable scrolling rows, close/result feedback, and a keyboard-form example inside the device preview.
+- Add background/barrier colour, radius, shadow, pixel/fractional height, expanded layout, safe-area, root-navigator, close-threshold, and transition overrides. Preserve the natural-content `isScrollControlled` height limit when no explicit height is supplied.
+- Coordinate downward drags at the top of scrolling content with sheet dismissal; support threshold release, fast flings, snap-back, and disabling drag independently of barrier/Escape dismissal.
+- Add fixed header/footer slots, optional title, keyboard-accessible close action, header divider, body padding, and handle-colour overrides. Return selected results through `closeDievasBottomSheet`.
+- Preserve caller-local Dievas/Material themes across route boundaries, clip content to the surface, avoid the keyboard, and respect reduced motion. Extend the theme with optional motion/threshold/handle defaults and `copyWith`.
+
 ## 1.0.1
 
 ### Breaking colour role names

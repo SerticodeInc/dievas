@@ -42,7 +42,7 @@ class App extends StatelessComponent {
       link(rel: 'stylesheet', href: '/theme_section.css'),
       link(rel: 'stylesheet', href: '/craft.css'),
       link(rel: 'stylesheet', href: '/footer.css'),
-      link(rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg'),
+      link(rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg?v=three-bars'),
       RawText(_themeInitScript),
     ],
     body: const _AppBody(),

@@ -350,15 +350,18 @@ DievasAvatarThemeData _createAvatarTheme(
     sizeMD: sizing.avatarMD,
     sizeLG: sizing.avatarLG,
     sizeXL: sizing.avatarXL,
+    sizeXL2: sizing.height80,
     borderRadiusSquare: border.MD,
     initialsStyleXS: typography.labelXS,
     initialsStyleSM: typography.labelSM,
     initialsStyleMD: typography.labelMD,
     initialsStyleLG: typography.labelLG,
     initialsStyleXL: typography.titleSM,
-    backgroundColour: colours.background.cardBackground,
-    initialsColour: colours.text.textSecondary,
-    placeholderColour: colours.icon.iconSecondary,
+    initialsStyleXL2: typography.titleMD,
+    badgeColour: colours.feedback.feedbackSuccess.icon,
+    backgroundColour: colours.background.pageBackground,
+    initialsColour: colours.text.textPrimary,
+    placeholderColour: colours.icon.iconPrimary,
   );
 }
 

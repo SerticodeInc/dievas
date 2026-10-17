@@ -7,8 +7,8 @@
     <path d="M12 2.5v2.2M12 19.3v2.2M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/>
   </g>
   <g stroke-width="5">
-    <rect x="381.5" y="374.5" width="261" height="59" rx="29.5" fill="none" stroke="#DCDEE3"/>
-    <rect x="320" y="482.5" width="384" height="59" rx="29.5" fill="none" stroke="#171717"/>
+    <rect x="381.5" y="374.5" width="261" height="59" rx="29.5" fill="#171717" stroke="#FF4E64"/>
+    <rect x="320" y="482.5" width="384" height="59" rx="29.5" fill="#171717" stroke="#1BD29A"/>
     <rect x="258.5" y="590.5" width="507" height="59" rx="29.5" fill="#171717" stroke="#5C33CF"/>
   </g>
   <circle cx="512" cy="762" r="77.5" fill="#5C33CF" stroke="#171717" stroke-width="5"/>

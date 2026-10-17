@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'gallery_components.dart';
-import 'widgets/dievas_logo.dart';
 
 void main() => runApp(const DievasGallery());
 
@@ -11,7 +10,6 @@ class DievasGallery extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Widgetbook.material(
     home: const DievasHomePage(),
-    header: const Row(children: [DievasLogo(size: 64), SizedBox(width: 12), Text('Dievas')]),
     directories: [
       WidgetbookCategory(
         name: 'Foundations',

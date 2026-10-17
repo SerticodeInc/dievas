@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:dievas_tokens/dievas_tokens.dart';
 import 'package:flutter/painting.dart';
 
 /// Theme data for [DievasAvatar].
 ///
-/// Holds per-size dimensions, initials text styles, and fallback colours.
-/// Colour is resolved from [DievasColourThemeData] in the widget — the
-/// background/foreground fields here are the defaults when no image or
-/// initials are provided.
+/// Holds per-size dimensions, foreground styles, surface colours, and badge
+/// proportions. The theme mapper resolves the defaults from Dievas tokens.
+/// Optional additions preserve existing custom theme constructors.
 final class DievasAvatarThemeData extends Equatable {
   const DievasAvatarThemeData({
     required this.sizeXS,
@@ -23,7 +23,27 @@ final class DievasAvatarThemeData extends Equatable {
     required this.backgroundColour,
     required this.initialsColour,
     required this.placeholderColour,
+    this.sizeXL2 = DievasSizingPrimitives.s80,
+    this.initialsStyleXL2,
+    this.badgeColour,
+    this.badgeSizeFactor = 0.2,
+    this.badgeMarginFactor = 0.05,
   });
+
+  /// Extra-large profile dimension; the default maps to the 80 dp size token.
+  final double sizeXL2;
+
+  /// Falls back to the XL text style in existing custom themes.
+  final TextStyle? initialsStyleXL2;
+
+  /// Status colour; null resolves the active theme’s success icon colour.
+  final Color? badgeColour;
+
+  /// Badge diameter as a fraction of the avatar’s shorter side.
+  final double badgeSizeFactor;
+
+  /// Transparent badge gap as a fraction of the avatar’s shorter side.
+  final double badgeMarginFactor;
 
   /// Container size for [DievasAvatarSize.XS] — 24 dp.
   final double sizeXS;
@@ -83,6 +103,11 @@ final class DievasAvatarThemeData extends Equatable {
     Color? backgroundColour,
     Color? initialsColour,
     Color? placeholderColour,
+    double? sizeXL2,
+    TextStyle? initialsStyleXL2,
+    Color? badgeColour,
+    double? badgeSizeFactor,
+    double? badgeMarginFactor,
   }) => DievasAvatarThemeData(
     sizeXS: sizeXS ?? this.sizeXS,
     sizeSM: sizeSM ?? this.sizeSM,
@@ -98,10 +123,20 @@ final class DievasAvatarThemeData extends Equatable {
     backgroundColour: backgroundColour ?? this.backgroundColour,
     initialsColour: initialsColour ?? this.initialsColour,
     placeholderColour: placeholderColour ?? this.placeholderColour,
+    sizeXL2: sizeXL2 ?? this.sizeXL2,
+    initialsStyleXL2: initialsStyleXL2 ?? this.initialsStyleXL2,
+    badgeColour: badgeColour ?? this.badgeColour,
+    badgeSizeFactor: badgeSizeFactor ?? this.badgeSizeFactor,
+    badgeMarginFactor: badgeMarginFactor ?? this.badgeMarginFactor,
   );
 
   @override
   List<Object?> get props => [
+    sizeXL2,
+    initialsStyleXL2,
+    badgeColour,
+    badgeSizeFactor,
+    badgeMarginFactor,
     sizeXS,
     sizeSM,
     sizeMD,

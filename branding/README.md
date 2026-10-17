@@ -4,11 +4,13 @@ Use the SVG masters for Dievas branding. The mark abstracts the landing footer i
 
 ## Colours and treatments
 
-- Light grey `#DCDEE3`: outline of the sun circle and smallest pill.
-- Dievas black `#171717`: sun icon, middle pill outline, widest pill fill, and moon circle outline.
+- Light grey `#DCDEE3`: outline of the sun circle.
+- Chi-Chi `#FF4E64`: outline of the smallest pill.
+- Hit `#1BD29A`: outline of the middle pill.
+- Dievas black `#171717`: sun icon, all three pill fills, and moon circle outline.
 - Piccolo purple `#5C33CF`: widest pill outline and moon circle fill.
 - White `#FFFFFF`: sun circle fill, moon icon, and logo tile.
-- The first and second pills have no fill; their interiors show the underlying surface.
+- All three pills are solid black so their silhouette remains visible at small sizes.
 
 ## Master geometry
 
@@ -40,6 +42,6 @@ Keep alternate treatments separate from these masters until reviewed. PNG logo a
 
 ## Website and gallery assets
 
-The landing uses the mark in its favicon, gallery links, and brand demonstration. Its navbar retains the text wordmark. The gallery uses the SVG in its header, home page, browser favicon, and web manifest. Manifest icons include an opaque white maskable version; no PNG logo exports are used.
+The landing uses the mark in its favicon, gallery links, and brand demonstration. Its navbar retains the text wordmark. The gallery uses the SVG on its home page, browser favicon, and web manifest. Manifest icons include an opaque white maskable version; no PNG logo exports are used.
 
-When the master changes, synchronize `landing/web/assets/dievas-logo.svg`, both `web/favicon.svg` files, `packages/dievas_gallery/assets/branding/dievas-logo.svg`, and the gallery’s `web/icons/Icon.svg` and `Icon-maskable.svg`. Favicons use a tighter viewBox for small sizes; the maskable icon uses an opaque square background. Keep the mark’s geometry identical in every copy.
+When the master changes, synchronize `landing/web/assets/dievas-logo.svg`, both `web/favicon.svg` files, `packages/dievas_gallery/assets/branding/dievas-logo.svg`, and the gallery’s `web/icons/Icon.svg` and `Icon-maskable.svg`. Favicons retain the complete rounded tile and enlarge the mark by 1.25× around the canvas center for small sizes; the maskable icon uses an opaque square background. Keep the mark’s geometry identical in every copy.

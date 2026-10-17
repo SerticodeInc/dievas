@@ -4,6 +4,14 @@
 
 - Use Moon Design Piccolo purple (`#5C33CF`) for the default primary brand in both themes. Update focus, selection, active controls, cursors, and tinted brand surfaces together; derive hover and pressed shades from Piccolo. Explicit palette overrides remain available.
 
+### Avatar
+
+- Add a foreground content slot over image backgrounds; show initials or the placeholder while images load or fail. Preserve complete Unicode graphemes when shortening initials.
+- Add a status badge with colour, size, transparent margin, semantic label, and four corners that mirror in RTL layouts.
+- Add XL2 (80 dp), custom width/height, radius, text style, and border width. Existing XS–XL dimensions remain unchanged; avatar theme additions are optional for existing custom constructors.
+- Change the default shape to rounded square and default text/icon colours to primary foregrounds on the page surface. Pass `shape: .circle` to retain the previous default shape.
+- Paint borders above images and content. Expand Widgetbook with grouped token overrides, image/failure examples, content overlays, and badge controls.
+
 ## 1.0.1
 
 ### Breaking colour role names

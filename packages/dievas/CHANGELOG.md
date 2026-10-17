@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.0.1
 
 ### Breaking colour role names
 
@@ -10,6 +10,33 @@
 - Migrate Flutter themes, component consumers, examples, gallery labels, and tests together.
 - See the token package’s README colour naming migration section for the replacement table and custom-theme migration requirements.
 
+### Accordion
+
+- Add grouped and ungrouped layouts, small/medium/large sizes, and optional borders, dividers, and token shadows.
+- Add independent collapsed and expanded text, icon, and background colours; content, border, and divider colours; radius, padding, height, spacing, alignment, and motion overrides.
+- Add controlled expansion through `expandedIndices`, expansion callbacks, content state preservation, and focus and semantic options.
+- Fix the initially expanded chevron rotation and disable header interaction for disabled items.
+
+### Alerts
+
+- Add base, filled, and outlined variants, with optional leading, label, content, and trailing widget slots.
+- Add independent slot and surface colours, border visibility, radius, padding, and semantic labels.
+- Add disabled trailing actions and keyboard-accessible dismiss buttons while retaining `leadingIcon` and `onDismiss`.
+- Default filled alerts to no border; outlined alerts show a border unless explicitly overridden.
+
+### Theme token access
+
+- Align the Flutter theme layer with `dievas_tokens` 1.0.1.
+- Expose all 50 semantic height and width values through `context.sizing`, all 18 opacity percentage values through `context.opacity`, and large radii `R28` through `R64` through `context.border`.
+- Include the added values in constructor defaults, `copyWith`, and equality.
+- Resolve default animation easing curves from semantic tokens while preserving const construction and custom curve overrides.
+- Add `DievasZIndexThemeData`, `DievasTheme.zIndexOf`, and `context.zIndex`, with aspect-scoped rebuilds and preservation through theme copies. Custom implementations of `DievasThemeData` must provide `zIndex`.
+
+### Widgetbook
+
+- Add interactive accordion and alert examples, including controlled expansion, form state preservation, alert visibility, dismissal, and restoration.
+- Replace colour pickers with curated Dievas semantic token selectors that follow the active light or dark theme.
+- Group accordion and alert controls into sections, keeping visibility toggles, overrides, and their values together.
 
 ## 1.0.0
 
@@ -23,28 +50,28 @@ Every component that painted elevation through Flutter's `Material` / `Drawer` /
 
 All size axis identifiers were renamed to `<base><SIZE>` (lowercase base, **UPPERCASE** size suffix, multiplier trailing): - Suffixes: `XS`, `SM`, `MD`, `LG`, `XL`, `XL2`…`XL8`; half steps `SMPlus`, `MDPlus`, `LGPlus`, `XLPlus`. - Examples: `spacingMD`, `radiusLG`, `fontSizeXL`, `sizeXL2`, `breakpointSM`. - Enum values follow the same law (`DievasButtonSize.MD`, `DievasGridBreakpoint.XL`). - Component theme value record fields follow the same law (`heightLG`, `paddingMD`). - **Not** renamed (not size axes): opacity roles, z index, easing, animation intents, `touchMin`.
 
-### Breaking removed duplicate easing - `DievasAnimationThemeData.easingEmphasize` was an exact duplicate of `easingStandard` and has been removed.
+### Breaking removed duplicate easing - `DievasAnimationThemeData.easingEmphasize` was an exact duplicate of `easingStandard` and has been removed
 
 ### Breaking shadow opacities moved to the elevation domain
 
 The six shadow opacity aliases leaked into the opacity API. They are removed from `DievasOpacityThemeData`: - Removed: `shadow1`, `shadow1Light`, `shadow2`, `shadow2Upper`, `shadow2Lower`, `shadow2Heavy`. - The shadow tints now live inside the elevation layer records (see `dievas_tokens`), so no `SHADOW_TINT_*` constants are exposed.
 
-### New brand palette selection - **New:** `applyBrandPalette(DievasColourThemeData, DievasBrandPalette)` re resolves every brand derived colour role (brand, brand subtle, on brand text/icon, primary and secondary actions, brand/focus borders, focus input border, switch on track) while leaving neutral, text, surface, and feedback roles fixed. - **New:** `DievasGlobalThemeData` accepts an optional `brandPalette` - the single brand selection point for consumer apps. - The default `DievasBrandPalettes.indigo` reproduces the built in light and dark reference themes exactly (guarded by a parity test).
+### New brand palette selection - **New:** `applyBrandPalette(DievasColourThemeData, DievasBrandPalette)` re resolves every brand derived colour role (brand, brand subtle, on brand text/icon, primary and secondary actions, brand/focus borders, focus input border, switch on track) while leaving neutral, text, surface, and feedback roles fixed. - **New:** `DievasGlobalThemeData` accepts an optional `brandPalette` - the single brand selection point for consumer apps. - The default `DievasBrandPalettes.indigo` reproduces the built in light and dark reference themes exactly (guarded by a parity test)
 
-### Elevation Default shadows now use the soft `DievasElevationSemantic.shadowColour` (`0xFF171717`) ink instead of pure `staticBlack`, and render centred (no vertical offset) so depth reads as a soft halo rather than a drop shadow underneath. Reverses the `offsetY` behaviour introduced in 0.0.3 the offset tokens have since been removed entirely. - Shadow layers are built from the new ordered per tier `DievasElevationShadowLayer` lists (`SM`, `MD`, `LG`, `XL`), replacing the `upper` / `lower` records and the separate `SHADOW_TINT_*` constants. See `dievas_tokens` for the breaking token details.
+### Elevation Default shadows now use the soft `DievasElevationSemantic.shadowColour` (`0xFF171717`) ink instead of pure `staticBlack`, and render centred (no vertical offset) so depth reads as a soft halo rather than a drop shadow underneath. Reverses the `offsetY` behaviour introduced in 0.0.3 the offset tokens have since been removed entirely. - Shadow layers are built from the new ordered per tier `DievasElevationShadowLayer` lists (`SM`, `MD`, `LG`, `XL`), replacing the `upper` / `lower` records and the separate `SHADOW_TINT_*` constants. See `dievas_tokens` for the breaking token details
 
-### Changed - `DievasBadge` uses roomier internal padding (`SMPlus` horizontal, `XS` vertical) so labels no longer sit cramped against the pill edge.
+### Changed - `DievasBadge` uses roomier internal padding (`SMPlus` horizontal, `XS` vertical) so labels no longer sit cramped against the pill edge
 
-### Fixed - `DievasAlert` no longer stretches to fill a loosely constrained parent. Its text column is now shrink wrapped on the main axis, so the surface sizes to its content instead of expanding to the full available height (visible as a page filling alert in the widget book canvas). - `DievasTabBar` now uses a single underline indicator that slides between tabs instead of a per tab bottom border that popped in and out, so changing the selected tab animates smoothly.
+### Fixed - `DievasAlert` no longer stretches to fill a loosely constrained parent. Its text column is now shrink wrapped on the main axis, so the surface sizes to its content instead of expanding to the full available height (visible as a page filling alert in the widget book canvas). - `DievasTabBar` now uses a single underline indicator that slides between tabs instead of a per tab bottom border that popped in and out, so changing the selected tab animates smoothly
 
-### Docs Documented the size token naming law and the 4pt / 8pt grid law. - Corrected the colour taxonomy (`switchThumbOn` / `switchThumbOff`, added `SurfaceColours`). - Documented brand palettes.
+### Docs Documented the size token naming law and the 4pt / 8pt grid law. - Corrected the colour taxonomy (`switchThumbOn` / `switchThumbOff`, added `SurfaceColours`). - Documented brand palettes
 
-## 0.0.5 - **New:** `DievasTag` - pill/rounded shape via `DievasTagBorderRadius` sealed class, per instance colour overrides (`backgroundColor`, `foregroundColor`, `borderColor`), and border width stable sizing across all styles. - **Change:** All American "Color" naming renamed to British "Colour": `DievasTheme.coloursOf()`, `context.colours`, `DievasThemeAspect.colours`, `DievasColourThemeData`. - **API:** `DievasTagBorderRadius.pill` now uses `DievasRadiusSemantic.full` (9999.0) via `resolve()` instead of `containerHeight / 2`. - **Fix:** `DievasTag` stable width test targets Container descendants of DievasTag instead of global `find.byType(Container)`. - **Internal:** Downgraded `widgetbook` to ^3.21.0, `meta` to `>=1.17.0 <2.0.0`, `test` to ^1.30.0 for Flutter SDK 3.41.9 compatibility.
+## 0.0.5 - **New:** `DievasTag` - pill/rounded shape via `DievasTagBorderRadius` sealed class, per instance colour overrides (`backgroundColor`, `foregroundColor`, `borderColor`), and border width stable sizing across all styles. - **Change:** All American "Color" naming renamed to British "Colour": `DievasTheme.coloursOf()`, `context.colours`, `DievasThemeAspect.colours`, `DievasColourThemeData`. - **API:** `DievasTagBorderRadius.pill` now uses `DievasRadiusSemantic.full` (9999.0) via `resolve()` instead of `containerHeight / 2`. - **Fix:** `DievasTag` stable width test targets Container descendants of DievasTag instead of global `find.byType(Container)`. - **Internal:** Downgraded `widgetbook` to ^3.21.0, `meta` to `>=1.17.0 <2.0.0`, `test` to ^1.30.0 for Flutter SDK 3.41.9 compatibility
 
-## 0.0.4 - **New:** `DievasGlobalThemeData` now accepts an optional `DievasTypographyThemeData? typography` parameter for custom type scales (instead of hardcoded `DievasTypographySemantic` defaults). - **Change:** `DievasGlobalThemeData` relaxed from `sealed` to `base` to allow consumer app extension. - **New:** Private `_raw` constructor added bypasses all derivation (typography, elevation, components, material) for use by `copyWith`. - **Optimization:** `copyWith` now returns `this` immediately when nothing changed, and reuses pre computed `_material`, `_elevation`, and `_typography` when only components change. Only component derivation is re run. - **API:** `copyWith` now also accepts `DievasTypographyThemeData? typography` for dynamic type scale overrides. - **Internal:** `DievasLightThemeData.copyWith` and `DievasDarkThemeData.copyWith` pass `typography` through to match the updated method signature.
+## 0.0.4 - **New:** `DievasGlobalThemeData` now accepts an optional `DievasTypographyThemeData? typography` parameter for custom type scales (instead of hardcoded `DievasTypographySemantic` defaults). - **Change:** `DievasGlobalThemeData` relaxed from `sealed` to `base` to allow consumer app extension. - **New:** Private `_raw` constructor added bypasses all derivation (typography, elevation, components, material) for use by `copyWith`. - **Optimization:** `copyWith` now returns `this` immediately when nothing changed, and reuses pre computed `_material`, `_elevation`, and `_typography` when only components change. Only component derivation is re run. - **API:** `copyWith` now also accepts `DievasTypographyThemeData? typography` for dynamic type scale overrides. - **Internal:** `DievasLightThemeData.copyWith` and `DievasDarkThemeData.copyWith` pass `typography` through to match the updated method signature
 
-## 0.0.3 - **Surface colours:** Added `SurfaceColours` value object with canvas, code, sidebar, and table striped tokens; wired into light/dark themes. - **Breakpoints:** `DievasGridBreakpoint` now references `DievasBreakpointSemantic.*` instead of hardcoded pixel values. - **Elevation:** `_buildDefaultElevation` uses `offsetY` from each `DievasElevationShadowLayer` rather than `Offset.zero`. - **Easing curves:** Added 4 `Curve` fields to `DievasAnimationThemeData` (`easingStandard`, `easingEnter`, `easingExit`, `easingEmphasize`) resolved from `DievasEasingPrimitives`; replaced hardcoded `Curves.easeOutCubic`/`Curves.easeInOut` across 6 components. - **Component quality:** - Replaced all `AnimatedBuilder` usages with `AnimatedWidget` subclasses (switch, auth_code, loader). - Removed bang (`!`) operators from component code. - Replaced `_DigitBox._buildContent` builder function with a switch expression dispatching to private widget classes. - Replaced hardcoded `Colors.black` in auth_code obscured dot with token aware fallback. - **DievasTheme integration:** `animationOf()` accessor returning typed `DievasAnimationThemeData` for curve lookups in components.
+## 0.0.3 - **Surface colours:** Added `SurfaceColours` value object with canvas, code, sidebar, and table striped tokens; wired into light/dark themes. - **Breakpoints:** `DievasGridBreakpoint` now references `DievasBreakpointSemantic.*` instead of hardcoded pixel values. - **Elevation:** `_buildDefaultElevation` uses `offsetY` from each `DievasElevationShadowLayer` rather than `Offset.zero`. - **Easing curves:** Added 4 `Curve` fields to `DievasAnimationThemeData` (`easingStandard`, `easingEnter`, `easingExit`, `easingEmphasize`) resolved from `DievasEasingPrimitives`; replaced hardcoded `Curves.easeOutCubic`/`Curves.easeInOut` across 6 components. - **Component quality:** - Replaced all `AnimatedBuilder` usages with `AnimatedWidget` subclasses (switch, auth_code, loader). - Removed bang (`!`) operators from component code. - Replaced `_DigitBox._buildContent` builder function with a switch expression dispatching to private widget classes. - Replaced hardcoded `Colors.black` in auth_code obscured dot with token aware fallback. - **DievasTheme integration:** `animationOf()` accessor returning typed `DievasAnimationThemeData` for curve lookups in components
 
-## 0.0.2 Added `repository:` and `homepage:` to pubspec. - Added `example/` directory. - Improved dart doc coverage.
+## 0.0.2 Added `repository:` and `homepage:` to pubspec. - Added `example/` directory. - Improved dart doc coverage
 
-## 0.0.1 Initial release. - Theme infrastructure: InheritedModel based theming with static sub system accessors, brand theme contract, and default light/dark themes. - Components: buttons, form inputs, display components, feedback/overlay components, navigation/disclosure widgets. - Semantic colour schemes, typography roles, spacing/sizing scale, elevation layers, and animation presets.
+## 0.0.1 Initial release. - Theme infrastructure: InheritedModel based theming with static sub system accessors, brand theme contract, and default light/dark themes. - Components: buttons, form inputs, display components, feedback/overlay components, navigation/disclosure widgets. - Semantic colour schemes, typography roles, spacing/sizing scale, elevation layers, and animation presets

@@ -12,6 +12,15 @@
 - Change the default shape to rounded square and default text/icon colours to primary foregrounds on the page surface. Pass `shape: .circle` to retain the previous default shape.
 - Paint borders above images and content. Expand Widgetbook with grouped token overrides, image/failure examples, content overlays, and badge controls.
 
+### AuthCode
+
+- Add box, circle, and underline shapes, horizontal alignment, radius and gap overrides, and independent selected, filled, inactive, error, text, and cursor colours.
+- Add an explicit error state and optional shake animation, including when shake is enabled during an existing error. Respect reduced motion.
+- Add optional timed peeking of the newest typed digit; keep multi digit pasted codes masked.
+- Add `onChanged`, distinct completed edit callbacks, OTP autofill, accessible input labels, and safe truncation when code length changes. Adapt fields and gaps to narrow layouts.
+- Limit code length to 7 digits. Replace the Widgetbook decimal slider with 4, 5, 6, and 7 digit presets.
+- Expand Widgetbook with grouped semantic colour overrides, disabled/active/error examples, and an error shake replay button.
+
 ## 1.0.1
 
 ### Breaking colour role names

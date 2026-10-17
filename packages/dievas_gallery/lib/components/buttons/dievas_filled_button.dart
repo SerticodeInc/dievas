@@ -2,6 +2,7 @@ import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
+import '../../knobs/token_colour_knob.dart';
 import '../../widgets/component_boundary.dart';
 
 final filledButtonComponent = WidgetbookComponent(
@@ -44,16 +45,12 @@ class _Playground extends StatelessWidget {
     final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
     final useChild = context.knobs.boolean(label: 'Use custom child');
 
-    final useCustomColours = context.knobs.boolean(label: 'Custom colours');
+    final useCustomColours = context.knobs.boolean(label: 'Override token colours');
     final backgroundColor = useCustomColours
-        ? context.knobs.color(label: 'Background colour', initialValue: const Color(0xFF6200EE))
+        ? context.tokenColourKnob(label: 'Background colour', role: .background)
         : null;
-    final foregroundColor = useCustomColours
-        ? context.knobs.color(label: 'Foreground colour', initialValue: Colors.white)
-        : null;
-    final borderColor = useCustomColours
-        ? context.knobs.color(label: 'Border colour', initialValue: const Color(0xFF6200EE))
-        : null;
+    final foregroundColor = useCustomColours ? context.tokenColourKnob(label: 'Foreground colour', role: .text) : null;
+    final borderColor = useCustomColours ? context.tokenColourKnob(label: 'Border colour', role: .border) : null;
 
     return Center(
       child: ComponentBoundary(

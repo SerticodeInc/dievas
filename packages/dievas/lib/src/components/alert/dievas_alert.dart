@@ -1,180 +1,259 @@
 import 'package:flutter/material.dart';
+
 import 'package:dievas/l10n/dievas_localizations.dart';
-import 'package:dievas/src/extensions/dievas_theme_context_extension.dart';
-import 'package:dievas/src/theme/colour/sets/feedback_colours.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// Semantic tone of a [DievasAlert].
-enum DievasAlertTone {
-  /// Positive / success feedback.
-  success,
+enum DievasAlertTone { success, warning, error, info }
 
-  /// Cautionary / attention feedback.
-  warning,
+/// Presentation of the alert surface.
+enum DievasAlertVariant { base, filled, outlined }
 
-  /// Error / destructive feedback.
-  error,
-
-  /// Neutral informational message.
-  info,
-}
-
-/// An inline alert surface communicating status or feedback to the user.
-///
-/// Moon reference: Alert
-///
-/// ```dart
-/// DievasAlert(
-///   tone: .success,
-///   title: 'Changes saved',
-///   description: 'Your profile has been updated.',
-/// )
-/// ```
+/// An inline status message with optional leading, content, and trailing slots.
 class DievasAlert extends StatelessWidget {
   const DievasAlert({
     super.key,
-    required this.tone,
     required this.title,
+    this.tone = .info,
+    this.variant = .filled,
     this.description,
-    this.onDismiss,
+    this.label,
+    this.content,
+    this.leading,
+    this.trailing,
     this.leadingIcon,
+    this.showLeading = true,
+    this.showTrailing = true,
+    this.showBorder,
+    this.disabled = false,
+    this.onDismiss,
+    this.onTrailingTap,
+    this.leadingColour,
+    this.labelColour,
+    this.trailingColour,
+    this.contentColour,
+    this.backgroundColour,
+    this.borderColour,
+    this.borderRadius,
+    this.padding,
+    this.semanticLabel,
+    this.trailingSemanticLabel,
   });
 
-  /// Semantic tone — drives colour and default icon.
   final DievasAlertTone tone;
-
-  /// Short, prominent title line.
+  final DievasAlertVariant variant;
   final String title;
-
-  /// Optional supporting description shown below the title.
   final String? description;
 
-  /// If provided, renders a dismiss (×) button that calls [onDismiss].
+  /// Replaces the title's text widget when provided.
+  final Widget? label;
+
+  /// Replaces the description when provided.
+  final Widget? content;
+  final Widget? leading;
+  final Widget? trailing;
+
+  /// Existing leading-icon API; [leading] takes precedence when both are set.
+  final Widget? leadingIcon;
+  final bool showLeading;
+  final bool showTrailing;
+
+  /// Defaults to true for outlined alerts and false for other variants.
+  final bool? showBorder;
+
+  /// Disables the trailing action while keeping the alert readable.
+  final bool disabled;
   final VoidCallback? onDismiss;
 
-  /// Custom leading icon. Defaults to a tone-appropriate glyph when null.
-  final Widget? leadingIcon;
+  /// Handles a trailing-slot tap; takes precedence over [onDismiss].
+  final VoidCallback? onTrailingTap;
+  final Color? leadingColour;
+  final Color? labelColour;
+  final Color? trailingColour;
+  final Color? contentColour;
+  final Color? backgroundColour;
+  final Color? borderColour;
+  final BorderRadius? borderRadius;
+  final EdgeInsetsGeometry? padding;
+  final String? semanticLabel;
+  final String? trailingSemanticLabel;
 
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).alert;
-    final palette = _palette(tone, _AlertPalette(DievasTheme.coloursOf(context).feedback));
+    final colours = DievasTheme.coloursOf(context);
+    final feedback = switch (tone) {
+      .success => colours.feedback.feedbackSuccess,
+      .warning => colours.feedback.feedbackWarning,
+      .error => colours.feedback.feedbackError,
+      .info => colours.feedback.feedbackInfo,
+    };
+    final foreground = switch (variant) {
+      .base => colours.text.textPrimary,
+      .filled || .outlined => feedback.text,
+    };
+    final iconColour = switch (variant) {
+      .base => colours.icon.iconPrimary,
+      .filled || .outlined => feedback.icon,
+    };
+    final action = onTrailingTap ?? onDismiss;
+    final body = switch ((content, description)) {
+      (final content?, _) => content,
+      (_, final text?) => Text(text),
+      _ => null,
+    };
 
     return Semantics(
       container: true,
+      liveRegion: true,
+      label: semanticLabel,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: palette.background,
-          border: .all(color: palette.border, width: theme.borderWidth),
-          borderRadius: theme.borderRadius,
+          color: switch ((backgroundColour, variant)) {
+            (final colour?, _) => colour,
+            (null, .base) => colours.background.cardBackground,
+            (null, .filled) => feedback.background,
+            (null, .outlined) => Colors.transparent,
+          },
+          border: switch ((showBorder, variant)) {
+            (true, _) || (null, .outlined) => .all(color: borderColour ?? feedback.border, width: theme.borderWidth),
+            _ => null,
+          },
+          borderRadius: borderRadius ?? theme.borderRadius,
         ),
         child: Padding(
-          padding: theme.padding,
+          padding: padding ?? theme.padding,
           child: Row(
-            crossAxisAlignment: .start,
+            crossAxisAlignment: body == null ? .center : .start,
             children: [
-              // Leading icon
-              Padding(
-                padding: .only(right: theme.iconSpacing),
-                child: leadingIcon ?? _DievasAlertDefaultIcon(tone: tone, color: palette.icon, size: theme.iconSize),
-              ),
-
-              // Text column
+              ...switch (showLeading) {
+                true => [
+                  Padding(
+                    padding: .only(right: theme.iconSpacing),
+                    child: _AlertSlot(
+                      colour: leadingColour ?? iconColour,
+                      iconSize: theme.iconSize,
+                      child: switch ((leading, leadingIcon, tone)) {
+                        (final leading?, _, _) => leading,
+                        (_, final icon?, _) => icon,
+                        (_, _, .success) => const Icon(Icons.check_circle),
+                        (_, _, .warning) => const Icon(Icons.warning),
+                        (_, _, .error) => const Icon(Icons.error),
+                        (_, _, .info) => const Icon(Icons.info),
+                      },
+                    ),
+                  ),
+                ],
+                false => <Widget>[],
+              },
               Expanded(
                 child: Column(
                   crossAxisAlignment: .start,
                   mainAxisSize: .min,
                   children: [
-                    Text(title, style: theme.titleStyle.copyWith(color: palette.text)),
-                    if (description case final text?) ...[
-                      SizedBox(height: context.spacing.XS),
-                      Text(text, style: theme.bodyStyle.copyWith(color: palette.text)),
-                    ],
+                    DefaultTextStyle(
+                      style: theme.titleStyle.copyWith(color: labelColour ?? foreground),
+                      child: label ?? Text(title),
+                    ),
+                    ...switch (body) {
+                      final child? => [
+                        SizedBox(height: DievasTheme.spacingOf(context).XS),
+                        DefaultTextStyle(
+                          style: theme.bodyStyle.copyWith(color: contentColour ?? foreground),
+                          child: child,
+                        ),
+                      ],
+                      null => <Widget>[],
+                    },
                   ],
                 ),
               ),
-
-              // Dismiss button
-              if (onDismiss != null)
-                Semantics(
-                  label: DievasLocalizations.of(context).alertDismissLabel,
-                  button: true,
-                  child: GestureDetector(
-                    onTap: onDismiss,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: context.spacing.SM),
-                      child: SizedBox.square(
-                        dimension: theme.dismissIconSize,
-                        child: IconTheme(
-                          data: IconThemeData(color: palette.icon, size: theme.dismissIconSize),
-                          child: const Icon(Icons.close),
-                        ),
-                      ),
-                    ),
+              ...switch ((showTrailing, trailing, action)) {
+                (true, final child?, _) => [
+                  _AlertTrailing(
+                    onTap: action,
+                    disabled: disabled,
+                    colour: trailingColour ?? iconColour,
+                    semanticLabel: trailingSemanticLabel,
+                    child: child,
                   ),
-                ),
+                ],
+                (true, null, final callback?) => [
+                  _AlertTrailing(
+                    onTap: callback,
+                    disabled: disabled,
+                    colour: trailingColour ?? iconColour,
+                    semanticLabel: trailingSemanticLabel ?? DievasLocalizations.of(context).alertDismissLabel,
+                    child: const Icon(Icons.close),
+                  ),
+                ],
+                _ => <Widget>[],
+              },
             ],
           ),
         ),
       ),
     );
   }
-
-  ({Color background, Color border, Color icon, Color text}) _palette(DievasAlertTone tone, _AlertPalette p) =>
-      switch (tone) {
-        .success => (background: p.successBg, border: p.successBorder, icon: p.successIcon, text: p.successText),
-        .warning => (background: p.warningBg, border: p.warningBorder, icon: p.warningIcon, text: p.warningText),
-        .error => (background: p.errorBg, border: p.errorBorder, icon: p.errorIcon, text: p.errorText),
-        .info => (background: p.infoBg, border: p.infoBorder, icon: p.infoIcon, text: p.infoText),
-      };
 }
 
-/// Dievas Alert Default Icon
-class _DievasAlertDefaultIcon extends StatelessWidget {
-  const _DievasAlertDefaultIcon({required this.tone, required this.color, required this.size});
+class _AlertSlot extends StatelessWidget {
+  const _AlertSlot({required this.colour, required this.iconSize, required this.child});
 
-  final DievasAlertTone tone;
-  final Color color;
-  final double size;
+  final Color colour;
+  final double iconSize;
+  final Widget child;
 
   @override
-  Widget build(BuildContext context) => SizedBox.square(
-    dimension: size,
-    child: IconTheme(
-      data: IconThemeData(color: color, size: size),
-
-      /// Simple geometric stand-ins — consumers can supply their own via leadingIcon.
-      child: switch (tone) {
-        .success => const Icon(Icons.check_circle),
-        .warning => const Icon(Icons.warning),
-        .error => const Icon(Icons.error),
-        .info => const Icon(Icons.info),
-      },
+  Widget build(BuildContext context) => IconTheme(
+    data: IconThemeData(color: colour, size: iconSize),
+    child: DefaultTextStyle.merge(
+      style: TextStyle(color: colour),
+      child: child,
     ),
   );
 }
 
-final class _AlertPalette {
-  _AlertPalette(FeedbackColours f)
-    : successBg = f.feedbackSuccess.background,
-      successBorder = f.feedbackSuccess.border,
-      successIcon = f.feedbackSuccess.icon,
-      successText = f.feedbackSuccess.text,
-      warningBg = f.feedbackWarning.background,
-      warningBorder = f.feedbackWarning.border,
-      warningIcon = f.feedbackWarning.icon,
-      warningText = f.feedbackWarning.text,
-      errorBg = f.feedbackError.background,
-      errorBorder = f.feedbackError.border,
-      errorIcon = f.feedbackError.icon,
-      errorText = f.feedbackError.text,
-      infoBg = f.feedbackInfo.background,
-      infoBorder = f.feedbackInfo.border,
-      infoIcon = f.feedbackInfo.icon,
-      infoText = f.feedbackInfo.text;
+class _AlertTrailing extends StatelessWidget {
+  const _AlertTrailing({
+    required this.onTap,
+    required this.disabled,
+    required this.colour,
+    required this.semanticLabel,
+    required this.child,
+  });
 
-  final Color successBg, successBorder, successIcon, successText;
-  final Color warningBg, warningBorder, warningIcon, warningText;
-  final Color errorBg, errorBorder, errorIcon, errorText;
-  final Color infoBg, infoBorder, infoIcon, infoText;
+  final VoidCallback? onTap;
+  final bool disabled;
+  final Color colour;
+  final String? semanticLabel;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = DievasTheme.componentsOf(context).alert;
+    final slot = _AlertSlot(
+      colour: disabled ? DievasTheme.coloursOf(context).icon.iconDisabled : colour,
+      iconSize: theme.dismissIconSize,
+      child: child,
+    );
+
+    return Padding(
+      padding: .only(left: DievasTheme.spacingOf(context).SM),
+      child: switch (onTap) {
+        final callback? => IconButton(
+          onPressed: disabled ? null : callback,
+          tooltip: semanticLabel,
+          padding: .zero,
+          visualDensity: .compact,
+          constraints: .tightFor(
+            width: DievasTheme.sizingOf(context).touchMin,
+            height: DievasTheme.sizingOf(context).touchMin,
+          ),
+          icon: slot,
+        ),
+        null => Semantics(label: semanticLabel, child: slot),
+      },
+    );
+  }
 }

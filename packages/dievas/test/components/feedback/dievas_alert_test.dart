@@ -17,6 +17,92 @@ void main() {
       });
     }
 
+    for (final variant in DievasAlertVariant.values) {
+      testWidgets('$variant resolves the surface and optional border', (tester) async {
+        await tester.pumpWidget(
+          Harness(
+            child: DievasAlert(variant: variant, tone: .success, title: 'Status', showLeading: false),
+          ),
+        );
+        final context = tester.element(find.byType(DievasAlert));
+        final colours = DievasTheme.coloursOf(context);
+        final box = tester
+            .widget<DecoratedBox>(
+              find.descendant(of: find.byType(DievasAlert), matching: find.byType(DecoratedBox)).first,
+            )
+            .decoration;
+        if (box case BoxDecoration(:final color, :final border)) {
+          expect(color, switch (variant) {
+            .base => colours.background.cardBackground,
+            .filled => colours.feedback.feedbackSuccess.background,
+            .outlined => Colors.transparent,
+          });
+          expect(border != null, variant == DievasAlertVariant.outlined);
+        } else {
+          fail('Alert must expose its surface decoration');
+        }
+        expect(find.byIcon(Icons.check_circle), findsNothing);
+      });
+    }
+
+    testWidgets('custom slots inherit independent colours and border overrides', (tester) async {
+      await tester.pumpWidget(
+        const Harness(
+          child: DievasAlert(
+            title: 'Fallback',
+            label: Text('Label'),
+            content: Text('Content'),
+            leading: Icon(Icons.star),
+            trailing: Icon(Icons.arrow_forward),
+            leadingColour: Colors.red,
+            labelColour: Colors.green,
+            trailingColour: Colors.blue,
+            contentColour: Colors.orange,
+            backgroundColour: Colors.white,
+            borderColour: Colors.purple,
+            showBorder: true,
+            borderRadius: BorderRadius.all(Radius.circular(32)),
+          ),
+        ),
+      );
+      expect(find.text('Fallback'), findsNothing);
+      expect(DefaultTextStyle.of(tester.element(find.text('Label'))).style.color, Colors.green);
+      expect(DefaultTextStyle.of(tester.element(find.text('Content'))).style.color, Colors.orange);
+      expect(IconTheme.of(tester.element(find.byIcon(Icons.star))).color, Colors.red);
+      expect(IconTheme.of(tester.element(find.byIcon(Icons.arrow_forward))).color, Colors.blue);
+      final box = tester
+          .widget<DecoratedBox>(
+            find.descendant(of: find.byType(DievasAlert), matching: find.byType(DecoratedBox)).first,
+          )
+          .decoration;
+      expect(
+        box,
+        const BoxDecoration(
+          color: Colors.white,
+          border: Border.fromBorderSide(BorderSide(color: Colors.purple)),
+          borderRadius: BorderRadius.all(Radius.circular(32)),
+        ),
+      );
+    });
+
+    testWidgets('disabled trailing action does not fire and can be hidden', (tester) async {
+      var taps = 0;
+      await tester.pumpWidget(
+        Harness(
+          child: DievasAlert(title: 'Disabled', disabled: true, onDismiss: () => taps++),
+        ),
+      );
+      await tester.tap(find.byIcon(Icons.close));
+      expect(taps, 0);
+      expect(tester.widget<IconButton>(find.byType(IconButton)).onPressed, isNull);
+      await tester.pumpWidget(
+        Harness(
+          child: DievasAlert(title: 'Hidden action', showTrailing: false, onDismiss: () => taps++),
+        ),
+      );
+      expect(find.byIcon(Icons.close), findsNothing);
+    });
+
     testWidgets('renders title text', (tester) async {
       await tester.pumpWidget(
         Harness(
@@ -51,7 +137,7 @@ void main() {
           child: DievasAlert(tone: .info, title: 'Title', onDismiss: () => dismissed = true),
         ),
       );
-      await tester.tap(find.byType(GestureDetector));
+      await tester.tap(find.byIcon(Icons.close));
       expect(dismissed, isTrue);
     });
 

@@ -38,6 +38,9 @@ extension DievasThemeContextExtension on BuildContext {
   /// The animation sub-system — motion durations and easing curves.
   DievasAnimationThemeData get animation => DievasTheme.animationOf(this);
 
+  /// Stacking-order tokens for explicit overlay sorting.
+  DievasZIndexThemeData get zIndex => DievasTheme.zIndexOf(this);
+
   /// The component-level theme data sub-system.
   DievasComponentThemeData get components => DievasTheme.componentsOf(this);
 

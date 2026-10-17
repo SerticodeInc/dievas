@@ -2,6 +2,7 @@ import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
+import '../../knobs/token_colour_knob.dart';
 import '../../widgets/component_boundary.dart';
 
 final iconButtonComponent = WidgetbookComponent(
@@ -32,13 +33,11 @@ class _Playground extends StatelessWidget {
     final borderRadiusOverride = context.knobs.double.slider(label: 'Border radius', initialValue: 0, min: 0, max: 24);
     final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
 
-    final useCustomColours = context.knobs.boolean(label: 'Custom colours');
+    final useCustomColours = context.knobs.boolean(label: 'Override token colours');
     final backgroundColor = useCustomColours
-        ? context.knobs.color(label: 'Background colour', initialValue: const Color(0xFF6200EE))
+        ? context.tokenColourKnob(label: 'Background colour', role: .background)
         : null;
-    final foregroundColor = useCustomColours
-        ? context.knobs.color(label: 'Foreground colour', initialValue: Colors.white)
-        : null;
+    final foregroundColor = useCustomColours ? context.tokenColourKnob(label: 'Foreground colour', role: .text) : null;
 
     return Center(
       child: ComponentBoundary(

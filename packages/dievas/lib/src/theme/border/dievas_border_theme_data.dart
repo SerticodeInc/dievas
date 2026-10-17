@@ -16,6 +16,13 @@ final class DievasBorderThemeData extends Equatable {
     this.XL = const .all(.circular(DievasRadiusSemantic.XL)),
     this.XL2 = const .all(.circular(DievasRadiusSemantic.XL2)),
     this.XL3 = const .all(.circular(DievasRadiusSemantic.XL3)),
+    this.R28 = const .all(.circular(DievasRadiusSemantic.R28)),
+    this.R32 = const .all(.circular(DievasRadiusSemantic.R32)),
+    this.R36 = const .all(.circular(DievasRadiusSemantic.R36)),
+    this.R40 = const .all(.circular(DievasRadiusSemantic.R40)),
+    this.R48 = const .all(.circular(DievasRadiusSemantic.R48)),
+    this.R56 = const .all(.circular(DievasRadiusSemantic.R56)),
+    this.R64 = const .all(.circular(DievasRadiusSemantic.R64)),
     this.FULL = const .all(.circular(DievasRadiusSemantic.FULL)),
     this.strokeThin = 1.0,
     this.strokeDefault = 1.5,
@@ -46,6 +53,27 @@ final class DievasBorderThemeData extends Equatable {
   /// 24px — hero cards.
   final BorderRadius XL3;
 
+  /// 28px radius.
+  final BorderRadius R28;
+
+  /// 32px radius.
+  final BorderRadius R32;
+
+  /// 36px radius.
+  final BorderRadius R36;
+
+  /// 40px radius.
+  final BorderRadius R40;
+
+  /// 48px radius.
+  final BorderRadius R48;
+
+  /// 56px radius.
+  final BorderRadius R56;
+
+  /// 64px radius.
+  final BorderRadius R64;
+
   /// 9999px — pill shape. Badges, chips, fully rounded buttons.
   final BorderRadius FULL;
 
@@ -67,6 +95,13 @@ final class DievasBorderThemeData extends Equatable {
     BorderRadius? XL,
     BorderRadius? XL2,
     BorderRadius? XL3,
+    BorderRadius? R28,
+    BorderRadius? R32,
+    BorderRadius? R36,
+    BorderRadius? R40,
+    BorderRadius? R48,
+    BorderRadius? R56,
+    BorderRadius? R64,
     BorderRadius? FULL,
     double? strokeThin,
     double? strokeDefault,
@@ -80,6 +115,13 @@ final class DievasBorderThemeData extends Equatable {
     XL: XL ?? this.XL,
     XL2: XL2 ?? this.XL2,
     XL3: XL3 ?? this.XL3,
+    R28: R28 ?? this.R28,
+    R32: R32 ?? this.R32,
+    R36: R36 ?? this.R36,
+    R40: R40 ?? this.R40,
+    R48: R48 ?? this.R48,
+    R56: R56 ?? this.R56,
+    R64: R64 ?? this.R64,
     FULL: FULL ?? this.FULL,
     strokeThin: strokeThin ?? this.strokeThin,
     strokeDefault: strokeDefault ?? this.strokeDefault,
@@ -87,5 +129,25 @@ final class DievasBorderThemeData extends Equatable {
   );
 
   @override
-  List<Object?> get props => [NONE, XS, SM, MD, LG, XL, XL2, XL3, FULL, strokeThin, strokeDefault, strokeThick];
+  List<Object?> get props => [
+    NONE,
+    XS,
+    SM,
+    MD,
+    LG,
+    XL,
+    XL2,
+    XL3,
+    R28,
+    R32,
+    R36,
+    R40,
+    R48,
+    R56,
+    R64,
+    FULL,
+    strokeThin,
+    strokeDefault,
+    strokeThick,
+  ];
 }

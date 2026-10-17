@@ -159,7 +159,7 @@ packages:
       path: "../packages/dievas_tokens"
       relative: true
     source: path
-    version: "0.0.3"
+    version: "1.0.1"
   dio:
     dependency: "direct main"
     description:

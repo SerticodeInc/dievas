@@ -2,6 +2,7 @@ import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
+import '../../knobs/token_colour_knob.dart';
 import '../../widgets/component_boundary.dart';
 
 final tagComponent = WidgetbookComponent(
@@ -25,11 +26,11 @@ class _Playground extends StatelessWidget {
       initialOption: .tinted,
     );
 
-    final customColours = context.knobs.boolean(label: 'Custom Colours');
+    final customColours = context.knobs.boolean(label: 'Override token colours');
 
-    final bg = customColours ? context.knobs.color(label: 'Background', initialValue: const Color(0xFFE3F2FD)) : null;
-    final fg = customColours ? context.knobs.color(label: 'Foreground', initialValue: const Color(0xFF1565C0)) : null;
-    final border = customColours ? context.knobs.color(label: 'Border', initialValue: const Color(0xFF90CAF9)) : null;
+    final bg = customColours ? context.tokenColourKnob(label: 'Background', role: .background) : null;
+    final fg = customColours ? context.tokenColourKnob(label: 'Foreground', role: .text) : null;
+    final border = customColours ? context.tokenColourKnob(label: 'Border', role: .border) : null;
 
     final shape = context.knobs.object.dropdown<String>(
       label: 'Shape',

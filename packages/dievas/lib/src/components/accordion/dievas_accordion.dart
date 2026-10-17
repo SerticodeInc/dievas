@@ -233,15 +233,17 @@ class _AccordionCardState extends State<_AccordionCard> with SingleTickerProvide
       .md => theme.headerStyle,
       .lg => typography.titleSM,
     };
-    final iconColour = switch ((widget.item.disabled, _expanded)) {
-      (true, _) => colours.icon.iconDisabled,
-      (false, true) => options.expandedIconColour ?? options.iconColour ?? colours.icon.iconSecondary,
-      (false, false) => options.iconColour ?? colours.icon.iconSecondary,
+    final iconColour = switch ((widget.item.disabled, _expanded, options.expandedIconColour, options.iconColour)) {
+      (true, _, _, _) => colours.icon.iconDisabled,
+      (false, true, final colour?, _) => colour,
+      (false, _, _, final colour?) => colour,
+      _ => colours.icon.iconSecondary,
     };
-    final textColour = switch ((widget.item.disabled, _expanded)) {
-      (true, _) => colours.text.textDisabled,
-      (false, true) => options.expandedTextColour ?? options.textColour ?? colours.text.textPrimary,
-      (false, false) => options.textColour ?? colours.text.textPrimary,
+    final textColour = switch ((widget.item.disabled, _expanded, options.expandedTextColour, options.textColour)) {
+      (true, _, _, _) => colours.text.textDisabled,
+      (false, true, final colour?, _) => colour,
+      (false, _, _, final colour?) => colour,
+      _ => colours.text.textPrimary,
     };
     final duration = options.transitionDuration ?? theme.animationDuration;
     final curve = options.transitionCurve ?? DievasTheme.animationOf(context).easingStandard;
@@ -255,13 +257,12 @@ class _AccordionCardState extends State<_AccordionCard> with SingleTickerProvide
         autofocus: widget.item.autofocus,
         onTap: widget.item.disabled ? null : _toggle,
         child: Padding(
-          padding:
-              options.headerPadding ??
-              switch (options.size) {
-                .sm => .symmetric(horizontal: spacing.SM, vertical: spacing.SM),
-                .md => theme.padding,
-                .lg => .symmetric(horizontal: spacing.LG, vertical: spacing.MD),
-              },
+          padding: switch ((options.headerPadding, options.size)) {
+            (final padding?, _) => padding,
+            (null, .sm) => .symmetric(horizontal: spacing.SM, vertical: spacing.SM),
+            (null, .md) => theme.padding,
+            (null, .lg) => .symmetric(horizontal: spacing.LG, vertical: spacing.MD),
+          },
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: options.headerHeight ?? 0),
             child: IconTheme(
@@ -416,9 +417,10 @@ class _AccordionSurface extends StatelessWidget {
       ),
       child: Material(
         clipBehavior: .antiAlias,
-        color: switch (expanded) {
-          true => options.expandedBackgroundColour ?? options.backgroundColour ?? colours.background.cardBackground,
-          false => options.backgroundColour ?? colours.background.cardBackground,
+        color: switch ((expanded, options.expandedBackgroundColour, options.backgroundColour)) {
+          (true, final colour?, _) => colour,
+          (_, _, final colour?) => colour,
+          _ => colours.background.cardBackground,
         },
         shape: RoundedRectangleBorder(
           borderRadius: radius,

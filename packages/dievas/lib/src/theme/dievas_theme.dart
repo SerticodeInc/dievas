@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' show ThemeData;
 import 'package:flutter/widgets.dart';
 
+import 'z_index/dievas_z_index_theme_data.dart';
 import 'animation/dievas_animation_theme_data.dart';
 import 'border/dievas_border_theme_data.dart';
 import 'colour/dievas_colour_theme_data.dart';
@@ -28,6 +29,7 @@ enum DievasThemeAspect {
   sizing,
   spacing,
   typography,
+  zIndex,
 }
 
 /// The Dievas InheritedModel — the single source of truth for theme data
@@ -92,6 +94,10 @@ class DievasTheme extends InheritedModel<DievasThemeAspect> {
   static DievasOpacityThemeData opacityOf(BuildContext context) =>
       InheritedModel.inheritFrom<DievasTheme>(context, aspect: DievasThemeAspect.opacity)!.data.opacity;
 
+  /// Returns only stacking-order tokens. Rebuilds when z-index tokens change.
+  static DievasZIndexThemeData zIndexOf(BuildContext context) =>
+      InheritedModel.inheritFrom<DievasTheme>(context, aspect: DievasThemeAspect.zIndex)!.data.zIndex;
+
   /// Returns only the [DievasComponentThemeData]. Rebuilds when components change.
   static DievasComponentThemeData componentsOf(BuildContext context) =>
       InheritedModel.inheritFrom<DievasTheme>(context, aspect: DievasThemeAspect.components)!.data.components;
@@ -119,6 +125,7 @@ class DievasTheme extends InheritedModel<DievasThemeAspect> {
       .opacity => data.opacity != oldWidget.data.opacity,
       .sizing => data.sizing != oldWidget.data.sizing,
       .spacing => data.spacing != oldWidget.data.spacing,
+      .zIndex => data.zIndex != oldWidget.data.zIndex,
       .typography => data.typography != oldWidget.data.typography,
     },
   );

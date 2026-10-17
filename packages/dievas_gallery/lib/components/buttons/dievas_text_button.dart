@@ -2,6 +2,7 @@ import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
+import '../../knobs/token_colour_knob.dart';
 import '../../widgets/component_boundary.dart';
 
 final textButtonComponent = WidgetbookComponent(
@@ -43,10 +44,8 @@ class _Playground extends StatelessWidget {
     final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
     final useChild = context.knobs.boolean(label: 'Use custom child');
 
-    final useCustomColour = context.knobs.boolean(label: 'Custom colour');
-    final foregroundColor = useCustomColour
-        ? context.knobs.color(label: 'Foreground colour', initialValue: const Color(0xFF6200EE))
-        : null;
+    final useCustomColour = context.knobs.boolean(label: 'Override token colour');
+    final foregroundColor = useCustomColour ? context.tokenColourKnob(label: 'Foreground colour', role: .text) : null;
 
     return Center(
       child: ComponentBoundary(

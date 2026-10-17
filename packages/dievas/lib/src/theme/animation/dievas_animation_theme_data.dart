@@ -8,8 +8,8 @@ import 'package:flutter/animation.dart' show Curve, Cubic;
 /// the semantic name that matches their transition character rather than
 /// hardcoding millisecond values.
 ///
-/// Curve fields are resolved from [DievasEasingPrimitives] to Flutter [Curve]
-/// objects at construction time.
+/// Default curves are cached Flutter [Curve] objects resolved from
+/// [DievasEasingSemantic]. Callers can override each curve independently.
 final class DievasAnimationThemeData extends Equatable {
   const DievasAnimationThemeData({
     this.instant = DievasAnimationSemantic.instant,
@@ -23,10 +23,37 @@ final class DievasAnimationThemeData extends Equatable {
     this.loader = DievasAnimationSemantic.loader,
     this.tooltipShow = DievasAnimationSemantic.tooltipShow,
     this.snackbarDismiss = DievasAnimationSemantic.snackbarDismiss,
-    this.easingStandard = const Cubic(0.2, 0.0, 0.0, 1.0),
-    this.easingEnter = const Cubic(0.0, 0.0, 0.2, 1.0),
-    this.easingExit = const Cubic(0.4, 0.0, 1.0, 1.0),
-  });
+    Curve? easingStandard,
+    Curve? easingEnter,
+    Curve? easingExit,
+  }) : _easingStandard = easingStandard,
+       _easingEnter = easingEnter,
+       _easingExit = easingExit;
+
+  final Curve? _easingStandard;
+  final Curve? _easingEnter;
+  final Curve? _easingExit;
+
+  static final Curve _defaultEasingStandard = Cubic(
+    DievasEasingSemantic.standard.x1,
+    DievasEasingSemantic.standard.y1,
+    DievasEasingSemantic.standard.x2,
+    DievasEasingSemantic.standard.y2,
+  );
+
+  static final Curve _defaultEasingEnter = Cubic(
+    DievasEasingSemantic.enter.x1,
+    DievasEasingSemantic.enter.y1,
+    DievasEasingSemantic.enter.x2,
+    DievasEasingSemantic.enter.y2,
+  );
+
+  static final Curve _defaultEasingExit = Cubic(
+    DievasEasingSemantic.exit.x1,
+    DievasEasingSemantic.exit.y1,
+    DievasEasingSemantic.exit.x2,
+    DievasEasingSemantic.exit.y2,
+  );
 
   /// 50ms — micro-interactions, ripple, press feedback.
   final Duration instant;
@@ -63,15 +90,15 @@ final class DievasAnimationThemeData extends Equatable {
 
   /// Standard UI transitions — toggles, accordions, popovers.
   /// Derived from [DievasEasingSemantic.standard].
-  final Curve easingStandard;
+  Curve get easingStandard => _easingStandard ?? _defaultEasingStandard;
 
   /// Elements entering the screen — modals, sheets, panels, indicators.
   /// Derived from [DievasEasingSemantic.enter] (decelerate curve).
-  final Curve easingEnter;
+  Curve get easingEnter => _easingEnter ?? _defaultEasingEnter;
 
   /// Elements leaving the screen — dismissals, removals.
   /// Derived from [DievasEasingSemantic.exit] (accelerate curve).
-  final Curve easingExit;
+  Curve get easingExit => _easingExit ?? _defaultEasingExit;
 
   DievasAnimationThemeData copyWith({
     Duration? instant,

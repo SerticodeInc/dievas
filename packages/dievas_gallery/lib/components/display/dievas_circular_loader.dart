@@ -2,6 +2,7 @@ import 'package:dievas/dievas.dart';
 import 'package:flutter/widgets.dart';
 import 'package:widgetbook/widgetbook.dart';
 
+import '../../knobs/token_colour_knob.dart';
 import '../../widgets/component_boundary.dart';
 
 final circularLoaderComponent = WidgetbookComponent(
@@ -23,13 +24,9 @@ class _Playground extends StatelessWidget {
       initialOption: .MD,
     );
     final label = context.knobs.string(label: 'Label', initialValue: '');
-    final useCustomColours = context.knobs.boolean(label: 'Custom colours');
-    final colour = useCustomColours
-        ? context.knobs.color(label: 'Colour', initialValue: const Color(0xFF4A90E2))
-        : null;
-    final trackColour = useCustomColours
-        ? context.knobs.color(label: 'Track colour', initialValue: const Color(0xFFE0E6EF))
-        : null;
+    final useCustomColours = context.knobs.boolean(label: 'Override token colours');
+    final colour = useCustomColours ? context.tokenColourKnob(label: 'Colour', role: .icon) : null;
+    final trackColour = useCustomColours ? context.tokenColourKnob(label: 'Track colour', role: .background) : null;
 
     return Center(
       child: ComponentBoundary(

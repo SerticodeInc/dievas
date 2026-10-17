@@ -2,6 +2,7 @@ import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
+import '../../knobs/token_colour_knob.dart';
 import '../../widgets/component_boundary.dart';
 
 final avatarComponent = WidgetbookComponent(
@@ -33,23 +34,12 @@ class _Playground extends StatelessWidget {
 
     final showInitials = context.knobs.boolean(label: 'Show Initials', initialValue: true);
 
-    final customColours = context.knobs.boolean(label: 'Custom Colours');
+    final customColours = context.knobs.boolean(label: 'Override token colours');
 
-    final avatarTheme = DievasTheme.componentsOf(context).avatar;
-    final colours = context.colours;
-
-    final background = customColours
-        ? context.knobs.color(label: 'Background', initialValue: avatarTheme.backgroundColour)
-        : null;
-    final initialsColour = customColours
-        ? context.knobs.color(label: 'Initials', initialValue: avatarTheme.initialsColour)
-        : null;
-    final placeholder = customColours
-        ? context.knobs.color(label: 'Placeholder', initialValue: avatarTheme.placeholderColour)
-        : null;
-    final border = customColours
-        ? context.knobs.color(label: 'Border', initialValue: colours.border.dividerColour)
-        : null;
+    final background = customColours ? context.tokenColourKnob(label: 'Background', role: .background) : null;
+    final initialsColour = customColours ? context.tokenColourKnob(label: 'Initials', role: .text) : null;
+    final placeholder = customColours ? context.tokenColourKnob(label: 'Placeholder', role: .icon) : null;
+    final border = customColours ? context.tokenColourKnob(label: 'Border', role: .border) : null;
 
     return Center(
       child: ComponentBoundary(

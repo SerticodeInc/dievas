@@ -2,6 +2,7 @@ import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
+import '../../knobs/token_colour_knob.dart';
 import '../../widgets/component_boundary.dart';
 
 final dividerComponent = WidgetbookComponent(
@@ -33,9 +34,9 @@ class _Playground extends StatelessWidget {
       labelBuilder: (v) => '${v.resolve().toInt()}dp',
     );
 
-    final useCustomColour = context.knobs.boolean(label: 'Custom colour', initialValue: false);
+    final useCustomColour = context.knobs.boolean(label: 'Override token colour', initialValue: false);
 
-    final colour = useCustomColour ? context.knobs.color(label: 'Colour', initialValue: const Color(0xFFE3F2FD)) : null;
+    final colour = useCustomColour ? context.tokenColourKnob(label: 'Colour', role: .border) : null;
 
     final thickness = context.knobs.double.slider(label: 'Thickness', initialValue: 2, min: 0.5, max: 3);
 

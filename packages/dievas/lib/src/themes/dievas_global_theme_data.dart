@@ -36,6 +36,7 @@ base class DievasGlobalThemeData implements DievasThemeData {
     DievasSpacingThemeData spacing = const DievasSpacingThemeData(),
     DievasSizingThemeData sizing = const DievasSizingThemeData(),
     DievasElevationThemeData? elevation,
+    DievasZIndexThemeData zIndex = const DievasZIndexThemeData(),
     DievasOpacityThemeData opacity = const DievasOpacityThemeData(),
     DievasComponentThemeData? components,
     DievasTypographyThemeData? typography,
@@ -44,6 +45,7 @@ base class DievasGlobalThemeData implements DievasThemeData {
        _border = border,
        _spacing = spacing,
        _sizing = sizing,
+       _zIndex = zIndex,
        _opacity = opacity {
     _typography = typography ?? _createTypographyData(_colours.text.textPrimary);
     _elevation = elevation ?? _buildDefaultElevation();
@@ -70,12 +72,14 @@ base class DievasGlobalThemeData implements DievasThemeData {
     required DievasBorderThemeData border,
     required DievasSpacingThemeData spacing,
     required DievasSizingThemeData sizing,
+    required DievasZIndexThemeData zIndex,
     required DievasOpacityThemeData opacity,
   }) : _animation = animation,
        _colours = colours,
        _border = border,
        _spacing = spacing,
        _sizing = sizing,
+       _zIndex = zIndex,
        _opacity = opacity,
        _typography = typography,
        _elevation = elevation,
@@ -87,6 +91,7 @@ base class DievasGlobalThemeData implements DievasThemeData {
   final DievasBorderThemeData _border;
   final DievasSpacingThemeData _spacing;
   final DievasSizingThemeData _sizing;
+  final DievasZIndexThemeData _zIndex;
   final DievasOpacityThemeData _opacity;
   late final DievasTypographyThemeData _typography;
   late final DievasElevationThemeData _elevation;
@@ -104,6 +109,9 @@ base class DievasGlobalThemeData implements DievasThemeData {
 
   @override
   DievasElevationThemeData get elevation => _elevation;
+
+  @override
+  DievasZIndexThemeData get zIndex => _zIndex;
 
   @override
   DievasOpacityThemeData get opacity => _opacity;
@@ -148,6 +156,7 @@ base class DievasGlobalThemeData implements DievasThemeData {
       spacing: _spacing,
       sizing: _sizing,
       elevation: _elevation,
+      zIndex: _zIndex,
       opacity: _opacity,
       typography: newTypography,
       components: newComponents,

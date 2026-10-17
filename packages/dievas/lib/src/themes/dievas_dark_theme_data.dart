@@ -2,7 +2,7 @@ part of '../themes.dart';
 
 /// Default Dievas dark theme.
 ///
-/// Uses the indigo/slate dark palette. Mirror of [DievasLightThemeData] using
+/// Uses Moon Piccolo branding and the dark neutral reference palette. Mirror of [DievasLightThemeData] using
 /// [DievasColourSemanticDark] token values. Consumer apps do not subclass this —
 /// they subclass [DievasGlobalThemeData] with their own brand tokens.
 final class DievasDarkThemeData extends DievasGlobalThemeData {

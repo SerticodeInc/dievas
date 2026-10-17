@@ -204,7 +204,7 @@ Future<void> main() async {
           as Map<String, dynamic>;
   final themes = fixture['themes'] as Map<String, dynamic>;
   for (final theme in {'light': _light, 'dark': _dark}.entries) {
-    test('${theme.key} role migration preserves every colour value', () {
+    test('${theme.key} semantic roles match the recorded colour baseline', () {
       final expected = themes[theme.key] as Map<String, dynamic>;
       expect(theme.value.keys.toSet(), expected.keys.toSet());
       for (final entry in theme.value.entries) {

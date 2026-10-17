@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Dievas">
+<title>Dievas</title>
+<g id="dievas-mark">
+  <circle cx="512" cy="262" r="77.5" fill="#FFFFFF" stroke="#DCDEE3" stroke-width="5"/>
+  <g transform="translate(470 220) scale(3.5)" fill="none" stroke="#171717" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="4.2"/>
+    <path d="M12 2.5v2.2M12 19.3v2.2M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/>
+  </g>
+  <g stroke-width="5">
+    <rect x="381.5" y="374.5" width="261" height="59" rx="29.5" fill="none" stroke="#DCDEE3"/>
+    <rect x="320" y="482.5" width="384" height="59" rx="29.5" fill="none" stroke="#171717"/>
+    <rect x="258.5" y="590.5" width="507" height="59" rx="29.5" fill="#171717" stroke="#5C33CF"/>
+  </g>
+  <circle cx="512" cy="762" r="77.5" fill="#5C33CF" stroke="#171717" stroke-width="5"/>
+  <g transform="translate(470 720) scale(3.5)" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 13.5A8 8 0 0 1 10.5 4 8 8 0 1 0 20 13.5Z"/>
+  </g>
+</g>
+</svg>

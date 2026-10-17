@@ -196,7 +196,12 @@ base class DievasGlobalThemeData implements DievasThemeData {
 
     final base = ThemeData(
       brightness: brightness,
-      colorScheme: .fromSeed(seedColor: seedColour, brightness: brightness),
+      colorScheme: .fromSeed(
+        seedColor: seedColour,
+        brightness: brightness,
+        primary: colours.core.primary,
+        onPrimary: colours.text.buttonPrimaryText,
+      ),
       scaffoldBackgroundColor: scaffoldBg,
       useMaterial3: true,
       fontFamily: baseFont,

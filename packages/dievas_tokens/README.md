@@ -66,7 +66,7 @@ final primaryAction = lightBrand.buttonPrimaryBackground;
 final foregroundOnBrand = darkBrand.buttonPrimaryText;
 ```
 
-The default `indigo` palette matches the brand roles in the built-in semantic classes. Alternatives are `sky`, `green`, `violet`, `red`, `amber`, `ocean`, `forest`, `berry`, `dusk`, and `terracotta`. `DievasBrandPalettes.all` indexes them by name.
+The built in semantic classes use Moon Design’s Piccolo purple (`#5C33CF`) for primary brand roles in both themes, with translucent purple surfaces and derived hover and pressed shades. The optional `indigo` palette preserves the former colour family. Other palettes are `sky`, `green`, `violet`, `red`, `amber`, `ocean`, `forest`, `berry`, `dusk`, and `terracotta`. `DievasBrandPalettes.all` indexes them by name.
 
 Resolving a palette returns values; it does not mutate the static semantic classes. Apply those values through your theme adapter. These ramps preserve Dievas behaviour and have not yet migrated to Moon’s brand roles.
 

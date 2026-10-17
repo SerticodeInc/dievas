@@ -47,7 +47,7 @@ A Flutter import in that package is a bug.
 
 ```dart
 abstract final class DievasColourPrimitives {
-  static const int indigo500 = 0xFF6366F1;
+  static const int royalPurple = 0xFF5C33CF;
   static const int slate900  = 0xFF0F172A;
 }
 ```
@@ -58,7 +58,7 @@ abstract final class DievasColourPrimitives {
 // dievas_tokens — pure Dart, no Flutter import
 abstract final class DievasColourSemanticLight {
   static const int textPrimary   = DievasColourPrimitives.slate900;
-  static const int actionPrimary = DievasColourPrimitives.indigo500;
+  static const int buttonPrimaryBackground = DievasColourPrimitives.royalPurple;
 }
 
 // dievas package — Color wrapping happens here
@@ -118,7 +118,7 @@ final cols  = context.grid.columns;   // inside a DievasGrid
 
 ### Brand palettes
 
-Every brand-derived colour role is resolved from a selectable `DievasBrandPalette` — one full 11-tint colour-family ramp plus an `onBrand` contrast colour. `DievasBrandPalettes` ships the default `indigo` plus ten alternates (`sky`, `green`, `violet`, `red`, `amber`, `ocean`, `forest`, `berry`, `dusk`, `terracotta`). Roles resolve by brightness (`rolesForLight` / `rolesForDark`), and the default `indigo` reproduces the built-in themes exactly.
+Custom brand colours resolve from a selectable `DievasBrandPalette` — one full 11 tint colour family ramp plus an `onBrand` contrast colour. `DievasBrandPalettes` ships eleven optional palettes: `indigo` plus ten alternatives (`sky`, `green`, `violet`, `red`, `amber`, `ocean`, `forest`, `berry`, `dusk`, `terracotta`). Roles resolve by brightness (`rolesForLight` / `rolesForDark`), while the built in themes use Moon Design’s Piccolo purple (`#5C33CF`) in both light and dark mode.
 
 ### Plugging in a brand theme
 

@@ -10,8 +10,7 @@ import 'dievas_colour_theme_data.dart';
 /// The mapping is brightness-aware: [DievasBrandPalette.rolesForLight] is used
 /// on light surfaces and [DievasBrandPalette.rolesForDark] on dark surfaces.
 ///
-/// Passing [DievasBrandPalettes.indigo] reproduces the built-in reference
-/// themes exactly.
+/// The built-in themes use Moon Piccolo. Passing a palette replaces that brand.
 DievasColourThemeData applyBrandPalette(DievasColourThemeData colours, DievasBrandPalette palette) {
   final roles = switch (colours.brightness) {
     Brightness.dark => palette.rolesForDark(),

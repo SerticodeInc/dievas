@@ -35,7 +35,7 @@ class FooterComponent extends StatelessComponent {
           classes: 'cta-dark press',
           attributes: const {'target': '_blank', 'rel': 'noopener'},
           [
-            img(src: '/favicon.svg', alt: '', width: 14, height: 14, attributes: const {'aria-hidden': 'true'}),
+            img(src: '/favicon.svg', alt: '', width: 24, height: 24, attributes: const {'aria-hidden': 'true'}),
             Component.text('Visit Gallery'),
             RawText(_arrowUpRightSvg),
           ],

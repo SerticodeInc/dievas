@@ -412,7 +412,13 @@ class Chapters extends StatelessComponent {
       attributes: const {'data-brand-demo': '', 'data-brand': 'indigo'},
       [
         div(classes: 'bd-head', [
-          div(classes: 'bd-logo', [Component.text('D')]),
+          img(
+            src: '/assets/dievas-logo.svg',
+            alt: 'Dievas',
+            classes: 'bd-logo',
+            width: 34,
+            height: 34,
+          ),
           div(classes: 'bd-name', [Component.text('Sign in to continue')]),
         ]),
         div(classes: 'bd-card', [

@@ -4,6 +4,10 @@
 
 Changes to the Dievas token package, newest first.
 
+## Unreleased
+
+- Use Moon Design Piccolo purple (`#5C33CF`) for the default primary brand in both themes. Update focus, selection, active controls, cursors, and tinted brand surfaces together; derive hover and pressed shades from Piccolo. Explicit palette overrides remain available.
+
 ## 1.0.1
 
 ### Breaking colour role names

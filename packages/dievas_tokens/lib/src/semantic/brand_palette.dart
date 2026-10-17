@@ -1,6 +1,6 @@
 // Brand palette selection for the Dievas design system. A palette is a full
 // 11 tint colour ramp plus a contrast colour, so an app can reskin its entire
-// brand by picking one family. Defaults to [DievasBrandPalettes.indigo].
+// brand by picking one family. The built in themes use Moon Piccolo.
 
 import 'package:dievas_tokens/src/primitives/colour_primitives.dart';
 
@@ -139,10 +139,10 @@ final class DievasBrandPalette {
 }
 
 /// The selectable brand palettes shipped with Dievas. Each wraps an existing
-/// `DievasColourPrimitives` family. [indigo] is the default and reproduces the
-/// built in reference themes exactly.
+/// `DievasColourPrimitives` family. These opt-in palettes replace the built-in
+/// Moon Piccolo brand.
 abstract final class DievasBrandPalettes {
-  /// Default Dievas brand: the reference palette.
+  /// Indigo brand palette, available as an alternative to Moon Piccolo.
   static const DievasBrandPalette indigo = DievasBrandPalette(
     name: 'indigo',
     s50: DievasColourPrimitives.indigo50,

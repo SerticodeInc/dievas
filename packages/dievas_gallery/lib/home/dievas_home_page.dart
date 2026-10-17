@@ -1,6 +1,8 @@
 import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/dievas_logo.dart';
+
 /// Custom home page shown in the Widgetbook canvas when no component is selected.
 ///
 /// Wraps itself in a [DievasScope] so that [DievasTheme.of(context)] is
@@ -32,6 +34,8 @@ class _WidgetBookContent extends StatelessWidget {
           child: Column(
             crossAxisAlignment: .start,
             children: [
+              const DievasLogo(size: 128),
+              SizedBox(height: context.spacing.LG),
               _Eyebrow(),
               SizedBox(height: context.spacing.LG),
               _Headline(),

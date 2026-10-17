@@ -2,7 +2,7 @@ part of '../themes.dart';
 
 /// Default Dievas light theme.
 ///
-/// Uses the indigo/slate palette. This is the reference implementation and
+/// Uses Moon Piccolo branding and the neutral reference palette. This is the reference implementation and
 /// the fallback theme for the gallery. Consumer apps do not subclass this —
 /// they subclass [DievasGlobalThemeData] and provide their own brand tokens.
 final class DievasLightThemeData extends DievasGlobalThemeData {

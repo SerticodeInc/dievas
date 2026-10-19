@@ -300,7 +300,7 @@ DievasDotIndicatorThemeData _createDotIndicatorTheme(
   DievasAnimationThemeData animation,
 ) => DievasDotIndicatorThemeData(
   dotSize: DievasSizingPrimitives.s8,
-  activeDotSize: DievasSizingPrimitives.s10,
+  activeDotSize: DievasSizingPrimitives.s8,
   dotSpacing: DievasSpacingPrimitives.s2,
   colourActive: colours.action.sliderActiveTrack,
   colourInactive: colours.border.dividerColour,

@@ -1,18 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:dievas/src/theme/dievas_theme.dart';
 
-/// A horizontal row of dots indicating page position.
+/// A row of page indicators with optional pointer and keyboard selection.
 ///
-/// Each dot animates in size and colour when it becomes the [activeIndex].
-/// Tapping a dot calls [onDotTap] with that dot's index.
-///
-/// Moon reference: DotIndicator
-///
-/// ```dart
-/// DievasDotIndicator(count: 4, activeIndex: 1)
-/// DievasDotIndicator(count: 3, activeIndex: 0, onDotTap: (i) => pageController.jumpToPage(i))
-/// ```
+/// Defaults to equal 8px dots with 8px gaps. Selection fades between colours.
+/// Existing custom themes may retain a distinct active dot size. Reduced motion
+/// applies visual changes immediately.
 class DievasDotIndicator extends StatelessWidget {
   const DievasDotIndicator({
     super.key,
@@ -20,73 +15,146 @@ class DievasDotIndicator extends StatelessWidget {
     required this.activeIndex,
     this.onDotTap,
     this.enabled = true,
-  });
+    this.selectedColour,
+    this.unselectedColour,
+    this.size,
+    this.gap,
+    this.transitionDuration,
+    this.transitionCurve,
+    this.semanticLabelBuilder,
+  }) : assert(count >= 0),
+       assert(count == 0 || (activeIndex >= 0 && activeIndex < count)),
+       assert(size == null || size > 0),
+       assert(gap == null || gap >= 0);
 
-  /// Total number of dots.
   final int count;
-
-  /// Zero-based index of the active dot.
   final int activeIndex;
-
-  /// Called when a dot is tapped. Receives the tapped dot's index.
   final ValueChanged<int>? onDotTap;
-
-  /// When `false` all dots are dimmed.
   final bool enabled;
+
+  /// Per instance colours override the active theme.
+  final Color? selectedColour;
+  final Color? unselectedColour;
+
+  /// Diameter of every dot. Null preserves the theme's dot sizes.
+  final double? size;
+
+  /// Edge to edge spacing between dots.
+  final double? gap;
+  final Duration? transitionDuration;
+  final Curve? transitionCurve;
+
+  /// Accessible label for a zero based index and the total page count.
+  final String Function(int index, int count)? semanticLabelBuilder;
 
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).dotIndicator;
-
-    Widget row = Row(
-      mainAxisSize: .min,
-      children: [
-        for (int i = 0; i < count; i++) ...[
-          if (i > 0) SizedBox(width: theme.dotSpacing),
-          _Dot(
-            index: i,
-            isActive: i == activeIndex,
-            enabled: enabled,
-            onTap: switch (onDotTap) {
-              final callback? => () => callback(i),
-              null => null,
-            },
-          ),
+    return Opacity(
+      opacity: enabled ? 1 : theme.disabledOpacity,
+      child: Row(
+        mainAxisSize: .min,
+        children: [
+          for (int index = 0; index < count; index++) ...[
+            if (index > 0) SizedBox(width: gap ?? theme.dotSpacing),
+            _Dot(
+              selected: index == activeIndex,
+              enabled: enabled,
+              label: semanticLabelBuilder?.call(index, count) ?? 'Page ${index + 1} of $count',
+              size: size ?? (index == activeIndex ? theme.activeDotSize : theme.dotSize),
+              colour: switch ((index == activeIndex, selectedColour, unselectedColour)) {
+                (true, final colour?, _) || (false, _, final colour?) => colour,
+                (true, _, _) => theme.colourActive,
+                _ => theme.colourInactive,
+              },
+              duration: MediaQuery.disableAnimationsOf(context) ? .zero : transitionDuration ?? theme.animationDuration,
+              curve: transitionCurve ?? theme.transitionCurve,
+              onTap: switch ((enabled, onDotTap)) {
+                (true, final callback?) => () => callback(index),
+                _ => null,
+              },
+            ),
+          ],
         ],
-      ],
-    );
-
-    if (!enabled) {
-      row = Opacity(opacity: theme.disabledOpacity, child: row);
-    }
-
-    return row;
-  }
-}
-
-class _Dot extends StatelessWidget {
-  const _Dot({required this.index, required this.isActive, required this.enabled, required this.onTap});
-
-  final int index;
-  final bool isActive;
-  final bool enabled;
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = DievasTheme.componentsOf(context).dotIndicator;
-    final size = isActive ? theme.activeDotSize : theme.dotSize;
-    final color = isActive ? theme.colourActive : theme.colourInactive;
-
-    return GestureDetector(
-      onTap: enabled ? onTap : null,
-      child: AnimatedContainer(
-        duration: theme.animationDuration,
-        curve: DievasTheme.animationOf(context).easingEnter,
-        width: size,
-        height: size,
-        decoration: BoxDecoration(color: color, shape: .circle),
       ),
     );
   }
+}
+
+class _Dot extends StatefulWidget {
+  const _Dot({
+    required this.selected,
+    required this.enabled,
+    required this.label,
+    required this.size,
+    required this.colour,
+    required this.duration,
+    required this.curve,
+    required this.onTap,
+  });
+
+  final bool selected;
+  final bool enabled;
+  final String label;
+  final double size;
+  final Color colour;
+  final Duration duration;
+  final Curve curve;
+  final VoidCallback? onTap;
+
+  @override
+  State<_Dot> createState() => _DotState();
+}
+
+class _DotState extends State<_Dot> {
+  bool _showFocus = false;
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+    label: widget.label,
+    selected: widget.selected,
+    enabled: widget.enabled,
+    button: widget.onTap != null,
+    onTap: widget.onTap,
+    child: FocusableActionDetector(
+      enabled: widget.onTap != null,
+      onShowFocusHighlight: (value) => setState(() => _showFocus = value),
+      shortcuts: const {
+        SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+        SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+      },
+      actions: {
+        ActivateIntent: CallbackAction<ActivateIntent>(
+          onInvoke: (_) {
+            widget.onTap?.call();
+            return null;
+          },
+        ),
+      },
+      child: GestureDetector(
+        excludeFromSemantics: true,
+        behavior: .opaque,
+        onTap: widget.onTap,
+        child: DecoratedBox(
+          position: .foreground,
+          decoration: BoxDecoration(
+            shape: .circle,
+            border: _showFocus
+                ? Border.all(
+                    color: DievasTheme.coloursOf(context).core.primary,
+                    width: DievasTheme.borderOf(context).strokeDefault,
+                  )
+                : null,
+          ),
+          child: AnimatedContainer(
+            duration: widget.duration,
+            curve: widget.curve,
+            width: widget.size,
+            height: widget.size,
+            decoration: BoxDecoration(color: widget.colour, shape: .circle),
+          ),
+        ),
+      ),
+    ),
+  );
 }

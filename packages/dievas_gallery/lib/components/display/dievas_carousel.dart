@@ -208,23 +208,12 @@ class _CarouselDots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = DievasTheme.of(context);
-    final dots = theme.components.dotIndicator;
-    return DievasTheme(
-      data: theme.copyWith(
-        components: theme.components.copyWith(
-          dotIndicator: DievasDotIndicatorThemeData(
-            dotSize: (context.sizing.height4 + context.sizing.height8) / 2,
-            activeDotSize: (context.sizing.height4 + context.sizing.height8) / 2,
-            dotSpacing: context.spacing.sm,
-            colourActive: dots.colourActive,
-            colourInactive: dots.colourInactive,
-            animationDuration: dots.animationDuration,
-            disabledOpacity: dots.disabledOpacity,
-          ),
-        ),
-      ),
-      child: DievasDotIndicator(count: 5, activeIndex: activeIndex, onDotTap: onDotTap),
+    return DievasDotIndicator(
+      count: 5,
+      activeIndex: activeIndex,
+      onDotTap: onDotTap,
+      size: (context.sizing.height4 + context.sizing.height8) / 2,
+      gap: context.spacing.sm,
     );
   }
 }

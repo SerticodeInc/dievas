@@ -85,3 +85,6 @@ export 'src/components/popover/dievas_popover.dart';
 //  Components — Utility
 export 'src/components/loader/dievas_loader.dart';
 export 'src/components/empty_state/dievas_empty_state.dart';
+
+export 'src/theme/component/carousel/dievas_carousel_theme_data.dart';
+export 'src/components/carousel/dievas_carousel.dart';

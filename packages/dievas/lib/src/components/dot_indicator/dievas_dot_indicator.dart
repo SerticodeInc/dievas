@@ -41,13 +41,16 @@ class DievasDotIndicator extends StatelessWidget {
     Widget row = Row(
       mainAxisSize: .min,
       children: [
-        for (var i = 0; i < count; i++) ...[
+        for (int i = 0; i < count; i++) ...[
           if (i > 0) SizedBox(width: theme.dotSpacing),
           _Dot(
             index: i,
             isActive: i == activeIndex,
             enabled: enabled,
-            onTap: onDotTap != null ? () => onDotTap!(i) : null,
+            onTap: switch (onDotTap) {
+              final callback? => () => callback(i),
+              null => null,
+            },
           ),
         ],
       ],
@@ -82,7 +85,7 @@ class _Dot extends StatelessWidget {
         curve: DievasTheme.animationOf(context).easingEnter,
         width: size,
         height: size,
-        decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        decoration: BoxDecoration(color: color, shape: .circle),
       ),
     );
   }

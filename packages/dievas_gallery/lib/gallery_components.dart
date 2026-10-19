@@ -61,3 +61,5 @@ export 'components/foundations/color_tokens.dart';
 export 'components/foundations/elevation_opacity.dart';
 export 'components/foundations/spacing_tokens.dart';
 export 'components/foundations/typography_scale.dart';
+
+export 'components/display/dievas_carousel.dart';

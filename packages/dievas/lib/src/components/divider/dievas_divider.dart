@@ -38,6 +38,9 @@ class DievasDivider extends StatelessWidget {
     this.endIndent = .NONE,
     this.colour,
     this.thickness,
+    this.label,
+    this.labelStyle,
+    this.labelGap,
   });
 
   final DievasDividerOrientation orientation;
@@ -54,6 +57,15 @@ class DievasDivider extends StatelessWidget {
   /// Override thickness (dp). Falls back to [DievasDividerThemeData.thickness].
   final double? thickness;
 
+  /// Optional text centred between equal line segments.
+  final String? label;
+
+  /// Label typography. Defaults to the theme's secondary label style.
+  final TextStyle? labelStyle;
+
+  /// Space on either side of the label, along the divider axis.
+  final double? labelGap;
+
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).divider;
@@ -64,11 +76,54 @@ class DievasDivider extends StatelessWidget {
         .horizontal => .only(left: indent.resolve(), right: endIndent.resolve()),
         .vertical => .only(top: indent.resolve(), bottom: endIndent.resolve()),
       },
-      child: SizedBox(
-        height: orientation == .horizontal ? resolvedThickness : null,
-        width: orientation == .vertical ? resolvedThickness : null,
-        child: ColoredBox(color: colour ?? theme.colour),
-      ),
+      child: switch (label) {
+        final text? => Flex(
+          direction: orientation == .horizontal ? .horizontal : .vertical,
+          children: [
+            Expanded(
+              child: _Rule(orientation: orientation, thickness: resolvedThickness, colour: colour ?? theme.colour),
+            ),
+            Flexible(
+              child: Padding(
+                padding: orientation == .horizontal
+                    ? EdgeInsets.symmetric(horizontal: labelGap ?? DievasTheme.spacingOf(context).md)
+                    : EdgeInsets.symmetric(vertical: labelGap ?? DievasTheme.spacingOf(context).md),
+                child: Text(
+                  text,
+                  textAlign: .center,
+                  style:
+                      labelStyle ??
+                      DievasTheme.typographyOf(
+                        context,
+                      ).labelXs.copyWith(color: DievasTheme.coloursOf(context).text.textSecondary),
+                ),
+              ),
+            ),
+            Expanded(
+              child: _Rule(orientation: orientation, thickness: resolvedThickness, colour: colour ?? theme.colour),
+            ),
+          ],
+        ),
+        null => _Rule(orientation: orientation, thickness: resolvedThickness, colour: colour ?? theme.colour),
+      },
     );
   }
+}
+
+class _Rule extends StatelessWidget {
+  const _Rule({required this.orientation, required this.thickness, required this.colour});
+  final DievasDividerOrientation orientation;
+  final double thickness;
+  final Color colour;
+
+  @override
+  Widget build(BuildContext context) => Align(
+    heightFactor: orientation == .horizontal ? 1 : null,
+    widthFactor: orientation == .vertical ? 1 : null,
+    child: SizedBox(
+      height: orientation == .horizontal ? thickness : null,
+      width: orientation == .vertical ? thickness : null,
+      child: ColoredBox(color: colour),
+    ),
+  );
 }

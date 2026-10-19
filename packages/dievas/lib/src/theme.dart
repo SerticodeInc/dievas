@@ -65,3 +65,5 @@ export 'theme/sizing/dievas_sizing_theme_data.dart';
 export 'theme/spacing/dievas_spacing_theme_data.dart';
 export 'theme/typography/dievas_typography_theme_data.dart';
 export 'theme/z_index/dievas_z_index_theme_data.dart';
+
+export 'theme/component/carousel/dievas_carousel_theme_data.dart';

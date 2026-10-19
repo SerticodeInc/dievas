@@ -1,6 +1,6 @@
 # dievas_migrate
 
-Rewrites the pre-lowercase Dievas size token names (`spacing.MD`, `buttonHeightXS`, `DievasRadiusSemantic.R28`) to the current vocabulary (`spacing.md`, `buttonHeightXs`, `DievasRadiusSemantic.r28`).
+Rewrites the pre-lowercase Dievas token names (`spacing.MD`, `buttonHeightXS`, `DievasRadiusSemantic.R28`) to the current vocabulary (`spacing.md`, `buttonHeightXs`, `DievasRadiusSemantic.r28`).
 
 The tool is type-aware: it reads `dart analyze` diagnostics, so unrelated enums that reuse the same member names (`DievasButtonSize.MD`) and display strings stay untouched.
 

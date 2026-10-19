@@ -1,5 +1,5 @@
 name: dievas_migrate
-description: "One-shot codemod that migrates Dievas size token names to the lowercased vocabulary. Type-aware and dependency-free."
+description: "One-shot codemod that migrates Dievas token names to the lowercased vocabulary. Type-aware and dependency-free."
 version: 0.1.0
 repository: https://github.com/SerticodeInc/dievas
 homepage: https://dievas.serticode.com

@@ -57,7 +57,7 @@ Future<void> main(List<String> args) async {
 }
 
 const String _usage = '''
-Migrate Dievas size token names to the lowercased vocabulary.
+Migrate Dievas token names to the lowercased vocabulary.
 
 Usage: dart run dievas_migrate [paths...] [options]
 

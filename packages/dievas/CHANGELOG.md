@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Slow the shared loader rotation token from 800ms to 2222ms, matching Moon timing so the arc growth and shrinkage remain visible. Applies to standalone loaders and button loaders; explicit duration overrides remain available.
+
+### Checkbox
+
+- Add optional tristate cycling: unchecked, checked, mixed, then unchecked. Preserve the enum API and binary default, including programmatically supplied mixed values.
+- Add independent check, active/inactive fill and unchecked border colour overrides, focus node, autofocus, semantic label, and a configurable tap area.
+- Animate fill and progressive tick/dash drawing; respect reduced motion. Add keyboard activation, checked/mixed/disabled semantics, and visible keyboard focus without Material ink effects.
+- Match the reference defaults with a 16px rounded box, thin stroke, neutral border, Piccolo active fill and a 40px tap target. Custom checkbox themes retain their dimensions and colours.
+- Add directional label placement and optional full width label rows. Fix long label wrapping and make the entire row clickable.
+- Rework Widgetbook with independently interactive standalone and trailing checkbox label examples, grouped semantic colour overrides, tristate/disabled, tap area and RTL controls. State/label examples remain interactive.
+
 - Use Moon Design Piccolo purple (`#5C33CF`) for the default primary brand in both themes. Update focus, selection, active controls, cursors, and tinted brand surfaces together; derive hover and pressed shades from Piccolo. Explicit palette overrides remain available.
 
 ### Buttons

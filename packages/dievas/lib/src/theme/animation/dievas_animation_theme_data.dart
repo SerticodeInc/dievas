@@ -79,7 +79,7 @@ final class DievasAnimationThemeData extends Equatable {
   /// 500ms — tooltip wait, brief feedback pauses.
   final Duration xSlow;
 
-  /// 800ms — loader spinner rotation cycle.
+  /// 2222ms — loader spinner rotation cycle.
   final Duration loader;
 
   /// 2s — tooltip visible duration.

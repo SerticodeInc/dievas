@@ -9,11 +9,15 @@ import '../../cross_cutting_concerns/harness.dart';
 
 void main() {
   group('DievasLoader', () {
+    test('standalone and text-button defaults use the slower shared loader timing', () {
+      expect(const DievasAnimationThemeData().loader, const Duration(milliseconds: 2222));
+      expect(const DievasTextButton(label: 'Loading').loaderRotationDuration, const Duration(milliseconds: 2222));
+    });
     testWidgets('arc grows and shrinks instead of rotating a fixed sweep', (tester) async {
       await tester.pumpWidget(Harness(child: Center(child: const DievasLoader(diameter: 48))));
       final counts = <int>[];
       for (int i = 0; i < 5; i++) {
-        await tester.pump(const Duration(milliseconds: 100));
+        await tester.pump(const Duration(milliseconds: 300));
         counts.add(await _paintedPixels(tester));
       }
       counts.sort();

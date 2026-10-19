@@ -414,13 +414,13 @@ DievasCheckboxThemeData _createCheckboxTheme(
   DievasBorderThemeData border,
 ) {
   return DievasCheckboxThemeData(
-    size: DievasSizingPrimitives.s20,
-    borderRadius: border.xs,
-    strokeWidth: border.strokeThick,
+    size: DievasSizingPrimitives.s16,
+    borderRadius: border.sm,
+    strokeWidth: border.strokeThin,
     colourChecked: colours.action.checkboxCheckedBackground,
     colourUnchecked: colours.staticColours.staticTransparent,
     colourDisabled: colours.action.checkboxDisabledBackground,
-    borderColourUnchecked: colours.border.dividerColour,
+    borderColourUnchecked: colours.icon.iconSecondary,
     borderColourDisabled: colours.border.inputDisabledBorder,
     checkColour: colours.action.checkboxCheckmark,
     disabledOpacity: DievasOpacitySemantic.disabled,

@@ -66,9 +66,9 @@ void main() {
     expect(parameter.file, '/tmp/b.dart');
   });
 
-  test('degrades to empty output when the shape is unexpected', () {
-    expect(parseAnalysis('{}').diagnostics, isEmpty);
-    expect(parseAnalysis('{"diagnostics": "nope"}').diagnostics, isEmpty);
+  test('fails loudly when the shape is not analyzer output', () {
+    expect(() => parseAnalysis('{}'), throwsFormatException);
+    expect(() => parseAnalysis('{"diagnostics": "nope"}'), throwsFormatException);
     expect(parseAnalysis('{"diagnostics": []}').total, 0);
   });
 }

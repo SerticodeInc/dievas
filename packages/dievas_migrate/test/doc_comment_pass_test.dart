@@ -2,7 +2,7 @@ import 'package:dievas_migrate/src/doc_comment_pass.dart';
 import 'package:dievas_migrate/src/text_edit.dart';
 import 'package:test/test.dart';
 
-String migrateComments(String source) => applyEdits(source, commentEdits(source));
+String migrateComments(String source) => applyEdits(source, const CommentRewriter().edits(source));
 
 void main() {
   test('rewrites known receivers in line and block comments', () {

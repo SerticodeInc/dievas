@@ -42,11 +42,9 @@ dependencies:
     final pubGet = await _run(['dart', 'pub', 'get'], dir.path);
     expect(pubGet.exitCode, 0, reason: '${pubGet.stdout}\n${pubGet.stderr}');
 
-    final report = await migrate(
-      paths: [dir.path],
-      write: true,
+    final report = await Migrator(
       analyze: processAnalyzer(workingDirectory: dir.path),
-    );
+    ).run(paths: [dir.path], write: true);
 
     expect(report.failed, isFalse);
     expect(report.memberEdits, 2);

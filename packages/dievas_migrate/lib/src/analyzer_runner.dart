@@ -8,7 +8,11 @@ typedef Analyze = Future<AnalysisOutput> Function(List<String> paths);
 
 /// Runs `dart analyze --format=json`, which resolves the consumer project and
 /// reports the old names as undefined.
-Analyze processAnalyzer({String workingDirectory = '.'}) => (paths) async {
-  final result = await Process.run('dart', ['analyze', '--format=json', ...paths], workingDirectory: workingDirectory);
+Analyze processAnalyzer({String workingDirectory = '.'}) => (List<String> paths) async {
+  final ProcessResult result = await Process.run('dart', [
+    'analyze',
+    '--format=json',
+    ...paths,
+  ], workingDirectory: workingDirectory);
   return parseAnalysis(result.stdout.toString());
 };

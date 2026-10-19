@@ -12,7 +12,7 @@ final class TextEdit {
 /// valid. Edits must not overlap.
 String applyEdits(String source, List<TextEdit> edits) {
   final ordered = edits.toList()..sort((a, b) => b.offset.compareTo(a.offset));
-  var result = source;
+  String result = source;
   for (final edit in ordered) {
     result = result.replaceRange(edit.offset, edit.offset + edit.length, edit.replacement);
   }

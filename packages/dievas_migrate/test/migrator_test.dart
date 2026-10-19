@@ -41,7 +41,7 @@ void main() {
   test('rewrites eligible members and reports the change', () async {
     const original = 'const a = DievasSpacingSemantic.MD;\nconst b = DievasSpacingSemantic.R28;\n';
     file.writeAsStringSync(original);
-    var calls = 0;
+    int calls = 0;
     Future<AnalysisOutput> analyze(List<String> _) async {
       calls++;
       if (calls == 1) {
@@ -56,7 +56,7 @@ void main() {
       return const AnalysisOutput(total: 0, diagnostics: []);
     }
 
-    final report = await migrate(paths: [dir.path], write: true, analyze: analyze);
+    final report = await Migrator(analyze: analyze).run(paths: [dir.path], write: true);
 
     expect(report.applied, isTrue);
     expect(report.failed, isFalse);
@@ -71,7 +71,7 @@ void main() {
     Future<AnalysisOutput> analyze(List<String> _) async =>
         AnalysisOutput(total: 1, diagnostics: [_getter(file.path, original, 'DievasSpacingSemantic', 'MD')]);
 
-    final report = await migrate(paths: [dir.path], write: false, analyze: analyze);
+    final report = await Migrator(analyze: analyze).run(paths: [dir.path], write: false);
 
     expect(report.applied, isFalse);
     expect(report.pending, 1);
@@ -85,7 +85,7 @@ void main() {
     final diagnostic = _getter(file.path, original, 'DievasSpacingSemantic', 'MD');
     Future<AnalysisOutput> analyze(List<String> _) async => AnalysisOutput(total: 1, diagnostics: [diagnostic]);
 
-    final report = await migrate(paths: [dir.path], write: true, analyze: analyze);
+    final report = await Migrator(analyze: analyze).run(paths: [dir.path], write: true);
 
     expect(report.failed, isTrue);
     expect(report.applied, isFalse);
@@ -98,7 +98,7 @@ void main() {
     Future<AnalysisOutput> analyze(List<String> _) async =>
         AnalysisOutput(total: 1, diagnostics: [_getter(file.path, original, 'DievasButtonSize', 'MD')]);
 
-    final report = await migrate(paths: [dir.path], write: true, analyze: analyze);
+    final report = await Migrator(analyze: analyze).run(paths: [dir.path], write: true);
 
     expect(report.memberEdits, 0);
     expect(report.skipped, ['DievasButtonSize.MD']);
@@ -111,7 +111,7 @@ void main() {
     final allowedFile = File('${dir.path}/allowed.dart')..writeAsStringSync(allowed);
     final deniedFile = File('${dir.path}/denied.dart')..writeAsStringSync(denied);
 
-    var calls = 0;
+    int calls = 0;
     Future<AnalysisOutput> analyze(List<String> _) async {
       calls++;
       if (calls == 1) {
@@ -123,7 +123,7 @@ void main() {
       return const AnalysisOutput(total: 1, diagnostics: []);
     }
 
-    final report = await migrate(paths: [dir.path], write: true, analyze: analyze);
+    final report = await Migrator(analyze: analyze).run(paths: [dir.path], write: true);
 
     expect(allowedFile.readAsStringSync(), 'DievasSpacingThemeData(md: 1.0);\n');
     expect(deniedFile.readAsStringSync(), denied);
@@ -136,7 +136,7 @@ void main() {
     file.writeAsStringSync(original);
     Future<AnalysisOutput> analyze(List<String> _) async => const AnalysisOutput(total: 0, diagnostics: []);
 
-    final report = await migrate(paths: [dir.path], write: true, analyze: analyze);
+    final report = await Migrator(analyze: analyze).run(paths: [dir.path], write: true);
 
     expect(report.commentEdits, 1);
     expect(report.memberEdits, 0);

@@ -23,10 +23,6 @@ final class RenameDiagnostic {
   final bool isNamedParameter;
 }
 
-final RegExp _getter = RegExp(r"The getter '(\w+)' isn't defined for the type '([\w.]+)'");
-final RegExp _method = RegExp(r"The method '(\w+)' isn't defined for the type '([\w.]+)'");
-final RegExp _parameter = RegExp(r"The named parameter '(\w+)' isn't defined");
-
 /// Every diagnostic the analyzer reported, so verification can detect an
 /// unrelated error the tool might have introduced.
 final class AnalysisOutput {
@@ -38,70 +34,92 @@ final class AnalysisOutput {
 
 /// Parses the raw JSON emitted by `dart analyze --format=json` into the handful
 /// of diagnostics this tool can act on. Output is external data, so it is
-/// validated rather than trusted.
+/// validated rather than trusted; a shape this tool cannot read fails loudly
+/// instead of silently reporting an empty project.
 AnalysisOutput parseAnalysis(String json) {
-  final decoded = jsonDecode(json);
-  if (decoded case {'diagnostics': final List<Object?> entries}) {
-    final all = entries.whereType<Map<String, Object?>>().toList();
-    return AnalysisOutput(total: all.length, diagnostics: all.map(_toDiagnostic).nonNulls.toList());
+  if (jsonDecode(json) case {'diagnostics': final List<Object?> entries}) {
+    return AnalysisOutput(
+      total: entries.length,
+      diagnostics: [
+        for (final Object? entry in entries)
+          if (_toDiagnostic(entry) case final RenameDiagnostic diagnostic) diagnostic,
+      ],
+    );
   }
-  return const AnalysisOutput(total: 0, diagnostics: []);
+  throw const FormatException('Unexpected `dart analyze --format=json` output.');
 }
 
 List<RenameDiagnostic> parseDiagnostics(String json) => parseAnalysis(json).diagnostics;
 
-RenameDiagnostic? _toDiagnostic(Map<String, Object?> entry) {
-  final code = entry['code'];
-  final message = entry['problemMessage'];
-  if (message is! String) {
-    return null;
-  }
-  if (code == 'undefined_getter' || code == 'undefined_method') {
-    final match = (code == 'undefined_getter' ? _getter : _method).firstMatch(message);
-    if (match == null) {
-      return null;
-    }
-    return _location(entry, old: match.group(1)!, receiverType: match.group(2), isNamedParameter: false);
-  }
-  if (code == 'undefined_named_parameter') {
-    final match = _parameter.firstMatch(message);
-    if (match == null) {
-      return null;
-    }
-    return _location(entry, old: match.group(1)!, receiverType: null, isNamedParameter: true);
+RenameDiagnostic? _toDiagnostic(Object? entry) {
+  if (entry case {
+    'code': final String code,
+    'problemMessage': final String message,
+    'location': {
+      'file': final String file,
+      'range': {'start': {'offset': final int start}, 'end': {'offset': final int end}},
+    },
+  }) {
+    return _rename(code, message, file: file, offset: start, length: end - start);
   }
   return null;
 }
 
-RenameDiagnostic? _location(
-  Map<String, Object?> entry, {
-  required String old,
-  required String? receiverType,
-  required bool isNamedParameter,
+RenameDiagnostic? _rename(
+  String code,
+  String message, {
+  required String file,
+  required int offset,
+  required int length,
+}) => switch (code) {
+  'undefined_getter' => _member(_getter, message, file: file, offset: offset, length: length),
+  'undefined_method' => _member(_method, message, file: file, offset: offset, length: length),
+  'undefined_named_parameter' => _parameterOf(_parameter, message, file: file, offset: offset, length: length),
+  _ => null,
+};
+
+RenameDiagnostic? _member(
+  RegExp pattern,
+  String message, {
+  required String file,
+  required int offset,
+  required int length,
 }) {
-  final location = entry['location'];
-  if (location is! Map<String, Object?>) {
-    return null;
-  }
-  if (location['file'] case final String file) {
-    if (location['range'] case final Map<String, Object?> range) {
-      if (range['start'] case final Map<String, Object?> start) {
-        if (range['end'] case final Map<String, Object?> end) {
-          if (start['offset'] case final int offset) {
-            if (end['offset'] case final int endOffset) {
-              return RenameDiagnostic(
-                old: old,
-                receiverType: receiverType,
-                file: file,
-                offset: offset,
-                length: endOffset - offset,
-                isNamedParameter: isNamedParameter,
-              );
-            }
-          }
-        }
-      }
-    }
-  }
-  return null;
+  final RegExpMatch? match = pattern.firstMatch(message);
+  return switch ((match?.group(1), match?.group(2))) {
+    (final String old, final String type) => RenameDiagnostic(
+      old: old,
+      receiverType: type,
+      file: file,
+      offset: offset,
+      length: length,
+      isNamedParameter: false,
+    ),
+    _ => null,
+  };
 }
+
+RenameDiagnostic? _parameterOf(
+  RegExp pattern,
+  String message, {
+  required String file,
+  required int offset,
+  required int length,
+}) {
+  final RegExpMatch? match = pattern.firstMatch(message);
+  return switch (match?.group(1)) {
+    final String old => RenameDiagnostic(
+      old: old,
+      receiverType: null,
+      file: file,
+      offset: offset,
+      length: length,
+      isNamedParameter: true,
+    ),
+    null => null,
+  };
+}
+
+final RegExp _getter = RegExp(r"The getter '(\w+)' isn't defined for the type '([\w.]+)'");
+final RegExp _method = RegExp(r"The method '(\w+)' isn't defined for the type '([\w.]+)'");
+final RegExp _parameter = RegExp(r"The named parameter '(\w+)' isn't defined");

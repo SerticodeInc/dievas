@@ -1,4 +1,4 @@
-import 'package:dievas_migrate/src/size_vocabulary.dart';
+import 'package:dievas_migrate/src/token_vocabulary.dart';
 import 'package:test/test.dart';
 
 void main() {

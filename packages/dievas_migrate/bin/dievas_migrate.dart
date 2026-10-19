@@ -8,14 +8,12 @@ Future<void> main(List<String> args) async {
     return;
   }
 
-  final paths = args.where((arg) => !arg.startsWith('-')).toList();
+  final List<String> paths = args.where((String arg) => !arg.startsWith('-')).toList();
   final MigrationReport report;
   try {
-    report = await migrate(
-      paths: paths.isEmpty ? ['.'] : paths,
-      write: args.contains('--write'),
+    report = await Migrator(
       analyze: processAnalyzer(),
-    );
+    ).run(paths: paths.isEmpty ? ['.'] : paths, write: args.contains('--write'));
   } on FormatException {
     stderr.writeln('Could not read `dart analyze --format=json` output. Run it directly to see why.');
     exitCode = 2;

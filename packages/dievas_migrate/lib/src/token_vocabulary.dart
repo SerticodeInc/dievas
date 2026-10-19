@@ -1,7 +1,9 @@
-/// The lowercased size vocabulary introduced by the Dievas size token rename.
+/// The lowercased vocabulary introduced by the Dievas token rename.
 ///
-/// Every member that changed in that release is a pure function of its old
-/// name, so the rename table lives here as a scale map plus two role patterns.
+/// This covers every renamed surface, not just sizes: scales, concrete radii,
+/// breakpoints, elevation, and typographic role suffixes. Every changed member
+/// is a pure function of its old name, so the rename table lives here as a
+/// scale map plus two role patterns.
 library;
 
 /// Types whose members were renamed. A diagnostic only migrates when the
@@ -77,22 +79,29 @@ final RegExp roleRename = RegExp(
 /// Maps a pre-1.0.2 member name to its lowercased form, or `null` when the name
 /// does not belong to the renamed vocabulary.
 String? renamedMember(String old) {
-  if (scaleRenames[old] case final renamed?) {
+  if (scaleRenames[old] case final String renamed) {
     return renamed;
   }
-  if (roleRename.firstMatch(old) case final match?) {
-    final suffix = match.group(2)!;
-    return '${match.group(1)}${suffix[0]}${suffix.substring(1).toLowerCase()}';
+  return _roleRename(old);
+}
+
+String? _roleRename(String old) {
+  final RegExpMatch? match = roleRename.firstMatch(old);
+  if (match == null) {
+    return null;
   }
-  return null;
+  return switch ((match.group(1), match.group(2))) {
+    (final String base, final String suffix) => '$base${suffix[0]}${suffix.substring(1).toLowerCase()}',
+    _ => null,
+  };
 }
 
 /// Old member names, longest first, for building alternation patterns.
 final List<String> renamedMembersByLength = _collectMembers();
 
 List<String> _collectMembers() {
-  final members = <String>{...scaleRenames.keys};
-  for (final base in const [
+  final Set<String> members = {...scaleRenames.keys};
+  for (final String base in const [
     'display',
     'heading',
     'title',
@@ -104,10 +113,10 @@ List<String> _collectMembers() {
     'icon',
     'avatar',
   ]) {
-    for (final suffix in const ['XS', 'SM', 'MD', 'LG', 'XL']) {
+    for (final String suffix in const ['XS', 'SM', 'MD', 'LG', 'XL']) {
       members.add('$base$suffix');
     }
   }
-  final ordered = members.toList()..sort((a, b) => b.length.compareTo(a.length));
+  final List<String> ordered = members.toList()..sort((String a, String b) => b.length.compareTo(a.length));
   return List.unmodifiable(ordered);
 }

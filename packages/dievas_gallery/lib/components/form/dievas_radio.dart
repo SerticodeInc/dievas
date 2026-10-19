@@ -59,34 +59,31 @@ class _Playground extends StatelessWidget {
 class _Group extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: StatefulBuilder(
-        builder: (context, setState) {
-          var selected = 'Standard';
-          final options = ['Standard', 'Express', 'Overnight'];
+    child: StatefulBuilder(
+      builder: (context, setState) {
+        var selected = 'Standard';
+        final options = ['Standard', 'Express', 'Overnight'];
 
-          return ComponentBoundary(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Shipping method', style: context.typography.titleSm),
-                SizedBox(height: context.spacing.smPlus),
-                for (final option in options) ...[
-                  DievasRadio<String>(
-                    value: option,
-                    groupValue: selected,
-                    label: option,
-                    onChanged: (v) => setState(() => selected = v),
-                  ),
-                  if (option != options.last) SizedBox(height: context.spacing.smPlus),
-                ],
+        return ComponentBoundary(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Shipping method', style: context.typography.titleSm),
+              SizedBox(height: context.spacing.smPlus),
+              for (final option in options) ...[
+                DievasRadio<String>(
+                  value: option,
+                  groupValue: selected,
+                  label: option,
+                  onChanged: (v) => setState(() => selected = v),
+                ),
+                if (option != options.last) SizedBox(height: context.spacing.smPlus),
               ],
-            ),
-          );
-        },
-      ),
+            ],
+          ),
+        );
+      },
     ),
   );
 }
@@ -94,21 +91,18 @@ class _Group extends StatelessWidget {
 class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _StateRow('Unselected', isSelected: false),
-          SizedBox(height: context.spacing.md),
-          _StateRow('Selected', isSelected: true),
-          SizedBox(height: context.spacing.md),
-          _StateRow('Disabled (unselected)', isSelected: false, disabled: true),
-          SizedBox(height: context.spacing.md),
-          _StateRow('Disabled (selected)', isSelected: true, disabled: true),
-        ],
-      ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _StateRow('Unselected', isSelected: false),
+        SizedBox(height: context.spacing.md),
+        _StateRow('Selected', isSelected: true),
+        SizedBox(height: context.spacing.md),
+        _StateRow('Disabled (unselected)', isSelected: false, disabled: true),
+        SizedBox(height: context.spacing.md),
+        _StateRow('Disabled (selected)', isSelected: true, disabled: true),
+      ],
     ),
   );
 }

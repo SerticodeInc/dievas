@@ -18,7 +18,6 @@ class _AllSets extends StatelessWidget {
     final colours = DievasTheme.coloursOf(context);
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -115,7 +114,6 @@ class _FeedbackColours extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

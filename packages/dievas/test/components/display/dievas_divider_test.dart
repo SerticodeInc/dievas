@@ -6,6 +6,24 @@ import '../../cross_cutting_concerns/harness.dart';
 
 void main() {
   group('DievasDivider', () {
+    testWidgets('painted strokes fill their available axis without a label', (tester) async {
+      for (final orientation in DievasDividerOrientation.values) {
+        await tester.pumpWidget(
+          Harness(
+            child: Center(
+              child: SizedBox(width: 280, height: 180, child: DievasDivider(orientation: orientation)),
+            ),
+          ),
+        );
+        final stroke = find.descendant(of: find.byType(DievasDivider), matching: find.byType(ColoredBox));
+        expect(
+          tester.getSize(stroke),
+          orientation == DievasDividerOrientation.horizontal ? const Size(280, 1.5) : const Size(1.5, 180),
+        );
+        expect(tester.takeException(), isNull);
+      }
+    });
+
     testWidgets('centres the label between equal thin strokes', (tester) async {
       await tester.pumpWidget(
         const Harness(
@@ -17,6 +35,7 @@ void main() {
       final strokes = find.descendant(of: find.byType(DievasDivider), matching: find.byType(ColoredBox));
       expect(strokes, findsNWidgets(2));
       expect(tester.getSize(strokes.first).height, 1.5);
+      expect(tester.getSize(strokes.first).width, greaterThan(0));
       expect(tester.getSize(strokes.first).width, tester.getSize(strokes.last).width);
       expect(tester.getCenter(find.text('Section')).dx, tester.getCenter(find.byType(DievasDivider)).dx);
     });

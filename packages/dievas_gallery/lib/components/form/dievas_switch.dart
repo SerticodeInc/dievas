@@ -41,21 +41,18 @@ class _Playground extends StatelessWidget {
 class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _StateRow('Off', value: false),
-          SizedBox(height: context.spacing.md),
-          _StateRow('On', value: true),
-          SizedBox(height: context.spacing.md),
-          _StateRow('Disabled (off)', value: false, disabled: true),
-          SizedBox(height: context.spacing.md),
-          _StateRow('Disabled (on)', value: true, disabled: true),
-        ],
-      ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _StateRow('Off', value: false),
+        SizedBox(height: context.spacing.md),
+        _StateRow('On', value: true),
+        SizedBox(height: context.spacing.md),
+        _StateRow('Disabled (off)', value: false, disabled: true),
+        SizedBox(height: context.spacing.md),
+        _StateRow('Disabled (on)', value: true, disabled: true),
+      ],
     ),
   );
 }
@@ -84,23 +81,20 @@ class _StateRow extends StatelessWidget {
 class _WithLabels extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ComponentBoundary(
-            child: DievasSwitch(value: false, label: 'Notifications', onChanged: (_) {}),
-          ),
-          SizedBox(height: context.spacing.md),
-          ComponentBoundary(
-            child: DievasSwitch(value: true, label: 'Dark mode', onChanged: (_) {}),
-          ),
-          SizedBox(height: context.spacing.md),
-          ComponentBoundary(child: DievasSwitch(value: false, label: 'Disabled setting', onChanged: null)),
-        ],
-      ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ComponentBoundary(
+          child: DievasSwitch(value: false, label: 'Notifications', onChanged: (_) {}),
+        ),
+        SizedBox(height: context.spacing.md),
+        ComponentBoundary(
+          child: DievasSwitch(value: true, label: 'Dark mode', onChanged: (_) {}),
+        ),
+        SizedBox(height: context.spacing.md),
+        ComponentBoundary(child: DievasSwitch(value: false, label: 'Disabled setting', onChanged: null)),
+      ],
     ),
   );
 }

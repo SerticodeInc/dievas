@@ -27,19 +27,16 @@ class _AllStyles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
-        alignment: WrapAlignment.center,
-        children: [
-          for (final style in DievasFilledButtonStyle.values)
-            ComponentBoundary(
-              child: DievasFilledButton(label: style.name, style: style, onPressed: () {}),
-            ),
-        ],
-      ),
+    child: Wrap(
+      spacing: context.spacing.smPlus,
+      runSpacing: context.spacing.smPlus,
+      alignment: WrapAlignment.center,
+      children: [
+        for (final style in DievasFilledButtonStyle.values)
+          ComponentBoundary(
+            child: DievasFilledButton(label: style.name, style: style, onPressed: () {}),
+          ),
+      ],
     ),
   );
 }
@@ -49,19 +46,16 @@ class _AllSizes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          for (final size in DievasButtonSize.values)
-            ComponentBoundary(
-              child: DievasFilledButton(label: size.name, size: size, onPressed: () {}),
-            ),
-        ],
-      ),
+    child: Wrap(
+      spacing: context.spacing.smPlus,
+      runSpacing: context.spacing.smPlus,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        for (final size in DievasButtonSize.values)
+          ComponentBoundary(
+            child: DievasFilledButton(label: size.name, size: size, onPressed: () {}),
+          ),
+      ],
     ),
   );
 }
@@ -71,23 +65,20 @@ class _AllStates extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          for (final state in DievasButtonState.values)
-            ComponentBoundary(
-              child: DievasFilledButton(
-                label: state.name,
-                state: state,
-                onPressed: state == DievasButtonState.disabled ? null : () {},
-              ),
+    child: Wrap(
+      spacing: context.spacing.smPlus,
+      runSpacing: context.spacing.smPlus,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        for (final state in DievasButtonState.values)
+          ComponentBoundary(
+            child: DievasFilledButton(
+              label: state.name,
+              state: state,
+              onPressed: state == DievasButtonState.disabled ? null : () {},
             ),
-        ],
-      ),
+          ),
+      ],
     ),
   );
 }

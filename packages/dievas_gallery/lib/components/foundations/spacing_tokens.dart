@@ -35,7 +35,6 @@ class _SpacingScale extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -98,7 +97,6 @@ class _BorderRadii extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.lg),
       child: Wrap(
         spacing: context.spacing.lg,
         runSpacing: context.spacing.lg,

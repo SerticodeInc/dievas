@@ -34,20 +34,17 @@ class _Playground extends StatelessWidget {
     final disabled = context.knobs.boolean(label: 'Disabled');
 
     return Center(
-      child: Padding(
-        padding: .symmetric(horizontal: context.spacing.xl),
-        child: ComponentBoundary(
-          child: DievasTextInput(
-            size: size,
-            label: label.isEmpty ? null : label,
-            hint: hint.isEmpty ? null : hint,
-            helperText: helperText.isEmpty ? null : helperText,
-            errorText: errorText.isEmpty ? null : errorText,
-            warningText: warningText.isEmpty ? null : warningText,
-            enabled: !disabled,
-            leadingIcon: showLeadingIcon ? const Icon(Icons.email_outlined) : null,
-            trailingIcon: showTrailingIcon ? const Icon(Icons.visibility_outlined) : null,
-          ),
+      child: ComponentBoundary(
+        child: DievasTextInput(
+          size: size,
+          label: label.isEmpty ? null : label,
+          hint: hint.isEmpty ? null : hint,
+          helperText: helperText.isEmpty ? null : helperText,
+          errorText: errorText.isEmpty ? null : errorText,
+          warningText: warningText.isEmpty ? null : warningText,
+          enabled: !disabled,
+          leadingIcon: showLeadingIcon ? const Icon(Icons.email_outlined) : null,
+          trailingIcon: showTrailingIcon ? const Icon(Icons.visibility_outlined) : null,
         ),
       ),
     );
@@ -57,33 +54,30 @@ class _Playground extends StatelessWidget {
 class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: .symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
-      child: Column(
-        mainAxisSize: .min,
-        children: [
-          for (final size in DievasTextInputSize.values) ...[
-            Row(
-              children: [
-                SizedBox(
-                  width: 40,
-                  child: Text(
-                    size.name,
-                    style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary),
-                  ),
+    child: Column(
+      mainAxisSize: .min,
+      children: [
+        for (final size in DievasTextInputSize.values) ...[
+          Row(
+            children: [
+              SizedBox(
+                width: 40,
+                child: Text(
+                  size.name,
+                  style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary),
                 ),
-                SizedBox(width: context.spacing.md),
-                Expanded(
-                  child: ComponentBoundary(
-                    child: DievasTextInput(size: size, hint: 'Placeholder'),
-                  ),
+              ),
+              SizedBox(width: context.spacing.md),
+              Expanded(
+                child: ComponentBoundary(
+                  child: DievasTextInput(size: size, hint: 'Placeholder'),
                 ),
-              ],
-            ),
-            if (size != .LG) SizedBox(height: context.spacing.md),
-          ],
+              ),
+            ],
+          ),
+          if (size != .LG) SizedBox(height: context.spacing.md),
         ],
-      ),
+      ],
     ),
   );
 }
@@ -91,51 +85,48 @@ class _AllSizes extends StatelessWidget {
 class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: .symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
-      child: Column(
-        mainAxisSize: .min,
-        children: [
-          _StateBlock('Default', child: DievasTextInput(hint: 'Placeholder')),
-          SizedBox(height: context.spacing.mdPlus),
-          _StateBlock(
-            'With Label + Helper',
-            child: DievasTextInput(label: 'Full name', hint: 'John Appleseed', helperText: 'As it appears on your ID.'),
+    child: Column(
+      mainAxisSize: .min,
+      children: [
+        _StateBlock('Default', child: DievasTextInput(hint: 'Placeholder')),
+        SizedBox(height: context.spacing.mdPlus),
+        _StateBlock(
+          'With Label + Helper',
+          child: DievasTextInput(label: 'Full name', hint: 'John Appleseed', helperText: 'As it appears on your ID.'),
+        ),
+        SizedBox(height: context.spacing.mdPlus),
+        _StateBlock(
+          'Error',
+          child: DievasTextInput(
+            label: 'Email',
+            hint: 'you@serticodeinc.com',
+            errorText: 'This email is already in use.',
           ),
-          SizedBox(height: context.spacing.mdPlus),
-          _StateBlock(
-            'Error',
-            child: DievasTextInput(
-              label: 'Email',
-              hint: 'you@serticodeinc.com',
-              errorText: 'This email is already in use.',
-            ),
+        ),
+        SizedBox(height: context.spacing.mdPlus),
+        _StateBlock(
+          'Warning',
+          child: DievasTextInput(
+            label: 'Email',
+            hint: 'you@serticodeinc.com',
+            warningText: 'This email is close to a registered one.',
           ),
-          SizedBox(height: context.spacing.mdPlus),
-          _StateBlock(
-            'Warning',
-            child: DievasTextInput(
-              label: 'Email',
-              hint: 'you@serticodeinc.com',
-              warningText: 'This email is close to a registered one.',
-            ),
+        ),
+        SizedBox(height: context.spacing.mdPlus),
+        _StateBlock(
+          'With Icons',
+          child: DievasTextInput(
+            hint: 'Search...',
+            leadingIcon: const Icon(Icons.search_rounded),
+            trailingIcon: const Icon(Icons.close_rounded),
           ),
-          SizedBox(height: context.spacing.mdPlus),
-          _StateBlock(
-            'With Icons',
-            child: DievasTextInput(
-              hint: 'Search...',
-              leadingIcon: const Icon(Icons.search_rounded),
-              trailingIcon: const Icon(Icons.close_rounded),
-            ),
-          ),
-          SizedBox(height: context.spacing.mdPlus),
-          _StateBlock(
-            'Disabled',
-            child: DievasTextInput(label: 'Username', hint: 'adonis_serticode', enabled: false),
-          ),
-        ],
-      ),
+        ),
+        SizedBox(height: context.spacing.mdPlus),
+        _StateBlock(
+          'Disabled',
+          child: DievasTextInput(label: 'Username', hint: 'adonis_serticode', enabled: false),
+        ),
+      ],
     ),
   );
 }
@@ -154,29 +145,26 @@ class _ThemeOverride extends StatelessWidget {
     );
 
     return Center(
-      child: Padding(
-        padding: .symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
-        child: Column(
-          mainAxisSize: .min,
-          crossAxisAlignment: .start,
-          children: [
-            Text(
-              'Focus + warning colours overridden per instance via copyWith',
-              style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary),
-            ),
-            SizedBox(height: context.spacing.md),
-            ComponentBoundary(
-              child: DievasTheme(
-                data: overridden,
-                child: DievasTextInput(
-                  label: 'Email',
-                  hint: 'you@example.com',
-                  warningText: 'Focus ring and warning border are custom colours.',
-                ),
+      child: Column(
+        mainAxisSize: .min,
+        crossAxisAlignment: .start,
+        children: [
+          Text(
+            'Focus + warning colours overridden per instance via copyWith',
+            style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary),
+          ),
+          SizedBox(height: context.spacing.md),
+          ComponentBoundary(
+            child: DievasTheme(
+              data: overridden,
+              child: DievasTextInput(
+                label: 'Email',
+                hint: 'you@example.com',
+                warningText: 'Focus ring and warning border are custom colours.',
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -48,7 +48,6 @@ class _PlaygroundState extends State<_Playground> {
 
     return Center(
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(context.spacing.md),
         child: Directionality(
           textDirection: rtl ? .rtl : .ltr,
           child: Column(
@@ -121,7 +120,6 @@ class _Examples extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.md),
       child: Column(
         mainAxisSize: .min,
         children: [

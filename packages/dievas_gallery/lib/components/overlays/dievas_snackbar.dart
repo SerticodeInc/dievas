@@ -21,15 +21,12 @@ class _Playground extends StatelessWidget {
     final actionLabel = context.knobs.string(label: 'Action label', initialValue: 'Undo');
 
     return Center(
-      child: Padding(
-        padding: EdgeInsets.all(context.spacing.lg),
-        child: ComponentBoundary(
-          child: DievasSnackbar(
-            message: message.isEmpty ? 'Snackbar message' : message,
-            action: showAction
-                ? DievasSnackbarAction(label: actionLabel.isEmpty ? 'Action' : actionLabel, onPressed: () {})
-                : null,
-          ),
+      child: ComponentBoundary(
+        child: DievasSnackbar(
+          message: message.isEmpty ? 'Snackbar message' : message,
+          action: showAction
+              ? DievasSnackbarAction(label: actionLabel.isEmpty ? 'Action' : actionLabel, onPressed: () {})
+              : null,
         ),
       ),
     );
@@ -39,13 +36,10 @@ class _Playground extends StatelessWidget {
 class _WithAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: ComponentBoundary(
-        child: DievasSnackbar(
-          message: 'Message deleted.',
-          action: DievasSnackbarAction(label: 'Undo', onPressed: () {}),
-        ),
+    child: ComponentBoundary(
+      child: DievasSnackbar(
+        message: 'Message deleted.',
+        action: DievasSnackbarAction(label: 'Undo', onPressed: () {}),
       ),
     ),
   );
@@ -54,9 +48,6 @@ class _WithAction extends StatelessWidget {
 class _MessageOnly extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: ComponentBoundary(child: DievasSnackbar(message: 'Your profile has been updated.')),
-    ),
+    child: ComponentBoundary(child: DievasSnackbar(message: 'Your profile has been updated.')),
   );
 }

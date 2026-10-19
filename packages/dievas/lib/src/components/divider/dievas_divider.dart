@@ -121,8 +121,8 @@ class _Rule extends StatelessWidget {
     heightFactor: orientation == .horizontal ? 1 : null,
     widthFactor: orientation == .vertical ? 1 : null,
     child: SizedBox(
-      height: orientation == .horizontal ? thickness : null,
-      width: orientation == .vertical ? thickness : null,
+      height: orientation == .horizontal ? thickness : double.infinity,
+      width: orientation == .vertical ? thickness : double.infinity,
       child: ColoredBox(color: colour),
     ),
   );

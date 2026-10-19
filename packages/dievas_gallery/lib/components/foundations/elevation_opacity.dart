@@ -28,7 +28,6 @@ class _ElevationLevels extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.lg, vertical: context.spacing.xlPlus),
       child: Wrap(
         spacing: context.spacing.xl,
         runSpacing: context.spacing.xlPlus,
@@ -80,7 +79,6 @@ class _OpacityTokens extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -44,18 +44,15 @@ class _Playground extends StatelessWidget {
     ];
 
     return Center(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.spacing.xl),
-        child: ComponentBoundary(
-          child: SizedBox(
-            width: context.sizing.inputHeightMd * 8,
-            child: DievasSearchWithDropdown<String>(
-              items: countries,
-              displayString: (s) => s,
-              hint: hint,
-              enabled: enabled,
-              onSelected: (_) {},
-            ),
+      child: ComponentBoundary(
+        child: SizedBox(
+          width: context.sizing.inputHeightMd * 8,
+          child: DievasSearchWithDropdown<String>(
+            items: countries,
+            displayString: (s) => s,
+            hint: hint,
+            enabled: enabled,
+            onSelected: (_) {},
           ),
         ),
       ),
@@ -68,40 +65,37 @@ class _StaticDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.xl),
-      child: Column(
-        mainAxisSize: .min,
-        children: [
-          _DemoBlock(
-            'Default — tight layout (clipped)',
-            child: SizedBox(
-              width: 280,
-              height: 280,
-              child: DievasSearchWithDropdown<String>(
-                items: const ['Apple', 'Apricot', 'Banana', 'Blueberry', 'Cherry'],
-                displayString: (s) => s,
-                hint: 'Search...',
-                onSelected: (_) {},
-              ),
+    child: Column(
+      mainAxisSize: .min,
+      children: [
+        _DemoBlock(
+          'Default — tight layout (clipped)',
+          child: SizedBox(
+            width: 280,
+            height: 280,
+            child: DievasSearchWithDropdown<String>(
+              items: const ['Apple', 'Apricot', 'Banana', 'Blueberry', 'Cherry'],
+              displayString: (s) => s,
+              hint: 'Search...',
+              onSelected: (_) {},
             ),
           ),
-          SizedBox(height: context.spacing.lg),
-          _DemoBlock(
-            'Disabled',
-            child: SizedBox(
-              width: 320,
-              child: DievasSearchWithDropdown<String>(
-                items: ['Apple', 'Banana', 'Cherry'],
-                displayString: (s) => s,
-                hint: 'Search...',
-                enabled: false,
-                onSelected: (_) {},
-              ),
+        ),
+        SizedBox(height: context.spacing.lg),
+        _DemoBlock(
+          'Disabled',
+          child: SizedBox(
+            width: 320,
+            child: DievasSearchWithDropdown<String>(
+              items: ['Apple', 'Banana', 'Cherry'],
+              displayString: (s) => s,
+              hint: 'Search...',
+              enabled: false,
+              onSelected: (_) {},
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }

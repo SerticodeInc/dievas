@@ -162,40 +162,37 @@ class _Playground extends StatelessWidget {
     );
 
     return Center(
-      child: Padding(
-        padding: EdgeInsets.all(context.spacing.md),
-        child: SizedBox(
-          width: .infinity,
-          child: ComponentBoundary(
-            child: DievasAccordion(
-              key: ValueKey((initiallyExpanded, formContent)),
-              items: items,
-              allowMultiple: allowMultiple,
-              layout: layout,
-              size: size,
-              showBorder: showBorder,
-              showDivider: showDivider,
-              showShadows: showShadows,
-              maintainState: maintainState,
-              borderRadius: radiusEnabled ? BorderRadius.circular(radius) : null,
-              headerPadding: customPadding ? EdgeInsets.all(headerPadding) : null,
-              contentPadding: customPadding ? EdgeInsets.all(contentPadding) : null,
-              headerHeight: customHeight ? headerHeight : null,
-              gap: customGap ? gap : null,
-              transitionDuration: customMotion ? Duration(milliseconds: duration.round()) : null,
-              transitionCurve: customMotion ? curve : null,
-              expandedAlignment: alignment,
-              expandedCrossAxisAlignment: crossAxisAlignment,
-              textColour: textColourEnabled ? textColour : null,
-              expandedTextColour: expandedTextColourEnabled ? expandedTextColour : null,
-              contentTextColour: contentTextColourEnabled ? contentTextColour : null,
-              iconColour: iconColourEnabled ? iconColour : null,
-              expandedIconColour: expandedIconColourEnabled ? expandedIconColour : null,
-              backgroundColour: backgroundColourEnabled ? backgroundColour : null,
-              expandedBackgroundColour: expandedBackgroundColourEnabled ? expandedBackgroundColour : null,
-              borderColour: borderColourEnabled ? borderColour : null,
-              dividerColour: dividerColourEnabled ? dividerColour : null,
-            ),
+      child: SizedBox(
+        width: .infinity,
+        child: ComponentBoundary(
+          child: DievasAccordion(
+            key: ValueKey((initiallyExpanded, formContent)),
+            items: items,
+            allowMultiple: allowMultiple,
+            layout: layout,
+            size: size,
+            showBorder: showBorder,
+            showDivider: showDivider,
+            showShadows: showShadows,
+            maintainState: maintainState,
+            borderRadius: radiusEnabled ? BorderRadius.circular(radius) : null,
+            headerPadding: customPadding ? EdgeInsets.all(headerPadding) : null,
+            contentPadding: customPadding ? EdgeInsets.all(contentPadding) : null,
+            headerHeight: customHeight ? headerHeight : null,
+            gap: customGap ? gap : null,
+            transitionDuration: customMotion ? Duration(milliseconds: duration.round()) : null,
+            transitionCurve: customMotion ? curve : null,
+            expandedAlignment: alignment,
+            expandedCrossAxisAlignment: crossAxisAlignment,
+            textColour: textColourEnabled ? textColour : null,
+            expandedTextColour: expandedTextColourEnabled ? expandedTextColour : null,
+            contentTextColour: contentTextColourEnabled ? contentTextColour : null,
+            iconColour: iconColourEnabled ? iconColour : null,
+            expandedIconColour: expandedIconColourEnabled ? expandedIconColour : null,
+            backgroundColour: backgroundColourEnabled ? backgroundColour : null,
+            expandedBackgroundColour: expandedBackgroundColourEnabled ? expandedBackgroundColour : null,
+            borderColour: borderColourEnabled ? borderColour : null,
+            dividerColour: dividerColourEnabled ? dividerColour : null,
           ),
         ),
       ),
@@ -208,24 +205,21 @@ class _AllStates extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.md),
-      child: SizedBox(
-        width: 400,
-        child: ComponentBoundary(
-          child: DievasAccordion(
-            items: const [
-              DievasAccordionItem(title: Text('Collapsed'), content: Text('Hidden content')),
-              DievasAccordionItem(title: Text('Expanded'), content: Text('Visible content'), initiallyExpanded: true),
-              DievasAccordionItem(title: Text('Disabled'), content: Text('Cannot expand'), disabled: true),
-              DievasAccordionItem(
-                title: Text('No Arrow'),
-                content: Text('Trailing arrow hidden'),
-                showTrailingArrow: false,
-              ),
-            ],
-            allowMultiple: true,
-          ),
+    child: SizedBox(
+      width: 400,
+      child: ComponentBoundary(
+        child: DievasAccordion(
+          items: const [
+            DievasAccordionItem(title: Text('Collapsed'), content: Text('Hidden content')),
+            DievasAccordionItem(title: Text('Expanded'), content: Text('Visible content'), initiallyExpanded: true),
+            DievasAccordionItem(title: Text('Disabled'), content: Text('Cannot expand'), disabled: true),
+            DievasAccordionItem(
+              title: Text('No Arrow'),
+              content: Text('Trailing arrow hidden'),
+              showTrailingArrow: false,
+            ),
+          ],
+          allowMultiple: true,
         ),
       ),
     ),
@@ -237,32 +231,29 @@ class _WithIcons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.md),
-      child: SizedBox(
-        width: 400,
-        child: ComponentBoundary(
-          child: DievasAccordion(
-            items: const [
-              DievasAccordionItem(
-                title: Text('Leading Icon'),
-                content: Text('This item has a leading folder icon.'),
-                leading: Icon(Icons.folder_outlined),
-              ),
-              DievasAccordionItem(
-                title: Text('Custom Trailing'),
-                content: Text('This item has a custom trailing icon.'),
-                trailing: Icon(Icons.settings),
-              ),
-              DievasAccordionItem(
-                title: Text('Leading + Custom Trailing'),
-                content: Text('Both leading and custom trailing icons.'),
-                leading: Icon(Icons.star_border),
-                trailing: Icon(Icons.more_vert),
-              ),
-            ],
-            allowMultiple: true,
-          ),
+    child: SizedBox(
+      width: 400,
+      child: ComponentBoundary(
+        child: DievasAccordion(
+          items: const [
+            DievasAccordionItem(
+              title: Text('Leading Icon'),
+              content: Text('This item has a leading folder icon.'),
+              leading: Icon(Icons.folder_outlined),
+            ),
+            DievasAccordionItem(
+              title: Text('Custom Trailing'),
+              content: Text('This item has a custom trailing icon.'),
+              trailing: Icon(Icons.settings),
+            ),
+            DievasAccordionItem(
+              title: Text('Leading + Custom Trailing'),
+              content: Text('Both leading and custom trailing icons.'),
+              leading: Icon(Icons.star_border),
+              trailing: Icon(Icons.more_vert),
+            ),
+          ],
+          allowMultiple: true,
         ),
       ),
     ),
@@ -276,28 +267,25 @@ class _LayoutExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.md),
-      child: SizedBox(
-        width: 400,
-        child: ComponentBoundary(
-          child: DievasAccordion(
-            layout: layout,
-            allowMultiple: context.knobs.boolean(label: 'Allow multiple', initialValue: false),
-            items: const [
-              DievasAccordionItem(
-                title: Text('Account settings'),
-                leading: Icon(Icons.person_outline),
-                content: Text('Manage your profile, email address, and account preferences.'),
-                initiallyExpanded: true,
-              ),
-              DievasAccordionItem(
-                title: Text('Notifications'),
-                leading: Icon(Icons.notifications_outlined),
-                content: Text('Choose which updates you receive and how we notify you.'),
-              ),
-            ],
-          ),
+    child: SizedBox(
+      width: 400,
+      child: ComponentBoundary(
+        child: DievasAccordion(
+          layout: layout,
+          allowMultiple: context.knobs.boolean(label: 'Allow multiple', initialValue: false),
+          items: const [
+            DievasAccordionItem(
+              title: Text('Account settings'),
+              leading: Icon(Icons.person_outline),
+              content: Text('Manage your profile, email address, and account preferences.'),
+              initiallyExpanded: true,
+            ),
+            DievasAccordionItem(
+              title: Text('Notifications'),
+              leading: Icon(Icons.notifications_outlined),
+              content: Text('Choose which updates you receive and how we notify you.'),
+            ),
+          ],
         ),
       ),
     ),
@@ -316,33 +304,30 @@ class _ControlledExampleState extends State<_ControlledExample> {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.md),
-      child: SizedBox(
-        width: 400,
-        child: Column(
-          mainAxisSize: .min,
-          children: [
-            Wrap(
-              spacing: context.spacing.sm,
-              children: [
-                TextButton(onPressed: () => setState(() => _expanded = {0}), child: const Text('Open first')),
-                TextButton(onPressed: () => setState(() => _expanded = {}), child: const Text('Close all')),
+    child: SizedBox(
+      width: 400,
+      child: Column(
+        mainAxisSize: .min,
+        children: [
+          Wrap(
+            spacing: context.spacing.sm,
+            children: [
+              TextButton(onPressed: () => setState(() => _expanded = {0}), child: const Text('Open first')),
+              TextButton(onPressed: () => setState(() => _expanded = {}), child: const Text('Close all')),
+            ],
+          ),
+          Text('Expanded: ${_expanded.isEmpty ? 'none' : _expanded.map((index) => index + 1).join(', ')}'),
+          ComponentBoundary(
+            child: DievasAccordion(
+              expandedIndices: _expanded,
+              onExpansionChanged: (index, expanded) => setState(() => _expanded = expanded ? {index} : {}),
+              items: const [
+                DievasAccordionItem(title: Text('Account'), content: Text('Account preferences')),
+                DievasAccordionItem(title: Text('Notifications'), content: Text('Notification preferences')),
               ],
             ),
-            Text('Expanded: ${_expanded.isEmpty ? 'none' : _expanded.map((index) => index + 1).join(', ')}'),
-            ComponentBoundary(
-              child: DievasAccordion(
-                expandedIndices: _expanded,
-                onExpansionChanged: (index, expanded) => setState(() => _expanded = expanded ? {index} : {}),
-                items: const [
-                  DievasAccordionItem(title: Text('Account'), content: Text('Account preferences')),
-                  DievasAccordionItem(title: Text('Notifications'), content: Text('Notification preferences')),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     ),
   );

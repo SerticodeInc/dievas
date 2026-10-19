@@ -27,7 +27,6 @@ class _WidgetBookContent extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: context.colours.background.cardBackground,
     body: SingleChildScrollView(
-      padding: .symmetric(horizontal: context.spacing.xl, vertical: context.spacing.xl3),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 720),

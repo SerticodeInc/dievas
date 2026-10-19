@@ -74,44 +74,37 @@ class _AllStyles extends StatelessWidget {
     final borderSM = DievasTheme.borderOf(context).sm;
 
     return Center(
-      child: Padding(
-        padding: .all(context.spacing.lg),
-        child: Wrap(
-          spacing: context.spacing.sm,
-          runSpacing: context.spacing.smPlus,
-          alignment: .center,
-          children: [
-            for (final style in DievasTagStyle.values) ...[
-              ComponentBoundary(
-                child: DievasTag(label: style.name, style: style),
+      child: Wrap(
+        spacing: context.spacing.sm,
+        runSpacing: context.spacing.smPlus,
+        alignment: .center,
+        children: [
+          for (final style in DievasTagStyle.values) ...[
+            ComponentBoundary(
+              child: DievasTag(label: style.name, style: style),
+            ),
+            ComponentBoundary(
+              child: DievasTag(
+                label: style.name,
+                style: style,
+                leadingIcon: Icon(Icons.label_outline_rounded, size: iconSize),
+                onRemove: () {},
               ),
-              ComponentBoundary(
-                child: DievasTag(
-                  label: style.name,
-                  style: style,
-                  leadingIcon: Icon(Icons.label_outline_rounded, size: iconSize),
-                  onRemove: () {},
-                ),
+            ),
+            ComponentBoundary(
+              child: DievasTag(label: style.name, style: style, borderRadius: DievasTagBorderRadius.rounded(borderSM)),
+            ),
+            ComponentBoundary(
+              child: DievasTag(
+                label: style.name,
+                style: style,
+                borderRadius: DievasTagBorderRadius.rounded(borderSM),
+                leadingIcon: Icon(Icons.label_outline_rounded, size: iconSize),
+                onRemove: () {},
               ),
-              ComponentBoundary(
-                child: DievasTag(
-                  label: style.name,
-                  style: style,
-                  borderRadius: DievasTagBorderRadius.rounded(borderSM),
-                ),
-              ),
-              ComponentBoundary(
-                child: DievasTag(
-                  label: style.name,
-                  style: style,
-                  borderRadius: DievasTagBorderRadius.rounded(borderSM),
-                  leadingIcon: Icon(Icons.label_outline_rounded, size: iconSize),
-                  onRemove: () {},
-                ),
-              ),
-            ],
+            ),
           ],
-        ),
+        ],
       ),
     );
   }

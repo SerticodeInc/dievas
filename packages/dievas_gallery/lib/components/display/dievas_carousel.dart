@@ -56,7 +56,6 @@ class _PlaygroundState extends State<_Playground> {
       textDirection: rtl ? .rtl : .ltr,
       child: Center(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(context.spacing.md),
           child: Column(
             mainAxisSize: .min,
             children: [

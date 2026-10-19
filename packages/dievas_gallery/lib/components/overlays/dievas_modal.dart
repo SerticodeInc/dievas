@@ -25,20 +25,17 @@ class _Playground extends StatelessWidget {
     final showActions = context.knobs.boolean(label: 'Show actions', initialValue: true);
 
     return Center(
-      child: Padding(
-        padding: EdgeInsets.all(context.spacing.lg),
-        child: ComponentBoundary(
-          child: DievasModal(
-            title: title.isEmpty ? 'Modal title' : title,
-            body: body.isEmpty ? null : body,
-            showCloseButton: showClose,
-            actions: showActions
-                ? [
-                    DievasTextButton(label: 'Cancel', onPressed: () {}),
-                    DievasFilledButton(label: 'Confirm', onPressed: () {}),
-                  ]
-                : [],
-          ),
+      child: ComponentBoundary(
+        child: DievasModal(
+          title: title.isEmpty ? 'Modal title' : title,
+          body: body.isEmpty ? null : body,
+          showCloseButton: showClose,
+          actions: showActions
+              ? [
+                  DievasTextButton(label: 'Cancel', onPressed: () {}),
+                  DievasFilledButton(label: 'Confirm', onPressed: () {}),
+                ]
+              : [],
         ),
       ),
     );
@@ -48,17 +45,14 @@ class _Playground extends StatelessWidget {
 class _WithActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: ComponentBoundary(
-        child: DievasModal(
-          title: 'Delete item',
-          body: 'This will permanently delete the item. This action cannot be undone.',
-          actions: [
-            DievasTextButton(label: 'Cancel', onPressed: () {}),
-            DievasFilledButton(label: 'Delete', style: .destructive, onPressed: () {}),
-          ],
-        ),
+    child: ComponentBoundary(
+      child: DievasModal(
+        title: 'Delete item',
+        body: 'This will permanently delete the item. This action cannot be undone.',
+        actions: [
+          DievasTextButton(label: 'Cancel', onPressed: () {}),
+          DievasFilledButton(label: 'Delete', style: .destructive, onPressed: () {}),
+        ],
       ),
     ),
   );
@@ -67,21 +61,18 @@ class _WithActions extends StatelessWidget {
 class _ContentOnly extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: ComponentBoundary(
-        child: DievasModal(
-          title: 'Custom content',
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DievasAlert(tone: .info, title: 'Note', description: 'Custom widget content inside a modal.'),
-              SizedBox(height: context.spacing.md),
-              DievasTextInput(label: 'Confirm name', onChanged: (_) {}),
-            ],
-          ),
-          actions: [DievasFilledButton(label: 'Submit', onPressed: () {})],
+    child: ComponentBoundary(
+      child: DievasModal(
+        title: 'Custom content',
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            DievasAlert(tone: .info, title: 'Note', description: 'Custom widget content inside a modal.'),
+            SizedBox(height: context.spacing.md),
+            DievasTextInput(label: 'Confirm name', onChanged: (_) {}),
+          ],
         ),
+        actions: [DievasFilledButton(label: 'Submit', onPressed: () {})],
       ),
     ),
   );

@@ -81,7 +81,7 @@ class DievasCarousel extends StatefulWidget {
     required this.itemExtent,
     required this.itemBuilder,
     this.controller,
-    this.axisDirection = Axis.horizontal,
+    this.axisDirection = .horizontal,
     this.gap,
     this.anchor = 0,
     this.isCentered = true,
@@ -100,7 +100,7 @@ class DievasCarousel extends StatefulWidget {
        assert(gap == null || gap >= 0),
        assert(anchor >= 0 && anchor <= 1),
        assert(velocityFactor > 0 && velocityFactor <= 1),
-       assert(autoPlayDelay == null || autoPlayDelay > Duration.zero);
+       assert(autoPlayDelay == null || autoPlayDelay > .zero);
 
   final int itemCount;
   final double itemExtent;
@@ -234,19 +234,7 @@ class _DievasCarouselState extends State<DievasCarousel> with WidgetsBindingObse
               _schedule();
             },
             child: NotificationListener<ScrollNotification>(
-              onNotification: (notification) {
-                if (notification.depth != 0) return false;
-                final index = _controller.selectedItem;
-                if (_lastIndex != index) {
-                  _lastIndex = index;
-                  widget.onIndexChanged?.call(index);
-                }
-                if (notification case ScrollStartNotification()) {
-                  _timer?.cancel();
-                }
-                if (notification case ScrollEndNotification()) _schedule();
-                return false;
-              },
+              onNotification: _handleScrollNotification,
               child: DefaultTextStyle.merge(
                 style: theme.textStyle,
                 child: CustomScrollView(
@@ -291,32 +279,52 @@ class _DievasCarouselState extends State<DievasCarousel> with WidgetsBindingObse
     );
   }
 
+  bool _handleScrollNotification(ScrollNotification notification) {
+    if (notification case ScrollNotification(depth: 0)) {
+      if (_controller.selectedItem case final index when index != _lastIndex) {
+        _lastIndex = index;
+        widget.onIndexChanged?.call(index);
+      }
+
+      switch (notification) {
+        case ScrollStartNotification():
+          _timer?.cancel();
+        case ScrollEndNotification():
+          _schedule();
+        default:
+          break;
+      }
+    }
+    return false;
+  }
+
   void _schedule() {
     _timer?.cancel();
-    if (!mounted ||
-        !widget.autoPlay ||
-        widget.itemCount < 2 ||
-        _pointerDown ||
-        !_resumed ||
-        _controller._reduceMotion ||
-        !TickerMode.valuesOf(context).enabled ||
-        !_controller.hasClients) {
-      return;
+
+    final autoplayEnabled = widget.autoPlay && widget.itemCount > 1;
+    final viewActive = mounted && _resumed && TickerMode.valuesOf(context).enabled;
+    final motionAllowed = !_controller._reduceMotion && !_pointerDown;
+
+    if ((autoplayEnabled, viewActive, motionAllowed, _controller.hasClients) case (true, true, true, true)) {
+      _timer = Timer(widget.autoPlayDelay ?? DievasTheme.componentsOf(context).carousel.autoPlayDelay, () async {
+        final isScrolling = _controller.position.isScrollingNotifier.value;
+        final reachedEnd = _controller.offset >= _controller.position.maxScrollExtent;
+
+        if (isScrolling case false) {
+          await switch ((widget.loop, reachedEnd)) {
+            (false, true) => _controller.animateToItem(0),
+            _ => _controller.nextItem(),
+          };
+          if (mounted) _schedule();
+        }
+      });
     }
-    _timer = Timer(widget.autoPlayDelay ?? DievasTheme.componentsOf(context).carousel.autoPlayDelay, () async {
-      if (_controller.position.isScrollingNotifier.value) return;
-      if (!widget.loop && _controller.offset >= _controller.position.maxScrollExtent) {
-        await _controller.animateToItem(0);
-      } else {
-        await _controller.nextItem();
-      }
-      if (mounted) _schedule();
-    });
   }
 }
 
 class _CarouselItem extends StatelessWidget {
   const _CarouselItem({required this.axis, required this.gap, required this.child});
+
   final Axis axis;
   final double gap;
   final Widget child;
@@ -355,6 +363,7 @@ class _CarouselPhysics extends ScrollPhysics {
     if (!loop && velocity.abs() < tolerance.velocity && (position.pixels == 0 || position.pixels == end)) {
       return null;
     }
+
     final projected = FrictionSimulation(.135, position.pixels, velocity * velocityFactor).finalX;
     final target = ((projected / step).round() * step).clamp(
       loop ? double.negativeInfinity : 0.0,

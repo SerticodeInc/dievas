@@ -67,7 +67,6 @@ class _ButtonPlaygroundState extends State<ButtonPlayground> {
 
     return Center(
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(context.spacing.lg),
         child: Directionality(
           textDirection: rtl ? .rtl : .ltr,
           child: Column(

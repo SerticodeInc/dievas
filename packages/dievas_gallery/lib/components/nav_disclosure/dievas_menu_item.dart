@@ -49,34 +49,31 @@ class _Configurations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: .symmetric(horizontal: context.spacing.md, vertical: context.spacing.lg),
-      child: Column(
-        mainAxisSize: .min,
-        crossAxisAlignment: .start,
-        children: [
-          const _DemoBlock('Default', child: DievasMenuItem(label: 'Profile')),
-          SizedBox(height: context.spacing.sm),
-          const _DemoBlock(
-            'With leading icon',
-            child: DievasMenuItem(label: 'Settings', leadingIcon: Icon(Icons.settings)),
-          ),
-          SizedBox(height: context.spacing.sm),
-          const _DemoBlock(
-            'With trailing',
-            child: DievasMenuItem(label: 'More', trailing: Icon(Icons.chevron_right)),
-          ),
-          SizedBox(height: context.spacing.sm),
-          const _DemoBlock(
-            'With subtitle',
-            child: DievasMenuItem(label: 'Delete', subtitle: 'This cannot be undone'),
-          ),
-          SizedBox(height: context.spacing.sm),
-          const _DemoBlock('Dense', child: DievasMenuItem(label: 'Dense item', dense: true)),
-          SizedBox(height: context.spacing.sm),
-          const _DemoBlock('Disabled', child: DievasMenuItem(label: 'Disabled', enabled: false)),
-        ],
-      ),
+    child: Column(
+      mainAxisSize: .min,
+      crossAxisAlignment: .start,
+      children: [
+        const _DemoBlock('Default', child: DievasMenuItem(label: 'Profile')),
+        SizedBox(height: context.spacing.sm),
+        const _DemoBlock(
+          'With leading icon',
+          child: DievasMenuItem(label: 'Settings', leadingIcon: Icon(Icons.settings)),
+        ),
+        SizedBox(height: context.spacing.sm),
+        const _DemoBlock(
+          'With trailing',
+          child: DievasMenuItem(label: 'More', trailing: Icon(Icons.chevron_right)),
+        ),
+        SizedBox(height: context.spacing.sm),
+        const _DemoBlock(
+          'With subtitle',
+          child: DievasMenuItem(label: 'Delete', subtitle: 'This cannot be undone'),
+        ),
+        SizedBox(height: context.spacing.sm),
+        const _DemoBlock('Dense', child: DievasMenuItem(label: 'Dense item', dense: true)),
+        SizedBox(height: context.spacing.sm),
+        const _DemoBlock('Disabled', child: DievasMenuItem(label: 'Disabled', enabled: false)),
+      ],
     ),
   );
 }

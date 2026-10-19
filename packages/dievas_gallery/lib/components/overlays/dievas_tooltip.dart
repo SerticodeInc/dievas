@@ -51,14 +51,11 @@ class _PreferAbove extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Align(
     alignment: Alignment.bottomCenter,
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.xl2),
-      child: ComponentBoundary(
-        child: DievasTooltip(
-          message: 'Shown above the target',
-          preferBelow: false,
-          child: DievasFilledButton(label: 'Tooltip above', onPressed: () {}),
-        ),
+    child: ComponentBoundary(
+      child: DievasTooltip(
+        message: 'Shown above the target',
+        preferBelow: false,
+        child: DievasFilledButton(label: 'Tooltip above', onPressed: () {}),
       ),
     ),
   );

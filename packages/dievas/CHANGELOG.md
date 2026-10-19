@@ -15,7 +15,7 @@
 - Share keyboard/pointer handling and loading layout across the three variants. Remove their Material ink surfaces and IconTheme wrappers; resolve standard icon slots through DievasIcon. Loading keeps the content footprint and accessible label; pulse and loader animations respect reduced motion.
 - Wrap long labels in narrow layouts and retain natural width in unbounded parents. Support icon only content and long press only buttons.
 - Default outlined buttons to primary foregrounds with neutral borders, and text buttons to secondary foregrounds. Destructive styles and explicit theme/colour overrides remain available. Text buttons now use the size variant's minimum height and padding instead of a content-only hit area.
-- Add grouped Widgetbook controls for all reference options, independent semantic colour overrides, zero-radius overrides, RTL, loading/disabled states, and working tap/long-press feedback. Add a standard three-variant showcase; omit custom-shape examples.
+- Add grouped Widgetbook controls for all reference options, independent semantic colour overrides, zero radius overrides, RTL, loading/disabled states, and working tap/long-press feedback. Add a standard three variant showcase; omit custom shape examples.
 
 ### Breadcrumb
 

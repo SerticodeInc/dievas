@@ -7,17 +7,17 @@ import 'package:dievas_tokens/src/primitives/breakpoint_primitives.dart';
 /// [DievasBreakpointPrimitives] exclusively, no raw doubles are permitted here.
 abstract final class DievasBreakpointSemantic {
   /// 0px+ smallest viewport. Baseline mobile layout.
-  static const double XS = DievasBreakpointPrimitives.XS;
+  static const double xs = DievasBreakpointPrimitives.xs;
 
   /// 360px+ small mobile / entry level handset.
-  static const double SM = DievasBreakpointPrimitives.SM;
+  static const double sm = DievasBreakpointPrimitives.sm;
 
   /// 700px+ tablet portrait.
-  static const double MD = DievasBreakpointPrimitives.MD;
+  static const double md = DievasBreakpointPrimitives.md;
 
   /// 1000px+ tablet landscape.
-  static const double LG = DievasBreakpointPrimitives.LG;
+  static const double lg = DievasBreakpointPrimitives.lg;
 
   /// 1348px+ desktop.
-  static const double XL = DievasBreakpointPrimitives.XL;
+  static const double xl = DievasBreakpointPrimitives.xl;
 }

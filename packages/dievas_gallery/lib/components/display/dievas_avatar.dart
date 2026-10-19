@@ -89,7 +89,7 @@ class _Playground extends StatelessWidget {
     return Directionality(
       textDirection: rtl ? .rtl : .ltr,
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(context.spacing.LG),
+        padding: EdgeInsets.all(context.spacing.lg),
         child: Column(
           mainAxisSize: .min,
           children: [
@@ -117,7 +117,7 @@ class _Playground extends StatelessWidget {
                 content: content == .custom ? _AvatarContent(type: content, text: initials) : null,
               ),
             ),
-            SizedBox(height: context.spacing.XL),
+            SizedBox(height: context.spacing.xl),
             _DemoBlock(
               label: 'Image background',
               child: DievasAvatar(
@@ -145,7 +145,7 @@ class _Playground extends StatelessWidget {
                 content: overlay ? _AvatarContent(type: content, text: initials) : null,
               ),
             ),
-            SizedBox(height: context.spacing.XL),
+            SizedBox(height: context.spacing.xl),
           ],
         ),
       ),
@@ -175,8 +175,8 @@ class _DemoBlock extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     mainAxisSize: .min,
     children: [
-      Text(label, style: context.typography.labelSM),
-      SizedBox(height: context.spacing.LG),
+      Text(label, style: context.typography.labelSm),
+      SizedBox(height: context.spacing.lg),
       ComponentBoundary(child: child),
     ],
   );
@@ -188,7 +188,7 @@ class _CustomContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Wrap(
-      spacing: context.spacing.LG,
+      spacing: context.spacing.lg,
       children: [
         const DievasAvatar(size: .XL, content: Icon(Icons.favorite), showBadge: true),
         const DievasAvatar(
@@ -211,20 +211,20 @@ class _AllSizes extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: .all(spacing.LG),
+        padding: .all(spacing.lg),
         child: Wrap(
-          spacing: spacing.MD,
+          spacing: spacing.md,
           crossAxisAlignment: .center,
           children: [
             for (final size in DievasAvatarSize.values)
               Column(
                 mainAxisSize: .min,
-                spacing: spacing.SM,
+                spacing: spacing.sm,
                 children: [
                   ComponentBoundary(
                     child: DievasAvatar(initials: 'AB', size: size),
                   ),
-                  Text(size.name, style: context.typography.labelXS),
+                  Text(size.name, style: context.typography.labelXs),
                 ],
               ),
           ],
@@ -243,20 +243,20 @@ class _AllShapes extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: .all(spacing.LG),
+        padding: .all(spacing.lg),
         child: Wrap(
-          spacing: spacing.LG,
+          spacing: spacing.lg,
           crossAxisAlignment: .center,
           children: [
             for (final shape in DievasAvatarShape.values)
               Column(
                 mainAxisSize: .min,
-                spacing: spacing.SM,
+                spacing: spacing.sm,
                 children: [
                   ComponentBoundary(
                     child: DievasAvatar(initials: 'AB', size: .LG, shape: shape),
                   ),
-                  Text(shape.name, style: context.typography.labelXS),
+                  Text(shape.name, style: context.typography.labelXs),
                 ],
               ),
           ],

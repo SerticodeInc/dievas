@@ -11,22 +11,22 @@ import 'package:dievas_tokens/src/primitives/opacity_primitives.dart';
 /// tints [DievasOpacityPrimitives].
 abstract final class DievasElevationSemantic {
   /// No shadow. Flat surfaces flush with the page.
-  static const double NONE = DievasElevationPrimitives.e0;
+  static const double none = DievasElevationPrimitives.e0;
 
   /// Hairline shadow. Subtle card lift on a light background.
-  static const double XS = DievasElevationPrimitives.e1;
+  static const double xs = DievasElevationPrimitives.e1;
 
   /// Small shadow. Default card, chip, badge.
-  static const double SM = DievasElevationPrimitives.e2;
+  static const double sm = DievasElevationPrimitives.e2;
 
   /// Medium shadow. Hovered card, dropdown menu, tooltip.
-  static const double MD = DievasElevationPrimitives.e3;
+  static const double md = DievasElevationPrimitives.e3;
 
   /// Large shadow. Floating action button, sticky header.
-  static const double LG = DievasElevationPrimitives.e4;
+  static const double lg = DievasElevationPrimitives.e4;
 
   /// Extra large shadow. Modal, bottom sheet, popover.
-  static const double XL = DievasElevationPrimitives.e5;
+  static const double xl = DievasElevationPrimitives.e5;
 
   /// 0xFF171717: base ink for every shadow layer. A soft near black, so depth
   /// reads as a gentle halo instead of weight. Scoped to elevation only, never
@@ -42,31 +42,31 @@ typedef DievasElevationShadow = ({double blur, double tint});
 /// layer is painted centred with no vertical offset, so elevation reads as a
 /// soft halo around the surface rather than a drop shadow underneath it.
 abstract final class DievasElevationShadowLayer {
-  /// Elevation XS: single diffuse layer.
-  static const List<DievasElevationShadow> XS = [
+  /// Elevation xs: single diffuse layer.
+  static const List<DievasElevationShadow> xs = [
     (blur: DievasElevationPrimitives.e1, tint: DievasOpacityPrimitives.o12),
   ];
 
-  /// Elevation SM: tight ambient layer then diffuse layer.
-  static const List<DievasElevationShadow> SM = [
+  /// Elevation sm: tight ambient layer then diffuse layer.
+  static const List<DievasElevationShadow> sm = [
     (blur: DievasElevationPrimitives.e1, tint: DievasOpacityPrimitives.o8),
     (blur: DievasElevationPrimitives.e2, tint: DievasOpacityPrimitives.o12),
   ];
 
-  /// Elevation MD: tight ambient layer then diffuse layer.
-  static const List<DievasElevationShadow> MD = [
+  /// Elevation md: tight ambient layer then diffuse layer.
+  static const List<DievasElevationShadow> md = [
     (blur: DievasElevationPrimitives.e2, tint: DievasOpacityPrimitives.o8),
     (blur: DievasElevationPrimitives.e3, tint: DievasOpacityPrimitives.o20),
   ];
 
-  /// Elevation LG: tight ambient layer then diffuse layer.
-  static const List<DievasElevationShadow> LG = [
+  /// Elevation lg: tight ambient layer then diffuse layer.
+  static const List<DievasElevationShadow> lg = [
     (blur: DievasElevationPrimitives.e3, tint: DievasOpacityPrimitives.o8),
     (blur: DievasElevationPrimitives.e4, tint: DievasOpacityPrimitives.o20),
   ];
 
-  /// Elevation XL: tight ambient layer then diffuse layer.
-  static const List<DievasElevationShadow> XL = [
+  /// Elevation xl: tight ambient layer then diffuse layer.
+  static const List<DievasElevationShadow> xl = [
     (blur: DievasElevationPrimitives.e4, tint: DievasOpacityPrimitives.o8),
     (blur: DievasElevationPrimitives.e5, tint: DievasOpacityPrimitives.o24),
   ];

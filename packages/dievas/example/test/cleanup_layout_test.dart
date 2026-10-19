@@ -26,8 +26,8 @@ void main() {
     expect(tester.widget<NavigationBar>(find.byType(NavigationBar)).selectedIndex, 1);
     expect(find.text('Colour'), findsOneWidget);
     final themeContext = tester.element(find.byType(ExampleFoundationsScreen));
-    expect(tester.getSize(find.byType(DievasFilledButton).first).height, themeContext.sizing.buttonHeightMD);
-    expect(tester.getSize(find.byType(DievasTextInput)).height, themeContext.sizing.inputHeightMD);
+    expect(tester.getSize(find.byType(DievasFilledButton).first).height, themeContext.sizing.buttonHeightMd);
+    expect(tester.getSize(find.byType(DievasTextInput)).height, themeContext.sizing.inputHeightMd);
     final motion = find.descendant(of: find.byType(AnimatedAlign), matching: find.byType(CircleAvatar));
     await tester.ensureVisible(find.text('Replay motion'));
     await tester.pump();

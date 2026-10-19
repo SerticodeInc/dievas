@@ -8,74 +8,74 @@ import 'package:flutter/painting.dart';
 /// in widget decoration. Stroke widths are raw [double] values.
 final class DievasBorderThemeData extends Equatable {
   const DievasBorderThemeData({
-    this.NONE = .zero,
-    this.XS = const .all(.circular(DievasRadiusSemantic.XS)),
-    this.SM = const .all(.circular(DievasRadiusSemantic.SM)),
-    this.MD = const .all(.circular(DievasRadiusSemantic.MD)),
-    this.LG = const .all(.circular(DievasRadiusSemantic.LG)),
-    this.XL = const .all(.circular(DievasRadiusSemantic.XL)),
-    this.XL2 = const .all(.circular(DievasRadiusSemantic.XL2)),
-    this.XL3 = const .all(.circular(DievasRadiusSemantic.XL3)),
-    this.R28 = const .all(.circular(DievasRadiusSemantic.R28)),
-    this.R32 = const .all(.circular(DievasRadiusSemantic.R32)),
-    this.R36 = const .all(.circular(DievasRadiusSemantic.R36)),
-    this.R40 = const .all(.circular(DievasRadiusSemantic.R40)),
-    this.R48 = const .all(.circular(DievasRadiusSemantic.R48)),
-    this.R56 = const .all(.circular(DievasRadiusSemantic.R56)),
-    this.R64 = const .all(.circular(DievasRadiusSemantic.R64)),
-    this.FULL = const .all(.circular(DievasRadiusSemantic.FULL)),
+    this.none = .zero,
+    this.xs = const .all(.circular(DievasRadiusSemantic.xs)),
+    this.sm = const .all(.circular(DievasRadiusSemantic.sm)),
+    this.md = const .all(.circular(DievasRadiusSemantic.md)),
+    this.lg = const .all(.circular(DievasRadiusSemantic.lg)),
+    this.xl = const .all(.circular(DievasRadiusSemantic.xl)),
+    this.xl2 = const .all(.circular(DievasRadiusSemantic.xl2)),
+    this.xl3 = const .all(.circular(DievasRadiusSemantic.xl3)),
+    this.r28 = const .all(.circular(DievasRadiusSemantic.r28)),
+    this.r32 = const .all(.circular(DievasRadiusSemantic.r32)),
+    this.r36 = const .all(.circular(DievasRadiusSemantic.r36)),
+    this.r40 = const .all(.circular(DievasRadiusSemantic.r40)),
+    this.r48 = const .all(.circular(DievasRadiusSemantic.r48)),
+    this.r56 = const .all(.circular(DievasRadiusSemantic.r56)),
+    this.r64 = const .all(.circular(DievasRadiusSemantic.r64)),
+    this.full = const .all(.circular(DievasRadiusSemantic.full)),
     this.strokeThin = 1.0,
     this.strokeDefault = 1.5,
     this.strokeThick = 2.0,
   });
 
   /// 0px — sharp corners.
-  final BorderRadius NONE;
+  final BorderRadius none;
 
   /// 2px — subtle rounding. Tags, small chips.
-  final BorderRadius XS;
+  final BorderRadius xs;
 
   /// 4px — compact inputs, small buttons, tooltips.
-  final BorderRadius SM;
+  final BorderRadius sm;
 
   /// 8px — default rounding. Cards, modals, standard buttons, text fields.
-  final BorderRadius MD;
+  final BorderRadius md;
 
   /// 12px — large cards, elevated panels.
-  final BorderRadius LG;
+  final BorderRadius lg;
 
   /// 16px — prominent surfaces, bottom sheets.
-  final BorderRadius XL;
+  final BorderRadius xl;
 
   /// 20px — extra-large overlays, feature cards.
-  final BorderRadius XL2;
+  final BorderRadius xl2;
 
   /// 24px — hero cards.
-  final BorderRadius XL3;
+  final BorderRadius xl3;
 
   /// 28px radius.
-  final BorderRadius R28;
+  final BorderRadius r28;
 
   /// 32px radius.
-  final BorderRadius R32;
+  final BorderRadius r32;
 
   /// 36px radius.
-  final BorderRadius R36;
+  final BorderRadius r36;
 
   /// 40px radius.
-  final BorderRadius R40;
+  final BorderRadius r40;
 
   /// 48px radius.
-  final BorderRadius R48;
+  final BorderRadius r48;
 
   /// 56px radius.
-  final BorderRadius R56;
+  final BorderRadius r56;
 
   /// 64px radius.
-  final BorderRadius R64;
+  final BorderRadius r64;
 
   /// 9999px — pill shape. Badges, chips, fully rounded buttons.
-  final BorderRadius FULL;
+  final BorderRadius full;
 
   /// 1px — dividers, subtle borders.
   final double strokeThin;
@@ -87,42 +87,42 @@ final class DievasBorderThemeData extends Equatable {
   final double strokeThick;
 
   DievasBorderThemeData copyWith({
-    BorderRadius? NONE,
-    BorderRadius? XS,
-    BorderRadius? SM,
-    BorderRadius? MD,
-    BorderRadius? LG,
-    BorderRadius? XL,
-    BorderRadius? XL2,
-    BorderRadius? XL3,
-    BorderRadius? R28,
-    BorderRadius? R32,
-    BorderRadius? R36,
-    BorderRadius? R40,
-    BorderRadius? R48,
-    BorderRadius? R56,
-    BorderRadius? R64,
-    BorderRadius? FULL,
+    BorderRadius? none,
+    BorderRadius? xs,
+    BorderRadius? sm,
+    BorderRadius? md,
+    BorderRadius? lg,
+    BorderRadius? xl,
+    BorderRadius? xl2,
+    BorderRadius? xl3,
+    BorderRadius? r28,
+    BorderRadius? r32,
+    BorderRadius? r36,
+    BorderRadius? r40,
+    BorderRadius? r48,
+    BorderRadius? r56,
+    BorderRadius? r64,
+    BorderRadius? full,
     double? strokeThin,
     double? strokeDefault,
     double? strokeThick,
   }) => DievasBorderThemeData(
-    NONE: NONE ?? this.NONE,
-    XS: XS ?? this.XS,
-    SM: SM ?? this.SM,
-    MD: MD ?? this.MD,
-    LG: LG ?? this.LG,
-    XL: XL ?? this.XL,
-    XL2: XL2 ?? this.XL2,
-    XL3: XL3 ?? this.XL3,
-    R28: R28 ?? this.R28,
-    R32: R32 ?? this.R32,
-    R36: R36 ?? this.R36,
-    R40: R40 ?? this.R40,
-    R48: R48 ?? this.R48,
-    R56: R56 ?? this.R56,
-    R64: R64 ?? this.R64,
-    FULL: FULL ?? this.FULL,
+    none: none ?? this.none,
+    xs: xs ?? this.xs,
+    sm: sm ?? this.sm,
+    md: md ?? this.md,
+    lg: lg ?? this.lg,
+    xl: xl ?? this.xl,
+    xl2: xl2 ?? this.xl2,
+    xl3: xl3 ?? this.xl3,
+    r28: r28 ?? this.r28,
+    r32: r32 ?? this.r32,
+    r36: r36 ?? this.r36,
+    r40: r40 ?? this.r40,
+    r48: r48 ?? this.r48,
+    r56: r56 ?? this.r56,
+    r64: r64 ?? this.r64,
+    full: full ?? this.full,
     strokeThin: strokeThin ?? this.strokeThin,
     strokeDefault: strokeDefault ?? this.strokeDefault,
     strokeThick: strokeThick ?? this.strokeThick,
@@ -130,22 +130,22 @@ final class DievasBorderThemeData extends Equatable {
 
   @override
   List<Object?> get props => [
-    NONE,
-    XS,
-    SM,
-    MD,
-    LG,
-    XL,
-    XL2,
-    XL3,
-    R28,
-    R32,
-    R36,
-    R40,
-    R48,
-    R56,
-    R64,
-    FULL,
+    none,
+    xs,
+    sm,
+    md,
+    lg,
+    xl,
+    xl2,
+    xl3,
+    r28,
+    r32,
+    r36,
+    r40,
+    r48,
+    r56,
+    r64,
+    full,
     strokeThin,
     strokeDefault,
     strokeThick,

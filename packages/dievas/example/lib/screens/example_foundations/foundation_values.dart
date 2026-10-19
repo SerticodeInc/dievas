@@ -8,15 +8,15 @@ class _SpacingReadout extends StatelessWidget {
     final spacing = context.spacing;
 
     return Wrap(
-      spacing: context.spacing.MD,
-      runSpacing: context.spacing.MD,
+      spacing: context.spacing.md,
+      runSpacing: context.spacing.md,
       children: [
-        _StatChip(label: 'XS', value: '${spacing.XS}'),
-        _StatChip(label: 'SM', value: '${spacing.SM}'),
-        _StatChip(label: 'MD', value: '${spacing.MD}'),
-        _StatChip(label: 'LG', value: '${spacing.LG}'),
-        _StatChip(label: 'XL', value: '${spacing.XL}'),
-        _StatChip(label: 'XL2', value: '${spacing.XL2}'),
+        _StatChip(label: 'xs', value: '${spacing.xs}'),
+        _StatChip(label: 'sm', value: '${spacing.sm}'),
+        _StatChip(label: 'md', value: '${spacing.md}'),
+        _StatChip(label: 'lg', value: '${spacing.lg}'),
+        _StatChip(label: 'xl', value: '${spacing.xl}'),
+        _StatChip(label: 'xl2', value: '${spacing.xl2}'),
       ],
     );
   }
@@ -30,11 +30,11 @@ class _ValueReadouts extends StatelessWidget {
     crossAxisAlignment: .start,
     children: [
       const _ControlSizes(),
-      SizedBox(height: context.spacing.XL2),
+      SizedBox(height: context.spacing.xl2),
       const _SurfacePreviews(),
-      SizedBox(height: context.spacing.XL2),
+      SizedBox(height: context.spacing.xl2),
       const _DisabledPreview(),
-      SizedBox(height: context.spacing.XL2),
+      SizedBox(height: context.spacing.xl2),
       const _MotionPreview(),
     ],
   );
@@ -50,28 +50,28 @@ class _ControlSizes extends StatelessWidget {
     return Column(
       crossAxisAlignment: .start,
       children: [
-        Text('Medium controls', style: context.typography.titleMD),
-        SizedBox(height: context.spacing.SM),
+        Text('Medium controls', style: context.typography.titleMd),
+        SizedBox(height: context.spacing.sm),
         Text(
-          'The input is ${(context.sizing.inputHeightMD - context.sizing.buttonHeightMD).toStringAsFixed(wholeNumberPrecision)} px taller.',
-          style: context.typography.bodySM,
+          'The input is ${(context.sizing.inputHeightMd - context.sizing.buttonHeightMd).toStringAsFixed(wholeNumberPrecision)} px taller.',
+          style: context.typography.bodySm,
         ),
-        SizedBox(height: context.spacing.MD),
+        SizedBox(height: context.spacing.md),
         Row(
           crossAxisAlignment: .start,
           children: [
             Expanded(
               child: _TokenPreview(
                 label: 'Button',
-                value: '${context.sizing.buttonHeightMD.toStringAsFixed(wholeNumberPrecision)} px',
+                value: '${context.sizing.buttonHeightMd.toStringAsFixed(wholeNumberPrecision)} px',
                 child: DievasFilledButton(label: 'Continue', onPressed: () {}),
               ),
             ),
-            SizedBox(width: context.spacing.MD),
+            SizedBox(width: context.spacing.md),
             Expanded(
               child: _TokenPreview(
                 label: 'Input',
-                value: '${context.sizing.inputHeightMD.toStringAsFixed(wholeNumberPrecision)} px',
+                value: '${context.sizing.inputHeightMd.toStringAsFixed(wholeNumberPrecision)} px',
                 child: const DievasTextInput(hint: 'Your name'),
               ),
             ),
@@ -93,11 +93,11 @@ class _TokenPreview extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: .start,
     children: [
-      Text(label, style: context.typography.labelMD),
-      SizedBox(height: context.spacing.SM),
+      Text(label, style: context.typography.labelMd),
+      SizedBox(height: context.spacing.sm),
       child,
-      SizedBox(height: context.spacing.SM),
-      Text(value, style: context.typography.codeSM.copyWith(color: context.colours.text.textSecondary)),
+      SizedBox(height: context.spacing.sm),
+      Text(value, style: context.typography.codeSm.copyWith(color: context.colours.text.textSecondary)),
     ],
   );
 }

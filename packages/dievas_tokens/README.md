@@ -16,8 +16,8 @@ import 'package:dievas_tokens/dievas_tokens.dart';
 const purple = DievasColourPrimitives.royalPurple;
 const foreground = DievasColourSemanticLight.textPrimary;
 const background = DievasColourSemanticDark.pageBackground;
-const padding = DievasSpacingSemantic.MD;
-const sectionGap = DievasSpacingSemantic.XL;
+const padding = DievasSpacingSemantic.md;
+const sectionGap = DievasSpacingSemantic.xl;
 ```
 
 Colours are integers in `0xAARRGGBB` format: alpha, red, green, then blue. Spacing, sizing, radius, and breakpoints use logical pixels. Primitive alpha suffixes contain exact hexadecimal bytes: `blackAlpha8F` has alpha `0x8F`, not 60%.
@@ -77,11 +77,11 @@ Semantic values include records and lists as well as scalar aliases. Typography 
 Read typography fields and ordered shadow layers:
 
 ```dart
-const body = DievasTypographySemantic.bodyMD;
+const body = DievasTypographySemantic.bodyMd;
 const fontSize = body.fontSize;
 const lineHeight = body.lineHeight;
 const shadowInk = DievasElevationSemantic.shadowColour;
-const layers = DievasElevationShadowLayer.MD;
+const layers = DievasElevationShadowLayer.md;
 ```
 
 Line height is a multiplier; letter spacing uses logical pixels. Each shadow layer contains `blur` and `tint`. Paint layers in list order, centred with no positional offset. Blur, colour, and opacity come from their respective primitive families.
@@ -102,13 +102,34 @@ const modalLayer = DievasZIndexSemantic.modal;
 
 Size names depend on their scope:
 
-- **Class-scoped scales**: `DievasSpacingSemantic.MD`, `DievasRadiusSemantic.SM`, and `DievasElevationShadowLayer.XL`
-- **Role names with size suffixes**: `buttonHeightMD`, `headingXL`, and `titleXS`
-- **Size vocabulary**: `XS`, `SM`, `MD`, `LG`, `XL`, and `XL2` through `XL8`, where supported
-- **Half steps**: `SMPlus`, `MDPlus`, `LGPlus`, `XLPlus`, and `XL2Plus`, where supported
-- **Special scale names**: `NONE`, `FULL`, and `BASE`, where supported
+- **Class-scoped scales**: `DievasSpacingSemantic.md`, `DievasRadiusSemantic.sm`, and `DievasElevationShadowLayer.xl`
+- **Role names with size suffixes**: `buttonHeightMd`, `headingXl`, and `titleXs`
+- **Size vocabulary**: `xs`, `sm`, `md`, `lg`, `xl`, and `xl2` through `xl5`, where supported
+- **Half steps**: `smPlus`, `mdPlus`, `lgPlus`, `xlPlus`, and `xl2Plus`, where supported
+- **Special scale names**: `none`, `full`, and `base`, where supported
 
-Numeric primitives such as `s4`, opacity names such as `o13`, and intent names such as `touchMin`, `standard`, and `modal` are not size-axis names. Spacing uses a 4 logical pixel base grid; `MD` is 16 and `XL` is 32.
+Numeric primitives such as `s4`, opacity names such as `o13`, and intent names such as `touchMin`, `standard`, and `modal` are not size-axis names. Spacing uses a 4 logical pixel base grid; `md` is 16 and `xl` is 32.
+
+## Migrate size token names
+
+Size identifiers are lowercase as of the current release. Upgrade `dievas_tokens` and `dievas`, then either run the codemod or rename by hand.
+
+```sh
+dart run dievas_migrate            # preview
+dart run dievas_migrate --write    # apply
+```
+
+[`dievas_migrate`](../dievas_migrate/README.md) reads analyzer errors, so it rewrites only the renamed token types and leaves unrelated enums such as `DievasButtonSize.MD` alone.
+
+| Before | After |
+| --- | --- |
+| `DievasSpacingSemantic.MD`, `DievasRadiusSemantic.SM`, `DievasElevationSemantic.XL` | `DievasSpacingSemantic.md`, `DievasRadiusSemantic.sm`, `DievasElevationSemantic.xl` |
+| `DievasRadiusSemantic.R28` through `.R64`, `.NONE`, `.FULL` | `DievasRadiusSemantic.r28` through `.r64`, `.none`, `.full` |
+| `buttonHeightXS`, `displayLG`, `headingXL`, `titleXS`, `bodyMD`, `labelXS`, `codeMD` | `buttonHeightXs`, `displayLg`, `headingXl`, `titleXs`, `bodyMd`, `labelXs`, `codeMd` |
+| `DievasBreakpointSemantic.XS`, the breakpoint primitives | `DievasBreakpointSemantic.xs`, the breakpoint primitives |
+| Theme mirror fields such as `context.spacing.MD` and `DievasSpacingThemeData(MD: …)` | `context.spacing.md` and `DievasSpacingThemeData(md: …)` |
+
+Colour roles, opacity, z-index, easing, animation intents, and `touchMin` are unchanged. Display strings are not rewritten; update any user-visible labels by hand.
 
 ## Verification
 

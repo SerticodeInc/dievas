@@ -60,17 +60,17 @@ class _Configurations extends StatelessWidget {
     mainAxisSize: .min,
     children: [
       const _DemoBlock('2 tabs', child: DievasTabBar(tabs: ['On', 'Off'], selectedIndex: 0, onChanged: null)),
-      SizedBox(height: context.spacing.LG),
+      SizedBox(height: context.spacing.lg),
       const _DemoBlock(
         '3 tabs',
         child: DievasTabBar(tabs: ['Details', 'Activity', 'Settings'], selectedIndex: 1, onChanged: null),
       ),
-      SizedBox(height: context.spacing.LG),
+      SizedBox(height: context.spacing.lg),
       const _DemoBlock(
         '4 tabs',
         child: DievasTabBar(tabs: ['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4'], selectedIndex: 2, onChanged: null),
       ),
-      SizedBox(height: context.spacing.LG),
+      SizedBox(height: context.spacing.lg),
       const _DemoBlock(
         'Disabled',
         child: DievasTabBar(tabs: ['One', 'Two', 'Three'], selectedIndex: 1, onChanged: null, enabled: false),
@@ -90,10 +90,10 @@ class _DemoBlock extends StatelessWidget {
     mainAxisSize: .min,
     children: [
       Padding(
-        padding: .symmetric(horizontal: context.spacing.MD),
-        child: Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
+        padding: .symmetric(horizontal: context.spacing.md),
+        child: Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
       ),
-      SizedBox(height: context.spacing.XS),
+      SizedBox(height: context.spacing.xs),
       ComponentBoundary(child: child),
     ],
   );

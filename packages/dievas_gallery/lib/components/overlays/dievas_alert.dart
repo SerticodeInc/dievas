@@ -97,7 +97,7 @@ class _PlaygroundState extends State<_Playground> {
         : [(variant, tone, title)];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: .stretch,
         children: [
@@ -143,7 +143,7 @@ class _PlaygroundState extends State<_Playground> {
                 ),
               },
             ),
-            SizedBox(height: context.spacing.MD),
+            SizedBox(height: context.spacing.md),
             ...switch ((allVariants, index)) {
               (true, 0) => [
                 Center(
@@ -173,13 +173,13 @@ class _ExampleHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: EdgeInsets.symmetric(vertical: context.spacing.LG),
+    padding: EdgeInsets.symmetric(vertical: context.spacing.lg),
     child: Row(
       children: [
         const Expanded(child: Divider()),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.spacing.MD),
-          child: Text(title, style: context.typography.labelSM.copyWith(color: context.colours.text.textSecondary)),
+          padding: EdgeInsets.symmetric(horizontal: context.spacing.md),
+          child: Text(title, style: context.typography.labelSm.copyWith(color: context.colours.text.textSecondary)),
         ),
         const Expanded(child: Divider()),
       ],
@@ -190,7 +190,7 @@ class _ExampleHeading extends StatelessWidget {
 class _AllTones extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
-    padding: EdgeInsets.all(context.spacing.LG),
+    padding: EdgeInsets.all(context.spacing.lg),
     child: Column(
       children: [
         for (final tone in DievasAlertTone.values) ...[
@@ -201,7 +201,7 @@ class _AllTones extends StatelessWidget {
               description: 'This is a ${tone.name} tone alert with a supporting description.',
             ),
           ),
-          SizedBox(height: context.spacing.SMPlus),
+          SizedBox(height: context.spacing.smPlus),
         ],
       ],
     ),
@@ -212,7 +212,7 @@ class _WithDismiss extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: ComponentBoundary(
         child: DievasAlert(
           tone: .warning,
@@ -228,14 +228,14 @@ class _WithDismiss extends StatelessWidget {
 class _NoDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
-    padding: EdgeInsets.all(context.spacing.LG),
+    padding: EdgeInsets.all(context.spacing.lg),
     child: Column(
       children: [
         for (final tone in DievasAlertTone.values) ...[
           ComponentBoundary(
             child: DievasAlert(tone: tone, title: '${tone.name[0].toUpperCase()}${tone.name.substring(1)}'),
           ),
-          SizedBox(height: context.spacing.SMPlus),
+          SizedBox(height: context.spacing.smPlus),
         ],
       ],
     ),

@@ -32,14 +32,14 @@ void main() {
           builder: (context) {
             zIndexBuilds++;
             expect(context.zIndex.modal, theme.zIndex.modal);
-            expect(context.border.R64, BorderRadius.circular(DievasRadiusSemantic.R64));
+            expect(context.border.r64, BorderRadius.circular(DievasRadiusSemantic.r64));
             return const SizedBox();
           },
         ),
         Builder(
           builder: (context) {
             spacingBuilds++;
-            context.spacing.MD;
+            context.spacing.md;
             return const SizedBox();
           },
         ),

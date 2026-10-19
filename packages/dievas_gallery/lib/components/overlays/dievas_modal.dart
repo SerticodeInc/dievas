@@ -26,7 +26,7 @@ class _Playground extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(context.spacing.LG),
+        padding: EdgeInsets.all(context.spacing.lg),
         child: ComponentBoundary(
           child: DievasModal(
             title: title.isEmpty ? 'Modal title' : title,
@@ -49,7 +49,7 @@ class _WithActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: ComponentBoundary(
         child: DievasModal(
           title: 'Delete item',
@@ -68,7 +68,7 @@ class _ContentOnly extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: ComponentBoundary(
         child: DievasModal(
           title: 'Custom content',
@@ -76,7 +76,7 @@ class _ContentOnly extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DievasAlert(tone: .info, title: 'Note', description: 'Custom widget content inside a modal.'),
-              SizedBox(height: context.spacing.MD),
+              SizedBox(height: context.spacing.md),
               DievasTextInput(label: 'Confirm name', onChanged: (_) {}),
             ],
           ),

@@ -10,6 +10,7 @@ workspace:
     - packages/dievas
     - packages/dievas/example
     - packages/dievas_gallery
+    - packages/dievas_migrate
     - packages/dievas_tokens
 
 dev_dependencies:

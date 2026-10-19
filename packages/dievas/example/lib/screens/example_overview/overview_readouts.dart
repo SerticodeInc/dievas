@@ -8,8 +8,8 @@ class _GridReadout extends StatelessWidget {
     final grid = context.grid;
 
     return Wrap(
-      spacing: context.spacing.MD,
-      runSpacing: context.spacing.MD,
+      spacing: context.spacing.md,
+      runSpacing: context.spacing.md,
       children: [
         _StatChip(label: 'Breakpoint', value: grid.name),
         _StatChip(label: 'Columns', value: '${grid.columns}'),
@@ -29,14 +29,14 @@ class _StatChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    padding: .symmetric(horizontal: context.spacing.MD, vertical: context.spacing.SM),
-    decoration: BoxDecoration(color: context.colours.background.dialogBackground, borderRadius: context.border.MD),
+    padding: .symmetric(horizontal: context.spacing.md, vertical: context.spacing.sm),
+    decoration: BoxDecoration(color: context.colours.background.dialogBackground, borderRadius: context.border.md),
     child: Column(
       crossAxisAlignment: .start,
       children: [
-        Text(label, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
-        SizedBox(height: context.spacing.XS),
-        Text(value, style: context.typography.labelMD),
+        Text(label, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
+        SizedBox(height: context.spacing.xs),
+        Text(value, style: context.typography.labelMd),
       ],
     ),
   );
@@ -48,6 +48,6 @@ class _L10nReadout extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     'context.l10n.emptyStateDefaultTitle → "${context.l10n.emptyStateDefaultTitle}"',
-    style: context.typography.codeMD.copyWith(color: context.colours.text.textSecondary),
+    style: context.typography.codeMd.copyWith(color: context.colours.text.textSecondary),
   );
 }

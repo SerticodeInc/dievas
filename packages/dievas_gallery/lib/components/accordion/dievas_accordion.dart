@@ -163,7 +163,7 @@ class _Playground extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(context.spacing.MD),
+        padding: EdgeInsets.all(context.spacing.md),
         child: SizedBox(
           width: .infinity,
           child: ComponentBoundary(
@@ -209,7 +209,7 @@ class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.MD),
+      padding: EdgeInsets.all(context.spacing.md),
       child: SizedBox(
         width: 400,
         child: ComponentBoundary(
@@ -238,7 +238,7 @@ class _WithIcons extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.MD),
+      padding: EdgeInsets.all(context.spacing.md),
       child: SizedBox(
         width: 400,
         child: ComponentBoundary(
@@ -277,7 +277,7 @@ class _LayoutExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.MD),
+      padding: EdgeInsets.all(context.spacing.md),
       child: SizedBox(
         width: 400,
         child: ComponentBoundary(
@@ -317,14 +317,14 @@ class _ControlledExampleState extends State<_ControlledExample> {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.MD),
+      padding: EdgeInsets.all(context.spacing.md),
       child: SizedBox(
         width: 400,
         child: Column(
           mainAxisSize: .min,
           children: [
             Wrap(
-              spacing: context.spacing.SM,
+              spacing: context.spacing.sm,
               children: [
                 TextButton(onPressed: () => setState(() => _expanded = {0}), child: const Text('Open first')),
                 TextButton(onPressed: () => setState(() => _expanded = {}), child: const Text('Close all')),

@@ -10,8 +10,8 @@ import 'package:dievas/src/theme.dart';
 /// Usage inside a widget's [build] method:
 /// ```dart
 /// final colour = context.colours.action.buttonPrimaryBackground;
-/// final style = context.typography.labelMD;
-/// final gap   = context.spacing.MD;
+/// final style = context.typography.labelMd;
+/// final gap   = context.spacing.md;
 /// ```
 extension DievasThemeContextExtension on BuildContext {
   /// The complete colour sub-system for the current theme.

@@ -52,7 +52,7 @@ class _PreferAbove extends StatelessWidget {
   Widget build(BuildContext context) => Align(
     alignment: Alignment.bottomCenter,
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.XL2),
+      padding: EdgeInsets.all(context.spacing.xl2),
       child: ComponentBoundary(
         child: DievasTooltip(
           message: 'Shown above the target',

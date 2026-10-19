@@ -177,12 +177,12 @@ base class DievasGlobalThemeData implements DievasThemeData {
     ];
 
     return DievasElevationThemeData(
-      NONE: const [],
-      XS: stack(DievasElevationShadowLayer.XS),
-      SM: stack(DievasElevationShadowLayer.SM),
-      MD: stack(DievasElevationShadowLayer.MD),
-      LG: stack(DievasElevationShadowLayer.LG),
-      XL: stack(DievasElevationShadowLayer.XL),
+      none: const [],
+      xs: stack(DievasElevationShadowLayer.xs),
+      sm: stack(DievasElevationShadowLayer.sm),
+      md: stack(DievasElevationShadowLayer.md),
+      lg: stack(DievasElevationShadowLayer.lg),
+      xl: stack(DievasElevationShadowLayer.xl),
     );
   }
 
@@ -191,8 +191,8 @@ base class DievasGlobalThemeData implements DievasThemeData {
     final seedColour = colours.action.buttonPrimaryBackground;
     final scaffoldBg = colours.background.pageBackground;
     final textColour = colours.text.textPrimary;
-    final baseFont = typography.bodyMD.fontFamily ?? DievasFontFamilyPrimitives.sans;
-    final displayFont = typography.displaySM.fontFamily ?? DievasFontFamilyPrimitives.sansExtended;
+    final baseFont = typography.bodyMd.fontFamily ?? DievasFontFamilyPrimitives.sans;
+    final displayFont = typography.displaySm.fontFamily ?? DievasFontFamilyPrimitives.sansExtended;
 
     final base = ThemeData(
       brightness: brightness,

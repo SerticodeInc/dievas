@@ -1,26 +1,15 @@
 import 'package:dievas_tokens/dievas_tokens.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:dievas/src/theme/dievas_theme.dart';
-import 'dievas_button_state_animated_loader_mixin.dart';
-import 'dievas_button_state_switcher.dart';
-import 'dievas_button_press_mixin.dart';
-import 'dievas_button_color_utils.dart';
-import 'button_types/dievas_button_size.dart';
-import 'button_types/dievas_button_state.dart';
+import 'dievas_button_builder.dart';
+import 'dievas_button_types.dart';
 
-/// Visual style variants for [DievasTextButton].
-enum DievasTextButtonStyle {
-  /// Brand-coloured foreground — primary inline action.
-  primary,
+export 'dievas_button_types.dart' show DievasTextButtonStyle;
 
-  /// Error-red foreground — destructive inline action.
-  destructive,
-}
-
-/// A text-only button with no background or border.
+/// A text button with a transparent, borderless default surface.
 ///
-/// Sizes itself to its content. Used for inline actions, links, and
+/// Uses the size variant’s minimum height. Used for inline actions, links, and
 /// secondary affordance where a full-height button would be too heavy.
 ///
 /// ```dart
@@ -29,7 +18,7 @@ enum DievasTextButtonStyle {
 ///   onPressed: () { },
 /// )
 /// ```
-class DievasTextButton extends StatefulWidget with DievasButtonStateAnimatedLoaderMixin {
+class DievasTextButton extends StatefulWidget {
   const DievasTextButton({
     super.key,
     this.style = .primary,
@@ -42,20 +31,29 @@ class DievasTextButton extends StatefulWidget with DievasButtonStateAnimatedLoad
     this.leadingIcon,
     this.trailingIcon,
     this.onPressed,
+    this.onLongPress,
+    this.backgroundColor,
+    this.borderColor,
+    this.borderRadius,
+    this.showBorder,
+    this.isFullWidth = false,
+    this.showPulseEffect = false,
+    this.animateLoading = true,
+    this.showPulseEffectJiggle = false,
+    this.iconStyleBehavior = .inheritFromState,
+    this.semanticLabel,
     this.loaderRotationDuration = DievasAnimationSemantic.loader,
-  }) : assert(label != null || child != null, 'Either label or child must be provided'),
+  }) : assert(label != null || child != null || leadingIcon != null || trailingIcon != null, 'Provide button content'),
        assert(
          child == null || (leadingIcon == null && trailingIcon == null),
          'leadingIcon/trailingIcon are ignored when child is provided',
        );
 
-  @override
   final Duration loaderRotationDuration;
 
   final DievasTextButtonStyle style;
   final DievasButtonSize size;
 
-  @override
   final DievasButtonState state;
 
   final String? label;
@@ -65,112 +63,98 @@ class DievasTextButton extends StatefulWidget with DievasButtonStateAnimatedLoad
   final Widget? leadingIcon;
   final Widget? trailingIcon;
 
-  /// Pressed callback. `null`, [DievasButtonState.loading], or
-  /// [DievasButtonState.disabled] → non-interactive.
+  /// Tap action. Both callbacks being null, loading, or disabled blocks interaction.
   final VoidCallback? onPressed;
+
+  /// Long-press action, independent of the tap callback.
+  final VoidCallback? onLongPress;
+
+  /// Optional surface fill; transparent by default.
+  final Color? backgroundColor;
+
+  /// Border colour override. Explicit false [showBorder] takes precedence.
+  final Color? borderColor;
+
+  /// Radius override, used when [shape] is null.
+  final BorderRadiusGeometry? borderRadius;
+
+  /// Optional border visibility; text buttons default to borderless.
+  final bool? showBorder;
+
+  /// Fill bounded available width; retain natural width when unbounded.
+  final bool isFullWidth;
+
+  /// Enable a press-scale response, respecting reduced motion.
+  final bool showPulseEffect;
+
+  /// Fade and scale between content and loader. Reduced motion switches instantly.
+  final bool animateLoading;
+
+  /// Add a rotational jiggle when [showPulseEffect] is enabled.
+  final bool showPulseEffectJiggle;
+
+  /// Whether icon slots use the resolved foreground or their own styling.
+  final DievasButtonIconStyleBehavior iconStyleBehavior;
+
+  /// Accessible name for an icon-only button.
+  final String? semanticLabel;
 
   @override
   State<DievasTextButton> createState() => _DievasTextButtonState();
 }
 
-class _DievasTextButtonState extends State<DievasTextButton>
-    with SingleTickerProviderStateMixin, DievasButtonStateAnimatedLoaderProviderMixin, DievasButtonPressMixin {
+class _DievasTextButtonState extends State<DievasTextButton> {
   @override
   Widget build(BuildContext context) {
     final components = DievasTheme.componentsOf(context);
-    final buttonTheme = switch (widget.style) {
+    final theme = switch (widget.style) {
       .primary => components.textButton.primary,
       .destructive => components.textButton.destructive,
     };
-
-    final textStyle = switch (widget.size) {
-      .SM => buttonTheme.textStyle.SM,
-      .MD => buttonTheme.textStyle.MD,
-      .LG => buttonTheme.textStyle.LG,
+    final (textStyle, iconSize, gap) = switch (widget.size) {
+      .SM => (theme.textStyle.SM, theme.iconSize.SM, theme.iconSpacing.SM),
+      .MD => (theme.textStyle.MD, theme.iconSize.MD, theme.iconSpacing.MD),
+      .LG => (theme.textStyle.LG, theme.iconSize.LG, theme.iconSpacing.LG),
     };
-
-    final iconSize = switch (widget.size) {
-      .SM => buttonTheme.iconSize.SM,
-      .MD => buttonTheme.iconSize.MD,
-      .LG => buttonTheme.iconSize.LG,
-    };
-
-    final iconSpacing = switch (widget.size) {
-      .SM => buttonTheme.iconSpacing.SM,
-      .MD => buttonTheme.iconSpacing.MD,
-      .LG => buttonTheme.iconSpacing.LG,
-    };
-
-    final apple = isApplePlatform;
-    final pressDuration = DievasTheme.animationOf(context).quick;
-
-    return Semantics(
-      button: true,
-      child: Material(
-        type: .transparency,
-        child: InkWell(
-          statesController: statesController,
-          onTap: (widget.state == .loading || widget.state == .disabled) ? null : widget.onPressed,
-          customBorder: widget.shape,
-          splashFactory: NoSplash.splashFactory,
-          highlightColor: Colors.transparent,
-          hoverColor: Colors.transparent,
-          child: ValueListenableBuilder<Set<WidgetState>>(
-            valueListenable: statesController,
-            builder: (_, states, _) {
-              final isPressed = states.contains(WidgetState.pressed);
-              final isDisabled =
-                  widget.state == .disabled || states.contains(WidgetState.disabled) || widget.onPressed == null;
-
-              final opacityFactor = isDisabled
-                  ? buttonTheme.disabledOpacity
-                  : (apple && isPressed ? buttonTheme.pressOpacity : 1.0);
-
-              final themeStyle = buttonTheme.style;
-              final activeStyle = isPressed ? themeStyle.focused : themeStyle.idle;
-              final foreground = resolveColour(
-                override: widget.foregroundColor,
-                fallback: activeStyle.foreground,
-                opacity: opacityFactor,
-              );
-
-              final content =
-                  widget.child ??
-                  Row(
-                    mainAxisSize: .min,
-                    spacing: iconSpacing,
-                    children: [
-                      if (widget.leadingIcon case final icon?)
-                        IconTheme(
-                          data: IconThemeData(color: foreground, size: iconSize),
-                          child: icon,
-                        ),
-                      if (widget.label case final label? when label.isNotEmpty)
-                        AnimatedDefaultTextStyle(
-                          duration: pressDuration,
-                          style: textStyle.copyWith(color: foreground),
-                          child: Text(label),
-                        ),
-                      if (widget.trailingIcon case final icon?)
-                        IconTheme(
-                          data: IconThemeData(color: foreground, size: iconSize),
-                          child: icon,
-                        ),
-                    ],
-                  );
-
-              return DievasButtonStateSwitcher(
-                state: widget.state,
-                loader: IconTheme(
-                  data: IconThemeData(color: foreground, size: iconSize),
-                  child: animatedLoader,
-                ),
-                content: content,
-              );
-            },
-          ),
-        ),
+    return DievasButtonBuilder(
+      state: widget.state,
+      style: theme.style,
+      shape: switch ((widget.shape, widget.borderRadius)) {
+        (final shape?, _) => shape,
+        (_, final radius?) => RoundedRectangleBorder(borderRadius: radius),
+        _ => RoundedRectangleBorder(borderRadius: DievasTheme.borderOf(context).MD),
+      },
+      disabledOpacity: theme.disabledOpacity,
+      pressOpacity: theme.pressOpacity,
+      iconSpacing: gap,
+      iconSize: iconSize,
+      textStyle: textStyle,
+      height: switch (widget.size) {
+        .SM => DievasTheme.sizingOf(context).buttonHeightSM,
+        .MD => DievasTheme.sizingOf(context).buttonHeightMD,
+        .LG => DievasTheme.sizingOf(context).buttonHeightLG,
+      },
+      padding: EdgeInsets.symmetric(
+        horizontal: DievasTheme.spacingOf(context).MD,
+        vertical: DievasTheme.spacingOf(context).XS,
       ),
+      label: widget.label,
+      leadingIcon: widget.leadingIcon,
+      trailingIcon: widget.trailingIcon,
+      backgroundColor: widget.backgroundColor,
+      foregroundColor: widget.foregroundColor,
+      borderColor: widget.borderColor,
+      showBorder: widget.showBorder,
+      isFullWidth: widget.isFullWidth,
+      showPulseEffect: widget.showPulseEffect,
+      animateLoading: widget.animateLoading,
+      showPulseEffectJiggle: widget.showPulseEffectJiggle,
+      iconStyleBehavior: widget.iconStyleBehavior,
+      semanticLabel: widget.semanticLabel,
+      onPressed: widget.onPressed,
+      onLongPress: widget.onLongPress,
+      loaderRotationDuration: widget.loaderRotationDuration,
+      child: widget.child,
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'dievas_button.dart';
-import 'button_types/dievas_button_style.dart';
+import 'dievas_button_types.dart';
 
 /// A filled button with a solid background colour.
 ///
@@ -38,5 +38,13 @@ class DievasFilledButton extends DievasButton {
     super.leadingIcon,
     super.trailingIcon,
     super.onPressed,
+    super.onLongPress,
+    super.borderRadius,
+    super.showBorder,
+    super.isFullWidth,
+    super.showPulseEffect,
+    super.animateLoading,
+    super.showPulseEffectJiggle,
+    super.semanticLabel,
   });
 }

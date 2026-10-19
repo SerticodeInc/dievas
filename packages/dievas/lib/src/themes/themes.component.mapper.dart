@@ -197,14 +197,14 @@ DievasOutlinedButtonGroupThemeData _createOutlinedButtonGroup(
   return DievasOutlinedButtonGroupThemeData(
     primary: makeThemeData((
       idle: DievasOutlinedButtonThemeStyle(
-        foreground: c.buttonPrimaryBackground,
-        icon: c.buttonPrimaryBackground,
-        borderSide: BorderSide(color: c.buttonPrimaryBackground),
+        foreground: colours.text.textPrimary,
+        icon: colours.icon.iconPrimary,
+        borderSide: BorderSide(color: colours.icon.iconSecondary),
       ),
       focused: DievasOutlinedButtonThemeStyle(
-        foreground: c.buttonPrimaryPressedBackground,
-        icon: c.buttonPrimaryPressedBackground,
-        borderSide: BorderSide(color: c.buttonPrimaryPressedBackground),
+        foreground: colours.text.textPrimary,
+        icon: colours.icon.iconPrimary,
+        borderSide: BorderSide(color: colours.icon.iconSecondary),
       ),
     )),
     destructive: makeThemeData((
@@ -241,11 +241,8 @@ DievasTextButtonGroupThemeData _createTextButtonGroup(
 
   return DievasTextButtonGroupThemeData(
     primary: makeThemeData((
-      idle: DievasTextButtonThemeStyle(foreground: c.buttonPrimaryBackground, icon: c.buttonPrimaryBackground),
-      focused: DievasTextButtonThemeStyle(
-        foreground: c.buttonPrimaryPressedBackground,
-        icon: c.buttonPrimaryPressedBackground,
-      ),
+      idle: DievasTextButtonThemeStyle(foreground: colours.text.textSecondary, icon: colours.icon.iconSecondary),
+      focused: DievasTextButtonThemeStyle(foreground: colours.text.textPrimary, icon: colours.icon.iconPrimary),
     )),
     destructive: makeThemeData((
       idle: DievasTextButtonThemeStyle(foreground: c.buttonDestructiveBackground, icon: c.buttonDestructiveBackground),
@@ -699,10 +696,10 @@ DievasLoaderThemeData _createLoaderTheme(
     spinnerSizeLG: DievasSizingPrimitives.s48,
     strokeWidth: _kStrokeLoader,
     color: colours.action.progressIndicator,
-    trackColour: colours.background.progressTrack,
+    trackColour: const Color(0x00000000),
     labelStyle: typography.bodySM.copyWith(color: colours.text.textSecondary),
     labelSpacing: spacing.SM,
-    animationDuration: animation.standard,
+    animationDuration: animation.loader,
   );
 }
 

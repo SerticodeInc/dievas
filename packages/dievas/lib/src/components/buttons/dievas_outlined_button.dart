@@ -1,10 +1,10 @@
 import 'dievas_button.dart';
-import 'button_types/dievas_button_style.dart';
+import 'dievas_button_types.dart';
 
 /// A button with a transparent background and a visible border.
 ///
 /// Use [DievasOutlinedButtonStyle] to select the visual variant:
-/// - [DievasOutlinedButtonStyle.primary] — brand-coloured border/foreground (default)
+/// - [DievasOutlinedButtonStyle.primary] — neutral border/foreground (default)
 /// - [DievasOutlinedButtonStyle.destructive] — error-red border/foreground
 ///
 /// ```dart
@@ -29,5 +29,13 @@ class DievasOutlinedButton extends DievasButton {
     super.leadingIcon,
     super.trailingIcon,
     super.onPressed,
+    super.onLongPress,
+    super.borderRadius,
+    super.showBorder,
+    super.isFullWidth,
+    super.showPulseEffect,
+    super.animateLoading,
+    super.showPulseEffectJiggle,
+    super.semanticLabel,
   });
 }

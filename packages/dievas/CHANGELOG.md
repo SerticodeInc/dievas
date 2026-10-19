@@ -4,6 +4,13 @@
 
 - Use Moon Design Piccolo purple (`#5C33CF`) for the default primary brand in both themes. Update focus, selection, active controls, cursors, and tinted brand surfaces together; derive hover and pressed shades from Piccolo. Explicit palette overrides remain available.
 
+### Breadcrumb
+
+- Add optional middle item collapse with a menu for hidden pages, customizable overflow content, and a localized tooltip.
+- Add item/current_item/hover/divider colour overrides, gap, and leading/trailing item slots. Preserve the existing complete trail default and navigation API.
+- Support keyboard navigation, selected page semantics, and horizontal scrolling on narrow screens. Disable home navigation when the trail is disabled.
+- Expand Widgetbook with reference controls, semantic colour selectors, working navigation/reset, and a custom overflow example. Fix item count indexing.
+
 ### Avatar
 
 - Add a foreground content slot over image backgrounds; show initials or the placeholder while images load or fail. Preserve complete Unicode graphemes when shortening initials.

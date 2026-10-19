@@ -6,7 +6,7 @@ import 'package:dievas_tokens/dievas_tokens.dart';
 /// Implements [Comparable] and comparison operators so layout code can
 /// branch cleanly:
 /// ```dart
-/// if (context.grid >= DievasGridBreakpoint.MD) { ... }
+/// if (context.grid >= DievasGridBreakpoint.md) { ... }
 /// ```
 @immutable
 final class DievasGridBreakpoint implements Comparable<DievasGridBreakpoint> {
@@ -38,9 +38,9 @@ final class DievasGridBreakpoint implements Comparable<DievasGridBreakpoint> {
   final String family;
 
   /// 0–359px · 4 columns · mobile
-  static const DievasGridBreakpoint XS = DievasGridBreakpoint._(
-    name: 'XS',
-    minWidth: DievasBreakpointSemantic.XS,
+  static const DievasGridBreakpoint xs = DievasGridBreakpoint._(
+    name: 'xs',
+    minWidth: DievasBreakpointSemantic.xs,
     columns: 4,
     margin: 16,
     gutter: 16,
@@ -48,9 +48,9 @@ final class DievasGridBreakpoint implements Comparable<DievasGridBreakpoint> {
   );
 
   /// 360–699px · 4 columns · mobile
-  static const DievasGridBreakpoint SM = DievasGridBreakpoint._(
-    name: 'SM',
-    minWidth: DievasBreakpointSemantic.SM,
+  static const DievasGridBreakpoint sm = DievasGridBreakpoint._(
+    name: 'sm',
+    minWidth: DievasBreakpointSemantic.sm,
     columns: 4,
     margin: 16,
     gutter: 16,
@@ -58,9 +58,9 @@ final class DievasGridBreakpoint implements Comparable<DievasGridBreakpoint> {
   );
 
   /// 700–999px · 8 columns · tablet
-  static const DievasGridBreakpoint MD = DievasGridBreakpoint._(
-    name: 'MD',
-    minWidth: DievasBreakpointSemantic.MD,
+  static const DievasGridBreakpoint md = DievasGridBreakpoint._(
+    name: 'md',
+    minWidth: DievasBreakpointSemantic.md,
     columns: 8,
     margin: 32,
     gutter: 24,
@@ -68,9 +68,9 @@ final class DievasGridBreakpoint implements Comparable<DievasGridBreakpoint> {
   );
 
   /// 1000–1347px · 12 columns · tablet
-  static const DievasGridBreakpoint LG = DievasGridBreakpoint._(
-    name: 'LG',
-    minWidth: DievasBreakpointSemantic.LG,
+  static const DievasGridBreakpoint lg = DievasGridBreakpoint._(
+    name: 'lg',
+    minWidth: DievasBreakpointSemantic.lg,
     columns: 12,
     margin: 32,
     gutter: 24,
@@ -78,9 +78,9 @@ final class DievasGridBreakpoint implements Comparable<DievasGridBreakpoint> {
   );
 
   /// 1348px+ · 12 columns · desktop
-  static const DievasGridBreakpoint XL = DievasGridBreakpoint._(
-    name: 'XL',
-    minWidth: DievasBreakpointSemantic.XL,
+  static const DievasGridBreakpoint xl = DievasGridBreakpoint._(
+    name: 'xl',
+    minWidth: DievasBreakpointSemantic.xl,
     columns: 12,
     margin: 32,
     gutter: 24,
@@ -88,11 +88,11 @@ final class DievasGridBreakpoint implements Comparable<DievasGridBreakpoint> {
   );
 
   /// All breakpoints in ascending order of [minWidth].
-  static const List<DievasGridBreakpoint> values = [XS, SM, MD, LG, XL];
+  static const List<DievasGridBreakpoint> values = [xs, sm, md, lg, xl];
 
   /// Returns the breakpoint that applies to [width].
   static DievasGridBreakpoint fromWidth(double width) {
-    return values.lastWhere((bp) => width >= bp.minWidth, orElse: () => XS);
+    return values.lastWhere((bp) => width >= bp.minWidth, orElse: () => xs);
   }
 
   @override

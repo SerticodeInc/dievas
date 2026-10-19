@@ -8,23 +8,23 @@ import 'package:equatable/equatable.dart';
 /// these rather than duplicating values.
 final class DievasSizingThemeData extends Equatable {
   const DievasSizingThemeData({
-    this.buttonHeightXS = DievasSizingSemantic.buttonHeightXS,
-    this.buttonHeightSM = DievasSizingSemantic.buttonHeightSM,
-    this.buttonHeightMD = DievasSizingSemantic.buttonHeightMD,
-    this.buttonHeightLG = DievasSizingSemantic.buttonHeightLG,
-    this.inputHeightSM = DievasSizingSemantic.inputHeightSM,
-    this.inputHeightMD = DievasSizingSemantic.inputHeightMD,
-    this.inputHeightLG = DievasSizingSemantic.inputHeightLG,
-    this.iconXS = DievasSizingSemantic.iconXS,
-    this.iconSM = DievasSizingSemantic.iconSM,
-    this.iconMD = DievasSizingSemantic.iconMD,
-    this.iconLG = DievasSizingSemantic.iconLG,
-    this.iconXL = DievasSizingSemantic.iconXL,
-    this.avatarXS = DievasSizingSemantic.avatarXS,
-    this.avatarSM = DievasSizingSemantic.avatarSM,
-    this.avatarMD = DievasSizingSemantic.avatarMD,
-    this.avatarLG = DievasSizingSemantic.avatarLG,
-    this.avatarXL = DievasSizingSemantic.avatarXL,
+    this.buttonHeightXs = DievasSizingSemantic.buttonHeightXs,
+    this.buttonHeightSm = DievasSizingSemantic.buttonHeightSm,
+    this.buttonHeightMd = DievasSizingSemantic.buttonHeightMd,
+    this.buttonHeightLg = DievasSizingSemantic.buttonHeightLg,
+    this.inputHeightSm = DievasSizingSemantic.inputHeightSm,
+    this.inputHeightMd = DievasSizingSemantic.inputHeightMd,
+    this.inputHeightLg = DievasSizingSemantic.inputHeightLg,
+    this.iconXs = DievasSizingSemantic.iconXs,
+    this.iconSm = DievasSizingSemantic.iconSm,
+    this.iconMd = DievasSizingSemantic.iconMd,
+    this.iconLg = DievasSizingSemantic.iconLg,
+    this.iconXl = DievasSizingSemantic.iconXl,
+    this.avatarXs = DievasSizingSemantic.avatarXs,
+    this.avatarSm = DievasSizingSemantic.avatarSm,
+    this.avatarMd = DievasSizingSemantic.avatarMd,
+    this.avatarLg = DievasSizingSemantic.avatarLg,
+    this.avatarXl = DievasSizingSemantic.avatarXl,
     this.touchMin = DievasSizingSemantic.touchMin,
     this.height4 = DievasSizingSemantic.height4,
     this.height8 = DievasSizingSemantic.height8,
@@ -78,26 +78,26 @@ final class DievasSizingThemeData extends Equatable {
     this.width256 = DievasSizingSemantic.width256,
   });
 
-  final double buttonHeightXS;
-  final double buttonHeightSM;
-  final double buttonHeightMD;
-  final double buttonHeightLG;
+  final double buttonHeightXs;
+  final double buttonHeightSm;
+  final double buttonHeightMd;
+  final double buttonHeightLg;
 
-  final double inputHeightSM;
-  final double inputHeightMD;
-  final double inputHeightLG;
+  final double inputHeightSm;
+  final double inputHeightMd;
+  final double inputHeightLg;
 
-  final double iconXS;
-  final double iconSM;
-  final double iconMD;
-  final double iconLG;
-  final double iconXL;
+  final double iconXs;
+  final double iconSm;
+  final double iconMd;
+  final double iconLg;
+  final double iconXl;
 
-  final double avatarXS;
-  final double avatarSM;
-  final double avatarMD;
-  final double avatarLG;
-  final double avatarXL;
+  final double avatarXs;
+  final double avatarSm;
+  final double avatarMd;
+  final double avatarLg;
+  final double avatarXl;
 
   /// Minimum touch target dimension per WCAG 2.5.5. Applied to all interactive widgets.
   final double touchMin;
@@ -253,23 +253,23 @@ final class DievasSizingThemeData extends Equatable {
   final double width256;
 
   DievasSizingThemeData copyWith({
-    double? buttonHeightXS,
-    double? buttonHeightSM,
-    double? buttonHeightMD,
-    double? buttonHeightLG,
-    double? inputHeightSM,
-    double? inputHeightMD,
-    double? inputHeightLG,
-    double? iconXS,
-    double? iconSM,
-    double? iconMD,
-    double? iconLG,
-    double? iconXL,
-    double? avatarXS,
-    double? avatarSM,
-    double? avatarMD,
-    double? avatarLG,
-    double? avatarXL,
+    double? buttonHeightXs,
+    double? buttonHeightSm,
+    double? buttonHeightMd,
+    double? buttonHeightLg,
+    double? inputHeightSm,
+    double? inputHeightMd,
+    double? inputHeightLg,
+    double? iconXs,
+    double? iconSm,
+    double? iconMd,
+    double? iconLg,
+    double? iconXl,
+    double? avatarXs,
+    double? avatarSm,
+    double? avatarMd,
+    double? avatarLg,
+    double? avatarXl,
     double? touchMin,
     double? height4,
     double? height8,
@@ -322,23 +322,23 @@ final class DievasSizingThemeData extends Equatable {
     double? width192,
     double? width256,
   }) => DievasSizingThemeData(
-    buttonHeightXS: buttonHeightXS ?? this.buttonHeightXS,
-    buttonHeightSM: buttonHeightSM ?? this.buttonHeightSM,
-    buttonHeightMD: buttonHeightMD ?? this.buttonHeightMD,
-    buttonHeightLG: buttonHeightLG ?? this.buttonHeightLG,
-    inputHeightSM: inputHeightSM ?? this.inputHeightSM,
-    inputHeightMD: inputHeightMD ?? this.inputHeightMD,
-    inputHeightLG: inputHeightLG ?? this.inputHeightLG,
-    iconXS: iconXS ?? this.iconXS,
-    iconSM: iconSM ?? this.iconSM,
-    iconMD: iconMD ?? this.iconMD,
-    iconLG: iconLG ?? this.iconLG,
-    iconXL: iconXL ?? this.iconXL,
-    avatarXS: avatarXS ?? this.avatarXS,
-    avatarSM: avatarSM ?? this.avatarSM,
-    avatarMD: avatarMD ?? this.avatarMD,
-    avatarLG: avatarLG ?? this.avatarLG,
-    avatarXL: avatarXL ?? this.avatarXL,
+    buttonHeightXs: buttonHeightXs ?? this.buttonHeightXs,
+    buttonHeightSm: buttonHeightSm ?? this.buttonHeightSm,
+    buttonHeightMd: buttonHeightMd ?? this.buttonHeightMd,
+    buttonHeightLg: buttonHeightLg ?? this.buttonHeightLg,
+    inputHeightSm: inputHeightSm ?? this.inputHeightSm,
+    inputHeightMd: inputHeightMd ?? this.inputHeightMd,
+    inputHeightLg: inputHeightLg ?? this.inputHeightLg,
+    iconXs: iconXs ?? this.iconXs,
+    iconSm: iconSm ?? this.iconSm,
+    iconMd: iconMd ?? this.iconMd,
+    iconLg: iconLg ?? this.iconLg,
+    iconXl: iconXl ?? this.iconXl,
+    avatarXs: avatarXs ?? this.avatarXs,
+    avatarSm: avatarSm ?? this.avatarSm,
+    avatarMd: avatarMd ?? this.avatarMd,
+    avatarLg: avatarLg ?? this.avatarLg,
+    avatarXl: avatarXl ?? this.avatarXl,
     touchMin: touchMin ?? this.touchMin,
     height4: height4 ?? this.height4,
     height8: height8 ?? this.height8,
@@ -394,23 +394,23 @@ final class DievasSizingThemeData extends Equatable {
 
   @override
   List<Object?> get props => [
-    buttonHeightXS,
-    buttonHeightSM,
-    buttonHeightMD,
-    buttonHeightLG,
-    inputHeightSM,
-    inputHeightMD,
-    inputHeightLG,
-    iconXS,
-    iconSM,
-    iconMD,
-    iconLG,
-    iconXL,
-    avatarXS,
-    avatarSM,
-    avatarMD,
-    avatarLG,
-    avatarXL,
+    buttonHeightXs,
+    buttonHeightSm,
+    buttonHeightMd,
+    buttonHeightLg,
+    inputHeightSm,
+    inputHeightMd,
+    inputHeightLg,
+    iconXs,
+    iconSm,
+    iconMd,
+    iconLg,
+    iconXl,
+    avatarXs,
+    avatarSm,
+    avatarMd,
+    avatarLg,
+    avatarXl,
     touchMin,
     height4,
     height8,

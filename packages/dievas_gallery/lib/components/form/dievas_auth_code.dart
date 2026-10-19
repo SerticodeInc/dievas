@@ -71,7 +71,7 @@ class _Playground extends StatelessWidget {
     final errorBorderColour = context.tokenColourKnob(label: 'Error border colour', role: .border);
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         mainAxisSize: .min,
         children: [
@@ -101,14 +101,14 @@ class _Playground extends StatelessWidget {
               errorBorderColour: overrideErrorBorderColour ? errorBorderColour : null,
             ),
           ),
-          SizedBox(height: context.spacing.XL),
+          SizedBox(height: context.spacing.xl),
           _DemoBlock(
             'Disabled AuthCode',
             child: DievasAuthCode(codeLength: 4, enabled: false, autofocus: false, onCompleted: (_) {}),
           ),
-          SizedBox(height: context.spacing.XL),
+          SizedBox(height: context.spacing.xl),
           _DemoBlock('Active AuthCode', child: DievasAuthCode(codeLength: 6, autofocus: false, onCompleted: (_) {})),
-          SizedBox(height: context.spacing.XL),
+          SizedBox(height: context.spacing.xl),
           _DemoBlock('Error AuthCode', child: _ErrorExample(shake: shake)),
         ],
       ),
@@ -122,19 +122,19 @@ class _Configurations extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
     child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.XL, vertical: context.spacing.LG),
+      padding: EdgeInsets.symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
       child: Column(
         mainAxisSize: .min,
         children: [
           _DemoBlock('4-digit — plain', child: DievasAuthCode(codeLength: 4, autofocus: false, onCompleted: (_) {})),
-          SizedBox(height: context.spacing.LG),
+          SizedBox(height: context.spacing.lg),
           _DemoBlock('6-digit — plain', child: DievasAuthCode(codeLength: 6, autofocus: false, onCompleted: (_) {})),
-          SizedBox(height: context.spacing.LG),
+          SizedBox(height: context.spacing.lg),
           _DemoBlock(
             '6-digit — obscured',
             child: DievasAuthCode(codeLength: 6, obscureText: true, autofocus: false, onCompleted: (_) {}),
           ),
-          SizedBox(height: context.spacing.LG),
+          SizedBox(height: context.spacing.lg),
           _DemoBlock(
             '4-digit — disabled',
             child: DievasAuthCode(codeLength: 4, enabled: false, autofocus: false, onCompleted: (_) {}),
@@ -155,8 +155,8 @@ class _DemoBlock extends StatelessWidget {
     crossAxisAlignment: .start,
     mainAxisSize: .min,
     children: [
-      Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
-      SizedBox(height: context.spacing.SM),
+      Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
+      SizedBox(height: context.spacing.sm),
       ComponentBoundary(child: child),
     ],
   );

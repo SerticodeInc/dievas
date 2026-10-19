@@ -34,9 +34,9 @@ class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Wrap(
-        spacing: context.spacing.LG,
+        spacing: context.spacing.lg,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           for (final size in DievasIconSize.values)
@@ -44,8 +44,8 @@ class _AllSizes extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ComponentBoundary(child: DievasIcon(Icons.star_rounded, size: size)),
-                SizedBox(height: context.spacing.SM),
-                Text(size.name, style: context.typography.labelXS),
+                SizedBox(height: context.spacing.sm),
+                Text(size.name, style: context.typography.labelXs),
               ],
             ),
         ],

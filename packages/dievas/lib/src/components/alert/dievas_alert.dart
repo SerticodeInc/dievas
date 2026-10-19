@@ -157,7 +157,7 @@ class DievasAlert extends StatelessWidget {
                     ),
                     ...switch (body) {
                       final child? => [
-                        SizedBox(height: DievasTheme.spacingOf(context).XS),
+                        SizedBox(height: DievasTheme.spacingOf(context).xs),
                         DefaultTextStyle(
                           style: theme.bodyStyle.copyWith(color: contentColour ?? foreground),
                           child: child,
@@ -239,7 +239,7 @@ class _AlertTrailing extends StatelessWidget {
     );
 
     return Padding(
-      padding: .only(left: DievasTheme.spacingOf(context).SM),
+      padding: .only(left: DievasTheme.spacingOf(context).sm),
       child: switch (onTap) {
         final callback? => IconButton(
           onPressed: disabled ? null : callback,

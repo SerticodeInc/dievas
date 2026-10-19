@@ -53,6 +53,16 @@ class MyApp extends StatelessWidget {
 }
 ```
 
+## Migrate size token names
+
+Flutter theme mirrors the token vocabulary: `context.spacing.md`, `context.typography.bodyMd`, and `DievasSpacingThemeData(md: …)`. To upgrade from the uppercase names, run the codemod after upgrading `dievas` and `dievas_tokens`:
+
+```sh
+dart run dievas_migrate --write
+```
+
+See the [token README](../dievas_tokens/README.md#migrate-size-token-names) for the full rename table and the [`dievas_migrate` CLI](../dievas_migrate/README.md) for its options.
+
 ## License
 
 MIT

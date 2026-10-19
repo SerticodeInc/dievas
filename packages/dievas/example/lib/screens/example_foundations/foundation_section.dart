@@ -9,14 +9,14 @@ class _FoundationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: .symmetric(vertical: context.spacing.LG),
+    padding: .symmetric(vertical: context.spacing.lg),
     child: Column(
       crossAxisAlignment: .start,
       children: [
-        Text(title, style: context.typography.titleLG),
-        SizedBox(height: context.spacing.XS),
-        Text(description, style: context.typography.bodySM.copyWith(color: context.colours.text.textSecondary)),
-        SizedBox(height: context.spacing.LG),
+        Text(title, style: context.typography.titleLg),
+        SizedBox(height: context.spacing.xs),
+        Text(description, style: context.typography.bodySm.copyWith(color: context.colours.text.textSecondary)),
+        SizedBox(height: context.spacing.lg),
         child,
       ],
     ),

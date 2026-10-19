@@ -47,9 +47,9 @@ class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Wrap(
-        spacing: context.spacing.LG,
+        spacing: context.spacing.lg,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           for (final size in DievasCircularProgressSize.values)
@@ -57,8 +57,8 @@ class _AllSizes extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ComponentBoundary(child: DievasCircularProgress(value: 0.65, size: size)),
-                SizedBox(height: context.spacing.SM),
-                Text(size.name, style: context.typography.labelXS),
+                SizedBox(height: context.spacing.sm),
+                Text(size.name, style: context.typography.labelXs),
               ],
             ),
         ],
@@ -73,9 +73,9 @@ class _AllStyles extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Wrap(
-        spacing: context.spacing.LG,
+        spacing: context.spacing.lg,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           for (final style in DievasCircularProgressStyle.values)
@@ -83,8 +83,8 @@ class _AllStyles extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ComponentBoundary(child: DievasCircularProgress(value: 0.65, style: style)),
-                SizedBox(height: context.spacing.SM),
-                Text(style.name, style: context.typography.labelXS),
+                SizedBox(height: context.spacing.sm),
+                Text(style.name, style: context.typography.labelXs),
               ],
             ),
         ],

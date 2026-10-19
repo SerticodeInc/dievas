@@ -136,7 +136,7 @@ class DievasBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).bottomSheet;
-    final insets = (padding ?? .symmetric(horizontal: DievasTheme.spacingOf(context).SM)).resolve(
+    final insets = (padding ?? .symmetric(horizontal: DievasTheme.spacingOf(context).sm)).resolve(
       Directionality.of(context),
     );
     final body = ListTileTheme.merge(
@@ -148,7 +148,7 @@ class DievasBottomSheet extends StatelessWidget {
     );
     final heading = switch ((header, title)) {
       (final widget?, _) => widget,
-      (_, final text?) => Text(text, textAlign: .center, style: DievasTheme.typographyOf(context).titleMD),
+      (_, final text?) => Text(text, textAlign: .center, style: DievasTheme.typographyOf(context).titleMd),
       _ => null,
     };
     final action = switch ((trailing, showCloseButton)) {
@@ -198,9 +198,9 @@ class DievasBottomSheet extends StatelessWidget {
             Padding(
               padding: .fromLTRB(
                 insets.left,
-                DievasTheme.spacingOf(context).SM,
+                DievasTheme.spacingOf(context).sm,
                 insets.right,
-                DievasTheme.spacingOf(context).SM,
+                DievasTheme.spacingOf(context).sm,
               ),
               child: SizedBox(
                 height: DievasTheme.sizingOf(context).touchMin,

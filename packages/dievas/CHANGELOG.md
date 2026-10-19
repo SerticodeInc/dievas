@@ -4,6 +4,12 @@
 
 - Use Moon Design Piccolo purple (`#5C33CF`) for the default primary brand in both themes. Update focus, selection, active controls, cursors, and tinted brand surfaces together; derive hover and pressed shades from Piccolo. Explicit palette overrides remain available.
 
+### Breaking size token naming reversed
+
+- Align the Flutter theme mirrors with the lowercased `dievas_tokens` size vocabulary: `DievasSpacingThemeData.md`, `DievasBorderThemeData.sm`, `DievasElevationThemeData.xl`, `DievasSizingThemeData.buttonHeightMd`, `DievasTypographyThemeData.displayLg`, and `DievasGridBreakpoint.md`.
+- Colour roles, opacity, z-index, easing, animation intents, and `strokeThin`/`touchMin` are unchanged.
+- Run `dart run dievas_migrate --write` to migrate theme mirrors and component call sites. The new `dievas_migrate` CLI reads analyzer errors and rewrites only the renamed token types.
+
 ### Avatar
 
 - Add a foreground content slot over image backgrounds; show initials or the placeholder while images load or fail. Preserve complete Unicode graphemes when shortening initials.

@@ -42,14 +42,14 @@ class DievasSnackbar extends StatelessWidget {
     final spacing = context.spacing;
 
     return Padding(
-      padding: .only(bottom: theme.bottomInset, left: spacing.MD, right: spacing.MD),
+      padding: .only(bottom: theme.bottomInset, left: spacing.md, right: spacing.md),
       child: ConstrainedBox(
         constraints: BoxConstraints(minWidth: theme.minWidth, maxWidth: theme.maxWidth),
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: bg,
             borderRadius: theme.borderRadius,
-            boxShadow: DievasTheme.elevationOf(context).MD,
+            boxShadow: DievasTheme.elevationOf(context).md,
           ),
           child: Padding(
             padding: theme.padding,
@@ -77,7 +77,7 @@ class DievasSnackbar extends StatelessWidget {
                   ),
                 ),
                 if (action case final action?) ...[
-                  SizedBox(width: spacing.MD),
+                  SizedBox(width: spacing.md),
                   GestureDetector(
                     onTap: action.onPressed,
                     child: Text(

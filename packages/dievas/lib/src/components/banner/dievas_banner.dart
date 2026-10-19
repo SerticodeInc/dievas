@@ -57,7 +57,7 @@ class DievasBanner extends StatelessWidget {
               Expanded(
                 child: Text(message, style: alertTheme.bodyStyle.copyWith(color: palette.text)),
               ),
-              if (action case final widget?) ...[SizedBox(width: context.spacing.SMPlus), widget],
+              if (action case final widget?) ...[SizedBox(width: context.spacing.smPlus), widget],
               if (onDismiss != null)
                 Semantics(
                   label: DievasLocalizations.of(context).alertDismissLabel,
@@ -65,7 +65,7 @@ class DievasBanner extends StatelessWidget {
                   child: GestureDetector(
                     onTap: onDismiss,
                     child: Padding(
-                      padding: .only(left: context.spacing.SM),
+                      padding: .only(left: context.spacing.sm),
                       child: SizedBox.square(
                         dimension: alertTheme.dismissIconSize,
                         child: IconTheme(

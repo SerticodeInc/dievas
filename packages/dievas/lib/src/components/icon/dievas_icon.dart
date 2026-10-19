@@ -46,10 +46,10 @@ class DievasIcon extends StatelessWidget {
     final sizing = DievasTheme.sizingOf(context);
 
     final dimension = switch (size) {
-      .XS => sizing.iconXS,
-      .SM => sizing.iconSM,
-      .MD => sizing.iconMD,
-      .LG => sizing.iconLG,
+      .XS => sizing.iconXs,
+      .SM => sizing.iconSm,
+      .MD => sizing.iconMd,
+      .LG => sizing.iconLg,
     };
 
     return Icon(

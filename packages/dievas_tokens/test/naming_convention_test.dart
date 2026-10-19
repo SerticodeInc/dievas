@@ -5,20 +5,22 @@ import 'package:test/test.dart';
 
 final RegExp _declaration = RegExp(r'static const\s+[\w<> ,]+\s+(\w+)\s*=');
 final RegExp _legacyAxis = RegExp(
-  r'^(x[2-8]l|xlPlus|x2lPlus)$'
-  r'|[A-Za-z_]\w*(Xs|Sm|Md|Lg|Xl|Xsm)$',
+  r'^(?:NONE|FULL|BASE|R\d+)$'
+  r'|(?:XS|SM|MD|LG|XL|XL[2-5]|SMPlus|MDPlus|LGPlus|XLPlus|XL2Plus)$',
 );
 final RegExp _sizeName = RegExp(
-  r'^(?:[a-z][a-zA-Z]*)?(?:XS|SM|MD|LG|XL|XL[2-8]|SMPlus|MDPlus|LGPlus|XLPlus|XL2Plus)$'
-  r'|^(?:NONE|FULL|BASE)$'
+  r'^(?:none|base|full)$'
+  r'|^(?:xs|sm|smPlus|md|mdPlus|lg|lgPlus|xl|xlPlus|xl2|xl2Plus|xl3|xl4|xl5)$'
+  r'|^(?:buttonHeight|inputHeight|icon|avatar)(?:Xs|Sm|Md|Lg|Xl)$'
+  r'|^(?:display|heading|title|body|label|code)(?:Xs|Sm|Md|Lg|Xl)$'
   r'|^(?:height|width)\d+$'
-  r'|^R\d+$',
+  r'|^r\d+$',
 );
 
 void main() {
   final sourceDirectory = Directory('${Directory.current.path}/lib');
 
-  test('no constant declaration uses a legacy lowercase size name', () {
+  test('no constant declaration uses a legacy uppercase size name', () {
     final offenders = <String>[];
     for (final entity in sourceDirectory.listSync(recursive: true)) {
       if (entity case File() when entity.path.endsWith('.dart')) {
@@ -32,7 +34,7 @@ void main() {
     expect(offenders, isEmpty);
   });
 
-  test('size families use class-scoped scales or role names with uppercase suffixes', () {
+  test('size families use class-scoped scales or role names with lowerCamelCase suffixes', () {
     const files = [
       'primitives/breakpoint_primitives.dart',
       'semantic/spacing_semantic.dart',

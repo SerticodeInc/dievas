@@ -8,6 +8,15 @@ Changes to the Dievas token package, newest first.
 
 - Use Moon Design Piccolo purple (`#5C33CF`) for the default primary brand in both themes. Update focus, selection, active controls, cursors, and tinted brand surfaces together; derive hover and pressed shades from Piccolo. Explicit palette overrides remain available.
 
+### Breaking size token naming
+
+- Lowercase every class-scoped size identifier: `DievasSpacingSemantic.md`, `DievasRadiusSemantic.sm`, `DievasElevationSemantic.xl`, `DievasElevationShadowLayer.xl`, `DievasBreakpointSemantic.xs`, and the breakpoint primitives.
+- Role tokens keep their base and take a lowerCamelCase suffix: `buttonHeightMd`, `displayLg`, `headingXl`, `titleXs`, `bodyMd`, `labelXs`, and `codeMd`.
+- Radius extras use lowercase names (`r28` through `r64`); `none` and `full` replace `NONE` and `FULL`.
+- Colour roles, opacity, z-index, easing, animation intents, and `touchMin` are unchanged.
+- Run `dart run dievas_migrate --write` to rewrite consumer code. The new `dievas_migrate` CLI reads analyzer errors, so it leaves unrelated enums that reuse the same names untouched.
+
+
 ## 1.0.1
 
 ### Breaking colour role names

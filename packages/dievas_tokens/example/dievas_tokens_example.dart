@@ -86,48 +86,48 @@ final class _TokenReport {
   }
 
   _Section get _typography => _Section('Typography — named text styles', [
-    _Entry('displayLG', _style(DievasTypographySemantic.displayLG)),
-    _Entry('headingXL', _style(DievasTypographySemantic.headingXL)),
-    _Entry('titleLG', _style(DievasTypographySemantic.titleLG)),
-    _Entry('bodyMD', _style(DievasTypographySemantic.bodyMD)),
-    _Entry('labelSM', _style(DievasTypographySemantic.labelSM)),
-    _Entry('codeMD', _style(DievasTypographySemantic.codeMD)),
+    _Entry('displayLG', _style(DievasTypographySemantic.displayLg)),
+    _Entry('headingXL', _style(DievasTypographySemantic.headingXl)),
+    _Entry('titleLG', _style(DievasTypographySemantic.titleLg)),
+    _Entry('bodyMD', _style(DievasTypographySemantic.bodyMd)),
+    _Entry('labelSM', _style(DievasTypographySemantic.labelSm)),
+    _Entry('codeMD', _style(DievasTypographySemantic.codeMd)),
   ]);
 
   _Section get _spacing => const _Section('Spacing — logical pixels on a 4pt grid', [
-    _Entry('XS', DievasSpacingSemantic.XS),
-    _Entry('SM', DievasSpacingSemantic.SM),
-    _Entry('MD', DievasSpacingSemantic.MD),
-    _Entry('LG', DievasSpacingSemantic.LG),
-    _Entry('XL3', DievasSpacingSemantic.XL3),
-    _Entry('XL5', DievasSpacingSemantic.XL5),
+    _Entry('XS', DievasSpacingSemantic.xs),
+    _Entry('SM', DievasSpacingSemantic.sm),
+    _Entry('MD', DievasSpacingSemantic.md),
+    _Entry('LG', DievasSpacingSemantic.lg),
+    _Entry('XL3', DievasSpacingSemantic.xl3),
+    _Entry('XL5', DievasSpacingSemantic.xl5),
   ]);
 
   _Section get _radius => const _Section('Radius — logical pixels', [
-    _Entry('NONE', DievasRadiusSemantic.NONE),
-    _Entry('SM', DievasRadiusSemantic.SM),
-    _Entry('MD', DievasRadiusSemantic.MD),
-    _Entry('LG', DievasRadiusSemantic.LG),
-    _Entry('FULL', DievasRadiusSemantic.FULL),
+    _Entry('NONE', DievasRadiusSemantic.none),
+    _Entry('SM', DievasRadiusSemantic.sm),
+    _Entry('MD', DievasRadiusSemantic.md),
+    _Entry('LG', DievasRadiusSemantic.lg),
+    _Entry('FULL', DievasRadiusSemantic.full),
   ]);
 
   _Section get _sizing => const _Section('Sizing — logical pixels', [
-    _Entry('buttonHeightMD', DievasSizingSemantic.buttonHeightMD),
-    _Entry('inputHeightMD', DievasSizingSemantic.inputHeightMD),
-    _Entry('iconMD', DievasSizingSemantic.iconMD),
-    _Entry('avatarLG', DievasSizingSemantic.avatarLG),
+    _Entry('buttonHeightMD', DievasSizingSemantic.buttonHeightMd),
+    _Entry('inputHeightMD', DievasSizingSemantic.inputHeightMd),
+    _Entry('iconMD', DievasSizingSemantic.iconMd),
+    _Entry('avatarLG', DievasSizingSemantic.avatarLg),
     _Entry('touchMin', DievasSizingSemantic.touchMin),
     _Entry('height256', DievasSizingSemantic.height256),
     _Entry('width256', DievasSizingSemantic.width256),
   ]);
 
   _Section get _elevation => _Section('Elevation — blur radii and shadow layers', [
-    const _Entry('NONE', DievasElevationSemantic.NONE),
-    const _Entry('SM', DievasElevationSemantic.SM),
-    const _Entry('MD', DievasElevationSemantic.MD),
-    const _Entry('XL', DievasElevationSemantic.XL),
-    _Entry('SM layers', DievasElevationShadowLayer.SM.length),
-    _Entry('XL layers', DievasElevationShadowLayer.XL.length),
+    const _Entry('NONE', DievasElevationSemantic.none),
+    const _Entry('SM', DievasElevationSemantic.sm),
+    const _Entry('MD', DievasElevationSemantic.md),
+    const _Entry('XL', DievasElevationSemantic.xl),
+    _Entry('SM layers', DievasElevationShadowLayer.sm.length),
+    _Entry('XL layers', DievasElevationShadowLayer.xl.length),
     _Entry('shadowColour', _hex(DievasElevationSemantic.shadowColour)),
   ]);
 
@@ -151,9 +151,9 @@ final class _TokenReport {
   ]);
 
   _Section get _layout => const _Section('Layout — breakpoints and stacking order', [
-    _Entry('breakpoint.XS', DievasBreakpointSemantic.XS),
-    _Entry('breakpoint.MD', DievasBreakpointSemantic.MD),
-    _Entry('breakpoint.XL', DievasBreakpointSemantic.XL),
+    _Entry('breakpoint.XS', DievasBreakpointSemantic.xs),
+    _Entry('breakpoint.MD', DievasBreakpointSemantic.md),
+    _Entry('breakpoint.XL', DievasBreakpointSemantic.xl),
     _Entry('zIndex.dropdown', DievasZIndexSemantic.dropdown),
     _Entry('zIndex.modal', DievasZIndexSemantic.modal),
     _Entry('zIndex.toast', DievasZIndexSemantic.toast),

@@ -35,7 +35,7 @@ class _Playground extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: .symmetric(horizontal: context.spacing.XL),
+        padding: .symmetric(horizontal: context.spacing.xl),
         child: ComponentBoundary(
           child: DievasTextInput(
             size: size,
@@ -58,7 +58,7 @@ class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: .symmetric(horizontal: context.spacing.XL, vertical: context.spacing.LG),
+      padding: .symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
       child: Column(
         mainAxisSize: .min,
         children: [
@@ -69,10 +69,10 @@ class _AllSizes extends StatelessWidget {
                   width: 40,
                   child: Text(
                     size.name,
-                    style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary),
+                    style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary),
                   ),
                 ),
-                SizedBox(width: context.spacing.MD),
+                SizedBox(width: context.spacing.md),
                 Expanded(
                   child: ComponentBoundary(
                     child: DievasTextInput(size: size, hint: 'Placeholder'),
@@ -80,7 +80,7 @@ class _AllSizes extends StatelessWidget {
                 ),
               ],
             ),
-            if (size != .LG) SizedBox(height: context.spacing.MD),
+            if (size != .LG) SizedBox(height: context.spacing.md),
           ],
         ],
       ),
@@ -92,17 +92,17 @@ class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: .symmetric(horizontal: context.spacing.XL, vertical: context.spacing.LG),
+      padding: .symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
       child: Column(
         mainAxisSize: .min,
         children: [
           _StateBlock('Default', child: DievasTextInput(hint: 'Placeholder')),
-          SizedBox(height: context.spacing.MDPlus),
+          SizedBox(height: context.spacing.mdPlus),
           _StateBlock(
             'With Label + Helper',
             child: DievasTextInput(label: 'Full name', hint: 'John Appleseed', helperText: 'As it appears on your ID.'),
           ),
-          SizedBox(height: context.spacing.MDPlus),
+          SizedBox(height: context.spacing.mdPlus),
           _StateBlock(
             'Error',
             child: DievasTextInput(
@@ -111,7 +111,7 @@ class _AllStates extends StatelessWidget {
               errorText: 'This email is already in use.',
             ),
           ),
-          SizedBox(height: context.spacing.MDPlus),
+          SizedBox(height: context.spacing.mdPlus),
           _StateBlock(
             'Warning',
             child: DievasTextInput(
@@ -120,7 +120,7 @@ class _AllStates extends StatelessWidget {
               warningText: 'This email is close to a registered one.',
             ),
           ),
-          SizedBox(height: context.spacing.MDPlus),
+          SizedBox(height: context.spacing.mdPlus),
           _StateBlock(
             'With Icons',
             child: DievasTextInput(
@@ -129,7 +129,7 @@ class _AllStates extends StatelessWidget {
               trailingIcon: const Icon(Icons.close_rounded),
             ),
           ),
-          SizedBox(height: context.spacing.MDPlus),
+          SizedBox(height: context.spacing.mdPlus),
           _StateBlock(
             'Disabled',
             child: DievasTextInput(label: 'Username', hint: 'adonis_serticode', enabled: false),
@@ -155,16 +155,16 @@ class _ThemeOverride extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: .symmetric(horizontal: context.spacing.XL, vertical: context.spacing.LG),
+        padding: .symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
         child: Column(
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
             Text(
               'Focus + warning colours overridden per instance via copyWith',
-              style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary),
+              style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary),
             ),
-            SizedBox(height: context.spacing.MD),
+            SizedBox(height: context.spacing.md),
             ComponentBoundary(
               child: DievasTheme(
                 data: overridden,
@@ -192,8 +192,8 @@ class _StateBlock extends StatelessWidget {
     crossAxisAlignment: .start,
     mainAxisSize: .min,
     children: [
-      Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
-      SizedBox(height: context.spacing.SM),
+      Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
+      SizedBox(height: context.spacing.sm),
       ComponentBoundary(child: child),
     ],
   );

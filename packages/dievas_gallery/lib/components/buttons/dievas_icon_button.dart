@@ -63,10 +63,10 @@ class _AllStyles extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Wrap(
-        spacing: context.spacing.SMPlus,
-        runSpacing: context.spacing.SMPlus,
+        spacing: context.spacing.smPlus,
+        runSpacing: context.spacing.smPlus,
         alignment: WrapAlignment.center,
         children: [
           for (final style in DievasIconButtonStyle.values)
@@ -85,10 +85,10 @@ class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Wrap(
-        spacing: context.spacing.SMPlus,
-        runSpacing: context.spacing.SMPlus,
+        spacing: context.spacing.smPlus,
+        runSpacing: context.spacing.smPlus,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           for (final size in DievasButtonSize.values)

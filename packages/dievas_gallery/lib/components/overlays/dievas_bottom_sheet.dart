@@ -102,7 +102,7 @@ class _Playground extends StatelessWidget {
     );
     final padding = context.knobs.double.slider(
       label: 'General horizontal padding',
-      initialValue: context.spacing.SM,
+      initialValue: context.spacing.sm,
       min: 0,
       max: 40,
     );
@@ -180,7 +180,7 @@ class _LaunchPanelState extends State<_LaunchPanel> {
         ComponentBoundary(
           child: DievasFilledButton(label: 'Open bottom sheet', onPressed: _open ? null : _show),
         ),
-        if (_result case final text?) Padding(padding: EdgeInsets.all(context.spacing.LG), child: Text(text)),
+        if (_result case final text?) Padding(padding: EdgeInsets.all(context.spacing.lg), child: Text(text)),
       ],
     ),
   );
@@ -238,7 +238,7 @@ class _SheetContents extends StatelessWidget {
     handleColour: options.handleColour,
     footer: options.footer
         ? Padding(
-            padding: EdgeInsets.symmetric(vertical: context.spacing.MD),
+            padding: EdgeInsets.symmetric(vertical: context.spacing.md),
             child: DievasFilledButton(label: 'Done', onPressed: () => closeDievasBottomSheet(context)),
           )
         : null,
@@ -263,17 +263,17 @@ class _SheetForm extends StatelessWidget {
   const _SheetForm();
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
-    padding: EdgeInsets.symmetric(vertical: context.spacing.LG),
+    padding: EdgeInsets.symmetric(vertical: context.spacing.lg),
     child: Column(
       mainAxisSize: .min,
       children: [
         const TextField(decoration: InputDecoration(labelText: 'Name')),
-        SizedBox(height: context.spacing.LG),
+        SizedBox(height: context.spacing.lg),
         const TextField(
           decoration: InputDecoration(labelText: 'Email'),
           keyboardType: .emailAddress,
         ),
-        SizedBox(height: context.spacing.LG),
+        SizedBox(height: context.spacing.lg),
         DievasFilledButton(label: 'Save', onPressed: () => closeDievasBottomSheet(context)),
       ],
     ),

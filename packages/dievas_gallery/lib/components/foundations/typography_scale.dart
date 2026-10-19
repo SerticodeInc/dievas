@@ -21,31 +21,31 @@ class _FullScale extends StatelessWidget {
     final colours = DievasTheme.coloursOf(context);
 
     final entries = [
-      ('displayLG', t.displayLG),
-      ('displayMD', t.displayMD),
-      ('displaySM', t.displaySM),
-      ('headingXL', t.headingXL),
-      ('headingLG', t.headingLG),
-      ('headingMD', t.headingMD),
-      ('headingSM', t.headingSM),
-      ('headingXS', t.headingXS),
-      ('titleLG', t.titleLG),
-      ('titleMD', t.titleMD),
-      ('titleSM', t.titleSM),
-      ('bodyLG', t.bodyLG),
-      ('bodyMD', t.bodyMD),
-      ('bodySM', t.bodySM),
-      ('bodyXS', t.bodyXS),
-      ('labelLG', t.labelLG),
-      ('labelMD', t.labelMD),
-      ('labelSM', t.labelSM),
-      ('labelXS', t.labelXS),
-      ('codeMD', t.codeMD),
-      ('codeSM', t.codeSM),
+      ('displayLg', t.displayLg),
+      ('displayMd', t.displayMd),
+      ('displaySm', t.displaySm),
+      ('headingXl', t.headingXl),
+      ('headingLg', t.headingLg),
+      ('headingMd', t.headingMd),
+      ('headingSm', t.headingSm),
+      ('headingXs', t.headingXs),
+      ('titleLg', t.titleLg),
+      ('titleMd', t.titleMd),
+      ('titleSm', t.titleSm),
+      ('bodyLg', t.bodyLg),
+      ('bodyMd', t.bodyMd),
+      ('bodySm', t.bodySm),
+      ('bodyXs', t.bodyXs),
+      ('labelLg', t.labelLg),
+      ('labelMd', t.labelMd),
+      ('labelSm', t.labelSm),
+      ('labelXs', t.labelXs),
+      ('codeMd', t.codeMd),
+      ('codeSm', t.codeSm),
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -54,7 +54,7 @@ class _FullScale extends StatelessWidget {
             Container(
               height: 1,
               color: colours.border.dividerColour,
-              margin: EdgeInsets.symmetric(vertical: context.spacing.SMPlus),
+              margin: EdgeInsets.symmetric(vertical: context.spacing.smPlus),
             ),
           ],
         ],
@@ -72,18 +72,18 @@ class _DisplayHeading extends StatelessWidget {
     final colours = DievasTheme.coloursOf(context);
 
     final entries = [
-      ('displayLG', t.displayLG),
-      ('displayMD', t.displayMD),
-      ('displaySM', t.displaySM),
-      ('headingXL', t.headingXL),
-      ('headingLG', t.headingLG),
-      ('headingMD', t.headingMD),
-      ('headingSM', t.headingSM),
-      ('headingXS', t.headingXS),
+      ('displayLg', t.displayLg),
+      ('displayMd', t.displayMd),
+      ('displaySm', t.displaySm),
+      ('headingXl', t.headingXl),
+      ('headingLg', t.headingLg),
+      ('headingMd', t.headingMd),
+      ('headingSm', t.headingSm),
+      ('headingXs', t.headingXs),
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -92,7 +92,7 @@ class _DisplayHeading extends StatelessWidget {
             Container(
               height: 1,
               color: colours.border.dividerColour,
-              margin: EdgeInsets.symmetric(vertical: context.spacing.SMPlus),
+              margin: EdgeInsets.symmetric(vertical: context.spacing.smPlus),
             ),
           ],
         ],
@@ -110,21 +110,21 @@ class _BodyLabel extends StatelessWidget {
     final colours = DievasTheme.coloursOf(context);
 
     final entries = [
-      ('titleLG', t.titleLG),
-      ('titleMD', t.titleMD),
-      ('titleSM', t.titleSM),
-      ('bodyLG', t.bodyLG),
-      ('bodyMD', t.bodyMD),
-      ('bodySM', t.bodySM),
-      ('bodyXS', t.bodyXS),
-      ('labelLG', t.labelLG),
-      ('labelMD', t.labelMD),
-      ('labelSM', t.labelSM),
-      ('labelXS', t.labelXS),
+      ('titleLg', t.titleLg),
+      ('titleMd', t.titleMd),
+      ('titleSm', t.titleSm),
+      ('bodyLg', t.bodyLg),
+      ('bodyMd', t.bodyMd),
+      ('bodySm', t.bodySm),
+      ('bodyXs', t.bodyXs),
+      ('labelLg', t.labelLg),
+      ('labelMd', t.labelMd),
+      ('labelSm', t.labelSm),
+      ('labelXs', t.labelXs),
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -133,7 +133,7 @@ class _BodyLabel extends StatelessWidget {
             Container(
               height: 1,
               color: colours.border.dividerColour,
-              margin: EdgeInsets.symmetric(vertical: context.spacing.SMPlus),
+              margin: EdgeInsets.symmetric(vertical: context.spacing.smPlus),
             ),
           ],
         ],
@@ -151,17 +151,17 @@ class _Code extends StatelessWidget {
     final colours = DievasTheme.coloursOf(context);
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _TypeRow(name: 'codeMD', style: t.codeMD, sample: 'final result = compute(value);'),
+          _TypeRow(name: 'codeMd', style: t.codeMd, sample: 'final result = compute(value);'),
           Container(
             height: 1,
             color: colours.border.dividerColour,
-            margin: EdgeInsets.symmetric(vertical: context.spacing.SMPlus),
+            margin: EdgeInsets.symmetric(vertical: context.spacing.smPlus),
           ),
-          _TypeRow(name: 'codeSM', style: t.codeSM, sample: 'final result = compute(value);'),
+          _TypeRow(name: 'codeSm', style: t.codeSm, sample: 'final result = compute(value);'),
         ],
       ),
     );
@@ -179,7 +179,7 @@ class _TypeRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final labelStyle = DievasTheme.typographyOf(
       context,
-    ).labelXS.copyWith(color: DievasTheme.coloursOf(context).text.textTertiary, fontFamily: 'monospace');
+    ).labelXs.copyWith(color: DievasTheme.coloursOf(context).text.textTertiary, fontFamily: 'monospace');
 
     final size = style.fontSize;
     final weight = style.fontWeight?.value ?? 3;
@@ -199,7 +199,7 @@ class _TypeRow extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(width: context.spacing.LG),
+        SizedBox(width: context.spacing.lg),
         Expanded(
           child: Text(sample ?? 'The quick brown fox', style: style, maxLines: 1, overflow: TextOverflow.ellipsis),
         ),

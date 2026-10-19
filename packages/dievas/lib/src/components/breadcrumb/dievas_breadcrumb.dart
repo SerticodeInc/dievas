@@ -316,14 +316,14 @@ class _BreadcrumbOverflowState extends State<_BreadcrumbOverflow> {
       shadowColor: WidgetStatePropertyAll(DievasTheme.coloursOf(context).text.textPrimary.withValues(alpha: 0.2)),
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(
-          borderRadius: DievasTheme.borderOf(context).XL,
+          borderRadius: DievasTheme.borderOf(context).xl,
           side: BorderSide(
             color: DievasTheme.coloursOf(context).border.dividerColour,
             width: DievasTheme.borderOf(context).strokeThin,
           ),
         ),
       ),
-      padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: DievasTheme.spacingOf(context).XS)),
+      padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: DievasTheme.spacingOf(context).xs)),
       minimumSize: WidgetStatePropertyAll(Size(DievasTheme.sizingOf(context).width160, 0)),
     ),
     menuChildren: [
@@ -339,7 +339,7 @@ class _BreadcrumbOverflowState extends State<_BreadcrumbOverflow> {
             minimumSize: WidgetStatePropertyAll(
               Size(DievasTheme.sizingOf(context).width160, DievasTheme.sizingOf(context).height40),
             ),
-            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: DievasTheme.spacingOf(context).MD)),
+            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: DievasTheme.spacingOf(context).md)),
             alignment: .centerLeft,
           ),
           onPressed: enabled ? () => widget.onSelected(index) : null,

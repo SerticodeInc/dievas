@@ -142,7 +142,7 @@ class _DievasAccordionState extends State<DievasAccordion> {
       clipBehavior: .none,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: widget.items.length,
-      separatorBuilder: (_, _) => SizedBox(height: spacing.SM),
+      separatorBuilder: (_, _) => SizedBox(height: spacing.sm),
       itemBuilder: (context, index) => _AccordionCard(
         item: widget.items[index],
         index: index,
@@ -229,9 +229,9 @@ class _AccordionCardState extends State<_AccordionCard> with SingleTickerProvide
     final spacing = DievasTheme.spacingOf(context);
     final typography = DievasTheme.typographyOf(context);
     final headerStyle = switch (options.size) {
-      .sm => typography.bodySM,
+      .sm => typography.bodySm,
       .md => theme.headerStyle,
-      .lg => typography.titleSM,
+      .lg => typography.titleSm,
     };
     final iconColour = switch ((widget.item.disabled, _expanded, options.expandedIconColour, options.iconColour)) {
       (true, _, _, _) => colours.icon.iconDisabled,
@@ -259,9 +259,9 @@ class _AccordionCardState extends State<_AccordionCard> with SingleTickerProvide
         child: Padding(
           padding: switch ((options.headerPadding, options.size)) {
             (final padding?, _) => padding,
-            (null, .sm) => .symmetric(horizontal: spacing.SM, vertical: spacing.SM),
+            (null, .sm) => .symmetric(horizontal: spacing.sm, vertical: spacing.sm),
             (null, .md) => theme.padding,
-            (null, .lg) => .symmetric(horizontal: spacing.LG, vertical: spacing.MD),
+            (null, .lg) => .symmetric(horizontal: spacing.lg, vertical: spacing.md),
           },
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: options.headerHeight ?? 0),
@@ -413,7 +413,7 @@ class _AccordionSurface extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: radius,
-        boxShadow: options.showShadows ? DievasTheme.elevationOf(context).SM : null,
+        boxShadow: options.showShadows ? DievasTheme.elevationOf(context).sm : null,
       ),
       child: Material(
         clipBehavior: .antiAlias,

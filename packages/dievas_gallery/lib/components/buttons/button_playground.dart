@@ -67,7 +67,7 @@ class _ButtonPlaygroundState extends State<ButtonPlayground> {
 
     return Center(
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(context.spacing.LG),
+        padding: EdgeInsets.all(context.spacing.lg),
         child: Directionality(
           textDirection: rtl ? .rtl : .ltr,
           child: Column(
@@ -75,13 +75,13 @@ class _ButtonPlaygroundState extends State<ButtonPlayground> {
             children: [
               for (final variant in widget.showAll ? ButtonGalleryVariant.values : [widget.variant]) ...[
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: context.spacing.MD),
+                  padding: EdgeInsets.symmetric(vertical: context.spacing.md),
                   child: Row(
                     children: [
                       const Expanded(child: DievasDivider()),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: context.spacing.MD),
-                        child: Text('${variant.name} button', style: context.typography.labelXS),
+                        padding: EdgeInsets.symmetric(horizontal: context.spacing.md),
+                        child: Text('${variant.name} button', style: context.typography.labelXs),
                       ),
                       const Expanded(child: DievasDivider()),
                     ],
@@ -118,8 +118,8 @@ class _ButtonPlaygroundState extends State<ButtonPlayground> {
                   ),
                 ),
               ],
-              SizedBox(height: context.spacing.LG),
-              Semantics(liveRegion: true, child: Text(_feedback, style: context.typography.bodySM)),
+              SizedBox(height: context.spacing.lg),
+              Semantics(liveRegion: true, child: Text(_feedback, style: context.typography.bodySm)),
             ],
           ),
         ),

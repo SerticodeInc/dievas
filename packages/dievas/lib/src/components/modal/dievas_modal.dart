@@ -116,20 +116,20 @@ class DievasModal extends StatelessWidget {
 
                 // Body
                 if (content case final content?) ...[
-                  SizedBox(height: spacing.SMPlus),
+                  SizedBox(height: spacing.smPlus),
                   content,
                 ] else if (body case final body?) ...[
-                  SizedBox(height: spacing.SMPlus),
+                  SizedBox(height: spacing.smPlus),
                   Text(body, style: theme.bodyStyle),
                 ],
 
                 // Actions
                 if (actions.isNotEmpty) ...[
-                  SizedBox(height: spacing.LG),
+                  SizedBox(height: spacing.lg),
                   Row(
                     mainAxisAlignment: .end,
                     children: [
-                      for (int i = 0; i < actions.length; i++) ...[if (i > 0) SizedBox(width: spacing.SM), actions[i]],
+                      for (int i = 0; i < actions.length; i++) ...[if (i > 0) SizedBox(width: spacing.sm), actions[i]],
                     ],
                   ),
                 ],

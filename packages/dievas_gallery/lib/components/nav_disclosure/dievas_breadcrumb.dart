@@ -55,7 +55,7 @@ class _PlaygroundState extends State<_Playground> {
 
     return Center(
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(context.spacing.LG),
+        padding: EdgeInsets.all(context.spacing.lg),
         child: Directionality(
           textDirection: rtl ? .rtl : .ltr,
           child: Column(
@@ -63,7 +63,7 @@ class _PlaygroundState extends State<_Playground> {
             children: [
               for (final custom in [false, true]) ...[
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: context.spacing.LG),
+                  padding: EdgeInsets.symmetric(vertical: context.spacing.lg),
                   child: _SectionTitle(label: custom ? 'Custom breadcrumb with dropdown' : 'Breadcrumb'),
                 ),
                 ComponentBoundary(
@@ -86,7 +86,7 @@ class _PlaygroundState extends State<_Playground> {
                   ),
                 ),
                 if (!custom) ...[
-                  SizedBox(height: context.spacing.MD),
+                  SizedBox(height: context.spacing.md),
                   DievasFilledButton(label: 'Reset', onPressed: () => setState(() => _selected = null)),
                 ],
               ],
@@ -108,8 +108,8 @@ class _SectionTitle extends StatelessWidget {
     children: [
       const Expanded(child: DievasDivider()),
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.spacing.MD),
-        child: Text(label, style: context.typography.labelXS),
+        padding: EdgeInsets.symmetric(horizontal: context.spacing.md),
+        child: Text(label, style: context.typography.labelXs),
       ),
       const Expanded(child: DievasDivider()),
     ],
@@ -121,7 +121,7 @@ class _Configurations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
-    padding: EdgeInsets.all(context.spacing.LG),
+    padding: EdgeInsets.all(context.spacing.lg),
     child: Column(
       mainAxisSize: .min,
       children: [
@@ -131,7 +131,7 @@ class _Configurations extends StatelessWidget {
           ('Disabled', 3, false),
         ]) ...[
           Padding(
-            padding: EdgeInsets.symmetric(vertical: context.spacing.LG),
+            padding: EdgeInsets.symmetric(vertical: context.spacing.lg),
             child: _SectionTitle(label: label),
           ),
           DievasBreadcrumb<String>(

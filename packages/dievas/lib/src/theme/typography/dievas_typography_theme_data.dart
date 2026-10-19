@@ -12,149 +12,149 @@ import 'package:flutter/painting.dart';
 final class DievasTypographyThemeData extends Equatable {
   const DievasTypographyThemeData({
     // Display
-    required this.displayLG,
-    required this.displayMD,
-    required this.displaySM,
+    required this.displayLg,
+    required this.displayMd,
+    required this.displaySm,
     // Heading
-    required this.headingXL,
-    required this.headingLG,
-    required this.headingMD,
-    required this.headingSM,
-    required this.headingXS,
+    required this.headingXl,
+    required this.headingLg,
+    required this.headingMd,
+    required this.headingSm,
+    required this.headingXs,
     // Title
-    required this.titleLG,
-    required this.titleMD,
-    required this.titleSM,
-    required this.titleXS,
+    required this.titleLg,
+    required this.titleMd,
+    required this.titleSm,
+    required this.titleXs,
     // Body
-    required this.bodyLG,
-    required this.bodyMD,
-    required this.bodySM,
-    required this.bodyXS,
+    required this.bodyLg,
+    required this.bodyMd,
+    required this.bodySm,
+    required this.bodyXs,
     // Label
-    required this.labelLG,
-    required this.labelMD,
-    required this.labelSM,
-    required this.labelXS,
+    required this.labelLg,
+    required this.labelMd,
+    required this.labelSm,
+    required this.labelXs,
     // Code
-    required this.codeMD,
-    required this.codeSM,
+    required this.codeMd,
+    required this.codeSm,
   });
 
   /// Display large — hero headings, marketing splash copy.
-  final TextStyle displayLG;
+  final TextStyle displayLg;
 
   /// Display medium.
-  final TextStyle displayMD;
+  final TextStyle displayMd;
 
   /// Display small.
-  final TextStyle displaySM;
+  final TextStyle displaySm;
 
   /// Heading XL — page-level section titles.
-  final TextStyle headingXL;
+  final TextStyle headingXl;
 
   /// Heading large.
-  final TextStyle headingLG;
+  final TextStyle headingLg;
 
   /// Heading medium — card titles, modal headings.
-  final TextStyle headingMD;
+  final TextStyle headingMd;
 
   /// Heading small.
-  final TextStyle headingSM;
+  final TextStyle headingSm;
 
   /// Heading XS — section dividers, list group labels.
-  final TextStyle headingXS;
+  final TextStyle headingXs;
 
   /// Title large — section headings inside cards, drawer titles, sheet headers.
-  final TextStyle titleLG;
+  final TextStyle titleLg;
 
   /// Title medium — list group headers, tab labels, sub-section titles.
-  final TextStyle titleMD;
+  final TextStyle titleMd;
 
   /// Title small — compact sub-headings, sidebar labels, dense list headers.
-  final TextStyle titleSM;
+  final TextStyle titleSm;
 
   /// Title extra small — compact sub-headings, sidebar labels, dense list headers.
-  final TextStyle titleXS;
+  final TextStyle titleXs;
 
   /// Body large — long-form reading content.
-  final TextStyle bodyLG;
+  final TextStyle bodyLg;
 
   /// Body medium — default paragraph / list item text.
-  final TextStyle bodyMD;
+  final TextStyle bodyMd;
 
   /// Body small — secondary descriptions, supporting copy.
-  final TextStyle bodySM;
+  final TextStyle bodySm;
 
   /// Body XS — fine print, timestamps, footnotes.
-  final TextStyle bodyXS;
+  final TextStyle bodyXs;
 
   /// Label large — button text (large), prominent tags.
-  final TextStyle labelLG;
+  final TextStyle labelLg;
 
   /// Label medium — default button text, input labels, nav labels.
-  final TextStyle labelMD;
+  final TextStyle labelMd;
 
   /// Label small — small button text, chip labels, compact badges.
-  final TextStyle labelSM;
+  final TextStyle labelSm;
 
   /// Label XS — overline, eyebrow text, micro-labels above inputs.
-  final TextStyle labelXS;
+  final TextStyle labelXs;
 
   /// Code medium — inline code blocks, code editors, shell output.
-  final TextStyle codeMD;
+  final TextStyle codeMd;
 
   /// Code small — compact code snippets, token labels.
-  final TextStyle codeSM;
+  final TextStyle codeSm;
 
   static DievasTypographyThemeData lerp(DievasTypographyThemeData a, DievasTypographyThemeData b, double t) =>
       DievasTypographyThemeData(
-        displayLG: TextStyle.lerp(a.displayLG, b.displayLG, t)!,
-        displayMD: TextStyle.lerp(a.displayMD, b.displayMD, t)!,
-        displaySM: TextStyle.lerp(a.displaySM, b.displaySM, t)!,
-        headingXL: TextStyle.lerp(a.headingXL, b.headingXL, t)!,
-        headingLG: TextStyle.lerp(a.headingLG, b.headingLG, t)!,
-        headingMD: TextStyle.lerp(a.headingMD, b.headingMD, t)!,
-        headingSM: TextStyle.lerp(a.headingSM, b.headingSM, t)!,
-        headingXS: TextStyle.lerp(a.headingXS, b.headingXS, t)!,
-        titleLG: TextStyle.lerp(a.titleLG, b.titleLG, t)!,
-        titleMD: TextStyle.lerp(a.titleMD, b.titleMD, t)!,
-        titleSM: TextStyle.lerp(a.titleSM, b.titleSM, t)!,
-        titleXS: TextStyle.lerp(a.titleXS, b.titleXS, t)!,
-        bodyLG: TextStyle.lerp(a.bodyLG, b.bodyLG, t)!,
-        bodyMD: TextStyle.lerp(a.bodyMD, b.bodyMD, t)!,
-        bodySM: TextStyle.lerp(a.bodySM, b.bodySM, t)!,
-        bodyXS: TextStyle.lerp(a.bodyXS, b.bodyXS, t)!,
-        labelLG: TextStyle.lerp(a.labelLG, b.labelLG, t)!,
-        labelMD: TextStyle.lerp(a.labelMD, b.labelMD, t)!,
-        labelSM: TextStyle.lerp(a.labelSM, b.labelSM, t)!,
-        labelXS: TextStyle.lerp(a.labelXS, b.labelXS, t)!,
-        codeMD: TextStyle.lerp(a.codeMD, b.codeMD, t)!,
-        codeSM: TextStyle.lerp(a.codeSM, b.codeSM, t)!,
+        displayLg: TextStyle.lerp(a.displayLg, b.displayLg, t)!,
+        displayMd: TextStyle.lerp(a.displayMd, b.displayMd, t)!,
+        displaySm: TextStyle.lerp(a.displaySm, b.displaySm, t)!,
+        headingXl: TextStyle.lerp(a.headingXl, b.headingXl, t)!,
+        headingLg: TextStyle.lerp(a.headingLg, b.headingLg, t)!,
+        headingMd: TextStyle.lerp(a.headingMd, b.headingMd, t)!,
+        headingSm: TextStyle.lerp(a.headingSm, b.headingSm, t)!,
+        headingXs: TextStyle.lerp(a.headingXs, b.headingXs, t)!,
+        titleLg: TextStyle.lerp(a.titleLg, b.titleLg, t)!,
+        titleMd: TextStyle.lerp(a.titleMd, b.titleMd, t)!,
+        titleSm: TextStyle.lerp(a.titleSm, b.titleSm, t)!,
+        titleXs: TextStyle.lerp(a.titleXs, b.titleXs, t)!,
+        bodyLg: TextStyle.lerp(a.bodyLg, b.bodyLg, t)!,
+        bodyMd: TextStyle.lerp(a.bodyMd, b.bodyMd, t)!,
+        bodySm: TextStyle.lerp(a.bodySm, b.bodySm, t)!,
+        bodyXs: TextStyle.lerp(a.bodyXs, b.bodyXs, t)!,
+        labelLg: TextStyle.lerp(a.labelLg, b.labelLg, t)!,
+        labelMd: TextStyle.lerp(a.labelMd, b.labelMd, t)!,
+        labelSm: TextStyle.lerp(a.labelSm, b.labelSm, t)!,
+        labelXs: TextStyle.lerp(a.labelXs, b.labelXs, t)!,
+        codeMd: TextStyle.lerp(a.codeMd, b.codeMd, t)!,
+        codeSm: TextStyle.lerp(a.codeSm, b.codeSm, t)!,
       );
 
   @override
   List<Object?> get props => [
-    displayLG,
-    displayMD,
-    displaySM,
-    headingXL,
-    headingLG,
-    headingMD,
-    headingSM,
-    headingXS,
-    titleLG,
-    titleMD,
-    titleSM,
-    bodyLG,
-    bodyMD,
-    bodySM,
-    bodyXS,
-    labelLG,
-    labelMD,
-    labelSM,
-    labelXS,
-    codeMD,
-    codeSM,
+    displayLg,
+    displayMd,
+    displaySm,
+    headingXl,
+    headingLg,
+    headingMd,
+    headingSm,
+    headingXs,
+    titleLg,
+    titleMd,
+    titleSm,
+    bodyLg,
+    bodyMd,
+    bodySm,
+    bodyXs,
+    labelLg,
+    labelMd,
+    labelSm,
+    labelXs,
+    codeMd,
+    codeSm,
   ];
 }

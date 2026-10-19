@@ -8,8 +8,8 @@ class _ColourSwatches extends StatelessWidget {
     final colours = context.colours;
 
     return Wrap(
-      spacing: context.spacing.MD,
-      runSpacing: context.spacing.MD,
+      spacing: context.spacing.md,
+      runSpacing: context.spacing.md,
       children: [
         _Swatch(label: 'primary', colour: colours.core.primary),
         _Swatch(label: 'textPrimary', colour: colours.text.textPrimary),
@@ -39,15 +39,15 @@ class _Swatch extends StatelessWidget {
         crossAxisAlignment: .start,
         children: [
           Container(
-            height: context.spacing.XL3,
+            height: context.spacing.xl3,
             decoration: BoxDecoration(
               color: colour,
-              borderRadius: context.border.MD,
+              borderRadius: context.border.md,
               border: .all(color: context.colours.border.dividerColour),
             ),
           ),
-          SizedBox(height: context.spacing.SM),
-          Text(label, style: context.typography.codeSM),
+          SizedBox(height: context.spacing.sm),
+          Text(label, style: context.typography.codeSm),
         ],
       ),
     );

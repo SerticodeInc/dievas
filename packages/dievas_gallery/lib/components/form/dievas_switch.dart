@@ -42,17 +42,17 @@ class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _StateRow('Off', value: false),
-          SizedBox(height: context.spacing.MD),
+          SizedBox(height: context.spacing.md),
           _StateRow('On', value: true),
-          SizedBox(height: context.spacing.MD),
+          SizedBox(height: context.spacing.md),
           _StateRow('Disabled (off)', value: false, disabled: true),
-          SizedBox(height: context.spacing.MD),
+          SizedBox(height: context.spacing.md),
           _StateRow('Disabled (on)', value: true, disabled: true),
         ],
       ),
@@ -72,7 +72,7 @@ class _StateRow extends StatelessWidget {
     children: [
       SizedBox(
         width: 140,
-        child: Text(name, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
+        child: Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
       ),
       ComponentBoundary(
         child: DievasSwitch(value: value, onChanged: disabled ? null : (_) {}),
@@ -85,7 +85,7 @@ class _WithLabels extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,11 +93,11 @@ class _WithLabels extends StatelessWidget {
           ComponentBoundary(
             child: DievasSwitch(value: false, label: 'Notifications', onChanged: (_) {}),
           ),
-          SizedBox(height: context.spacing.MD),
+          SizedBox(height: context.spacing.md),
           ComponentBoundary(
             child: DievasSwitch(value: true, label: 'Dark mode', onChanged: (_) {}),
           ),
-          SizedBox(height: context.spacing.MD),
+          SizedBox(height: context.spacing.md),
           ComponentBoundary(child: DievasSwitch(value: false, label: 'Disabled setting', onChanged: null)),
         ],
       ),

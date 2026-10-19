@@ -7,13 +7,13 @@
 ### Buttons
 
 - Fade and scale between normal content and loading on all three standard variants. `animateLoading` defaults to true; false or reduced motion switches instantly. Preserve content size and semantics through both directions and rapid reversals. Widgetbook exposes an Animate loading transition toggle.
-- Use the shared DievasLoader inside buttons. Replace the fixed rotating sweep with a rounded arc whose head grows and tail catches up while rotating, following MoonCircularLoader. Default the loader track to transparent and its timing to the loader motion token; add optional diameter, stroke width, and animation-duration overrides. Reduced motion displays a static arc.
+- Use the shared DievasLoader inside buttons. Replace the fixed rotating sweep with a rounded arc whose head grows and tail catches up while rotating, following MoonCircularLoader. Default the loader track to transparent and its timing to the loader motion token; add optional diameter, stroke width, and animation duration overrides. Reduced motion displays a static arc.
 
-- Consolidate button sizes, states, styles, and icon behaviour in one types file. Keep public package exports and variant style exports available. Move the icon-button colour resolver and state-controller lifecycle into the icon button; remove unused switcher and loader/press mixin files.
+- Consolidate button sizes, states, styles, and icon behaviour in one types file. Keep public package exports and variant style exports available. Move the icon button colour resolver and state controller lifecycle into the icon button; remove unused switcher and loader/press mixin files.
 
-- Add border visibility, radius overrides, full width, long-press actions, semantic labels, and optional pulse/jiggle press effects to filled, outlined, and text buttons. Keep custom child and shape APIs; the gallery focuses on standard button content.
+- Add border visibility, radius overrides, full width, long press actions, semantic labels, and optional pulse/jiggle press effects to filled, outlined, and text buttons. Keep custom child and shape APIs; the gallery focuses on standard button content.
 - Share keyboard/pointer handling and loading layout across the three variants. Remove their Material ink surfaces and IconTheme wrappers; resolve standard icon slots through DievasIcon. Loading keeps the content footprint and accessible label; pulse and loader animations respect reduced motion.
-- Wrap long labels in narrow layouts and retain natural width in unbounded parents. Support icon-only content and long-press-only buttons.
+- Wrap long labels in narrow layouts and retain natural width in unbounded parents. Support icon only content and long press only buttons.
 - Default outlined buttons to primary foregrounds with neutral borders, and text buttons to secondary foregrounds. Destructive styles and explicit theme/colour overrides remain available. Text buttons now use the size variant's minimum height and padding instead of a content-only hit area.
 - Add grouped Widgetbook controls for all reference options, independent semantic colour overrides, zero-radius overrides, RTL, loading/disabled states, and working tap/long-press feedback. Add a standard three-variant showcase; omit custom-shape examples.
 
@@ -23,6 +23,12 @@
 - Add item/current_item/hover/divider colour overrides, gap, and leading/trailing item slots. Preserve the existing complete trail default and navigation API.
 - Support keyboard navigation, selected page semantics, and horizontal scrolling on narrow screens. Disable home navigation when the trail is disabled.
 - Expand Widgetbook with reference controls, semantic colour selectors, working navigation/reset, and a custom overflow example. Fix item count indexing.
+
+### Breaking size token naming reversed
+
+- Align the Flutter theme mirrors with the lowercased `dievas_tokens` size vocabulary: `DievasSpacingThemeData.md`, `DievasBorderThemeData.sm`, `DievasElevationThemeData.xl`, `DievasSizingThemeData.buttonHeightMd`, `DievasTypographyThemeData.displayLg`, and `DievasGridBreakpoint.md`.
+- Colour roles, opacity, z-index, easing, animation intents, and `strokeThin`/`touchMin` are unchanged.
+- Run `dart run dievas_migrate --write` to migrate theme mirrors and component call sites. The new `dievas_migrate` CLI reads analyzer errors and rewrites only the renamed token types.
 
 ### Avatar
 

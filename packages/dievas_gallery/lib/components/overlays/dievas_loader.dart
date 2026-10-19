@@ -42,7 +42,7 @@ class _AllSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.XL),
+      padding: EdgeInsets.all(context.spacing.xl),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,7 +58,7 @@ class _WithLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
-      padding: EdgeInsets.all(context.spacing.XL),
+      padding: EdgeInsets.all(context.spacing.xl),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -66,7 +66,7 @@ class _WithLabel extends StatelessWidget {
             ComponentBoundary(
               child: DievasLoader(size: size, label: 'Loading ${size.name}…'),
             ),
-            SizedBox(height: context.spacing.XL),
+            SizedBox(height: context.spacing.xl),
           ],
         ],
       ),

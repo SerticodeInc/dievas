@@ -16,25 +16,25 @@ class _ThemeStatics extends StatelessWidget {
           value: Text(switch (DievasTheme.materialOf(context).brightness) {
             .light => 'Light',
             .dark => 'Dark',
-          }, style: context.typography.labelMD),
+          }, style: context.typography.labelMd),
         ),
-        SizedBox(height: context.spacing.LG),
+        SizedBox(height: context.spacing.lg),
         _ThemeValueRow(
           label: 'Brand colour',
           accessor: 'DievasTheme.coloursOf(context).core.primary',
           value: Semantics(
             label: 'Active theme primary colour',
             child: CircleAvatar(
-              radius: context.sizing.avatarSM * avatarRadiusFactor,
+              radius: context.sizing.avatarSm * avatarRadiusFactor,
               backgroundColor: DievasTheme.coloursOf(context).core.primary,
             ),
           ),
         ),
-        SizedBox(height: context.spacing.LG),
+        SizedBox(height: context.spacing.lg),
         _ThemeValueRow(
           label: 'Fast motion',
           accessor: 'DievasTheme.animationOf(context).fast',
-          value: Text('${DievasTheme.animationOf(context).fast.inMilliseconds} ms', style: context.typography.labelMD),
+          value: Text('${DievasTheme.animationOf(context).fast.inMilliseconds} ms', style: context.typography.labelMd),
         ),
       ],
     );
@@ -53,16 +53,16 @@ class _ThemeValueRow extends StatelessWidget {
     crossAxisAlignment: .start,
     children: [
       Wrap(
-        spacing: context.spacing.MD,
-        runSpacing: context.spacing.SM,
+        spacing: context.spacing.md,
+        runSpacing: context.spacing.sm,
         crossAxisAlignment: .center,
         children: [
-          Text(label, style: context.typography.bodyMD),
+          Text(label, style: context.typography.bodyMd),
           value,
         ],
       ),
-      SizedBox(height: context.spacing.XS),
-      Text(accessor, style: context.typography.codeSM.copyWith(color: context.colours.text.textSecondary)),
+      SizedBox(height: context.spacing.xs),
+      Text(accessor, style: context.typography.codeSm.copyWith(color: context.colours.text.textSecondary)),
     ],
   );
 }
@@ -85,22 +85,22 @@ class _ComponentOverride extends StatelessWidget {
     );
 
     return Wrap(
-      spacing: context.spacing.XL2,
-      runSpacing: context.spacing.LG,
+      spacing: context.spacing.xl2,
+      runSpacing: context.spacing.lg,
       children: [
         Column(
           crossAxisAlignment: .start,
           children: [
-            Text('Default', style: context.typography.labelSM),
-            SizedBox(height: context.spacing.MD),
+            Text('Default', style: context.typography.labelSm),
+            SizedBox(height: context.spacing.md),
             const DievasAvatar(initials: 'DX'),
           ],
         ),
         Column(
           crossAxisAlignment: .start,
           children: [
-            Text('Local override', style: context.typography.labelSM),
-            SizedBox(height: context.spacing.MD),
+            Text('Local override', style: context.typography.labelSm),
+            SizedBox(height: context.spacing.md),
             DievasTheme(
               data: overridden,
               child: const DievasAvatar(initials: 'DX'),
@@ -120,14 +120,14 @@ class _StatChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    padding: .symmetric(horizontal: context.spacing.MD, vertical: context.spacing.SM),
-    decoration: BoxDecoration(color: context.colours.background.dialogBackground, borderRadius: context.border.MD),
+    padding: .symmetric(horizontal: context.spacing.md, vertical: context.spacing.sm),
+    decoration: BoxDecoration(color: context.colours.background.dialogBackground, borderRadius: context.border.md),
     child: Column(
       crossAxisAlignment: .start,
       children: [
-        Text(label, style: context.typography.labelXS.copyWith(color: context.colours.text.textTertiary)),
-        SizedBox(height: context.spacing.XS),
-        Text(value, style: context.typography.labelMD),
+        Text(label, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
+        SizedBox(height: context.spacing.xs),
+        Text(value, style: context.typography.labelMd),
       ],
     ),
   );

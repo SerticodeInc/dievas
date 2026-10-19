@@ -40,7 +40,7 @@ class _Playground extends StatelessWidget {
 
     final DievasTagBorderRadius borderRadius = switch (shape) {
       'Pill' => .pill,
-      _ => .rounded(DievasTheme.borderOf(context).SM),
+      _ => .rounded(DievasTheme.borderOf(context).sm),
     };
 
     final showLeadingIcon = context.knobs.boolean(label: 'Leading Icon');
@@ -71,14 +71,14 @@ class _AllStyles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconSize = DievasTheme.componentsOf(context).tag.iconSize;
-    final borderSM = DievasTheme.borderOf(context).SM;
+    final borderSM = DievasTheme.borderOf(context).sm;
 
     return Center(
       child: Padding(
-        padding: .all(context.spacing.LG),
+        padding: .all(context.spacing.lg),
         child: Wrap(
-          spacing: context.spacing.SM,
-          runSpacing: context.spacing.SMPlus,
+          spacing: context.spacing.sm,
+          runSpacing: context.spacing.smPlus,
           alignment: .center,
           children: [
             for (final style in DievasTagStyle.values) ...[

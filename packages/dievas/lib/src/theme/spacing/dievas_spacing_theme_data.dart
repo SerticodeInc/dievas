@@ -8,102 +8,102 @@ import 'package:equatable/equatable.dart';
 /// is a 1-to-1 read.
 final class DievasSpacingThemeData extends Equatable {
   const DievasSpacingThemeData({
-    this.NONE = DievasSpacingSemantic.NONE,
-    this.XS = DievasSpacingSemantic.XS,
-    this.SM = DievasSpacingSemantic.SM,
-    this.SMPlus = DievasSpacingSemantic.SMPlus,
-    this.MD = DievasSpacingSemantic.MD,
-    this.MDPlus = DievasSpacingSemantic.MDPlus,
-    this.LG = DievasSpacingSemantic.LG,
-    this.LGPlus = DievasSpacingSemantic.LGPlus,
-    this.XL = DievasSpacingSemantic.XL,
-    this.XLPlus = DievasSpacingSemantic.XLPlus,
-    this.XL2 = DievasSpacingSemantic.XL2,
-    this.XL2Plus = DievasSpacingSemantic.XL2Plus,
-    this.XL3 = DievasSpacingSemantic.XL3,
-    this.XL4 = DievasSpacingSemantic.XL4,
-    this.XL5 = DievasSpacingSemantic.XL5,
+    this.none = DievasSpacingSemantic.none,
+    this.xs = DievasSpacingSemantic.xs,
+    this.sm = DievasSpacingSemantic.sm,
+    this.smPlus = DievasSpacingSemantic.smPlus,
+    this.md = DievasSpacingSemantic.md,
+    this.mdPlus = DievasSpacingSemantic.mdPlus,
+    this.lg = DievasSpacingSemantic.lg,
+    this.lgPlus = DievasSpacingSemantic.lgPlus,
+    this.xl = DievasSpacingSemantic.xl,
+    this.xlPlus = DievasSpacingSemantic.xlPlus,
+    this.xl2 = DievasSpacingSemantic.xl2,
+    this.xl2Plus = DievasSpacingSemantic.xl2Plus,
+    this.xl3 = DievasSpacingSemantic.xl3,
+    this.xl4 = DievasSpacingSemantic.xl4,
+    this.xl5 = DievasSpacingSemantic.xl5,
   });
 
   /// 0px
-  final double NONE;
+  final double none;
 
   /// 4px — tight inline gaps, icon-to-label spacing.
-  final double XS;
+  final double xs;
 
   /// 8px — compact list item padding, small gutters.
-  final double SM;
+  final double sm;
 
   /// 12px — small component internal padding.
-  final double SMPlus;
+  final double smPlus;
 
   /// 16px — default internal padding for cards, inputs, buttons.
-  final double MD;
+  final double md;
 
   /// 20px — comfortable section gaps.
-  final double MDPlus;
+  final double mdPlus;
 
   /// 24px — component group separation, card-to-card gap.
-  final double LG;
+  final double lg;
 
   /// 28px — slightly wider section separation.
-  final double LGPlus;
+  final double lgPlus;
 
   /// 32px — page section padding (vertical rhythm on mobile).
-  final double XL;
+  final double xl;
 
   /// 40px — generous section breathing room.
-  final double XLPlus;
+  final double xlPlus;
 
   /// 48px — large section breaks, modal padding.
-  final double XL2;
+  final double xl2;
 
   /// 56px — prominent feature spacing.
-  final double XL2Plus;
+  final double xl2Plus;
 
   /// 64px — page-level vertical padding on tablet.
-  final double XL3;
+  final double xl3;
 
   /// 80px — hero section spacing.
-  final double XL4;
+  final double xl4;
 
   /// 96px — wide-screen layout gutters.
-  final double XL5;
+  final double xl5;
 
   DievasSpacingThemeData copyWith({
-    double? NONE,
-    double? XS,
-    double? SM,
-    double? SMPlus,
-    double? MD,
-    double? MDPlus,
-    double? LG,
-    double? LGPlus,
-    double? XL,
-    double? XLPlus,
-    double? XL2,
-    double? XL2Plus,
-    double? XL3,
-    double? XL4,
-    double? XL5,
+    double? none,
+    double? xs,
+    double? sm,
+    double? smPlus,
+    double? md,
+    double? mdPlus,
+    double? lg,
+    double? lgPlus,
+    double? xl,
+    double? xlPlus,
+    double? xl2,
+    double? xl2Plus,
+    double? xl3,
+    double? xl4,
+    double? xl5,
   }) => DievasSpacingThemeData(
-    NONE: NONE ?? this.NONE,
-    XS: XS ?? this.XS,
-    SM: SM ?? this.SM,
-    SMPlus: SMPlus ?? this.SMPlus,
-    MD: MD ?? this.MD,
-    MDPlus: MDPlus ?? this.MDPlus,
-    LG: LG ?? this.LG,
-    LGPlus: LGPlus ?? this.LGPlus,
-    XL: XL ?? this.XL,
-    XLPlus: XLPlus ?? this.XLPlus,
-    XL2: XL2 ?? this.XL2,
-    XL2Plus: XL2Plus ?? this.XL2Plus,
-    XL3: XL3 ?? this.XL3,
-    XL4: XL4 ?? this.XL4,
-    XL5: XL5 ?? this.XL5,
+    none: none ?? this.none,
+    xs: xs ?? this.xs,
+    sm: sm ?? this.sm,
+    smPlus: smPlus ?? this.smPlus,
+    md: md ?? this.md,
+    mdPlus: mdPlus ?? this.mdPlus,
+    lg: lg ?? this.lg,
+    lgPlus: lgPlus ?? this.lgPlus,
+    xl: xl ?? this.xl,
+    xlPlus: xlPlus ?? this.xlPlus,
+    xl2: xl2 ?? this.xl2,
+    xl2Plus: xl2Plus ?? this.xl2Plus,
+    xl3: xl3 ?? this.xl3,
+    xl4: xl4 ?? this.xl4,
+    xl5: xl5 ?? this.xl5,
   );
 
   @override
-  List<Object?> get props => [NONE, XS, SM, SMPlus, MD, MDPlus, LG, LGPlus, XL, XLPlus, XL2, XL2Plus, XL3, XL4, XL5];
+  List<Object?> get props => [none, xs, sm, smPlus, md, mdPlus, lg, lgPlus, xl, xlPlus, xl2, xl2Plus, xl3, xl4, xl5];
 }

@@ -122,7 +122,7 @@ class _DievasTextButtonState extends State<DievasTextButton> {
       shape: switch ((widget.shape, widget.borderRadius)) {
         (final shape?, _) => shape,
         (_, final radius?) => RoundedRectangleBorder(borderRadius: radius),
-        _ => RoundedRectangleBorder(borderRadius: DievasTheme.borderOf(context).MD),
+        _ => RoundedRectangleBorder(borderRadius: DievasTheme.borderOf(context).md),
       },
       disabledOpacity: theme.disabledOpacity,
       pressOpacity: theme.pressOpacity,
@@ -130,13 +130,13 @@ class _DievasTextButtonState extends State<DievasTextButton> {
       iconSize: iconSize,
       textStyle: textStyle,
       height: switch (widget.size) {
-        .SM => DievasTheme.sizingOf(context).buttonHeightSM,
-        .MD => DievasTheme.sizingOf(context).buttonHeightMD,
-        .LG => DievasTheme.sizingOf(context).buttonHeightLG,
+        .SM => DievasTheme.sizingOf(context).buttonHeightSm,
+        .MD => DievasTheme.sizingOf(context).buttonHeightMd,
+        .LG => DievasTheme.sizingOf(context).buttonHeightLg,
       },
       padding: EdgeInsets.symmetric(
-        horizontal: DievasTheme.spacingOf(context).MD,
-        vertical: DievasTheme.spacingOf(context).XS,
+        horizontal: DievasTheme.spacingOf(context).md,
+        vertical: DievasTheme.spacingOf(context).xs,
       ),
       label: widget.label,
       leadingIcon: widget.leadingIcon,

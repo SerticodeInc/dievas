@@ -32,17 +32,17 @@ class _FormExamplesState extends State<_FormExamples> {
         hint: 'you@example.com',
         helperText: 'We never share your email.',
       ),
-      SizedBox(height: context.spacing.MD),
+      SizedBox(height: context.spacing.md),
       DievasTextArea(controller: _areaController, label: 'Message', hint: 'Write something…'),
-      SizedBox(height: context.spacing.MD),
+      SizedBox(height: context.spacing.md),
       DievasCheckbox(
         value: _checkbox,
         onChanged: (value) => setState(() => _checkbox = value),
         label: 'Subscribe to updates',
       ),
-      SizedBox(height: context.spacing.MD),
+      SizedBox(height: context.spacing.md),
       DievasSwitch(value: _switchOn, onChanged: (value) => setState(() => _switchOn = value), label: 'Notifications'),
-      SizedBox(height: context.spacing.MD),
+      SizedBox(height: context.spacing.md),
       DievasRadio<_RadioOption>(
         value: .one,
         groupValue: _radioOption,
@@ -55,7 +55,7 @@ class _FormExamplesState extends State<_FormExamples> {
         onChanged: (value) => setState(() => _radioOption = value),
         label: 'Option two',
       ),
-      SizedBox(height: context.spacing.MD),
+      SizedBox(height: context.spacing.md),
       SingleChildScrollView(
         scrollDirection: .horizontal,
         child: DievasSegmentedControl<_Density>(
@@ -69,7 +69,7 @@ class _FormExamplesState extends State<_FormExamples> {
           },
         ),
       ),
-      SizedBox(height: context.spacing.MD),
+      SizedBox(height: context.spacing.md),
       DievasDropdown<_Plan>(
         options: _Plan.values,
         value: _plan,

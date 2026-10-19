@@ -19,19 +19,19 @@ class _ElevationLevels extends StatelessWidget {
     final colours = DievasTheme.coloursOf(context);
 
     final levels = [
-      ('NONE', elevation.NONE),
-      ('XS', elevation.XS),
-      ('SM', elevation.SM),
-      ('MD', elevation.MD),
-      ('LG', elevation.LG),
-      ('XL', elevation.XL),
+      ('none', elevation.none),
+      ('xs', elevation.xs),
+      ('sm', elevation.sm),
+      ('md', elevation.md),
+      ('lg', elevation.lg),
+      ('xl', elevation.xl),
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.LG, vertical: context.spacing.XLPlus),
+      padding: EdgeInsets.symmetric(horizontal: context.spacing.lg, vertical: context.spacing.xlPlus),
       child: Wrap(
-        spacing: context.spacing.XL,
-        runSpacing: context.spacing.XLPlus,
+        spacing: context.spacing.xl,
+        runSpacing: context.spacing.xlPlus,
         alignment: WrapAlignment.start,
         children: [
           for (final (name, shadows) in levels)
@@ -42,16 +42,16 @@ class _ElevationLevels extends StatelessWidget {
                   height: 64, // elevation card demo — gallery-only visual dimension
                   decoration: BoxDecoration(
                     color: colours.background.dialogBackground,
-                    borderRadius: DievasTheme.borderOf(context).MD,
+                    borderRadius: DievasTheme.borderOf(context).md,
                     boxShadow: shadows,
                   ),
                 ),
-                SizedBox(height: context.spacing.SMPlus),
+                SizedBox(height: context.spacing.smPlus),
                 Text(
                   name,
                   style: DievasTheme.typographyOf(
                     context,
-                  ).labelXS.copyWith(fontFamily: 'monospace', color: colours.text.textTertiary),
+                  ).labelXs.copyWith(fontFamily: 'monospace', color: colours.text.textTertiary),
                 ),
               ],
             ),
@@ -80,13 +80,13 @@ class _OpacityTokens extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           for (final (name, value) in entries)
             Padding(
-              padding: EdgeInsets.only(bottom: context.spacing.MD),
+              padding: EdgeInsets.only(bottom: context.spacing.md),
               child: Row(
                 children: [
                   SizedBox(
@@ -95,7 +95,7 @@ class _OpacityTokens extends StatelessWidget {
                       name,
                       style: DievasTheme.typographyOf(
                         context,
-                      ).labelXS.copyWith(fontFamily: 'monospace', color: colours.text.textTertiary),
+                      ).labelXs.copyWith(fontFamily: 'monospace', color: colours.text.textTertiary),
                     ),
                   ),
                   SizedBox(
@@ -105,10 +105,10 @@ class _OpacityTokens extends StatelessWidget {
                       textAlign: TextAlign.end,
                       style: DievasTheme.typographyOf(
                         context,
-                      ).labelXS.copyWith(color: colours.text.textSecondary, fontFamily: 'monospace'),
+                      ).labelXs.copyWith(color: colours.text.textSecondary, fontFamily: 'monospace'),
                     ),
                   ),
-                  SizedBox(width: context.spacing.MD),
+                  SizedBox(width: context.spacing.md),
                   Opacity(
                     opacity: value,
                     child: Container(
@@ -116,7 +116,7 @@ class _OpacityTokens extends StatelessWidget {
                       height: 28, // opacity chip demo — gallery-only visual dimension
                       decoration: BoxDecoration(
                         color: colours.action.buttonPrimaryBackground,
-                        borderRadius: DievasTheme.borderOf(context).SM,
+                        borderRadius: DievasTheme.borderOf(context).sm,
                       ),
                     ),
                   ),

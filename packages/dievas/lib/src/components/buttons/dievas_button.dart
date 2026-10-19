@@ -149,7 +149,7 @@ class DievasButton extends StatelessWidget {
       borderColor: borderColor,
       onPressed: onPressed,
       height: height,
-      padding: padding + EdgeInsets.symmetric(vertical: DievasTheme.spacingOf(context).XS),
+      padding: padding + EdgeInsets.symmetric(vertical: DievasTheme.spacingOf(context).xs),
       onLongPress: onLongPress,
       showBorder: showBorder,
       isFullWidth: isFullWidth,

@@ -18,7 +18,7 @@ class _AllSets extends StatelessWidget {
     final colours = DievasTheme.coloursOf(context);
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -115,7 +115,7 @@ class _FeedbackColours extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.LG),
+      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -147,16 +147,16 @@ class _Section extends StatelessWidget {
     final colours = DievasTheme.coloursOf(context);
 
     return Padding(
-      padding: EdgeInsets.only(bottom: context.spacing.XL),
+      padding: EdgeInsets.only(bottom: context.spacing.xl),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             label.toUpperCase(),
-            style: typography.labelXS.copyWith(letterSpacing: 2, color: colours.text.textTertiary),
+            style: typography.labelXs.copyWith(letterSpacing: 2, color: colours.text.textTertiary),
           ),
-          SizedBox(height: context.spacing.SMPlus),
-          Wrap(spacing: context.spacing.SMPlus, runSpacing: context.spacing.SMPlus, children: swatches),
+          SizedBox(height: context.spacing.smPlus),
+          Wrap(spacing: context.spacing.smPlus, runSpacing: context.spacing.smPlus, children: swatches),
         ],
       ),
     );
@@ -181,16 +181,16 @@ class _Swatch extends StatelessWidget {
           height: 48, // swatch chip — gallery-only visual dimension
           decoration: BoxDecoration(
             color: color,
-            borderRadius: context.border.MD,
+            borderRadius: context.border.md,
             border: Border.all(color: context.colours.border.dividerColour.withAlpha(50)),
           ),
         ),
-        SizedBox(height: context.spacing.SM),
+        SizedBox(height: context.spacing.sm),
         SizedBox(
           width: 72, // swatch label width — gallery-only
           child: Text(
             name,
-            style: typography.labelXS,
+            style: typography.labelXs,
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,

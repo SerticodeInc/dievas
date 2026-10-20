@@ -26,7 +26,7 @@ abstract final class DievasDurationPrimitives {
   /// 500ms tooltip wait, brief feedback pauses.
   static const Duration d500 = Duration(milliseconds: 500);
 
-  /// 800ms loader spinner rotation cycle.
+  /// 800ms extended motion.
   static const Duration d800 = Duration(milliseconds: 800);
 
   /// 1000ms / 1s noticeable delays and auto dismiss timers.
@@ -34,6 +34,9 @@ abstract final class DievasDurationPrimitives {
 
   /// 2000ms / 2s tooltip show duration, longer feedback pauses.
   static const Duration d2000 = Duration(milliseconds: 2000);
+
+  /// 2222ms relaxed loader rotation, matching Moon circular-loader timing.
+  static const Duration d2222 = Duration(milliseconds: 2222);
 
   /// 3000ms / 3s snackbar auto dismiss, temporary notifications.
   static const Duration d3000 = Duration(milliseconds: 3000);

@@ -1,16 +1,11 @@
-import 'dart:math' as math;
-
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:dievas/src/theme/component/button/dievas_button_theme_data.dart';
 import 'package:dievas/src/theme/component/button/dievas_button_theme_style.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
 import 'dievas_button_builder.dart';
-import 'button_types/dievas_button_icon_style_behavior.dart';
-import 'button_types/dievas_button_size.dart';
-import 'button_types/dievas_button_state.dart';
-import 'button_types/dievas_button_style.dart';
+import 'dievas_button_types.dart';
 
 /// Internal base widget shared by [DievasFilledButton] and [DievasOutlinedButton].
 ///
@@ -35,7 +30,15 @@ class DievasButton extends StatelessWidget {
     this.leadingIcon,
     this.trailingIcon,
     this.onPressed,
-  }) : assert(label != null || child != null, 'Either label or child must be provided'),
+    this.onLongPress,
+    this.borderRadius,
+    this.showBorder,
+    this.isFullWidth = false,
+    this.showPulseEffect = false,
+    this.animateLoading = true,
+    this.showPulseEffectJiggle = false,
+    this.semanticLabel,
+  }) : assert(label != null || child != null || leadingIcon != null || trailingIcon != null, 'Provide button content'),
        assert(
          child == null || (leadingIcon == null && trailingIcon == null),
          'leadingIcon/trailingIcon are ignored when child is provided',
@@ -54,8 +57,32 @@ class DievasButton extends StatelessWidget {
   final Widget? leadingIcon;
   final Widget? trailingIcon;
 
-  /// Pressed callback. `null` or [DievasButtonState.loading] → non-interactive.
+  /// Tap action. Both callbacks being null, loading, or disabled blocks interaction.
   final VoidCallback? onPressed;
+
+  /// Long-press action. A long-press-only button remains enabled.
+  final VoidCallback? onLongPress;
+
+  /// Radius override when no custom [shape] is supplied.
+  final BorderRadiusGeometry? borderRadius;
+
+  /// Border visibility. Null preserves the variant default or explicit colour.
+  final bool? showBorder;
+
+  /// Expand to the bounded parent's width; retain natural width when unbounded.
+  final bool isFullWidth;
+
+  /// Animate a subtle scale response while pressed.
+  final bool showPulseEffect;
+
+  /// Fade and scale between content and loader. Reduced motion switches instantly.
+  final bool animateLoading;
+
+  /// Add rotation to the pulse response. Requires [showPulseEffect].
+  final bool showPulseEffectJiggle;
+
+  /// Accessible name for icon-only or otherwise unlabeled buttons.
+  final String? semanticLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +125,11 @@ class DievasButton extends StatelessWidget {
       ),
     };
 
-    final effectiveShape = shape ?? RoundedRectangleBorder(borderRadius: BorderRadius.all(radius.square));
+    final effectiveShape = switch ((shape, borderRadius)) {
+      (final shape?, _) => shape,
+      (_, final radius?) => RoundedRectangleBorder(borderRadius: radius),
+      _ => RoundedRectangleBorder(borderRadius: BorderRadius.all(radius.square)),
+    };
 
     return DievasButtonBuilder(
       state: state,
@@ -107,7 +138,6 @@ class DievasButton extends StatelessWidget {
       shape: effectiveShape,
       disabledOpacity: themeData.disabledOpacity,
       pressOpacity: themeData.pressOpacity,
-      loaderRotationDuration: DievasTheme.animationOf(context).loader,
       iconSpacing: iconSpacing,
       iconSize: iconSize,
       textStyle: textStyle,
@@ -118,22 +148,16 @@ class DievasButton extends StatelessWidget {
       foregroundColor: foregroundColor,
       borderColor: borderColor,
       onPressed: onPressed,
+      height: height,
+      padding: padding + EdgeInsets.symmetric(vertical: DievasTheme.spacingOf(context).xs),
+      onLongPress: onLongPress,
+      showBorder: showBorder,
+      isFullWidth: isFullWidth,
+      showPulseEffect: showPulseEffect,
+      animateLoading: animateLoading,
+      showPulseEffectJiggle: showPulseEffectJiggle,
+      semanticLabel: semanticLabel,
       child: child,
-      builder: (_, props) {
-        final borderWidth = props.borderSide.width;
-        final effectiveHeight = math.max(height, props.estimatedTextHeight + padding.vertical);
-        final rawVerticalPad = (height - borderWidth * 2 - props.estimatedTextHeight) / 2;
-        final effectivePadding = padding + .symmetric(vertical: rawVerticalPad.clamp(0.0, .infinity));
-
-        final child = Center(
-          child: switch (size) {
-            .SM || .MD => UnconstrainedBox(constrainedAxis: .vertical, child: props.child),
-            .LG => props.child,
-          },
-        );
-
-        return DievasButtonDecorator(height: effectiveHeight, padding: effectivePadding, child: child);
-      },
     );
   }
 }

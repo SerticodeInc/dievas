@@ -12,6 +12,7 @@ import 'button/dievas_filled_button_theme_data.dart';
 import 'button/dievas_icon_button_theme_data.dart';
 import 'button/dievas_outlined_button_theme_data.dart';
 import 'button/dievas_text_button_theme_data.dart';
+import 'carousel/dievas_carousel_theme_data.dart';
 import 'checkbox/dievas_checkbox_theme_data.dart';
 import 'circular_progress/dievas_circular_progress_theme_data.dart';
 import 'dot_indicator/dievas_dot_indicator_theme_data.dart';
@@ -78,6 +79,7 @@ final class DievasComponentThemeData extends Equatable {
     required this.tabBar,
     required this.popover,
     required this.divider,
+    this.carousel = const DievasCarouselThemeData(),
   });
 
   /// Theme data for [DievasAuthCode].
@@ -181,7 +183,11 @@ final class DievasComponentThemeData extends Equatable {
   /// Theme data for [DievasDivider].
   final DievasDividerThemeData divider;
 
+  /// Defaults for snapping carousels.
+  final DievasCarouselThemeData carousel;
+
   DievasComponentThemeData copyWith({
+    DievasCarouselThemeData? carousel,
     DievasFilledButtonGroupThemeData? filledButton,
     DievasOutlinedButtonGroupThemeData? outlinedButton,
     DievasTextButtonGroupThemeData? textButton,
@@ -249,10 +255,12 @@ final class DievasComponentThemeData extends Equatable {
     tabBar: tabBar ?? this.tabBar,
     popover: popover ?? this.popover,
     divider: divider ?? this.divider,
+    carousel: carousel ?? this.carousel,
   );
 
   @override
   List<Object?> get props => [
+    carousel,
     filledButton,
     outlinedButton,
     textButton,

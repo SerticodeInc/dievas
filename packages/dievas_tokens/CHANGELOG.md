@@ -6,18 +6,17 @@ Changes to the Dievas token package, newest first.
 
 ## Unreleased
 
+- Slow `DievasAnimationSemantic.loader` from 800ms to 2222ms using the new `DievasDurationPrimitives.d2222`, making the circular loader arc animation visible at Moon timing.
+
 - Use Moon Design Piccolo purple (`#5C33CF`) for the default primary brand in both themes. Update focus, selection, active controls, cursors, and tinted brand surfaces together; derive hover and pressed shades from Piccolo. Explicit palette overrides remain available.
 
-### Breaking size token naming
+### Breaking size token naming reverse
 
-- Lowercase every class-scoped size identifier: `DievasSpacingSemantic.md`, `DievasRadiusSemantic.sm`, `DievasElevationSemantic.xl`, `DievasElevationShadowLayer.xl`, `DievasBreakpointSemantic.xs`, and the breakpoint primitives.
+- Lowercase every class scoped size identifier: `DievasSpacingSemantic.md`, `DievasRadiusSemantic.sm`, `DievasElevationSemantic.xl`, `DievasElevationShadowLayer.xl`, `DievasBreakpointSemantic.xs`, and the breakpoint primitives.
 - Role tokens keep their base and take a lowerCamelCase suffix: `buttonHeightMd`, `displayLg`, `headingXl`, `titleXs`, `bodyMd`, `labelXs`, and `codeMd`.
 - Radius extras use lowercase names (`r28` through `r64`); `none` and `full` replace `NONE` and `FULL`.
 - Colour roles, opacity, z-index, easing, animation intents, and `touchMin` are unchanged.
 - Run `dart run dievas_migrate --write` to rewrite consumer code. The new `dievas_migrate` CLI reads analyzer errors, so it leaves unrelated enums that reuse the same names untouched.
-
-
-## 1.0.1
 
 ### Breaking colour role names
 
@@ -25,7 +24,7 @@ Changes to the Dievas token package, newest first.
 - Replace ambiguous brand, background, surface, and action names; separate dialog, menu, tooltip, and other component backgrounds.
 - Preserve existing colour values and extend palette application to the new component roles.
 - Migrate Flutter themes, component consumers, examples, gallery labels, and tests together.
-- See the token package’s README colour naming migration section for the replacement table and custom-theme migration requirements.
+- See the token package’s README colour naming migration section for the replacement table and custom theme migration requirements.
 
 ### Changed
 

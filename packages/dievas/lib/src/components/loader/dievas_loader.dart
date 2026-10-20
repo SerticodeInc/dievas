@@ -1,66 +1,58 @@
+import 'dart:math' as math;
+
 import 'package:flutter/widgets.dart';
 
 import 'package:dievas/src/theme/dievas_theme.dart';
 
-/// Size variants for [DievasLoader].
-enum DievasLoaderSize {
-  /// Small — 20 dp spinner.
-  SM,
+enum DievasLoaderSize { SM, MD, LG }
 
-  /// Medium — 32 dp spinner (default).
-  MD,
-
-  /// Large — 48 dp spinner.
-  LG,
-}
-
-/// A standalone loading indicator — distinct from the inline button loading state.
+/// A rounded circular arc whose head grows and tail catches up as it rotates.
 ///
-/// Use when a full area or screen is loading. For button loading states, use the
-/// [DievasFilledButton] / [DievasTextButton] `state` parameter instead.
-///
-/// ```dart
-/// DievasLoader(size: .MD, label: 'Loading…')
-/// DievasLoader(size: .LG, colour: DievasTheme.of(context).colours.action.actionError)
-/// ```
-///
-/// Moon reference: Loader
+/// Uses the same loader for standalone feedback and inline button loading.
+/// Reduced motion displays a static arc. The track is transparent by default.
 class DievasLoader extends StatefulWidget {
-  const DievasLoader({super.key, this.size = .MD, this.label, this.colour, this.trackColour});
+  const DievasLoader({
+    super.key,
+    this.size = .MD,
+    this.label,
+    this.colour,
+    this.trackColour,
+    this.diameter,
+    this.strokeWidth,
+    this.animationDuration,
+  }) : assert(diameter == null || diameter > 0),
+       assert(strokeWidth == null || strokeWidth > 0),
+       assert(animationDuration == null || animationDuration > Duration.zero);
 
-  /// Controls spinner diameter (SM / MD / LG).
   final DievasLoaderSize size;
-
-  /// Optional label shown below the spinner.
   final String? label;
-
-  /// Colour of the active spinning arc.
-  ///
-  /// Defaults to the theme's loader colour when `null`.
   final Color? colour;
-
-  /// Colour of the background track arc.
-  ///
-  /// Defaults to the theme's loader track colour when `null`.
   final Color? trackColour;
+
+  /// Exact diameter override, useful for inline icon slots.
+  final double? diameter;
+  final double? strokeWidth;
+
+  /// Duration of one rotation. Overrides the loader theme's duration.
+  final Duration? animationDuration;
 
   @override
   State<DievasLoader> createState() => _DievasLoaderState();
 }
 
 class _DievasLoaderState extends State<DievasLoader> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 800))..repeat();
-  }
+  late final AnimationController _controller = AnimationController(vsync: this);
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _controller.duration = DievasTheme.componentsOf(context).loader.animationDuration;
+    _configureAnimation();
+  }
+
+  @override
+  void didUpdateWidget(DievasLoader oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.animationDuration != widget.animationDuration) _configureAnimation();
   }
 
   @override
@@ -72,23 +64,30 @@ class _DievasLoaderState extends State<DievasLoader> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).loader;
-
-    final diameter = switch (widget.size) {
-      .SM => theme.spinnerSizeSM,
-      .MD => theme.spinnerSizeMD,
-      .LG => theme.spinnerSizeLG,
+    final diameter = switch ((widget.diameter, widget.size)) {
+      (final diameter?, _) => diameter,
+      (_, .SM) => theme.spinnerSizeSM,
+      (_, .MD) => theme.spinnerSizeMD,
+      (_, .LG) => theme.spinnerSizeLG,
     };
 
     return Column(
       mainAxisSize: .min,
       children: [
-        SizedBox.square(
-          dimension: diameter,
-          child: _SpinnerAnimation(
-            controller: _controller,
-            colour: widget.colour ?? theme.color,
-            trackColour: widget.trackColour ?? theme.trackColour,
-            strokeWidth: theme.strokeWidth,
+        RepaintBoundary(
+          child: SizedBox.square(
+            dimension: diameter,
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (context, child) => CustomPaint(
+                painter: _SpinnerPainter(
+                  progress: MediaQuery.disableAnimationsOf(context) ? null : _controller.value,
+                  colour: widget.colour ?? theme.color,
+                  trackColour: widget.trackColour ?? theme.trackColour,
+                  strokeWidth: widget.strokeWidth ?? theme.strokeWidth,
+                ),
+              ),
+            ),
           ),
         ),
         if (widget.label case final label?) ...[
@@ -98,30 +97,16 @@ class _DievasLoaderState extends State<DievasLoader> with SingleTickerProviderSt
       ],
     );
   }
-}
 
-class _SpinnerAnimation extends AnimatedWidget {
-  const _SpinnerAnimation({
-    required this.controller,
-    required this.colour,
-    required this.trackColour,
-    required this.strokeWidth,
-  }) : super(listenable: controller);
-
-  final AnimationController controller;
-  final Color colour;
-  final Color trackColour;
-  final double strokeWidth;
-
-  @override
-  Widget build(BuildContext context) => CustomPaint(
-    painter: _SpinnerPainter(
-      progress: controller.value,
-      colour: colour,
-      trackColour: trackColour,
-      strokeWidth: strokeWidth,
-    ),
-  );
+  void _configureAnimation() {
+    // Five head/tail cycles and three rotations share one seamless timeline.
+    _controller.duration = (widget.animationDuration ?? DievasTheme.componentsOf(context).loader.animationDuration) * 3;
+    if (MediaQuery.disableAnimationsOf(context)) {
+      _controller.stop();
+    } else {
+      _controller.repeat();
+    }
+  }
 }
 
 class _SpinnerPainter extends CustomPainter {
@@ -132,41 +117,30 @@ class _SpinnerPainter extends CustomPainter {
     required this.strokeWidth,
   });
 
-  final double progress;
+  final double? progress;
   final Color colour;
   final Color trackColour;
   final double strokeWidth;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width / 2, size.height / 2);
-    final radius = (size.width - strokeWidth) / 2;
-    // -π/2
-    const startAngle = -1.5707963267948966;
-
-    final trackPaint = Paint()
-      ..color = trackColour
+    final phase = ((progress ?? 0) * 5) % 1;
+    final head = const Interval(0, 0.5, curve: Curves.fastOutSlowIn).transform(phase);
+    final tail = const Interval(0.5, 1, curve: Curves.fastOutSlowIn).transform(phase);
+    final (start, sweep) = switch (progress) {
+      final progress? => (
+        -math.pi / 2 + tail * math.pi * 1.5 + progress * math.pi * 6 + phase * math.pi * 0.5,
+        math.max((head - tail) * math.pi * 1.5, 0.001),
+      ),
+      _ => (-math.pi / 2, math.pi * 1.5),
+    };
+    final bounds = (Offset.zero & size).deflate(strokeWidth / 2);
+    final paint = Paint()
       ..strokeWidth = strokeWidth
       ..style = .stroke
       ..strokeCap = .round;
-
-    final arcPaint = Paint()
-      ..color = colour
-      ..strokeWidth = strokeWidth
-      ..style = .stroke
-      ..strokeCap = .round;
-
-    // Track
-    canvas.drawCircle(center, radius, trackPaint);
-
-    // Arc — sweeps 270° rotated by progress
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
-      startAngle + progress * 6.283185307179586, // 2π
-      4.71238898038469, // 270° in radians
-      false,
-      arcPaint,
-    );
+    canvas.drawCircle(bounds.center, bounds.shortestSide / 2, paint..color = trackColour);
+    canvas.drawArc(bounds, start, sweep, false, paint..color = colour);
   }
 
   @override

@@ -97,7 +97,6 @@ class _PlaygroundState extends State<_Playground> {
         : [(variant, tone, title)];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: .stretch,
         children: [
@@ -190,7 +189,6 @@ class _ExampleHeading extends StatelessWidget {
 class _AllTones extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
-    padding: EdgeInsets.all(context.spacing.lg),
     child: Column(
       children: [
         for (final tone in DievasAlertTone.values) ...[
@@ -211,15 +209,12 @@ class _AllTones extends StatelessWidget {
 class _WithDismiss extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: ComponentBoundary(
-        child: DievasAlert(
-          tone: .warning,
-          title: 'Action required',
-          description: 'You have unsaved changes. Dismiss to discard them.',
-          onDismiss: () {},
-        ),
+    child: ComponentBoundary(
+      child: DievasAlert(
+        tone: .warning,
+        title: 'Action required',
+        description: 'You have unsaved changes. Dismiss to discard them.',
+        onDismiss: () {},
       ),
     ),
   );
@@ -228,7 +223,6 @@ class _WithDismiss extends StatelessWidget {
 class _NoDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
-    padding: EdgeInsets.all(context.spacing.lg),
     child: Column(
       children: [
         for (final tone in DievasAlertTone.values) ...[

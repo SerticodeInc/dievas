@@ -33,18 +33,15 @@ class _Playground extends StatelessWidget {
     ];
 
     return Center(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.spacing.xl),
-        child: ComponentBoundary(
-          child: SizedBox(
-            width: context.sizing.inputHeightMd * 8,
-            child: DievasSearchWithList<String>(
-              items: fruits,
-              displayString: (s) => s,
-              hint: hint,
-              enabled: enabled,
-              onSelected: (_) {},
-            ),
+      child: ComponentBoundary(
+        child: SizedBox(
+          width: context.sizing.inputHeightMd * 8,
+          child: DievasSearchWithList<String>(
+            items: fruits,
+            displayString: (s) => s,
+            hint: hint,
+            enabled: enabled,
+            onSelected: (_) {},
           ),
         ),
       ),
@@ -57,53 +54,50 @@ class _StaticDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.xl),
-      child: Column(
-        mainAxisSize: .min,
-        children: [
-          _DemoBlock(
-            'Default',
-            child: SizedBox(
-              width: 320,
-              child: DievasSearchWithList<String>(
-                items: const ['Apple', 'Banana', 'Cherry'],
-                displayString: (s) => s,
-                hint: 'Search...',
-                onSelected: (_) {},
-              ),
+    child: Column(
+      mainAxisSize: .min,
+      children: [
+        _DemoBlock(
+          'Default',
+          child: SizedBox(
+            width: 320,
+            child: DievasSearchWithList<String>(
+              items: const ['Apple', 'Banana', 'Cherry'],
+              displayString: (s) => s,
+              hint: 'Search...',
+              onSelected: (_) {},
             ),
           ),
-          SizedBox(height: context.spacing.md),
-          _DemoBlock(
-            'With Custom Leading Icon',
-            child: SizedBox(
-              width: 320,
-              child: DievasSearchWithList<String>(
-                items: const ['Apple', 'Banana', 'Cherry'],
-                displayString: (s) => s,
-                hint: 'Find...',
-                leadingIcon: const Icon(Icons.filter_list_rounded),
-                onSelected: (_) {},
-              ),
+        ),
+        SizedBox(height: context.spacing.md),
+        _DemoBlock(
+          'With Custom Leading Icon',
+          child: SizedBox(
+            width: 320,
+            child: DievasSearchWithList<String>(
+              items: const ['Apple', 'Banana', 'Cherry'],
+              displayString: (s) => s,
+              hint: 'Find...',
+              leadingIcon: const Icon(Icons.filter_list_rounded),
+              onSelected: (_) {},
             ),
           ),
-          SizedBox(height: context.spacing.md),
-          _DemoBlock(
-            'Disabled',
-            child: SizedBox(
-              width: 320,
-              child: DievasSearchWithList<String>(
-                items: ['Apple', 'Banana', 'Cherry'],
-                displayString: (s) => s,
-                hint: 'Search...',
-                enabled: false,
-                onSelected: (_) {},
-              ),
+        ),
+        SizedBox(height: context.spacing.md),
+        _DemoBlock(
+          'Disabled',
+          child: SizedBox(
+            width: 320,
+            child: DievasSearchWithList<String>(
+              items: ['Apple', 'Banana', 'Cherry'],
+              displayString: (s) => s,
+              hint: 'Search...',
+              enabled: false,
+              onSelected: (_) {},
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }

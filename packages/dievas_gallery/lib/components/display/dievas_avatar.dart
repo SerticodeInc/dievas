@@ -89,7 +89,6 @@ class _Playground extends StatelessWidget {
     return Directionality(
       textDirection: rtl ? .rtl : .ltr,
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(context.spacing.lg),
         child: Column(
           mainAxisSize: .min,
           children: [
@@ -210,25 +209,22 @@ class _AllSizes extends StatelessWidget {
     final spacing = context.spacing;
 
     return Center(
-      child: Padding(
-        padding: .all(spacing.lg),
-        child: Wrap(
-          spacing: spacing.md,
-          crossAxisAlignment: .center,
-          children: [
-            for (final size in DievasAvatarSize.values)
-              Column(
-                mainAxisSize: .min,
-                spacing: spacing.sm,
-                children: [
-                  ComponentBoundary(
-                    child: DievasAvatar(initials: 'AB', size: size),
-                  ),
-                  Text(size.name, style: context.typography.labelXs),
-                ],
-              ),
-          ],
-        ),
+      child: Wrap(
+        spacing: spacing.md,
+        crossAxisAlignment: .center,
+        children: [
+          for (final size in DievasAvatarSize.values)
+            Column(
+              mainAxisSize: .min,
+              spacing: spacing.sm,
+              children: [
+                ComponentBoundary(
+                  child: DievasAvatar(initials: 'AB', size: size),
+                ),
+                Text(size.name, style: context.typography.labelXs),
+              ],
+            ),
+        ],
       ),
     );
   }
@@ -242,25 +238,22 @@ class _AllShapes extends StatelessWidget {
     final spacing = context.spacing;
 
     return Center(
-      child: Padding(
-        padding: .all(spacing.lg),
-        child: Wrap(
-          spacing: spacing.lg,
-          crossAxisAlignment: .center,
-          children: [
-            for (final shape in DievasAvatarShape.values)
-              Column(
-                mainAxisSize: .min,
-                spacing: spacing.sm,
-                children: [
-                  ComponentBoundary(
-                    child: DievasAvatar(initials: 'AB', size: .LG, shape: shape),
-                  ),
-                  Text(shape.name, style: context.typography.labelXs),
-                ],
-              ),
-          ],
-        ),
+      child: Wrap(
+        spacing: spacing.lg,
+        crossAxisAlignment: .center,
+        children: [
+          for (final shape in DievasAvatarShape.values)
+            Column(
+              mainAxisSize: .min,
+              spacing: spacing.sm,
+              children: [
+                ComponentBoundary(
+                  child: DievasAvatar(initials: 'AB', size: .LG, shape: shape),
+                ),
+                Text(shape.name, style: context.typography.labelXs),
+              ],
+            ),
+        ],
       ),
     );
   }

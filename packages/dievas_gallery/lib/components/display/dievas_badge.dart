@@ -51,19 +51,16 @@ class _AllStyles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Wrap(
-        spacing: context.spacing.sm,
-        runSpacing: context.spacing.smPlus,
-        alignment: WrapAlignment.center,
-        children: [
-          for (final style in DievasBadgeStyle.values)
-            ComponentBoundary(
-              child: DievasBadge(label: style.name, style: style),
-            ),
-        ],
-      ),
+    child: Wrap(
+      spacing: context.spacing.sm,
+      runSpacing: context.spacing.smPlus,
+      alignment: WrapAlignment.center,
+      children: [
+        for (final style in DievasBadgeStyle.values)
+          ComponentBoundary(
+            child: DievasBadge(label: style.name, style: style),
+          ),
+      ],
     ),
   );
 }
@@ -73,35 +70,32 @@ class _AllTones extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (final style in DievasBadgeStyle.values) ...[
-            Text(
-              style.name,
-              style: context.typography.labelXs.copyWith(
-                fontWeight: FontWeight.w600,
-                color: context.colours.text.textPrimary,
-              ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final style in DievasBadgeStyle.values) ...[
+          Text(
+            style.name,
+            style: context.typography.labelXs.copyWith(
+              fontWeight: FontWeight.w600,
+              color: context.colours.text.textPrimary,
             ),
-            SizedBox(height: context.spacing.sm),
-            Wrap(
-              spacing: context.spacing.sm,
-              runSpacing: context.spacing.sm,
-              children: [
-                for (final tone in DievasBadgeTone.values)
-                  ComponentBoundary(
-                    child: DievasBadge(label: tone.name, style: style, tone: tone),
-                  ),
-              ],
-            ),
-            SizedBox(height: context.spacing.md),
-          ],
+          ),
+          SizedBox(height: context.spacing.sm),
+          Wrap(
+            spacing: context.spacing.sm,
+            runSpacing: context.spacing.sm,
+            children: [
+              for (final tone in DievasBadgeTone.values)
+                ComponentBoundary(
+                  child: DievasBadge(label: tone.name, style: style, tone: tone),
+                ),
+            ],
+          ),
+          SizedBox(height: context.spacing.md),
         ],
-      ),
+      ],
     ),
   );
 }

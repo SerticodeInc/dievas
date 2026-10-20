@@ -26,6 +26,7 @@ class DievasGallery extends StatelessWidget {
             name: 'Display',
             children: [
               dotIndicatorComponent,
+              carouselComponent,
               avatarComponent,
               badgeComponent,
               circularLoaderComponent,

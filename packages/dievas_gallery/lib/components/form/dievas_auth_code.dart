@@ -71,7 +71,6 @@ class _Playground extends StatelessWidget {
     final errorBorderColour = context.tokenColourKnob(label: 'Error border colour', role: .border);
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         mainAxisSize: .min,
         children: [
@@ -121,26 +120,23 @@ class _Configurations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
-    child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
-      child: Column(
-        mainAxisSize: .min,
-        children: [
-          _DemoBlock('4-digit — plain', child: DievasAuthCode(codeLength: 4, autofocus: false, onCompleted: (_) {})),
-          SizedBox(height: context.spacing.lg),
-          _DemoBlock('6-digit — plain', child: DievasAuthCode(codeLength: 6, autofocus: false, onCompleted: (_) {})),
-          SizedBox(height: context.spacing.lg),
-          _DemoBlock(
-            '6-digit — obscured',
-            child: DievasAuthCode(codeLength: 6, obscureText: true, autofocus: false, onCompleted: (_) {}),
-          ),
-          SizedBox(height: context.spacing.lg),
-          _DemoBlock(
-            '4-digit — disabled',
-            child: DievasAuthCode(codeLength: 4, enabled: false, autofocus: false, onCompleted: (_) {}),
-          ),
-        ],
-      ),
+    child: Column(
+      mainAxisSize: .min,
+      children: [
+        _DemoBlock('4-digit — plain', child: DievasAuthCode(codeLength: 4, autofocus: false, onCompleted: (_) {})),
+        SizedBox(height: context.spacing.lg),
+        _DemoBlock('6-digit — plain', child: DievasAuthCode(codeLength: 6, autofocus: false, onCompleted: (_) {})),
+        SizedBox(height: context.spacing.lg),
+        _DemoBlock(
+          '6-digit — obscured',
+          child: DievasAuthCode(codeLength: 6, obscureText: true, autofocus: false, onCompleted: (_) {}),
+        ),
+        SizedBox(height: context.spacing.lg),
+        _DemoBlock(
+          '4-digit — disabled',
+          child: DievasAuthCode(codeLength: 4, enabled: false, autofocus: false, onCompleted: (_) {}),
+        ),
+      ],
     ),
   );
 }

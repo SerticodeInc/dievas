@@ -26,19 +26,16 @@ class _Playground extends StatelessWidget {
     final disabled = context.knobs.boolean(label: 'Disabled');
 
     return Center(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.spacing.xl),
-        child: ComponentBoundary(
-          child: DievasTextArea(
-            label: label.isEmpty ? null : label,
-            hint: hint.isEmpty ? null : hint,
-            helperText: helperText.isEmpty ? null : helperText,
-            errorText: errorText.isEmpty ? null : errorText,
-            warningText: warningText.isEmpty ? null : warningText,
-            minLines: minLines.clamp(1, maxLines),
-            maxLines: maxLines,
-            enabled: !disabled,
-          ),
+      child: ComponentBoundary(
+        child: DievasTextArea(
+          label: label.isEmpty ? null : label,
+          hint: hint.isEmpty ? null : hint,
+          helperText: helperText.isEmpty ? null : helperText,
+          errorText: errorText.isEmpty ? null : errorText,
+          warningText: warningText.isEmpty ? null : warningText,
+          minLines: minLines.clamp(1, maxLines),
+          maxLines: maxLines,
+          enabled: !disabled,
         ),
       ),
     );
@@ -48,47 +45,44 @@ class _Playground extends StatelessWidget {
 class _AllStates extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.spacing.xl, vertical: context.spacing.lg),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _StateBlock('Default', child: const DievasTextArea(hint: 'Start typing...')),
-          SizedBox(height: context.spacing.mdPlus),
-          _StateBlock(
-            'With Label + Helper',
-            child: const DievasTextArea(
-              label: 'Cover letter',
-              hint: 'Why do you want to work here?',
-              helperText: 'Be concise — 300 words max.',
-              minLines: 4,
-            ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _StateBlock('Default', child: const DievasTextArea(hint: 'Start typing...')),
+        SizedBox(height: context.spacing.mdPlus),
+        _StateBlock(
+          'With Label + Helper',
+          child: const DievasTextArea(
+            label: 'Cover letter',
+            hint: 'Why do you want to work here?',
+            helperText: 'Be concise — 300 words max.',
+            minLines: 4,
           ),
-          SizedBox(height: context.spacing.mdPlus),
-          _StateBlock(
-            'Error',
-            child: const DievasTextArea(
-              label: 'Bio',
-              hint: 'Tell us about yourself...',
-              errorText: 'Bio cannot be empty.',
-            ),
+        ),
+        SizedBox(height: context.spacing.mdPlus),
+        _StateBlock(
+          'Error',
+          child: const DievasTextArea(
+            label: 'Bio',
+            hint: 'Tell us about yourself...',
+            errorText: 'Bio cannot be empty.',
           ),
-          SizedBox(height: context.spacing.mdPlus),
-          _StateBlock(
-            'Warning',
-            child: const DievasTextArea(
-              label: 'Bio',
-              hint: 'Tell us about yourself...',
-              warningText: 'Bio is very short — add a little more detail.',
-            ),
+        ),
+        SizedBox(height: context.spacing.mdPlus),
+        _StateBlock(
+          'Warning',
+          child: const DievasTextArea(
+            label: 'Bio',
+            hint: 'Tell us about yourself...',
+            warningText: 'Bio is very short — add a little more detail.',
           ),
-          SizedBox(height: context.spacing.mdPlus),
-          _StateBlock(
-            'Disabled',
-            child: const DievasTextArea(label: 'Notes', hint: 'No notes available.', enabled: false),
-          ),
-        ],
-      ),
+        ),
+        SizedBox(height: context.spacing.mdPlus),
+        _StateBlock(
+          'Disabled',
+          child: const DievasTextArea(label: 'Notes', hint: 'No notes available.', enabled: false),
+        ),
+      ],
     ),
   );
 }

@@ -41,13 +41,10 @@ class _AllSizes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.xl),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [for (final size in DievasLoaderSize.values) ComponentBoundary(child: DievasLoader(size: size))],
-      ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [for (final size in DievasLoaderSize.values) ComponentBoundary(child: DievasLoader(size: size))],
     ),
   );
 }
@@ -57,19 +54,16 @@ class _WithLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.xl),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (final size in DievasLoaderSize.values) ...[
-            ComponentBoundary(
-              child: DievasLoader(size: size, label: 'Loading ${size.name}…'),
-            ),
-            SizedBox(height: context.spacing.xl),
-          ],
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        for (final size in DievasLoaderSize.values) ...[
+          ComponentBoundary(
+            child: DievasLoader(size: size, label: 'Loading ${size.name}…'),
+          ),
+          SizedBox(height: context.spacing.xl),
         ],
-      ),
+      ],
     ),
   );
 }

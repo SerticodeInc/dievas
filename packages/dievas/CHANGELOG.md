@@ -2,7 +2,66 @@
 
 ## Unreleased
 
+### Carousel
+
+- Add `DievasCarousel` and `DievasCarouselController` with fixed item extents, snapping, gaps, anchor alignment, centring, looping and optional trailing-edge clamping.
+- Support horizontal and vertical scrolling, mouse dragging, keyboard navigation and right-to-left layouts. Preserve valid selection when item counts, extents or controllers change.
+- Add autoplay and transition overrides. Pause autoplay during interaction and background states; disable autoplay and animated navigation for reduced motion.
+- Add gallery examples with synchronized arrows and dots. Position squircle arrow buttons across card edges, add token shadows, and fade disabled boundary buttons.
+
+### Divider
+
+- Add centred labels with text-style and gap overrides for horizontal and vertical dividers.
+- Change the default thickness from 2px to 1.5px. Preserve explicit thickness overrides.
+- Fix painted lines collapsing to zero length or stretching thicker under parent constraints. Add label and optional thickness controls to the gallery.
+
+### Dot indicator
+
+- Default selected and unselected dots to equal 8px diameters with 8px gaps and a 200 ms colour fade. Preserve distinct active sizes in custom themes.
+- Add selected/unselected colour, uniform size, gap, duration, curve and accessible-label overrides.
+- Retain optional dot tapping and add keyboard activation, selected/disabled semantics, visible focus and reduced-motion support.
+- Add numbered gallery buttons that select dots, grouped overrides and count controls. Use instance overrides for the carousel’s smaller dots.
+
+### Gallery and example app
+
+- Use the Gohan surface for the shared phone background and white surfaces for carousel cards in light mode.
+- Apply 8px page padding inside the phone safe area. Remove duplicate page insets while preserving internal component spacing.
+- Declare Flutter as a direct SDK dependency of the example app, resolving eight `depend_on_referenced_packages` notices.
+
+### Loader
+
+- Slow the shared loader rotation token from 800ms to 2222ms, matching Moon timing so the arc growth and shrinkage remain visible. Applies to standalone loaders and button loaders; explicit duration overrides remain available.
+
+### Checkbox
+
+- Add optional tristate cycling: unchecked, checked, mixed, then unchecked. Preserve the enum API and binary default, including programmatically supplied mixed values.
+- Add independent check, active/inactive fill and unchecked border colour overrides, focus node, autofocus, semantic label, and a configurable tap area.
+- Animate fill and progressive tick/dash drawing; respect reduced motion. Add keyboard activation, checked/mixed/disabled semantics, and visible keyboard focus without Material ink effects.
+- Match the reference defaults with a 16px rounded box, thin stroke, neutral border, Piccolo active fill and a 40px tap target. Custom checkbox themes retain their dimensions and colours.
+- Add directional label placement and optional full width label rows. Fix long label wrapping and make the entire row clickable.
+- Rework Widgetbook with independently interactive standalone and trailing checkbox label examples, grouped semantic colour overrides, tristate/disabled, tap area and RTL controls. State/label examples remain interactive.
+
 - Use Moon Design Piccolo purple (`#5C33CF`) for the default primary brand in both themes. Update focus, selection, active controls, cursors, and tinted brand surfaces together; derive hover and pressed shades from Piccolo. Explicit palette overrides remain available.
+
+### Buttons
+
+- Fade and scale between normal content and loading on all three standard variants. `animateLoading` defaults to true; false or reduced motion switches instantly. Preserve content size and semantics through both directions and rapid reversals. Widgetbook exposes an Animate loading transition toggle.
+- Use the shared DievasLoader inside buttons. Replace the fixed rotating sweep with a rounded arc whose head grows and tail catches up while rotating, following MoonCircularLoader. Default the loader track to transparent and its timing to the loader motion token; add optional diameter, stroke width, and animation duration overrides. Reduced motion displays a static arc.
+
+- Consolidate button sizes, states, styles, and icon behaviour in one types file. Keep public package exports and variant style exports available. Move the icon button colour resolver and state controller lifecycle into the icon button; remove unused switcher and loader/press mixin files.
+
+- Add border visibility, radius overrides, full width, long press actions, semantic labels, and optional pulse/jiggle press effects to filled, outlined, and text buttons. Keep custom child and shape APIs; the gallery focuses on standard button content.
+- Share keyboard/pointer handling and loading layout across the three variants. Remove their Material ink surfaces and IconTheme wrappers; resolve standard icon slots through DievasIcon. Loading keeps the content footprint and accessible label; pulse and loader animations respect reduced motion.
+- Wrap long labels in narrow layouts and retain natural width in unbounded parents. Support icon only content and long press only buttons.
+- Default outlined buttons to primary foregrounds with neutral borders, and text buttons to secondary foregrounds. Destructive styles and explicit theme/colour overrides remain available. Text buttons now use the size variant's minimum height and padding instead of a content-only hit area.
+- Add grouped Widgetbook controls for all reference options, independent semantic colour overrides, zero radius overrides, RTL, loading/disabled states, and working tap/long-press feedback. Add a standard three variant showcase; omit custom shape examples.
+
+### Breadcrumb
+
+- Add optional middle item collapse with a menu for hidden pages, customizable overflow content, and a localized tooltip.
+- Add item/current_item/hover/divider colour overrides, gap, and leading/trailing item slots. Preserve the existing complete trail default and navigation API.
+- Support keyboard navigation, selected page semantics, and horizontal scrolling on narrow screens. Disable home navigation when the trail is disabled.
+- Expand Widgetbook with reference controls, semantic colour selectors, working navigation/reset, and a custom overflow example. Fix item count indexing.
 
 ### Breaking size token naming reversed
 

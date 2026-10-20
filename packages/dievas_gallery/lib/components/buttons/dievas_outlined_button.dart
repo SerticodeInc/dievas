@@ -2,97 +2,37 @@ import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
-import '../../knobs/token_colour_knob.dart';
+import 'button_playground.dart';
 import '../../widgets/component_boundary.dart';
 
 final outlinedButtonComponent = WidgetbookComponent(
   name: 'OutlinedButton',
   useCases: [
-    WidgetbookUseCase(name: 'Playground', builder: (ctx) => _Playground()),
+    WidgetbookUseCase(
+      name: 'Playground',
+      builder: (ctx) => const ButtonPlayground(variant: .outlined),
+    ),
     WidgetbookUseCase(name: 'All Styles', builder: (ctx) => const _AllStyles()),
     WidgetbookUseCase(name: 'All Sizes', builder: (ctx) => const _AllSizes()),
     WidgetbookUseCase(name: 'All States', builder: (ctx) => const _AllStates()),
   ],
 );
 
-class _Playground extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final label = context.knobs.string(label: 'Label', initialValue: 'Cancel');
-
-    final style = context.knobs.object.dropdown<DievasOutlinedButtonStyle>(
-      label: 'Style',
-      options: DievasOutlinedButtonStyle.values,
-      labelBuilder: (v) => v.name,
-    );
-
-    final size = context.knobs.object.dropdown<DievasButtonSize>(
-      label: 'Size',
-      options: DievasButtonSize.values,
-      labelBuilder: (v) => v.name,
-      initialOption: DievasButtonSize.MD,
-    );
-
-    final state = context.knobs.object.dropdown<DievasButtonState>(
-      label: 'State',
-      options: DievasButtonState.values,
-      labelBuilder: (v) => v.name,
-    );
-
-    final borderRadiusOverride = context.knobs.double.slider(label: 'Border radius', initialValue: 0, min: 0, max: 24);
-    final leadingIcon = context.knobs.boolean(label: 'Leading Icon');
-    final trailingIcon = context.knobs.boolean(label: 'Trailing Icon');
-    final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
-    final useChild = context.knobs.boolean(label: 'Use custom child');
-
-    final useCustomColours = context.knobs.boolean(label: 'Override token colours');
-    final backgroundColor = useCustomColours
-        ? context.tokenColourKnob(label: 'Background colour', role: .background)
-        : null;
-    final foregroundColor = useCustomColours ? context.tokenColourKnob(label: 'Foreground colour', role: .text) : null;
-    final borderColor = useCustomColours ? context.tokenColourKnob(label: 'Border colour', role: .border) : null;
-
-    return Center(
-      child: ComponentBoundary(
-        child: DievasOutlinedButton(
-          label: useChild ? null : (label.isEmpty ? 'Cancel' : label),
-          style: style,
-          size: size,
-          shape: borderRadiusOverride > 0
-              ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadiusOverride))
-              : null,
-          state: state,
-          backgroundColor: backgroundColor,
-          foregroundColor: foregroundColor,
-          borderColor: borderColor,
-          leadingIcon: useChild ? null : (leadingIcon ? const Icon(Icons.close_rounded) : null),
-          trailingIcon: useChild ? null : (trailingIcon ? const Icon(Icons.arrow_back_rounded) : null),
-          onPressed: enabled ? () {} : null,
-          child: useChild ? const Text('Custom child') : null,
-        ),
-      ),
-    );
-  }
-}
-
 class _AllStyles extends StatelessWidget {
   const _AllStyles();
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
-        alignment: WrapAlignment.center,
-        children: [
-          for (final style in DievasOutlinedButtonStyle.values)
-            ComponentBoundary(
-              child: DievasOutlinedButton(label: style.name, style: style, onPressed: () {}),
-            ),
-        ],
-      ),
+    child: Wrap(
+      spacing: context.spacing.smPlus,
+      runSpacing: context.spacing.smPlus,
+      alignment: WrapAlignment.center,
+      children: [
+        for (final style in DievasOutlinedButtonStyle.values)
+          ComponentBoundary(
+            child: DievasOutlinedButton(label: style.name, style: style, onPressed: () {}),
+          ),
+      ],
     ),
   );
 }
@@ -102,19 +42,16 @@ class _AllSizes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          for (final size in DievasButtonSize.values)
-            ComponentBoundary(
-              child: DievasOutlinedButton(label: size.name, size: size, onPressed: () {}),
-            ),
-        ],
-      ),
+    child: Wrap(
+      spacing: context.spacing.smPlus,
+      runSpacing: context.spacing.smPlus,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        for (final size in DievasButtonSize.values)
+          ComponentBoundary(
+            child: DievasOutlinedButton(label: size.name, size: size, onPressed: () {}),
+          ),
+      ],
     ),
   );
 }
@@ -124,23 +61,20 @@ class _AllStates extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Wrap(
-        spacing: context.spacing.smPlus,
-        runSpacing: context.spacing.smPlus,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          for (final state in DievasButtonState.values)
-            ComponentBoundary(
-              child: DievasOutlinedButton(
-                label: state.name,
-                state: state,
-                onPressed: state == DievasButtonState.disabled ? null : () {},
-              ),
+    child: Wrap(
+      spacing: context.spacing.smPlus,
+      runSpacing: context.spacing.smPlus,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        for (final state in DievasButtonState.values)
+          ComponentBoundary(
+            child: DievasOutlinedButton(
+              label: state.name,
+              state: state,
+              onPressed: state == DievasButtonState.disabled ? null : () {},
             ),
-        ],
-      ),
+          ),
+      ],
     ),
   );
 }

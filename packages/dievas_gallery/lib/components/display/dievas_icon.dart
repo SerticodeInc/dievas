@@ -33,23 +33,20 @@ class _AllSizes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: EdgeInsets.all(context.spacing.lg),
-      child: Wrap(
-        spacing: context.spacing.lg,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          for (final size in DievasIconSize.values)
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ComponentBoundary(child: DievasIcon(Icons.star_rounded, size: size)),
-                SizedBox(height: context.spacing.sm),
-                Text(size.name, style: context.typography.labelXs),
-              ],
-            ),
-        ],
-      ),
+    child: Wrap(
+      spacing: context.spacing.lg,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        for (final size in DievasIconSize.values)
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ComponentBoundary(child: DievasIcon(Icons.star_rounded, size: size)),
+              SizedBox(height: context.spacing.sm),
+              Text(size.name, style: context.typography.labelXs),
+            ],
+          ),
+      ],
     ),
   );
 }

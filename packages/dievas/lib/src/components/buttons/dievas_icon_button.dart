@@ -1,21 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:dievas/src/theme/dievas_theme.dart';
-import 'dievas_button_press_mixin.dart';
-import 'dievas_button_color_utils.dart';
-import 'button_types/dievas_button_size.dart';
+import 'dievas_button_types.dart';
 
-/// Visual style variants for [DievasIconButton].
-///
-/// The variants differ only by container: [ghost] is transparent, [tinted] sits
-/// on a subtle surface fill. Both share the same icon colour.
-enum DievasIconButtonStyle {
-  /// Transparent background — icon only.
-  ghost,
-
-  /// Subtle surface fill behind the icon.
-  tinted,
-}
+export 'dievas_button_types.dart' show DievasIconButtonStyle;
 
 /// A square or circular button that displays a single icon with no label.
 ///
@@ -55,7 +43,9 @@ class DievasIconButton extends StatefulWidget {
   State<DievasIconButton> createState() => _DievasIconButtonState();
 }
 
-class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPressMixin {
+class _DievasIconButtonState extends State<DievasIconButton> {
+  final WidgetStatesController _statesController = WidgetStatesController();
+
   @override
   Widget build(BuildContext context) {
     final components = DievasTheme.componentsOf(context);
@@ -80,14 +70,14 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
       child: Material(
         type: .transparency,
         child: InkWell(
-          statesController: statesController,
+          statesController: _statesController,
           onTap: widget.onPressed,
           customBorder: effectiveShape,
           splashFactory: NoSplash.splashFactory,
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,
           child: ValueListenableBuilder<Set<WidgetState>>(
-            valueListenable: statesController,
+            valueListenable: _statesController,
             builder: (_, states, _) {
               final isPressed = states.contains(WidgetState.pressed);
               final isDisabled = states.contains(WidgetState.disabled) || widget.onPressed == null;
@@ -98,12 +88,12 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
 
               final activeStyle = isPressed ? buttonTheme.style.focused : buttonTheme.style.idle;
 
-              final bgColour = resolveColour(
+              final bgColour = _resolveColour(
                 override: widget.backgroundColor,
                 fallback: activeStyle.background,
                 opacity: opacityFactor,
               );
-              final iconColour = resolveColour(
+              final iconColour = _resolveColour(
                 override: widget.foregroundColor,
                 fallback: activeStyle.icon,
                 opacity: opacityFactor,
@@ -126,5 +116,19 @@ class _DievasIconButtonState extends State<DievasIconButton> with DievasButtonPr
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _statesController.dispose();
+    super.dispose();
+  }
+
+  Color _resolveColour({Color? override, Color? fallback, required double opacity}) {
+    final base = switch ((override, fallback)) {
+      (final colour?, _) || (_, final colour?) => colour,
+      _ => Colors.transparent,
+    };
+    return base.withValues(alpha: base.a * opacity);
   }
 }

@@ -45,7 +45,6 @@ class _FullScale extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -83,7 +82,6 @@ class _DisplayHeading extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -124,7 +122,6 @@ class _BodyLabel extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -151,7 +148,6 @@ class _Code extends StatelessWidget {
     final colours = DievasTheme.coloursOf(context);
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(context.spacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

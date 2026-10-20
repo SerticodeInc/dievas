@@ -51,6 +51,12 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
         override?.dropdown ?? _createDropdownTheme(colours, typography, spacing, sizing, border, elevation, animation),
     tabBar: override?.tabBar ?? _createTabBarTheme(colours, typography, spacing, sizing, border, animation),
     popover: override?.popover ?? _createPopoverTheme(colours, typography, spacing, border, animation, elevation),
+    carousel:
+        override?.carousel ??
+        DievasCarouselThemeData(
+          gap: spacing.sm,
+          textStyle: typography.bodyMd.copyWith(color: colours.text.textPrimary),
+        ),
     divider: override?.divider ?? _createDividerTheme(colours, border),
   );
 }
@@ -197,14 +203,14 @@ DievasOutlinedButtonGroupThemeData _createOutlinedButtonGroup(
   return DievasOutlinedButtonGroupThemeData(
     primary: makeThemeData((
       idle: DievasOutlinedButtonThemeStyle(
-        foreground: c.buttonPrimaryBackground,
-        icon: c.buttonPrimaryBackground,
-        borderSide: BorderSide(color: c.buttonPrimaryBackground),
+        foreground: colours.text.textPrimary,
+        icon: colours.icon.iconPrimary,
+        borderSide: BorderSide(color: colours.icon.iconSecondary),
       ),
       focused: DievasOutlinedButtonThemeStyle(
-        foreground: c.buttonPrimaryPressedBackground,
-        icon: c.buttonPrimaryPressedBackground,
-        borderSide: BorderSide(color: c.buttonPrimaryPressedBackground),
+        foreground: colours.text.textPrimary,
+        icon: colours.icon.iconPrimary,
+        borderSide: BorderSide(color: colours.icon.iconSecondary),
       ),
     )),
     destructive: makeThemeData((
@@ -241,11 +247,8 @@ DievasTextButtonGroupThemeData _createTextButtonGroup(
 
   return DievasTextButtonGroupThemeData(
     primary: makeThemeData((
-      idle: DievasTextButtonThemeStyle(foreground: c.buttonPrimaryBackground, icon: c.buttonPrimaryBackground),
-      focused: DievasTextButtonThemeStyle(
-        foreground: c.buttonPrimaryPressedBackground,
-        icon: c.buttonPrimaryPressedBackground,
-      ),
+      idle: DievasTextButtonThemeStyle(foreground: colours.text.textSecondary, icon: colours.icon.iconSecondary),
+      focused: DievasTextButtonThemeStyle(foreground: colours.text.textPrimary, icon: colours.icon.iconPrimary),
     )),
     destructive: makeThemeData((
       idle: DievasTextButtonThemeStyle(foreground: c.buttonDestructiveBackground, icon: c.buttonDestructiveBackground),
@@ -297,7 +300,7 @@ DievasDotIndicatorThemeData _createDotIndicatorTheme(
   DievasAnimationThemeData animation,
 ) => DievasDotIndicatorThemeData(
   dotSize: DievasSizingPrimitives.s8,
-  activeDotSize: DievasSizingPrimitives.s10,
+  activeDotSize: DievasSizingPrimitives.s8,
   dotSpacing: DievasSpacingPrimitives.s2,
   colourActive: colours.action.sliderActiveTrack,
   colourInactive: colours.border.dividerColour,
@@ -417,13 +420,13 @@ DievasCheckboxThemeData _createCheckboxTheme(
   DievasBorderThemeData border,
 ) {
   return DievasCheckboxThemeData(
-    size: DievasSizingPrimitives.s20,
-    borderRadius: border.xs,
-    strokeWidth: border.strokeThick,
+    size: DievasSizingPrimitives.s16,
+    borderRadius: border.sm,
+    strokeWidth: border.strokeThin,
     colourChecked: colours.action.checkboxCheckedBackground,
     colourUnchecked: colours.staticColours.staticTransparent,
     colourDisabled: colours.action.checkboxDisabledBackground,
-    borderColourUnchecked: colours.border.dividerColour,
+    borderColourUnchecked: colours.icon.iconSecondary,
     borderColourDisabled: colours.border.inputDisabledBorder,
     checkColour: colours.action.checkboxCheckmark,
     disabledOpacity: DievasOpacitySemantic.disabled,
@@ -699,10 +702,10 @@ DievasLoaderThemeData _createLoaderTheme(
     spinnerSizeLG: DievasSizingPrimitives.s48,
     strokeWidth: _kStrokeLoader,
     color: colours.action.progressIndicator,
-    trackColour: colours.background.progressTrack,
+    trackColour: const Color(0x00000000),
     labelStyle: typography.bodySm.copyWith(color: colours.text.textSecondary),
     labelSpacing: spacing.sm,
-    animationDuration: animation.standard,
+    animationDuration: animation.loader,
   );
 }
 
@@ -871,7 +874,7 @@ DievasTabBarThemeData _createTabBarTheme(
 
 // Divider
 DievasDividerThemeData _createDividerTheme(DievasColourThemeData colours, DievasBorderThemeData border) =>
-    DievasDividerThemeData(colour: colours.border.dividerColour, thickness: border.strokeThick);
+    DievasDividerThemeData(colour: colours.border.dividerColour, thickness: border.strokeDefault);
 
 // Popover
 DievasPopoverThemeData _createPopoverTheme(

@@ -37,10 +37,7 @@ export 'src/components/buttons/dievas_filled_button.dart';
 export 'src/components/buttons/dievas_icon_button.dart';
 export 'src/components/buttons/dievas_outlined_button.dart';
 export 'src/components/buttons/dievas_text_button.dart';
-export 'src/components/buttons/button_types/dievas_button_icon_style_behavior.dart';
-export 'src/components/buttons/button_types/dievas_button_size.dart';
-export 'src/components/buttons/button_types/dievas_button_state.dart';
-export 'src/components/buttons/button_types/dievas_button_style.dart';
+export 'src/components/buttons/dievas_button_types.dart';
 
 //  Components — Form
 export 'src/components/dropdown/dievas_dropdown.dart';
@@ -88,3 +85,6 @@ export 'src/components/popover/dievas_popover.dart';
 //  Components — Utility
 export 'src/components/loader/dievas_loader.dart';
 export 'src/components/empty_state/dievas_empty_state.dart';
+
+export 'src/theme/component/carousel/dievas_carousel_theme_data.dart';
+export 'src/components/carousel/dievas_carousel.dart';

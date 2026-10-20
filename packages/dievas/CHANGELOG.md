@@ -2,6 +2,34 @@
 
 ## Unreleased
 
+### Carousel
+
+- Add `DievasCarousel` and `DievasCarouselController` with fixed item extents, snapping, gaps, anchor alignment, centring, looping and optional trailing-edge clamping.
+- Support horizontal and vertical scrolling, mouse dragging, keyboard navigation and right-to-left layouts. Preserve valid selection when item counts, extents or controllers change.
+- Add autoplay and transition overrides. Pause autoplay during interaction and background states; disable autoplay and animated navigation for reduced motion.
+- Add gallery examples with synchronized arrows and dots. Position squircle arrow buttons across card edges, add token shadows, and fade disabled boundary buttons.
+
+### Divider
+
+- Add centred labels with text-style and gap overrides for horizontal and vertical dividers.
+- Change the default thickness from 2px to 1.5px. Preserve explicit thickness overrides.
+- Fix painted lines collapsing to zero length or stretching thicker under parent constraints. Add label and optional thickness controls to the gallery.
+
+### Dot indicator
+
+- Default selected and unselected dots to equal 8px diameters with 8px gaps and a 200 ms colour fade. Preserve distinct active sizes in custom themes.
+- Add selected/unselected colour, uniform size, gap, duration, curve and accessible-label overrides.
+- Retain optional dot tapping and add keyboard activation, selected/disabled semantics, visible focus and reduced-motion support.
+- Add numbered gallery buttons that select dots, grouped overrides and count controls. Use instance overrides for the carousel’s smaller dots.
+
+### Gallery and example app
+
+- Use the Gohan surface for the shared phone background and white surfaces for carousel cards in light mode.
+- Apply 8px page padding inside the phone safe area. Remove duplicate page insets while preserving internal component spacing.
+- Declare Flutter as a direct SDK dependency of the example app, resolving eight `depend_on_referenced_packages` notices.
+
+### Loader
+
 - Slow the shared loader rotation token from 800ms to 2222ms, matching Moon timing so the arc growth and shrinkage remain visible. Applies to standalone loaders and button loaders; explicit duration overrides remain available.
 
 ### Checkbox

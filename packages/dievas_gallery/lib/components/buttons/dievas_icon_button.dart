@@ -27,7 +27,7 @@ class _Playground extends StatelessWidget {
       label: 'Size',
       options: DievasButtonSize.values,
       labelBuilder: (v) => v.name,
-      initialOption: DievasButtonSize.MD,
+      initialOption: DievasButtonSize.md,
     );
 
     final borderRadiusOverride = context.knobs.double.slider(label: 'Border radius', initialValue: 0, min: 0, max: 24);

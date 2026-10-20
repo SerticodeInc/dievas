@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:dievas/l10n/dievas_localizations.dart';
+import 'package:dievas/src/extensions/dievas_theme_context_extension.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// Semantic tone of a [DievasAlert].
@@ -183,7 +183,7 @@ class DievasAlert extends StatelessWidget {
                     onTap: callback,
                     disabled: disabled,
                     colour: trailingColour ?? iconColour,
-                    semanticLabel: trailingSemanticLabel ?? DievasLocalizations.of(context).alertDismissLabel,
+                    semanticLabel: trailingSemanticLabel ?? context.dievasL10n.alertDismissLabel,
                     child: const Icon(Icons.close),
                   ),
                 ],

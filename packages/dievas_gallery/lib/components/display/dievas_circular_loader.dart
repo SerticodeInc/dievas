@@ -21,7 +21,7 @@ class _Playground extends StatelessWidget {
       label: 'Size',
       options: DievasLoaderSize.values,
       labelBuilder: (v) => v.name,
-      initialOption: .MD,
+      initialOption: .md,
     );
     final label = context.knobs.string(label: 'Label', initialValue: '');
     final useCustomColours = context.knobs.boolean(label: 'Override token colours');

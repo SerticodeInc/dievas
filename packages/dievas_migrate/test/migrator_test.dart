@@ -93,16 +93,34 @@ void main() {
   });
 
   test('skips members whose declaring type is not migrated', () async {
-    const original = 'const a = DievasButtonSize.MD;\n';
+    const original = 'const a = UnrelatedSize.MD;\n';
     file.writeAsStringSync(original);
     Future<AnalysisOutput> analyze(List<String> _) async =>
-        AnalysisOutput(total: 1, diagnostics: [_getter(file.path, original, 'DievasButtonSize', 'MD')]);
+        AnalysisOutput(total: 1, diagnostics: [_getter(file.path, original, 'UnrelatedSize', 'MD')]);
 
     final report = await Migrator(analyze: analyze).run(paths: [dir.path], write: true);
 
     expect(report.memberEdits, 0);
-    expect(report.skipped, ['DievasButtonSize.MD']);
+    expect(report.skipped, ['UnrelatedSize.MD']);
     expect(file.readAsStringSync(), original);
+  });
+
+  test('migrates a component size enum', () async {
+    const original = 'const a = DievasButtonSize.MD;\n';
+    file.writeAsStringSync(original);
+    int calls = 0;
+    Future<AnalysisOutput> analyze(List<String> _) async {
+      calls++;
+      if (calls == 1) {
+        return AnalysisOutput(total: 1, diagnostics: [_getter(file.path, original, 'DievasButtonSize', 'MD')]);
+      }
+      return const AnalysisOutput(total: 0, diagnostics: []);
+    }
+
+    final report = await Migrator(analyze: analyze).run(paths: [dir.path], write: true);
+
+    expect(report.memberEdits, 1);
+    expect(file.readAsStringSync(), 'const a = DievasButtonSize.md;\n');
   });
 
   test('migrates a named parameter only on an allowed owner', () async {

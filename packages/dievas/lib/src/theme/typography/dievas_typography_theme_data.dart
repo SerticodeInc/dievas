@@ -50,7 +50,7 @@ final class DievasTypographyThemeData extends Equatable {
   /// Display small.
   final TextStyle displaySm;
 
-  /// Heading XL — page-level section titles.
+  /// Heading xl — page-level section titles.
   final TextStyle headingXl;
 
   /// Heading large.
@@ -62,7 +62,7 @@ final class DievasTypographyThemeData extends Equatable {
   /// Heading small.
   final TextStyle headingSm;
 
-  /// Heading XS — section dividers, list group labels.
+  /// Heading xs — section dividers, list group labels.
   final TextStyle headingXs;
 
   /// Title large — section headings inside cards, drawer titles, sheet headers.
@@ -86,7 +86,7 @@ final class DievasTypographyThemeData extends Equatable {
   /// Body small — secondary descriptions, supporting copy.
   final TextStyle bodySm;
 
-  /// Body XS — fine print, timestamps, footnotes.
+  /// Body xs — fine print, timestamps, footnotes.
   final TextStyle bodyXs;
 
   /// Label large — button text (large), prominent tags.
@@ -98,7 +98,7 @@ final class DievasTypographyThemeData extends Equatable {
   /// Label small — small button text, chip labels, compact badges.
   final TextStyle labelSm;
 
-  /// Label XS — overline, eyebrow text, micro-labels above inputs.
+  /// Label xs — overline, eyebrow text, micro-labels above inputs.
   final TextStyle labelXs;
 
   /// Code medium — inline code blocks, code editors, shell output.

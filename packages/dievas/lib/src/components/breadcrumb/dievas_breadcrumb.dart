@@ -113,7 +113,7 @@ class DievasBreadcrumb<T> extends StatelessWidget {
                 onTap: enabled ? onHomeTap : null,
                 hoverColour: hoverColour,
                 height: theme.minHitHeight,
-                child: homeIcon ?? DievasIcon(Icons.home_outlined, size: .SM, color: normalColour),
+                child: homeIcon ?? DievasIcon(Icons.home_outlined, size: .sm, color: normalColour),
               ),
               if (items.isNotEmpty) _BreadcrumbSeparator(separator: separator, gap: gap, colour: dividerColour),
             ],
@@ -173,7 +173,7 @@ class _BreadcrumbSeparator extends StatelessWidget {
           style: theme.separatorStyle.copyWith(color: colour),
           child: switch (separator) {
             final separator? => separator,
-            _ => DievasIcon(Icons.keyboard_arrow_right, size: .SM, color: colour ?? theme.separatorStyle.color),
+            _ => DievasIcon(Icons.keyboard_arrow_right, size: .sm, color: colour ?? theme.separatorStyle.color),
           },
         ),
       ),

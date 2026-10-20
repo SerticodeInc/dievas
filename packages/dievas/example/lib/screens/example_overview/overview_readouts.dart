@@ -47,7 +47,7 @@ class _L10nReadout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Text(
-    'context.l10n.emptyStateDefaultTitle → "${context.l10n.emptyStateDefaultTitle}"',
+    'context.dievasL10n.emptyStateDefaultTitle → "${context.dievasL10n.emptyStateDefaultTitle}"',
     style: context.typography.codeMd.copyWith(color: context.colours.text.textSecondary),
   );
 }

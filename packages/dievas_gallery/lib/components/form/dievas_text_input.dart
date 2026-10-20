@@ -21,7 +21,7 @@ class _Playground extends StatelessWidget {
       label: 'Size',
       options: DievasTextInputSize.values,
       labelBuilder: (v) => v.name,
-      initialOption: .LG,
+      initialOption: .lg,
     );
 
     final label = context.knobs.string(label: 'Label', initialValue: 'Email address');
@@ -75,7 +75,7 @@ class _AllSizes extends StatelessWidget {
               ),
             ],
           ),
-          if (size != .LG) SizedBox(height: context.spacing.md),
+          if (size != .lg) SizedBox(height: context.spacing.md),
         ],
       ],
     ),

@@ -13,7 +13,7 @@ import 'package:flutter/widgets.dart';
 /// )
 /// ```
 ///
-/// Access strings in widgets via `context.l10n` (see [DievasL10nExtension]).
+/// Access strings in widgets via `DievasLocalizations.of(context)`.
 abstract class DievasLocalizations {
   /// The standard set of delegates needed to resolve [DievasLocalizations].
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = [_DievasLocalizationsDelegate()];
@@ -38,30 +38,20 @@ abstract class DievasLocalizations {
   /// Default body shown when [DievasEmptyState] has no [description] provided.
   String get emptyStateDefaultDescription;
 
-  // ─── Bottom sheet ─────────────────────────────────────────────────────────
-
   /// Accessibility label for the bottom sheet drag handle.
   String get bottomSheetDragHandleLabel;
 
   /// Label for the bottom sheet close action (screen readers).
   String get bottomSheetCloseLabel;
 
-  // ─── Modal ────────────────────────────────────────────────────────────────
-
   /// Accessibility label for the modal close button.
   String get modalCloseLabel;
-
-  // ─── Snackbar ─────────────────────────────────────────────────────────────
 
   /// Default label for the snackbar dismiss action.
   String get snackbarDismissLabel;
 
-  // ─── Alert ────────────────────────────────────────────────────────────────
-
   /// Accessibility label for the alert dismiss button.
   String get alertDismissLabel;
-
-  // ─── Tooltip ──────────────────────────────────────────────────────────────
 
   /// Semantic label announced by screen readers when a tooltip is shown.
   String get tooltipLabel;

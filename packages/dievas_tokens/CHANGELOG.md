@@ -4,7 +4,7 @@
 
 Changes to the Dievas token package, newest first.
 
-## Unreleased
+## 1.0.2
 
 - Slow `DievasAnimationSemantic.loader` from 800ms to 2222ms using the new `DievasDurationPrimitives.d2222`, making the circular loader arc animation visible at Moon timing.
 
@@ -43,7 +43,7 @@ Changes to the Dievas token package, newest first.
 ### Documentation and checks
 
 - Expand the README with token value shapes, palette selection, naming rules, and migration limits.
-- Repair historical changelog formatting and clarify class-scoped size names, role suffixes, and the `XL2Plus` half step.
+- Repair historical changelog formatting and clarify class scoped size names, role suffixes, and the `XL2Plus` half step.
 - Demonstrate semantic spacing and palette resolution in the example.
 - Correct elevation dependency comments and remove misleading Moon cross references from none migrated colour roles.
 - Resolve naming test paths independently of the working directory and check constant declarations.
@@ -58,11 +58,11 @@ This release unifies size names, adds brand palettes, and paints elevation shado
 
 ### Breaking size token naming
 
-Size scales use uppercase class-scoped names or lowercase role names with uppercase size suffixes:
+Size scales use uppercase class scoped names or lowercase role names with uppercase size suffixes:
 
 - Use `XS`, `SM`, `MD`, `LG`, `XL`, and `XL2` through `XL8` where supported. Half steps are `SMPlus`, `MDPlus`, `LGPlus`, `XLPlus`, and `XL2Plus`.
 - Radius and font size primitives, plus spacing, radius, sizing, breakpoint, elevation, and typography semantics follow this convention.
-- Class-scoped examples include `DievasSpacingSemantic.MD` and `DievasRadiusSemantic.SM`.
+- Class scoped examples include `DievasSpacingSemantic.MD` and `DievasRadiusSemantic.SM`.
 - Role examples include `buttonHeightMD` and `titleXS`; `titleXsm` becomes `titleXS`.
 - Opacity roles (`oN`), z-index, easing, and animation intents are not size axes and retain their names.
 
@@ -90,7 +90,7 @@ Remove six aliases from `DievasOpacitySemantic`: `shadow1`, `shadow1Light`, `sha
 
 Add palette selection to the token layer:
 
-- `DievasBrandPalette` holds an 11-tint ramp (`50` through `950`) and an `onBrand` contrast colour. `rolesForLight()` and `rolesForDark()` resolve the brand roles.
+- `DievasBrandPalette` holds an 11 tint ramp (`50` through `950`) and an `onBrand` contrast colour. `rolesForLight()` and `rolesForDark()` resolve the brand roles.
 - `DievasBrandRoleColours` describes the resolved record.
 - `DievasBrandPalettes` includes default `indigo`, plus `sky`, `green`, `violet`, `red`, `amber`, `ocean`, `forest`, `berry`, `dusk`, and `terracotta`. Parity tests verify that indigo reproduces the built-in brand semantics.
 

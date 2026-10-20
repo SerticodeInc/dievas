@@ -35,6 +35,24 @@ void main() {
       }
     },
     {
+      "code": "undefined_enum_constant",
+      "severity": "ERROR",
+      "problemMessage": "There's no constant named 'MD' in 'DievasButtonSize'.",
+      "location": {
+        "file": "/tmp/c.dart",
+        "range": {"start": {"offset": 40, "line": 0, "column": 41}, "end": {"offset": 42, "line": 0, "column": 43}}
+      }
+    },
+    {
+      "code": "dot_shorthand_undefined_member",
+      "severity": "ERROR",
+      "problemMessage": "The static getter 'XL2' isn't defined for the context type 'DievasAvatarSize'.",
+      "location": {
+        "file": "/tmp/c.dart",
+        "range": {"start": {"offset": 60, "line": 0, "column": 61}, "end": {"offset": 63, "line": 0, "column": 64}}
+      }
+    },
+    {
       "code": "unused_import",
       "severity": "WARNING",
       "problemMessage": "Unused import: 'dart:io'.",
@@ -49,8 +67,8 @@ void main() {
 
     final output = parseAnalysis(json);
 
-    expect(output.total, 4, reason: 'total counts every diagnostic for verification');
-    expect(output.diagnostics, hasLength(3));
+    expect(output.total, 6, reason: 'total counts every diagnostic for verification');
+    expect(output.diagnostics, hasLength(5));
 
     final getter = output.diagnostics.first;
     expect(getter.old, 'MD');
@@ -59,11 +77,21 @@ void main() {
     expect(getter.offset, 30);
     expect(getter.length, 2);
 
-    final parameter = output.diagnostics.last;
+    final parameter = output.diagnostics[2];
     expect(parameter.old, 'LG');
     expect(parameter.receiverType, isNull);
     expect(parameter.isNamedParameter, isTrue);
     expect(parameter.file, '/tmp/b.dart');
+
+    final enumConstant = output.diagnostics[3];
+    expect(enumConstant.old, 'MD');
+    expect(enumConstant.receiverType, 'DievasButtonSize');
+    expect(enumConstant.isNamedParameter, isFalse);
+
+    final shorthand = output.diagnostics[4];
+    expect(shorthand.old, 'XL2');
+    expect(shorthand.receiverType, 'DievasAvatarSize');
+    expect(shorthand.isNamedParameter, isFalse);
   });
 
   test('fails loudly when the shape is not analyzer output', () {

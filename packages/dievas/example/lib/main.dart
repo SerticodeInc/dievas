@@ -38,7 +38,7 @@ class _DievasExampleApp extends StatelessWidget {
     // 3. Material bridge
     //
     // DievasScope rebuilds `builder` whenever the resolved theme changes (manual switch or system brightness change), so `theme.material` is always the ThemeData for the active mode.
-    // Register the Dievas localizations so component internal copy resolves via `context.l10n`.
+    // Register the Dievas localizations so component internal copy resolves via `context.dievasL10n`.
     builder: (context, theme, child) => MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Dievas Example App',

@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:dievas/src/theme/dievas_theme.dart';
 
-enum DievasLoaderSize { SM, MD, LG }
+enum DievasLoaderSize { sm, md, lg }
 
 /// A rounded circular arc whose head grows and tail catches up as it rotates.
 ///
@@ -13,7 +13,7 @@ enum DievasLoaderSize { SM, MD, LG }
 class DievasLoader extends StatefulWidget {
   const DievasLoader({
     super.key,
-    this.size = .MD,
+    this.size = .md,
     this.label,
     this.colour,
     this.trackColour,
@@ -66,9 +66,9 @@ class _DievasLoaderState extends State<DievasLoader> with SingleTickerProviderSt
     final theme = DievasTheme.componentsOf(context).loader;
     final diameter = switch ((widget.diameter, widget.size)) {
       (final diameter?, _) => diameter,
-      (_, .SM) => theme.spinnerSizeSM,
-      (_, .MD) => theme.spinnerSizeMD,
-      (_, .LG) => theme.spinnerSizeLG,
+      (_, .sm) => theme.spinnerSizeSm,
+      (_, .md) => theme.spinnerSizeMd,
+      (_, .lg) => theme.spinnerSizeLg,
     };
 
     return Column(

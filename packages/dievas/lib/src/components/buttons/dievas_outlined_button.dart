@@ -19,7 +19,7 @@ class DievasOutlinedButton extends DievasButton {
     super.label,
     super.child,
     DievasOutlinedButtonStyle super.style = .primary,
-    super.size = .MD,
+    super.size = .md,
     super.state = .idle,
     super.shape,
     super.backgroundColor,

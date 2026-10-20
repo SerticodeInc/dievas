@@ -7,13 +7,13 @@ import 'package:dievas/src/theme/dievas_theme.dart';
 /// Size variants for [DievasTextInput].
 enum DievasTextInputSize {
   /// 52 dp container height — compact contexts.
-  SM,
+  sm,
 
   /// 56 dp container height — default.
-  MD,
+  md,
 
   /// 60 dp container height — prominent / hero inputs.
-  LG,
+  lg,
 }
 
 /// A themed text input field.
@@ -30,7 +30,7 @@ enum DievasTextInputSize {
 ///   hint: 'you@example.com',
 ///   leadingIcon: Icon(Icons.email_outlined),
 /// )
-/// DievasTextInput(controller: _ctrl, errorText: 'Invalid email', size: .SM)
+/// DievasTextInput(controller: _ctrl, errorText: 'Invalid email', size: .sm)
 /// DievasTextInput(controller: _ctrl, enabled: false)
 /// ```
 class DievasTextInput extends StatefulWidget {
@@ -45,7 +45,7 @@ class DievasTextInput extends StatefulWidget {
     this.warningText,
     this.leadingIcon,
     this.trailingIcon,
-    this.size = DievasTextInputSize.MD,
+    this.size = DievasTextInputSize.md,
     this.enabled = true,
     this.obscureText = false,
     this.keyboardType,
@@ -120,39 +120,39 @@ class _DievasTextInputState extends State<DievasTextInput> {
     };
 
     final height = switch (widget.size) {
-      .SM => theme.height.SM,
-      .MD => theme.height.MD,
-      .LG => theme.height.LG,
+      .sm => theme.height.sm,
+      .md => theme.height.md,
+      .lg => theme.height.lg,
     };
 
     final contentPadding = switch (widget.size) {
-      .SM => theme.contentPadding.SM,
-      .MD => theme.contentPadding.MD,
-      .LG => theme.contentPadding.LG,
+      .sm => theme.contentPadding.sm,
+      .md => theme.contentPadding.md,
+      .lg => theme.contentPadding.lg,
     };
 
     final inputStyle = switch (widget.size) {
-      .SM => theme.inputStyle.SM,
-      .MD => theme.inputStyle.MD,
-      .LG => theme.inputStyle.LG,
+      .sm => theme.inputStyle.sm,
+      .md => theme.inputStyle.md,
+      .lg => theme.inputStyle.lg,
     };
 
     final placeholderStyle = switch (widget.size) {
-      .SM => theme.placeholderStyle.SM,
-      .MD => theme.placeholderStyle.MD,
-      .LG => theme.placeholderStyle.LG,
+      .sm => theme.placeholderStyle.sm,
+      .md => theme.placeholderStyle.md,
+      .lg => theme.placeholderStyle.lg,
     };
 
     final cursorWidth = switch (widget.size) {
-      .SM => theme.cursorWidth.SM,
-      .MD => theme.cursorWidth.MD,
-      .LG => theme.cursorWidth.LG,
+      .sm => theme.cursorWidth.sm,
+      .md => theme.cursorWidth.md,
+      .lg => theme.cursorWidth.lg,
     };
 
     final cursorHeight = switch (widget.size) {
-      .SM => theme.cursorHeight.SM,
-      .MD => theme.cursorHeight.MD,
-      .LG => theme.cursorHeight.LG,
+      .sm => theme.cursorHeight.sm,
+      .md => theme.cursorHeight.md,
+      .lg => theme.cursorHeight.lg,
     };
 
     final (borderColour, focusedBorderColour) = switch ((hasError, hasWarning)) {

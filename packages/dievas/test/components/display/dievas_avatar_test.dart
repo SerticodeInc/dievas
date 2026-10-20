@@ -104,10 +104,10 @@ void main() {
       expect(decoration.color, const Color(0xFF0000FF));
     });
 
-    testWidgets('rounded-square default uses primary theme foreground and XL2 is 80dp', (tester) async {
+    testWidgets('rounded-square default uses primary theme foreground and xl2 is 80dp', (tester) async {
       await tester.pumpWidget(
         Harness(
-          child: const DievasAvatar(size: .XL2, initials: 'MD'),
+          child: const DievasAvatar(size: .xl2, initials: 'MD'),
         ),
       );
       expect(tester.getSize(find.byType(DievasAvatar)), const Size(80, 80));
@@ -310,11 +310,11 @@ void main() {
     testWidgets('badge defaults scale and theme copies preserve new properties', (tester) async {
       await tester.pumpWidget(
         Harness(
-          child: const DievasAvatar(size: .XL2, showBadge: true, badgeSemanticLabel: 'Online'),
+          child: const DievasAvatar(size: .xl2, showBadge: true, badgeSemanticLabel: 'Online'),
           themeOverrides: (theme) => theme.copyWith(
             components: theme.components.copyWith(
               avatar: theme.components.avatar.copyWith(
-                sizeXL2: 100,
+                sizeXl2: 100,
                 badgeSizeFactor: 0.1,
                 badgeMarginFactor: 0.03,
                 badgeColour: Colors.purple,

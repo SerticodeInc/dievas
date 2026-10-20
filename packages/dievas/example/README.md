@@ -30,7 +30,7 @@ The entry point. A single `DievasScope` wraps the whole app and:
 - resolves the active theme from `themeMode` + platform brightness,
 - inserts the `DievasTheme` InheritedModel into the tree,
 - bridges to Material by passing `theme.material` to `MaterialApp`,
-- registers `DievasLocalizations` so component copy resolves via `context.l10n`,
+- registers `DievasLocalizations` so component copy resolves via `context.dievasL10n`,
 - hosts a `NavigationBar` shell with three demo screens.
 
 ### This is the only place an app talks to Dievas directly. Everything below reads the theme through `context.*`
@@ -53,7 +53,7 @@ To make it your brand: rename `Example*` → `YourBrand*`, replace
 
 | Screen                            | Teaches                                                                                                                                                                                                               |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `example_overview_screen.dart`    | Theme switching (`DievasScope.of(context).setThemeMode`), banner/snackbar overlays (`showBanner` / `showSnackbar`), the responsive grid (`DievasGrid` + `context.grid`), and `context.l10n`.                          |
+| `example_overview_screen.dart`    | Theme switching (`DievasScope.of(context).setThemeMode`), banner/snackbar overlays (`showBanner` / `showSnackbar`), the responsive grid (`DievasGrid` + `context.grid`), and `context.dievasL10n`.                          |
 | `example_foundations_screen.dart` | Every aspect scoped subsystem (`colours`, `typography`, `spacing`, `sizing`, `border`, `elevation`, `opacity`, `animation`), plus the `DievasTheme.of` statics and a per instance component override via `copyWith`. |
 | `example_components_screen.dart`  | The component library: buttons, form controls, display components, progress, feedback, overlays, tooltips, loaders, and empty states: all driven by the theme.                                                       |
 

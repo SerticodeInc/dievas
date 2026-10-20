@@ -22,7 +22,7 @@ class _Playground extends StatelessWidget {
       label: 'Size',
       options: DievasCircularProgressSize.values,
       labelBuilder: (v) => v.name,
-      initialOption: DievasCircularProgressSize.MD,
+      initialOption: DievasCircularProgressSize.md,
     );
 
     final style = context.knobs.object.dropdown<DievasCircularProgressStyle>(

@@ -22,7 +22,7 @@ class DievasTextButton extends StatefulWidget {
   const DievasTextButton({
     super.key,
     this.style = .primary,
-    this.size = .MD,
+    this.size = .md,
     this.state = .idle,
     this.label,
     this.child,
@@ -112,9 +112,9 @@ class _DievasTextButtonState extends State<DievasTextButton> {
       .destructive => components.textButton.destructive,
     };
     final (textStyle, iconSize, gap) = switch (widget.size) {
-      .SM => (theme.textStyle.SM, theme.iconSize.SM, theme.iconSpacing.SM),
-      .MD => (theme.textStyle.MD, theme.iconSize.MD, theme.iconSpacing.MD),
-      .LG => (theme.textStyle.LG, theme.iconSize.LG, theme.iconSpacing.LG),
+      .sm => (theme.textStyle.sm, theme.iconSize.sm, theme.iconSpacing.sm),
+      .md => (theme.textStyle.md, theme.iconSize.md, theme.iconSpacing.md),
+      .lg => (theme.textStyle.lg, theme.iconSize.lg, theme.iconSpacing.lg),
     };
     return DievasButtonBuilder(
       state: widget.state,
@@ -130,9 +130,9 @@ class _DievasTextButtonState extends State<DievasTextButton> {
       iconSize: iconSize,
       textStyle: textStyle,
       height: switch (widget.size) {
-        .SM => DievasTheme.sizingOf(context).buttonHeightSm,
-        .MD => DievasTheme.sizingOf(context).buttonHeightMd,
-        .LG => DievasTheme.sizingOf(context).buttonHeightLg,
+        .sm => DievasTheme.sizingOf(context).buttonHeightSm,
+        .md => DievasTheme.sizingOf(context).buttonHeightMd,
+        .lg => DievasTheme.sizingOf(context).buttonHeightLg,
       },
       padding: EdgeInsets.symmetric(
         horizontal: DievasTheme.spacingOf(context).md,

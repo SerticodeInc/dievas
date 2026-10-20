@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dievas_migrate/src/analyzer_runner.dart';
 import 'package:dievas_migrate/src/diagnostic.dart';
 import 'package:dievas_migrate/src/doc_comment_pass.dart';
+import 'package:dievas_migrate/src/record_literal_pass.dart';
 import 'package:dievas_migrate/src/text_edit.dart';
 import 'package:dievas_migrate/src/token_vocabulary.dart';
 
@@ -119,6 +120,25 @@ final class Migrator {
     String source(String file) => sources.putIfAbsent(file, () => File(file).readAsStringSync());
 
     for (final RenameDiagnostic diagnostic in diagnostics) {
+      if (diagnostic.isRecordLiteral) {
+        final String file = _canonical(diagnostic.file);
+        if (!renamedTypes.contains(diagnostic.receiverType)) {
+          skipped.add(_describe(diagnostic));
+          continue;
+        }
+        final List<TextEdit> edits = const RecordLiteralRewriter().edits(
+          source(file),
+          offset: diagnostic.offset,
+          length: diagnostic.length,
+          fields: diagnostic.recordFields,
+        );
+        if (edits.isEmpty || !seen.add('$file:${diagnostic.offset}')) {
+          continue;
+        }
+        (editsByFile[file] ??= []).addAll(edits);
+        memberEdits += edits.length;
+        continue;
+      }
       final String? renamed = renamedMember(diagnostic.old);
       if (renamed == null) {
         continue;
@@ -176,6 +196,8 @@ final class Migrator {
 }
 
 String _describe(RenameDiagnostic diagnostic) => switch (diagnostic) {
+  RenameDiagnostic(isRecordLiteral: true, receiverType: final String type, recordFields: final List<String> fields) =>
+    'record literal for $type (${fields.join(', ')})',
   RenameDiagnostic(isNamedParameter: true, old: final String old) => 'named parameter $old',
   RenameDiagnostic(receiverType: final String type, old: final String old) => '$type.$old',
   _ => diagnostic.old,

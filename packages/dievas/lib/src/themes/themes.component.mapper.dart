@@ -65,7 +65,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
 const double _kStrokeProgress = 2.5; // circular progress arc
 const double _kStrokeLoader = 3.0; // loader spinner
 const double _kSwitchThumbPadding = 3.0; // inset between thumb and track edge
-const DievasInputThemeValue<double> _kCursorWidth = (SM: 1.5, MD: 2.0, LG: 2.5);
+const DievasInputThemeValue<double> _kCursorWidth = (sm: 1.5, md: 2.0, lg: 2.5);
 const double _kSnackbarMinWidth = 280.0;
 const double _kSnackbarMaxWidth = 480.0;
 const double _kModalMinWidth = 320.0;
@@ -93,19 +93,19 @@ _SharedLayout _sharedButtonLayout(
   DievasBorderThemeData border,
 ) {
   return (
-    textStyle: (SM: typography.labelSm, MD: typography.labelMd, LG: typography.labelLg),
-    height: (SM: sizing.buttonHeightSm, MD: sizing.buttonHeightMd, LG: sizing.buttonHeightLg),
-    iconSize: (SM: sizing.iconSm, MD: sizing.iconMd, LG: sizing.iconLg),
-    iconSpacing: (SM: spacing.xs, MD: spacing.xs, LG: spacing.sm),
+    textStyle: (sm: typography.labelSm, md: typography.labelMd, lg: typography.labelLg),
+    height: (sm: sizing.buttonHeightSm, md: sizing.buttonHeightMd, lg: sizing.buttonHeightLg),
+    iconSize: (sm: sizing.iconSm, md: sizing.iconMd, lg: sizing.iconLg),
+    iconSpacing: (sm: spacing.xs, md: spacing.xs, lg: spacing.sm),
     radius: (
-      SM: (square: _extractRadius(border.sm), pill: .circular(DievasRadiusSemantic.full)),
-      MD: (square: _extractRadius(border.md), pill: .circular(DievasRadiusSemantic.full)),
-      LG: (square: _extractRadius(border.md), pill: .circular(DievasRadiusSemantic.full)),
+      sm: (square: _extractRadius(border.sm), pill: .circular(DievasRadiusSemantic.full)),
+      md: (square: _extractRadius(border.md), pill: .circular(DievasRadiusSemantic.full)),
+      lg: (square: _extractRadius(border.md), pill: .circular(DievasRadiusSemantic.full)),
     ),
     padding: (
-      SM: .symmetric(horizontal: spacing.smPlus),
-      MD: .symmetric(horizontal: spacing.md),
-      LG: .symmetric(horizontal: spacing.md),
+      sm: .symmetric(horizontal: spacing.smPlus),
+      md: .symmetric(horizontal: spacing.md),
+      lg: .symmetric(horizontal: spacing.md),
     ),
     disabledOpacity: DievasOpacitySemantic.disabled,
     pressOpacity: 0.7,
@@ -237,9 +237,9 @@ DievasTextButtonGroupThemeData _createTextButtonGroup(
   final c = colours.action;
 
   DievasTextButtonThemeData makeThemeData(DievasTextButtonThemeStateStyle style) => DievasTextButtonThemeData(
-    textStyle: (SM: typography.labelSm, MD: typography.labelMd, LG: typography.labelLg),
-    iconSize: (SM: DievasSizingPrimitives.s14, MD: DievasSizingPrimitives.s16, LG: DievasSizingPrimitives.s18),
-    iconSpacing: (SM: DievasSpacingPrimitives.s1, MD: DievasSpacingPrimitives.s1, LG: DievasSpacingPrimitives.s2),
+    textStyle: (sm: typography.labelSm, md: typography.labelMd, lg: typography.labelLg),
+    iconSize: (sm: DievasSizingPrimitives.s14, md: DievasSizingPrimitives.s16, lg: DievasSizingPrimitives.s18),
+    iconSpacing: (sm: DievasSpacingPrimitives.s1, md: DievasSpacingPrimitives.s1, lg: DievasSpacingPrimitives.s2),
     disabledOpacity: DievasOpacitySemantic.disabled,
     pressOpacity: 0.7,
     style: style,
@@ -270,9 +270,9 @@ DievasIconButtonGroupThemeData _createIconButtonGroup(
   final transparent = colours.staticColours.staticTransparent;
 
   DievasIconButtonThemeData makeThemeData(DievasIconButtonThemeStateStyle style) => DievasIconButtonThemeData(
-    size: (SM: sizing.buttonHeightSm, MD: sizing.buttonHeightMd, LG: sizing.buttonHeightLg),
-    iconSize: (SM: sizing.iconSm, MD: sizing.iconMd, LG: sizing.iconLg),
-    radius: (SM: _extractRadius(border.sm), MD: _extractRadius(border.md), LG: _extractRadius(border.md)),
+    size: (sm: sizing.buttonHeightSm, md: sizing.buttonHeightMd, lg: sizing.buttonHeightLg),
+    iconSize: (sm: sizing.iconSm, md: sizing.iconMd, lg: sizing.iconLg),
+    radius: (sm: _extractRadius(border.sm), md: _extractRadius(border.md), lg: _extractRadius(border.md)),
     disabledOpacity: DievasOpacitySemantic.disabled,
     pressOpacity: 0.7,
     style: style,
@@ -348,19 +348,19 @@ DievasAvatarThemeData _createAvatarTheme(
   DievasBorderThemeData border,
 ) {
   return DievasAvatarThemeData(
-    sizeXS: sizing.avatarXs,
-    sizeSM: sizing.avatarSm,
-    sizeMD: sizing.avatarMd,
-    sizeLG: sizing.avatarLg,
-    sizeXL: sizing.avatarXl,
-    sizeXL2: sizing.height80,
+    sizeXs: sizing.avatarXs,
+    sizeSm: sizing.avatarSm,
+    sizeMd: sizing.avatarMd,
+    sizeLg: sizing.avatarLg,
+    sizeXl: sizing.avatarXl,
+    sizeXl2: sizing.height80,
     borderRadiusSquare: border.md,
-    initialsStyleXS: typography.labelXs,
-    initialsStyleSM: typography.labelSm,
-    initialsStyleMD: typography.labelMd,
-    initialsStyleLG: typography.labelLg,
-    initialsStyleXL: typography.titleSm,
-    initialsStyleXL2: typography.titleMd,
+    initialsStyleXs: typography.labelXs,
+    initialsStyleSm: typography.labelSm,
+    initialsStyleMd: typography.labelMd,
+    initialsStyleLg: typography.labelLg,
+    initialsStyleXl: typography.titleSm,
+    initialsStyleXl2: typography.titleMd,
     badgeColour: colours.feedback.feedbackSuccess.icon,
     backgroundColour: colours.background.pageBackground,
     initialsColour: colours.text.textPrimary,
@@ -402,9 +402,9 @@ DievasLinearProgressThemeData _createLinearProgressTheme(DievasColourThemeData c
 // CircularProgress
 DievasCircularProgressThemeData _createCircularProgressTheme(DievasColourThemeData colours) {
   return DievasCircularProgressThemeData(
-    sizeSM: DievasSizingPrimitives.s16,
-    sizeMD: DievasSizingPrimitives.s24,
-    sizeLG: DievasSizingPrimitives.s32,
+    sizeSm: DievasSizingPrimitives.s16,
+    sizeMd: DievasSizingPrimitives.s24,
+    sizeLg: DievasSizingPrimitives.s32,
     strokeWidth: _kStrokeProgress,
     colourPrimary: colours.action.progressIndicator,
     colourOnBrand: colours.action.progressOnPrimaryIndicator,
@@ -489,20 +489,20 @@ DievasTextInputThemeData _createTextInputTheme(
   DievasSizingThemeData sizing,
   DievasBorderThemeData border,
 ) => DievasTextInputThemeData(
-  inputStyle: (SM: typography.bodySm, MD: typography.bodyMd, LG: typography.bodyLg),
+  inputStyle: (sm: typography.bodySm, md: typography.bodyMd, lg: typography.bodyLg),
   labelStyle: typography.labelSm.copyWith(color: colours.text.textSecondary),
   helperStyle: typography.bodySm.copyWith(color: colours.text.textSecondary),
   errorStyle: typography.bodySm,
   placeholderStyle: (
-    SM: typography.bodySm.copyWith(color: colours.input.inputPlaceholderText),
-    MD: typography.bodyMd.copyWith(color: colours.input.inputPlaceholderText),
-    LG: typography.bodyLg.copyWith(color: colours.input.inputPlaceholderText),
+    sm: typography.bodySm.copyWith(color: colours.input.inputPlaceholderText),
+    md: typography.bodyMd.copyWith(color: colours.input.inputPlaceholderText),
+    lg: typography.bodyLg.copyWith(color: colours.input.inputPlaceholderText),
   ),
-  height: (SM: sizing.inputHeightSm, MD: sizing.inputHeightMd, LG: sizing.inputHeightLg),
+  height: (sm: sizing.inputHeightSm, md: sizing.inputHeightMd, lg: sizing.inputHeightLg),
   contentPadding: (
-    SM: .symmetric(horizontal: spacing.smPlus, vertical: spacing.xs),
-    MD: .symmetric(horizontal: spacing.md, vertical: spacing.sm),
-    LG: .symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
+    sm: .symmetric(horizontal: spacing.smPlus, vertical: spacing.xs),
+    md: .symmetric(horizontal: spacing.md, vertical: spacing.sm),
+    lg: .symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
   ),
   borderRadius: border.md,
   strokeWidth: border.strokeThin,
@@ -516,7 +516,7 @@ DievasTextInputThemeData _createTextInputTheme(
   iconSize: DievasSizingPrimitives.s20,
   iconSpacing: spacing.sm,
   cursorWidth: _kCursorWidth,
-  cursorHeight: (SM: typography.bodySm.fontSize!, MD: typography.bodyMd.fontSize!, LG: typography.bodyLg.fontSize!),
+  cursorHeight: (sm: typography.bodySm.fontSize!, md: typography.bodyMd.fontSize!, lg: typography.bodyLg.fontSize!),
   labelSpacing: spacing.sm,
   helperSpacing: spacing.sm,
   disabledOpacity: DievasOpacitySemantic.disabled,
@@ -529,11 +529,11 @@ DievasTextInputGroupThemeData _createTextInputGroupTheme(
   DievasSpacingThemeData spacing,
   DievasBorderThemeData border,
 ) => DievasTextInputGroupThemeData(
-  height: (SM: sizing.inputHeightSm, MD: sizing.inputHeightMd, LG: sizing.inputHeightLg),
+  height: (sm: sizing.inputHeightSm, md: sizing.inputHeightMd, lg: sizing.inputHeightLg),
   contentPadding: (
-    SM: .symmetric(horizontal: spacing.smPlus, vertical: spacing.xs),
-    MD: .symmetric(horizontal: spacing.md, vertical: spacing.sm),
-    LG: .symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
+    sm: .symmetric(horizontal: spacing.smPlus, vertical: spacing.xs),
+    md: .symmetric(horizontal: spacing.md, vertical: spacing.sm),
+    lg: .symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
   ),
   borderRadius: border.md,
   strokeWidth: border.strokeThin,
@@ -697,9 +697,9 @@ DievasLoaderThemeData _createLoaderTheme(
   DievasAnimationThemeData animation,
 ) {
   return DievasLoaderThemeData(
-    spinnerSizeSM: DievasSizingPrimitives.s20,
-    spinnerSizeMD: DievasSizingPrimitives.s32,
-    spinnerSizeLG: DievasSizingPrimitives.s48,
+    spinnerSizeSm: DievasSizingPrimitives.s20,
+    spinnerSizeMd: DievasSizingPrimitives.s32,
+    spinnerSizeLg: DievasSizingPrimitives.s48,
     strokeWidth: _kStrokeLoader,
     color: colours.action.progressIndicator,
     trackColour: const Color(0x00000000),

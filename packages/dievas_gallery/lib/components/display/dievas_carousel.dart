@@ -180,7 +180,7 @@ class _NavigationButton extends StatelessWidget {
         dimension: context.sizing.height32,
         child: DievasIconButton(
           semanticLabel: semanticLabel,
-          size: .SM,
+          size: .sm,
           shape: RoundedSuperellipseBorder(borderRadius: context.border.md),
           backgroundColor: context.colours.background.pageBackground,
           icon: SizedBox.square(

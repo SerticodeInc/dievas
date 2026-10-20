@@ -20,7 +20,7 @@ class _DisplayRow extends StatelessWidget {
       const DievasBadge(label: 'Shipped', tone: .success),
       const DievasTag(label: 'Flutter'),
       DievasTag(label: 'Removable', onRemove: () {}, backgroundColor: context.colours.action.buttonSecondaryBackground),
-      const DievasIcon(Icons.bolt, size: .LG, semanticLabel: 'Bolt'),
+      const DievasIcon(Icons.bolt, size: .lg, semanticLabel: 'Bolt'),
       const DievasDivider(),
     ],
   );

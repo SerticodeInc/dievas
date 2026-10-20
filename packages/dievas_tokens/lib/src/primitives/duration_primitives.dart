@@ -35,7 +35,7 @@ abstract final class DievasDurationPrimitives {
   /// 2000ms / 2s tooltip show duration, longer feedback pauses.
   static const Duration d2000 = Duration(milliseconds: 2000);
 
-  /// 2222ms relaxed loader rotation, matching Moon circular-loader timing.
+  /// 2222ms relaxed loader rotation, matching Moon circular loader timing.
   static const Duration d2222 = Duration(milliseconds: 2222);
 
   /// 3000ms / 3s snackbar auto dismiss, temporary notifications.

@@ -42,7 +42,7 @@ class _Playground extends StatelessWidget {
     final size = context.knobs.object.dropdown(
       label: 'Size',
       options: DievasAvatarSize.values,
-      initialOption: DievasAvatarSize.MD,
+      initialOption: DievasAvatarSize.md,
       labelBuilder: (value) => value.name,
     );
     final shape = context.knobs.object.dropdown(
@@ -189,9 +189,9 @@ class _CustomContent extends StatelessWidget {
     child: Wrap(
       spacing: context.spacing.lg,
       children: [
-        const DievasAvatar(size: .XL, content: Icon(Icons.favorite), showBadge: true),
+        const DievasAvatar(size: .xl, content: Icon(Icons.favorite), showBadge: true),
         const DievasAvatar(
-          size: .XL,
+          size: .xl,
           imageProvider: AssetImage('assets/images/avatar-sample.jpg'),
           content: Icon(Icons.star, color: Colors.white),
           showBadge: true,
@@ -248,7 +248,7 @@ class _AllShapes extends StatelessWidget {
               spacing: spacing.sm,
               children: [
                 ComponentBoundary(
-                  child: DievasAvatar(initials: 'AB', size: .LG, shape: shape),
+                  child: DievasAvatar(initials: 'AB', size: .lg, shape: shape),
                 ),
                 Text(shape.name, style: context.typography.labelXs),
               ],

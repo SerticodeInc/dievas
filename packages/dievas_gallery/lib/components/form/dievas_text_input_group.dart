@@ -22,7 +22,7 @@ class _Playground extends StatelessWidget {
       label: 'Size',
       options: DievasTextInputGroupSize.values,
       labelBuilder: (v) => v.name,
-      initialOption: .MD,
+      initialOption: .md,
     );
     final segmentCount = context.knobs.double.slider(label: 'Segments', initialValue: 3, min: 2, max: 4).round();
     final hint = context.knobs.string(label: 'Hint', initialValue: 'Value');
@@ -72,7 +72,7 @@ class _AllSizes extends StatelessWidget {
               ),
             ],
           ),
-          if (size != DievasTextInputGroupSize.LG) SizedBox(height: context.spacing.md),
+          if (size != DievasTextInputGroupSize.lg) SizedBox(height: context.spacing.md),
         ],
       ],
     ),

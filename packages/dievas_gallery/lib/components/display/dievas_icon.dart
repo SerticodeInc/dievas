@@ -19,7 +19,7 @@ class _Playground extends StatelessWidget {
       label: 'Size',
       options: DievasIconSize.values,
       labelBuilder: (v) => v.name,
-      initialOption: DievasIconSize.MD,
+      initialOption: DievasIconSize.md,
     );
 
     return Center(

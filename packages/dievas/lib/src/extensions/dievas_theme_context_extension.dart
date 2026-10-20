@@ -47,5 +47,5 @@ extension DievasThemeContextExtension on BuildContext {
   /// Dievas localizations for component-internal copy.
   ///
   /// Requires [DievasLocalizations.localizationsDelegates] to be registered.
-  DievasLocalizations get l10n => DievasLocalizations.of(this);
+  DievasLocalizations get dievasL10n => DievasLocalizations.of(this);
 }

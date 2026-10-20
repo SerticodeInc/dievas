@@ -14,7 +14,7 @@ part 'example_overview/overview_readouts.dart';
 ///   - theme mode switching via [DievasScope.of]
 ///   - banner / snackbar overlays via [DievasScope.of]
 ///   - the responsive grid ([DievasGrid] + `context.grid`)
-///   - localizations via `context.l10n`
+///   - localizations via `context.dievasL10n`
 class ExampleOverviewScreen extends StatelessWidget {
   const ExampleOverviewScreen({super.key});
 
@@ -66,7 +66,7 @@ class ExampleOverviewScreen extends StatelessWidget {
             const _SectionCard(
               title: 'Localizations',
               description:
-                  'Component internal copy resolves through context.l10n. '
+                  'Component internal copy resolves through context.dievasL10n. '
                   'Register DievasLocalizations delegates on MaterialApp to use it.',
               child: _L10nReadout(),
             ),

@@ -71,7 +71,7 @@ class _AllStyles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconSize = DievasTheme.componentsOf(context).tag.iconSize;
-    final borderSM = DievasTheme.borderOf(context).sm;
+    final borderSm = DievasTheme.borderOf(context).sm;
 
     return Center(
       child: Wrap(
@@ -92,13 +92,13 @@ class _AllStyles extends StatelessWidget {
               ),
             ),
             ComponentBoundary(
-              child: DievasTag(label: style.name, style: style, borderRadius: DievasTagBorderRadius.rounded(borderSM)),
+              child: DievasTag(label: style.name, style: style, borderRadius: DievasTagBorderRadius.rounded(borderSm)),
             ),
             ComponentBoundary(
               child: DievasTag(
                 label: style.name,
                 style: style,
-                borderRadius: DievasTagBorderRadius.rounded(borderSM),
+                borderRadius: DievasTagBorderRadius.rounded(borderSm),
                 leadingIcon: Icon(Icons.label_outline_rounded, size: iconSize),
                 onRemove: () {},
               ),

@@ -36,7 +36,7 @@ class _ButtonPlaygroundState extends State<ButtonPlayground> {
     final size = context.knobs.object.dropdown<DievasButtonSize>(
       label: 'Size',
       options: DievasButtonSize.values,
-      initialOption: .MD,
+      initialOption: .md,
       labelBuilder: (value) => value.name,
     );
     final fullWidth = context.knobs.boolean(label: 'Full width');

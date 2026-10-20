@@ -9,32 +9,32 @@ import 'package:flutter/painting.dart';
 /// Optional additions preserve existing custom theme constructors.
 final class DievasAvatarThemeData extends Equatable {
   const DievasAvatarThemeData({
-    required this.sizeXS,
-    required this.sizeSM,
-    required this.sizeMD,
-    required this.sizeLG,
-    required this.sizeXL,
+    required this.sizeXs,
+    required this.sizeSm,
+    required this.sizeMd,
+    required this.sizeLg,
+    required this.sizeXl,
     required this.borderRadiusSquare,
-    required this.initialsStyleXS,
-    required this.initialsStyleSM,
-    required this.initialsStyleMD,
-    required this.initialsStyleLG,
-    required this.initialsStyleXL,
+    required this.initialsStyleXs,
+    required this.initialsStyleSm,
+    required this.initialsStyleMd,
+    required this.initialsStyleLg,
+    required this.initialsStyleXl,
     required this.backgroundColour,
     required this.initialsColour,
     required this.placeholderColour,
-    this.sizeXL2 = DievasSizingPrimitives.s80,
-    this.initialsStyleXL2,
+    this.sizeXl2 = DievasSizingPrimitives.s80,
+    this.initialsStyleXl2,
     this.badgeColour,
     this.badgeSizeFactor = 0.2,
     this.badgeMarginFactor = 0.05,
   });
 
   /// Extra-large profile dimension; the default maps to the 80 dp size token.
-  final double sizeXL2;
+  final double sizeXl2;
 
-  /// Falls back to the XL text style in existing custom themes.
-  final TextStyle? initialsStyleXL2;
+  /// Falls back to the xl text style in existing custom themes.
+  final TextStyle? initialsStyleXl2;
 
   /// Status colour; null resolves the active theme’s success icon colour.
   final Color? badgeColour;
@@ -45,38 +45,38 @@ final class DievasAvatarThemeData extends Equatable {
   /// Transparent badge gap as a fraction of the avatar’s shorter side.
   final double badgeMarginFactor;
 
-  /// Container size for [DievasAvatarSize.XS] — 24 dp.
-  final double sizeXS;
+  /// Container size for [DievasAvatarSize.xs] — 24 dp.
+  final double sizeXs;
 
-  /// Container size for [DievasAvatarSize.SM] — 32 dp.
-  final double sizeSM;
+  /// Container size for [DievasAvatarSize.sm] — 32 dp.
+  final double sizeSm;
 
-  /// Container size for [DievasAvatarSize.MD] — 40 dp.
-  final double sizeMD;
+  /// Container size for [DievasAvatarSize.md] — 40 dp.
+  final double sizeMd;
 
-  /// Container size for [DievasAvatarSize.LG] — 48 dp.
-  final double sizeLG;
+  /// Container size for [DievasAvatarSize.lg] — 48 dp.
+  final double sizeLg;
 
-  /// Container size for [DievasAvatarSize.XL] — 64 dp.
-  final double sizeXL;
+  /// Container size for [DievasAvatarSize.xl] — 64 dp.
+  final double sizeXl;
 
   /// Corner radius used when [DievasAvatarShape.square] is selected.
   final BorderRadius borderRadiusSquare;
 
-  /// Initials text style at [DievasAvatarSize.XS].
-  final TextStyle initialsStyleXS;
+  /// Initials text style at [DievasAvatarSize.xs].
+  final TextStyle initialsStyleXs;
 
-  /// Initials text style at [DievasAvatarSize.SM].
-  final TextStyle initialsStyleSM;
+  /// Initials text style at [DievasAvatarSize.sm].
+  final TextStyle initialsStyleSm;
 
-  /// Initials text style at [DievasAvatarSize.MD].
-  final TextStyle initialsStyleMD;
+  /// Initials text style at [DievasAvatarSize.md].
+  final TextStyle initialsStyleMd;
 
-  /// Initials text style at [DievasAvatarSize.LG].
-  final TextStyle initialsStyleLG;
+  /// Initials text style at [DievasAvatarSize.lg].
+  final TextStyle initialsStyleLg;
 
-  /// Initials text style at [DievasAvatarSize.XL].
-  final TextStyle initialsStyleXL;
+  /// Initials text style at [DievasAvatarSize.xl].
+  final TextStyle initialsStyleXl;
 
   /// Fallback container background (used when no image is provided).
   final Color backgroundColour;
@@ -89,42 +89,42 @@ final class DievasAvatarThemeData extends Equatable {
 
   /// Creates a copy of this [DievasAvatarThemeData] with the given fields replaced.
   DievasAvatarThemeData copyWith({
-    double? sizeXS,
-    double? sizeSM,
-    double? sizeMD,
-    double? sizeLG,
-    double? sizeXL,
+    double? sizeXs,
+    double? sizeSm,
+    double? sizeMd,
+    double? sizeLg,
+    double? sizeXl,
     BorderRadius? borderRadiusSquare,
-    TextStyle? initialsStyleXS,
-    TextStyle? initialsStyleSM,
-    TextStyle? initialsStyleMD,
-    TextStyle? initialsStyleLG,
-    TextStyle? initialsStyleXL,
+    TextStyle? initialsStyleXs,
+    TextStyle? initialsStyleSm,
+    TextStyle? initialsStyleMd,
+    TextStyle? initialsStyleLg,
+    TextStyle? initialsStyleXl,
     Color? backgroundColour,
     Color? initialsColour,
     Color? placeholderColour,
-    double? sizeXL2,
-    TextStyle? initialsStyleXL2,
+    double? sizeXl2,
+    TextStyle? initialsStyleXl2,
     Color? badgeColour,
     double? badgeSizeFactor,
     double? badgeMarginFactor,
   }) => DievasAvatarThemeData(
-    sizeXS: sizeXS ?? this.sizeXS,
-    sizeSM: sizeSM ?? this.sizeSM,
-    sizeMD: sizeMD ?? this.sizeMD,
-    sizeLG: sizeLG ?? this.sizeLG,
-    sizeXL: sizeXL ?? this.sizeXL,
+    sizeXs: sizeXs ?? this.sizeXs,
+    sizeSm: sizeSm ?? this.sizeSm,
+    sizeMd: sizeMd ?? this.sizeMd,
+    sizeLg: sizeLg ?? this.sizeLg,
+    sizeXl: sizeXl ?? this.sizeXl,
     borderRadiusSquare: borderRadiusSquare ?? this.borderRadiusSquare,
-    initialsStyleXS: initialsStyleXS ?? this.initialsStyleXS,
-    initialsStyleSM: initialsStyleSM ?? this.initialsStyleSM,
-    initialsStyleMD: initialsStyleMD ?? this.initialsStyleMD,
-    initialsStyleLG: initialsStyleLG ?? this.initialsStyleLG,
-    initialsStyleXL: initialsStyleXL ?? this.initialsStyleXL,
+    initialsStyleXs: initialsStyleXs ?? this.initialsStyleXs,
+    initialsStyleSm: initialsStyleSm ?? this.initialsStyleSm,
+    initialsStyleMd: initialsStyleMd ?? this.initialsStyleMd,
+    initialsStyleLg: initialsStyleLg ?? this.initialsStyleLg,
+    initialsStyleXl: initialsStyleXl ?? this.initialsStyleXl,
     backgroundColour: backgroundColour ?? this.backgroundColour,
     initialsColour: initialsColour ?? this.initialsColour,
     placeholderColour: placeholderColour ?? this.placeholderColour,
-    sizeXL2: sizeXL2 ?? this.sizeXL2,
-    initialsStyleXL2: initialsStyleXL2 ?? this.initialsStyleXL2,
+    sizeXl2: sizeXl2 ?? this.sizeXl2,
+    initialsStyleXl2: initialsStyleXl2 ?? this.initialsStyleXl2,
     badgeColour: badgeColour ?? this.badgeColour,
     badgeSizeFactor: badgeSizeFactor ?? this.badgeSizeFactor,
     badgeMarginFactor: badgeMarginFactor ?? this.badgeMarginFactor,
@@ -132,22 +132,22 @@ final class DievasAvatarThemeData extends Equatable {
 
   @override
   List<Object?> get props => [
-    sizeXL2,
-    initialsStyleXL2,
+    sizeXl2,
+    initialsStyleXl2,
     badgeColour,
     badgeSizeFactor,
     badgeMarginFactor,
-    sizeXS,
-    sizeSM,
-    sizeMD,
-    sizeLG,
-    sizeXL,
+    sizeXs,
+    sizeSm,
+    sizeMd,
+    sizeLg,
+    sizeXl,
     borderRadiusSquare,
-    initialsStyleXS,
-    initialsStyleSM,
-    initialsStyleMD,
-    initialsStyleLG,
-    initialsStyleXL,
+    initialsStyleXs,
+    initialsStyleSm,
+    initialsStyleMd,
+    initialsStyleLg,
+    initialsStyleXl,
     backgroundColour,
     initialsColour,
     placeholderColour,

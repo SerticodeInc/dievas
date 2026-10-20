@@ -1,6 +1,6 @@
 name: dievas
 description: "Dievas design system. A Flutter theme and component layer for building branded, token driven interfaces."
-version: 1.0.1
+version: 1.0.2
 repository: https://github.com/SerticodeInc/dievas
 homepage: https://dievas.serticode.com
 resolution: workspace

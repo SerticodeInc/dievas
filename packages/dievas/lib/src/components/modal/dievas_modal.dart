@@ -1,7 +1,6 @@
 import 'package:dievas/src/extensions/dievas_theme_context_extension.dart';
 import 'package:flutter/material.dart' show showDialog;
 import 'package:flutter/widgets.dart';
-import 'package:dievas/l10n/dievas_localizations.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
 
 /// Shows a Dievas-styled modal dialog.
@@ -95,7 +94,7 @@ class DievasModal extends StatelessWidget {
                     Expanded(child: Text(title, style: theme.titleStyle)),
                     if (showCloseButton)
                       Semantics(
-                        label: DievasLocalizations.of(context).modalCloseLabel,
+                        label: context.dievasL10n.modalCloseLabel,
                         button: true,
                         child: GestureDetector(
                           onTap: onClose ?? () => Navigator.of(context).pop(),

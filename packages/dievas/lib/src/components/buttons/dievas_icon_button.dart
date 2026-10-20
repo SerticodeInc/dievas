@@ -18,7 +18,7 @@ class DievasIconButton extends StatefulWidget {
     super.key,
     required this.icon,
     this.style = .ghost,
-    this.size = .MD,
+    this.size = .md,
     this.shape,
     this.backgroundColor,
     this.foregroundColor,
@@ -56,9 +56,9 @@ class _DievasIconButtonState extends State<DievasIconButton> {
     };
 
     final (containerSize, iconSize, radius) = switch (widget.size) {
-      .SM => (buttonTheme.size.SM, buttonTheme.iconSize.SM, buttonTheme.radius.SM),
-      .MD => (buttonTheme.size.MD, buttonTheme.iconSize.MD, buttonTheme.radius.MD),
-      .LG => (buttonTheme.size.LG, buttonTheme.iconSize.LG, buttonTheme.radius.LG),
+      .sm => (buttonTheme.size.sm, buttonTheme.iconSize.sm, buttonTheme.radius.sm),
+      .md => (buttonTheme.size.md, buttonTheme.iconSize.md, buttonTheme.radius.md),
+      .lg => (buttonTheme.size.lg, buttonTheme.iconSize.lg, buttonTheme.radius.lg),
     };
 
     final effectiveShape = widget.shape ?? RoundedRectangleBorder(borderRadius: BorderRadius.all(radius));

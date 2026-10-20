@@ -83,12 +83,12 @@ void main() {
     });
 
     testWidgets('renders with indent', (tester) async {
-      await tester.pumpWidget(Harness(child: const DievasDivider(indent: DievasDividerIndent.MD)));
+      await tester.pumpWidget(Harness(child: const DievasDivider(indent: DievasDividerIndent.md)));
       expect(tester.takeException(), isNull);
     });
 
     testWidgets('renders with endIndent', (tester) async {
-      await tester.pumpWidget(Harness(child: const DievasDivider(endIndent: DievasDividerIndent.MD)));
+      await tester.pumpWidget(Harness(child: const DievasDivider(endIndent: DievasDividerIndent.md)));
       expect(tester.takeException(), isNull);
     });
 

@@ -86,7 +86,7 @@ class _BothOrientations extends StatelessWidget {
         const ComponentBoundary(
           child: SizedBox(
             width: 280,
-            child: DievasDivider(indent: DievasDividerIndent.MD, endIndent: DievasDividerIndent.MD),
+            child: DievasDivider(indent: DievasDividerIndent.md, endIndent: DievasDividerIndent.md),
           ),
         ),
         SizedBox(height: context.spacing.lg),

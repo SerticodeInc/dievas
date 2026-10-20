@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:dievas/src/theme/dievas_theme.dart';
 
-/// Avatar sizes. Existing XS - XL dimensions are retained; XL2 adds 80 dp.
-enum DievasAvatarSize { XS, SM, MD, LG, XL, XL2 }
+/// Avatar sizes. Existing xs - xl dimensions are retained; xl2 adds 80 dp.
+enum DievasAvatarSize { xs, sm, md, lg, xl, xl2 }
 
 /// Circle or rounded square avatar surface.
 enum DievasAvatarShape { circle, square }
@@ -26,7 +26,7 @@ class DievasAvatar extends StatelessWidget {
     this.imageProvider,
     this.initials,
     this.content,
-    this.size = .MD,
+    this.size = .md,
     this.shape = .square,
     this.semanticLabel,
     this.backgroundColour,
@@ -84,20 +84,20 @@ class DievasAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = DievasTheme.componentsOf(context).avatar;
     final dimension = switch (size) {
-      .XS => theme.sizeXS,
-      .SM => theme.sizeSM,
-      .MD => theme.sizeMD,
-      .LG => theme.sizeLG,
-      .XL => theme.sizeXL,
-      .XL2 => theme.sizeXL2,
+      .xs => theme.sizeXs,
+      .sm => theme.sizeSm,
+      .md => theme.sizeMd,
+      .lg => theme.sizeLg,
+      .xl => theme.sizeXl,
+      .xl2 => theme.sizeXl2,
     };
     final style = switch (size) {
-      .XS => theme.initialsStyleXS,
-      .SM => theme.initialsStyleSM,
-      .MD => theme.initialsStyleMD,
-      .LG => theme.initialsStyleLG,
-      .XL => theme.initialsStyleXL,
-      .XL2 => theme.initialsStyleXL2 ?? theme.initialsStyleXL,
+      .xs => theme.initialsStyleXs,
+      .sm => theme.initialsStyleSm,
+      .md => theme.initialsStyleMd,
+      .lg => theme.initialsStyleLg,
+      .xl => theme.initialsStyleXl,
+      .xl2 => theme.initialsStyleXl2 ?? theme.initialsStyleXl,
     };
     final foreground = switch (content) {
       null => _AvatarFallback(initials: initials, iconColour: placeholderColour ?? theme.placeholderColour),

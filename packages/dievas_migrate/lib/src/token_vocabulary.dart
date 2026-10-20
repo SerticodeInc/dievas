@@ -8,8 +8,8 @@ library;
 
 /// Types whose members were renamed. A diagnostic only migrates when the
 /// declaring type is listed here, which keeps unrelated enums that reuse the
-/// same member names (`DievasButtonSize.MD`, record keys like `SM:`)
-/// untouched.
+/// same member names (`DievasButtonSize.MD` before component sizes were
+/// lowercased, record keys like `SM:` in an unrelated type) untouched.
 const Set<String> renamedTypes = {
   'DievasBreakpointPrimitives',
   'DievasBreakpointSemantic',
@@ -25,6 +25,16 @@ const Set<String> renamedTypes = {
   'DievasElevationThemeData',
   'DievasSizingThemeData',
   'DievasTypographyThemeData',
+  'DievasDividerIndent',
+  'DievasButtonSize',
+  'DievasAvatarSize',
+  'DievasLoaderSize',
+  'DievasCircularProgressSize',
+  'DievasIconSize',
+  'DievasTextInputSize',
+  'DievasTextInputGroupSize',
+  'DievasButtonThemeValue',
+  'DievasInputThemeValue',
 };
 
 /// Theme data constructors and `copyWith` are the only call sites where a named

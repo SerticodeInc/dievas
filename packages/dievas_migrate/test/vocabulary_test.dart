@@ -33,6 +33,23 @@ void main() {
     });
   });
 
+  test('renamedTypes covers the component size surfaces', () {
+    for (final type in [
+      'DievasDividerIndent',
+      'DievasButtonSize',
+      'DievasAvatarSize',
+      'DievasLoaderSize',
+      'DievasCircularProgressSize',
+      'DievasIconSize',
+      'DievasTextInputSize',
+      'DievasTextInputGroupSize',
+      'DievasButtonThemeValue',
+      'DievasInputThemeValue',
+    ]) {
+      expect(renamedTypes, contains(type), reason: type);
+    }
+  });
+
   test('renamedMembersByLength lists longest names first', () {
     final lengths = renamedMembersByLength.map((name) => name.length).toList();
     final ordered = [...lengths]..sort((a, b) => b.compareTo(a));

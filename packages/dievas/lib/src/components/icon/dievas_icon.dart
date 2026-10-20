@@ -5,16 +5,16 @@ import 'package:dievas/src/theme/dievas_theme.dart';
 /// Size variants for [DievasIcon].
 enum DievasIconSize {
   /// 16 dp — inline with body text.
-  XS,
+  xs,
 
   /// 20 dp — inline with label text.
-  SM,
+  sm,
 
   /// 24 dp — default stand-alone size.
-  MD,
+  md,
 
   /// 32 dp — large feature icon.
-  LG,
+  lg,
 }
 
 /// A thin wrapper around [Icon] / [ImageIcon] that enforces Dievas sizing
@@ -30,7 +30,7 @@ enum DievasIconSize {
 /// DievasIcon(Icons.warning, color: context.colours.feedback.feedbackWarning.icon)
 /// ```
 class DievasIcon extends StatelessWidget {
-  const DievasIcon(this.icon, {super.key, this.size = .MD, this.color, this.semanticLabel});
+  const DievasIcon(this.icon, {super.key, this.size = .md, this.color, this.semanticLabel});
 
   final IconData icon;
   final DievasIconSize size;
@@ -46,10 +46,10 @@ class DievasIcon extends StatelessWidget {
     final sizing = DievasTheme.sizingOf(context);
 
     final dimension = switch (size) {
-      .XS => sizing.iconXs,
-      .SM => sizing.iconSm,
-      .MD => sizing.iconMd,
-      .LG => sizing.iconLg,
+      .xs => sizing.iconXs,
+      .sm => sizing.iconSm,
+      .md => sizing.iconMd,
+      .lg => sizing.iconLg,
     };
 
     return Icon(

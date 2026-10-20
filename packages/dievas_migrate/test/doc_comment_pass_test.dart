@@ -22,10 +22,20 @@ void b() {}
 
   test('leaves unrelated types and bare members alone', () {
     const source = '''
-// [DievasButtonSize.MD] and a bare MD and [somethingElse.SM].
+// [UnrelatedSize.MD] and a bare MD and [somethingElse.SM].
 const label = 'MD';
 ''';
     expect(migrateComments(source), source);
+  });
+
+  test('rewrites component size references now that they are renamed', () {
+    const source = '''
+/// Button [DievasButtonSize.MD] and avatar [DievasAvatarSize.XL2].
+void a() {}
+''';
+    final result = migrateComments(source);
+    expect(result, contains('[DievasButtonSize.md]'));
+    expect(result, contains('[DievasAvatarSize.xl2]'));
   });
 
   test('does not edit comment markers inside strings', () {

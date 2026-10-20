@@ -5,13 +5,13 @@ import 'package:dievas/src/theme/dievas_theme.dart';
 /// Size variants for [DievasCircularProgress].
 enum DievasCircularProgressSize {
   /// 16 dp — inline loading indicator.
-  SM,
+  sm,
 
   /// 24 dp — standard standalone indicator.
-  MD,
+  md,
 
   /// 32 dp — prominent page-level indicator.
-  LG,
+  lg,
 }
 
 /// Visual style of [DievasCircularProgress].
@@ -35,7 +35,7 @@ enum DievasCircularProgressStyle {
 /// DievasCircularProgress(value: 0.4)      // 40% determinate
 /// ```
 class DievasCircularProgress extends StatelessWidget {
-  const DievasCircularProgress({super.key, this.value, this.size = .MD, this.style = .primary});
+  const DievasCircularProgress({super.key, this.value, this.size = .md, this.style = .primary});
 
   /// Progress from 0.0 to 1.0. `null` → indeterminate.
   final double? value;
@@ -48,9 +48,9 @@ class DievasCircularProgress extends StatelessWidget {
     final theme = DievasTheme.componentsOf(context).circularProgress;
 
     final diameter = switch (size) {
-      .SM => theme.sizeSM,
-      .MD => theme.sizeMD,
-      .LG => theme.sizeLG,
+      .sm => theme.sizeSm,
+      .md => theme.sizeMd,
+      .lg => theme.sizeLg,
     };
 
     final color = switch (style) {

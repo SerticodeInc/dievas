@@ -98,8 +98,8 @@ class Stage extends StatelessComponent {
           _elevationCard('e4', DievasElevationShadowLayer.lg),
         ]),
         _tokenFamily('radius', [
-          _radiusCard('SM', DievasRadiusPrimitives.sm),
-          _radiusCard('MD', DievasRadiusPrimitives.md),
+          _radiusCard('sm', DievasRadiusPrimitives.sm),
+          _radiusCard('md', DievasRadiusPrimitives.md),
           _radiusCard('R24', DievasRadiusPrimitives.r24),
         ]),
         _tokenFamily('spacing', [
@@ -157,9 +157,9 @@ class Stage extends StatelessComponent {
           _aliasChip('xl', 'context.elevation.xl', '24.0', 'e5'),
         ]),
         _tokenFamily('radius', [
-          _aliasChip('sm', 'context.border.sm', '4.0', 'SM'),
-          _aliasChip('md', 'context.border.md', '8.0', 'MD'),
-          _aliasChip('xl3', 'context.border.xl3', '24.0', 'XL3'),
+          _aliasChip('sm', 'context.border.sm', '4.0', 'sm'),
+          _aliasChip('md', 'context.border.md', '8.0', 'md'),
+          _aliasChip('xl3', 'context.border.xl3', '24.0', 'xl3'),
         ]),
         _tokenFamily('spacing', [
           _aliasChip('sm', 'context.spacing.sm', '8.0', 's2'),
@@ -223,7 +223,7 @@ class Stage extends StatelessComponent {
           Component.text('DievasFilledButton(\n  style: '),
           span(classes: 'tok-k', [Component.text('.primary')]),
           Component.text(',\n  size: '),
-          span(classes: 'tok-k', [Component.text('.LG')]),
+          span(classes: 'tok-k', [Component.text('.lg')]),
           Component.text(',\n  label: '),
           span(classes: 'tok-s', [Component.text('\'Continue\'')]),
           Component.text(',\n  foregroundColor: '),
@@ -253,7 +253,7 @@ class Stage extends StatelessComponent {
   /// layer list from [DievasElevationShadowLayer], each layer's blur and tint
   /// applied as a centred box-shadow (offset 0) so it reads as a soft halo
   /// rather than a drop shadow. Each card is the tier whose dominant blur is
-  /// the named primitive (e2 → SM, e3 → MD, e4 → LG), so the label's value is
+  /// the named primitive (e2 → sm, e3 → md, e4 → lg), so the label's value is
   /// the last layer's blur.
   Component _elevationCard(String name, List<DievasElevationShadow> layers) => div(classes: 'shape-card', [
     div(classes: 'shape-sample elev-sample', [

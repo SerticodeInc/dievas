@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
-import 'package:dievas/l10n/dievas_localizations.dart';
+import 'package:dievas/src/extensions/dievas_theme_context_extension.dart';
 import 'package:dievas/src/components/divider/dievas_divider.dart';
 import 'package:dievas/src/components/buttons/dievas_icon_button.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
@@ -95,7 +95,7 @@ void closeDievasBottomSheet<T>(BuildContext context, [T? result]) => Navigator.o
 
 /// Sheet content with an optional handle, fixed header/footer, and flexible body.
 ///
-/// Header, body and footer share [padding] horizontally (default: theme SM).
+/// Header, body and footer share [padding] horizontally (default: theme sm).
 /// List tiles inherit zero internal content padding to avoid double insets.
 /// Place a ListView in [child] to scroll the body without moving the header.
 /// The modal helper supplies the surface, clipping, drag behaviour and insets.
@@ -154,12 +154,12 @@ class DievasBottomSheet extends StatelessWidget {
     final action = switch ((trailing, showCloseButton)) {
       (final widget?, _) => widget,
       (_, true) => Tooltip(
-        message: DievasLocalizations.of(context).bottomSheetCloseLabel,
+        message: context.dievasL10n.bottomSheetCloseLabel,
         excludeFromSemantics: true,
         child: DievasIconButton(
           style: .tinted,
-          size: .SM,
-          semanticLabel: DievasLocalizations.of(context).bottomSheetCloseLabel,
+          size: .sm,
+          semanticLabel: context.dievasL10n.bottomSheetCloseLabel,
           backgroundColor: closeButtonBackgroundColour ?? DievasTheme.coloursOf(context).border.dividerColour,
           foregroundColor: DievasTheme.coloursOf(context).icon.iconPrimary,
           shape: const CircleBorder(),
@@ -179,7 +179,7 @@ class DievasBottomSheet extends StatelessWidget {
               padding: .only(top: theme.handleTopInset),
               child: Center(
                 child: Semantics(
-                  label: DievasLocalizations.of(context).bottomSheetDragHandleLabel,
+                  label: context.dievasL10n.bottomSheetDragHandleLabel,
                   child: Container(
                     width: theme.handleWidth,
                     height: theme.handleHeight,

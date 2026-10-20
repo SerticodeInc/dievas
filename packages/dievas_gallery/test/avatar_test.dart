@@ -39,7 +39,7 @@ void main() {
     expect(labels.indexOf('Override text colour') + 1, labels.indexOf('Text colour'));
     expect(labels.indexOf('Override badge colour') + 1, labels.indexOf('Badge colour'));
     state.updateQueryField(group: 'knobs', field: 'Content text', value: 'XY');
-    state.updateQueryField(group: 'knobs', field: 'Size', value: 'XL2');
+    state.updateQueryField(group: 'knobs', field: 'Size', value: 'xl2');
     state.updateQueryField(group: 'knobs', field: 'Override badge colour', value: 'true');
     state.updateQueryField(group: 'knobs', field: 'Badge colour', value: 'Brand');
     state.updateQueryField(group: 'knobs', field: 'Badge alignment', value: 'topLeft');
@@ -49,7 +49,7 @@ void main() {
     await tester.pumpAndSettle();
     for (final avatar in tester.widgetList<DievasAvatar>(find.byType(DievasAvatar))) {
       expect(avatar.initials, 'XY');
-      expect(avatar.size, DievasAvatarSize.XL2);
+      expect(avatar.size, DievasAvatarSize.xl2);
       expect(avatar.badgeAlignment, DievasAvatarBadgeAlignment.topLeft);
       expect(avatar.badgeSize, 12);
       expect(avatar.showBadge, isTrue);

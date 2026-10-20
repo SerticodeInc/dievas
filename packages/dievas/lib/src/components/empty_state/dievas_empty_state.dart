@@ -1,4 +1,5 @@
 import 'package:dievas/l10n/dievas_localizations.dart';
+import 'package:dievas/src/extensions/dievas_theme_context_extension.dart';
 import 'package:flutter/widgets.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
 
@@ -35,7 +36,7 @@ class DievasEmptyState extends StatelessWidget {
   Widget build(BuildContext context) {
     final colours = DievasTheme.coloursOf(context);
     final theme = DievasTheme.componentsOf(context).emptyState;
-    final l10n = DievasLocalizations.of(context);
+    final l10n = context.dievasL10n;
 
     final resolvedTitle = title ?? l10n.emptyStateDefaultTitle;
     final resolvedDescription = description ?? l10n.emptyStateDefaultDescription;

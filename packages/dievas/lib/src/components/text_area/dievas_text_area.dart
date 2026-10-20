@@ -8,7 +8,7 @@ import 'package:dievas/src/theme/dievas_theme.dart';
 ///
 /// Shares the same token architecture as [DievasTextInput]. Height is driven
 /// by [minLines] / [maxLines] rather than a fixed size enum — always uses the
-/// `MD` content padding and typography variant.
+/// `md` content padding and typography variant.
 ///
 /// Moon reference: Textarea
 ///
@@ -95,7 +95,7 @@ class DievasTextArea extends StatelessWidget {
       _ => false,
     };
 
-    // TextArea always uses MD tokens
+    // TextArea always uses md tokens
 
     final (borderColour, focusedBorderColour) = switch ((hasError, hasWarning)) {
       (true, _) => (theme.borderColourError, theme.borderColourError),
@@ -129,7 +129,7 @@ class DievasTextArea extends StatelessWidget {
       field: TextField(
         controller: controller,
         focusNode: focusNode,
-        style: theme.inputStyle.MD,
+        style: theme.inputStyle.md,
         keyboardType: keyboardType,
         textInputAction: textInputAction,
         inputFormatters: inputFormatters,
@@ -143,12 +143,12 @@ class DievasTextArea extends StatelessWidget {
         minLines: minLines,
         maxLines: maxLines,
         cursorColor: theme.borderColourFocused,
-        cursorWidth: theme.cursorWidth.MD,
-        cursorHeight: theme.cursorHeight.MD,
+        cursorWidth: theme.cursorWidth.md,
+        cursorHeight: theme.cursorHeight.md,
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: theme.placeholderStyle.MD,
-          contentPadding: theme.contentPadding.MD,
+          hintStyle: theme.placeholderStyle.md,
+          contentPadding: theme.contentPadding.md,
           filled: true,
           fillColor: theme.bgColour,
           border: border,

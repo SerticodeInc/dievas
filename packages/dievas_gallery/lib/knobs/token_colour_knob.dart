@@ -4,44 +4,20 @@ import 'package:widgetbook/widgetbook.dart';
 
 /// Curated semantic roles offered by the gallery's colour dropdowns.
 enum DievasColourRole {
-  text([
-    DievasGalleryColour.primaryText,
-    DievasGalleryColour.secondaryText,
-    DievasGalleryColour.inverseText,
-    DievasGalleryColour.brand,
-    DievasGalleryColour.successText,
-    DievasGalleryColour.warningText,
-    DievasGalleryColour.errorText,
-    DievasGalleryColour.infoText,
-  ]),
-  icon([
-    DievasGalleryColour.primaryIcon,
-    DievasGalleryColour.secondaryIcon,
-    DievasGalleryColour.brand,
-    DievasGalleryColour.successIcon,
-    DievasGalleryColour.warningIcon,
-    DievasGalleryColour.errorIcon,
-    DievasGalleryColour.infoIcon,
-  ]),
+  text([.primaryText, .secondaryText, .inverseText, .brand, .successText, .warningText, .errorText, .infoText]),
+  icon([.primaryIcon, .secondaryIcon, .brand, .successIcon, .warningIcon, .errorIcon, .infoIcon]),
   background([
-    DievasGalleryColour.card,
-    DievasGalleryColour.page,
-    DievasGalleryColour.brand,
-    DievasGalleryColour.brandTint,
-    DievasGalleryColour.track,
-    DievasGalleryColour.successBackground,
-    DievasGalleryColour.warningBackground,
-    DievasGalleryColour.errorBackground,
-    DievasGalleryColour.infoBackground,
+    .card,
+    .page,
+    .brand,
+    .brandTint,
+    .track,
+    .successBackground,
+    .warningBackground,
+    .errorBackground,
+    .infoBackground,
   ]),
-  border([
-    DievasGalleryColour.divider,
-    DievasGalleryColour.brand,
-    DievasGalleryColour.successBorder,
-    DievasGalleryColour.warningBorder,
-    DievasGalleryColour.errorBorder,
-    DievasGalleryColour.infoBorder,
-  ]);
+  border([.divider, .brand, .successBorder, .warningBorder, .errorBorder, .infoBorder]);
 
   const DievasColourRole(this.options);
 

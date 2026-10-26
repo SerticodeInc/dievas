@@ -53,6 +53,9 @@ class DievasThemeAddon extends WidgetbookAddon<WidgetbookTheme<DievasThemeData>>
 
   @override
   Widget buildUseCase(BuildContext context, Widget child, WidgetbookTheme<DievasThemeData> setting) {
+    // Drawer surfaces and barriers cover the whole phone; their content owns safe insets.
+    final fullBleed = WidgetbookState.of(context).path?.split('/').contains('drawer') ?? false;
+
     return device_frame.DeviceFrame(
       device: device_frame.Devices.ios.iPhone12ProMax,
       screen: DievasScope(
@@ -64,9 +67,12 @@ class DievasThemeAddon extends WidgetbookAddon<WidgetbookTheme<DievasThemeData>>
             data: setting.data.material,
             child: Scaffold(
               backgroundColor: setting.data.colours.background.cardBackground,
-              body: SafeArea(
-                child: Padding(padding: EdgeInsets.all(setting.data.spacing.sm), child: child),
-              ),
+              body: switch (fullBleed) {
+                true => child,
+                false => SafeArea(
+                  child: Padding(padding: EdgeInsets.all(setting.data.spacing.sm), child: child),
+                ),
+              },
             ),
           ),
         ),

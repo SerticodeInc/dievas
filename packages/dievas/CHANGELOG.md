@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **Drawer**: add surface, barrier, radius, decoration, shadow and semantic label overrides; start/end placement with RTL support; opening gesture and barrier dismissal controls; open-state feedback; and parent-constrained widths. Refresh the interactive Widgetbook example with an edge-to-edge viewport, 80% default width, square corners and shadows off by default.
+
 ## 1.0.2
 
 ### Breaking changes - size names, localization and bottom sheet shadows

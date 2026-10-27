@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- **Dependencies**: raise the minimum `dievas_tokens` version to `1.0.2`, matching the lowercase token names used by Dievas and excluding incompatible `1.0.1` from dependency lower bound resolution.
+
+- **Menu item**: add custom leading, label and content slots; independent slot colours; surface, hover, decoration, radius and layout overrides; long press, keyboard activation, focus and semantics; and child gesture control. Use Moon Heles for neutral hover feedback and semantic opacity for enabled rows. Preserve the existing text and icon conveniences. Rebuild the interactive gallery with selection controls, expandable rows, named spacing/sizing presets and shared preview configuration.
+
 - **Search composites**: join the dropdown to the painted input edge, use regular body text for menu labels, reduce search shadows to the hairline semantic tier, and offer compact input sizes. Rebuild Search with List as a flat, full height inline list with separate Clear and Close actions, centered initial/empty states, and live colour, radius, size, floating label and RTL controls. Result selection reports the item without clearing or dismissing the inline list. Keep the dropdown's semantic 256px cap.
 
 - **Search with dropdown**: compose the search field with `DievasDropdown`; show all options on opening, filter trimmed queries, retain selected labels, and provide Clear and empty result states. Add joined or spaced surfaces, colour and semantic radius overrides, floating labels, shadow control, and a semantic 256px results cap. Preserve search state across Widgetbook controls and keep results inside the phone viewport.

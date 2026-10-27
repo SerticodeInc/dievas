@@ -14,7 +14,7 @@ environment:
 dependencies:
     flutter:
         sdk: flutter
-    dievas_tokens: ^1.0.1
+    dievas_tokens: ^1.0.2
     equatable: ^3.0.0
     meta: ^1.19.0
 

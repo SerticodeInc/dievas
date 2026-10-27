@@ -800,8 +800,11 @@ DievasMenuItemThemeData _createMenuItemTheme(
   DievasSizingThemeData sizing,
   DievasBorderThemeData border,
 ) => DievasMenuItemThemeData(
+  hoverEffectColour: colours.background.menuHoveredBackground,
+  minHeight: sizing.height40,
+  verticalGap: spacing.xs / 2,
   textStyle: typography.bodySm.copyWith(color: colours.text.textPrimary),
-  subtitleStyle: typography.bodyXs.copyWith(color: colours.text.textSecondary),
+  subtitleStyle: typography.bodySm.copyWith(color: colours.text.textSecondary),
   iconSize: sizing.iconSm,
   iconSpacing: spacing.sm,
   padding: .symmetric(horizontal: spacing.sm, vertical: spacing.sm),

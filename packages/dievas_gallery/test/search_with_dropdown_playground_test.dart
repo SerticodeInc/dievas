@@ -10,7 +10,8 @@ Finder _surfaceFor(String text) => find
       of: find.text(text).last,
       matching: find.byWidgetPredicate(
         (widget) => switch (widget) {
-          Container(decoration: BoxDecoration(color: final Color _)) => true,
+          // Popup surfaces own a shadow stack; menu row surfaces do not.
+          Container(decoration: BoxDecoration(color: final Color _, boxShadow: final List<BoxShadow> _)) => true,
           _ => false,
         },
       ),

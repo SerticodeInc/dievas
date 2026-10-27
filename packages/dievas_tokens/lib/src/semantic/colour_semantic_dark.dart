@@ -246,6 +246,9 @@ abstract final class DievasColourSemanticDark {
   /// menu background.
   static const int menuBackground = DievasColourPrimitives.slate800;
 
+  /// Neutral menu hover overlay. Moon ref: heles.
+  static const int menuHoveredBackground = DievasColourPrimitives.whiteAlpha14;
+
   /// popover background.
   static const int popoverBackground = DievasColourPrimitives.slate800;
 

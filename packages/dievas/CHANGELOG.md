@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.0.3
 
 - **Modal colours**: add independent `titleColour` and `contentColour` widget/theme overrides and gallery selectors. Keep `textColour` as the shared fallback.
 

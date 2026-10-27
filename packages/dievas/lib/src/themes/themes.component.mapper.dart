@@ -40,7 +40,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
     alert: override?.alert ?? _createAlertTheme(typography, spacing, border),
     snackbar: override?.snackbar ?? _createSnackbarTheme(colours, typography, spacing, border),
     bottomSheet: override?.bottomSheet ?? _createBottomSheetTheme(colours, border),
-    modal: override?.modal ?? _createModalTheme(colours, typography, spacing, border, elevation),
+    modal: override?.modal ?? _createModalTheme(colours, typography, spacing, border),
     tooltip: override?.tooltip ?? _createTooltipTheme(colours, typography, spacing, border, animation),
     loader: override?.loader ?? _createLoaderTheme(colours, typography, spacing, animation),
     menuItem: override?.menuItem ?? _createMenuItemTheme(colours, typography, spacing, sizing, border),
@@ -61,7 +61,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
   );
 }
 
-// Component-level constants — layout extents (minWidth/maxWidth) are overlay-sizing constraints.
+// Component level constants — layout extents (minWidth/maxWidth) are overlay sizing constraints.
 const double _kStrokeProgress = 2.5; // circular progress arc
 const double _kStrokeLoader = 3.0; // loader spinner
 const double _kSwitchThumbPadding = 3.0; // inset between thumb and track edge
@@ -654,19 +654,20 @@ DievasModalThemeData _createModalTheme(
   DievasTypographyThemeData typography,
   DievasSpacingThemeData spacing,
   DievasBorderThemeData border,
-  DievasElevationThemeData elevation,
 ) {
   return DievasModalThemeData(
-    titleStyle: typography.titleMd,
-    bodyStyle: typography.bodyMd,
+    titleStyle: typography.titleSm,
+    bodyStyle: typography.bodySm,
+    textColour: colours.text.textPrimary,
+    iconColour: colours.icon.iconPrimary,
     backgroundColour: colours.background.dialogBackground,
     barrierColour: colours.background.modalBarrierBackground,
-    borderRadius: border.lg,
-    padding: .all(spacing.lg),
+    borderRadius: border.md,
+    padding: .symmetric(vertical: spacing.sm, horizontal: spacing.md),
     minWidth: _kModalMinWidth,
     maxWidth: _kModalMaxWidth,
-    closeIconSize: DievasSizingPrimitives.s20,
-    shadow: elevation.lg,
+    closeIconSize: DievasSizingPrimitives.s16,
+    shadow: const [],
   );
 }
 

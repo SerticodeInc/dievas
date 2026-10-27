@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- **Modal colours**: add independent `titleColour` and `contentColour` widget/theme overrides and gallery selectors. Keep `textColour` as the shared fallback.
+
+- **Modal gallery**: match the Moon reference composition with a 300px card, divided header, reference content insets and one full width 40px Okay button. Keep the confirmation example under With Actions.
+
+- **Modal**: add title free custom content, header/trailing slots, colour, decoration, shadow, directional radius/padding, viewport inset, constraint and semantic overrides. Add configurable route barriers, safe areas, navigation, focus and transitions, preserving local themes and respecting reduced motion. Replace the close gesture with an accessible keyboard button, scroll long content above the keyboard and wrap actions on narrow screens. Add `closeDievasModal` for typed results and modal theme `copyWith`. Default body text to 14px, radius to 8px and shadows to none; existing custom themes retain their values. Replace static gallery cards with working modal examples and live controls.
+
 - **Dependencies**: raise the minimum `dievas_tokens` version to `1.0.2`, matching the lowercase token names used by Dievas and excluding incompatible `1.0.1` from dependency lower bound resolution.
 
 - **Menu item**: add custom leading, label and content slots; independent slot colours; surface, hover, decoration, radius and layout overrides; long press, keyboard activation, focus and semantics; and child gesture control. Use Moon Heles for neutral hover feedback and semantic opacity for enabled rows. Preserve the existing text and icon conveniences. Rebuild the interactive gallery with selection controls, expandable rows, named spacing/sizing presets and shared preview configuration.

@@ -235,67 +235,18 @@ class DievasModal extends StatelessWidget {
                       padding: padding ?? theme.padding,
                       child: switch (child) {
                         final child? => child,
-                        _ => Column(
-                          mainAxisSize: .min,
-                          crossAxisAlignment: .start,
-                          children: [
-                            if (header != null || title != null || trailing != null || showCloseButton)
-                              Builder(
-                                builder: (context) {
-                                  final trailingWidget = switch (trailing) {
-                                    final trailing? => trailing,
-                                    _ when showCloseButton => DievasTextButton(
-                                      size: .sm,
-                                      semanticLabel: closeButtonLabel ?? context.dievasL10n.modalCloseLabel,
-                                      foregroundColor: icons,
-                                      onPressed: onClose ?? () => closeDievasModal(context),
-                                      child: Icon(Icons.close, size: theme.closeIconSize, color: icons),
-                                    ),
-                                    _ => null,
-                                  };
-
-                                  return Row(
-                                    children: [
-                                      Expanded(
-                                        child: switch ((header, title)) {
-                                          (final header?, _) => DefaultTextStyle(
-                                            style: theme.titleStyle.copyWith(color: headingColour),
-                                            child: header,
-                                          ),
-                                          (_, final title?) => Text(
-                                            title,
-                                            style: theme.titleStyle.copyWith(color: headingColour),
-                                          ),
-                                          _ => const SizedBox.shrink(),
-                                        },
-                                      ),
-                                      ?trailingWidget,
-                                    ],
-                                  );
-                                },
-                              ),
-                            if (content != null || body != null) ...[
-                              if (header != null || title != null || trailing != null || showCloseButton)
-                                SizedBox(height: spacing.smPlus),
-                              switch ((content, body)) {
-                                (final content?, _) => content,
-                                (_, final body?) => Text(body),
-                                _ => const SizedBox.shrink(),
-                              },
-                            ],
-                            if (actions.isNotEmpty) ...[
-                              SizedBox(height: spacing.lg),
-                              Align(
-                                alignment: .centerEnd,
-                                child: Wrap(
-                                  spacing: spacing.sm,
-                                  runSpacing: spacing.sm,
-                                  alignment: .end,
-                                  children: actions,
-                                ),
-                              ),
-                            ],
-                          ],
+                        _ => _ModalContent(
+                          header: header,
+                          title: title,
+                          trailing: trailing,
+                          showCloseButton: showCloseButton,
+                          onClose: onClose,
+                          closeButtonLabel: closeButtonLabel,
+                          iconColour: icons,
+                          titleStyle: theme.titleStyle.copyWith(color: headingColour),
+                          content: content,
+                          body: body,
+                          actions: actions,
                         ),
                       },
                     ),
@@ -308,4 +259,96 @@ class DievasModal extends StatelessWidget {
       ),
     );
   }
+}
+
+class _ModalContent extends StatelessWidget {
+  const _ModalContent({
+    required this.header,
+    required this.title,
+    required this.trailing,
+    required this.showCloseButton,
+    required this.onClose,
+    required this.closeButtonLabel,
+    required this.iconColour,
+    required this.titleStyle,
+    required this.content,
+    required this.body,
+    required this.actions,
+  });
+
+  final Widget? header;
+  final String? title;
+  final Widget? trailing;
+  final bool showCloseButton;
+  final VoidCallback? onClose;
+  final String? closeButtonLabel;
+  final Color iconColour;
+  final TextStyle titleStyle;
+  final Widget? content;
+  final String? body;
+  final List<Widget> actions;
+
+  @override
+  Widget build(BuildContext context) {
+    final heading = switch ((header, title)) {
+      (final header?, _) => header,
+      (_, final title?) => Text(title, style: titleStyle),
+      _ => null,
+    };
+    final action = switch ((trailing, showCloseButton)) {
+      (final trailing?, _) => trailing,
+      (_, true) => DievasTextButton(
+        size: .sm,
+        semanticLabel: closeButtonLabel ?? context.dievasL10n.modalCloseLabel,
+        foregroundColor: iconColour,
+        onPressed: onClose ?? () => closeDievasModal(context),
+        child: Icon(Icons.close, size: DievasTheme.componentsOf(context).modal.closeIconSize, color: iconColour),
+      ),
+      _ => null,
+    };
+    final bodyContent = switch ((content, body)) {
+      (final content?, _) => content,
+      (_, final body?) => Text(body),
+      _ => null,
+    };
+    final hasHeader = heading != null || action != null;
+    final spacing = context.spacing;
+
+    return Column(
+      mainAxisSize: .min,
+      crossAxisAlignment: .start,
+      children: [
+        if (hasHeader) _ModalHeader(heading: heading, action: action, titleStyle: titleStyle),
+        if (bodyContent case final body?) ...[if (hasHeader) SizedBox(height: spacing.smPlus), body],
+        if (actions.isNotEmpty) ...[
+          SizedBox(height: spacing.lg),
+          Align(
+            alignment: .centerEnd,
+            child: Wrap(spacing: spacing.sm, runSpacing: spacing.sm, alignment: .end, children: actions),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _ModalHeader extends StatelessWidget {
+  const _ModalHeader({required this.heading, required this.action, required this.titleStyle});
+
+  final Widget? heading;
+  final Widget? action;
+  final TextStyle titleStyle;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      Expanded(
+        child: switch (heading) {
+          final heading? => DefaultTextStyle(style: titleStyle, child: heading),
+          _ => const SizedBox.shrink(),
+        },
+      ),
+      ?action,
+    ],
+  );
 }

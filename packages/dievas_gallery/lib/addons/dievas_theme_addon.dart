@@ -55,7 +55,11 @@ class DievasThemeAddon extends WidgetbookAddon<WidgetbookTheme<DievasThemeData>>
   Widget buildUseCase(BuildContext context, Widget child, WidgetbookTheme<DievasThemeData> setting) {
     // Drawer surfaces and barriers cover the whole phone; their content owns safe insets.
     final path = WidgetbookState.of(context).path?.split('/') ?? const <String>[];
-    final fullBleed = path.contains('drawer') || path.contains('searchwithdropdown') || path.contains('searchwithlist');
+    final fullBleed =
+        path.contains('drawer') ||
+        path.contains('modal') ||
+        path.contains('searchwithdropdown') ||
+        path.contains('searchwithlist');
     final isDropdown = path.contains('dropdown') || path.contains('searchwithdropdown');
     final canvas = Scaffold(
       backgroundColor: setting.data.colours.background.cardBackground,

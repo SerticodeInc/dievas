@@ -11,10 +11,9 @@ on:
             - "packages/dievas_gallery/**"
             - "packages/dievas/**"
             - "packages/dievas_tokens/**"
-            - "landing/**"
 
 jobs:
     publish_gallery_labeled:
-        if: contains(join(github.event.pull_request.labels.*.name, ','), 'dievas-gallery-preview')
+        if: contains(github.event.pull_request.labels.*.name, 'gallery-preview')
         uses: ./.github/workflows/publish_gallery.yml
         secrets: inherit

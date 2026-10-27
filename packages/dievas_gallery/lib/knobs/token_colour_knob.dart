@@ -91,7 +91,13 @@ enum DievasGalleryColour {
 
 extension DievasTokenColourKnob on BuildContext {
   /// Resolves the selected semantic token against the active Dievas theme.
-  Color tokenColourKnob({required String label, required DievasColourRole role}) => knobs.object
-      .dropdown<DievasGalleryColour>(label: label, options: role.options, labelBuilder: (token) => token.label)
-      .resolve(DievasTheme.coloursOf(this));
+  Color tokenColourKnob({required String label, required DievasColourRole role, DievasGalleryColour? initialValue}) =>
+      knobs.object
+          .dropdown<DievasGalleryColour>(
+            label: label,
+            options: role.options,
+            initialOption: initialValue,
+            labelBuilder: (token) => token.label,
+          )
+          .resolve(DievasTheme.coloursOf(this));
 }

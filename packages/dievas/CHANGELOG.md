@@ -2,7 +2,13 @@
 
 ## Unreleased
 
-- **Drawer**: add surface, barrier, radius, decoration, shadow and semantic label overrides; start/end placement with RTL support; opening gesture and barrier dismissal controls; open-state feedback; and parent-constrained widths. Refresh the interactive Widgetbook example with an edge-to-edge viewport, 80% default width, square corners and shadows off by default.
+- **Search composites**: join the dropdown to the painted input edge, use regular body text for menu labels, reduce search shadows to the hairline semantic tier, and offer compact input sizes. Rebuild Search with List as a flat, full height inline list with separate Clear and Close actions, centered initial/empty states, and live colour, radius, size, floating label and RTL controls. Result selection reports the item without clearing or dismissing the inline list. Keep the dropdown's semantic 256px cap.
+
+- **Search with dropdown**: compose the search field with `DievasDropdown`; show all options on opening, filter trimmed queries, retain selected labels, and provide Clear and empty result states. Add joined or spaced surfaces, colour and semantic radius overrides, floating labels, shadow control, and a semantic 256px results cap. Preserve search state across Widgetbook controls and keep results inside the phone viewport.
+
+- **Dropdown**: add anchor placement, width/height constraints, surface overrides, multi select and nested menus. Derive menu layout defaults from semantic tokens, including the 256px height cap. Fix overlay theme inheritance, placement and rebuild timing. Keep Widgetbook overlays inside the phone and preserve open menus while changing grouped controls.
+
+- **Drawer**: add surface, barrier, radius, decoration, shadow and semantic label overrides; start/end placement with RTL support; opening gesture and barrier dismissal controls; open state feedback; and parent constrained widths. Refresh the interactive Widgetbook example with an edge to edge viewport, 80% default width, square corners and shadows off by default.
 
 ## 1.0.2
 

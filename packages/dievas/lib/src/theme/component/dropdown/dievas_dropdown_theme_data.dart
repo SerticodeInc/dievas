@@ -30,6 +30,11 @@ final class DievasDropdownThemeData extends Equatable {
     required this.disabledOpacity,
     required this.animationDuration,
     required this.minHeight,
+    required this.maxHeight,
+    required this.distanceToTarget,
+    required this.dropdownMargin,
+    required this.contentPadding,
+    required this.borderWidth,
   });
 
   /// Text style for the selected value.
@@ -101,6 +106,21 @@ final class DievasDropdownThemeData extends Equatable {
   /// Minimum height of the trigger (dp).
   final double minHeight;
 
+  /// Default menu height cap, derived from the semantic sizing scale.
+  final double maxHeight;
+
+  /// Gap between the trigger and menu.
+  final double distanceToTarget;
+
+  /// Minimum space between the menu and viewport edges.
+  final EdgeInsetsGeometry dropdownMargin;
+
+  /// Padding within the menu surface.
+  final EdgeInsetsGeometry contentPadding;
+
+  /// Stroke used when the menu border is visible.
+  final double borderWidth;
+
   @override
   List<Object?> get props => [
     triggerStyle,
@@ -126,5 +146,10 @@ final class DievasDropdownThemeData extends Equatable {
     disabledOpacity,
     animationDuration,
     minHeight,
+    maxHeight,
+    distanceToTarget,
+    dropdownMargin,
+    contentPadding,
+    borderWidth,
   ];
 }

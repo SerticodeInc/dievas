@@ -580,9 +580,9 @@ DievasSearchThemeData _createSearchTheme(
   DievasBorderThemeData border,
   DievasElevationThemeData elevation,
 ) => DievasSearchThemeData(
-  inputStyle: typography.bodyMd,
-  placeholderStyle: typography.bodyMd.copyWith(color: colours.input.inputPlaceholderText),
-  height: sizing.inputHeightMd,
+  inputStyle: typography.bodySm,
+  placeholderStyle: typography.bodySm.copyWith(color: colours.input.inputPlaceholderText),
+  height: sizing.height40,
   borderRadius: border.md,
   strokeWidth: border.strokeThin,
   strokeWidthFocused: border.strokeDefault,
@@ -590,15 +590,15 @@ DievasSearchThemeData _createSearchTheme(
   borderColour: colours.input.inputBorder,
   borderColourFocused: colours.input.inputFocusedBorder,
   iconColour: colours.icon.iconSecondary,
-  iconSize: DievasSizingPrimitives.s20,
-  contentPadding: .symmetric(horizontal: spacing.md, vertical: spacing.sm),
-  resultItemStyle: typography.bodyMd,
-  resultItemPadding: .symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
-  resultMaxHeight: 240.0,
+  iconSize: sizing.iconLg,
+  contentPadding: .symmetric(horizontal: spacing.smPlus, vertical: spacing.sm),
+  resultItemStyle: typography.bodySm,
+  resultItemPadding: .symmetric(horizontal: spacing.smPlus, vertical: spacing.smPlus),
+  resultMaxHeight: sizing.height256,
   dividerColour: colours.border.dividerColour,
   dividerIndent: spacing.md,
   disabledOpacity: DievasOpacitySemantic.disabled,
-  shadow: elevation.md,
+  shadow: elevation.xs,
 );
 
 // Alert
@@ -800,7 +800,7 @@ DievasMenuItemThemeData _createMenuItemTheme(
   DievasSizingThemeData sizing,
   DievasBorderThemeData border,
 ) => DievasMenuItemThemeData(
-  textStyle: typography.titleXs.copyWith(color: colours.text.textPrimary),
+  textStyle: typography.bodySm.copyWith(color: colours.text.textPrimary),
   subtitleStyle: typography.bodyXs.copyWith(color: colours.text.textSecondary),
   iconSize: sizing.iconSm,
   iconSpacing: spacing.sm,
@@ -840,7 +840,7 @@ DievasDropdownThemeData _createDropdownTheme(
   overlayBgColour: colours.background.menuBackground,
   overlayBorderColour: colours.border.dividerColour,
   overlayBorderRadius: border.md,
-  shadow: elevation.md,
+  shadow: elevation.sm,
   optionStyle: typography.bodyMd,
   optionSelectedColour: colours.background.listItemSelectedBackground,
   optionTextColour: colours.text.textPrimary,
@@ -849,6 +849,11 @@ DievasDropdownThemeData _createDropdownTheme(
   disabledOpacity: DievasOpacitySemantic.disabled,
   animationDuration: animation.standard,
   minHeight: sizing.inputHeightMd,
+  maxHeight: sizing.height256,
+  distanceToTarget: spacing.sm,
+  dropdownMargin: .all(spacing.sm),
+  contentPadding: .all(spacing.xs),
+  borderWidth: border.strokeThin,
 );
 
 // TabBar

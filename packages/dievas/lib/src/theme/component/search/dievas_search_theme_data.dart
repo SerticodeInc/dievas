@@ -72,7 +72,7 @@ final class DievasSearchThemeData extends Equatable {
   /// Result list item padding.
   final EdgeInsets resultItemPadding;
 
-  /// Maximum height for the results overlay / inline list (dp).
+  /// Maximum height for the dropdown results overlay (dp). Inline results fill their available height.
   final double resultMaxHeight;
 
   /// Divider colour between result items.

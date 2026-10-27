@@ -40,7 +40,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
     alert: override?.alert ?? _createAlertTheme(typography, spacing, border),
     snackbar: override?.snackbar ?? _createSnackbarTheme(colours, typography, spacing, border),
     bottomSheet: override?.bottomSheet ?? _createBottomSheetTheme(colours, border),
-    modal: override?.modal ?? _createModalTheme(colours, typography, spacing, border, elevation),
+    modal: override?.modal ?? _createModalTheme(colours, typography, spacing, border),
     tooltip: override?.tooltip ?? _createTooltipTheme(colours, typography, spacing, border, animation),
     loader: override?.loader ?? _createLoaderTheme(colours, typography, spacing, animation),
     menuItem: override?.menuItem ?? _createMenuItemTheme(colours, typography, spacing, sizing, border),
@@ -61,7 +61,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
   );
 }
 
-// Component-level constants — layout extents (minWidth/maxWidth) are overlay-sizing constraints.
+// Component level constants — layout extents (minWidth/maxWidth) are overlay sizing constraints.
 const double _kStrokeProgress = 2.5; // circular progress arc
 const double _kStrokeLoader = 3.0; // loader spinner
 const double _kSwitchThumbPadding = 3.0; // inset between thumb and track edge
@@ -580,9 +580,9 @@ DievasSearchThemeData _createSearchTheme(
   DievasBorderThemeData border,
   DievasElevationThemeData elevation,
 ) => DievasSearchThemeData(
-  inputStyle: typography.bodyMd,
-  placeholderStyle: typography.bodyMd.copyWith(color: colours.input.inputPlaceholderText),
-  height: sizing.inputHeightMd,
+  inputStyle: typography.bodySm,
+  placeholderStyle: typography.bodySm.copyWith(color: colours.input.inputPlaceholderText),
+  height: sizing.height40,
   borderRadius: border.md,
   strokeWidth: border.strokeThin,
   strokeWidthFocused: border.strokeDefault,
@@ -590,15 +590,15 @@ DievasSearchThemeData _createSearchTheme(
   borderColour: colours.input.inputBorder,
   borderColourFocused: colours.input.inputFocusedBorder,
   iconColour: colours.icon.iconSecondary,
-  iconSize: DievasSizingPrimitives.s20,
-  contentPadding: .symmetric(horizontal: spacing.md, vertical: spacing.sm),
-  resultItemStyle: typography.bodyMd,
-  resultItemPadding: .symmetric(horizontal: spacing.md, vertical: spacing.smPlus),
-  resultMaxHeight: 240.0,
+  iconSize: sizing.iconLg,
+  contentPadding: .symmetric(horizontal: spacing.smPlus, vertical: spacing.sm),
+  resultItemStyle: typography.bodySm,
+  resultItemPadding: .symmetric(horizontal: spacing.smPlus, vertical: spacing.smPlus),
+  resultMaxHeight: sizing.height256,
   dividerColour: colours.border.dividerColour,
   dividerIndent: spacing.md,
   disabledOpacity: DievasOpacitySemantic.disabled,
-  shadow: elevation.md,
+  shadow: elevation.xs,
 );
 
 // Alert
@@ -654,19 +654,20 @@ DievasModalThemeData _createModalTheme(
   DievasTypographyThemeData typography,
   DievasSpacingThemeData spacing,
   DievasBorderThemeData border,
-  DievasElevationThemeData elevation,
 ) {
   return DievasModalThemeData(
-    titleStyle: typography.titleMd,
-    bodyStyle: typography.bodyMd,
+    titleStyle: typography.titleSm,
+    bodyStyle: typography.bodySm,
+    textColour: colours.text.textPrimary,
+    iconColour: colours.icon.iconPrimary,
     backgroundColour: colours.background.dialogBackground,
     barrierColour: colours.background.modalBarrierBackground,
-    borderRadius: border.lg,
-    padding: .all(spacing.lg),
+    borderRadius: border.md,
+    padding: .symmetric(vertical: spacing.sm, horizontal: spacing.md),
     minWidth: _kModalMinWidth,
     maxWidth: _kModalMaxWidth,
-    closeIconSize: DievasSizingPrimitives.s20,
-    shadow: elevation.lg,
+    closeIconSize: DievasSizingPrimitives.s16,
+    shadow: const [],
   );
 }
 
@@ -800,8 +801,11 @@ DievasMenuItemThemeData _createMenuItemTheme(
   DievasSizingThemeData sizing,
   DievasBorderThemeData border,
 ) => DievasMenuItemThemeData(
-  textStyle: typography.titleXs.copyWith(color: colours.text.textPrimary),
-  subtitleStyle: typography.bodyXs.copyWith(color: colours.text.textSecondary),
+  hoverEffectColour: colours.background.menuHoveredBackground,
+  minHeight: sizing.height40,
+  verticalGap: spacing.xs / 2,
+  textStyle: typography.bodySm.copyWith(color: colours.text.textPrimary),
+  subtitleStyle: typography.bodySm.copyWith(color: colours.text.textSecondary),
   iconSize: sizing.iconSm,
   iconSpacing: spacing.sm,
   padding: .symmetric(horizontal: spacing.sm, vertical: spacing.sm),
@@ -840,7 +844,7 @@ DievasDropdownThemeData _createDropdownTheme(
   overlayBgColour: colours.background.menuBackground,
   overlayBorderColour: colours.border.dividerColour,
   overlayBorderRadius: border.md,
-  shadow: elevation.md,
+  shadow: elevation.sm,
   optionStyle: typography.bodyMd,
   optionSelectedColour: colours.background.listItemSelectedBackground,
   optionTextColour: colours.text.textPrimary,
@@ -849,6 +853,11 @@ DievasDropdownThemeData _createDropdownTheme(
   disabledOpacity: DievasOpacitySemantic.disabled,
   animationDuration: animation.standard,
   minHeight: sizing.inputHeightMd,
+  maxHeight: sizing.height256,
+  distanceToTarget: spacing.sm,
+  dropdownMargin: .all(spacing.sm),
+  contentPadding: .all(spacing.xs),
+  borderWidth: border.strokeThin,
 );
 
 // TabBar

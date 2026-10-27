@@ -2,119 +2,148 @@ import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
-import '../../widgets/component_boundary.dart';
+import '../../knobs/knob_section.dart';
+import '../../knobs/token_colour_knob.dart';
 
 final searchWithListComponent = WidgetbookComponent(
   name: 'SearchWithList',
   useCases: [
-    WidgetbookUseCase(name: 'Playground', builder: (ctx) => const _Playground()),
-    WidgetbookUseCase(name: 'Static Demo', builder: (ctx) => const _StaticDemo()),
+    WidgetbookUseCase(
+      name: 'Playground',
+      builder: (context) {
+        final state = WidgetbookState.of(context);
+        final session = _sessions[state] ??= _SearchSession();
+        return _Playground(session: session);
+      },
+    ),
   ],
 );
 
-class _Playground extends StatelessWidget {
-  const _Playground();
+const _components = [
+  'Accordion',
+  'Alert',
+  'AuthCode',
+  'Avatar',
+  'BottomSheet',
+  'Breadcrumb',
+  'Button',
+  'Carousel',
+  'Checkbox',
+  'Chip',
+  'CircularLoader',
+  'CircularProgress',
+  'Combobox',
+  'DotIndicator',
+  'Drawer',
+  'Dropdown',
+  'Icons',
+  'LinearLoader',
+  'LinearProgress',
+  'MenuItem',
+  'Modal',
+  'Popover',
+  'Radio',
+  'Search',
+  'SegmentedControl',
+  'Switch',
+  'TabBar',
+  'Table',
+  'Tag',
+  'TextArea',
+  'TextInput',
+  'TextInputGroup',
+  'Toast',
+  'Tooltip',
+];
+
+// Widgetbook remounts use cases when changing knob query parameters.
+final _sessions = Expando<_SearchSession>();
+
+class _SearchSession {
+  String query = '';
+  bool open = false;
+}
+
+class _Playground extends StatefulWidget {
+  const _Playground({required this.session});
+  final _SearchSession session;
 
   @override
+  State<_Playground> createState() => _PlaygroundState();
+}
+
+class _PlaygroundState extends State<_Playground> {
+  @override
   Widget build(BuildContext context) {
-    final hint = context.knobs.string(label: 'Hint', initialValue: 'Search fruits...');
+    context.knobSection('Input colours');
+    final overrideActive = context.knobs.boolean(label: 'Override active border colour');
+    final active = context.tokenColourKnob(label: 'Active border colour', role: .border, initialValue: .brand);
+    final overrideInactive = context.knobs.boolean(label: 'Override inactive border colour');
+    final inactive = context.tokenColourKnob(label: 'Inactive border colour', role: .border, initialValue: .brand);
+    final overrideHover = context.knobs.boolean(label: 'Override hover border colour');
+    final hover = context.tokenColourKnob(label: 'Hover border colour', role: .border, initialValue: .brand);
+    final overrideBackground = context.knobs.boolean(label: 'Override background colour');
+    final background = context.tokenColourKnob(label: 'Background colour', role: .background, initialValue: .brand);
+
+    context.knobSection('Input layout');
+    final overrideRadius = context.knobs.boolean(label: 'Override border radius');
+    final radius = context.knobs.object.dropdown<_SearchRadius>(
+      label: 'Border radius',
+      options: _SearchRadius.values,
+      initialOption: .md,
+      labelBuilder: (value) => value.name,
+    );
+    context.knobSection('Input behaviour');
+    final size = context.knobs.object.dropdown<DievasSearchSize>(
+      label: 'Input size',
+      options: DievasSearchSize.values,
+      initialOption: .md,
+      labelBuilder: (value) => value.name,
+    );
     final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
+    final floatingLabel = context.knobs.boolean(label: 'Floating label');
+    final rtl = context.knobs.boolean(label: 'Right to left');
+    final session = widget.session;
+    final borderRadius = switch (radius) {
+      .none => context.border.none,
+      .xs => context.border.xs,
+      .sm => context.border.sm,
+      .md => context.border.md,
+      .lg => context.border.lg,
+      .xl => context.border.xl,
+      .xl2 => context.border.xl2,
+      .xl3 => context.border.xl3,
+      .r28 => context.border.r28,
+      .r32 => context.border.r32,
+    };
 
-    const fruits = [
-      'Apple',
-      'Apricot',
-      'Banana',
-      'Blackberry',
-      'Blueberry',
-      'Cherry',
-      'Coconut',
-      'Date',
-      'Dragonfruit',
-    ];
-
-    return Center(
-      child: ComponentBoundary(
-        child: SizedBox(
-          width: context.sizing.inputHeightMd * 8,
-          child: DievasSearchWithList<String>(
-            items: fruits,
-            displayString: (s) => s,
-            hint: hint,
-            enabled: enabled,
-            onSelected: (_) {},
-          ),
+    return Directionality(
+      textDirection: rtl ? .rtl : .ltr,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: context.spacing.xl3, horizontal: context.spacing.md),
+        child: DievasSearchWithList<String>(
+          items: _components,
+          displayString: (value) => value,
+          hint: 'Search components',
+          initialQuery: session.query,
+          show: session.open,
+          enabled: enabled,
+          size: size,
+          hasFloatingLabel: floatingLabel,
+          borderRadius: overrideRadius ? borderRadius : null,
+          activeBorderColour: overrideActive ? active : null,
+          inactiveBorderColour: overrideInactive ? inactive : null,
+          hoverBorderColour: overrideHover ? hover : null,
+          backgroundColour: overrideBackground ? background : null,
+          onChanged: (query) {
+            session.query = query;
+          },
+          onSelected: (_) {},
+          onOpenChanged: (open) => setState(() => session.open = open),
         ),
       ),
     );
   }
 }
 
-class _StaticDemo extends StatelessWidget {
-  const _StaticDemo();
-
-  @override
-  Widget build(BuildContext context) => Center(
-    child: Column(
-      mainAxisSize: .min,
-      children: [
-        _DemoBlock(
-          'Default',
-          child: SizedBox(
-            width: 320,
-            child: DievasSearchWithList<String>(
-              items: const ['Apple', 'Banana', 'Cherry'],
-              displayString: (s) => s,
-              hint: 'Search...',
-              onSelected: (_) {},
-            ),
-          ),
-        ),
-        SizedBox(height: context.spacing.md),
-        _DemoBlock(
-          'With Custom Leading Icon',
-          child: SizedBox(
-            width: 320,
-            child: DievasSearchWithList<String>(
-              items: const ['Apple', 'Banana', 'Cherry'],
-              displayString: (s) => s,
-              hint: 'Find...',
-              leadingIcon: const Icon(Icons.filter_list_rounded),
-              onSelected: (_) {},
-            ),
-          ),
-        ),
-        SizedBox(height: context.spacing.md),
-        _DemoBlock(
-          'Disabled',
-          child: SizedBox(
-            width: 320,
-            child: DievasSearchWithList<String>(
-              items: ['Apple', 'Banana', 'Cherry'],
-              displayString: (s) => s,
-              hint: 'Search...',
-              enabled: false,
-              onSelected: (_) {},
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-class _DemoBlock extends StatelessWidget {
-  const _DemoBlock(this.name, {required this.child});
-  final String name;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: .start,
-    mainAxisSize: .min,
-    children: [
-      Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
-      SizedBox(height: context.spacing.sm),
-      ComponentBoundary(child: child),
-    ],
-  );
-}
+enum _SearchRadius { none, xs, sm, md, lg, xl, xl2, xl3, r28, r32 }

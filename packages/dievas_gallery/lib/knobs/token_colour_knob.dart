@@ -4,44 +4,20 @@ import 'package:widgetbook/widgetbook.dart';
 
 /// Curated semantic roles offered by the gallery's colour dropdowns.
 enum DievasColourRole {
-  text([
-    DievasGalleryColour.primaryText,
-    DievasGalleryColour.secondaryText,
-    DievasGalleryColour.inverseText,
-    DievasGalleryColour.brand,
-    DievasGalleryColour.successText,
-    DievasGalleryColour.warningText,
-    DievasGalleryColour.errorText,
-    DievasGalleryColour.infoText,
-  ]),
-  icon([
-    DievasGalleryColour.primaryIcon,
-    DievasGalleryColour.secondaryIcon,
-    DievasGalleryColour.brand,
-    DievasGalleryColour.successIcon,
-    DievasGalleryColour.warningIcon,
-    DievasGalleryColour.errorIcon,
-    DievasGalleryColour.infoIcon,
-  ]),
+  text([.primaryText, .secondaryText, .inverseText, .brand, .successText, .warningText, .errorText, .infoText]),
+  icon([.primaryIcon, .secondaryIcon, .brand, .successIcon, .warningIcon, .errorIcon, .infoIcon]),
   background([
-    DievasGalleryColour.card,
-    DievasGalleryColour.page,
-    DievasGalleryColour.brand,
-    DievasGalleryColour.brandTint,
-    DievasGalleryColour.track,
-    DievasGalleryColour.successBackground,
-    DievasGalleryColour.warningBackground,
-    DievasGalleryColour.errorBackground,
-    DievasGalleryColour.infoBackground,
+    .card,
+    .page,
+    .brand,
+    .brandTint,
+    .track,
+    .successBackground,
+    .warningBackground,
+    .errorBackground,
+    .infoBackground,
   ]),
-  border([
-    DievasGalleryColour.divider,
-    DievasGalleryColour.brand,
-    DievasGalleryColour.successBorder,
-    DievasGalleryColour.warningBorder,
-    DievasGalleryColour.errorBorder,
-    DievasGalleryColour.infoBorder,
-  ]);
+  border([.divider, .brand, .successBorder, .warningBorder, .errorBorder, .infoBorder]);
 
   const DievasColourRole(this.options);
 
@@ -115,7 +91,13 @@ enum DievasGalleryColour {
 
 extension DievasTokenColourKnob on BuildContext {
   /// Resolves the selected semantic token against the active Dievas theme.
-  Color tokenColourKnob({required String label, required DievasColourRole role}) => knobs.object
-      .dropdown<DievasGalleryColour>(label: label, options: role.options, labelBuilder: (token) => token.label)
-      .resolve(DievasTheme.coloursOf(this));
+  Color tokenColourKnob({required String label, required DievasColourRole role, DievasGalleryColour? initialValue}) =>
+      knobs.object
+          .dropdown<DievasGalleryColour>(
+            label: label,
+            options: role.options,
+            initialOption: initialValue,
+            labelBuilder: (token) => token.label,
+          )
+          .resolve(DievasTheme.coloursOf(this));
 }

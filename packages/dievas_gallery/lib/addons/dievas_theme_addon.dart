@@ -53,6 +53,24 @@ class DievasThemeAddon extends WidgetbookAddon<WidgetbookTheme<DievasThemeData>>
 
   @override
   Widget buildUseCase(BuildContext context, Widget child, WidgetbookTheme<DievasThemeData> setting) {
+    // Drawer surfaces and barriers cover the whole phone; their content owns safe insets.
+    final path = WidgetbookState.of(context).path?.split('/') ?? const <String>[];
+    final fullBleed =
+        path.contains('drawer') ||
+        path.contains('modal') ||
+        path.contains('searchwithdropdown') ||
+        path.contains('searchwithlist');
+    final isDropdown = path.contains('dropdown') || path.contains('searchwithdropdown');
+    final canvas = Scaffold(
+      backgroundColor: setting.data.colours.background.cardBackground,
+      body: switch (fullBleed) {
+        true => child,
+        false => SafeArea(
+          child: Padding(padding: EdgeInsets.all(setting.data.spacing.sm), child: child),
+        ),
+      },
+    );
+
     return device_frame.DeviceFrame(
       device: device_frame.Devices.ios.iPhone12ProMax,
       screen: DievasScope(
@@ -62,12 +80,15 @@ class DievasThemeAddon extends WidgetbookAddon<WidgetbookTheme<DievasThemeData>>
           data: setting.data,
           child: Theme(
             data: setting.data.material,
-            child: Scaffold(
-              backgroundColor: setting.data.colours.background.cardBackground,
-              body: SafeArea(
-                child: Padding(padding: EdgeInsets.all(setting.data.spacing.sm), child: child),
+            child: switch (isDropdown) {
+              true => HeroControllerScope.none(
+                child: Navigator(
+                  pages: [MaterialPage<void>(child: canvas)],
+                  onDidRemovePage: (_) {},
+                ),
               ),
-            ),
+              false => canvas,
+            },
           ),
         ),
       ),

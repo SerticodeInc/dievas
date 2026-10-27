@@ -32,6 +32,21 @@ abstract class DievasLocalizations {
     return _EnDievasLocalizations();
   }
 
+  /// Default search placeholder. Override for additional app locales.
+  String get searchHint => 'Search...';
+
+  /// Clear action in search composites.
+  String get searchClearLabel => 'Clear';
+
+  /// Empty result message in search composites.
+  String get searchNoResults => 'No results found.';
+
+  /// Accessibility label for hiding inline search results.
+  String get searchCloseLabel => 'Close search';
+
+  /// Placeholder for an inline search before results are shown.
+  String get searchListDescription => 'Search results displayed as a list.';
+
   /// Default title shown when [DievasEmptyState] has no [title] provided.
   String get emptyStateDefaultTitle;
 

@@ -1,5 +1,5 @@
 {
-  "provenance": "Dievas semantic values at 94ea8cc before the component role naming migration; new component roles inherit the prior shared role value. Brand roles updated to Moon Piccolo on 2026-10-17; hover and pressed shades derive from Piccolo.",
+  "provenance": "Dievas semantic values at 94ea8cc before the component role naming migration; new component roles inherit the prior shared role value. Brand roles updated to Moon Piccolo on 2026-10-17; hover and pressed shades derive from Piccolo. Menu hover uses Moon Heles: 0x0A000000 in light mode and 0x14FFFFFF in dark mode.",
   "themes": {
     "light": {
       "primary": "0xFF5C33CF",
@@ -70,6 +70,7 @@
       "tooltipBackground": "0xFFFFFFFF",
       "drawerBackground": "0xFFFFFFFF",
       "menuBackground": "0xFFFFFFFF",
+      "menuHoveredBackground": "0x0A000000",
       "popoverBackground": "0xFFFFFFFF",
       "snackbarBackground": "0xFFFFFFFF",
       "tagBackground": "0xFFFFFFFF",
@@ -166,6 +167,7 @@
       "tooltipBackground": "0xFF1E293B",
       "drawerBackground": "0xFF1E293B",
       "menuBackground": "0xFF1E293B",
+      "menuHoveredBackground": "0x14FFFFFF",
       "popoverBackground": "0xFF1E293B",
       "snackbarBackground": "0xFF1E293B",
       "tagBackground": "0xFF1E293B",

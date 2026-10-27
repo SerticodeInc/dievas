@@ -1,5 +1,25 @@
 # Changelog
 
+## Unreleased
+
+- **Modal colours**: add independent `titleColour` and `contentColour` widget/theme overrides and gallery selectors. Keep `textColour` as the shared fallback.
+
+- **Modal gallery**: match the Moon reference composition with a 300px card, divided header, reference content insets and one full width 40px Okay button. Keep the confirmation example under With Actions.
+
+- **Modal**: add title free custom content, header/trailing slots, colour, decoration, shadow, directional radius/padding, viewport inset, constraint and semantic overrides. Add configurable route barriers, safe areas, navigation, focus and transitions, preserving local themes and respecting reduced motion. Replace the close gesture with an accessible keyboard button, scroll long content above the keyboard and wrap actions on narrow screens. Add `closeDievasModal` for typed results and modal theme `copyWith`. Default body text to 14px, radius to 8px and shadows to none; existing custom themes retain their values. Replace static gallery cards with working modal examples and live controls.
+
+- **Dependencies**: raise the minimum `dievas_tokens` version to `1.0.2`, matching the lowercase token names used by Dievas and excluding incompatible `1.0.1` from dependency lower bound resolution.
+
+- **Menu item**: add custom leading, label and content slots; independent slot colours; surface, hover, decoration, radius and layout overrides; long press, keyboard activation, focus and semantics; and child gesture control. Use Moon Heles for neutral hover feedback and semantic opacity for enabled rows. Preserve the existing text and icon conveniences. Rebuild the interactive gallery with selection controls, expandable rows, named spacing/sizing presets and shared preview configuration.
+
+- **Search composites**: join the dropdown to the painted input edge, use regular body text for menu labels, reduce search shadows to the hairline semantic tier, and offer compact input sizes. Rebuild Search with List as a flat, full height inline list with separate Clear and Close actions, centered initial/empty states, and live colour, radius, size, floating label and RTL controls. Result selection reports the item without clearing or dismissing the inline list. Keep the dropdown's semantic 256px cap.
+
+- **Search with dropdown**: compose the search field with `DievasDropdown`; show all options on opening, filter trimmed queries, retain selected labels, and provide Clear and empty result states. Add joined or spaced surfaces, colour and semantic radius overrides, floating labels, shadow control, and a semantic 256px results cap. Preserve search state across Widgetbook controls and keep results inside the phone viewport.
+
+- **Dropdown**: add anchor placement, width/height constraints, surface overrides, multi select and nested menus. Derive menu layout defaults from semantic tokens, including the 256px height cap. Fix overlay theme inheritance, placement and rebuild timing. Keep Widgetbook overlays inside the phone and preserve open menus while changing grouped controls.
+
+- **Drawer**: add surface, barrier, radius, decoration, shadow and semantic label overrides; start/end placement with RTL support; opening gesture and barrier dismissal controls; open state feedback; and parent constrained widths. Refresh the interactive Widgetbook example with an edge to edge viewport, 80% default width, square corners and shadows off by default.
+
 ## 1.0.2
 
 ### Breaking changes - size names, localization and bottom sheet shadows

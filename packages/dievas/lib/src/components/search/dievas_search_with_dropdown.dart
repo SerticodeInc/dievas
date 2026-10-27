@@ -1,30 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'package:dievas/l10n/dievas_localizations.dart';
+import 'package:dievas/src/components/search/dievas_search_field.dart';
+
+export 'dievas_search_field.dart' show DievasSearchSize;
+import 'package:dievas/src/components/dropdown/dievas_dropdown.dart';
+import 'package:dievas/src/components/menu_item/dievas_menu_item.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
 
-/// A search field with an overlay dropdown showing filtered results.
+/// Search input composed with [DievasDropdown] and [DievasMenuItem].
 ///
-/// As the user types, [items] are filtered and matching results appear in a
-/// dropdown overlay positioned below the search field. Tapping outside the
-/// dropdown or clearing the search text dismisses it.
-///
-/// Unlike [DievasSearchWithList] (which renders results inline), this
-/// variant uses an [Overlay] so the dropdown can extend beyond the parent's
-/// clip bounds — useful inside dialogs, side panels, or tight layouts.
-///
-/// All styling is derived from [DievasSearchThemeData] via
-/// [DievasTheme.componentsOf].
-///
-/// Moon reference: SearchWithDropdown
-///
-/// ```dart
-/// DievasSearchWithDropdown<String>(
-///   items: ['Apple', 'Banana', 'Cherry'],
-///   displayString: (s) => s,
-///   hint: 'Search...',
-///   onSelected: (fruit) => print(fruit),
-/// )
-/// ```
+/// Tapping the input opens all matching items, including for an empty query.
+/// Selecting a result retains its label and releases focus. Outside dismissal
+/// clears an unselected query; Clear resets the results without closing an open
+/// menu. A zero gap joins the input and menu corners as in the Moon reference.
 class DievasSearchWithDropdown<T> extends StatefulWidget {
   const DievasSearchWithDropdown({
     super.key,
@@ -32,231 +21,284 @@ class DievasSearchWithDropdown<T> extends StatefulWidget {
     required this.displayString,
     required this.onSelected,
     this.hint,
+    this.size,
     this.filter,
     this.enabled = true,
+    this.controller,
+    this.focusNode,
+    this.initialValue,
+    this.initialQuery,
+    this.show,
+    this.onChanged,
+    this.onOpenChanged,
+    this.activeBorderColour,
+    this.inactiveBorderColour,
+    this.hoverBorderColour,
+    this.backgroundColour,
+    this.borderRadius,
+    this.distanceToTarget,
+    this.maxHeight,
+    this.showShadow = true,
+    this.hasFloatingLabel = false,
+    this.clearLabel,
+    this.noResultsText,
   });
 
-  /// The full set of searchable items.
   final List<T> items;
-
-  /// Converts an item to its display string for filtering and rendering.
   final String Function(T) displayString;
 
-  /// Called when the user taps a result item. Search text is cleared
-  /// and the dropdown dismissed before this fires.
+  /// Called after selection is retained in the input and the menu is dismissed.
   final ValueChanged<T> onSelected;
-
-  /// Placeholder text in the search field.
   final String? hint;
-
-  /// Custom filter predicate. Defaults to case-insensitive substring match.
+  final DievasSearchSize? size;
   final bool Function(T item, String query)? filter;
-
-  /// When `false` the search field is read-only.
   final bool enabled;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final T? initialValue;
+  final String? initialQuery;
+  final bool? show;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<bool>? onOpenChanged;
+  final Color? activeBorderColour;
+  final Color? inactiveBorderColour;
+  final Color? hoverBorderColour;
+  final Color? backgroundColour;
+  final BorderRadiusGeometry? borderRadius;
+  final double? distanceToTarget;
+  final double? maxHeight;
+  final bool showShadow;
+  final bool hasFloatingLabel;
+  final String? clearLabel;
+  final String? noResultsText;
 
   @override
   State<DievasSearchWithDropdown<T>> createState() => _DievasSearchWithDropdownState<T>();
 }
 
 class _DievasSearchWithDropdownState<T> extends State<DievasSearchWithDropdown<T>> {
-  final _controller = TextEditingController();
-  final _link = LayerLink();
-  OverlayEntry? _dropdown;
+  late TextEditingController _controller;
+  late FocusNode _focusNode;
+  late String _lastQuery;
+  T? _selected;
+  bool _open = false;
 
   @override
   void initState() {
     super.initState();
-    _controller.addListener(_onQueryChange);
+    _selected = widget.initialValue;
+    _open = widget.show ?? false;
+    _controller = switch (widget.controller) {
+      final controller? => controller,
+      _ => TextEditingController(
+        text: switch ((widget.initialQuery, widget.initialValue)) {
+          (final query?, _) => query,
+          (_, final value?) => widget.displayString(value),
+          _ => '',
+        },
+      ),
+    };
+    _lastQuery = _controller.text;
+    _controller.addListener(_onControllerChanged);
+    _focusNode = widget.focusNode ?? FocusNode();
+  }
+
+  @override
+  void didUpdateWidget(DievasSearchWithDropdown<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _controller = switch ((oldWidget.controller, widget.controller)) {
+      (final previous, final next) when previous != next => _replaceController(previous, next),
+      _ => _controller,
+    };
+    _focusNode = switch ((oldWidget.focusNode, widget.focusNode)) {
+      (final previous, final next) when previous != next => _replaceFocusNode(previous, next),
+      _ => _focusNode,
+    };
+    _open = switch ((widget.enabled, widget.show)) {
+      (false, _) => false,
+      (true, final show?) => show,
+      _ => _open,
+    };
   }
 
   @override
   void dispose() {
-    _removeDropdown();
-    _controller.removeListener(_onQueryChange);
-    _controller.dispose();
+    _controller.removeListener(_onControllerChanged);
+    if (widget.controller == null) _controller.dispose();
+    if (widget.focusNode == null) _focusNode.dispose();
     super.dispose();
   }
 
-  void _onQueryChange() {
-    final query = _controller.text;
-    if (query.isEmpty) {
-      _removeDropdown();
-      setState(() {});
-      return;
-    }
+  @override
+  Widget build(BuildContext context) {
+    final theme = DievasTheme.componentsOf(context).search;
+    final direction = Directionality.of(context);
+    final strings = DievasLocalizations.of(context);
+    final radius = (widget.borderRadius ?? theme.borderRadius).resolve(direction);
+    final distance = widget.distanceToTarget ?? DievasTheme.spacingOf(context).none;
+    final joined = _open && widget.enabled && distance == 0;
+    final inputRadius = switch (joined) {
+      true => BorderRadius.only(topLeft: radius.topLeft, topRight: radius.topRight),
+      false => radius,
+    };
+    final menuRadius = switch (joined) {
+      true => BorderRadius.only(bottomLeft: radius.bottomLeft, bottomRight: radius.bottomRight),
+      false => radius,
+    };
+    final borderColour = widget.inactiveBorderColour ?? theme.borderColour;
+    final background = widget.backgroundColour ?? theme.bgColour;
+    final results = _results;
+    final side = BorderSide(color: borderColour, width: theme.strokeWidth);
+    final hint = widget.hint ?? strings.searchHint;
 
-    final filter = widget.filter ?? _defaultFilter;
-    final results = widget.items.where((item) => filter(item, query)).toList();
+    return DievasDropdown<T>(
+      show: _open && widget.enabled,
+      enabled: widget.enabled,
+      constrainWidthToChild: true,
+      distanceToTarget: distance,
+      maxHeight: widget.maxHeight ?? theme.resultMaxHeight,
+      contentPadding: EdgeInsets.all(DievasTheme.spacingOf(context).none),
+      borderRadius: menuRadius,
+      onTapOutside: _dismiss,
+      onOpenChanged: (open) {
+        if (!open && _open) _setOpen(false);
+      },
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: menuRadius,
+        border: Border(left: side, right: side, bottom: side, top: joined ? BorderSide.none : side),
+        boxShadow: widget.showShadow ? theme.shadow : const [],
+      ),
+      content: ClipRRect(
+        borderRadius: menuRadius,
+        child: ScrollConfiguration(
+          behavior: const ScrollBehavior().copyWith(scrollbars: false),
+          child: switch (results.isEmpty) {
+            true => DievasMenuItem(label: widget.noResultsText ?? strings.searchNoResults),
+            false => _SearchResults<T>(results: results, displayString: widget.displayString, onSelect: _select),
+          },
+        ),
+      ),
+      child: DievasSearchField(
+        controller: _controller,
+        focusNode: _focusNode,
+        enabled: widget.enabled,
+        hasFloatingLabel: widget.hasFloatingLabel,
+        size: widget.size,
+        hint: hint,
+        clearLabel: widget.clearLabel,
+        borderRadius: inputRadius,
+        backgroundColour: background,
+        activeBorderColour: widget.activeBorderColour,
+        inactiveBorderColour: widget.inactiveBorderColour,
+        hoverBorderColour: widget.hoverBorderColour,
+        onSearch: _search,
+        onClear: _clear,
+      ),
+    );
+  }
 
-    setState(() {});
-    if (results.isNotEmpty) {
-      _showOverlay(results);
-    } else {
-      _removeDropdown();
-    }
+  List<T> get _results {
+    final query = _controller.text.trim();
+    return widget.items.where((item) => (widget.filter ?? _defaultFilter)(item, query)).toList();
+  }
+
+  bool get _selectionMatches => switch (_selected) {
+    final item? => widget.displayString(item) == _controller.text,
+    null => false,
+  };
+
+  TextEditingController _replaceController(TextEditingController? previous, TextEditingController? next) {
+    final value = _controller.value;
+    _controller.removeListener(_onControllerChanged);
+    if (previous case null) _controller.dispose();
+    final controller = switch (next) {
+      final controller? => controller,
+      null => TextEditingController.fromValue(value),
+    };
+    _lastQuery = controller.text;
+    controller.addListener(_onControllerChanged);
+    return controller;
+  }
+
+  FocusNode _replaceFocusNode(FocusNode? previous, FocusNode? next) {
+    if (previous case null) _focusNode.dispose();
+    return switch (next) {
+      final focusNode? => focusNode,
+      null => FocusNode(),
+    };
   }
 
   bool _defaultFilter(T item, String query) => widget.displayString(item).toLowerCase().contains(query.toLowerCase());
 
-  void _showOverlay(List<T> results) {
-    _removeDropdown();
-
-    _dropdown = OverlayEntry(
-      builder: (context) => _DropdownResults<T>(
-        link: _link,
-        results: results,
-        displayString: widget.displayString,
-        onItemTap: _onItemTap,
-        onDismiss: _removeDropdown,
-      ),
-    );
-
-    Overlay.of(context).insert(_dropdown!);
+  void _onControllerChanged() {
+    if (_lastQuery == _controller.text) return;
+    _lastQuery = _controller.text;
+    if (!_selectionMatches) _selected = null;
+    setState(() {});
+    widget.onChanged?.call(_controller.text);
   }
 
-  void _removeDropdown() {
-    _dropdown?.remove();
-    _dropdown = null;
+  void _setOpen(bool open) {
+    if (_open == open) return;
+    setState(() => _open = open);
+    widget.onOpenChanged?.call(open);
   }
 
-  void _onItemTap(T item) {
-    _removeDropdown();
-    _controller.clear();
+  void _search() {
+    if (widget.enabled) _setOpen(true);
+  }
+
+  void _select(T item) {
+    _selected = item;
+    _setOpen(false);
+    _controller.text = widget.displayString(item);
+    _focusNode.unfocus();
     widget.onSelected(item);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final theme = DievasTheme.componentsOf(context).search;
+  void _clear() {
+    _selected = null;
+    _controller.clear();
+    setState(() {});
+    _focusNode.requestFocus();
+  }
 
-    return CompositedTransformTarget(
-      link: _link,
-      child: SizedBox(
-        height: theme.height,
-        child: TextField(
-          controller: _controller,
-          enabled: widget.enabled,
-          style: theme.inputStyle,
-          decoration: InputDecoration(
-            hintText: widget.hint,
-            hintStyle: theme.placeholderStyle,
-            contentPadding: theme.contentPadding,
-            filled: true,
-            fillColor: theme.bgColour,
-            prefixIcon: Padding(
-              padding: EdgeInsetsDirectional.only(start: theme.dividerIndent, end: theme.iconSize / 4),
-              child: IconTheme(
-                data: IconThemeData(color: theme.iconColour, size: theme.iconSize),
-                child: const Icon(Icons.search),
-              ),
-            ),
-            prefixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 0),
-            suffixIcon: _controller.text.isNotEmpty
-                ? Padding(
-                    padding: EdgeInsetsDirectional.only(end: theme.iconSize / 4, start: theme.iconSize / 4),
-                    child: IconTheme(
-                      data: IconThemeData(color: theme.iconColour, size: theme.iconSize * 0.8),
-                      child: GestureDetector(
-                        onTap: () {
-                          _controller.clear();
-                          _removeDropdown();
-                        },
-                        child: const Icon(Icons.close),
-                      ),
-                    ),
-                  )
-                : null,
-            suffixIconConstraints: const BoxConstraints(minWidth: 32, minHeight: 0),
-            border: OutlineInputBorder(
-              borderRadius: theme.borderRadius,
-              borderSide: BorderSide(color: theme.borderColour),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: theme.borderRadius,
-              borderSide: BorderSide(color: theme.borderColour),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: theme.borderRadius,
-              borderSide: BorderSide(color: theme.borderColourFocused),
-            ),
-            isDense: true,
-          ),
-        ),
-      ),
-    );
+  void _dismiss() {
+    _setOpen(false);
+    if (!_selectionMatches) _controller.clear();
+    _focusNode.unfocus();
   }
 }
 
-class _DropdownResults<T> extends StatelessWidget {
-  const _DropdownResults({
-    required this.link,
-    required this.results,
-    required this.displayString,
-    required this.onItemTap,
-    required this.onDismiss,
-  });
-
-  final LayerLink link;
+class _SearchResults<T> extends StatelessWidget {
+  const _SearchResults({required this.results, required this.displayString, required this.onSelect});
   final List<T> results;
   final String Function(T) displayString;
-  final ValueChanged<T> onItemTap;
-  final VoidCallback onDismiss;
+  final ValueChanged<T> onSelect;
 
   @override
-  Widget build(BuildContext context) {
-    final theme = DievasTheme.componentsOf(context).search;
+  Widget build(BuildContext context) => ListView.builder(
+    shrinkWrap: true,
+    padding: .zero,
+    itemCount: results.length,
+    itemBuilder: (context, index) =>
+        _SearchResult<T>(item: results.elementAt(index), displayString: displayString, onSelect: onSelect),
+  );
+}
 
-    final rowHeight = theme.height * 0.8;
-    final maxHeight = (results.length * rowHeight).clamp(0.0, rowHeight * 7);
+class _SearchResult<T> extends StatelessWidget {
+  const _SearchResult({required this.item, required this.displayString, required this.onSelect});
+  final T item;
+  final String Function(T) displayString;
+  final ValueChanged<T> onSelect;
 
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: GestureDetector(onTap: onDismiss, behavior: .opaque, child: const SizedBox.expand()),
-        ),
-        CompositedTransformFollower(
-          link: link,
-          targetAnchor: .bottomLeft,
-          followerAnchor: .topLeft,
-          child: Material(
-            elevation: 0,
-            color: theme.bgColour,
-            borderRadius: BorderRadius.vertical(bottom: theme.borderRadius.topLeft),
-            child: Container(
-              constraints: BoxConstraints(maxHeight: maxHeight),
-              decoration: BoxDecoration(
-                color: theme.bgColour,
-                borderRadius: BorderRadius.vertical(bottom: theme.borderRadius.topLeft),
-                border: Border.all(color: theme.borderColourFocused),
-                boxShadow: theme.shadow,
-              ),
-              child: ListView.separated(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                itemCount: results.length,
-                separatorBuilder: (_, _) => Divider(
-                  height: 1,
-                  thickness: 1,
-                  color: theme.dividerColour,
-                  indent: theme.dividerIndent,
-                  endIndent: theme.dividerIndent,
-                ),
-                itemBuilder: (context, i) {
-                  final item = results[i];
-                  return InkWell(
-                    onTap: () => onItemTap(item),
-                    child: Padding(
-                      padding: theme.resultItemPadding,
-                      child: Text(displayString(item), style: theme.resultItemStyle),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  @override
+  Widget build(BuildContext context) => ConstrainedBox(
+    constraints: BoxConstraints(minHeight: DievasTheme.sizingOf(context).height40),
+    child: Align(
+      heightFactor: 1,
+      child: DievasMenuItem(label: displayString(item), onTap: () => onSelect(item)),
+    ),
+  );
 }

@@ -12,6 +12,7 @@ final class BackgroundColours extends Equatable {
     required this.tooltipBackground,
     required this.drawerBackground,
     required this.menuBackground,
+    this.menuHoveredBackground = const Color(0x0A000000),
     required this.popoverBackground,
     required this.snackbarBackground,
     required this.tagBackground,
@@ -32,6 +33,9 @@ final class BackgroundColours extends Equatable {
   final Color tooltipBackground;
   final Color drawerBackground;
   final Color menuBackground;
+
+  /// Neutral overlay applied to interactive menu rows on hover.
+  final Color menuHoveredBackground;
   final Color popoverBackground;
   final Color snackbarBackground;
   final Color tagBackground;
@@ -52,6 +56,7 @@ final class BackgroundColours extends Equatable {
     Color? tooltipBackground,
     Color? drawerBackground,
     Color? menuBackground,
+    Color? menuHoveredBackground,
     Color? popoverBackground,
     Color? snackbarBackground,
     Color? tagBackground,
@@ -71,6 +76,7 @@ final class BackgroundColours extends Equatable {
     tooltipBackground: tooltipBackground ?? this.tooltipBackground,
     drawerBackground: drawerBackground ?? this.drawerBackground,
     menuBackground: menuBackground ?? this.menuBackground,
+    menuHoveredBackground: menuHoveredBackground ?? this.menuHoveredBackground,
     popoverBackground: popoverBackground ?? this.popoverBackground,
     snackbarBackground: snackbarBackground ?? this.snackbarBackground,
     tagBackground: tagBackground ?? this.tagBackground,
@@ -92,6 +98,7 @@ final class BackgroundColours extends Equatable {
     tooltipBackground: Color.lerp(a.tooltipBackground, b.tooltipBackground, t) as Color,
     drawerBackground: Color.lerp(a.drawerBackground, b.drawerBackground, t) as Color,
     menuBackground: Color.lerp(a.menuBackground, b.menuBackground, t) as Color,
+    menuHoveredBackground: Color.lerp(a.menuHoveredBackground, b.menuHoveredBackground, t) as Color,
     popoverBackground: Color.lerp(a.popoverBackground, b.popoverBackground, t) as Color,
     snackbarBackground: Color.lerp(a.snackbarBackground, b.snackbarBackground, t) as Color,
     tagBackground: Color.lerp(a.tagBackground, b.tagBackground, t) as Color,
@@ -116,6 +123,7 @@ final class BackgroundColours extends Equatable {
     tooltipBackground,
     drawerBackground,
     menuBackground,
+    menuHoveredBackground,
     popoverBackground,
     snackbarBackground,
     tagBackground,

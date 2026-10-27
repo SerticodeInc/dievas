@@ -33,6 +33,7 @@ final class DievasLightThemeData extends DievasGlobalThemeData {
       tooltipBackground: Color(DievasColourSemanticLight.tooltipBackground),
       drawerBackground: Color(DievasColourSemanticLight.drawerBackground),
       menuBackground: Color(DievasColourSemanticLight.menuBackground),
+      menuHoveredBackground: Color(DievasColourSemanticLight.menuHoveredBackground),
       popoverBackground: Color(DievasColourSemanticLight.popoverBackground),
       snackbarBackground: Color(DievasColourSemanticLight.snackbarBackground),
       tagBackground: Color(DievasColourSemanticLight.tagBackground),

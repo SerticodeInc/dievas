@@ -1,27 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'package:dievas/l10n/dievas_localizations.dart';
+import 'package:dievas/src/components/menu_item/dievas_menu_item.dart';
+import 'package:dievas/src/components/search/dievas_search_field.dart';
 import 'package:dievas/src/theme/dievas_theme.dart';
 
-/// A search field with an inline filtered-results list.
+export 'dievas_search_field.dart' show DievasSearchSize;
+
+/// Search with inline results on the page, rather than in an overlay.
 ///
-/// As the user types, [items] are filtered by [filter] (defaults to
-/// case-insensitive substring match). Matching items appear in a list
-/// directly below the search field. Tapping an item calls [onSelected]
-/// and clears the search text.
-///
-/// All styling is derived from [DievasSearchThemeData] via
-/// [DievasTheme.componentsOf].
-///
-/// Moon reference: SearchWithList
-///
-/// ```dart
-/// DievasSearchWithList<String>(
-///   items: ['Apple', 'Banana', 'Cherry', 'Date'],
-///   displayString: (s) => s,
-///   hint: 'Search fruits...',
-///   onSelected: (fruit) => print(fruit),
-/// )
-/// ```
+/// Tapping the field shows all matching items. Clear resets the query while
+/// retaining results; Close clears the query, hides results and releases focus.
+/// Selection reports the item without changing the query or visibility.
+/// In a bounded parent the results scroll through the remaining height.
 class DievasSearchWithList<T> extends StatefulWidget {
   const DievasSearchWithList({
     super.key,
@@ -32,178 +23,270 @@ class DievasSearchWithList<T> extends StatefulWidget {
     this.leadingIcon,
     this.filter,
     this.enabled = true,
+    this.controller,
+    this.focusNode,
+    this.initialQuery,
+    this.show,
+    this.onChanged,
+    this.onOpenChanged,
+    this.size,
+    this.activeBorderColour,
+    this.inactiveBorderColour,
+    this.hoverBorderColour,
+    this.backgroundColour,
+    this.borderRadius,
+    this.hasFloatingLabel = false,
+    this.clearLabel,
+    this.noResultsText,
+    this.description,
   });
 
-  /// The full set of searchable items.
   final List<T> items;
-
-  /// Converts an item to its display string for filtering and rendering.
   final String Function(T) displayString;
-
-  /// Called when the user taps a result item. The search text is cleared
-  /// automatically before this fires.
   final ValueChanged<T> onSelected;
-
-  /// Placeholder text in the search field.
   final String? hint;
-
-  /// Leading icon in the search field. Defaults to [Icons.search].
   final Widget? leadingIcon;
-
-  /// Custom filter predicate. Defaults to case-insensitive substring match.
   final bool Function(T item, String query)? filter;
-
-  /// When `false` the search field is read-only.
   final bool enabled;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final String? initialQuery;
+  final bool? show;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<bool>? onOpenChanged;
+  final DievasSearchSize? size;
+  final Color? activeBorderColour;
+  final Color? inactiveBorderColour;
+  final Color? hoverBorderColour;
+  final Color? backgroundColour;
+  final BorderRadiusGeometry? borderRadius;
+  final bool hasFloatingLabel;
+  final String? clearLabel;
+  final String? noResultsText;
+  final String? description;
 
   @override
   State<DievasSearchWithList<T>> createState() => _DievasSearchWithListState<T>();
 }
 
 class _DievasSearchWithListState<T> extends State<DievasSearchWithList<T>> {
-  final _controller = TextEditingController();
-  final _focusNode = FocusNode();
-  List<T> _results = const [];
-
-  bool get _hasQuery => _controller.text.isNotEmpty;
-  bool get _showResults => _hasQuery && _results.isNotEmpty;
+  late TextEditingController _controller;
+  late FocusNode _focusNode;
+  late String _lastQuery;
+  bool _open = false;
 
   @override
   void initState() {
     super.initState();
-    _controller.addListener(_onQueryChange);
+    _open = widget.show ?? false;
+    _controller = widget.controller ?? TextEditingController(text: widget.initialQuery);
+    _lastQuery = _controller.text;
+    _controller.addListener(_onQueryChanged);
+    _focusNode = widget.focusNode ?? FocusNode();
+  }
+
+  @override
+  void didUpdateWidget(DievasSearchWithList<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _controller = switch ((oldWidget.controller, widget.controller)) {
+      (final previous, final next) when previous != next => _replaceController(previous, next),
+      _ => _controller,
+    };
+    _focusNode = switch ((oldWidget.focusNode, widget.focusNode)) {
+      (final previous, final next) when previous != next => _replaceFocusNode(previous, next),
+      _ => _focusNode,
+    };
+    _open = switch ((widget.enabled, widget.show)) {
+      (false, _) => false,
+      (true, final show?) => show,
+      _ => _open,
+    };
   }
 
   @override
   void dispose() {
-    _controller.removeListener(_onQueryChange);
-    _controller.dispose();
-    _focusNode.dispose();
+    _controller.removeListener(_onQueryChanged);
+    if (widget.controller == null) _controller.dispose();
+    if (widget.focusNode == null) _focusNode.dispose();
     super.dispose();
   }
 
-  void _onQueryChange() {
-    final query = _controller.text;
-    if (query.isEmpty) {
-      setState(() => _results = const []);
-      return;
-    }
-
-    final filter = widget.filter ?? _defaultFilter;
-    setState(() => _results = widget.items.where((item) => filter(item, query)).toList());
-  }
-
-  bool _defaultFilter(T item, String query) => widget.displayString(item).toLowerCase().contains(query.toLowerCase());
-
-  void _onItemTap(T item) {
-    _controller.clear();
-    _focusNode.unfocus();
-    widget.onSelected(item);
-  }
-
   @override
   Widget build(BuildContext context) {
-    final theme = DievasTheme.componentsOf(context).search;
-
-    return Column(
-      mainAxisSize: .min,
-      crossAxisAlignment: .stretch,
-      children: [
-        SizedBox(
-          height: theme.height,
-          child: TextField(
-            controller: _controller,
-            focusNode: _focusNode,
-            enabled: widget.enabled,
-            style: theme.inputStyle,
-            decoration: InputDecoration(
-              hintText: widget.hint,
-              hintStyle: theme.placeholderStyle,
-              contentPadding: theme.contentPadding,
-              filled: true,
-              fillColor: theme.bgColour,
-              prefixIcon: Padding(
-                padding: EdgeInsetsDirectional.only(start: theme.dividerIndent, end: theme.iconSize / 4),
-                child: IconTheme(
-                  data: IconThemeData(color: theme.iconColour, size: theme.iconSize),
-                  child: widget.leadingIcon ?? const Icon(Icons.search),
-                ),
-              ),
-              prefixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 0),
-              border: OutlineInputBorder(
-                borderRadius: _showResults
-                    ? BorderRadius.vertical(top: theme.borderRadius.topLeft)
-                    : theme.borderRadius,
-                borderSide: BorderSide(color: theme.borderColour),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: _showResults
-                    ? BorderRadius.vertical(top: theme.borderRadius.topLeft)
-                    : theme.borderRadius,
-                borderSide: BorderSide(color: theme.borderColour),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: _showResults
-                    ? BorderRadius.vertical(top: theme.borderRadius.topLeft)
-                    : theme.borderRadius,
-                borderSide: BorderSide(color: theme.borderColourFocused),
-              ),
-              isDense: true,
-            ),
-          ),
+    final strings = DievasLocalizations.of(context);
+    final query = _controller.text.trim();
+    final results = widget.items.where((item) => (widget.filter ?? _defaultFilter)(item, query)).toList();
+    final open = _open && widget.enabled;
+    return LayoutBuilder(
+      builder: (context, constraints) => _SearchListLayout<T>(
+        bounded: constraints.hasBoundedHeight,
+        input: DievasSearchField(
+          controller: _controller,
+          focusNode: _focusNode,
+          enabled: widget.enabled,
+          hasFloatingLabel: widget.hasFloatingLabel,
+          size: widget.size,
+          hint: widget.hint,
+          clearLabel: widget.clearLabel,
+          leadingIcon: widget.leadingIcon,
+          borderRadius: widget.borderRadius,
+          activeBorderColour: widget.activeBorderColour,
+          inactiveBorderColour: widget.inactiveBorderColour,
+          hoverBorderColour: widget.hoverBorderColour,
+          backgroundColour: widget.backgroundColour,
+          onSearch: _search,
+          onClear: _clear,
+          onClose: _close,
         ),
-        if (_showResults)
-          _ResultsList<T>(results: _results, displayString: widget.displayString, onItemTap: _onItemTap),
-      ],
-    );
-  }
-}
-
-class _ResultsList<T> extends StatelessWidget {
-  const _ResultsList({required this.results, required this.displayString, required this.onItemTap});
-
-  final List<T> results;
-  final String Function(T) displayString;
-  final ValueChanged<T> onItemTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = DievasTheme.componentsOf(context).search;
-
-    return Container(
-      constraints: BoxConstraints(maxHeight: theme.resultMaxHeight),
-      decoration: BoxDecoration(
-        color: theme.bgColour,
-        borderRadius: BorderRadius.vertical(bottom: theme.borderRadius.topLeft),
-        border: Border(
-          left: BorderSide(color: theme.borderColourFocused),
-          right: BorderSide(color: theme.borderColourFocused),
-          bottom: BorderSide(color: theme.borderColourFocused),
-        ),
-        boxShadow: theme.shadow,
-      ),
-      child: ListView.separated(
-        padding: EdgeInsets.zero,
-        shrinkWrap: true,
-        itemCount: results.length,
-        separatorBuilder: (_, _) => Divider(
-          height: 1,
-          thickness: 1,
-          color: theme.dividerColour,
-          indent: theme.dividerIndent,
-          endIndent: theme.dividerIndent,
-        ),
-        itemBuilder: (context, i) {
-          final item = results[i];
-          return InkWell(
-            onTap: () => onItemTap(item),
-            child: Padding(
-              padding: theme.resultItemPadding,
-              child: Text(displayString(item), style: theme.resultItemStyle),
-            ),
-          );
+        results: results,
+        open: open,
+        displayString: widget.displayString,
+        onSelect: widget.onSelected,
+        message: switch ((open, results.isEmpty)) {
+          (false, _) => widget.description ?? strings.searchListDescription,
+          (true, true) => widget.noResultsText ?? strings.searchNoResults,
+          _ => null,
         },
       ),
     );
   }
+
+  TextEditingController _replaceController(TextEditingController? previous, TextEditingController? next) {
+    final value = _controller.value;
+    _controller.removeListener(_onQueryChanged);
+    if (previous case null) _controller.dispose();
+    final controller = switch (next) {
+      final controller? => controller,
+      null => TextEditingController.fromValue(value),
+    };
+    _lastQuery = controller.text;
+    controller.addListener(_onQueryChanged);
+    return controller;
+  }
+
+  FocusNode _replaceFocusNode(FocusNode? previous, FocusNode? next) {
+    if (previous case null) _focusNode.dispose();
+    return switch (next) {
+      final focusNode? => focusNode,
+      null => FocusNode(),
+    };
+  }
+
+  bool _defaultFilter(T item, String query) => widget.displayString(item).toLowerCase().contains(query.toLowerCase());
+
+  void _onQueryChanged() {
+    if (_lastQuery == _controller.text) return;
+    _lastQuery = _controller.text;
+    setState(() {});
+    widget.onChanged?.call(_controller.text);
+  }
+
+  void _setOpen(bool open) {
+    if (_open == open) return;
+    setState(() => _open = open);
+    widget.onOpenChanged?.call(open);
+  }
+
+  void _search() {
+    if (widget.enabled) _setOpen(true);
+  }
+
+  void _clear() {
+    _controller.clear();
+    _focusNode.requestFocus();
+  }
+
+  void _close() {
+    _controller.clear();
+    _setOpen(false);
+    _focusNode.unfocus();
+  }
+}
+
+class _SearchListLayout<T> extends StatelessWidget {
+  const _SearchListLayout({
+    required this.bounded,
+    required this.input,
+    required this.results,
+    required this.open,
+    required this.displayString,
+    required this.onSelect,
+    required this.message,
+  });
+
+  final bool bounded;
+  final Widget input;
+  final List<T> results;
+  final bool open;
+  final String Function(T) displayString;
+  final ValueChanged<T> onSelect;
+  final String? message;
+
+  @override
+  Widget build(BuildContext context) => Stack(
+    children: [
+      Column(
+        mainAxisSize: bounded ? .max : .min,
+        crossAxisAlignment: .stretch,
+        children: [
+          input,
+          if ((bounded, message) case (false, final message?))
+            Padding(
+              padding: .symmetric(vertical: DievasTheme.spacingOf(context).xl3),
+              child: Text(message, textAlign: .center, style: DievasTheme.componentsOf(context).search.inputStyle),
+            ),
+          if (open && results.isNotEmpty)
+            switch (bounded) {
+              true => Expanded(
+                child: _InlineResults<T>(results: results, displayString: displayString, onSelect: onSelect),
+              ),
+              false => _InlineResults<T>(results: results, displayString: displayString, onSelect: onSelect),
+            },
+        ],
+      ),
+      if ((bounded, message) case (true, final message?))
+        Positioned.fill(
+          child: IgnorePointer(
+            child: Center(
+              child: Text(message, textAlign: .center, style: DievasTheme.componentsOf(context).search.inputStyle),
+            ),
+          ),
+        ),
+    ],
+  );
+}
+
+class _InlineResults<T> extends StatelessWidget {
+  const _InlineResults({required this.results, required this.displayString, required this.onSelect});
+  final List<T> results;
+  final String Function(T) displayString;
+  final ValueChanged<T> onSelect;
+
+  @override
+  Widget build(BuildContext context) => ScrollConfiguration(
+    behavior: const ScrollBehavior().copyWith(scrollbars: false),
+    child: ListView.builder(
+      shrinkWrap: true,
+      padding: .only(top: DievasTheme.spacingOf(context).sm),
+      itemCount: results.length,
+      itemBuilder: (context, index) =>
+          _InlineResult<T>(item: results.elementAt(index), displayString: displayString, onSelect: onSelect),
+    ),
+  );
+}
+
+class _InlineResult<T> extends StatelessWidget {
+  const _InlineResult({required this.item, required this.displayString, required this.onSelect});
+  final T item;
+  final String Function(T) displayString;
+  final ValueChanged<T> onSelect;
+
+  @override
+  Widget build(BuildContext context) => ConstrainedBox(
+    constraints: BoxConstraints(minHeight: DievasTheme.sizingOf(context).height40),
+    child: Align(
+      heightFactor: 1,
+      child: DievasMenuItem(label: displayString(item), onTap: () => onSelect(item)),
+    ),
+  );
 }

@@ -26,7 +26,7 @@ class _SectionHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 16, bottom: 4),
+    padding: const .only(top: 16, bottom: 4),
     child: Column(
       crossAxisAlignment: .stretch,
       children: [

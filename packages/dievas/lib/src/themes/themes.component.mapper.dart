@@ -896,7 +896,7 @@ DievasPopoverThemeData _createPopoverTheme(
 ) {
   return DievasPopoverThemeData(
     backgroundColour: colours.background.popoverBackground,
-    textStyle: typography.bodyMd.copyWith(color: colours.text.textPrimary),
+    textStyle: typography.bodySm.copyWith(color: colours.text.textPrimary),
     borderRadius: border.md,
     padding: .all(spacing.smPlus),
     verticalOffset: DievasSizingPrimitives.s8,
@@ -904,7 +904,7 @@ DievasPopoverThemeData _createPopoverTheme(
     arrowSize: DievasSizingPrimitives.s8,
     barrierColour: colours.background.modalBarrierBackground,
     animationDuration: animation.standard,
-    shadow: elevation.md,
+    shadow: elevation.sm,
     maxWidth: 280.0,
   );
 }

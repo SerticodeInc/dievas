@@ -60,7 +60,7 @@ class DievasThemeAddon extends WidgetbookAddon<WidgetbookTheme<DievasThemeData>>
         path.contains('modal') ||
         path.contains('searchwithdropdown') ||
         path.contains('searchwithlist');
-    final isDropdown = path.contains('dropdown') || path.contains('searchwithdropdown');
+    final isDropdown = path.contains('dropdown') || path.contains('searchwithdropdown') || path.contains('popover');
     final canvas = Scaffold(
       backgroundColor: setting.data.colours.background.cardBackground,
       body: switch (fullBleed) {

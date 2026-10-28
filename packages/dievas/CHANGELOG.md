@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **Popover**: add controlled visibility, ten placements, viewport constraints, RTL, surface and motion overrides, keyboard activation, focus feedback, Escape dismissal and route observation. Preserve local themes and live content in the overlay. Replace the dimming barrier with nonmodal outside-tap handling. Refresh the gallery with interactive reference content and semantic controls.
+
 ## 1.0.3
 
 - **Modal colours**: add independent `titleColour` and `contentColour` widget/theme overrides and gallery selectors. Keep `textColour` as the shared fallback.

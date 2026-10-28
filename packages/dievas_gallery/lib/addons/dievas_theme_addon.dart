@@ -58,6 +58,7 @@ class DievasThemeAddon extends WidgetbookAddon<WidgetbookTheme<DievasThemeData>>
     final fullBleed =
         path.contains('drawer') ||
         path.contains('modal') ||
+        path.contains('radio') ||
         path.contains('searchwithdropdown') ||
         path.contains('searchwithlist');
     final isDropdown = path.contains('dropdown') || path.contains('searchwithdropdown') || path.contains('popover');

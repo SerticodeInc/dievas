@@ -2,7 +2,10 @@
 
 ## Unreleased
 
-- **Popover**: add controlled visibility, ten placements, viewport constraints, RTL, surface and motion overrides, keyboard activation, focus feedback, Escape dismissal and route observation. Preserve local themes and live content in the overlay. Replace the dimming barrier with nonmodal outside-tap handling. Refresh the gallery with interactive reference content and semantic controls.
+- **Radio callback migration**: `DievasRadio.onChanged` accepts `T?` so toggleable radios can clear selection. Update explicitly typed callback parameters and stored group values to accept null. Repeated activation of an already selected radio does nothing unless `toggleable` is enabled.
+- **Radio**: match the Moon reference with a 16px outlined ring, 8px coloured dot and 40px tap target. Add active/inactive colour overrides, configurable hit area, focus nodes, autofocus, keyboard activation, focus feedback and radio semantics. Animate the ring and dot with reduced motion support; fix label wrapping and add theme `copyWith`. Rebuild the gallery with independent plain and labelled groups whose selection survives live controls.
+
+- **Popover**: add controlled visibility, ten placements, viewport constraints, RTL, surface and motion overrides, keyboard activation, focus feedback, Escape dismissal and route observation. Preserve local themes and live content in the overlay. Replace the dimming barrier with nonmodal outside tap handling. Refresh the gallery with interactive reference content and semantic controls.
 
 ## 1.0.3
 

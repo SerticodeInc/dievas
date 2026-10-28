@@ -2,128 +2,198 @@ import 'package:dievas/dievas.dart';
 import 'package:flutter/widgets.dart';
 import 'package:widgetbook/widgetbook.dart';
 
+import '../../knobs/knob_section.dart';
+import '../../knobs/token_colour_knob.dart';
 import '../../widgets/component_boundary.dart';
 
+final _sessions = Expando<Map<String, _RadioSession>>();
 final radioComponent = WidgetbookComponent(
   name: 'Radio',
   useCases: [
-    WidgetbookUseCase(name: 'Playground', builder: (ctx) => _Playground()),
-    WidgetbookUseCase(name: 'Group', builder: (ctx) => _Group()),
-    WidgetbookUseCase(name: 'All States', builder: (ctx) => _AllStates()),
+    for (final name in ['Playground', 'Group', 'All States'])
+      WidgetbookUseCase(
+        name: name,
+        builder: (context) => _Playground(
+          example: name,
+          session: (_sessions[WidgetbookState.of(context)] ??= {}).putIfAbsent(name, _RadioSession.new),
+        ),
+      ),
   ],
 );
 
-// Playground simulates a 3-option group — the knob sets which one is pre-selected.
-class _Playground extends StatelessWidget {
+enum _Choice { first, second }
+
+enum _TapArea {
+  none,
+  compact,
+  regular,
+  large;
+
+  double resolve(DievasSizingThemeData sizing) => switch (this) {
+    .none => 0,
+    .compact => sizing.height32,
+    .regular => sizing.height40,
+    .large => sizing.height48,
+  };
+}
+
+class _RadioSession {
+  _Choice? plain = .first;
+  _Choice? labelled = .first;
+}
+
+typedef _Appearance = ({Color? active, Color? inactive, bool toggleable, bool disabled, double tapArea});
+
+class _Playground extends StatefulWidget {
+  const _Playground({required this.example, required this.session});
+  final String example;
+  final _RadioSession session;
+
+  @override
+  State<_Playground> createState() => _PlaygroundState();
+}
+
+class _PlaygroundState extends State<_Playground> {
   @override
   Widget build(BuildContext context) {
-    final options = ['Option A', 'Option B', 'Option C'];
-
-    final initialSelection = context.knobs.object.dropdown<String>(
-      label: 'Selected',
-      options: options,
-      labelBuilder: (v) => v,
-      initialOption: 'Option A',
-    );
-
-    final showLabels = context.knobs.boolean(label: 'Show Labels', initialValue: true);
+    context.knobSection('Colours');
+    final overrideActive = context.knobs.boolean(label: 'Override active colour');
+    final active = context.tokenColourKnob(label: 'Active colour', role: .border, initialValue: .brand);
+    final overrideInactive = context.knobs.boolean(label: 'Override inactive colour');
+    final inactive = context.tokenColourKnob(label: 'Inactive colour', role: .border, initialValue: .brand);
+    context.knobSection('Interaction');
+    final toggleable = context.knobs.boolean(label: 'Toggleable');
     final disabled = context.knobs.boolean(label: 'Disabled');
-
-    return Center(
-      child: StatefulBuilder(
-        builder: (context, setState) {
-          var selected = initialSelection;
-          return ComponentBoundary(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (final option in options) ...[
-                  DievasRadio<String>(
-                    value: option,
-                    groupValue: selected,
-                    label: showLabels ? option : null,
-                    onChanged: disabled ? null : (v) => setState(() => selected = v),
+    context.knobSection('Layout');
+    final rtl = context.knobs.boolean(label: 'Right to left');
+    final tapArea = context.knobs.object.dropdown(
+      label: 'Tap area',
+      options: _TapArea.values,
+      initialOption: _TapArea.regular,
+      labelBuilder: (value) => value.name,
+    );
+    final theme = DievasTheme.of(context);
+    final appearance = (
+      active: overrideActive ? active : null,
+      inactive: overrideInactive ? inactive : null,
+      toggleable: toggleable,
+      disabled: disabled,
+      tapArea: tapArea.resolve(theme.sizing),
+    );
+    return Directionality(
+      textDirection: rtl ? .rtl : .ltr,
+      child: Center(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(vertical: theme.spacing.xl3, horizontal: theme.spacing.md),
+          child: Column(
+            mainAxisSize: .min,
+            children: [
+              const _SectionTitle(label: 'DievasRadio'),
+              for (final choice in _Choice.values)
+                ComponentBoundary(
+                  child: DievasRadio<_Choice>(
+                    key: ValueKey('plain-${choice.name}'),
+                    value: choice,
+                    groupValue: widget.session.plain,
+                    onChanged: disabled ? null : (value) => setState(() => widget.session.plain = value),
+                    toggleable: toggleable,
+                    activeColour: appearance.active,
+                    inactiveColour: appearance.inactive,
+                    tapAreaSize: appearance.tapArea,
+                    semanticLabel: 'Radio ${choice.name}',
                   ),
-                  if (option != options.last) SizedBox(height: context.spacing.smPlus),
-                ],
+                ),
+              SizedBox(height: theme.spacing.xl3),
+              const _SectionTitle(label: 'DievasRadio with label'),
+              _LabelledGroup(
+                selected: widget.session.labelled,
+                appearance: appearance,
+                onChanged: (value) => setState(() => widget.session.labelled = value),
+              ),
+              if (widget.example == 'Group') ...[
+                SizedBox(height: theme.spacing.lg),
+                DievasRadio<_Choice>(
+                  value: .first,
+                  groupValue: widget.session.labelled,
+                  label: 'Label convenience',
+                  toggleable: toggleable,
+                  onChanged: disabled ? null : (value) => setState(() => widget.session.labelled = value),
+                ),
               ],
-            ),
-          );
-        },
+              if (widget.example == 'All States') ...[
+                SizedBox(height: theme.spacing.xl3),
+                const _SectionTitle(label: 'Disabled states'),
+                const DievasRadio<bool>(value: true, groupValue: true, onChanged: null, label: 'Selected'),
+                const DievasRadio<bool>(value: true, groupValue: false, onChanged: null, label: 'Unselected'),
+              ],
+            ],
+          ),
+        ),
       ),
     );
   }
 }
 
-class _Group extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => Center(
-    child: StatefulBuilder(
-      builder: (context, setState) {
-        var selected = 'Standard';
-        final options = ['Standard', 'Express', 'Overnight'];
+class _LabelledGroup extends StatelessWidget {
+  const _LabelledGroup({required this.selected, required this.appearance, required this.onChanged});
+  final _Choice? selected;
+  final _Appearance appearance;
+  final ValueChanged<_Choice?> onChanged;
 
-        return ComponentBoundary(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Shipping method', style: context.typography.titleSm),
-              SizedBox(height: context.spacing.smPlus),
-              for (final option in options) ...[
-                DievasRadio<String>(
-                  value: option,
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: .min,
+    children: [
+      for (final choice in _Choice.values)
+        Semantics(
+          checked: selected == choice,
+          inMutuallyExclusiveGroup: true,
+          child: DievasMenuItem(
+            key: ValueKey('labelled-${choice.name}'),
+            label: 'With label #${choice.index + 1}',
+            enabled: !appearance.disabled,
+            absorbGestures: true,
+            onTap: switch ((appearance.disabled, appearance.toggleable, selected == choice)) {
+              (true, _, _) => null,
+              (false, false, true) => () {},
+              (false, true, true) => () => onChanged(null),
+              (false, _, false) => () => onChanged(choice),
+            },
+            trailing: ExcludeSemantics(
+              child: ExcludeFocus(
+                child: DievasRadio<_Choice>(
+                  value: choice,
                   groupValue: selected,
-                  label: option,
-                  onChanged: (v) => setState(() => selected = v),
+                  toggleable: appearance.toggleable,
+                  activeColour: appearance.active,
+                  inactiveColour: appearance.inactive,
+                  tapAreaSize: 0,
+                  onChanged: appearance.disabled ? null : (_) {},
                 ),
-                if (option != options.last) SizedBox(height: context.spacing.smPlus),
-              ],
-            ],
+              ),
+            ),
           ),
-        );
-      },
-    ),
+        ),
+    ],
   );
 }
 
-class _AllStates extends StatelessWidget {
+class _SectionTitle extends StatelessWidget {
+  const _SectionTitle({required this.label});
+  final String label;
+
   @override
-  Widget build(BuildContext context) => Center(
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
+  Widget build(BuildContext context) => Padding(
+    padding: EdgeInsets.only(bottom: context.spacing.xl),
+    child: Row(
       children: [
-        _StateRow('Unselected', isSelected: false),
-        SizedBox(height: context.spacing.md),
-        _StateRow('Selected', isSelected: true),
-        SizedBox(height: context.spacing.md),
-        _StateRow('Disabled (unselected)', isSelected: false, disabled: true),
-        SizedBox(height: context.spacing.md),
-        _StateRow('Disabled (selected)', isSelected: true, disabled: true),
+        const Expanded(child: DievasDivider()),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: context.spacing.md),
+          child: Text(label, style: context.typography.bodySm.copyWith(color: context.colours.text.textSecondary)),
+        ),
+        const Expanded(child: DievasDivider()),
       ],
     ),
-  );
-}
-
-class _StateRow extends StatelessWidget {
-  const _StateRow(this.name, {required this.isSelected, this.disabled = false});
-  final String name;
-  final bool isSelected;
-  final bool disabled;
-
-  @override
-  Widget build(BuildContext context) => Row(
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      SizedBox(
-        width: 180,
-        child: Text(name, style: context.typography.labelXs.copyWith(color: context.colours.text.textTertiary)),
-      ),
-      ComponentBoundary(
-        child: DievasRadio<bool>(value: true, groupValue: isSelected, onChanged: disabled ? null : (_) {}),
-      ),
-    ],
   );
 }

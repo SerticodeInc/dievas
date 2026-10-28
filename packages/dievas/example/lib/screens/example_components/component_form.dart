@@ -18,7 +18,7 @@ class _FormExamplesState extends State<_FormExamples> {
   final _areaController = TextEditingController();
   DievasCheckboxValue _checkbox = .checked;
   bool _switchOn = true;
-  _RadioOption _radioOption = .one;
+  _RadioOption? _radioOption = .one;
   _Density _density = .compact;
   _Plan? _plan;
 

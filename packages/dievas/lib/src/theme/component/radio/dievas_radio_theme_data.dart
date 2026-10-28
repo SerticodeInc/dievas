@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/animation.dart';
 
 /// Theme data for [DievasRadio].
 ///
@@ -19,21 +20,23 @@ final class DievasRadioThemeData extends Equatable {
     required this.disabledOpacity,
     required this.labelStyle,
     required this.labelSpacing,
+    this.animationDuration,
+    this.animationCurve,
   });
 
   /// Outer circle diameter (dp).
   final double size;
 
-  /// Ring stroke width (dp) in unselected state.
+  /// Ring stroke width (dp) in both selection states.
   final double strokeWidth;
 
   /// Inner dot diameter (dp) in selected state.
   final double dotSize;
 
-  /// Outer ring fill / border colour when selected.
+  /// Outer ring colour when selected.
   final Color colourSelected;
 
-  /// Outer ring border colour when unselected (transparent fill).
+  /// Background inside the ring in both selection states.
   final Color colourUnselected;
 
   /// Outer ring colour when disabled.
@@ -57,6 +60,41 @@ final class DievasRadioThemeData extends Equatable {
   /// Gap between the radio circle and the label (dp).
   final double labelSpacing;
 
+  final Duration? animationDuration;
+  final Curve? animationCurve;
+
+  DievasRadioThemeData copyWith({
+    double? size,
+    double? strokeWidth,
+    double? dotSize,
+    Color? colourSelected,
+    Color? colourUnselected,
+    Color? colourDisabled,
+    Color? borderColourUnselected,
+    Color? borderColourDisabled,
+    Color? dotColour,
+    double? disabledOpacity,
+    TextStyle? labelStyle,
+    double? labelSpacing,
+    Duration? animationDuration,
+    Curve? animationCurve,
+  }) => DievasRadioThemeData(
+    size: size ?? this.size,
+    strokeWidth: strokeWidth ?? this.strokeWidth,
+    dotSize: dotSize ?? this.dotSize,
+    colourSelected: colourSelected ?? this.colourSelected,
+    colourUnselected: colourUnselected ?? this.colourUnselected,
+    colourDisabled: colourDisabled ?? this.colourDisabled,
+    borderColourUnselected: borderColourUnselected ?? this.borderColourUnselected,
+    borderColourDisabled: borderColourDisabled ?? this.borderColourDisabled,
+    dotColour: dotColour ?? this.dotColour,
+    disabledOpacity: disabledOpacity ?? this.disabledOpacity,
+    labelStyle: labelStyle ?? this.labelStyle,
+    labelSpacing: labelSpacing ?? this.labelSpacing,
+    animationDuration: animationDuration ?? this.animationDuration,
+    animationCurve: animationCurve ?? this.animationCurve,
+  );
+
   @override
   List<Object?> get props => [
     size,
@@ -71,5 +109,7 @@ final class DievasRadioThemeData extends Equatable {
     disabledOpacity,
     labelStyle,
     labelSpacing,
+    animationDuration,
+    animationCurve,
   ];
 }

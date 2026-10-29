@@ -2,7 +2,7 @@
 
 ## 1.0.4
 
-- **Token dependency compatibility**: require `dievas_tokens` 1.0.4 or newer, which includes `menuHoveredBackground` for both themes. The published 1.0.2 dependency lacks these constants, causing undefined getters and constant evaluation errors outside the workspace, including dependency lower bound analysis. Publish the token package before Dievas.
+- **Token dependency compatibility**: require `dievas_tokens` 1.0.3 or newer, which includes `menuHoveredBackground` for both themes. The published 1.0.2 dependency lacks these constants, causing undefined getters and constant evaluation errors outside the workspace, including dependency lower bound analysis. Publish the token package before Dievas.
 
 - **Segmented control**: retain typed controlled options and add widget segments, leading/trailing slots, icon only and custom content, per segment styling, 40px/48px sizes, expanded layout, directional geometry and instance surface/motion overrides. Add caller owned `TabController` integration, keyboard navigation, focus/hover/press feedback, selection semantics and reduced motion support. Replace static gallery samples with independently selectable text and icon groups and live semantic controls.
 - **Segmented control appearance**: default to neutral selected surfaces and consistent text weight, with separate container/segment radii and gaps instead of separators. Brand palettes preserve neutral selection colours. Theme radius and padding fields accept directional geometry; use the size presets for size-specific layout overrides.

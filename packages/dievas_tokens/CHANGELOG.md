@@ -4,7 +4,7 @@
 
 Changes to the Dievas token package, newest first.
 
-## 1.0.4
+## 1.0.3
 
 - Include `menuHoveredBackground` in both semantic themes: `blackAlpha0A` for light and `whiteAlpha14` for dark. Dievas uses these constant tokens when constructing its default themes. They were added locally after the published 1.0.2 archive.
 

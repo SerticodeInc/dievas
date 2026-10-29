@@ -1,0 +1,72 @@
+---
+title: "Upgrade existing applications"
+description: "Migrate old size and colour names and verify package compatibility."
+sidebar:
+  order: 1
+meta:
+  contentType: How-to
+---
+
+{/* Plan — Overview: Migrate old size and colour names and verify package compatibility. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Upgrade compatible Flutter and token packages together. Review the changelog before migrating names, then analyse and test the consuming application.
+
+## Confirm package versions
+
+Dievas 1.0.4 depends on tokens ^1.0.3. Upgrade the packages and resolve dependencies:
+
+```sh
+flutter pub upgrade dievas dievas_tokens
+```
+
+The guides target that release baseline. Review the [Flutter changelog](https://github.com/SerticodeInc/dievas/blob/master/packages/dievas/CHANGELOG.md) and [token changelog](https://github.com/SerticodeInc/dievas/blob/master/packages/dievas_tokens/CHANGELOG.md) for subsequent changes.
+
+## Rename size members
+
+The public vocabulary uses lowercase size names:
+
+| Previous name | Replacement |
+| --- | --- |
+| `context.spacing.MD` | `context.spacing.md` |
+| `DievasButtonSize.SM` | `DievasButtonSize.sm` |
+| `DievasAvatarSize.XL2` | `DievasAvatarSize.xl2` |
+| `buttonHeightXS` | `buttonHeightXs` |
+| `DievasRadiusSemantic.R28` | `DievasRadiusSemantic.r28` |
+
+The repository includes a type-aware codemod. It uses analyzer diagnostics, so upgrade dependencies first: the old names need to be undefined for it to identify replacements.
+
+## Run the repository-local codemod
+
+`dievas_migrate` was not published on pub.dev when this documentation baseline was checked. Activate it from your Dievas checkout, then run it from the consuming application's directory:
+
+```sh
+cd /absolute/path/to/dievas/packages/dievas_migrate
+dart pub global activate --source path .
+cd /absolute/path/to/your_application
+dart pub global run dievas_migrate:dievas_migrate
+```
+
+Replace both absolute paths with your local checkouts. The first run previews edits without changing files. Review that output before applying:
+
+```sh
+dart pub global run dievas_migrate:dievas_migrate --write
+```
+
+Use `--check` to fail if pending migrations remain. The tool targets size vocabulary; it does not migrate colour roles or visible display strings.
+
+## Rename colour roles deliberately
+
+Colour names now describe explicit component roles. Examples include `pageBackground`, `cardBackground`, `buttonPrimaryBackground`, and `inputFocusedBorder`.
+
+A formerly shared background can split into different roles for a dialog, drawer, tooltip, or menu. Choose the role matching each use rather than applying an indiscriminate replacement. See the [complete colour migration tables](https://github.com/SerticodeInc/dievas/blob/master/packages/dievas_tokens/README.md#migrate-colour-names-to-explicit-component-roles).
+
+## Verify the application
+
+Run the application's checks and inspect the changed components in both themes:
+
+```sh
+flutter analyze
+flutter test
+```
+
+Review diff changes before committing. A workspace dependency override can hide a compatibility problem; also verify a standalone application resolves the published package versions.

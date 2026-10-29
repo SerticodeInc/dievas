@@ -1,0 +1,77 @@
+---
+title: "Keep documentation aligned with code"
+description: "Update documentation, examples, and migration guidance alongside public API changes."
+sidebar:
+  order: 4
+meta:
+  contentType: How-to
+---
+
+{/* Plan — Overview: Update documentation, examples, and migration guidance alongside public API changes. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Update the documentation in the same pull request as a public API change. Use source and published manifests as evidence, then check the examples and rendered site.
+
+## Work in the monorepo
+
+The Astro Starlight application lives in `documentation/`, outside the Dart/Melos workspace. Content lives under `documentation/src/content/docs/`. The landing page and Widgetbook gallery have separate builds.
+
+Install the pinned dependencies and start a local documentation server from that directory:
+
+```sh
+npm ci
+npm run dev
+```
+
+Stop the development server when you finish. Site search is indexed during the production build; verify search using the built preview.
+
+## Plan a page before writing
+
+Record the overview, measurable goal, audience, documentation plan, and open questions. Select one content type: tutorial, how-to, concept, reference, or troubleshooting. Explain the task in the title and introduce prerequisites before instructions.
+
+The frontmatter includes a `meta.contentType` annotation for authors. The sidebar groups are configured in `astro.config.mjs`; pages within a group use `sidebar.order`.
+
+## Follow the component guide contract
+
+Each component guide should include these topics:
+
+- Purpose and when to choose the component
+- A minimal working example using public imports
+- Variants, states, important properties, and defaults
+- State ownership and controller lifecycle
+- Theme entry points and supported customisation
+- Verified keyboard/semantic behaviour and known limitations
+- Versioned API and gallery links
+
+Do not describe unsupported properties or turn unverified behaviour into a guarantee. A page with a non-compiling example is not ready to publish.
+
+## Validate the change
+
+Run the site checks from `documentation/`:
+
+```sh
+npm run check
+npm run build
+npm run verify:links
+```
+
+Run the example verifier from the same directory when changing Dart snippets:
+
+```sh
+python3 scripts/verify-examples.py
+```
+
+The verifier creates a temporary consumer, resolves the documented hosted package versions, analyses the Dart snippets together by page, and runs the adoption-flow widget tests. It requires Flutter on your path. It removes the temporary consumer when finished.
+
+Inspect the production build with:
+
+```sh
+npm run preview
+```
+
+Check mobile/desktop layouts, keyboard navigation, light/dark appearance, search results, code copying, deep links, and the 404 page. Stop the preview after verification.
+
+## Review and release
+
+Describe the concrete change and verification in the PR. Link the preview when available. If an API breaks, update the migration guide and changelog. Keep the docs release baseline explicit and confirm published versions before changing installation commands.
+
+The documentation workflow checks pull requests and publishes pushes to `master`. Manual deployment is available through the workflow's deploy input. Deployments require the configured Cloudflare account and token secrets. A custom domain also requires its own verified Cloudflare domain configuration.

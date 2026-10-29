@@ -1,0 +1,63 @@
+---
+title: "Build appearance settings"
+description: "Connect a segmented control to the Dievas scope theme controller."
+sidebar:
+  order: 2
+meta:
+  contentType: How-to
+---
+
+{/* Plan — Overview: Connect a segmented control to the Dievas scope theme controller. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Let people select light, dark, or system appearance. Read the scope's selected mode and update the same controller when the selection changes.
+
+## Connect the control
+
+This screen works below the `DievasScope` and `MaterialApp` root from [the scope guide](/theming/scope/):
+
+```dart
+class AppearanceSettings extends StatelessWidget {
+  const AppearanceSettings({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final scope = DievasScope.of(context);
+    return Padding(
+      padding: EdgeInsets.all(context.spacing.lg),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Appearance', style: context.typography.headingMd),
+          SizedBox(height: context.spacing.md),
+          DievasSegmentedControl<ThemeMode>(
+            options: ThemeMode.values,
+            value: scope.themeMode,
+            labelBuilder: (mode) => switch (mode) {
+              ThemeMode.system => 'System',
+              ThemeMode.light => 'Light',
+              ThemeMode.dark => 'Dark',
+            },
+            onChanged: scope.setThemeMode,
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+`DievasScope.of(context)` establishes a dependency on the selected mode. The screen rebuilds after the controller changes it.
+
+## Persist the preference
+
+The scope keeps the selection in memory. Persist it through your application's settings layer using the scope's `onThemeChanged` callback, then supply the restored value through `themeMode` when the app starts.
+
+Keep the saved preference distinct from the resolved brightness: `ThemeMode.system` remains the selected preference even while the platform uses dark appearance.
+
+## Verify the settings
+
+Select all 3 choices. Confirm the selected segment and the surrounding page agree. With **System** selected, change the platform appearance. If persistence is added, restart the application and confirm the original preference is restored.
+
+## Next step
+
+[Review palette customisation](/theming/brand/) to apply your product identity in both modes.

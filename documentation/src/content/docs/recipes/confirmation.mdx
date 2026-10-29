@@ -1,0 +1,65 @@
+---
+title: "Confirm an action"
+description: "Return a typed result from a modal before performing an application command."
+sidebar:
+  order: 3
+meta:
+  contentType: How-to
+---
+
+{/* Plan — Overview: Return a typed result from a modal before performing an application command. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Require an affirmative result before performing a consequential action. A dismissed dialog must not count as confirmation.
+
+## Return a boolean result
+
+This widget delegates the actual operation to its caller. It uses the dialog's context when closing the route:
+
+```dart
+class RemoveItemAction extends StatelessWidget {
+  const RemoveItemAction({super.key, required this.onConfirmed});
+  final VoidCallback onConfirmed;
+
+  @override
+  Widget build(BuildContext context) => DievasOutlinedButton(
+    label: 'Remove item',
+    style: DievasOutlinedButtonStyle.destructive,
+    onPressed: () async {
+      final confirmed = await showDievasModal<bool>(
+        context: context,
+        builder: (dialogContext) => DievasModal(
+          title: 'Remove this item?',
+          body: 'You cannot undo this action.',
+          actions: [
+            DievasTextButton(
+              label: 'Cancel',
+              onPressed: () => closeDievasModal(dialogContext, false),
+            ),
+            DievasFilledButton(
+              label: 'Remove',
+              style: DievasFilledButtonStyle.destructive,
+              onPressed: () => closeDievasModal(dialogContext, true),
+            ),
+          ],
+        ),
+      );
+      if (!context.mounted) return;
+      if (confirmed == true) onConfirmed();
+    },
+  );
+}
+```
+
+The `context.mounted` check handles the real possibility that the caller is disposed while awaiting the dialog. `confirmed == true` distinguishes explicit acceptance from false or null dismissal.
+
+## Handle the operation in the application
+
+The callback is the boundary to your application command. Handle loading, persistence, failure, and any navigation there. Avoid claiming deletion succeeded before the operation finishes.
+
+## Verify each exit path
+
+Confirm **Cancel**, the close button, Escape, and outside dismissal do not call `onConfirmed`. Confirm **Remove** calls it once. Check keyboard focus and return behaviour on each supported platform.
+
+## Next step
+
+[Review overlay options](/components/overlays/) for dismissal and navigator configuration.

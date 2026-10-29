@@ -1,0 +1,96 @@
+---
+title: "Choose a component"
+description: "Find exported Dievas components, usage guides, and versioned API reference."
+sidebar:
+  order: 1
+meta:
+  contentType: Reference
+---
+
+{/* Plan — Overview: Find exported Dievas components, usage guides, and versioned API reference. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Choose a component by the task it supports. This inventory lists the exported component widgets in the reviewed source. Public helper, controller, theme, and enum declarations are covered by the [API reference](/maintain/reference/).
+
+## Before you compose components
+
+Install the [theme root](/theming/scope/) and import `package:dievas/dievas.dart`. Your application owns state, data fetching, routing, and validation.
+
+## Guide coverage
+
+Detailed guides cover buttons, text inputs, selection controls, feedback, and modal/sheet workflows. A linked family guide covers the components named in that guide; other widgets retain API/gallery coverage without a dedicated usage guide. The inventory does not imply all components have the same documentation depth.
+
+## Buttons
+
+| Component | Purpose | Usage coverage |
+| --- | --- | --- |
+| [DievasFilledButton](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasFilledButton-class.html) | A filled action | [Family guide](/components/buttons/) |
+| [DievasOutlinedButton](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasOutlinedButton-class.html) | A bordered action | [Family guide](/components/buttons/) |
+| [DievasTextButton](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasTextButton-class.html) | A lower-emphasis action | [Family guide](/components/buttons/) |
+| [DievasIconButton](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasIconButton-class.html) | An icon action | [Family guide](/components/buttons/) |
+
+## Text and selection
+
+| Component | Purpose | Usage coverage |
+| --- | --- | --- |
+| [DievasTextInput](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasTextInput-class.html) | Single-line text input | [Family guide](/components/inputs/) |
+| [DievasTextArea](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasTextArea-class.html) | Multiline text input | [Family guide](/components/inputs/) |
+| [DievasTextInputGroup](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasTextInputGroup-class.html) | A grouped input composition | API and gallery |
+| [DievasAuthCode](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasAuthCode-class.html) | A verification-code input | API and gallery |
+| [DievasCheckbox](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasCheckbox-class.html) | Independent or mixed selection | [Family guide](/components/selection/) |
+| [DievasSwitch](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasSwitch-class.html) | An on/off preference | [Family guide](/components/selection/) |
+| [DievasRadio](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasRadio-class.html) | A choice in a group | [Family guide](/components/selection/) |
+| [DievasSegmentedControl](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasSegmentedControl-class.html) | Visible mutually exclusive choices | [Family guide](/components/selection/) |
+| [DievasDropdown](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasDropdown-class.html) | Selection from an overlay | [Family guide](/components/selection/) |
+| [DievasSearchWithList](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasSearchWithList-class.html) | Search with inline results | API and gallery |
+| [DievasSearchWithDropdown](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasSearchWithDropdown-class.html) | Search with overlay results | API and gallery |
+
+## Display
+
+| Component | Purpose | Usage coverage |
+| --- | --- | --- |
+| [DievasAvatar](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasAvatar-class.html) | An image or identity placeholder | API and gallery |
+| [DievasBadge](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasBadge-class.html) | A compact status indicator | API and gallery |
+| [DievasTag](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasTag-class.html) | A content label | API and gallery |
+| [DievasDivider](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasDivider-class.html) | A content separator | API and gallery |
+| [DievasIcon](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasIcon-class.html) | A themed icon | API and gallery |
+| [DievasCircularProgress](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasCircularProgress-class.html) | Circular progress | API and gallery |
+| [DievasLinearProgress](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasLinearProgress-class.html) | Linear progress | API and gallery |
+| [DievasDotIndicator](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasDotIndicator-class.html) | A position indicator | API and gallery |
+| [DievasEmptyState](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasEmptyState-class.html) | An empty-content explanation | API and gallery |
+| [DievasCarousel](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasCarousel-class.html) | A snapping content strip | API and gallery |
+
+## Feedback
+
+| Component | Purpose | Usage coverage |
+| --- | --- | --- |
+| [DievasAlert](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasAlert-class.html) | An inline status message | [Family guide](/components/feedback/) |
+| [DievasBanner](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasBanner-class.html) | A scope-owned top message | [Family guide](/components/feedback/) |
+| [DievasSnackbar](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasSnackbar-class.html) | A scope-owned transient message | [Family guide](/components/feedback/) |
+| [DievasLoader](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasLoader-class.html) | An indeterminate loading indicator | API and gallery |
+
+## Navigation and disclosure
+
+| Component | Purpose | Usage coverage |
+| --- | --- | --- |
+| [DievasAccordion](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasAccordion-class.html) | Collapsible content | API and gallery |
+| [DievasBreadcrumb](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasBreadcrumb-class.html) | A location trail | API and gallery |
+| [DievasDrawer](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasDrawer-class.html) | An edge panel | API and gallery |
+| [DievasTabBar](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasTabBar-class.html) | Tab navigation | API and gallery |
+| [DievasMenuItem](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasMenuItem-class.html) | A menu row | API and gallery |
+
+## Overlays
+
+| Component | Purpose | Usage coverage |
+| --- | --- | --- |
+| [DievasBottomSheet](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasBottomSheet-class.html) | A bottom sheet surface | [Family guide](/components/overlays/) |
+| [DievasModal](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasModal-class.html) | A dialog surface | [Family guide](/components/overlays/) |
+| [DievasTooltip](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasTooltip-class.html) | Brief anchored help | [Family guide](/components/overlays/) |
+| [DievasPopover](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasPopover-class.html) | Rich anchored content | API and gallery |
+
+## Inspect components interactively
+
+Open the [Widgetbook gallery](https://master.dievas-gallery.pages.dev) and select the component. Compare the available variants and controls. The gallery may track repository changes newer than the package version; consult the versioned API links in this inventory.
+
+## Contribute a guide
+
+Use the [documentation contribution contract](/maintain/contributing/) to add a verified component page. Explain state ownership and integration before listing every property.

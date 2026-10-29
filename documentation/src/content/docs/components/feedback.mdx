@@ -1,0 +1,64 @@
+---
+title: "Show feedback and status"
+description: "Choose inline alerts, transient snackbars, or scope-owned banners."
+sidebar:
+  order: 5
+meta:
+  contentType: Reference
+---
+
+{/* Plan — Overview: Choose inline alerts, transient snackbars, or scope-owned banners. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Use an alert for status that belongs in the content, a snackbar for transient feedback, and a banner for a message near the top of the application.
+
+## Render an inline alert
+
+This alert stays in the widget tree until your application removes it:
+
+```dart
+class SaveError extends StatelessWidget {
+  const SaveError({super.key});
+
+  @override
+  Widget build(BuildContext context) => const DievasAlert(
+    title: 'Changes could not be saved',
+    description: 'Check your connection and try again.',
+    tone: DievasAlertTone.error,
+    variant: DievasAlertVariant.outlined,
+  );
+}
+```
+
+`title` is required. `tone` defaults to `info`; other tones are `success`, `warning`, and `error`. `variant` defaults to `filled`, with `base` and `outlined` alternatives.
+
+Use `label` or `content` to supply custom title/body widgets. A custom `leading` takes precedence over `leadingIcon`. If you supply both `onTrailingTap` and `onDismiss`, the trailing callback takes precedence.
+
+## Show a transient snackbar
+
+Use the nearest scope controller so the snackbar mounts in the correct overlay:
+
+```dart
+class SaveFeedbackAction extends StatelessWidget {
+  const SaveFeedbackAction({super.key});
+
+  @override
+  Widget build(BuildContext context) => DievasFilledButton(
+    label: 'Show saved feedback',
+    onPressed: () => DievasScope.of(context).showSnackbar(
+      (context, animation) => const DievasSnackbar(message: 'Changes saved'),
+    ),
+  );
+}
+```
+
+The default snackbar timeout is 4 seconds. `showBanner` defaults to 5 seconds. Pass `duration: Duration.zero` to keep either visible until you call `hideSnackbar()` or `hideBanner()`. Showing another message replaces the active message in that scope slot and restarts the countdown.
+
+A `DievasBanner` requires `tone` and `message`. Its `onDismiss` callback should hide the scope-owned banner. A `DievasSnackbarAction` provides a labelled callback for actions such as Undo; your application must implement the actual undo operation.
+
+## Customise and verify
+
+Use the `alert` and `snackbar` component theme entries. Keep tone and copy aligned; an error must not rely on colour alone. Verify message announcement and visibility duration with the assistive technology your application supports. Critical information should remain available in the content rather than disappearing only in a snackbar.
+
+## Explore and inspect
+
+Select Alert, Banner, or Snackbar in the [interactive gallery](https://master.dievas-gallery.pages.dev). See the [alert API](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasAlert-class.html) and [scope controller API](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasScopeController-mixin.html).

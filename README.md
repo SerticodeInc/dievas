@@ -16,7 +16,6 @@ Choose the guide for your task:
 - [Run the workspace and gallery](#run-locally)
 - [Use the logo and brand assets](branding/README.md)
 - [Read component changes](packages/dievas/CHANGELOG.md)
-- [Validate and publish a release](docs/release_check_list.md)
 
 ## What Dievas includes
 

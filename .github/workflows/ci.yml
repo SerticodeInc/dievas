@@ -6,13 +6,69 @@ on:
     pull_request:
         branches: [master]
     workflow_call:
+        inputs:
+            force_full:
+                description: Run all checks when called by a release workflow
+                type: boolean
+                default: true
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
     cancel-in-progress: true
 
 jobs:
+    changes:
+        name: Detect relevant changes
+        runs-on: ubuntu-latest
+        outputs:
+            packages: ${{ steps.filter.outputs.packages }}
+            landing: ${{ steps.filter.outputs.landing }}
+        steps:
+            - uses: actions/checkout@v7
+              with:
+                  fetch-depth: 0
+            - name: Classify changed paths
+              id: filter
+              env:
+                  CI_FORCE_FULL: ${{ inputs.force_full == true }}
+                  CI_EVENT: ${{ github.event_name }}
+                  CI_PR_BASE: ${{ github.event.pull_request.base.sha }}
+                  CI_BEFORE: ${{ github.event.before }}
+                  CI_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+              shell: bash
+              run: |
+                  set -euo pipefail
+                  packages=false
+                  landing=false
+                  if [[ "$CI_FORCE_FULL" == true || "$CI_BEFORE" == 0000000000000000000000000000000000000000 ]]; then
+                      packages=true
+                      landing=true
+                  else
+                      case "$CI_EVENT" in
+                          pull_request) base=$(git merge-base "$CI_PR_BASE" "$CI_HEAD") ;;
+                          push) base="$CI_BEFORE" ;;
+                          *) echo "Unsupported change-detection event: $CI_EVENT" >&2; exit 1 ;;
+                      esac
+                      changed_paths=$(mktemp)
+                      trap 'rm -f "$changed_paths"' EXIT
+                      git diff --no-renames --name-only -z "$base" "$CI_HEAD" > "$changed_paths"
+                      while IFS= read -r -d '' path; do
+                          case "$path" in
+                              *.md|*.mdx) ;;
+                              packages/*) packages=true ;;
+                              landing/*) landing=true ;;
+                              pubspec.yaml|pubspec.lock|analysis_options.yaml|.github/workflows/ci.yml|.github/workflows/publish.yml)
+                                  packages=true
+                                  landing=true
+                                  ;;
+                          esac
+                      done < "$changed_paths"
+                  fi
+                  printf 'packages=%s\nlanding=%s\n' "$packages" "$landing" >> "$GITHUB_OUTPUT"
+
     analyze-format-test:
+        needs: changes
+        if: needs.changes.outputs.packages == 'true'
         name: Analyze, Format & Test
         runs-on: ubuntu-latest
 
@@ -49,21 +105,48 @@ jobs:
             - name: Run tests
               run: melos run test
 
-            # Analyze landing (outside melos workspace — needs its own pub get)
+    analyze-landing:
+        name: Analyze Landing
+        needs: changes
+        if: needs.changes.outputs.landing == 'true'
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v7
+            - uses: dart-lang/setup-dart@v1
+              with:
+                  sdk: '3.13.2'
             - name: Get landing dependencies
               run: dart pub get
               working-directory: landing
-
             - name: Analyze landing
               run: dart analyze .
               working-directory: landing
 
     ci-passed:
         name: CI Passed
-        needs: [analyze-format-test]
-        if: always() && !cancelled()
+        needs: [changes, analyze-format-test, analyze-landing]
+        if: always()
         runs-on: ubuntu-latest
         steps:
-            - name: Check result
-              if: contains(needs.analyze-format-test.result, 'failure')
-              run: exit 1
+            - name: Check required results
+              env:
+                  CHANGES_RESULT: ${{ needs.changes.result }}
+                  PACKAGES_REQUIRED: ${{ needs.changes.outputs.packages }}
+                  PACKAGES_RESULT: ${{ needs.analyze-format-test.result }}
+                  LANDING_REQUIRED: ${{ needs.changes.outputs.landing }}
+                  LANDING_RESULT: ${{ needs.analyze-landing.result }}
+              shell: bash
+              run: |
+                  set -euo pipefail
+                  case "$CHANGES_RESULT" in
+                      success) ;;
+                      *) echo "Change detection failed: $CHANGES_RESULT" >&2; exit 1 ;;
+                  esac
+                  case "$PACKAGES_REQUIRED:$PACKAGES_RESULT" in
+                      true:success|false:skipped) ;;
+                      *) echo "Package checks: $PACKAGES_REQUIRED required, result $PACKAGES_RESULT" >&2; exit 1 ;;
+                  esac
+                  case "$LANDING_REQUIRED:$LANDING_RESULT" in
+                      true:success|false:skipped) ;;
+                      *) echo "Landing checks: $LANDING_REQUIRED required, result $LANDING_RESULT" >&2; exit 1 ;;
+                  esac

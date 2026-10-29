@@ -775,22 +775,37 @@ DievasSegmentedControlThemeData _createSegmentedControlTheme(
   DievasBorderThemeData border,
   DievasAnimationThemeData animation,
 ) => DievasSegmentedControlThemeData(
-  labelStyle: typography.labelSm.copyWith(color: colours.text.textPrimary),
-  selectedLabelStyle: typography.labelSm.copyWith(
-    fontWeight: .w700,
-    color: colours.action.segmentedControlSelectedText,
-  ),
+  labelStyle: typography.bodySm,
+  selectedLabelStyle: typography.bodySm,
   borderRadius: border.md,
-  padding: .symmetric(horizontal: spacing.smPlus, vertical: spacing.sm),
+  containerPadding: .all(spacing.xs),
+  gap: spacing.xs,
+  padding: .symmetric(horizontal: spacing.md),
   bgColour: colours.background.segmentedControlBackground,
   selectedBgColour: colours.action.segmentedControlSelectedBackground,
-  borderColour: colours.border.dividerColour,
+  borderColour: colours.staticColours.staticTransparent,
   textColour: colours.text.textPrimary,
   selectedTextColour: colours.action.segmentedControlSelectedText,
   disabledOpacity: DievasOpacitySemantic.disabled,
   animationDuration: animation.standard,
-  minSegmentWidth: DievasSizingPrimitives.s64,
-  minHeight: DievasSizingPrimitives.s32,
+  minSegmentWidth: 0,
+  minHeight: sizing.height48,
+  sizes: (
+    sm: DievasSegmentedControlSizeData(
+      height: sizing.height40,
+      iconSize: sizing.iconMd,
+      padding: .symmetric(horizontal: spacing.smPlus),
+      gap: spacing.xs,
+      borderRadius: border.md,
+    ),
+    md: DievasSegmentedControlSizeData(
+      height: sizing.height48,
+      iconSize: sizing.iconMd,
+      padding: .symmetric(horizontal: spacing.md),
+      gap: spacing.sm,
+      borderRadius: border.md,
+    ),
+  ),
 );
 
 // MenuItem

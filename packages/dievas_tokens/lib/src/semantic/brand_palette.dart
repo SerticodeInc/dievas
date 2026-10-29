@@ -75,7 +75,7 @@ final class DievasBrandPalette {
   /// Text / icon colour placed on top of a [s500] based brand surface.
   final int buttonPrimaryText;
 
-  /// Brand derived roles for light surfaces.
+  /// Brand derived roles for light surfaces. Segmented selection stays neutral.
   DievasBrandRoleColours rolesForLight() => (
     badgePrimaryBackground: s500,
     badgePrimaryTintedText: s500,
@@ -84,13 +84,13 @@ final class DievasBrandPalette {
     progressIndicator: s500,
     sliderActiveTrack: s500,
     inputCursor: s500,
-    segmentedControlSelectedBackground: s500,
+    segmentedControlSelectedBackground: DievasColourPrimitives.white,
     tabSelectedIndicator: s500,
     badgePrimaryText: buttonPrimaryText,
     checkboxCheckmark: buttonPrimaryText,
     radioDot: buttonPrimaryText,
     progressOnPrimaryIndicator: buttonPrimaryText,
-    segmentedControlSelectedText: buttonPrimaryText,
+    segmentedControlSelectedText: DievasColourPrimitives.black,
 
     primary: s500,
     badgePrimaryTintedBackground: s200,
@@ -106,7 +106,7 @@ final class DievasBrandPalette {
     switchOnTrack: s500,
   );
 
-  /// Brand derived roles for dark surfaces.
+  /// Brand derived roles for dark surfaces. Segmented selection stays neutral.
   DievasBrandRoleColours rolesForDark() => (
     badgePrimaryBackground: s500,
     badgePrimaryTintedText: s500,
@@ -115,13 +115,13 @@ final class DievasBrandPalette {
     progressIndicator: s500,
     sliderActiveTrack: s500,
     inputCursor: s500,
-    segmentedControlSelectedBackground: s500,
+    segmentedControlSelectedBackground: DievasColourPrimitives.black,
     tabSelectedIndicator: s500,
     badgePrimaryText: buttonPrimaryText,
     checkboxCheckmark: buttonPrimaryText,
     radioDot: buttonPrimaryText,
     progressOnPrimaryIndicator: buttonPrimaryText,
-    segmentedControlSelectedText: buttonPrimaryText,
+    segmentedControlSelectedText: DievasColourPrimitives.white,
 
     primary: s400,
     badgePrimaryTintedBackground: s950,
@@ -139,7 +139,7 @@ final class DievasBrandPalette {
 }
 
 /// The selectable brand palettes shipped with Dievas. Each wraps an existing
-/// `DievasColourPrimitives` family. These opt-in palettes replace the built-in
+/// `DievasColourPrimitives` family. These opt in palettes replace the built-in
 /// Moon Piccolo brand.
 abstract final class DievasBrandPalettes {
   /// Indigo brand palette, available as an alternative to Moon Piccolo.

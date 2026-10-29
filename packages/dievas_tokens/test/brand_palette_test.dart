@@ -8,6 +8,17 @@ import 'package:dievas_tokens/dievas_tokens.dart';
 import 'package:test/test.dart';
 
 void main() {
+  test('segmented control stays neutral across every palette', () {
+    for (final palette in DievasBrandPalettes.all.values) {
+      final light = palette.rolesForLight();
+      final dark = palette.rolesForDark();
+      expect(light.segmentedControlSelectedBackground, DievasColourPrimitives.white);
+      expect(light.segmentedControlSelectedText, DievasColourPrimitives.black);
+      expect(dark.segmentedControlSelectedBackground, DievasColourPrimitives.black);
+      expect(dark.segmentedControlSelectedText, DievasColourPrimitives.white);
+    }
+  });
+
   group('DievasBrandPalettes.indigo light parity', () {
     final roles = DievasBrandPalettes.indigo.rolesForLight();
 

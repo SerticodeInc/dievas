@@ -306,7 +306,7 @@ abstract final class DievasColourSemanticLight {
   static const int inputCursor = DievasColourPrimitives.royalPurple;
 
   /// segmented control selected background.
-  static const int segmentedControlSelectedBackground = DievasColourPrimitives.royalPurple;
+  static const int segmentedControlSelectedBackground = DievasColourPrimitives.white;
 
   /// tab selected indicator.
   static const int tabSelectedIndicator = DievasColourPrimitives.royalPurple;
@@ -330,5 +330,5 @@ abstract final class DievasColourSemanticLight {
   static const int progressOnPrimaryIndicator = DievasColourPrimitives.white;
 
   /// segmented control selected text.
-  static const int segmentedControlSelectedText = DievasColourPrimitives.white;
+  static const int segmentedControlSelectedText = DievasColourPrimitives.black;
 }

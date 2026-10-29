@@ -59,6 +59,7 @@ class DievasThemeAddon extends WidgetbookAddon<WidgetbookTheme<DievasThemeData>>
         path.contains('drawer') ||
         path.contains('modal') ||
         path.contains('radio') ||
+        path.contains('segmentedcontrol') ||
         path.contains('searchwithdropdown') ||
         path.contains('searchwithlist');
     final isDropdown = path.contains('dropdown') || path.contains('searchwithdropdown') || path.contains('popover');

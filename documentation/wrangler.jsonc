@@ -5,5 +5,12 @@
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page"
-  }
+  },
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "docs.dievas.serticode.com",
+      "custom_domain": true
+    }
+  ]
 }

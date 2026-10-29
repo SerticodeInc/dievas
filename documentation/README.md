@@ -2,8 +2,6 @@
 
 The dedicated documentation application lives in this directory, outside the Dart/Melos workspace.
 
-The implementation plan and active checkpoints are in the Dievas product area of the Serticode Inc Obsidian vault: `01 Products/Dievas/Documentation site.md`.
-
 ## Scope
 
 Help Flutter engineers install Dievas, build a first screen, customise themes, select components, and migrate existing applications. Use source-verified examples and distinguish published APIs from workspace changes.

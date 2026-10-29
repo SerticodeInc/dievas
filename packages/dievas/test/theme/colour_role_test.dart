@@ -26,11 +26,17 @@ void main() {
     expect(colours.action.badgePrimaryBackground, fill);
     expect(colours.action.checkboxCheckedBackground, fill);
     expect(colours.action.radioSelectedBackground, fill);
-    expect(colours.action.segmentedControlSelectedBackground, fill);
+    expect(
+      colours.action.segmentedControlSelectedBackground,
+      DievasDarkThemeData().colours.action.segmentedControlSelectedBackground,
+    );
     expect(colours.action.progressIndicator, fill);
     expect(colours.action.badgePrimaryText, text);
     expect(colours.action.checkboxCheckmark, text);
     expect(colours.action.radioDot, text);
-    expect(colours.action.segmentedControlSelectedText, text);
+    expect(
+      colours.action.segmentedControlSelectedText,
+      DievasDarkThemeData().colours.action.segmentedControlSelectedText,
+    );
   });
 }

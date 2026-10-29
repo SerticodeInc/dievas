@@ -4,6 +4,12 @@
 
 Changes to the Dievas token package, newest first.
 
+## 1.0.3
+
+- Include `menuHoveredBackground` in both semantic themes: `blackAlpha0A` for light and `whiteAlpha14` for dark. Dievas uses these constant tokens when constructing its default themes. They were added locally after the published 1.0.2 archive.
+
+- Make segmented control selection neutral: white background/black text in light mode, black background/white text in dark mode. Keep palette role records aligned with these defaults; other brand roles retain their palette colours.
+
 ## 1.0.2
 
 - Slow `DievasAnimationSemantic.loader` from 800ms to 2222ms using the new `DievasDurationPrimitives.d2222`, making the circular loader arc animation visible at Moon timing.

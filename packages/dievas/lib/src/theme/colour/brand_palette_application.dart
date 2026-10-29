@@ -32,13 +32,11 @@ DievasColourThemeData applyBrandPalette(DievasColourThemeData colours, DievasBra
       progressIndicator: Color(roles.progressIndicator),
       sliderActiveTrack: Color(roles.sliderActiveTrack),
       inputCursor: Color(roles.inputCursor),
-      segmentedControlSelectedBackground: Color(roles.segmentedControlSelectedBackground),
       tabSelectedIndicator: Color(roles.tabSelectedIndicator),
       badgePrimaryText: Color(roles.badgePrimaryText),
       checkboxCheckmark: Color(roles.checkboxCheckmark),
       radioDot: Color(roles.radioDot),
       progressOnPrimaryIndicator: Color(roles.progressOnPrimaryIndicator),
-      segmentedControlSelectedText: Color(roles.segmentedControlSelectedText),
 
       buttonPrimaryBackground: Color(roles.buttonPrimaryBackground),
       buttonPrimaryHoveredBackground: Color(roles.buttonPrimaryHoveredBackground),

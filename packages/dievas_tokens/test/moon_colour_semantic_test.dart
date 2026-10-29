@@ -20,8 +20,9 @@ const _referenceRoles = <String, String>{
   'radioSelectedBackground': 'piccolo',
   'progressIndicator': 'piccolo',
   'sliderActiveTrack': 'piccolo',
-  'segmentedControlSelectedBackground': 'piccolo',
+  'segmentedControlSelectedBackground': 'goku',
   'tabSelectedIndicator': 'piccolo',
+  'segmentedControlSelectedText': 'textPrimary',
 
   'textPrimary': 'textPrimary',
   'textSecondary': 'textSecondary',
@@ -53,6 +54,7 @@ const _light = <String, int>{
   'sliderActiveTrack': DievasColourSemanticLight.sliderActiveTrack,
   'segmentedControlSelectedBackground': DievasColourSemanticLight.segmentedControlSelectedBackground,
   'tabSelectedIndicator': DievasColourSemanticLight.tabSelectedIndicator,
+  'segmentedControlSelectedText': DievasColourSemanticLight.segmentedControlSelectedText,
 
   'textPrimary': DievasColourSemanticLight.textPrimary,
   'textSecondary': DievasColourSemanticLight.textSecondary,
@@ -84,6 +86,7 @@ const _dark = <String, int>{
   'sliderActiveTrack': DievasColourSemanticDark.sliderActiveTrack,
   'segmentedControlSelectedBackground': DievasColourSemanticDark.segmentedControlSelectedBackground,
   'tabSelectedIndicator': DievasColourSemanticDark.tabSelectedIndicator,
+  'segmentedControlSelectedText': DievasColourSemanticDark.segmentedControlSelectedText,
 
   'textPrimary': DievasColourSemanticDark.textPrimary,
   'textSecondary': DievasColourSemanticDark.textSecondary,

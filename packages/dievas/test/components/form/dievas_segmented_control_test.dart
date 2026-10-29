@@ -57,7 +57,7 @@ void main() {
           ),
         ),
       );
-      await tester.tap(find.text('Day'));
+      await tester.tapAt(tester.getCenter(find.text('Day')));
       expect(selected, isNull);
     });
 

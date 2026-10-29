@@ -88,7 +88,7 @@
       "progressIndicator": "0xFF5C33CF",
       "sliderActiveTrack": "0xFF5C33CF",
       "inputCursor": "0xFF5C33CF",
-      "segmentedControlSelectedBackground": "0xFF5C33CF",
+      "segmentedControlSelectedBackground": "0xFFFFFFFF",
       "tabSelectedIndicator": "0xFF5C33CF",
       "checkboxDisabledBackground": "0xFFE2E8F0",
       "radioDisabledBackground": "0xFFE2E8F0",
@@ -96,7 +96,7 @@
       "checkboxCheckmark": "0xFFFFFFFF",
       "radioDot": "0xFFFFFFFF",
       "progressOnPrimaryIndicator": "0xFFFFFFFF",
-      "segmentedControlSelectedText": "0xFFFFFFFF"
+      "segmentedControlSelectedText": "0xFF000000"
     },
     "dark": {
       "primary": "0xFF5C33CF",
@@ -185,7 +185,7 @@
       "progressIndicator": "0xFF5C33CF",
       "sliderActiveTrack": "0xFF5C33CF",
       "inputCursor": "0xFF5C33CF",
-      "segmentedControlSelectedBackground": "0xFF5C33CF",
+      "segmentedControlSelectedBackground": "0xFF000000",
       "tabSelectedIndicator": "0xFF5C33CF",
       "checkboxDisabledBackground": "0xFF334155",
       "radioDisabledBackground": "0xFF334155",

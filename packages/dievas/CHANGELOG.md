@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.4
+
+- **Token dependency compatibility**: require `dievas_tokens` 1.0.3 or newer, which includes `menuHoveredBackground` for both themes. The published 1.0.2 dependency lacks these constants, causing undefined getters and constant evaluation errors outside the workspace, including dependency lower bound analysis. Publish the token package before Dievas.
+
+- **Segmented control**: retain typed controlled options and add widget segments, leading/trailing slots, icon only and custom content, per segment styling, 40px/48px sizes, expanded layout, directional geometry and instance surface/motion overrides. Add caller owned `TabController` integration, keyboard navigation, focus/hover/press feedback, selection semantics and reduced motion support. Replace static gallery samples with independently selectable text and icon groups and live semantic controls.
+- **Segmented control appearance**: default to neutral selected surfaces and consistent text weight, with separate container/segment radii and gaps instead of separators. Brand palettes preserve neutral selection colours. Theme radius and padding fields accept directional geometry; use the size presets for size-specific layout overrides.
+
+- **Radio callback migration**: `DievasRadio.onChanged` accepts `T?` so toggleable radios can clear selection. Update explicitly typed callback parameters and stored group values to accept null. Repeated activation of an already selected radio does nothing unless `toggleable` is enabled.
+- **Radio**: match the Moon reference with a 16px outlined ring, 8px coloured dot and 40px tap target. Add active/inactive colour overrides, configurable hit area, focus nodes, autofocus, keyboard activation, focus feedback and radio semantics. Animate the ring and dot with reduced motion support; fix label wrapping and add theme `copyWith`. Rebuild the gallery with independent plain and labelled groups whose selection survives live controls.
+
+- **Popover**: add controlled visibility, ten placements, viewport constraints, RTL, surface and motion overrides, keyboard activation, focus feedback, Escape dismissal and route observation. Preserve local themes and live content in the overlay. Replace the dimming barrier with non modal outside tap handling. Refresh the gallery with interactive reference content and semantic controls.
+
 ## 1.0.3
 
 - **Modal colours**: add independent `titleColour` and `contentColour` widget/theme overrides and gallery selectors. Keep `textColour` as the shared fallback.

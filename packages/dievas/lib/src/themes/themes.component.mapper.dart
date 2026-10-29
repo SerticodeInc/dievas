@@ -467,15 +467,15 @@ DievasRadioThemeData _createRadioTheme(
   DievasSpacingThemeData spacing,
   DievasBorderThemeData border,
 ) => DievasRadioThemeData(
-  size: DievasSizingPrimitives.s20,
-  strokeWidth: border.strokeThick,
+  size: DievasSizingPrimitives.s16,
+  strokeWidth: border.strokeThin,
   dotSize: DievasSizingPrimitives.s8,
   colourSelected: colours.action.radioSelectedBackground,
   colourUnselected: colours.staticColours.staticTransparent,
-  colourDisabled: colours.action.radioDisabledBackground,
-  borderColourUnselected: colours.border.dividerColour,
-  borderColourDisabled: colours.border.inputDisabledBorder,
-  dotColour: colours.action.radioDot,
+  colourDisabled: colours.action.radioSelectedBackground,
+  borderColourUnselected: colours.icon.iconSecondary,
+  borderColourDisabled: colours.icon.iconSecondary,
+  dotColour: colours.action.radioSelectedBackground,
   disabledOpacity: DievasOpacitySemantic.disabled,
   labelStyle: typography.bodyMd,
   labelSpacing: spacing.sm,
@@ -775,22 +775,37 @@ DievasSegmentedControlThemeData _createSegmentedControlTheme(
   DievasBorderThemeData border,
   DievasAnimationThemeData animation,
 ) => DievasSegmentedControlThemeData(
-  labelStyle: typography.labelSm.copyWith(color: colours.text.textPrimary),
-  selectedLabelStyle: typography.labelSm.copyWith(
-    fontWeight: .w700,
-    color: colours.action.segmentedControlSelectedText,
-  ),
+  labelStyle: typography.bodySm,
+  selectedLabelStyle: typography.bodySm,
   borderRadius: border.md,
-  padding: .symmetric(horizontal: spacing.smPlus, vertical: spacing.sm),
+  containerPadding: .all(spacing.xs),
+  gap: spacing.xs,
+  padding: .symmetric(horizontal: spacing.md),
   bgColour: colours.background.segmentedControlBackground,
   selectedBgColour: colours.action.segmentedControlSelectedBackground,
-  borderColour: colours.border.dividerColour,
+  borderColour: colours.staticColours.staticTransparent,
   textColour: colours.text.textPrimary,
   selectedTextColour: colours.action.segmentedControlSelectedText,
   disabledOpacity: DievasOpacitySemantic.disabled,
   animationDuration: animation.standard,
-  minSegmentWidth: DievasSizingPrimitives.s64,
-  minHeight: DievasSizingPrimitives.s32,
+  minSegmentWidth: 0,
+  minHeight: sizing.height48,
+  sizes: (
+    sm: DievasSegmentedControlSizeData(
+      height: sizing.height40,
+      iconSize: sizing.iconMd,
+      padding: .symmetric(horizontal: spacing.smPlus),
+      gap: spacing.xs,
+      borderRadius: border.md,
+    ),
+    md: DievasSegmentedControlSizeData(
+      height: sizing.height48,
+      iconSize: sizing.iconMd,
+      padding: .symmetric(horizontal: spacing.md),
+      gap: spacing.sm,
+      borderRadius: border.md,
+    ),
+  ),
 );
 
 // MenuItem
@@ -896,7 +911,7 @@ DievasPopoverThemeData _createPopoverTheme(
 ) {
   return DievasPopoverThemeData(
     backgroundColour: colours.background.popoverBackground,
-    textStyle: typography.bodyMd.copyWith(color: colours.text.textPrimary),
+    textStyle: typography.bodySm.copyWith(color: colours.text.textPrimary),
     borderRadius: border.md,
     padding: .all(spacing.smPlus),
     verticalOffset: DievasSizingPrimitives.s8,
@@ -904,7 +919,7 @@ DievasPopoverThemeData _createPopoverTheme(
     arrowSize: DievasSizingPrimitives.s8,
     barrierColour: colours.background.modalBarrierBackground,
     animationDuration: animation.standard,
-    shadow: elevation.md,
+    shadow: elevation.sm,
     maxWidth: 280.0,
   );
 }

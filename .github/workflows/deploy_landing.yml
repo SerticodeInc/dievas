@@ -6,17 +6,23 @@ name: Deploy — Landing
 on:
     workflow_dispatch:
         inputs:
+            target:
+                description: Site to deploy
+                type: choice
+                options: [landing, documentation]
+                default: landing
             reason:
                 description: "Reason for manual deploy (optional)"
                 required: false
                 default: "Manual trigger"
 
 concurrency:
-    group: deploy-landing
+    group: deploy-${{ inputs.target || 'landing' }}
     cancel-in-progress: true
 
 jobs:
     deploy:
+        if: inputs.target != 'documentation'
         name: Deploy to Cloudflare Workers
         runs-on: ubuntu-latest
         timeout-minutes: 20
@@ -41,3 +47,10 @@ jobs:
               env:
                   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+    documentation:
+        if: inputs.target == 'documentation'
+        uses: ./.github/workflows/documentation.yml
+        with:
+            deploy: true
+        secrets: inherit

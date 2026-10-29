@@ -1,0 +1,39 @@
+---
+title: "Find API declarations and examples"
+description: "Choose versioned API documentation, source, or the interactive gallery."
+sidebar:
+  label: "Find Api Declarations And Examples"
+  order: 3
+meta:
+  contentType: Reference
+---
+
+{/* Plan — Overview: Choose versioned API documentation, source, or the interactive gallery. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Use the guides for tasks, versioned API pages for declarations, and the gallery for visual states. Each resource answers a different question.
+
+## Read the documented release API
+
+These references match the documentation baseline:
+
+- [Dievas 1.0.4 public API](https://pub.dev/documentation/dievas/1.0.4/dievas/)
+- [Dievas tokens 1.0.3 public API](https://pub.dev/documentation/dievas_tokens/1.0.3/dievas_tokens/)
+- [DievasScope](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasScope-class.html)
+- [DievasGlobalThemeData](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasGlobalThemeData-class.html)
+- [DievasThemeContextExtension](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasThemeContextExtension.html)
+
+Generated API documentation describes declarations. It does not replace the [installation guide](/start/install/), state ownership examples, or migration instructions.
+
+## Inspect visual behaviour
+
+Open the [Widgetbook gallery](https://master.dievas-gallery.pages.dev) and choose the component from its navigation. Inspect variants, sizes, states, light/dark appearance, viewport constraints, and text scaling where those controls are available.
+
+The gallery tracks the repository deployment and can contain changes newer than the documented package release. Check the API baseline before copying a new property into an application using an older package.
+
+## Inspect source and changes
+
+Use the [repository](https://github.com/SerticodeInc/dievas) for implementation details and the [Flutter package changelog](https://github.com/SerticodeInc/dievas/blob/master/packages/dievas/CHANGELOG.md) for release changes. Import public libraries in your application rather than implementation files under `src/`.
+
+## Understand coverage
+
+The [component inventory](/components/overview/) lists exported widgets and distinguishes task guides from API/gallery coverage. A guide is not evidence of cross-platform accessibility certification; verify your complete workflow on its target platforms.

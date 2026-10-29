@@ -1,0 +1,77 @@
+---
+title: "Open dialogs and bottom sheets"
+description: "Use route helpers to preserve themes and close overlays with typed results."
+sidebar:
+  label: "Open Dialogs And Bottom Sheets"
+  order: 6
+meta:
+  contentType: Reference
+---
+
+{/* Plan — Overview: Use route helpers to preserve themes and close overlays with typed results. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Use `showDievasModal` for a focused dialog and `showDievasBottomSheet` for a sheet. The helpers create routes and preserve the caller's Dievas theme.
+
+## Open a modal
+
+Call the helper from a context below both `DievasScope` and your application's navigator:
+
+```dart
+class InformationAction extends StatelessWidget {
+  const InformationAction({super.key});
+
+  @override
+  Widget build(BuildContext context) => DievasTextButton(
+    label: 'View information',
+    onPressed: () => showDievasModal<void>(
+      context: context,
+      builder: (dialogContext) => const DievasModal(
+        title: 'About your account',
+        body: 'Your preferences apply across this device.',
+      ),
+    ),
+  );
+}
+```
+
+`showDievasModal` defaults to `barrierDismissible: true` and `useRootNavigator: true`. `DievasModal` defaults to showing its close button. Its `child` replaces the full standard composition; `content` replaces the body only.
+
+Use `closeDievasModal<T>(dialogContext, result)` to return a typed result. A route dismissed without a result resolves to null. Treat dismissal separately from affirmative confirmation.
+
+## Open a bottom sheet
+
+A sheet can provide a header, footer, close action, and drag handle:
+
+```dart
+class DetailsSheetAction extends StatelessWidget {
+  const DetailsSheetAction({super.key});
+
+  @override
+  Widget build(BuildContext context) => DievasTextButton(
+    label: 'View details',
+    onPressed: () => showDievasBottomSheet<void>(
+      context: context,
+      fitContent: true,
+      builder: (sheetContext) => const DievasBottomSheet(
+        title: 'Details',
+        showCloseButton: true,
+        child: Text('Your application provides this content.'),
+      ),
+    ),
+  );
+}
+```
+
+The sheet helper defaults to `useRootNavigator: false`, unlike the modal helper. Choose the correct navigator for nested application flows. `isDismissible` and `enableDrag` default to true. Use `closeDievasBottomSheet` with the sheet context to close the route.
+
+## Use anchored help
+
+`DievasTooltip` requires `message` and `child`. For richer anchored content, inspect `DievasPopover` and `DievasDropdown` in the gallery. These are different interaction contracts from modal routes.
+
+## Customise and verify
+
+Use `modal`, `bottomSheet`, `tooltip`, and `popover` component theme entries. The modal helper uses closed-loop focus traversal and disables its transition when the platform disables animations. Test Escape, outside dismissal, focus return, long content, keyboard insets, small screens, and nested navigators in your workflow.
+
+## Explore and inspect
+
+Select Modal or Bottom Sheet in the [interactive gallery](https://master.dievas-gallery.pages.dev). Read the [modal helper API](https://pub.dev/documentation/dievas/1.0.4/dievas/showDievasModal.html) and [sheet helper API](https://pub.dev/documentation/dievas/1.0.4/dievas/showDievasBottomSheet.html). See [Confirm an action](/recipes/confirmation/) for a typed result workflow.

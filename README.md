@@ -5,11 +5,11 @@
 
 Use this README to explore the workspace and run the gallery. For application setup and a first widget, see the [Flutter package guide](packages/dievas/README.md).
 
-[Website](https://dievas.serticode.com) · [Component gallery](https://master.dievas-gallery.pages.dev) · [Flutter package](https://pub.dev/packages/dievas) · [Design tokens](https://pub.dev/packages/dievas_tokens)
+[Website](https://dievas.serticode.com) · [Documentation](https://docs.dievas.serticode.com) · [Component gallery](https://master.dievas-gallery.pages.dev) · [Flutter package](https://pub.dev/packages/dievas) · [Design tokens](https://pub.dev/packages/dievas_tokens)
 
 ## Start here
 
-Choose the guide for your task:
+For application guides and component usage, visit the [documentation site](https://docs.dievas.serticode.com). Choose the repository guide for your task:
 
 - [Use Dievas in a Flutter app](packages/dievas/README.md)
 - [Use pure Dart design tokens](packages/dievas_tokens/README.md)
@@ -41,6 +41,7 @@ dievas/
 │   └── dievas_gallery/     # Flutter app — live component showcase (Widgetbook)
 ├── branding/               # SVG logo masters and identity guidelines
 ├── landing/               # Jaspr static + Tailwind v4 landing page
+├── documentation/         # Astro Starlight documentation site
 ├── pubspec.yaml            # Melos workspace root
 └── analysis_options.yaml   # Shared lint rules (line length: 120)
 ```
@@ -81,7 +82,7 @@ abstract final class DievasColourSemanticLight {
 static const Color textPrimary = Color(DievasColourSemanticLight.textPrimary);
 ```
 
-Colour roles use **grouped semantic naming** — `textPrimary`, `bgBase`, `actionPrimary`, `borderDefault` — not Moon character names. Primitive scales follow the Tailwind convention: `50` → `950`.
+Colour roles use **grouped semantic naming** — `textPrimary`, `pageBackground`, `buttonPrimaryBackground`, `inputActiveBorder` — not Moon character names. Primitive scales follow the Tailwind convention: `50` → `950`.
 
 ### Size-token naming law
 
@@ -126,9 +127,9 @@ DievasThemeData               ← abstract interface (the contract)
 
 ```dart
 // Inside any widget's build method
-final color = context.colours.action.actionPrimary;
-final style = context.typography.labelMD;
-final gap   = context.spacing.MD;
+final color = context.colours.action.buttonPrimaryBackground;
+final style = context.typography.labelMd;
+final gap   = context.spacing.md;
 final cols  = context.grid.columns;   // inside a DievasGrid
 ```
 

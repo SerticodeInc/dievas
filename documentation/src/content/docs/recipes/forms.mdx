@@ -1,0 +1,80 @@
+---
+title: "Build a validated form"
+description: "Own text input, show validation errors, and submit a Dievas form."
+sidebar:
+  label: "Build A Validated Form"
+  order: 1
+meta:
+  contentType: Tutorial
+---
+
+{/* Plan — Overview: Own text input, show validation errors, and submit a Dievas form. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Build a name form that validates before submission and shows feedback. Validation belongs to your application; `DievasTextInput` displays the resulting error.
+
+## Create the state owner
+
+Place this widget under the themed application root from [your first screen](/start/first_screen/). The application owns and disposes its controller:
+
+```dart
+class ProfileForm extends StatefulWidget {
+  const ProfileForm({super.key});
+
+  @override
+  State<ProfileForm> createState() => _ProfileFormState();
+}
+
+class _ProfileFormState extends State<ProfileForm> {
+  final _name = TextEditingController();
+  String? _error;
+
+  @override
+  void dispose() {
+    _name.dispose();
+    super.dispose();
+  }
+
+  void _submit() {
+    final name = _name.text.trim();
+    setState(() => _error = name.isEmpty ? 'Enter your name.' : null);
+    if (name.isEmpty) return;
+    DievasScope.of(context).showSnackbar(
+      (context, animation) => const DievasSnackbar(message: 'Name validated'),
+    );
+  }
+```
+
+This example validates locally; it does not save to a server. Replace the success action with your application command when integrating persistence.
+
+## Compose the controls
+
+Continue the state class with the build method and closing brace:
+
+```dart
+  @override
+  Widget build(BuildContext context) => ListView(
+    padding: EdgeInsets.all(context.spacing.lg),
+    children: [
+      DievasTextInput(
+        controller: _name,
+        label: 'Name',
+        errorText: _error,
+        onChanged: (_) => setState(() => _error = null),
+        onSubmitted: (_) => _submit(),
+      ),
+      SizedBox(height: context.spacing.md),
+      DievasFilledButton(label: 'Validate name', onPressed: _submit),
+    ],
+  );
+}
+```
+
+For a remote submission, expose a loading state, prevent duplicate requests, handle errors, and only show success after the save completes. If an awaited operation completes after disposal, do not update the disposed widget.
+
+## Verify the form
+
+Submit an empty name and confirm the error appears. Enter a name and confirm the error clears. Submit again and confirm **Name validated** appears. Test keyboard submission and a viewport where the keyboard covers part of the screen.
+
+## Next step
+
+[Configure a settings screen](/recipes/settings/) or [confirm a consequential action](/recipes/confirmation/).

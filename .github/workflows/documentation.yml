@@ -1,0 +1,72 @@
+name: Documentation
+
+on:
+  workflow_call:
+    inputs:
+      deploy:
+        type: boolean
+        default: false
+    secrets:
+      CLOUDFLARE_ACCOUNT_ID:
+        required: false
+      CLOUDFLARE_API_TOKEN:
+        required: false
+  pull_request:
+    paths:
+      - 'documentation/**'
+      - 'packages/dievas/lib/**'
+      - 'packages/dievas_tokens/lib/**'
+      - '.github/workflows/documentation.yml'
+  push:
+    branches: [master]
+    paths:
+      - 'documentation/**'
+      - 'packages/dievas/lib/**'
+      - 'packages/dievas_tokens/lib/**'
+      - '.github/workflows/documentation.yml'
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: Deploy the checked documentation build
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: documentation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: documentation
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: documentation/package-lock.json
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: python3 scripts/verify-examples.py
+      - run: npm ci --no-audit --no-fund
+      - run: npm run check
+      - run: npm run build
+      - run: npm run verify:links
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dievas-documentation
+          path: documentation/dist
+      - name: Deploy documentation
+        if: github.event_name == 'push' || ((github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call') && inputs.deploy)
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

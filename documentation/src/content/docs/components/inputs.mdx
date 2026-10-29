@@ -1,0 +1,74 @@
+---
+title: "Collect text input"
+description: "Use controlled text fields, validation feedback, and multiline input."
+sidebar:
+  label: "Collect Text Input"
+  order: 3
+meta:
+  contentType: Reference
+---
+
+{/* Plan — Overview: Use controlled text fields, validation feedback, and multiline input. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Use `DievasTextInput` for a single line and `DievasTextArea` for multiline text. Your application owns validation and any supplied controller.
+
+## Own and dispose the controller
+
+This example supplies an email keyboard, visible label, and helper text. Import the public Dievas library and Flutter Material library:
+
+```dart
+class EmailField extends StatefulWidget {
+  const EmailField({super.key});
+
+  @override
+  State<EmailField> createState() => _EmailFieldState();
+}
+
+class _EmailFieldState extends State<EmailField> {
+  final _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => DievasTextInput(
+    controller: _controller,
+    label: 'Email address',
+    hint: 'you@example.com',
+    helperText: 'Use the address associated with your account.',
+    keyboardType: TextInputType.emailAddress,
+    textInputAction: TextInputAction.done,
+  );
+}
+```
+
+If you supply a `FocusNode`, dispose it in the owning state too. A widget must not dispose a controller or focus node owned elsewhere.
+
+## Configure input and feedback
+
+| Property | Default | Purpose |
+| --- | --- | --- |
+| `size` | `DievasTextInputSize.md` | Theme heights: `sm` 52, `md` 56, `lg` 60 |
+| `enabled` | `true` | Disables editing when false |
+| `obscureText` | `false` | Conceals entered text |
+| `errorText` | `null` | Application-provided validation feedback |
+| `warningText` | `null` | Non-error feedback |
+| `onChanged` | `null` | Reports text changes |
+| `onSubmitted` | `null` | Reports submitted text |
+
+`DievasTextInput` has no `validator` constructor argument. Compute validation in your application and pass `errorText`. Error feedback takes precedence over warning and helper feedback. Clear or update stale errors when the input changes.
+
+## Use multiline input
+
+`DievasTextArea` defaults to `minLines: 3` and `maxLines: 6`. It shares the text input theme and uses its medium padding and typography. Set line bounds according to the content rather than wrapping it in a fixed-height box.
+
+## Customise and verify
+
+The theme entry point is `context.components.textInput`. Check label visibility, screen-reader announcement, long feedback, keyboard submission, text scaling, and the error/disabled states in both themes. Do not use a hint as the only description of a field.
+
+## Explore and inspect
+
+Select Text Input or Text Area in the [interactive gallery](https://master.dievas-gallery.pages.dev). See the [versioned input API](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasTextInput-class.html) and [form recipe](/recipes/forms/).

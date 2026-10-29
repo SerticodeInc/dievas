@@ -1,0 +1,66 @@
+---
+title: "Use semantic tokens"
+description: "Choose primitive values or semantic roles in Flutter and pure Dart."
+sidebar:
+  label: "Use Semantic Tokens"
+  order: 1
+meta:
+  contentType: Conceptual
+---
+
+{/* Plan — Overview: Choose primitive values or semantic roles in Flutter and pure Dart. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+A token is a named design value. Dievas separates fixed primitive values from semantic roles that describe their purpose.
+
+## Choose the right layer
+
+Use semantic roles in application UI. Reserve primitives for defining tokens, palettes, and deliberate custom design values.
+
+| Layer | Example | Purpose |
+| --- | --- | --- |
+| Primitive | `DievasColourPrimitives.royalPurple` | Fixed raw value |
+| Semantic | `DievasColourSemanticLight.pageBackground` | Named role in a specific theme |
+| Flutter theme | `context.colours.background.pageBackground` | Role resolved for the active application theme |
+
+## Read pure Dart values
+
+Import the token library to use integers and logical-pixel values without Flutter:
+
+```dart
+import 'package:dievas_tokens/dievas_tokens.dart';
+
+const pageColour = DievasColourSemanticLight.pageBackground;
+const cardSpacing = DievasSpacingSemantic.md;
+const brandColour = DievasColourPrimitives.royalPurple;
+```
+
+Colours are integers in `0xAARRGGBB` format. Spacing and dimensions use logical pixels. Flutter constructs `Color`, `TextStyle`, and `BoxShadow` values in the theme layer.
+
+## Read the active Flutter theme
+
+Inside a widget below `DievasScope`, use context extensions. This card follows theme changes:
+
+```dart
+class TokenCard extends StatelessWidget {
+  const TokenCard({super.key});
+
+  @override
+  Widget build(BuildContext context) => Container(
+    color: context.colours.background.cardBackground,
+    padding: EdgeInsets.all(context.spacing.md),
+    child: Text('Account details', style: context.typography.bodyMd),
+  );
+}
+```
+
+Import `package:dievas/dievas.dart` and `package:flutter/material.dart` for Flutter snippets in these guides, unless the example includes its own imports.
+
+## Keep roles independent
+
+Dialog, menu, drawer, tooltip, and card backgrounds have separate names. Equal default values do not make them interchangeable. Use the role for the element you are building so brand changes can evolve independently.
+
+`primary` identifies the selected brand palette. A secondary button is a visual variant within that palette.
+
+## Next step
+
+[Set typography and spacing](/foundations/typography-spacing/) or [configure a brand palette](/theming/brand/).

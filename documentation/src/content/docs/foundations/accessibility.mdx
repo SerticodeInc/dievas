@@ -1,0 +1,60 @@
+---
+title: "Support accessible interactions"
+description: "Verify labels, keyboard access, motion, text scaling, and language behaviour."
+sidebar:
+  label: "Support Accessible Interactions"
+  order: 4
+meta:
+  contentType: Reference
+---
+
+{/* Plan — Overview: Verify labels, keyboard access, motion, text scaling, and language behaviour. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Dievas provides interaction and semantic behaviour at the component level. Your application still owns readable content, meaningful labels, complete workflows, and accessibility verification.
+
+## Name controls by their action
+
+Visible text should describe the action. For icon-only controls, provide a `semanticLabel` where the component supports one. A tooltip is additional help; it does not replace an accessible name.
+
+Inspect keyboard focus, activation, and disabled states in the actual application. Do not infer every component's behaviour from a different component.
+
+## Respect reduced motion
+
+The theme exposes animation durations and easing through `context.animation`. When adding your own animation, honour the platform's disabled-animation preference:
+
+```dart
+class MotionAwarePanel extends StatelessWidget {
+  const MotionAwarePanel({super.key, required this.visible});
+  final bool visible;
+
+  @override
+  Widget build(BuildContext context) => AnimatedOpacity(
+    opacity: visible ? 1 : 0,
+    duration: MediaQuery.disableAnimationsOf(context)
+        ? Duration.zero
+        : context.animation.standard,
+    child: const Text('Preferences saved'),
+  );
+}
+```
+
+An invisible widget can still affect layout and interaction. If you animate interactive content, also manage focus and hit testing for its hidden state.
+
+## Check these application behaviours
+
+- Reach each control with the keyboard and see its focus indicator.
+- Activate actions and dismiss overlays without a pointer.
+- Read status and validation messages with a screen reader.
+- Increase system text size and check clipping and wrapping.
+- Test light and dark themes, including your custom brand contrast.
+- Test right-to-left (RTL) layouts if your product supports them.
+
+## Understand language support
+
+`DievasLocalizations.supportedLocales` includes English. Register the Dievas delegate alongside any application and Flutter localization delegates you need. Supporting RTL geometry does not provide translated component copy automatically.
+
+Source review is evidence of implementation, not a certification of accessibility compliance. Validate on the platforms and assistive technologies your product supports.
+
+## Next step
+
+[Review component-specific guides](/components/overview/) for supported interaction details.

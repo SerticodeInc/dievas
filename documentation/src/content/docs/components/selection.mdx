@@ -1,0 +1,92 @@
+---
+title: "Manage selection controls"
+description: "Choose checkbox, switch, radio, segmented control, or dropdown and own their values."
+sidebar:
+  label: "Manage Selection Controls"
+  order: 4
+meta:
+  contentType: Reference
+---
+
+{/* Plan — Overview: Choose checkbox, switch, radio, segmented control, or dropdown and own their values. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Selection controls display the value your application supplies. Update that value in the callback to make a selection persist in the UI.
+
+## Choose the control
+
+| Control | Use | Value contract |
+| --- | --- | --- |
+| `DievasCheckbox` | Independent selection or mixed selection | `DievasCheckboxValue` enum |
+| `DievasSwitch` | An on/off preference | `bool` |
+| `DievasRadio<T>` | One choice in a group | `value`, `groupValue`, nullable callback value |
+| `DievasSegmentedControl<T>` | Visible mutually exclusive options | Typed `options`, `value`, `onChanged` |
+| `DievasDropdown<T>` | A selectable list in an overlay | Typed options and selected value |
+
+## Control a checkbox
+
+The checkbox uses an enum rather than a boolean. This example owns its state:
+
+```dart
+class TermsCheckbox extends StatefulWidget {
+  const TermsCheckbox({super.key});
+
+  @override
+  State<TermsCheckbox> createState() => _TermsCheckboxState();
+}
+
+class _TermsCheckboxState extends State<TermsCheckbox> {
+  DievasCheckboxValue _value = DievasCheckboxValue.unchecked;
+
+  @override
+  Widget build(BuildContext context) => DievasCheckbox(
+    value: _value,
+    label: 'I accept the terms',
+    onChanged: (value) => setState(() => _value = value),
+  );
+}
+```
+
+`tristate` defaults to false. Enable it for a workflow that includes `indeterminate`; a parent selection summarising mixed child selections is one use.
+
+## Control a segmented selection
+
+Use a typed value and a label builder. The default size is medium; pass `DievasSegmentedControlSize.sm` for the small preset:
+
+```dart
+class PeriodSelector extends StatefulWidget {
+  const PeriodSelector({super.key});
+
+  @override
+  State<PeriodSelector> createState() => _PeriodSelectorState();
+}
+
+class _PeriodSelectorState extends State<PeriodSelector> {
+  String _period = 'Month';
+
+  @override
+  Widget build(BuildContext context) => DievasSegmentedControl<String>(
+    options: const ['Week', 'Month', 'Year'],
+    value: _period,
+    labelBuilder: (value) => value,
+    onChanged: (value) => setState(() => _period = value),
+  );
+}
+```
+
+For richer content, supply typed `DievasSegment` descriptors with leading, label, trailing, and per-segment enabled state. Supply either `options` or `segments`. A supplied `TabController` takes selection precedence; your application owns its lifecycle.
+
+## Understand disabled and read-only states
+
+Checkbox, switch, and radio use a null `onChanged` to disable interaction. Segmented control has `enabled` and per-segment disabling; a null callback is read-only unless a controller is supplied. Dropdown has its own `enabled` flag.
+
+The radio callback receives `T?`. If you allow deselection with `toggleable`, model the absent selection explicitly rather than forcing it into an unrelated default.
+
+## Customise and verify
+
+Component theme entries include `checkbox`, `toggle`, `radio`, `segmentedControl`, and `dropdown`. Note that the switch theme slot is named `toggle`.
+
+Checkbox and radio source implement Enter/Space activation and semantic selection state. Segmented control supports keyboard navigation and directional handling. Test focus order, labels, group meaning, disabled choices, and RTL in your application. The switch source uses a `GestureDetector` and visible label text without an explicit switch-state semantics or keyboard-action wrapper. Add an accessible application wrapper or choose a control that meets your workflow's keyboard and screen-reader requirements; verify the result on your target platforms.
+
+## Explore and inspect
+
+Use the [interactive gallery](https://master.dievas-gallery.pages.dev) for visual states and the [checkbox API](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasCheckbox-class.html) and [segmented control API](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasSegmentedControl-class.html) for complete properties.

@@ -1,0 +1,44 @@
+---
+title: Build with Dievas
+description: A Flutter design system with semantic tokens, brand themes, and reusable components.
+meta:
+  contentType: Landing
+template: splash
+hero:
+  tagline: One foundation. Your brand. Every screen.
+  image:
+    file: ../../assets/dievas-logo.svg
+  actions:
+    - text: Start building
+      link: /start/install/
+      icon: right-arrow
+    - text: Explore the gallery
+      link: https://master.dievas-gallery.pages.dev
+      variant: minimal
+---
+
+{/* Plan — Overview: orient an engineer adopting Dievas. Goal: choose installation, theming, component or token guidance. Audiences: Flutter and Dart engineers. Documentation plan: starting tasks, package roles, release baseline. Open questions: none for this baseline. */}
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Dievas provides design tokens, theme infrastructure, and Flutter components for branded applications. Start with a working screen, then adapt the system to your product.
+
+<CardGrid>
+  <LinkCard title="Install and build" description="Add Dievas and render your first screen." href="/start/install/" />
+  <LinkCard title="Make it your brand" description="Choose a palette and configure light and dark themes." href="/theming/brand/" />
+  <LinkCard title="Choose components" description="Find components, usage guides, and interactive examples." href="/components/overview/" />
+  <LinkCard title="Use design tokens" description="Share semantic values across Flutter and pure Dart." href="/foundations/tokens/" />
+</CardGrid>
+
+## How the pieces fit
+
+<CardGrid>
+  <Card title="Tokens" icon="setting">`dievas_tokens` provides primitive values and semantic roles without importing Flutter.</Card>
+  <Card title="Themes and components" icon="puzzle">`dievas` converts tokens into Flutter themes and reusable widgets.</Card>
+  <Card title="Interactive gallery" icon="open-book">Widgetbook lets you inspect component variants, themes, and states.</Card>
+  <Card title="Your application" icon="rocket">You own state, navigation, validation, and product behaviour.</Card>
+</CardGrid>
+
+## Documentation baseline
+
+These guides target Dievas **1.0.4** and tokens **1.0.3**. Examples use the public package imports. The [upgrade guide](/maintain/upgrade/) explains naming migrations; the [API reference](/maintain/reference/) links to exact versioned declarations.

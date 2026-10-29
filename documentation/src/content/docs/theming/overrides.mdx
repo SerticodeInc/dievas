@@ -1,0 +1,66 @@
+---
+title: "Override component defaults"
+description: "Apply shared component changes or a local theme to a subtree."
+sidebar:
+  label: "Override Component Defaults"
+  order: 3
+meta:
+  contentType: How-to
+---
+
+{/* Plan — Overview: Apply shared component changes or a local theme to a subtree. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Use component theme data for repeated product decisions. Use widget properties for a single instance and a local `DievasTheme` for a scoped variation.
+
+## Change text input geometry
+
+Start from a complete default theme, copy its input settings, then provide the updated component theme:
+
+```dart
+class RoundedInputsApp extends StatelessWidget {
+  const RoundedInputsApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final base = DievasLightThemeData();
+    final components = base.components.copyWith(
+      textInput: base.components.textInput.copyWith(
+        borderRadius: BorderRadius.circular(16),
+      ),
+    );
+    return DievasScope(
+      themeMode: ThemeMode.light,
+      lightTheme: base.copyWith(components: components),
+      builder: (context, theme, child) => MaterialApp(
+        theme: theme.material,
+        home: const Scaffold(body: DievasTextInput(label: 'Name')),
+      ),
+    );
+  }
+}
+```
+
+This example intentionally forces light mode. For a product supporting dark mode, derive the override separately from the dark base so text and surfaces retain appropriate contrast.
+
+## Apply a local theme
+
+Wrap a subtree with `DievasTheme(data: yourTheme, child: yourContent)` when one region needs a different Dievas theme. If that region also contains Material widgets, supply a matching Flutter `Theme` using the same theme's `material` value.
+
+Do not copy light component data wholesale into a dark theme. Explicit component overrides take responsibility for the values they supply.
+
+## Choose override scope
+
+| Requirement | Place the decision |
+| --- | --- |
+| One instance | Supported widget property |
+| One region | Local theme wrapper |
+| Every instance in a product | Application component theme |
+| Default for all consumers | Dievas library change with documentation and migration review |
+
+## Verify the result
+
+Compare the default and overridden component. Check disabled, focused, error, light, and dark states affected by the change.
+
+## Next step
+
+[Choose components](/components/overview/) or [build a form](/recipes/forms/).

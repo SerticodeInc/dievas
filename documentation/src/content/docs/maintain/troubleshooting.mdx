@@ -1,0 +1,51 @@
+---
+title: "Resolve integration problems"
+description: "Diagnose missing theme ancestors, incorrect colours, inputs, and overlays."
+sidebar:
+  label: "Resolve Integration Problems"
+  order: 2
+meta:
+  contentType: Troubleshooting
+---
+
+{/* Plan — Overview: Diagnose missing theme ancestors, incorrect colours, inputs, and overlays. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Start with the widget ancestor chain and dependency resolution. These checks address integration mistakes without masking them with local fallback values.
+
+## No DievasScope or theme found
+
+Place `DievasScope` above the consumer. A context passed into the method that creates the scope still belongs above it. Read context extensions in a child widget, or use the scope builder's supplied `theme` argument for the application root.
+
+See [Configure scope and theme mode](/theming/scope/).
+
+## Material and Dievas colours disagree
+
+Connect `MaterialApp.theme` to the scope builder's `theme.material`. A standalone Material theme does not update automatically from a Dievas context read elsewhere. Check local `Theme` and `DievasTheme` wrappers if the mismatch affects one region.
+
+## A grid lookup fails
+
+Read `context.grid` below `DievasGrid`. The wrapper supplies data; it does not change the context used to construct itself. See [Adapt layouts to available width](/foundations/layout/).
+
+## A selection changes and immediately returns
+
+Update the controlled `value` from `onChanged`. The callback reports a proposed change; it does not save application state. If you supply a `TabController`, check its precedence over the segmented control's value.
+
+## Input validation does not run
+
+`DievasTextInput` displays `errorText`; it does not expose a `validator` argument. Compute validation in your application. Dispose controllers and focus nodes in their owner. See [Build a validated form](/recipes/forms/).
+
+## An overlay opens in the wrong navigator
+
+The modal helper defaults to the root navigator; the sheet helper defaults to the nearest navigator. Set `useRootNavigator` deliberately for nested flows. Close with the context supplied to the route builder. See [Open dialogs and bottom sheets](/components/overlays/).
+
+## Old names no longer compile
+
+Use lowercase size vocabulary and explicit colour roles. Follow [Upgrade existing applications](/maintain/upgrade/). Do not restore old names through dependency overrides unless you intend to pin the whole application to an older API.
+
+## Dependency solving fails
+
+Check the Dart SDK bundled with Flutter and the selected package constraints. Dievas 1.0.4 needs tokens ^1.0.3. A Melos workspace can resolve local packages even when a standalone consumer cannot. Verify outside the workspace too.
+
+## Report a reproducible issue
+
+Include the package versions, Flutter/Dart version, target platform, theme mode, error output, and the smallest reproducing widget. Remove credentials and private application data before filing an [issue on GitHub](https://github.com/SerticodeInc/dievas/issues).

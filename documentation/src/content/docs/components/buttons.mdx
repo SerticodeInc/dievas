@@ -1,0 +1,75 @@
+---
+title: "Choose and configure buttons"
+description: "Use filled, outlined, text, and icon buttons with loading and disabled states."
+sidebar:
+  label: "Choose And Configure Buttons"
+  order: 2
+meta:
+  contentType: Reference
+---
+
+{/* Plan — Overview: Use filled, outlined, text, and icon buttons with loading and disabled states. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Use a button for an action. Choose the visual variant according to its importance and provide the action through `onPressed`.
+
+## Choose a variant
+
+| Widget | Use | Style values |
+| --- | --- | --- |
+| `DievasFilledButton` | Primary or prominent action | `primary`, `secondary`, `destructive` |
+| `DievasOutlinedButton` | Bordered action | `primary`, `destructive` |
+| `DievasTextButton` | Lower-emphasis action | `primary`, `destructive` |
+| `DievasIconButton` | Compact action with a meaningful icon | `ghost`, `tinted` |
+
+The style enums are specific to each widget. Import `package:dievas/dievas.dart` and `package:flutter/material.dart` for this example:
+
+```dart
+class ButtonActions extends StatelessWidget {
+  const ButtonActions({super.key, required this.onContinue});
+  final VoidCallback onContinue;
+
+  @override
+  Widget build(BuildContext context) => Wrap(
+    spacing: context.spacing.sm,
+    runSpacing: context.spacing.sm,
+    children: [
+      DievasFilledButton(label: 'Continue', onPressed: onContinue),
+      const DievasOutlinedButton(label: 'Unavailable'),
+      DievasIconButton(
+        icon: const Icon(Icons.arrow_forward),
+        semanticLabel: 'Continue to the next step',
+        onPressed: onContinue,
+      ),
+    ],
+  );
+}
+```
+
+The outlined example has no callback, so it is disabled. Supply `onPressed: null` intentionally when an action is unavailable.
+
+## Configure sizes and states
+
+| Property | Default | Behaviour |
+| --- | --- | --- |
+| `size` | `DievasButtonSize.md` | `sm`, `md`, `lg`; default theme heights are 32, 40, 48 |
+| `state` | `DievasButtonState.idle` | Filled/outlined buttons support `loading` and `disabled` |
+| `onPressed` | `null` | A missing callback disables the action |
+| `semanticLabel` | `null` | Overrides the accessible action name |
+
+For an asynchronous action, derive `state` from your application state. Keep it `loading` until the operation resolves, handle failures, and prevent duplicate submissions. The button does not perform or persist the operation.
+
+Filled and outlined buttons support leading/trailing icons, width and shape controls. Text and icon buttons have their own constructor contracts; consult the API reference before transferring properties between variants.
+
+## Customise the theme
+
+Use `context.components.filledButton`, `outlinedButton`, `textButton`, and `iconButton` as the theme entry points. For one filled/outlined instance, supported properties include `backgroundColor`, `foregroundColor`, and `borderColor`. These property names use `Color`, while theme colour roles use British `Colour` naming.
+
+See [Override component defaults](/theming/overrides/) for shared application changes.
+
+## Verify interaction
+
+Check Tab focus, Enter/Space activation, focus visibility, and disabled behaviour on your target platform. Icon-only actions need an accessible name. Loading feedback must also be understandable in the surrounding workflow.
+
+## Explore and inspect
+
+Open the [interactive gallery](https://master.dievas-gallery.pages.dev) and select the button component. Read the [versioned button API](https://pub.dev/documentation/dievas/1.0.4/dievas/DievasFilledButton-class.html) for the complete property contract.

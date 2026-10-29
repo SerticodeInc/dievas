@@ -2,6 +2,8 @@
 
 # Dievas tokens
 
+[Documentation](https://docs.dievas.serticode.com/foundations/tokens/) · [Brand palettes](https://docs.dievas.serticode.com/theming/brand/) · [Upgrade guide](https://docs.dievas.serticode.com/maintain/upgrade/)
+
 Use primitive values and semantic roles to build interfaces with the [Dievas design system](https://dievas.serticode.com). This package uses Dart only; Flutter adapters construct colours, text styles, and shadows from these tokens.
 
 ## Primitives and semantic roles

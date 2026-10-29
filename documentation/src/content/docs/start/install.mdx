@@ -2,17 +2,19 @@
 title: "Install Dievas"
 description: "Add compatible Dievas packages to a Flutter application."
 sidebar:
-  label: "Install Dievas"
-  order: 1
+    label: "Install Dievas"
+    order: 1
 meta:
-  contentType: How-to
+    contentType: How-to
 ---
 
 {/* Plan — Overview: Add compatible Dievas packages to a Flutter application. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
 
-Add `dievas` to a Flutter application. Add `dievas_tokens` separately when you import its pure Dart values or brand palettes.
+Add `dievas` to a Flutter application.
 
-import { Steps } from '@astrojs/starlight/components';
+Add `dievas_tokens` separately when you import its pure Dart values or brand palettes.
+
+import { Steps } from "@astrojs/starlight/components";
 
 ## Before you begin
 
@@ -22,31 +24,33 @@ Use a Flutter SDK that includes Dart **3.11.4 or later**, below Dart 4. The pack
 
 1. Check the Dart version bundled with your Flutter installation:
 
-   ```sh
-   flutter --version
-   ```
+    ```sh
+    flutter --version
+    ```
 
-   Confirm the reported Dart version meets the requirement.
+    Confirm the reported Dart version meets the requirement.
 
 2. From your application's directory, add the documented release:
 
-   ```sh
-   flutter pub add dievas:^1.0.4
-   ```
+    ```sh
+    flutter pub add dievas:^1.0.4
+    ```
 
-   For palette or token imports, also add:
+    For palette or token imports, also add:
 
-   ```sh
-   flutter pub add dievas_tokens:^1.0.3
-   ```
+    ```sh
+    flutter pub add dievas_tokens:^1.0.3
+    ```
 
 3. Import the public Flutter library:
 
-   ```dart
-   import 'package:dievas/dievas.dart';
-   ```
+    ```dart
+    import 'package:dievas/dievas.dart';
+    ```
 
-   Avoid imports from `package:dievas/src/`. Internal paths can change independently of the public API.
+    Avoid imports from `package:dievas/src/`.
+
+    Internal paths can change independently of the public API.
 
 </Steps>
 
@@ -58,7 +62,9 @@ Inspect the resolved versions:
 flutter pub deps --style=compact
 ```
 
-Confirm `dievas` and `dievas_tokens` appear. Dievas 1.0.4 requires tokens ^1.0.3. If dependency solving fails, check your SDK and explicit package constraints before adding overrides.
+Confirm `dievas` and `dievas_tokens` appear.
+
+Dievas 1.0.4 requires tokens ^1.0.3. If dependency solving fails, check your SDK and explicit package constraints before adding overrides.
 
 ## Use tokens without Flutter
 
@@ -72,4 +78,4 @@ The token library contains no Flutter dependency. See [Use semantic tokens](/fou
 
 ## Next step
 
-[Build your first screen](/start/first-screen/) to install the theme ancestor and Material bridge.
+[Build your first screen](/start/first_screen/) to install the theme ancestor and Material bridge.

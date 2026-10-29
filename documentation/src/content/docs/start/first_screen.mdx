@@ -2,15 +2,17 @@
 title: "Build your first screen"
 description: "Run a complete Flutter screen with Dievas scope, theme, and a working action."
 sidebar:
-  label: "Build Your First Screen"
-  order: 1
+    label: "Build Your First Screen"
+    order: 1
 meta:
-  contentType: Tutorial
+    contentType: Tutorial
 ---
 
 {/* Plan — Overview: Run a complete Flutter screen with Dievas scope, theme, and a working action. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
 
-Build a screen that reads Dievas theme values and shows feedback when you select a button. This example includes the application entry point.
+Build a screen that reads Dievas theme values and shows feedback when you select a button.
+
+This example includes the application entry point.
 
 ## Before you begin
 
@@ -42,7 +44,9 @@ class DievasExampleApp extends StatelessWidget {
 }
 ```
 
-The builder's `context` belongs to the scope's parent. Use the supplied `theme` there. Read `context.colours` in descendant widgets, such as the screen below.
+The builder's `context` belongs to the scope's parent. Use the supplied `theme` there.
+
+Read `context.colours` in descendant widgets, such as the screen below.
 
 ## Compose the screen
 
@@ -57,10 +61,10 @@ class _WelcomeScreen extends StatelessWidget {
     backgroundColor: context.colours.background.pageBackground,
     body: SafeArea(
       child: Padding(
-        padding: EdgeInsets.all(context.spacing.lg),
+        padding: .all(context.spacing.lg),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: .center,
+          crossAxisAlignment: .stretch,
           children: [
             Text('Built with Dievas', style: context.typography.headingLg),
             SizedBox(height: context.spacing.md),
@@ -88,7 +92,9 @@ Start the application on your chosen device:
 flutter run
 ```
 
-Confirm the screen renders, selecting **Try an action** shows a snackbar, and changing the platform appearance updates the screen. Use keyboard navigation on desktop or web to reach and activate the button.
+Confirm the screen renders, selecting **Try an action** shows a snackbar, and changing the platform appearance updates the screen.
+
+Use keyboard navigation on desktop or web to reach and activate the button.
 
 ## Next step
 

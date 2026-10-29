@@ -2,15 +2,17 @@
 title: "Configure scope and theme mode"
 description: "Connect Dievas themes to MaterialApp and change appearance at runtime."
 sidebar:
-  label: "Configure Scope And Theme Mode"
-  order: 1
+    label: "Configure Scope And Theme Mode"
+    order: 1
 meta:
-  contentType: How-to
+    contentType: How-to
 ---
 
 {/* Plan — Overview: Connect Dievas themes to MaterialApp and change appearance at runtime. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
 
-Place `DievasScope` above widgets that consume Dievas. Pass its resolved Material theme to `MaterialApp` so Flutter and Dievas controls share the same appearance.
+Place `DievasScope` above widgets that consume Dievas.
+
+Pass its resolved Material theme to `MaterialApp` so Flutter and Dievas controls share the same appearance.
 
 ## Configure the root
 
@@ -22,7 +24,7 @@ class ThemedApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => DievasScope(
-    themeMode: ThemeMode.system,
+    themeMode: .system,
     lightTheme: DievasLightThemeData(),
     darkTheme: DievasDarkThemeData(),
     builder: (context, theme, child) => MaterialApp(
@@ -35,7 +37,11 @@ class ThemedApp extends StatelessWidget {
 }
 ```
 
-The scope's builder runs before the returned Dievas ancestor is installed. Use its `theme` argument there. Read `context.colours` and other extensions below the scope.
+The scope's builder runs before the returned Dievas ancestor is installed.
+
+Use its `theme` argument there.
+
+Read `context.colours` and other extensions below the scope.
 
 ## Change appearance from a descendant
 
@@ -53,15 +59,25 @@ class DarkModeAction extends StatelessWidget {
 }
 ```
 
-Use `ThemeMode.light` to force light appearance or `ThemeMode.system` to follow platform changes. The scope does not persist preferences across application restarts. Save the selected mode in your application and restore it through `themeMode`.
+Use `ThemeMode.light` to force light appearance or `ThemeMode.system` to follow platform changes.
+
+The scope does not persist preferences across application restarts.
+
+Save the selected mode in your application and restore it through `themeMode`.
 
 ## Understand theme reads
 
-`DievasTheme` uses an `InheritedModel` with named theme aspects. Reading `context.spacing` subscribes the widget to that aspect. Prefer reading the subsystem you need instead of depending on the complete theme unnecessarily.
+`DievasTheme` uses an `InheritedModel` with named theme aspects.
+
+Reading `context.spacing` subscribes the widget to that aspect.
+
+Prefer reading the subsystem you need instead of depending on the complete theme unnecessarily.
 
 ## Verify the connection
 
-Change all 3 theme modes and confirm both Material surfaces and Dievas components update. If a context lookup fails, check that the caller is below `DievasScope`.
+Change all 3 theme modes and confirm both Material surfaces and Dievas components update.
+
+If a context lookup fails, check that the caller is below `DievasScope`.
 
 ## Next step
 

@@ -19,7 +19,6 @@ Help Flutter engineers install Dievas, build a first screen, customize themes, s
 
 Verified against pub.dev on 29 October 2026: `dievas` 1.0.4 requires `dievas_tokens` ^1.0.3. Both require Dart >=3.11.4; the Flutter package declares Flutter >=3.22.0. Choose a Flutter SDK that also satisfies the Dart requirement. `dievas_migrate` is not published on pub.dev at this audit; its CLI instructions must run from its repository checkout.
 
-
 ## Develop and verify
 
 Use Node >=22.23.4 and Flutter with Dart >=3.11.4 for the example verifier. From this directory:
@@ -39,7 +38,7 @@ npm run verify:links
 npm run preview
 ```
 
-The example verifier resolves published package versions in a temporary consumer and runs four adoption-flow widget tests. Pagefind indexes the production build; check search in the built preview. Stop preview/dev processes after use.
+The example verifier resolves published package versions in a temporary consumer and runs four adoption flow widget tests. Pagefind indexes the production build; check search in the built preview. Stop preview/dev processes after use.
 
 ## Deployment
 

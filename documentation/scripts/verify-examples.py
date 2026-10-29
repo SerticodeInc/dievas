@@ -49,7 +49,7 @@ dev_dependencies:
 import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:dievas_documentation_examples/start_first-screen.dart';
+import 'package:dievas_documentation_examples/start_first_screen.dart';
 import 'package:dievas_documentation_examples/recipes_forms.dart';
 import 'package:dievas_documentation_examples/recipes_settings.dart';
 import 'package:dievas_documentation_examples/recipes_confirmation.dart';

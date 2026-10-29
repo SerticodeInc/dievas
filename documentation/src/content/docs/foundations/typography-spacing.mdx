@@ -1,0 +1,65 @@
+---
+title: "Set typography and spacing"
+description: "Use the type ramp and spacing scale from the active theme."
+sidebar:
+  order: 2
+meta:
+  contentType: How-to
+---
+
+{/* Plan — Overview: Use the type ramp and spacing scale from the active theme. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Read typography and spacing from the active Dievas theme to keep layouts consistent across your application.
+
+## Select a text role
+
+Choose a role by purpose. Theme text styles already contain their default text colour.
+
+| Family | Example | Use |
+| --- | --- | --- |
+| Display | `displayLg` | Prominent display text |
+| Heading | `headingMd` | Section headings |
+| Title | `titleMd` | Card and content titles |
+| Body | `bodyMd` | Reading text |
+| Label | `labelMd` | Controls and labels |
+| Code | `codeMd` | Monospaced content |
+
+The type styles are Flutter `TextStyle` objects. Override a role with `copyWith` when a specific semantic foreground is needed.
+
+## Compose a content block
+
+Use lowercase size names. This block uses a heading, secondary body copy, and spacing from the theme:
+
+```dart
+class AccountHeading extends StatelessWidget {
+  const AccountHeading({super.key});
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: EdgeInsets.all(context.spacing.lg),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Your account', style: context.typography.headingMd),
+        SizedBox(height: context.spacing.sm),
+        Text(
+          'Manage your profile and preferences.',
+          style: context.typography.bodyMd.copyWith(
+            color: context.colours.text.textSecondary,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+```
+
+For repeated spacing across a product, put the decision in your theme or shared composition. Avoid replacing every semantic role with a local numeric value.
+
+## Check text scaling
+
+Run the screen with larger system text, long labels, and a narrow viewport. Prefer flexible widths and wrapping text. A fixed-height container around a paragraph can clip content even when the text style is correct.
+
+## Next step
+
+[Adapt layouts to available width](/foundations/layout/).

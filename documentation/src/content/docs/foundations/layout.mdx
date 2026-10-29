@@ -1,0 +1,69 @@
+---
+title: "Adapt layouts to available width"
+description: "Read responsive grid breakpoints below DievasGrid."
+sidebar:
+  order: 3
+meta:
+  contentType: How-to
+---
+
+{/* Plan — Overview: Read responsive grid breakpoints below DievasGrid. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Wrap responsive content in `DievasGrid`, then read `context.grid` from a descendant. The grid reports available width; your application decides the layout.
+
+## Understand the breakpoints
+
+The default grid uses logical pixels:
+
+| Breakpoint | Minimum width | Columns | Margin | Gutter |
+| --- | --- | --- | --- | --- |
+| `xs` | 0 | 4 | 16 | 16 |
+| `sm` | 360 | 4 | 16 | 16 |
+| `md` | 700 | 8 | 32 | 24 |
+| `lg` | 1000 | 12 | 32 | 24 |
+| `xl` | 1348 | 12 | 32 | 24 |
+
+`DievasGrid` does not automatically arrange widgets into columns. It supplies breakpoint metadata based on its layout constraints.
+
+## Read the grid from a child
+
+This example changes content at the medium breakpoint and applies the breakpoint's margin:
+
+```dart
+class ResponsiveAccount extends StatelessWidget {
+  const ResponsiveAccount({super.key});
+
+  @override
+  Widget build(BuildContext context) => const DievasGrid(
+    child: _AccountLayout(),
+  );
+}
+
+class _AccountLayout extends StatelessWidget {
+  const _AccountLayout();
+
+  @override
+  Widget build(BuildContext context) {
+    final grid = context.grid;
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: grid.margin),
+      child: Text(
+        grid >= DievasGridBreakpoint.md
+            ? 'Account and preferences'
+            : 'Account',
+        style: context.typography.headingMd,
+      ),
+    );
+  }
+}
+```
+
+Reading `context.grid` in `ResponsiveAccount.build` would use a context above the grid. Keep the read inside `_AccountLayout`.
+
+## Verify boundaries
+
+Inspect widths just below and at 360, 700, 1000, and 1348 logical pixels. Test nested layouts too: the grid responds to its allocated width, which can differ from the whole screen.
+
+## Next step
+
+[Review motion and accessibility](/foundations/accessibility/).

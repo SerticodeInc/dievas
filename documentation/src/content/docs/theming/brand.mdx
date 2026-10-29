@@ -1,0 +1,62 @@
+---
+title: "Apply your brand palette"
+description: "Build light and dark application themes from a Dievas brand palette."
+sidebar:
+  order: 2
+meta:
+  contentType: How-to
+---
+
+{/* Plan — Overview: Build light and dark application themes from a Dievas brand palette. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Use `DievasGlobalThemeData` with a brand palette to replace the default brand roles while retaining the neutral light and dark surfaces.
+
+## Before you begin
+
+Add `dievas_tokens` as a direct dependency because the example imports `DievasBrandPalettes`. See [Install Dievas](/start/install/).
+
+## Create application themes
+
+`DievasLightThemeData` and `DievasDarkThemeData` do not accept a palette constructor parameter. Construct global themes using their colour sets:
+
+```dart
+import 'package:dievas/dievas.dart';
+import 'package:dievas_tokens/dievas_tokens.dart';
+import 'package:flutter/material.dart';
+
+class BrandedApp extends StatelessWidget {
+  const BrandedApp({super.key});
+
+  @override
+  Widget build(BuildContext context) => DievasScope(
+    lightTheme: DievasGlobalThemeData(
+      colours: DievasLightThemeData().colours,
+      brandPalette: DievasBrandPalettes.sky,
+    ),
+    darkTheme: DievasGlobalThemeData(
+      colours: DievasDarkThemeData().colours,
+      brandPalette: DievasBrandPalettes.sky,
+    ),
+    builder: (context, theme, child) => MaterialApp(
+      theme: theme.material,
+      home: const Scaffold(body: Center(child: Text('Your brand'))),
+    ),
+  );
+}
+```
+
+The global theme derives component defaults, typography, and its Material bridge from the resolved colours. Keep theme construction in your application composition root.
+
+## Choose a palette
+
+The built-in themes use Piccolo purple (`#5C33CF`). Optional palettes include `sky`, `indigo`, `green`, `violet`, `red`, `amber`, `ocean`, `forest`, `berry`, `dusk`, and `terracotta`.
+
+A `DievasBrandPalette` contains an 11-tint scale from `s50` through `s950`, plus foreground contrast information. Its `rolesForLight()` and `rolesForDark()` methods resolve theme-specific roles.
+
+## Verify both modes
+
+Inspect primary, secondary, destructive, disabled, hovered, and focused controls in both modes. A brand palette affects component roles beyond the primary button. Confirm the foreground contrast for your product's selected palette.
+
+## Next step
+
+[Override a component theme](/theming/overrides/) for geometry or styling that belongs to your product.

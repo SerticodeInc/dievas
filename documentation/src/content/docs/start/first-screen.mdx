@@ -1,0 +1,94 @@
+---
+title: "Build your first screen"
+description: "Run a complete Flutter screen with Dievas scope, theme, and a working action."
+sidebar:
+  order: 1
+meta:
+  contentType: Tutorial
+---
+
+{/* Plan — Overview: Run a complete Flutter screen with Dievas scope, theme, and a working action. Goal: complete the task described by this page. Audiences: Flutter application engineers. Documentation plan: prerequisites, example, behaviour, verification, next task. Open questions: none for the documented release baseline. */}
+
+Build a screen that reads Dievas theme values and shows feedback when you select a button. This example includes the application entry point.
+
+## Before you begin
+
+[Install Dievas](/start/install/). Replace your application's `lib/main.dart` with the following code.
+
+## Create the application root
+
+`DievasScope` resolves light and dark themes. Its builder provides the resolved theme, which you pass to `MaterialApp`:
+
+```dart
+import 'package:dievas/dievas.dart';
+import 'package:flutter/material.dart';
+
+void main() => runApp(const DievasExampleApp());
+
+class DievasExampleApp extends StatelessWidget {
+  const DievasExampleApp({super.key});
+
+  @override
+  Widget build(BuildContext context) => DievasScope(
+    builder: (context, theme, child) => MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: theme.material,
+      localizationsDelegates: DievasLocalizations.localizationsDelegates,
+      supportedLocales: DievasLocalizations.supportedLocales,
+      home: const _WelcomeScreen(),
+    ),
+  );
+}
+```
+
+The builder's `context` belongs to the scope's parent. Use the supplied `theme` there. Read `context.colours` in descendant widgets, such as the screen below.
+
+## Compose the screen
+
+Add this screen below the application class. The page background, text, and spacing resolve from the active theme:
+
+```dart
+class _WelcomeScreen extends StatelessWidget {
+  const _WelcomeScreen();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    backgroundColor: context.colours.background.pageBackground,
+    body: SafeArea(
+      child: Padding(
+        padding: EdgeInsets.all(context.spacing.lg),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text('Built with Dievas', style: context.typography.headingLg),
+            SizedBox(height: context.spacing.md),
+            DievasFilledButton(
+              label: 'Try an action',
+              onPressed: () => DievasScope.of(context).showSnackbar(
+                (context, animation) => const DievasSnackbar(
+                  message: 'Your first Dievas screen is ready.',
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+```
+
+## Verify the screen
+
+Start the application on your chosen device:
+
+```sh
+flutter run
+```
+
+Confirm the screen renders, selecting **Try an action** shows a snackbar, and changing the platform appearance updates the screen. Use keyboard navigation on desktop or web to reach and activate the button.
+
+## Next step
+
+[Configure scope and theme mode](/theming/scope/), then [apply your brand](/theming/brand/).

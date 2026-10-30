@@ -132,30 +132,32 @@ class _PlaygroundState extends State<_Playground> {
     context.knobSection('Interaction');
     final disabled = context.knobs.boolean(label: 'Disabled');
     final animate = context.knobs.boolean(label: 'Animate', initialValue: true);
-    final style = DievasSegmentStyle(
-      selectedBackgroundColour: overrideSelected ? selected : null,
-      textColour: overrideText ? text : null,
-      selectedTextColour: overrideSelectedText ? selectedText : null,
-      borderRadius: overrideSegmentRadius ? segmentRadius.resolve(theme.border) : null,
-      decoration: switch (decoration) {
-        true => BoxDecoration(
-          color: selected,
-          borderRadius: segmentRadius.resolve(theme.border),
-          border: Border.all(color: text, width: theme.border.strokeThin),
-        ),
-        false => null,
-      },
-    );
     final appearance = (
-      style: style,
-      background: overrideBackground ? background : null,
-      radius: overrideRadius ? radius.resolve(theme.border) : null,
+      style: DievasSegmentedControlStyle(
+        decoration: BoxDecoration(
+          color: overrideBackground ? background : null,
+          borderRadius: overrideRadius ? radius.resolve(theme.border) : null,
+        ),
+        padding: EdgeInsets.all(containerPadding.resolve(theme.spacing)),
+        gap: gap.resolve(theme.spacing),
+        transitionDuration: animate ? null : Duration.zero,
+        segmentStyle: DievasSegmentStyle(
+          appearance: DievasSegmentAppearance(
+            decoration: BoxDecoration(
+              borderRadius: overrideSegmentRadius ? segmentRadius.resolve(theme.border) : null,
+              border: decoration ? Border.all(color: text, width: theme.border.strokeThin) : null,
+            ),
+            textStyle: TextStyle(color: overrideText ? text : null),
+          ),
+          selected: DievasSegmentAppearance(
+            decoration: BoxDecoration(color: overrideSelected ? selected : null),
+            textStyle: TextStyle(color: overrideSelectedText ? selectedText : null),
+          ),
+        ),
+      ),
       size: size,
-      gap: gap.resolve(theme.spacing),
-      padding: EdgeInsets.all(containerPadding.resolve(theme.spacing)),
       expanded: expanded,
       enabled: !disabled,
-      duration: animate ? null : Duration.zero,
     );
 
     return Directionality(
@@ -179,17 +181,12 @@ class _PlaygroundState extends State<_Playground> {
                         label: label ? Text('Tab${tab.index + 1}') : null,
                         trailing: trailing ? const _FrameIcon() : null,
                         semanticLabel: 'Tab ${tab.index + 1}',
-                        style: appearance.style,
                       ),
                   ],
                   size: appearance.size,
                   enabled: appearance.enabled,
                   isExpanded: appearance.expanded,
-                  backgroundColour: appearance.background,
-                  borderRadius: appearance.radius,
-                  padding: appearance.padding,
-                  gap: appearance.gap,
-                  transitionDuration: appearance.duration,
+                  style: appearance.style,
                   segmentBuilder: switch (widget.example) {
                     'Custom content' => (context, tab, selected) => _CustomContent(label: tab.name, selected: selected),
                     _ => null,
@@ -204,21 +201,12 @@ class _PlaygroundState extends State<_Playground> {
                   onChanged: (value) => setState(() => widget.session.icon = value),
                   segments: [
                     for (final tab in _IconTab.values)
-                      DievasSegment(
-                        value: tab,
-                        trailing: const _FrameIcon(),
-                        semanticLabel: 'Icon ${tab.index + 1}',
-                        style: appearance.style,
-                      ),
+                      DievasSegment(value: tab, trailing: const _FrameIcon(), semanticLabel: 'Icon ${tab.index + 1}'),
                   ],
                   size: appearance.size,
                   enabled: appearance.enabled,
                   isExpanded: appearance.expanded,
-                  backgroundColour: appearance.background,
-                  borderRadius: appearance.radius,
-                  padding: appearance.padding,
-                  gap: appearance.gap,
-                  transitionDuration: appearance.duration,
+                  style: appearance.style,
                 ),
               ),
               if (widget.example == 'Configurations') ...[

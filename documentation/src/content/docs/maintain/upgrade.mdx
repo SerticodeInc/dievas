@@ -61,6 +61,10 @@ Colour names now describe explicit component roles. Examples include `pageBackgr
 
 A formerly shared background can split into different roles for a dialog, drawer, tooltip, or menu. Choose the role matching each use rather than applying an indiscriminate replacement. See the [complete colour migration tables](https://github.com/SerticodeInc/dievas/blob/master/packages/dievas_tokens/README.md#migrate-colour-names-to-explicit-component-roles).
 
+## Prepare for grouped segmented control styling
+
+The source branch introduces a grouped styling API that is not included in the published 1.0.4 baseline. When adopting a release containing it, follow [Migrate segmented control styling](https://github.com/SerticodeInc/dievas/blob/master/packages/dievas/doc/segmented_control_styling.md). Existing flat inputs remain accepted; the guide explains decoration composition and override precedence.
+
 ## Verify the application
 
 Run the application's checks and inspect the changed components in both themes:

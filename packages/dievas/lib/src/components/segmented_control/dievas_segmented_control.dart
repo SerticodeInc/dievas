@@ -8,29 +8,86 @@ import 'package:dievas/src/theme/component/segmented_control/dievas_segmented_co
 /// Presets for the overall control height and segment content.
 enum DievasSegmentedControlSize { sm, md }
 
-/// Optional appearance overrides for one segment.
-final class DievasSegmentStyle {
-  const DievasSegmentStyle({
-    this.selectedBackgroundColour,
-    this.textColour,
-    this.selectedTextColour,
-    this.borderRadius,
+/// Surface and foreground overrides for one segment state.
+///
+/// Non-null decoration fields merge with the inherited surface. Use transparent
+/// colours, an empty shadow list or [BorderSide.none] to clear painted values.
+/// Text styles merge with inherited typography; [iconColour] defaults to the
+/// resolved text colour.
+final class DievasSegmentAppearance {
+  const DievasSegmentAppearance({this.decoration, this.textStyle, this.iconColour});
+
+  final BoxDecoration? decoration;
+  final TextStyle? textStyle;
+  final Color? iconColour;
+}
+
+/// Appearance and spacing shared by the control and its segments.
+///
+/// Precedence is theme, legacy constructor inputs,
+/// [DievasSegmentedControl.style], then each segment's style. Decorations merge non-null fields instead of replacing the surface.
+final class DievasSegmentedControlStyle {
+  const DievasSegmentedControlStyle({
+    this.decoration,
+    this.segmentStyle,
     this.padding,
     this.gap,
-    this.textStyle,
-    this.decoration,
-    this.focusColour,
-  });
+    this.transitionDuration,
+    this.transitionCurve,
+  }) : assert(gap == null || gap >= 0);
 
-  final Color? selectedBackgroundColour;
-  final Color? textColour;
-  final Color? selectedTextColour;
-  final BorderRadiusGeometry? borderRadius;
+  final BoxDecoration? decoration;
+  final DievasSegmentStyle? segmentStyle;
   final EdgeInsetsGeometry? padding;
   final double? gap;
-  final TextStyle? textStyle;
-  final Decoration? decoration;
+  final Duration? transitionDuration;
+  final Curve? transitionCurve;
+}
+
+/// Shared segment defaults or overrides for one segment.
+///
+/// Within each layer, [appearance] applies first, followed by [selected],
+/// [hovered], then [pressed] when applicable. Hover and press do not select a
+/// segment. Each segment's layer applies after the control's shared layer.
+final class DievasSegmentStyle {
+  const DievasSegmentStyle({
+    this.appearance,
+    this.selected,
+    this.hovered,
+    this.pressed,
+    this.padding,
+    this.gap,
+    this.focusColour,
+    @Deprecated('Use selected.decoration.color instead.') this.selectedBackgroundColour,
+    @Deprecated('Use appearance.textStyle.color instead.') this.textColour,
+    @Deprecated('Use selected.textStyle.color instead.') this.selectedTextColour,
+    @Deprecated('Use appearance.decoration.borderRadius instead.') this.borderRadius,
+    @Deprecated('Use appearance.textStyle instead.') this.textStyle,
+    @Deprecated('Use appearance.decoration instead.') this.decoration,
+  }) : assert(gap == null || gap >= 0);
+
+  final DievasSegmentAppearance? appearance;
+  final DievasSegmentAppearance? selected;
+  final DievasSegmentAppearance? hovered;
+  final DievasSegmentAppearance? pressed;
+  final EdgeInsetsGeometry? padding;
+  final double? gap;
   final Color? focusColour;
+
+  @Deprecated('Use selected.decoration.color instead.')
+  final Color? selectedBackgroundColour;
+  @Deprecated('Use appearance.textStyle.color instead.')
+  final Color? textColour;
+  @Deprecated('Use selected.textStyle.color instead.')
+  final Color? selectedTextColour;
+  @Deprecated('Use appearance.decoration.borderRadius instead.')
+  final BorderRadiusGeometry? borderRadius;
+  @Deprecated('Use appearance.textStyle instead.')
+  final TextStyle? textStyle;
+
+  /// Box decorations merge fields. Other legacy decorations replace painting.
+  @Deprecated('Use appearance.decoration instead.')
+  final Decoration? decoration;
 }
 
 /// Typed segment content. Supply a semantic label for icon only segments.
@@ -76,21 +133,22 @@ class DievasSegmentedControl<T> extends StatefulWidget {
     this.isExpanded = false,
     this.size = .md,
     this.tabController,
-    this.backgroundColour,
-    this.selectedSegmentColour,
-    this.textColour,
-    this.selectedTextColour,
-    this.borderRadius,
-    this.segmentBorderRadius,
-    this.padding,
-    this.segmentPadding,
-    this.gap,
-    this.segmentGap,
     this.width,
     this.height,
-    this.decoration,
-    this.transitionDuration,
-    this.transitionCurve,
+    this.style,
+    @Deprecated('Use style.decoration.color instead.') this.backgroundColour,
+    @Deprecated('Use style.segmentStyle.selected.decoration.color instead.') this.selectedSegmentColour,
+    @Deprecated('Use style.segmentStyle.appearance.textStyle.color instead.') this.textColour,
+    @Deprecated('Use style.segmentStyle.selected.textStyle.color instead.') this.selectedTextColour,
+    @Deprecated('Use style.decoration.borderRadius instead.') this.borderRadius,
+    @Deprecated('Use style.segmentStyle.appearance.decoration.borderRadius instead.') this.segmentBorderRadius,
+    @Deprecated('Use style.padding instead.') this.padding,
+    @Deprecated('Use style.segmentStyle.padding instead.') this.segmentPadding,
+    @Deprecated('Use style.gap instead.') this.gap,
+    @Deprecated('Use style.segmentStyle.gap instead.') this.segmentGap,
+    @Deprecated('Use style.decoration instead.') this.decoration,
+    @Deprecated('Use style.transitionDuration instead.') this.transitionDuration,
+    @Deprecated('Use style.transitionCurve instead.') this.transitionCurve,
   }) : assert(segments == null || options.length == 0),
        assert(width == null || width > 0),
        assert(height == null || height > 0),
@@ -109,20 +167,36 @@ class DievasSegmentedControl<T> extends StatefulWidget {
   final bool isExpanded;
   final DievasSegmentedControlSize size;
   final TabController? tabController;
-  final Color? backgroundColour;
-  final Color? selectedSegmentColour;
-  final Color? textColour;
-  final Color? selectedTextColour;
-  final BorderRadiusGeometry? borderRadius;
-  final BorderRadiusGeometry? segmentBorderRadius;
-  final EdgeInsetsGeometry? padding;
-  final EdgeInsetsGeometry? segmentPadding;
-  final double? gap;
-  final double? segmentGap;
   final double? width;
   final double? height;
+
+  /// Container appearance and shared segment defaults.
+  final DievasSegmentedControlStyle? style;
+  @Deprecated('Use style.decoration.color instead.')
+  final Color? backgroundColour;
+  @Deprecated('Use style.segmentStyle.selected.decoration.color instead.')
+  final Color? selectedSegmentColour;
+  @Deprecated('Use style.segmentStyle.appearance.textStyle.color instead.')
+  final Color? textColour;
+  @Deprecated('Use style.segmentStyle.selected.textStyle.color instead.')
+  final Color? selectedTextColour;
+  @Deprecated('Use style.decoration.borderRadius instead.')
+  final BorderRadiusGeometry? borderRadius;
+  @Deprecated('Use style.segmentStyle.appearance.decoration.borderRadius instead.')
+  final BorderRadiusGeometry? segmentBorderRadius;
+  @Deprecated('Use style.padding instead.')
+  final EdgeInsetsGeometry? padding;
+  @Deprecated('Use style.segmentStyle.padding instead.')
+  final EdgeInsetsGeometry? segmentPadding;
+  @Deprecated('Use style.gap instead.')
+  final double? gap;
+  @Deprecated('Use style.segmentStyle.gap instead.')
+  final double? segmentGap;
+  @Deprecated('Use style.decoration instead.')
   final Decoration? decoration;
+  @Deprecated('Use style.transitionDuration instead.')
   final Duration? transitionDuration;
+  @Deprecated('Use style.transitionCurve instead.')
   final Curve? transitionCurve;
 
   @override
@@ -170,10 +244,10 @@ class _DievasSegmentedControlState<T> extends State<DievasSegmentedControl<T>> {
       textColour: widget.textColour,
       selectedTextColour: widget.selectedTextColour,
       borderRadius: widget.borderRadius,
-      containerPadding: widget.padding,
-      gap: widget.gap,
-      animationDuration: widget.transitionDuration,
-      animationCurve: widget.transitionCurve,
+      containerPadding: widget.style?.padding ?? widget.padding,
+      gap: widget.style?.gap ?? widget.gap,
+      animationDuration: widget.style?.transitionDuration ?? widget.transitionDuration,
+      animationCurve: widget.style?.transitionCurve ?? widget.transitionCurve,
     );
 
     final values = _values;
@@ -219,14 +293,17 @@ class _DievasSegmentedControlState<T> extends State<DievasSegmentedControl<T>> {
         width: widget.width,
         height: widget.height ?? size.height,
         child: DecoratedBox(
-          decoration: switch (widget.decoration) {
-            final decoration? => decoration,
-            null => BoxDecoration(
-              color: theme.bgColour,
-              borderRadius: theme.borderRadius.resolve(Directionality.of(context)),
-              border: .all(color: theme.borderColour, width: DievasTheme.borderOf(context).strokeThin),
+          decoration: _mergeDecoration(
+            _mergeDecoration(
+              BoxDecoration(
+                color: theme.bgColour,
+                borderRadius: theme.borderRadius,
+                border: .all(color: theme.borderColour, width: DievasTheme.borderOf(context).strokeThin),
+              ),
+              widget.decoration,
             ),
-          },
+            widget.style?.decoration,
+          ),
           child: Padding(
             padding: theme.containerPadding,
             child: LayoutBuilder(
@@ -243,6 +320,7 @@ class _DievasSegmentedControlState<T> extends State<DievasSegmentedControl<T>> {
                 segmentBorderRadius: widget.segmentBorderRadius ?? theme.segmentBorderRadius,
                 segmentPadding: widget.segmentPadding,
                 segmentGap: widget.segmentGap,
+                sharedStyle: widget.style?.segmentStyle,
                 segmentBuilder: widget.segmentBuilder,
                 nodes: [
                   for (final segment in segments)
@@ -295,6 +373,7 @@ class _SegmentRow<T> extends StatelessWidget {
     required this.segmentBorderRadius,
     required this.segmentPadding,
     required this.segmentGap,
+    required this.sharedStyle,
     required this.segmentBuilder,
     required this.nodes,
     required this.select,
@@ -312,6 +391,7 @@ class _SegmentRow<T> extends StatelessWidget {
   final BorderRadiusGeometry? segmentBorderRadius;
   final EdgeInsetsGeometry? segmentPadding;
   final double? segmentGap;
+  final DievasSegmentStyle? sharedStyle;
   final Widget Function(BuildContext, T, bool)? segmentBuilder;
   final List<FocusNode> nodes;
   final ValueChanged<int> select;
@@ -334,6 +414,7 @@ class _SegmentRow<T> extends StatelessWidget {
           borderRadius: segmentBorderRadius,
           padding: segmentPadding,
           gap: segmentGap,
+          sharedStyle: sharedStyle,
           builder: segmentBuilder,
           node: nodes.elementAt(index),
           select: () => select(index),
@@ -395,6 +476,7 @@ class _SegmentTile<T> extends StatefulWidget {
     required this.borderRadius,
     required this.padding,
     required this.gap,
+    required this.sharedStyle,
     required this.builder,
     required this.node,
     required this.select,
@@ -412,6 +494,7 @@ class _SegmentTile<T> extends StatefulWidget {
   final BorderRadiusGeometry? borderRadius;
   final EdgeInsetsGeometry? padding;
   final double? gap;
+  final DievasSegmentStyle? sharedStyle;
   final Widget Function(BuildContext, T, bool)? builder;
   final FocusNode node;
   final VoidCallback select;
@@ -425,132 +508,162 @@ class _SegmentTileState<T> extends State<_SegmentTile<T>> {
   bool _focused = false;
   bool _hovered = false;
   bool _pressed = false;
+  BoxShape _surfaceShape = .rectangle;
 
   @override
   Widget build(BuildContext context) {
     final segment = widget.segment;
     final style = segment.style;
-    final active = widget.selected || (widget.enabled && (_hovered || _pressed));
-    final foreground = switch ((style?.textStyle?.color, active, style?.selectedTextColour, style?.textColour)) {
-      (final colour?, _, _, _) => colour,
-      (_, true, final colour?, _) || (_, false, _, final colour?) => colour,
-      (_, true, _, _) => widget.theme.selectedTextColour,
-      _ => widget.theme.textColour,
-    };
+    final sharedStyle = widget.sharedStyle;
     final defaultPadding = widget.size.padding.resolve(Directionality.of(context));
-    final radius = switch ((style?.borderRadius, widget.borderRadius)) {
-      (final radius?, _) || (null, final radius?) => radius,
-      _ => widget.size.borderRadius,
-    };
-
-    return FocusableActionDetector(
-      focusNode: widget.node,
-      descendantsAreFocusable: false,
-      autofocus: segment.autofocus,
-      enabled: widget.enabled,
-      mouseCursor: widget.enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
-      onShowFocusHighlight: (value) => setState(() => _focused = value),
-      onShowHoverHighlight: (value) => setState(() => _hovered = value),
-      shortcuts: const {
-        SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
-        SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
-        SingleActivator(LogicalKeyboardKey.arrowLeft): _SegmentMoveIntent(LogicalKeyboardKey.arrowLeft),
-        SingleActivator(LogicalKeyboardKey.arrowRight): _SegmentMoveIntent(LogicalKeyboardKey.arrowRight),
-        SingleActivator(LogicalKeyboardKey.home): _SegmentMoveIntent(LogicalKeyboardKey.home),
-        SingleActivator(LogicalKeyboardKey.end): _SegmentMoveIntent(LogicalKeyboardKey.end),
-      },
-      actions: {
-        ActivateIntent: CallbackAction<ActivateIntent>(
-          onInvoke: (_) {
-            widget.select();
-            return null;
-          },
-        ),
-        _SegmentMoveIntent: CallbackAction<_SegmentMoveIntent>(
-          onInvoke: (intent) {
-            widget.move(intent.key);
-            return null;
-          },
-        ),
-      },
-      child: Semantics(
-        container: true,
-        excludeSemantics: segment.semanticLabel != null,
-        selected: widget.selected,
-        enabled: widget.enabled,
-        button: true,
-        inMutuallyExclusiveGroup: true,
-        label: segment.semanticLabel,
-        onTap: widget.enabled ? widget.select : null,
-        child: GestureDetector(
-          behavior: .opaque,
-          excludeFromSemantics: true,
-          onTap: widget.enabled ? widget.select : null,
-          onTapDown: widget.enabled ? (_) => setState(() => _pressed = true) : null,
-          onTapUp: (_) => setState(() => _pressed = false),
-          onTapCancel: () => setState(() => _pressed = false),
-          child: IgnorePointer(
-            ignoring: !widget.enabled,
-            child: Opacity(
-              opacity: widget.dimmed ? widget.theme.disabledOpacity : DievasTheme.opacityOf(context).opaque,
-              child: AnimatedContainer(
-                duration: widget.duration,
-                curve: widget.curve,
-                constraints: BoxConstraints(minWidth: widget.theme.minSegmentWidth),
-                decoration: switch (style?.decoration) {
-                  final decoration? => decoration,
-                  null => BoxDecoration(
-                    color: switch ((active, style?.selectedBackgroundColour)) {
-                      (true, final colour?) => colour,
-                      (true, null) => widget.theme.selectedBgColour,
-                      _ => null,
-                    },
-                    borderRadius: radius.resolve(Directionality.of(context)),
-                  ),
-                },
-                foregroundDecoration: switch ((_focused, widget.enabled)) {
-                  (true, true) => BoxDecoration(
-                    borderRadius: radius.resolve(Directionality.of(context)),
-                    border: Border.all(
-                      color: style?.focusColour ?? DievasTheme.coloursOf(context).border.focusIndicatorColour,
-                      width: DievasTheme.borderOf(context).strokeThin,
-                    ),
-                  ),
+    final radius = widget.borderRadius ?? widget.size.borderRadius;
+    final appearance =
+        _ResolvedSegmentAppearance(
+              decoration: BoxDecoration(
+                color: switch ((widget.selected, widget.enabled && (_hovered || _pressed))) {
+                  (true, _) => widget.theme.selectedBgColour,
+                  (_, true) => DievasTheme.coloursOf(context).background.menuHoveredBackground,
                   _ => null,
                 },
-                child: IconTheme(
-                  data: IconThemeData(size: widget.size.iconSize, color: foreground),
-                  child: AnimatedDefaultTextStyle(
-                    duration: widget.duration,
-                    curve: widget.curve,
-                    style: (widget.selected ? widget.theme.selectedLabelStyle : widget.theme.labelStyle)
-                        .merge(style?.textStyle)
-                        .copyWith(color: foreground),
-                    maxLines: 1,
-                    overflow: .ellipsis,
-                    child: Padding(
-                      padding: switch ((style?.padding, widget.padding, segment.label)) {
-                        (final padding?, _, _) || (null, final padding?, _) => padding,
-                        (_, _, null) => .symmetric(horizontal: widget.size.gap),
-                        _ => EdgeInsetsDirectional.only(
-                          start: segment.leading == null ? defaultPadding.left : widget.size.gap,
-                          end: segment.trailing == null ? defaultPadding.right : widget.size.gap,
-                          top: defaultPadding.top,
-                          bottom: defaultPadding.bottom,
-                        ),
+                borderRadius: radius,
+              ),
+              textStyle: (widget.selected ? widget.theme.selectedLabelStyle : widget.theme.labelStyle).copyWith(
+                color: widget.selected ? widget.theme.selectedTextColour : widget.theme.textColour,
+              ),
+            )
+            .apply(
+              sharedStyle,
+              selected: widget.selected,
+              hovered: widget.enabled && _hovered,
+              pressed: widget.enabled && _pressed,
+            )
+            .apply(
+              style,
+              selected: widget.selected,
+              hovered: widget.enabled && _hovered,
+              pressed: widget.enabled && _pressed,
+            );
+
+    final BoxShape shape = switch (appearance.decoration) {
+      BoxDecoration(:final shape) => shape,
+      _ => .rectangle,
+    };
+    // Flutter cannot interpolate a rounded rectangle into a circle safely.
+    // Snap that geometry change without remounting the segment's content.
+    final surfaceDuration = shape == _surfaceShape ? widget.duration : Duration.zero;
+    _surfaceShape = shape;
+
+    return MouseRegion(
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: FocusableActionDetector(
+        focusNode: widget.node,
+        descendantsAreFocusable: false,
+        autofocus: segment.autofocus,
+        enabled: widget.enabled,
+        mouseCursor: widget.enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
+        onShowFocusHighlight: (value) => setState(() => _focused = value),
+        shortcuts: const {
+          SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+          SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+          SingleActivator(LogicalKeyboardKey.arrowLeft): _SegmentMoveIntent(LogicalKeyboardKey.arrowLeft),
+          SingleActivator(LogicalKeyboardKey.arrowRight): _SegmentMoveIntent(LogicalKeyboardKey.arrowRight),
+          SingleActivator(LogicalKeyboardKey.home): _SegmentMoveIntent(LogicalKeyboardKey.home),
+          SingleActivator(LogicalKeyboardKey.end): _SegmentMoveIntent(LogicalKeyboardKey.end),
+        },
+        actions: {
+          ActivateIntent: CallbackAction<ActivateIntent>(
+            onInvoke: (_) {
+              widget.select();
+              return null;
+            },
+          ),
+          _SegmentMoveIntent: CallbackAction<_SegmentMoveIntent>(
+            onInvoke: (intent) {
+              widget.move(intent.key);
+              return null;
+            },
+          ),
+        },
+        child: Semantics(
+          container: true,
+          excludeSemantics: segment.semanticLabel != null,
+          selected: widget.selected,
+          enabled: widget.enabled,
+          button: true,
+          inMutuallyExclusiveGroup: true,
+          label: segment.semanticLabel,
+          onTap: widget.enabled ? widget.select : null,
+          child: GestureDetector(
+            behavior: .opaque,
+            excludeFromSemantics: true,
+            onTap: widget.enabled ? widget.select : null,
+            onTapDown: widget.enabled ? (_) => setState(() => _pressed = true) : null,
+            onTapUp: (_) => setState(() => _pressed = false),
+            onTapCancel: () => setState(() => _pressed = false),
+            child: IgnorePointer(
+              ignoring: !widget.enabled,
+              child: Opacity(
+                opacity: widget.dimmed ? widget.theme.disabledOpacity : DievasTheme.opacityOf(context).opaque,
+                child: AnimatedContainer(
+                  duration: surfaceDuration,
+                  curve: widget.curve,
+                  constraints: BoxConstraints(minWidth: widget.theme.minSegmentWidth),
+                  decoration: appearance.decoration,
+                  foregroundDecoration: switch ((_focused, widget.enabled)) {
+                    (true, true) => BoxDecoration(
+                      shape: shape,
+                      borderRadius: switch (appearance.decoration) {
+                        BoxDecoration(:final borderRadius) => borderRadius,
+                        _ => radius,
                       },
-                      child: Center(
-                        widthFactor: 1,
-                        child: switch (widget.builder) {
-                          final builder? => AbsorbPointer(child: builder(context, segment.value, widget.selected)),
-                          null => _SegmentContent(
-                            segment: segment,
-                            gap: switch ((style?.gap, widget.gap)) {
-                              (final gap?, _) || (null, final gap?) => gap,
-                              _ => widget.size.gap,
-                            },
+                      border: Border.all(
+                        color: switch ((style?.focusColour, sharedStyle?.focusColour)) {
+                          (final colour?, _) || (_, final colour?) => colour,
+                          _ => DievasTheme.coloursOf(context).border.focusIndicatorColour,
+                        },
+                        width: DievasTheme.borderOf(context).strokeThin,
+                      ),
+                    ),
+                    _ => null,
+                  },
+                  child: IconTheme(
+                    data: IconThemeData(
+                      size: widget.size.iconSize,
+                      color: appearance.iconColour ?? appearance.textStyle.color,
+                    ),
+                    child: AnimatedDefaultTextStyle(
+                      duration: widget.duration,
+                      curve: widget.curve,
+                      style: appearance.textStyle,
+                      maxLines: 1,
+                      overflow: .ellipsis,
+                      child: Padding(
+                        padding: switch ((style?.padding, sharedStyle?.padding, widget.padding, segment.label)) {
+                          (final padding?, _, _, _) ||
+                          (_, final padding?, _, _) ||
+                          (_, _, final padding?, _) => padding,
+                          (_, _, _, null) => .symmetric(horizontal: widget.size.gap),
+                          _ => EdgeInsetsDirectional.only(
+                            start: segment.leading == null ? defaultPadding.left : widget.size.gap,
+                            end: segment.trailing == null ? defaultPadding.right : widget.size.gap,
+                            top: defaultPadding.top,
+                            bottom: defaultPadding.bottom,
                           ),
                         },
+                        child: Center(
+                          widthFactor: 1,
+                          child: switch (widget.builder) {
+                            final builder? => AbsorbPointer(child: builder(context, segment.value, widget.selected)),
+                            null => _SegmentContent(
+                              segment: segment,
+                              gap: switch ((style?.gap, sharedStyle?.gap, widget.gap)) {
+                                (final gap?, _, _) || (_, final gap?, _) || (_, _, final gap?) => gap,
+                                _ => widget.size.gap,
+                              },
+                            ),
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -581,5 +694,79 @@ class _SegmentContent<T> extends StatelessWidget {
       if (segment.label case final label?) Flexible(child: label),
       if (segment.trailing case final trailing?) ...[if (segment.label != null) SizedBox(width: gap), trailing],
     ],
+  );
+}
+
+// Sparse box overrides inherit shape unless they provide a circle or a radius.
+// An explicit radius (including zero) restores rectangular geometry.
+Decoration _mergeDecoration(Decoration base, Decoration? override) => switch ((base, override)) {
+  (_, null) => base,
+  (final BoxDecoration base, final BoxDecoration override) => BoxDecoration(
+    color: override.color ?? base.color,
+    image: override.image ?? base.image,
+    border: override.border ?? base.border,
+    borderRadius: switch ((override.shape, override.borderRadius, base.shape)) {
+      (.circle, _, _) => null,
+      (_, final radius?, _) => radius,
+      (_, _, .circle) => null,
+      _ => base.borderRadius,
+    },
+    boxShadow: override.boxShadow ?? base.boxShadow,
+    gradient: override.gradient ?? base.gradient,
+    backgroundBlendMode: override.backgroundBlendMode ?? base.backgroundBlendMode,
+    shape: switch ((override.shape, override.borderRadius)) {
+      (.circle, _) => .circle,
+      (_, final _?) => .rectangle,
+      _ => base.shape,
+    },
+  ),
+  (_, final decoration?) => decoration,
+};
+
+class _ResolvedSegmentAppearance {
+  const _ResolvedSegmentAppearance({required this.decoration, required this.textStyle, this.iconColour});
+
+  final Decoration decoration;
+  final TextStyle textStyle;
+  final Color? iconColour;
+
+  _ResolvedSegmentAppearance apply(
+    DievasSegmentStyle? style, {
+    required bool selected,
+    required bool hovered,
+    required bool pressed,
+  }) {
+    final legacyText = textStyle
+        .merge(style?.textStyle)
+        .copyWith(
+          color: switch ((selected, style?.selectedTextColour, style?.textColour)) {
+            (true, final colour?, _) || (false, _, final colour?) => colour,
+            _ => null,
+          },
+        );
+    return _ResolvedSegmentAppearance(
+          decoration: _mergeDecoration(
+            _mergeDecoration(decoration, switch ((
+              selected ? style?.selectedBackgroundColour : null,
+              style?.borderRadius,
+            )) {
+              (null, null) => null,
+              (final colour, final radius) => BoxDecoration(color: colour, borderRadius: radius),
+            }),
+            style?.decoration,
+          ),
+          textStyle: legacyText,
+          iconColour: iconColour,
+        )
+        .merge(style?.appearance)
+        .merge(selected ? style?.selected : null)
+        .merge(hovered ? style?.hovered : null)
+        .merge(pressed ? style?.pressed : null);
+  }
+
+  _ResolvedSegmentAppearance merge(DievasSegmentAppearance? appearance) => _ResolvedSegmentAppearance(
+    decoration: _mergeDecoration(decoration, appearance?.decoration),
+    textStyle: textStyle.merge(appearance?.textStyle),
+    iconColour: appearance?.iconColour ?? iconColour,
   );
 }

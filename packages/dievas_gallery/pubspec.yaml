@@ -19,7 +19,7 @@ dependencies:
     dievas_tokens: ^1.0.1
     widgetbook: ^3.25.0
     device_frame: ^1.4.0
-    flutter_svg: ^2.3.0
+    flutter_svg: ^2.3.2
 
 dev_dependencies:
     flutter_test:

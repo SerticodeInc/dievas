@@ -45,15 +45,18 @@ void main() {
     tester.widget<DievasTabBar>(controller).tabController?.index = 1;
     await tester.pumpAndSettle();
 
-    await tester.tap(find.descendant(of: standard, matching: find.text('Tab2')));
+    await tester.tapAt(tester.getCenter(find.descendant(of: standard, matching: find.text('Tab2'))));
     await tester.pumpAndSettle();
     final disabledTab = find.descendant(of: disabled, matching: find.bySemanticsLabel('Example 2, tab 2'));
     final semantics = tester.ensureSemantics();
-    addTearDown(semantics.dispose);
-    await tester.tap(disabledTab);
-    await tester.pumpAndSettle();
+    try {
+      await tester.tapAt(tester.getCenter(disabledTab));
+      await tester.pumpAndSettle();
+    } finally {
+      semantics.dispose();
+    }
     expect(tester.widget<DievasTabBar>(disabled).selectedIndex, 0);
-    await tester.tap(find.descendant(of: pill, matching: find.text('Tab3')));
+    await tester.tapAt(tester.getCenter(find.descendant(of: pill, matching: find.text('Tab3'))));
     await tester.pumpAndSettle();
     final external = tester.widget<DievasTabBar>(controller).tabController;
     expect(external?.index, 1);

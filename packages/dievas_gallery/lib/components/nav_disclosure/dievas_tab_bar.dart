@@ -318,23 +318,25 @@ class _SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
     padding: EdgeInsets.only(top: first ? 0 : context.spacing.xl2, bottom: context.spacing.xl),
-    child: Row(
-      children: [
-        const Expanded(child: DievasDivider()),
-        Flexible(
-          flex: 0,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: context.spacing.md),
-            child: Text(
-              label,
-              maxLines: 1,
-              overflow: .ellipsis,
-              style: context.typography.bodyXs.copyWith(color: context.colours.text.textSecondary),
+    child: LayoutBuilder(
+      builder: (context, constraints) => Row(
+        children: [
+          const Expanded(child: DievasDivider()),
+          ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: constraints.maxWidth - context.spacing.xl),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: context.spacing.md),
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: .ellipsis,
+                style: context.typography.bodyXs.copyWith(color: context.colours.text.textSecondary),
+              ),
             ),
           ),
-        ),
-        const Expanded(child: DievasDivider()),
-      ],
+          const Expanded(child: DievasDivider()),
+        ],
+      ),
     ),
   );
 }

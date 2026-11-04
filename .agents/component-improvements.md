@@ -14,6 +14,8 @@
 
 ### Tab Bar (4 November 2026)
 
+- Diagnose gallery test failures: constrain reference section headings to the viewport while retaining centred single-line labels and divider space. The Tab Bar live-knob test explicitly disposes its temporary semantics handle before Flutter’s end-of-test verification and targets the parent-owned tab hit areas. Full gallery run: 31 passed, with this test failing only on semantics cleanup after the layout fix; corrected targeted rerun: 1 passed. All 32 gallery cases verified across those runs. No gallery/debug app launched; test runners exited.
+
 - Fix const-constructor compatibility: validate list contents and exclusive string/rich inputs in build instead of accessing list length in const assertions. Update the selection-semantics regression to flagsCollection rather than deprecated hasFlag. Targeted static analysis covers the component and test; runtime tests remain user-owned.
 
 - Fix pill hover/exit colour interpolation by retaining the resolved fill RGB in its zero-alpha endpoint. Hover still fades normally; selected fill remains stable and interrupted transitions cannot flash grey. Add pointer-enter/exit and rapid-reversal regressions for white and custom coloured fills. Tests written, not run; no gallery/debug process started.

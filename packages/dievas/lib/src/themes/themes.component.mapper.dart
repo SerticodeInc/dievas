@@ -64,7 +64,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
 // Component level constants — layout extents (minWidth/maxWidth) are overlay sizing constraints.
 const double _kStrokeProgress = 2.5; // circular progress arc
 const double _kStrokeLoader = 3.0; // loader spinner
-const double _kSwitchThumbPadding = 3.0; // inset between thumb and track edge
+const double _kSwitchThumbPadding = 4.0; // inset between thumb and track edge
 const DievasInputThemeValue<double> _kCursorWidth = (sm: 1.5, md: 2.0, lg: 2.5);
 const double _kSnackbarMinWidth = 280.0;
 const double _kSnackbarMaxWidth = 480.0;
@@ -446,7 +446,7 @@ DievasSwitchThemeData _createSwitchTheme(
     trackWidth: DievasSizingPrimitives.s44,
     trackHeight: DievasSizingPrimitives.s24,
     trackRadius: .circular(DievasRadiusSemantic.full),
-    thumbSize: DievasSizingPrimitives.s18,
+    thumbSize: DievasSizingPrimitives.s16,
     thumbRadius: .circular(DievasRadiusSemantic.full),
     thumbPadding: _kSwitchThumbPadding,
     trackColourOn: colours.switchColours.switchOnTrack,

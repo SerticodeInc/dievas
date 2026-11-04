@@ -219,13 +219,13 @@ abstract final class DievasColourSemanticLight {
   static const int switchOnTrack = DievasColourPrimitives.royalPurple;
 
   /// Track colour when the switch is OFF.
-  static const int switchOffTrack = DievasColourPrimitives.slate200;
+  static const int switchOffTrack = DievasColourPrimitives.coolGreyLight;
 
   /// Thumb (knob) colour when the switch is ON.
   static const int switchOnThumb = DievasColourPrimitives.white;
 
   /// Thumb (knob) colour when the switch is OFF.
-  static const int switchOffThumb = DievasColourPrimitives.slate300;
+  static const int switchOffThumb = DievasColourPrimitives.white;
 
   //Static
 

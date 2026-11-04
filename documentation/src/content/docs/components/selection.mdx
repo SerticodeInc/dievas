@@ -85,7 +85,13 @@ The radio callback receives `T?`. If you allow deselection with `toggleable`, mo
 
 Component theme entries include `checkbox`, `toggle`, `radio`, `segmentedControl`, and `dropdown`. Note that the switch theme slot is named `toggle`.
 
-Checkbox and radio source implement Enter/Space activation and semantic selection state. Segmented control supports keyboard navigation and directional handling. Test focus order, labels, group meaning, disabled choices, and RTL in your application. The switch source uses a `GestureDetector` and visible label text without an explicit switch-state semantics or keyboard-action wrapper. Add an accessible application wrapper or choose a control that meets your workflow's keyboard and screen-reader requirements; verify the result on your target platforms.
+Checkbox and radio source implement Enter/Space activation and semantic selection state. Segmented control supports keyboard navigation and directional handling. Test focus order, labels, group meaning, disabled choices, and RTL in your application. In hosted 1.0.4, the switch uses a `GestureDetector` and visible label text without an explicit switch-state semantics or keyboard-action wrapper. Add an accessible application wrapper or choose a control that meets your workflow's keyboard and screen-reader requirements; verify the result on your target platforms.
+
+## Switch additions in workspace source (unreleased)
+
+The workspace switch adds `DievasSwitchSize.xxs`, `.xs`, and `.sm`, independent thumb and track colour overrides, explicit dimensions and directional padding, and active/inactive thumb and track widget slots. It supports horizontal drag, RTL, Enter/Space, caller-owned focus nodes, a visible focus indicator, and toggled/enabled semantics. Use `semanticLabel` for decorative custom content. Set `hasHapticFeedback: false` to suppress haptics; reduced-motion preferences settle changes immediately.
+
+Your application still owns `value`. A rejected drag returns to that value. Existing labels and component theme constructors remain supported; default thumb size, inset, and inactive colours change to match the Moon reference. These additions are not part of the hosted 1.0.4 API. Component and gallery regression tests are written but have not been run for this implementation.
 
 ## Explore and inspect
 

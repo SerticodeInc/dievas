@@ -22,7 +22,11 @@ final class DievasSwitchThemeData extends Equatable {
     required this.animationDuration,
     required this.labelStyle,
     required this.labelSpacing,
+    this.thumbShadow,
   });
+
+  /// Thumb shadow; null uses the active theme’s small shadow tier.
+  final List<BoxShadow>? thumbShadow;
 
   /// Track container width (dp).
   final double trackWidth;
@@ -81,6 +85,7 @@ final class DievasSwitchThemeData extends Equatable {
     Duration? animationDuration,
     TextStyle? labelStyle,
     double? labelSpacing,
+    List<BoxShadow>? thumbShadow,
   }) => DievasSwitchThemeData(
     trackWidth: trackWidth ?? this.trackWidth,
     trackHeight: trackHeight ?? this.trackHeight,
@@ -96,6 +101,7 @@ final class DievasSwitchThemeData extends Equatable {
     animationDuration: animationDuration ?? this.animationDuration,
     labelStyle: labelStyle ?? this.labelStyle,
     labelSpacing: labelSpacing ?? this.labelSpacing,
+    thumbShadow: thumbShadow ?? this.thumbShadow,
   );
 
   @override
@@ -114,5 +120,6 @@ final class DievasSwitchThemeData extends Equatable {
     animationDuration,
     labelStyle,
     labelSpacing,
+    thumbShadow,
   ];
 }

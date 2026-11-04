@@ -4,11 +4,17 @@
 
 ### Added
 
+- `DievasSwitch` adds three Moon compatible size presets, dimension/colour/motion overrides, active/inactive thumb and track content, drag and RTL support, keyboard focus, switch semantics, optional haptics, and reduced motion handling. The gallery uses three independently interactive reference examples. See [Use the switch](doc/switch.md).
+
 - `DievasSegmentedControlStyle` groups container decoration, shared segment styling, spacing, and motion. `DievasSegmentAppearance` separates decoration, text, and icon overrides for normal, selected, hovered, and pressed states. See [Migrate segmented control styling](doc/segmented_control_styling.md).
 
 ### Deprecated
 
 - Flat appearance parameters on `DievasSegmentedControl` and overlapping colour, radius, text, and decoration fields on `DievasSegmentStyle` remain accepted for compatibility. Use the grouped `style` and state appearances instead; removal is deferred to a separately announced breaking release.
+
+### Changed
+
+- Switch defaults use a 16px white thumb, 4px inset, and Moon Beerus inactive tracks in both themes. Existing custom theme dimensions and colours remain supported.
 
 ### Fixed
 
@@ -108,7 +114,7 @@
 - Use centred token shadow stacks with the `shadowColour` tint. Add search field shadows.
 - Increase badge padding and document size naming, spacing and brand palettes.
 
-### Fixed
+### Fixes
 
 - Apply popover shadows and drawer corner radii from their themes.
 - Keep alerts at their natural height in loosely constrained layouts.

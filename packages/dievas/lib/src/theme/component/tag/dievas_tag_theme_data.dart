@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:dievas_tokens/dievas_tokens.dart';
 import 'package:flutter/painting.dart';
 
 import 'dievas_tag_border_radius.dart';
@@ -22,6 +23,12 @@ final class DievasTagThemeData extends Equatable {
     this.backgroundColor,
     this.foregroundColor,
     this.borderColor,
+    this.xxs,
+    this.xs,
+    this.sm,
+    this.textColour,
+    this.iconColour,
+    this.disabledOpacity = DievasOpacitySemantic.disabled,
   });
 
   /// Label text style — typically [DievasTypographyThemeData.labelSm].
@@ -60,6 +67,13 @@ final class DievasTagThemeData extends Equatable {
   /// Global override for tag border colour.
   final Color? borderColor;
 
+  final DievasTagSizeData? xxs;
+  final DievasTagSizeData? xs;
+  final DievasTagSizeData? sm;
+  final Color? textColour;
+  final Color? iconColour;
+  final double disabledOpacity;
+
   /// Creates a copy of this [DievasTagThemeData] with the given fields replaced.
   DievasTagThemeData copyWith({
     TextStyle? textStyle,
@@ -74,11 +88,25 @@ final class DievasTagThemeData extends Equatable {
     Color? backgroundColor,
     Color? foregroundColor,
     Color? borderColor,
+    DievasTagSizeData? xxs,
+    DievasTagSizeData? xs,
+    DievasTagSizeData? sm,
+    Color? textColour,
+    Color? iconColour,
+    double? disabledOpacity,
+    bool clearTextColour = false,
+    bool clearIconColour = false,
     bool clearBackgroundColor = false,
     bool clearForegroundColor = false,
     bool clearBorderColor = false,
   }) => DievasTagThemeData(
     textStyle: textStyle ?? this.textStyle,
+    xxs: xxs ?? this.xxs,
+    xs: xs ?? this.xs,
+    sm: sm ?? this.sm,
+    textColour: clearTextColour ? null : textColour ?? this.textColour,
+    iconColour: clearIconColour ? null : iconColour ?? this.iconColour,
+    disabledOpacity: disabledOpacity ?? this.disabledOpacity,
     borderRadius: borderRadius ?? this.borderRadius,
     padding: padding ?? this.padding,
     iconSize: iconSize ?? this.iconSize,
@@ -106,5 +134,48 @@ final class DievasTagThemeData extends Equatable {
     backgroundColor,
     foregroundColor,
     borderColor,
+    xxs,
+    xs,
+    sm,
+    textColour,
+    iconColour,
+    disabledOpacity,
   ];
+}
+
+/// Geometry and typography for an explicit tag size preset.
+final class DievasTagSizeData extends Equatable {
+  const DievasTagSizeData({
+    required this.height,
+    required this.iconSize,
+    required this.gap,
+    required this.padding,
+    required this.borderRadius,
+    required this.textStyle,
+  });
+  final double height;
+  final double iconSize;
+  final double gap;
+  final EdgeInsetsGeometry padding;
+  final DievasTagBorderRadius borderRadius;
+  final TextStyle textStyle;
+
+  DievasTagSizeData copyWith({
+    double? height,
+    double? iconSize,
+    double? gap,
+    EdgeInsetsGeometry? padding,
+    DievasTagBorderRadius? borderRadius,
+    TextStyle? textStyle,
+  }) => DievasTagSizeData(
+    height: height ?? this.height,
+    iconSize: iconSize ?? this.iconSize,
+    gap: gap ?? this.gap,
+    padding: padding ?? this.padding,
+    borderRadius: borderRadius ?? this.borderRadius,
+    textStyle: textStyle ?? this.textStyle,
+  );
+
+  @override
+  List<Object?> get props => [height, iconSize, gap, padding, borderRadius, textStyle];
 }

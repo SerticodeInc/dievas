@@ -64,7 +64,7 @@ DievasComponentThemeData _deriveDievasComponentThemeData(
 // Component level constants — layout extents (minWidth/maxWidth) are overlay sizing constraints.
 const double _kStrokeProgress = 2.5; // circular progress arc
 const double _kStrokeLoader = 3.0; // loader spinner
-const double _kSwitchThumbPadding = 3.0; // inset between thumb and track edge
+const double _kSwitchThumbPadding = 4.0; // inset between thumb and track edge
 const DievasInputThemeValue<double> _kCursorWidth = (sm: 1.5, md: 2.0, lg: 2.5);
 const double _kSnackbarMinWidth = 280.0;
 const double _kSnackbarMaxWidth = 480.0;
@@ -375,14 +375,14 @@ DievasTagThemeData _createTagTheme(
   DievasBorderThemeData border,
 ) {
   return DievasTagThemeData(
-    textStyle: typography.labelSm,
+    textStyle: typography.bodyXs.copyWith(height: 4 / 3),
     borderRadius: DievasTagBorderRadius.rounded(border.sm),
-    padding: .symmetric(horizontal: spacing.smPlus, vertical: spacing.xs),
-    iconSize: DievasSizingPrimitives.s14,
-    iconSpacing: spacing.xs,
-    removeIconSize: DievasSizingPrimitives.s14,
-    removeIconSpacing: spacing.xs,
-    minHeight: DievasSizingPrimitives.s28,
+    padding: .symmetric(horizontal: spacing.sm),
+    iconSize: DievasSizingPrimitives.s16,
+    iconSpacing: spacing.xs / 2,
+    removeIconSize: DievasSizingPrimitives.s16,
+    removeIconSpacing: spacing.xs / 2,
+    minHeight: DievasSizingPrimitives.s24,
     borderWidth: border.strokeDefault,
   );
 }
@@ -446,7 +446,7 @@ DievasSwitchThemeData _createSwitchTheme(
     trackWidth: DievasSizingPrimitives.s44,
     trackHeight: DievasSizingPrimitives.s24,
     trackRadius: .circular(DievasRadiusSemantic.full),
-    thumbSize: DievasSizingPrimitives.s18,
+    thumbSize: DievasSizingPrimitives.s16,
     thumbRadius: .circular(DievasRadiusSemantic.full),
     thumbPadding: _kSwitchThumbPadding,
     trackColourOn: colours.switchColours.switchOnTrack,
@@ -884,16 +884,29 @@ DievasTabBarThemeData _createTabBarTheme(
   DievasBorderThemeData border,
   DievasAnimationThemeData animation,
 ) => DievasTabBarThemeData(
-  labelStyle: typography.bodySm.copyWith(color: colours.text.textSecondary),
-  selectedLabelStyle: typography.titleXs.copyWith(color: colours.text.textPrimary),
+  labelStyle: typography.bodyMd.copyWith(color: colours.text.textPrimary, fontWeight: .w500),
+  selectedLabelStyle: typography.bodyMd.copyWith(color: colours.action.tabSelectedIndicator, fontWeight: .w500),
   indicatorColour: colours.action.tabSelectedIndicator,
   indicatorHeight: border.strokeThick,
   dividerColour: colours.border.dividerColour,
-  tabPadding: .symmetric(horizontal: spacing.md, vertical: spacing.sm),
+  tabPadding: .symmetric(horizontal: spacing.md),
   animationDuration: animation.standard,
   disabledOpacity: DievasOpacitySemantic.disabled,
-  minTabWidth: DievasSizingPrimitives.s64,
-  height: sizing.inputHeightMd,
+  minTabWidth: 0,
+  height: sizing.height40,
+  smallHeight: sizing.height32,
+  smallTabPadding: .symmetric(horizontal: spacing.smPlus),
+  slotGap: spacing.sm,
+  smallSlotGap: spacing.xs,
+  borderRadius: border.md,
+  smallBorderRadius: border.sm,
+  iconSize: sizing.iconMd,
+  pillSelectedColour: switch (colours.brightness) {
+    .light => colours.staticColours.staticWhite,
+    .dark => colours.staticColours.staticBlack,
+  },
+  pillSelectedTextColour: colours.text.textPrimary,
+  gap: spacing.xs,
 );
 
 // Divider

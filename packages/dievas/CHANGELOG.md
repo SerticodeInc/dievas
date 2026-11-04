@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- `DievasSegmentedControlStyle` groups container decoration, shared segment styling, spacing, and motion. `DievasSegmentAppearance` separates decoration, text, and icon overrides for normal, selected, hovered, and pressed states. See [Migrate segmented control styling](doc/segmented_control_styling.md).
+
+### Deprecated
+
+- Flat appearance parameters on `DievasSegmentedControl` and overlapping colour, radius, text, and decoration fields on `DievasSegmentStyle` remain accepted for compatibility. Use the grouped `style` and state appearances instead; removal is deferred to a separately announced breaking release.
+
+### Fixed
+
+- Segmented control box decorations merge specified fields, so adding a border or shadow preserves inherited backgrounds and radii. Selected text colour takes precedence over legacy `textStyle.color`; segment overrides apply after shared control defaults. Non-box legacy decorations retain replacement behaviour.
+- Hover and press no longer borrow selected foreground/background colours. The focus outline follows the resolved box shape and directional radius. Circle/rectangle changes snap without remounting segment content to avoid invalid Flutter decoration interpolation.
+
 ## 1.0.4
 
 - **Token dependency compatibility**: require `dievas_tokens` 1.0.3 or newer, which includes `menuHoveredBackground` for both themes. The published 1.0.2 dependency lacks these constants, causing undefined getters and constant evaluation errors outside the workspace, including dependency lower bound analysis. Publish the token package before Dievas.

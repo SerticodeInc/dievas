@@ -61,6 +61,7 @@ void main() {
       'Override selected text colour',
       'Override container radius',
       'Override segment radius',
+      'Custom segment decoration',
       'Expanded',
       'Leading',
       'Trailing',
@@ -77,10 +78,20 @@ void main() {
     expect(text.value, selectedText);
     expect(icon.value, selectedIcon);
     expect(text.size, DievasSegmentedControlSize.sm);
-    expect(text.backgroundColour, isNotNull);
+    expect(text.style?.decoration?.color, isNotNull);
     expect(text.isExpanded, isTrue);
-    expect(text.borderRadius, DievasTheme.of(tester.element(controls.first)).border.r32);
+    expect(text.style?.decoration?.borderRadius, DievasTheme.of(tester.element(controls.first)).border.r32);
     expect(Directionality.of(tester.element(controls.first)), TextDirection.rtl);
+    final selectedSurface = tester.widget<AnimatedContainer>(
+      find.ancestor(of: find.text('Tab2'), matching: find.byType(AnimatedContainer)),
+    );
+    switch (selectedSurface.decoration) {
+      case BoxDecoration(:final color, :final border):
+        expect(color, text.style?.segmentStyle?.selected?.decoration?.color);
+        expect(border, isNotNull);
+      default:
+        fail('Expected the gallery border to compose with the selected box surface');
+    }
     state.updateQueryField(group: 'knobs', field: 'Disabled', value: 'true');
     await tester.pumpAndSettle();
     await tester.tapAt(tester.getCenter(find.text('Tab1')));

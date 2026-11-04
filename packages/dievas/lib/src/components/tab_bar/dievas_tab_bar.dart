@@ -32,14 +32,12 @@ class DievasTabBar extends StatefulWidget {
     this.transitionDuration,
     this.transitionCurve,
     this.showDivider,
-  }) : assert((tabs.length > 0) != (items != null)),
-       assert(items == null || items.length > 0),
-       assert(selectedIndex >= 0),
+  }) : assert(selectedIndex >= 0),
        assert(width == null || width > 0),
        assert(height == null || height > 0),
        assert(gap == null || gap >= 0);
 
-  /// String-label convenience API; mutually exclusive with [items].
+  /// String label convenience API; mutually exclusive with [items].
   final List<String> tabs;
   final List<DievasTab>? items;
   final int selectedIndex;
@@ -117,6 +115,8 @@ class _DievasTabBarState extends State<DievasTabBar> {
   @override
   Widget build(BuildContext context) {
     final items = _items;
+    assert(widget.tabs.isNotEmpty != (widget.items != null), 'Supply either string tabs or rich items.');
+    assert(items.isNotEmpty, 'At least one tab is required.');
     assert(_selected < items.length, 'The selected tab must exist.');
     assert(widget.tabController == null || widget.tabController?.length == items.length);
     final theme = DievasTheme.componentsOf(context).tabBar;

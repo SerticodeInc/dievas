@@ -1,4 +1,4 @@
-import 'dart:ui' show PointerDeviceKind, SemanticsFlag;
+import 'dart:ui' show PointerDeviceKind, Tristate;
 
 import 'package:dievas/dievas.dart';
 import 'package:flutter/material.dart' show TabController;
@@ -287,8 +287,8 @@ void main() {
     );
     expect(style.style.color, local);
     expect(
-      tester.getSemantics(find.bySemanticsLabel('Activity')).getSemanticsData().hasFlag(SemanticsFlag.isSelected),
-      isTrue,
+      tester.getSemantics(find.bySemanticsLabel('Activity')).getSemanticsData().flagsCollection.isSelected,
+      Tristate.isTrue,
     );
   });
 

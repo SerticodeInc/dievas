@@ -4,6 +4,8 @@
 
 ### Added
 
+- `DievasTabBar` adds rich tab descriptors, pill/custom variants, shared and local styling, size presets, caller-owned controllers, per-tab disabling, keyboard/RTL navigation, focus and selection semantics, expanded layout, selected-tab scrolling, and reduced-motion handling. The gallery includes the four Moon-style reference compositions and custom content. See [Use Tab Bar](doc/tab_bar.md).
+
 - `DievasSwitch` adds three Moon compatible size presets, dimension/colour/motion overrides, active/inactive thumb and track content, drag and RTL support, keyboard focus, switch semantics, optional haptics, and reduced motion handling. The gallery uses three independently interactive reference examples. See [Use the switch](doc/switch.md).
 
 - `DievasSegmentedControlStyle` groups container decoration, shared segment styling, spacing, and motion. `DievasSegmentAppearance` separates decoration, text, and icon overrides for normal, selected, hovered, and pressed states. See [Migrate segmented control styling](doc/segmented_control_styling.md).
@@ -14,9 +16,13 @@
 
 ### Changed
 
+- Tab Bar defaults match Moon’s 32/40px sizing, 16px medium labels, brand selected underline text, neutral pill surfaces, 4/8px pill radii and slot gaps. The baseline divider is optional and hidden by default. Existing string tabs and custom theme constructors remain supported.
+
 - Switch defaults use a 16px white thumb, 4px inset, and Moon Beerus inactive tracks in both themes. Existing custom theme dimensions and colours remain supported.
 
 ### Fixed
+
+- Pill tab hover transitions preserve their fill hue while fading in and out, preventing grey flashes during pointer exit and rapid hover reversals.
 
 - Segmented control box decorations merge specified fields, so adding a border or shadow preserves inherited backgrounds and radii. Selected text colour takes precedence over legacy `textStyle.color`; segment overrides apply after shared control defaults. Non-box legacy decorations retain replacement behaviour.
 - Hover and press no longer borrow selected foreground/background colours. The focus outline follows the resolved box shape and directional radius. Circle/rectangle changes snap without remounting segment content to avoid invalid Flutter decoration interpolation.

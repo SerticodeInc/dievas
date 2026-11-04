@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### Tab Bar (4 November 2026)
+
+- Fix pill hover/exit colour interpolation by retaining the resolved fill RGB in its zero-alpha endpoint. Hover still fades normally; selected fill remains stable and interrupted transitions cannot flash grey. Add pointer-enter/exit and rapid-reversal regressions for white and custom coloured fills. Tests written, not run; no gallery/debug process started.
+
+- Refine the gallery from the supplied Moon screenshots: start the plain row on Tab3, icon row and pill row on Tab1, and controller row on Tab2. Use the frame-with-four-handles glyph, 48px between sections and 32px below headings, a full-width 112px Whis60/Frieza60 page panel, 16px panel labels and thin directional chevrons. Keep bodyXs headings and semantic knob conventions. Changes are source-reviewed/formatted; no runtime or render checks run.
+
+- Compare Moon 1.1.0 public API, tab/pill styles, size/theme definitions, implementation and four-section reference story. Preserve string tabs, controlled selectedIndex/onChanged and enabled. Add rich DievasTab descriptors, leading/label/trailing slots, per-tab disabling/focus/semantics, custom selection builders, underline/pill/custom variants and shared/local DievasTabStyle. Local non-null fields override shared style; explicit state foregrounds override text-style colour. Slots cannot independently handle gestures or focus.
+- Add caller-owned TabController precedence, one notification per changed index, listener detachment and page-view integration. Disabled tabs reject user selection while external controller changes remain authoritative. Support Enter/Space, RTL-aware arrows, Home/End, disabled-tab skipping, hover/press appearance, visible focus and selected/enabled semantics.
+- Align defaults to Moon: 32/40px height, 16px medium labels, 24px icons, 2px underline, 4px outer gap, 12/16px label padding, 4/8px slot gaps, 4/8px pill radii, brand selected underline text and neutral pill surfaces. Remove the baseline by default with an explicit showDivider option. Preserve custom theme constructors, add optional fields/copyWith/equality, dimensions, directional geometry, container decoration and motion overrides. Keep the existing single sliding selected underline and add Moon-style hover/press indicators. Natural-width bars scroll selected tabs into view; reduced motion settles immediately.
+- Rebuild the gallery with three text tabs, four icon tabs with the second disabled, three pill tabs and a controller-backed TabBarView initially on Tab2 with working previous/next controls. Add a custom-content page. Persist independent selections and controller index per Widgetbook session across live knobs; group semantic colour, size, gap, radius, indicator, content, expansion, disabled, RTL and motion controls. Tab Bar owns reference insets; use bodyXs section headings.
+- Add component/controller/keyboard/RTL/geometry/style/semantics/scrolling regression tests, a gallery live-control regression and unreleased usage guidance. Formatting and whitespace inspection only; user owns tests and the existing local gallery. No tests, debug builds or preview processes run. No package version changes or new token roles. Switch committed as 16f5348 on feat/switch_tab_bar_tag; Tag remains pending.
+
 ### Switch (4 November 2026)
 
 - Extend the controlled switch from the Moon API, source and reference story: XXS/XS/SM geometry, instance colours/dimensions/directional padding/motion, four state-specific content slots, thumb shadow, horizontal drag, RTL, caller-owned focus, Enter/Space, visible focus, toggled/enabled semantics and optional haptics. Preserve label and existing theme construction. Slots are decorative and cannot interact independently.

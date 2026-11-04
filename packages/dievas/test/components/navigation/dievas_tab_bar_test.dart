@@ -260,36 +260,39 @@ void main() {
 
   testWidgets('selected semantics and per-tab styling survive shared overrides', (tester) async {
     final semantics = tester.ensureSemantics();
-    addTearDown(semantics.dispose);
-    const local = Color(0xFF123456);
-    await tester.pumpWidget(
-      Harness(
-        child: Center(
-          child: DievasTabBar(
-            selectedIndex: 1,
-            onChanged: (_) {},
-            tabStyle: const DievasTabStyle(selectedTextColour: Color(0xFF654321)),
-            items: const [
-              DievasTab(label: Text('A')),
-              DievasTab(
-                label: Text('B'),
-                semanticLabel: 'Activity',
-                style: DievasTabStyle(selectedTextColour: local),
-              ),
-            ],
+    try {
+      const local = Color(0xFF123456);
+      await tester.pumpWidget(
+        Harness(
+          child: Center(
+            child: DievasTabBar(
+              selectedIndex: 1,
+              onChanged: (_) {},
+              tabStyle: const DievasTabStyle(selectedTextColour: Color(0xFF654321)),
+              items: const [
+                DievasTab(label: Text('A')),
+                DievasTab(
+                  label: Text('B'),
+                  semanticLabel: 'Activity',
+                  style: DievasTabStyle(selectedTextColour: local),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-    await tester.pumpAndSettle();
-    final style = tester.widget<AnimatedDefaultTextStyle>(
-      find.ancestor(of: find.text('B'), matching: find.byType(AnimatedDefaultTextStyle)).first,
-    );
-    expect(style.style.color, local);
-    expect(
-      tester.getSemantics(find.bySemanticsLabel('Activity')).getSemanticsData().flagsCollection.isSelected,
-      Tristate.isTrue,
-    );
+      );
+      await tester.pumpAndSettle();
+      final style = tester.widget<AnimatedDefaultTextStyle>(
+        find.ancestor(of: find.text('B'), matching: find.byType(AnimatedDefaultTextStyle)).first,
+      );
+      expect(style.style.color, local);
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Activity')).getSemanticsData().flagsCollection.isSelected,
+        Tristate.isTrue,
+      );
+    } finally {
+      semantics.dispose();
+    }
   });
 
   testWidgets('narrow RTL tabs scroll selected content into view with reduced motion', (tester) async {
@@ -357,6 +360,10 @@ void main() {
 
   for (final fill in [const Color(0xFFFFFFFF), const Color(0xFF8855CC)]) {
     testWidgets('pill hover preserves fill hue through exit and rapid reversal ($fill)', (tester) async {
+      final highlightStrategy = FocusManager.instance.highlightStrategy;
+      FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = highlightStrategy);
+
       await tester.pumpWidget(
         Harness(
           child: Center(

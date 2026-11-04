@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Component test corrections (4 November 2026)
+
+- Reproduce all eight Switch/Tab Bar/Tag component-test failures. Dispose three temporary semantics handles in try/finally before Flutter’s end-of-test verification. Assert Switch thumb-content geometry instead of the last Align descendant, which belongs to centred slot content. Set and restore desktop focus-highlight strategy for pill-hover regressions so synthetic mouse hover actually activates the fill transition. Preserve strict mid-fade alpha/hue and reversal assertions. No component implementation changes.
+- Targeted Switch/Tab Bar/Tag run: all 56 tests pass. Full dievas package verification: all 530 tests pass with --no-pub --concurrency=1. Test runners exited. No gallery/debug app launched.
+
 ### Tag (4 November 2026)
 
 - Align the reference Playground with the supplied Tag screenshot: one centred filled XS DievasTag, label and small thin trailing close glyph enabled, leading glyph off, 4px default radius. Keep tap/long-press feedback in Interactions so activating Playground does not move the sample. Add a regression for stable sample position. No runtime or render checks run.

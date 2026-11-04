@@ -272,21 +272,24 @@ void main() {
 
   testWidgets('remove semantics remain accessible with a custom tag label', (tester) async {
     final semantics = tester.ensureSemantics();
-    addTearDown(semantics.dispose);
-    await tester.pumpWidget(
-      Harness(
-        child: Center(
-          child: DievasTag(
-            label: 'Legacy',
-            semanticLabel: 'Selected language',
-            removeSemanticLabel: 'Remove language',
-            onRemove: () {},
+    try {
+      await tester.pumpWidget(
+        Harness(
+          child: Center(
+            child: DievasTag(
+              label: 'Legacy',
+              semanticLabel: 'Selected language',
+              removeSemanticLabel: 'Remove language',
+              onRemove: () {},
+            ),
           ),
         ),
-      ),
-    );
-    expect(find.bySemanticsLabel('Selected language'), findsOneWidget);
-    expect(find.bySemanticsLabel('Remove language'), findsOneWidget);
+      );
+      expect(find.bySemanticsLabel('Selected language'), findsOneWidget);
+      expect(find.bySemanticsLabel('Remove language'), findsOneWidget);
+    } finally {
+      semantics.dispose();
+    }
   });
 
   test('size presets copy and compare all fields', () {

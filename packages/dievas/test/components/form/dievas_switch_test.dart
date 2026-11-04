@@ -52,20 +52,24 @@ void main() {
 
   testWidgets('reports toggled and disabled semantics', (tester) async {
     final semantics = tester.ensureSemantics();
-    addTearDown(semantics.dispose);
-    await tester.pumpWidget(
-      const Harness(child: DievasSwitch(value: true, onChanged: null, semanticLabel: 'Dark mode')),
-    );
-    expect(
-      tester.getSemantics(find.bySemanticsLabel('Dark mode')),
-      matchesSemantics(label: 'Dark mode', hasToggledState: true, isToggled: true, hasEnabledState: true),
-    );
+    try {
+      await tester.pumpWidget(
+        const Harness(child: DievasSwitch(value: true, onChanged: null, semanticLabel: 'Dark mode')),
+      );
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Dark mode')),
+        matchesSemantics(label: 'Dark mode', hasToggledState: true, isToggled: true, hasEnabledState: true),
+      );
+    } finally {
+      semantics.dispose();
+    }
   });
 
   for (final rtl in [false, true]) {
     testWidgets('drag follows ${rtl ? 'RTL' : 'LTR'} and settles to accepted state', (tester) async {
       bool value = false;
       final requests = <bool>[];
+      const thumbContent = SizedBox.expand(key: ValueKey('thumb-content'));
       await tester.pumpWidget(
         Harness(
           child: Directionality(
@@ -75,6 +79,8 @@ void main() {
                 builder: (context, setState) => DievasSwitch(
                   value: value,
                   width: 100,
+                  activeThumbWidget: thumbContent,
+                  inactiveThumbWidget: thumbContent,
                   onChanged: (next) {
                     requests.add(next);
                     setState(() => value = next);
@@ -89,27 +95,36 @@ void main() {
       await tester.pumpAndSettle();
       expect(requests, [true]);
       expect(value, isTrue);
-      final align = tester.widget<Align>(
-        find.descendant(of: find.byType(DievasSwitch), matching: find.byType(Align)).last,
-      );
-      expect(align.alignment, const AlignmentDirectional(1, 0));
+      final track = tester.getRect(find.byType(DievasSwitch));
+      final thumb = tester.getRect(find.byKey(const ValueKey('thumb-content')));
+      final inset = DievasLightThemeData().components.toggle.thumbPadding;
+      expect(thumb.center.dy, closeTo(track.center.dy, 0.01));
+      expect(rtl ? thumb.left - track.left : track.right - thumb.right, closeTo(inset, 0.01));
     });
   }
 
   testWidgets('rejected drag returns thumb to controlled value', (tester) async {
     final requests = <bool>[];
+    const thumbContent = SizedBox.expand(key: ValueKey('thumb-content'));
     await tester.pumpWidget(
       Harness(
-        child: Center(child: DievasSwitch(value: false, width: 100, onChanged: requests.add)),
+        child: Center(
+          child: DievasSwitch(
+            value: false,
+            width: 100,
+            onChanged: requests.add,
+            activeThumbWidget: thumbContent,
+            inactiveThumbWidget: thumbContent,
+          ),
+        ),
       ),
     );
     await tester.drag(find.byType(DievasSwitch), const Offset(70, 0));
     await tester.pumpAndSettle();
     expect(requests, [true]);
-    final align = tester.widget<Align>(
-      find.descendant(of: find.byType(DievasSwitch), matching: find.byType(Align)).last,
-    );
-    expect(align.alignment, const AlignmentDirectional(-1, 0));
+    final track = tester.getRect(find.byType(DievasSwitch));
+    final thumb = tester.getRect(find.byKey(const ValueKey('thumb-content')));
+    expect(thumb.left - track.left, closeTo(DievasLightThemeData().components.toggle.thumbPadding, 0.01));
   });
 
   testWidgets('disabled switch ignores pointer and keyboard', (tester) async {

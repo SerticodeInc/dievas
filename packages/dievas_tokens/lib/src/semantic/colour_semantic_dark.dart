@@ -256,7 +256,7 @@ abstract final class DievasColourSemanticDark {
   static const int snackbarBackground = DievasColourPrimitives.slate800;
 
   /// tag background.
-  static const int tagBackground = DievasColourPrimitives.slate800;
+  static const int tagBackground = DievasColourPrimitives.black;
 
   /// badge neutral filled background.
   static const int badgeNeutralFilledBackground = DievasColourPrimitives.slate800;

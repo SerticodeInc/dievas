@@ -170,7 +170,7 @@
       "menuHoveredBackground": "0x14FFFFFF",
       "popoverBackground": "0xFF1E293B",
       "snackbarBackground": "0xFF1E293B",
-      "tagBackground": "0xFF1E293B",
+      "tagBackground": "0xFF000000",
       "badgeNeutralFilledBackground": "0xFF1E293B",
       "iconButtonFocusedBackground": "0xFF1E293B",
       "listItemSelectedBackground": "0xFF1F1F1F",

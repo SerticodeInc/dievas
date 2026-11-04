@@ -375,14 +375,14 @@ DievasTagThemeData _createTagTheme(
   DievasBorderThemeData border,
 ) {
   return DievasTagThemeData(
-    textStyle: typography.labelSm,
+    textStyle: typography.bodyXs.copyWith(height: 4 / 3),
     borderRadius: DievasTagBorderRadius.rounded(border.sm),
-    padding: .symmetric(horizontal: spacing.smPlus, vertical: spacing.xs),
-    iconSize: DievasSizingPrimitives.s14,
-    iconSpacing: spacing.xs,
-    removeIconSize: DievasSizingPrimitives.s14,
-    removeIconSpacing: spacing.xs,
-    minHeight: DievasSizingPrimitives.s28,
+    padding: .symmetric(horizontal: spacing.sm),
+    iconSize: DievasSizingPrimitives.s16,
+    iconSpacing: spacing.xs / 2,
+    removeIconSize: DievasSizingPrimitives.s16,
+    removeIconSpacing: spacing.xs / 2,
+    minHeight: DievasSizingPrimitives.s24,
     borderWidth: border.strokeDefault,
   );
 }

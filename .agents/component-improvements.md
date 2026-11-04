@@ -2,7 +2,19 @@
 
 ## Unreleased
 
+### Tag (4 November 2026)
+
+- Align the reference Playground with the supplied Tag screenshot: one centred filled XS DievasTag, label and small thin trailing close glyph enabled, leading glyph off, 4px default radius. Keep tap/long-press feedback in Interactions so activating Playground does not move the sample. Add a regression for stable sample position. No runtime or render checks run.
+
+- Compare Moon 1.1.0 Tag API, source, size/theme definitions and centred single-tag story. Preserve string label, leadingIcon, onPressed, onRemove, legacy colour names and filled/tinted/outlined conveniences. Add labelWidget, leading/trailing slots, independent text/icon colours, XXS/XS/SM presets, dimensions, directional padding/radii, gap, text style, decoration and long press. Custom label/leading inputs override legacy conveniences; removal overrides decorative trailing content.
+- Align default filled XS geometry to 24px height, 12px regular text, 16px icons, 2px slot gaps and 4px radius. XXS is 16px/9px/12px/2px; SM is 32px/12px/16px/8px with 8px radius. Preserve flat custom theme geometry when no preset is supplied; add optional preset data, foreground overrides, disabled opacity, copyWith/equality and colour clearing. Use neutral black dark tagBackground and update its token fixture; no version changes.
+- Add enabled state, caller-owned focus/autofocus, Enter/Space, visible focus, tap/long-press semantics and independent accessible removal without parent activation. Disabled tags block embedded interaction and focus. Keep pointer hover visually static. String labels truncate in constrained widths; decorative icon-only tags accept semantic labels.
+- Rebuild Playground as a centred DievasTag with a trailing close glyph, following the published Moon story’s 64px vertical/16px horizontal insets. Add grouped semantic colour, content, size/style/radius/gap/padding/width, action, disabled and RTL controls. Keep All Styles and add Interactions. Persist tap/long-press counts and removed state across knob remounts, with a working Restore tag action.
+- Write component and gallery regressions plus unreleased usage guidance. Formatting and whitespace checks only; user owns runtime testing and the existing local gallery. No tests, builds or debug previews run. Tab Bar committed as 459e3fe; Tag changes remain uncommitted for review.
+
 ### Tab Bar (4 November 2026)
+
+- Fix const-constructor compatibility: validate list contents and exclusive string/rich inputs in build instead of accessing list length in const assertions. Update the selection-semantics regression to flagsCollection rather than deprecated hasFlag. Targeted static analysis covers the component and test; runtime tests remain user-owned.
 
 - Fix pill hover/exit colour interpolation by retaining the resolved fill RGB in its zero-alpha endpoint. Hover still fades normally; selected fill remains stable and interrupted transitions cannot flash grey. Add pointer-enter/exit and rapid-reversal regressions for white and custom coloured fills. Tests written, not run; no gallery/debug process started.
 

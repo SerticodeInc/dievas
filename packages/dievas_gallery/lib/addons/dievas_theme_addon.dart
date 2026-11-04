@@ -61,6 +61,7 @@ class DievasThemeAddon extends WidgetbookAddon<WidgetbookTheme<DievasThemeData>>
         path.contains('radio') ||
         path.contains('switch') ||
         path.contains('tabbar') ||
+        path.contains('tag') ||
         path.contains('segmentedcontrol') ||
         path.contains('searchwithdropdown') ||
         path.contains('searchwithlist');

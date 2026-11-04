@@ -4,29 +4,28 @@ import 'package:flutter/painting.dart';
 /// Defines the border radius shape for [DievasTag].
 ///
 /// Use [DievasTagBorderRadius.pill] for fully rounded (pill-shaped) tags,
-/// or [DievasTagBorderRadius.rounded] for a specific [BorderRadius].
+/// or [DievasTagBorderRadius.rounded] for a specific or directional [BorderRadiusGeometry].
 sealed class DievasTagBorderRadius {
   const DievasTagBorderRadius._();
 
   /// Fully rounded pill shape.
   static const DievasTagBorderRadius pill = _PillTagBorderRadius();
 
-  /// A specific [BorderRadius].
-  const factory DievasTagBorderRadius.rounded(BorderRadius radius) = _RoundedTagBorderRadius;
+  /// A specific or directional radius, resolved in the tag’s text direction.
+  const factory DievasTagBorderRadius.rounded(BorderRadiusGeometry radius) = _RoundedTagBorderRadius;
 
   /// Resolves to a concrete [BorderRadius].
-  BorderRadius resolve() => switch (this) {
+  BorderRadius resolve([TextDirection direction = TextDirection.ltr]) => switch (this) {
     _PillTagBorderRadius() => BorderRadius.circular(DievasRadiusSemantic.full),
-    _RoundedTagBorderRadius(:final radius) => radius,
+    _RoundedTagBorderRadius(:final radius) => radius.resolve(direction),
   };
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! DievasTagBorderRadius) return false;
     return switch ((this, other)) {
       (_PillTagBorderRadius(), _PillTagBorderRadius()) => true,
-      (_RoundedTagBorderRadius(radius: var r1), _RoundedTagBorderRadius(radius: var r2)) => r1 == r2,
+      (_RoundedTagBorderRadius(radius: final r1), _RoundedTagBorderRadius(radius: final r2)) => r1 == r2,
       _ => false,
     };
   }
@@ -45,5 +44,5 @@ final class _PillTagBorderRadius extends DievasTagBorderRadius {
 final class _RoundedTagBorderRadius extends DievasTagBorderRadius {
   const _RoundedTagBorderRadius(this.radius) : super._();
 
-  final BorderRadius radius;
+  final BorderRadiusGeometry radius;
 }

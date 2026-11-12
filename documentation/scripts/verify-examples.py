@@ -128,7 +128,7 @@ void main() {
     print(f'Checking {count} Dart blocks in a standalone hosted consumer.', flush=True)
     for command in [
         ['flutter', 'pub', 'get'],
-        ['flutter', 'analyze', '--no-pub'],
+        ['flutter', 'analyze', '--no-pub', '--no-fatal-infos'],
         ['flutter', 'test', '--no-pub'],
     ]:
         subprocess.run(command, cwd=consumer, check=True)

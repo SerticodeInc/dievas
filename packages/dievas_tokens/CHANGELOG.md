@@ -1,8 +1,12 @@
-<!-- meta.contentType: Reference -->
-
 # Changelog
 
 Changes to the Dievas token package, newest first.
+
+## 1.0.4
+
+- Change the switch track when off from `slate200` (`#E2E8F0`) to `coolGreyLight` (`#DCDEE3`) in light mode and from `slate700` (`#334155`) to `charcoal` (`#292929`) in dark mode.
+- Change the switch thumb when off to white (`#FFFFFF`) in both themes. It was `slate300` (`#CBD5E1`) in light mode and `slate500` (`#64748B`) in dark mode.
+- Change the filled Tag background in dark mode from `slate800` (`#1E293B`) to black (`#000000`).
 
 ## 1.0.3
 

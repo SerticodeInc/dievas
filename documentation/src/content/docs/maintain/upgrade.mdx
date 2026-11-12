@@ -63,7 +63,7 @@ A formerly shared background can split into different roles for a dialog, drawer
 
 ## Prepare for grouped segmented control styling
 
-The source branch introduces a grouped styling API that is not included in the published 1.0.4 baseline. When adopting a release containing it, follow [Migrate segmented control styling](https://github.com/SerticodeInc/dievas/blob/master/packages/dievas/doc/segmented_control_styling.md). Existing flat inputs remain accepted; the guide explains decoration composition and override precedence.
+When upgrading to Dievas 1.0.5, use `DievasSegmentedControlStyle` for shared styling and `DievasSegmentAppearance` for individual states. Existing flat inputs remain supported as deprecated aliases. Individual segment overrides take precedence over shared styling.
 
 ## Verify the application
 

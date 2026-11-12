@@ -2,13 +2,13 @@
 
 ## 1.0.5
 
-- `DievasTag` adds XXS/XS/SM presets, custom label and leading/trailing slots, independent text/icon colours, dimensions, directional layout, decoration, long press, disabled state and keyboard accessible actions. Removal has independent keyboard and semantics support. Gallery actions persist across live controls. See [Use Tag](doc/tag.md).
+- `DievasTag` adds XXS/XS/SM presets, custom label and leading/trailing slots, independent text/icon colours, dimensions, directional layout, decoration, long press, disabled state and keyboard accessible actions. Removal has independent keyboard and semantics support. Gallery actions persist across live controls.
 
-- `DievasTabBar` adds rich tab descriptors, pill/custom variants, shared and local styling, size presets, caller owned controllers, per tab disabling, keyboard/RTL navigation, focus and selection semantics, expanded layout, selected tab scrolling, and reduced-motion handling. The gallery includes the four Moon style reference compositions and custom content. See [Use Tab Bar](doc/tab_bar.md).
+- `DievasTabBar` adds rich tab descriptors, pill/custom variants, shared and local styling, size presets, caller owned controllers, per tab disabling, keyboard/RTL navigation, focus and selection semantics, expanded layout, selected tab scrolling, and reduced motion handling. The gallery includes the four Moon style reference compositions and custom content.
 
-- `DievasSwitch` adds three Moon compatible size presets, dimension/colour/motion overrides, active/inactive thumb and track content, drag and RTL support, keyboard focus, switch semantics, optional haptics, and reduced motion handling. The gallery uses three independently interactive reference examples. See [Use the switch](doc/switch.md).
+- `DievasSwitch` adds three Moon compatible size presets, dimension/colour/motion overrides, active/inactive thumb and track content, drag and RTL support, keyboard focus, switch semantics, optional haptics, and reduced motion handling. The gallery uses three independently interactive reference examples.
 
-- `DievasSegmentedControlStyle` groups container decoration, shared segment styling, spacing, and motion. `DievasSegmentAppearance` separates decoration, text, and icon overrides for normal, selected, hovered, and pressed states. See [Migrate segmented control styling](doc/segmented_control_styling.md).
+- `DievasSegmentedControlStyle` groups container decoration, shared segment styling, spacing, and motion. `DievasSegmentAppearance` separates decoration, text, and icon overrides for normal, selected, hovered, and pressed states.
 
 ### Deprecated
 

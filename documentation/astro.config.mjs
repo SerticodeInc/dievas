@@ -29,7 +29,7 @@ export default defineConfig({
 				{ label: "Components", items: [{ autogenerate: { directory: "components" } }] },
 				{ label: "Recipes", items: [{ autogenerate: { directory: "recipes" } }] },
 				{ label: "Maintain & Upgrade", items: [{ autogenerate: { directory: "maintain" } }] },
-				{ label: "Interactive Gallery ↗", link: "https://master.dievas-gallery.pages.dev" },
+				{ label: "Interactive Gallery ↗", link: "https://gallery.dievas.serticode.com" },
 				{ label: "Dievas Website ↗", link: "https://dievas.serticode.com" },
 			],
 		}),

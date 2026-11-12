@@ -3,7 +3,7 @@
 /// All external links are defined here so a URL change requires a single edit.
 abstract final class DievasUrls {
   /// Live Widgetbook gallery (Cloudflare Pages, master branch).
-  static const String gallery = 'https://master.dievas-gallery.pages.dev';
+  static const String gallery = 'https://gallery.dievas.serticode.com';
 
   /// Flutter landing page.
   static const String flutter = 'https://flutter.dev';

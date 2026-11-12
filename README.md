@@ -5,7 +5,7 @@
 
 Use this README to explore the workspace and run the gallery. For application setup and a first widget, see the [Flutter package guide](packages/dievas/README.md).
 
-[Website](https://dievas.serticode.com) · [Documentation](https://docs.dievas.serticode.com) · [Component gallery](https://master.dievas-gallery.pages.dev) · [Flutter package](https://pub.dev/packages/dievas) · [Design tokens](https://pub.dev/packages/dievas_tokens)
+[Website](https://dievas.serticode.com) · [Documentation](https://docs.dievas.serticode.com) · [Component gallery](https://gallery.dievas.serticode.com) · [Flutter package](https://pub.dev/packages/dievas) · [Design tokens](https://pub.dev/packages/dievas_tokens)
 
 ## Start here
 
